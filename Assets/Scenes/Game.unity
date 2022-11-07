@@ -133,11 +133,11 @@ GameObject:
   m_Component:
   - component: {fileID: 353369882}
   - component: {fileID: 353369881}
-  - component: {fileID: 353369883}
   - component: {fileID: 353369885}
-  - component: {fileID: 353369884}
+  - component: {fileID: 353369883}
   - component: {fileID: 353369886}
-  m_Layer: 0
+  - component: {fileID: 353369884}
+  m_Layer: 6
   m_Name: Character
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -226,7 +226,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 116
   m_CollisionDetection: 1
 --- !u!114 &353369884
 MonoBehaviour:
@@ -244,6 +244,8 @@ MonoBehaviour:
   rend: {fileID: 353369881}
   anim: {fileID: 353369885}
   speed: 5
+  invincibleTime: 2
+  hp: 10
 --- !u!95 &353369885
 Animator:
   serializedVersion: 4

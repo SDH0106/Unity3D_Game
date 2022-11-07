@@ -4,17 +4,21 @@ using UnityEngine;
 
 public class CharacterMove : Singleton<CharacterMove>
 {
-    [SerializeField] Rigidbody2D rigid;
+    [SerializeField] Rigidbody rigid;
     [SerializeField] SpriteRenderer rend;
     [SerializeField] Animator anim;
     [SerializeField] float speed;
+    [SerializeField] float invincibleTime;
+    [SerializeField] int hp =10;
 
-    bool isRun = false;
+    bool isRun, isAttacked = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        rigid = GetComponent<Rigidbody2D>();
+        int initHp = hp;
+
+        rigid = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
     }
 
@@ -22,7 +26,13 @@ public class CharacterMove : Singleton<CharacterMove>
     void Update()
     {
         Move();
+
         anim.SetBool("isRun", isRun);
+    }
+
+    void ReleaseInvincible()
+    {
+        isAttacked = false;
     }
 
     void Move()
@@ -44,17 +54,46 @@ public class CharacterMove : Singleton<CharacterMove>
             isRun = true;
         }
 
+        else if(Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
+        {
+            isRun = true;
+        }
+
         else
             isRun = false;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private IEnumerator PlayerColorBlink()
     {
-        Debug.Log("2");
+        Color red = new Color(1, 0, 0, 0.5f);
+        Color white = new Color(1, 1, 1, 0.5f);
+
+        for (int i = 0; i < 3; i++)
+        {
+            rend.color = red;
+            yield return new WaitForSeconds(0.1f);
+
+            rend.color = white;
+            yield return new WaitForSeconds(0.1f);
+        }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("1");
+        if (other.tag == "Monster" && isAttacked == false)
+        {
+            StartCoroutine(OnInvincible());
+        }
+    }
+
+    IEnumerator OnInvincible()
+    {
+        anim.SetTrigger("isAttacked");
+        isAttacked = true;
+        StartCoroutine(PlayerColorBlink());
+
+        yield return new WaitForSeconds(invincibleTime);
+        isAttacked = false;
+        rend.color = Color.white;
     }
 }
