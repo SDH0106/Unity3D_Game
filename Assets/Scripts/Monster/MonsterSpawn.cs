@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -10,13 +11,12 @@ public class MonsterSpawn : MonoBehaviour
     [SerializeField] GameObject spawnImage;
     [SerializeField] int poolCount;
     [SerializeField] int spawnRange;
+    [SerializeField] float spawnDelay;
 
-    float spawnDelay;
 
     private IObjectPool<Monster> pool;
 
-    Vector3 spawnIamgePos;
-    Vector3 spawnMonPos;
+    Vector3 spawnPos;
 
     private void Awake()
     {
@@ -25,46 +25,44 @@ public class MonsterSpawn : MonoBehaviour
 
     private void Start()
     {
-        spawnDelay = 2f;
-        InvokeRepeating("RendSpawnImage", 2f, 5f);
+        InvokeRepeating("RendSpawnImage", 2f, spawnDelay);
     }
 
     void SpawnMonster()
     {
         Monster monster = pool.Get();
+        monster.transform.position = spawnPos;
     }
 
     Vector3 SpawnPosition()
     {
-        Vector3 playerPos = CharacterMove.Instance.transform.position;
+        Vector3 playerPos = Character.Instance.transform.position;
         Vector3 randPoint = Random.onUnitSphere * spawnRange;
         randPoint.y = 0;
 
-        spawnIamgePos = randPoint + transform.position;
+        spawnPos = randPoint + transform.position;
 
-        float distance = Vector3.Magnitude(playerPos - spawnIamgePos);
+        float distance = Vector3.Magnitude(playerPos - spawnPos);
 
         if(distance < 2)
         {
             SpawnPosition();
         }
-        
-        return spawnIamgePos;
+
+        return spawnPos;
     }
 
     void RendSpawnImage()
     {
         GameObject spawnMark = Instantiate(spawnImage, SpawnPosition(), spawnImage.transform.rotation);
         spawnMark.transform.SetParent(storageParent);
-        Destroy(spawnMark, spawnDelay);
-        Invoke("SpawnMonster", spawnDelay);
-
-        spawnMonPos = spawnIamgePos;
+        Destroy(spawnMark, 1f);
+        Invoke("SpawnMonster", 1f);
     }
 
     private Monster CreateMonster()
     {
-        Monster monster = Instantiate(monsterPrefab, spawnMonPos, monsterPrefab.transform.rotation).GetComponent<Monster>();
+        Monster monster = Instantiate(monsterPrefab).GetComponent<Monster>();
         monster.SetManagedPool(pool);
         monster.transform.SetParent(storageParent);
         return monster;

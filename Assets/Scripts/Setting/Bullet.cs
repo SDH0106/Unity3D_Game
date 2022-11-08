@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Pool;
 
 public class Bullet : MonoBehaviour
 {
     [SerializeField] float speed = 3f;
-    
+
     private IObjectPool<Bullet> managedPool;
 
     float angle;
@@ -36,5 +37,10 @@ public class Bullet : MonoBehaviour
     public void DestroyBullet()
     {
         managedPool.Release(this);
+    }
+
+    public void CancleDestroyInvoke()
+    {
+        CancelInvoke("DestroyBullet");
     }
 }
