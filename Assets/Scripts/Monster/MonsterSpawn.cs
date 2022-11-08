@@ -13,7 +13,6 @@ public class MonsterSpawn : MonoBehaviour
     [SerializeField] int spawnRange;
     [SerializeField] float spawnDelay;
 
-
     private IObjectPool<Monster> pool;
 
     Vector3 spawnPos;

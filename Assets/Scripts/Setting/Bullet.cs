@@ -26,7 +26,7 @@ public class Bullet : MonoBehaviour
     {
         this.dir = dir;
 
-        Invoke("DestroyBullet", 5f);
+        Invoke("DestroyBullet", 2f);
     }
 
     public void SetManagedPool(IObjectPool<Bullet> pool)

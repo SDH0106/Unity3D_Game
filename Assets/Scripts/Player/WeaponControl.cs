@@ -8,8 +8,8 @@ public class WeaponControl : MonoBehaviour
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] Transform storageParent;
     [SerializeField] Transform firePos; 
-    [SerializeField] int poolCount;
     [SerializeField] SpriteRenderer rend;
+    [SerializeField] int poolCount;
 
     private IObjectPool<Bullet> pool;
 

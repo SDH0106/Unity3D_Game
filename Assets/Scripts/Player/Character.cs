@@ -7,14 +7,17 @@ public class Character : Singleton<Character>
     [SerializeField] Rigidbody rigid;
     [SerializeField] SpriteRenderer rend;
     [SerializeField] Animator anim;
+
+    [Header("Stat")]
     [SerializeField] float speed;
     [SerializeField] float invincibleTime;
-    [SerializeField] int hp = 10;
+    [SerializeField] public int hp = 10;
     [SerializeField] int attackDamage = 1;
 
     bool isRun, isAttacked, isDead = false;
 
-    int maxHp;
+    [HideInInspector]
+    public int maxHp;
 
     public int AttackDamage => attackDamage;
 
@@ -30,7 +33,10 @@ public class Character : Singleton<Character>
     // Update is called once per frame
     void Update()
     {
-        Move();
+        if (isDead == false)
+        {
+            Move();
+        }
 
         anim.SetBool("isRun", isRun);
     }
@@ -95,14 +101,15 @@ public class Character : Singleton<Character>
         {
             hp = 0;
             isDead = true;
-            speed = 0;
 
             anim.SetBool("isDead", isDead);
 
             if (anim.GetCurrentAnimatorStateInfo(0).IsName("PlayerDie"))
             {
                 if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+                {
                     Time.timeScale = 0;
+                }
             }
         }
     }
