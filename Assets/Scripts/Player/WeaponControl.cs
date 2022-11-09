@@ -53,7 +53,6 @@ public class WeaponControl : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Bullet bullet = pool.Get();
-
             bullet.transform.position = transform.position;
             bullet.Shoot(dir.normalized);
         }

@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1130780972225632325
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6332070769285271093}
+  m_Layer: 7
+  m_Name: DamagePrintPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6332070769285271093
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1130780972225632325}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.241, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5320457567614347689}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2378124750920518384
 GameObject:
   m_ObjectHideFlags: 0
@@ -14,6 +45,7 @@ GameObject:
   - component: {fileID: 81727465642485590}
   - component: {fileID: 405998318861722249}
   - component: {fileID: 2100492170074265801}
+  - component: {fileID: 1601650622626363655}
   m_Layer: 7
   m_Name: Monster
   m_TagString: Monster
@@ -33,8 +65,8 @@ Transform:
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 752150463290446214}
-  - {fileID: 6595437620923701626}
+  - {fileID: 6332070769285271093}
+  - {fileID: 3501749693784083827}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
@@ -140,11 +172,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rend: {fileID: 2830613899386497867}
   anim: {fileID: 81727465642485590}
-  hp: 100
-  speed: 1
+  printPos: {fileID: 6332070769285271093}
+  hp: 2
+  speed: 0
   attackDamage: 1
-  damagePrefab: {fileID: 4972879093213316329, guid: aae3e76428e39fd4b8c7e277125f8208, type: 3}
-  printPos: {fileID: 752150463290446214}
 --- !u!65 &2100492170074265801
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -158,7 +189,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.18, y: 0.18, z: 0}
   m_Center: {x: 0.006, y: -0.038, z: 0}
---- !u!1 &4487457188295409931
+--- !u!114 &1601650622626363655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2378124750920518384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee581e7496ea03e4d9a05d7d71023c44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damagePrefab: {fileID: 4972879093213316329, guid: aae3e76428e39fd4b8c7e277125f8208, type: 3}
+  printPos: {fileID: 6332070769285271093}
+  storageParent: {fileID: 3501749693784083827}
+  poolCount: 10
+--- !u!1 &6504524086088071050
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -166,38 +213,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 752150463290446214}
-  m_Layer: 7
-  m_Name: DamageUIPo
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &752150463290446214
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4487457188295409931}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.001, y: 0.201, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5320457567614347689}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &7652806752839210711
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6595437620923701626}
+  - component: {fileID: 3501749693784083827}
   m_Layer: 7
   m_Name: DamageStorage
   m_TagString: Untagged
@@ -205,13 +221,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6595437620923701626
+--- !u!4 &3501749693784083827
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7652806752839210711}
+  m_GameObject: {fileID: 6504524086088071050}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}

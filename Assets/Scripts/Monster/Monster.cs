@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -7,15 +8,12 @@ public class Monster : MonoBehaviour
 {
     [SerializeField] SpriteRenderer rend;
     [SerializeField] Animator anim;
+    [SerializeField] Transform printPos;
 
     [Header("Stat")]
     [SerializeField] int hp = 10;
     [SerializeField] float speed;
     [SerializeField] int attackDamage;
-
-    [Header("DamageText")]
-    [SerializeField] GameObject damagePrefab;
-    [SerializeField] Transform printPos;
 
     bool isRun, isDead = false;
 
@@ -25,9 +23,11 @@ public class Monster : MonoBehaviour
 
     private IObjectPool<Monster> managedPool;
 
-    //PrintDamage printDamage;
+    PrintDamage printDamage;
 
     public int AttackDamage => attackDamage;
+    public int Hp => hp;
+    public bool IsDead => isDead;
 
     // Start is called before the first frame update
     void Start()
@@ -35,7 +35,7 @@ public class Monster : MonoBehaviour
         maxHp = hp;
         InitScale = transform.localScale;
         anim = GetComponent<Animator>();
-        //printDamage = GetComponent<PrintDamage>();
+        printDamage = GetComponent<PrintDamage>();
     }
 
     // Update is called once per frame
@@ -97,7 +97,7 @@ public class Monster : MonoBehaviour
 
     void OnDamaged()
     {
-        GameObject text = Instantiate(damagePrefab, printPos);
+        printDamage.PrintDamageText();
 
         hp -= Character.Instance.AttackDamage;
         anim.SetTrigger("isAttacked");
@@ -121,7 +121,6 @@ public class Monster : MonoBehaviour
                 }
             }
         }
-
     }
 
     private void OnTriggerEnter(Collider other)

@@ -14,19 +14,20 @@ public class DamageUI : MonoBehaviour
 
     private IObjectPool<DamageUI> managedPool;
 
-    Vector3 printPos;
+    Vector3 initPos;
 
-    float printTime;
-    float InitPrintTime;
+    Scale damageScale;
 
-    string text;
+    float printTime, initPrintTime;
+
+    string nextText;
 
     private void Start()
     {
         damageText.text = Character.Instance.AttackDamage.ToString();
-        printTime = 1f;
-        InitPrintTime = printTime;
-        Invoke("DestroyObject", printTime);
+        printTime = 5f;
+        initPrintTime = printTime;
+        initPos = transform.position;
     }
 
     private void ChangeAlpha(float alpha)
@@ -38,67 +39,30 @@ public class DamageUI : MonoBehaviour
 
     private void Update()
     {
+        nextText = Character.Instance.AttackDamage.ToString();
+
         printTime -= Time.deltaTime;
 
         if(printTime <= 0)
         {
-            printTime = InitPrintTime;
+            DestroyPool();
         }
 
-        ChangeAlpha(printTime / InitPrintTime);
+        ChangeAlpha(printTime / initPrintTime);
 
         transform.position += Vector3.forward * 0.35f * Time.deltaTime;
     }
 
-    void DestroyObject()
-    {
-        Destroy(gameObject);
-    }
-
-    /*private void Start()
+    public void TextUpdate()
     {
         damageText.text = Character.Instance.AttackDamage.ToString();
-        printTime = 2f;
-        InitPrintTime = printTime;
     }
 
     void InitSetting()
     {
-        damageText.text = Character.Instance.AttackDamage.ToString();
-        printTime = InitPrintTime;
+        printTime = initPrintTime;
+        transform.position = initPos;
         ChangeAlpha(1);
-    }
-
-    private void ChangeAlpha(float alpha)
-    {
-        Color textXColor = damageText.color;        // 텍스트의 색상값
-        textXColor.a = alpha;                       // 색상값의 알파값 변경(직접 변경 불가해서 빼옴)
-        damageText.color = textXColor;              // 변경한 색상을 대입
-    }
-
-    void TextDisappear()
-    {
-        ChangeAlpha(printTime / InitPrintTime);
-
-        if (printTime <= 0f)
-        {
-            printTime = InitPrintTime;
-        }
-    }
-
-    private void Update()
-    {
-        Debug.Log(printTime);
-        transform.position += Vector3.up * 0.2f * Time.deltaTime;
-        printTime -= Time.deltaTime;
-        TextDisappear();
-    }
-
-    public void TextMove(Vector3 position)
-    {
-        this.printPos = position;
-
-        Invoke("DestroyPool", printTime);
     }
 
     public void SetManagedPool(IObjectPool<DamageUI> pool)
@@ -110,5 +74,5 @@ public class DamageUI : MonoBehaviour
     {
         managedPool.Release(this);
         InitSetting();
-    }*/
+    }
 }

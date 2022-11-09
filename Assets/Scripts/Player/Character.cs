@@ -7,6 +7,7 @@ public class Character : Singleton<Character>
     [SerializeField] Rigidbody rigid;
     [SerializeField] SpriteRenderer rend;
     [SerializeField] Animator anim;
+    [SerializeField] Transform damageStorage;
 
     [Header("Stat")]
     [SerializeField] float speed;
@@ -20,6 +21,8 @@ public class Character : Singleton<Character>
     public int maxHp;
 
     public int AttackDamage => attackDamage;
+
+    public Transform DamageStorage => damageStorage;
 
     // Start is called before the first frame update
     void Start()

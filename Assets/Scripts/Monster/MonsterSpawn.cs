@@ -64,6 +64,7 @@ public class MonsterSpawn : MonoBehaviour
         Monster monster = Instantiate(monsterPrefab).GetComponent<Monster>();
         monster.SetManagedPool(pool);
         monster.transform.SetParent(storageParent);
+
         return monster;
     }
 

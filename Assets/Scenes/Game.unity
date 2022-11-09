@@ -328,6 +328,37 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
   m_EffectDistance: {x: 3, y: -3}
   m_UseGraphicAlpha: 1
+--- !u!1 &208140315
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 208140316}
+  m_Layer: 0
+  m_Name: DamageStorage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &208140316
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 208140315}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.5701787, y: 0.012864828, z: -1.8466928}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &229296489
 GameObject:
   m_ObjectHideFlags: 0
@@ -533,7 +564,7 @@ Transform:
   - {fileID: 421498738}
   - {fileID: 1646113564}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!54 &353369883
 Rigidbody:
@@ -566,6 +597,7 @@ MonoBehaviour:
   rigid: {fileID: 353369883}
   rend: {fileID: 353369881}
   anim: {fileID: 353369885}
+  damageStorage: {fileID: 208140316}
   speed: 5
   invincibleTime: 1
   hp: 100
@@ -977,7 +1009,7 @@ MonoBehaviour:
   spawnImage: {fileID: 995458817036204544, guid: 46c63591fdc1b544a9187fc96944aebc, type: 3}
   poolCount: 20
   spawnRange: 5
-  spawnDelay: 100
+  spawnDelay: 5
 --- !u!1 &1222579137
 GameObject:
   m_ObjectHideFlags: 0
@@ -1675,7 +1707,7 @@ RectTransform:
   m_Children:
   - {fileID: 2087787719}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 82.473, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Pool;
 
 public class PrintDamage : MonoBehaviour
 {
-    /*[SerializeField] GameObject damagePrefab;
-    [SerializeField] Transform storageParent;
+    [SerializeField] GameObject damagePrefab;
     [SerializeField] Transform printPos;
     [SerializeField] int poolCount;
 
@@ -20,15 +20,14 @@ public class PrintDamage : MonoBehaviour
     public void PrintDamageText()
     {
         DamageUI damage = objectPool.Get();
-        damage.transform.position = transform.position;
-        damage.TextMove(printPos.position);
+        damage.TextUpdate();
     }
 
     private DamageUI CreatePool()
     {
         DamageUI pool = Instantiate(damagePrefab, printPos.position, transform.rotation).GetComponent<DamageUI>();
         pool.SetManagedPool(objectPool);
-        pool.transform.SetParent(storageParent);
+        pool.transform.SetParent(Character.Instance.DamageStorage);
 
         return pool;
     }
@@ -46,5 +45,5 @@ public class PrintDamage : MonoBehaviour
     private void OnDestroyPool(DamageUI pool)
     {
         Destroy(pool.gameObject);
-    }*/
+    }
 }
