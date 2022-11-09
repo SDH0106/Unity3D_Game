@@ -25,7 +25,7 @@ public class DamageUI : MonoBehaviour
     private void Start()
     {
         damageText.text = Character.Instance.AttackDamage.ToString();
-        printTime = 5f;
+        printTime = 1f;
         initPrintTime = printTime;
         initPos = transform.position;
     }

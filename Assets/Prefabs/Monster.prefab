@@ -173,8 +173,8 @@ MonoBehaviour:
   rend: {fileID: 2830613899386497867}
   anim: {fileID: 81727465642485590}
   printPos: {fileID: 6332070769285271093}
-  hp: 2
-  speed: 0
+  hp: 10
+  speed: 1
   attackDamage: 1
 --- !u!65 &2100492170074265801
 BoxCollider:
@@ -203,7 +203,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damagePrefab: {fileID: 4972879093213316329, guid: aae3e76428e39fd4b8c7e277125f8208, type: 3}
   printPos: {fileID: 6332070769285271093}
-  storageParent: {fileID: 3501749693784083827}
   poolCount: 10
 --- !u!1 &6504524086088071050
 GameObject:
