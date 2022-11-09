@@ -27,7 +27,6 @@ public class DamageUI : MonoBehaviour
         damageText.text = Character.Instance.AttackDamage.ToString();
         printTime = 1f;
         initPrintTime = printTime;
-        initPos = transform.position;
     }
 
     private void ChangeAlpha(float alpha)
@@ -61,7 +60,6 @@ public class DamageUI : MonoBehaviour
     void InitSetting()
     {
         printTime = initPrintTime;
-        transform.position = initPos;
         ChangeAlpha(1);
     }
 

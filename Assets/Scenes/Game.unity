@@ -598,6 +598,9 @@ MonoBehaviour:
   rend: {fileID: 353369881}
   anim: {fileID: 353369885}
   damageStorage: {fileID: 208140316}
+  coinLayer:
+    serializedVersion: 2
+    m_Bits: 512
   speed: 5
   invincibleTime: 1
   hp: 100
@@ -1010,6 +1013,7 @@ MonoBehaviour:
   poolCount: 20
   spawnRange: 5
   spawnDelay: 5
+  spawnPos: {x: 0, y: 0, z: 0}
 --- !u!1 &1222579137
 GameObject:
   m_ObjectHideFlags: 0

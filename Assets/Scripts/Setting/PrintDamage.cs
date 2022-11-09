@@ -7,7 +7,6 @@ using UnityEngine.Pool;
 public class PrintDamage : MonoBehaviour
 {
     [SerializeField] GameObject damagePrefab;
-    [SerializeField] Transform printPos;
     [SerializeField] int poolCount;
 
     private IObjectPool<DamageUI> objectPool;
@@ -17,15 +16,16 @@ public class PrintDamage : MonoBehaviour
         objectPool = new ObjectPool<DamageUI>(CreatePool, OnGetPool, OnReleasePool, OnDestroyPool, maxSize: poolCount);
     }
 
-    public void PrintDamageText()
+    public void PrintDamageText(Vector3 pos)
     {
         DamageUI damage = objectPool.Get();
+        damage.transform.position = pos;
         damage.TextUpdate();
     }
 
     private DamageUI CreatePool()
     {
-        DamageUI pool = Instantiate(damagePrefab, printPos.position, transform.rotation).GetComponent<DamageUI>();
+        DamageUI pool = Instantiate(damagePrefab).GetComponent<DamageUI>();
         pool.SetManagedPool(objectPool);
         pool.transform.SetParent(Character.Instance.DamageStorage);
 

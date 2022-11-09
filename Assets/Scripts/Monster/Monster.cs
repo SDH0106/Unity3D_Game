@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Pool;
+using static UnityEditor.PlayerSettings;
 
 public class Monster : MonoBehaviour
 {
     [SerializeField] SpriteRenderer rend;
     [SerializeField] Animator anim;
+    [SerializeField] Collider coll;
     [SerializeField] Transform printPos;
 
     [Header("Stat")]
@@ -15,30 +18,30 @@ public class Monster : MonoBehaviour
     [SerializeField] float speed;
     [SerializeField] int attackDamage;
 
-    bool isRun, isDead = false;
+    bool isRun, isDead, isAttacked = false;
 
     int maxHp;
 
-    Vector3 InitScale;
+    Vector3 initScale;
 
     private IObjectPool<Monster> managedPool;
 
     PrintDamage printDamage;
+    DropCoin coin;
 
     public int AttackDamage => attackDamage;
     public int Hp => hp;
     public bool IsDead => isDead;
 
-    // Start is called before the first frame update
     void Start()
     {
         maxHp = hp;
-        InitScale = transform.localScale;
+        initScale = transform.localScale;
         anim = GetComponent<Animator>();
         printDamage = GetComponent<PrintDamage>();
+        coin = GetComponent<DropCoin>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (isDead == false)
@@ -55,7 +58,9 @@ public class Monster : MonoBehaviour
         hp = maxHp;
         isRun = false;
         isDead = false;
-        transform.localScale = InitScale;
+        isAttacked = false;
+        coll.enabled = true;
+        transform.localScale = initScale;
         rend.color = Color.white;
         hp = maxHp;
     }
@@ -97,10 +102,11 @@ public class Monster : MonoBehaviour
 
     void OnDamaged()
     {
-        printDamage.PrintDamageText();
+        printDamage.PrintDamageText(printPos.position);
 
         hp -= Character.Instance.AttackDamage;
-        anim.SetTrigger("isAttacked");
+
+        //anim.SetTrigger("isAttacked");
 
         StartCoroutine(MonsterColorBlink());
     }
@@ -109,15 +115,24 @@ public class Monster : MonoBehaviour
     {
         if (hp <= 0)
         {
+            Vector3 deadPos = transform.position;
+
+            //anim.SetTrigger("isAttacked");
+            anim.SetBool("isAttacked", isAttacked);
+
+            isAttacked = true;
             isDead = true;
 
-            anim.SetBool("isDead", isDead);
+            coll.enabled = false;
+
+            //anim.SetBool("isDead", isDead);
 
             if (anim.GetCurrentAnimatorStateInfo(0).IsName("Die"))
             {
                 if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
                 {
                     DestroyMonster();
+                    coin.Drop(deadPos);
                 }
             }
         }

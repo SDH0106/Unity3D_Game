@@ -8,9 +8,10 @@ public class Character : Singleton<Character>
     [SerializeField] SpriteRenderer rend;
     [SerializeField] Animator anim;
     [SerializeField] Transform damageStorage;
+    [SerializeField] LayerMask coinLayer;
 
     [Header("Stat")]
-    [SerializeField] float speed;
+    [SerializeField] public float speed;
     [SerializeField] float invincibleTime;
     [SerializeField] public int hp = 10;
     [SerializeField] int attackDamage = 1;
@@ -24,6 +25,8 @@ public class Character : Singleton<Character>
 
     public Transform DamageStorage => damageStorage;
 
+    Coin coin;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +34,7 @@ public class Character : Singleton<Character>
 
         rigid = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
+        coin = GetComponent<Coin>();
     }
 
     // Update is called once per frame
@@ -39,6 +43,7 @@ public class Character : Singleton<Character>
         if (isDead == false)
         {
             Move();
+            GetCoin();
         }
 
         anim.SetBool("isRun", isRun);
@@ -117,6 +122,26 @@ public class Character : Singleton<Character>
         }
     }
 
+    void GetCoin()
+    {/*
+        //bool isInRadius = Physics.CheckSphere(transform.position, 2, coinLayer);
+
+        Collider[] hit = Physics.OverlapSphere(transform.position, 2, coinLayer);
+
+        if(isInRadius)
+        {
+            Debug.Log(isInRadius);
+            Debug.Log(coin);
+            //coin.MoveCoin(transform.position);
+        }
+
+        foreach (Collider c in hit)
+        {
+            Debug.Log("1");
+            coin.MoveCoin(transform.position);
+        }*/
+    }
+
     private void OnTriggerStay(Collider other)
     {
         Ondamaged(other);
@@ -131,5 +156,14 @@ public class Character : Singleton<Character>
         yield return new WaitForSeconds(invincibleTime);
         rend.color = Color.white;
         isAttacked = false;
+    }
+
+    private void OnDrawGizmos()
+    {
+        UnityEditor.Handles.color = Color.blue;
+        UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.up, 2);
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawSphere(transform.position, 2);
     }
 }
