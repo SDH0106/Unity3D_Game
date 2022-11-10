@@ -41,12 +41,6 @@ public class Bullet : MonoBehaviour
         managedPool = pool;
     }
 
-    /*private void OnTriggerEnter(Collider other)
-    {
-        if(other.tag == "Monster" && monster.IsDead == false)
-            
-    }*/
-
     public void DestroyBullet()
     {
         managedPool.Release(this);

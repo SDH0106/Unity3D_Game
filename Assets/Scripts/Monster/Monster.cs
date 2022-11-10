@@ -21,6 +21,7 @@ public class Monster : MonoBehaviour
     bool isRun, isDead, isAttacked = false;
 
     int maxHp;
+    float exp = 2;
 
     Vector3 initScale;
 
@@ -155,6 +156,7 @@ public class Monster : MonoBehaviour
 
     public void DestroyMonster()
     {
+        Character.Instance.exp += exp;
         managedPool.Release(this);
         SetInitMonster();
     }

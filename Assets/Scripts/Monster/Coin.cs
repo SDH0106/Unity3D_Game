@@ -4,31 +4,39 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class Coin : MonoBehaviour
+public class Coin : Singleton<Coin>
 {
     private IObjectPool<Coin> managedPool;
 
-    Vector3 moveDir;
-
-    Vector3 characterPos;
-
     float speed;
+
+    public int coinValue;
 
     bool isGet = false;
 
+    Vector3 characterPos;
+
+    private void Start()
+    {
+        RandomValue();
+    }
+
     private void Update()
+    {
+        MoveCoin();
+    }
+
+    public void MoveCoin()
     {
         characterPos = Character.Instance.transform.position;
 
         float distance = Vector3.Distance(characterPos, transform.position);
-        moveDir = characterPos - transform.position;
 
         if (isGet == false)
         {
             if (distance <= 2)
             {
-                //speed = Character.Instance.speed + 1;
-                speed = 2;
+                speed = Character.Instance.speed + 1;
                 isGet = true;
             }
             else
@@ -36,15 +44,27 @@ public class Coin : MonoBehaviour
         }
 
         transform.position = Vector3.MoveTowards(transform.position, characterPos, speed * Time.deltaTime);
+    }
 
-        if (distance == 0)
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.CompareTag("Character"))
+        {
+            Character.Instance.money += coinValue;
             DestroyPool();
+        }
+    }
+
+    void RandomValue()
+    {
+        coinValue = Random.Range(1,11);
     }
 
     void InitSetting()
     {
         isGet = false;
         speed = 0;
+        RandomValue();
     }
 
     public void SetManagedPool(IObjectPool<Coin> pool)

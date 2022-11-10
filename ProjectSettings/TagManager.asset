@@ -8,6 +8,7 @@ TagManager:
   - myBullet
   - monsterBullet
   - Coin
+  - Character
   layers:
   - Default
   - TransparentFX
