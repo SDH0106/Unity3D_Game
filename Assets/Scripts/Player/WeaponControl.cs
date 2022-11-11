@@ -5,7 +5,6 @@ using UnityEngine.Pool;
 
 public class WeaponControl : MonoBehaviour
 {
-    [SerializeField] WeaponInfo info;
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] Transform firePos; 
     [SerializeField] int poolCount;
@@ -13,6 +12,7 @@ public class WeaponControl : MonoBehaviour
     private IObjectPool<Bullet> pool;
 
     SpriteRenderer rend;
+    Weapon weaponInfo;
 
     int weaponDamage;
     int elementDamage;
@@ -28,10 +28,8 @@ public class WeaponControl : MonoBehaviour
 
     private void Start()
     {
+        weaponInfo = GetComponent<Weapon>();
         rend = GetComponent<SpriteRenderer>();
-        weaponDamage = info.WeaponDamage;
-        elementDamage = info.ElementDamage;
-        weaponRange = info.WeaponRange;
     }
 
     void Update()

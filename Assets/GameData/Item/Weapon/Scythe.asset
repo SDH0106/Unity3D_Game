@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b702467f022889c4a8cc17c04fb53eb2, type: 3}
   m_Name: Scythe
   m_EditorClassIdentifier: 
-  type: 2
   itemSprite: {fileID: 21300000, guid: 74bb343429ea2cc4b83e564920ea104b, type: 3}
-  weaponName: Scythe
+  weaponName: "\uB0AB"
+  type: 2
   weaponDamage: 7
   elementDamage: 0
-  weaponRange: 5
+  weaponRange: 6

@@ -10,10 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 3953021356634962376}
   - component: {fileID: 3953021356634962377}
-  - component: {fileID: 3953021356634962382}
   - component: {fileID: 3953021356634962383}
+  - component: {fileID: 3953021356634962382}
+  - component: {fileID: -4970618607374384726}
   m_Layer: 0
-  m_Name: BasicGun
+  m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -88,22 +89,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3953021356634962382
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3953021356634962379}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4af302aa0064464c94cad52708a5c91, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  info: {fileID: 11400000, guid: a7e88bf1966034444ac1b821061e8a2f, type: 2}
-  bulletPrefab: {fileID: 8154831264171076226, guid: af6b2db259797fc48a47d68401f82ed8, type: 3}
-  firePos: {fileID: 3953021356963906099}
-  poolCount: 10
 --- !u!54 &3953021356634962383
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -120,6 +105,34 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
+--- !u!114 &3953021356634962382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3953021356634962379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4af302aa0064464c94cad52708a5c91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 8154831264171076226, guid: af6b2db259797fc48a47d68401f82ed8, type: 3}
+  firePos: {fileID: 3953021356963906099}
+  poolCount: 10
+--- !u!114 &-4970618607374384726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3953021356634962379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62a5d220590aa794e88273f600fb97ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponInfo: {fileID: 11400000, guid: 12b3004288bc0a04ab56df6053fbc176, type: 2}
 --- !u!1 &3953021356963906098
 GameObject:
   m_ObjectHideFlags: 0

@@ -32,15 +32,21 @@ public class Character : Singleton<Character>
 
     public Transform DamageStorage => damageStorage;
 
+    WeaponCardUI weaponCardUI;
+
+    int weaponPosNum;
+
     // Start is called before the first frame update
     void Start()
     {
+        weaponPosNum = 0;
         maxHp = hp;
         money = 0;
         exp = 0f;
 
         rigid = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
+        weaponCardUI = GetComponent<WeaponCardUI>();
     }
 
     // Update is called once per frame
@@ -49,7 +55,7 @@ public class Character : Singleton<Character>
         if (isDead == false)
         {
             Move();
-            EquipWeapon();
+            //EquipWeapon();
         }
 
         anim.SetBool("isRun", isRun);
@@ -61,20 +67,11 @@ public class Character : Singleton<Character>
         isAttacked = false;
     }
 
-    int i = 0;
-
-    void EquipWeapon()
+    public void EquipWeapon()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            GameObject weapon = Instantiate(weaponPrefab, weaponPoses[i].position, transform.rotation);
-            weapon.transform.SetParent(weaponPoses[i]);
-            i++;
-        }
-
-        if (Input.GetKeyDown(KeyCode.B))
-            Time.timeScale = 0;
-            
+        GameObject weapon = Instantiate(weaponPrefab, weaponPoses[weaponPosNum].position, transform.rotation);
+        weapon.transform.SetParent(weaponPoses[weaponPosNum]);
+        weaponPosNum++;
     }
 
     void Move()
@@ -160,40 +157,39 @@ public class Character : Singleton<Character>
         rend.color = Color.white;
         isAttacked = false;
     }
-
-/*    void GetCoin()
-    {
-        float radius = 2;
-
-        bool isInRadius = Physics.CheckSphere(transform.position, radius, coinLayer);
-
-        if (isInRadius)
+    /*    void GetCoin()
         {
-            Coin.Instance.MoveCoin(transform.position, radius);
-        }
+            float radius = 2;
 
+            bool isInRadius = Physics.CheckSphere(transform.position, radius, coinLayer);
 
-        Collider[] hit = Physics.OverlapSphere(transform.position, radius, coinLayer);
-
-        foreach (Collider c in hit)
-        {
-            int i = 0;
-            if (c.name == "Coin")
+            if (isInRadius)
             {
-                i++;
-                continue;
+                Coin.Instance.MoveCoin(transform.position, radius);
             }
-            Debug.Log(i);
 
-            Coin.Instance.MoveCoin(transform.position, radius);
+
+            Collider[] hit = Physics.OverlapSphere(transform.position, radius, coinLayer);
+
+            foreach (Collider c in hit)
+            {
+                int i = 0;
+                if (c.name == "Coin")
+                {
+                    i++;
+                    continue;
+                }
+                Debug.Log(i);
+
+                Coin.Instance.MoveCoin(transform.position, radius);
+            }
+
+            //Debug.Log(money);
         }
-
-        //Debug.Log(money);
-    }
-    private void OnDrawGizmos()
-    {
-        UnityEditor.Handles.color = Color.blue;
-        UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.up, 2);
-    }
-    */
+        private void OnDrawGizmos()
+        {
+            UnityEditor.Handles.color = Color.blue;
+            UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.up, 2);
+        }
+        */
 }
