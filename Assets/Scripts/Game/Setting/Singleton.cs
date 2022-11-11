@@ -10,6 +10,7 @@ public class Singleton<T> : MonoBehaviour
 
     protected void Awake()                              // ObjectPool의 Awake에서 호출하기 위해 Protected
     {
+        DontDestroyOnLoad(gameObject);
         instance = this as T;                           // 나(Singleton)을 T형으로 변환후 대입
     }
 }

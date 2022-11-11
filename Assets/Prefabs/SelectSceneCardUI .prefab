@@ -273,16 +273,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: -643204392626406560}
-        m_TargetAssemblyTypeName: WeaponCardUI, Assembly-CSharp
-        m_MethodName: Click
-        m_Mode: 1
+      - m_Target: {fileID: 1077021359343993128}
+        m_TargetAssemblyTypeName: SelectSceneCard, Assembly-CSharp
+        m_MethodName: MoveScene
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Game
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &714894163236016091
@@ -1126,9 +1126,9 @@ GameObject:
   - component: {fileID: 1927193374837317974}
   - component: {fileID: 7719271856648617477}
   - component: {fileID: 8710068272198256309}
-  - component: {fileID: -643204392626406560}
+  - component: {fileID: 1077021359343993128}
   m_Layer: 5
-  m_Name: WeaponCardUI
+  m_Name: 'SelectSceneCardUI '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1234,7 +1234,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
---- !u!114 &-643204392626406560
+--- !u!114 &1077021359343993128
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1243,7 +1243,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4429883375355207956}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6371fd0f1b19f924abf7358338a7f53f, type: 3}
+  m_Script: {fileID: 11500000, guid: 57e61bb924299c243b38c2dfa6903449, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   weaponInfo:
@@ -1260,7 +1260,6 @@ MonoBehaviour:
   weaponDamage: {fileID: 1445464021982260933}
   elementDamage: {fileID: 1951879854259284740}
   weaponRange: {fileID: 2636182103579118973}
-  selectedWeapon: {fileID: 0}
 --- !u!1 &4463944616484215258
 GameObject:
   m_ObjectHideFlags: 0

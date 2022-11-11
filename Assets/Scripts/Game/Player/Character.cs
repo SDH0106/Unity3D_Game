@@ -34,7 +34,7 @@ public class Character : Singleton<Character>
 
     WeaponCardUI weaponCardUI;
 
-    int weaponPosNum;
+    [HideInInspector] public int weaponPosNum;
 
     // Start is called before the first frame update
     void Start()

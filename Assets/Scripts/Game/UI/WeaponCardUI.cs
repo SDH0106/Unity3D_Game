@@ -19,18 +19,21 @@ public class WeaponCardUI : MonoBehaviour
     int randNum;
     int selectNum;
 
-    [HideInInspector] public WeaponInfo selectedWeapon;
+    WeaponInfo selectedWeapon;
 
     private void Start()
     {
         randNum = Random.Range(0, weaponInfo.Length);
         selectNum = randNum;
         selectedWeapon = weaponInfo[randNum];
+
+        Setting();
     }
 
     private void Update()
     {
-        Setting();
+        if (Character.Instance.weaponPosNum >= 6)
+            Destroy(gameObject);
     }
 
     void Setting()
@@ -45,6 +48,8 @@ public class WeaponCardUI : MonoBehaviour
 
     public void Click()
     {
+        ItemManager.Instance.GetItemInfo(selectedWeapon);
+        Character.Instance.EquipWeapon();
         Destroy(gameObject);
     }
 }
