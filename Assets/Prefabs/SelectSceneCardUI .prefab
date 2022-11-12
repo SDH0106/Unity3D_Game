@@ -111,7 +111,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -64.10034, y: 156}
+  m_AnchoredPosition: {x: -83.00293, y: 156}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4876853714509048481
@@ -320,7 +320,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 96.715, y: 124}
+  m_AnchoredPosition: {x: 87.49869, y: 124}
   m_SizeDelta: {x: 73.42999, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7536111480737398696
@@ -553,7 +553,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -64.1, y: 155}
+  m_AnchoredPosition: {x: -83, y: 155}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1648018286174661044
@@ -1260,6 +1260,7 @@ MonoBehaviour:
   weaponDamage: {fileID: 1445464021982260933}
   elementDamage: {fileID: 1951879854259284740}
   weaponRange: {fileID: 2636182103579118973}
+  selectedWeapon: {fileID: 0}
 --- !u!1 &4463944616484215258
 GameObject:
   m_ObjectHideFlags: 0
@@ -1571,7 +1572,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 94.215, y: 172}
+  m_AnchoredPosition: {x: 85, y: 172}
   m_SizeDelta: {x: 68.42999, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2828505685985975933

@@ -6,6 +6,7 @@ using UnityEngine.Pool;
 
 public class Bullet : MonoBehaviour
 {
+     GameObject effectPrefab; 
     [SerializeField] float speed = 3f;
 
     private IObjectPool<Bullet> managedPool;
@@ -18,6 +19,7 @@ public class Bullet : MonoBehaviour
     private void Start()
     {
         monster = GetComponent<Monster>();
+        effectPrefab = Resources.Load("Prefabs/AttackEffect/bulletEffect") as GameObject;
     }
 
     void Update()
@@ -34,6 +36,17 @@ public class Bullet : MonoBehaviour
         this.dir = dir;
 
         Invoke("DestroyBullet", 2f);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Monster")
+        {
+            other.GetComponent<Monster>().OnDamaged();
+            DestroyBullet();
+            CancleDestroyInvoke();
+            Instantiate(effectPrefab, transform.position, transform.rotation);
+        }
     }
 
     public void SetManagedPool(IObjectPool<Bullet> pool)    

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShowCard : Singleton<ShowCard>
+public class ShowCard : MonoBehaviour
 {
     [SerializeField] SelectSceneCard[] cards;
 

@@ -25,7 +25,7 @@ public class DropCoin : MonoBehaviour
     {
         Coin pool = Instantiate(coinPrefab).GetComponent<Coin>();
         pool.SetManagedPool(objectPool);
-        //pool.transform.SetParent(Character.Instance.DamageStorage);
+        pool.transform.SetParent(ItemManager.Instance.coinStorage);
 
         return pool;
     }

@@ -18,7 +18,6 @@ public class Character : Singleton<Character>
     [SerializeField] public float maxExp;
 
     [Header("WeaponPos")]
-    [SerializeField] GameObject weaponPrefab;
     [SerializeField] Transform[] weaponPoses;
     [SerializeField] public Transform bulletStorage;
 
@@ -36,9 +35,10 @@ public class Character : Singleton<Character>
 
     [HideInInspector] public int weaponPosNum;
 
-    // Start is called before the first frame update
     void Start()
     {
+        ItemManager.Instance.Equip(weaponPoses, weaponPosNum);
+
         weaponPosNum = 0;
         maxHp = hp;
         money = 0;
@@ -55,7 +55,6 @@ public class Character : Singleton<Character>
         if (isDead == false)
         {
             Move();
-            //EquipWeapon();
         }
 
         anim.SetBool("isRun", isRun);
@@ -69,7 +68,8 @@ public class Character : Singleton<Character>
 
     public void EquipWeapon()
     {
-        GameObject weapon = Instantiate(weaponPrefab, weaponPoses[weaponPosNum].position, transform.rotation);
+        GameObject weapon = ItemManager.Instance.WeaponPrefab;
+        weapon.transform.position = weaponPoses[weaponPosNum].position;
         weapon.transform.SetParent(weaponPoses[weaponPosNum]);
         weaponPosNum++;
     }

@@ -49,7 +49,7 @@ public class SelectSceneCard : MonoBehaviour
     {
         ItemManager.Instance.GetItemInfo(selectedWeapon);
         count++;
-        Character.Instance.EquipWeapon();
+        SceneManager.LoadScene(sceneName);
     }
 
 }

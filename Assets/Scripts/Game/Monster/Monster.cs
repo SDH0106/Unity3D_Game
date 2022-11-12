@@ -101,7 +101,7 @@ public class Monster : MonoBehaviour
         rend.color = Color.white;
     }
 
-    void OnDamaged()
+    public void OnDamaged()
     {
         printDamage.PrintDamageText(printPos.position);
 
@@ -136,16 +136,6 @@ public class Monster : MonoBehaviour
                     coin.Drop(deadPos);
                 }
             }
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "myBullet" && isDead == false)
-        {
-            OnDamaged();
-            other.gameObject.GetComponent<Bullet>().DestroyBullet();
-            other.gameObject.GetComponent<Bullet>().CancleDestroyInvoke();
         }
     }
 

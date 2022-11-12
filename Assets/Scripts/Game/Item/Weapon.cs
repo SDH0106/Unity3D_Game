@@ -7,7 +7,7 @@ using static WeaponInfo;
 
 public class Weapon : MonoBehaviour
 {
-    string weaponName;
+    public string weaponName;
     WEAPON_TYPE type;
     int weaponDamage;
     int elementDamage;

@@ -189,7 +189,7 @@ MonoBehaviour:
   coll: {fileID: 2100492170074265801}
   printPos: {fileID: 6332070769285271093}
   hp: 2
-  speed: 0
+  speed: 2
   attackDamage: 1
 --- !u!114 &1601650622626363655
 MonoBehaviour:
