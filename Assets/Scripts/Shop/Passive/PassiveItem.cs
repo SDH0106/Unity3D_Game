@@ -5,17 +5,17 @@ using static WeaponInfo;
 
 public class PassiveItem : MonoBehaviour
 {
-    public string itemName;
+    [HideInInspector] public string itemName;
     float hp;
     float recoverHp;
     float absorbHp;
-    int defence;
-    int weaponDamage;
-    int elementDamage;
+    float defence;
+    float weaponDamage;
+    float elementDamage;
     float attackSpeed;
-    float range;
     float speed;
-    int luck;
+    float range;
+    float luck;
 
     SpriteRenderer spriteRenderer;
 
@@ -32,15 +32,15 @@ public class PassiveItem : MonoBehaviour
     {
         spriteRenderer.sprite = passiveInfo.ItemSprite;
         itemName = passiveInfo.ItemName;
-        hp = passiveInfo.HP;
+        hp = passiveInfo.Hp;
         recoverHp = passiveInfo.RecoverHp;
         absorbHp = passiveInfo.AbsorbHp;
         defence = passiveInfo.Defence;
         weaponDamage = passiveInfo.WeaponDamage;
         elementDamage = passiveInfo.ElementDamage;
         attackSpeed = passiveInfo.AttackSpeed;
-        range = passiveInfo.Range;
         speed = passiveInfo.Speed;
+        range = passiveInfo.Range;
         luck = passiveInfo.Luck;
     }
 }

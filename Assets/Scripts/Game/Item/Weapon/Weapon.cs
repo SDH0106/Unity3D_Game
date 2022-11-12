@@ -7,7 +7,7 @@ using static WeaponInfo;
 
 public class Weapon : MonoBehaviour
 {
-    public string weaponName;
+    [HideInInspector] public string weaponName;
     WEAPON_TYPE type;
     int weaponDamage;
     int elementDamage;

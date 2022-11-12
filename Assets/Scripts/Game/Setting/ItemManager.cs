@@ -7,8 +7,11 @@ using UnityEngine.UIElements;
 
 public class ItemManager : Singleton<ItemManager>
 {
-    [SerializeField] GameObject weaponPrefab;
     [SerializeField] public Transform coinStorage;
+
+    [Header("Item")]
+    [SerializeField] GameObject weaponPrefab;
+    [SerializeField] GameObject PassivePerfab;
 
     [HideInInspector] public WeaponInfo weaponCardItem;
     [HideInInspector] public PassiveInfo passiveCardItem;

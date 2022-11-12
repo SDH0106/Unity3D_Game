@@ -16,11 +16,12 @@ MonoBehaviour:
   itemName: "\uBAAC\uC2A4\uD130\uC758 \uCCB4\uC561"
   hp: 0
   recoverHp: 2
-  asorbHp: 3
+  absorbHp: 3
   defence: 0
   weaponDamage: 0
   elementDamage: 0
   attackSpeed: 0
-  range: 0
   speed: 0
+  range: 0
   luck: 0
+  description: 

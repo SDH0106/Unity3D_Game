@@ -26,11 +26,6 @@ public class WeaponCardUI : MonoBehaviour
         Setting();
     }
 
-    private void Update()
-    {
-        
-    }
-
     void Setting()
     {
         itemSprite.sprite = selectedWeapon.ItemSprite;
