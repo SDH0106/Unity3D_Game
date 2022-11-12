@@ -1,12 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Pool;
 
 public class Bullet : MonoBehaviour
 {
-     GameObject effectPrefab; 
+    GameObject effectPrefab;
     [SerializeField] float speed = 3f;
 
     private IObjectPool<Bullet> managedPool;
@@ -19,7 +16,6 @@ public class Bullet : MonoBehaviour
     private void Start()
     {
         monster = GetComponent<Monster>();
-        effectPrefab = Resources.Load("Prefabs/AttackEffect/bulletEffect") as GameObject;
     }
 
     void Update()
@@ -45,11 +41,13 @@ public class Bullet : MonoBehaviour
             other.GetComponent<Monster>().OnDamaged();
             DestroyBullet();
             CancleDestroyInvoke();
+
+            effectPrefab = Resources.Load("BulletEffect") as GameObject;
             Instantiate(effectPrefab, transform.position, transform.rotation);
         }
     }
 
-    public void SetManagedPool(IObjectPool<Bullet> pool)    
+    public void SetManagedPool(IObjectPool<Bullet> pool)
     {
         managedPool = pool;
     }

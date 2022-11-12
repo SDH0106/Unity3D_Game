@@ -14,4 +14,9 @@ public class GameStart : MonoBehaviour
     {
 
     }
+
+    public void ClickExit()
+    {
+        Application.Quit();
+    }
 }

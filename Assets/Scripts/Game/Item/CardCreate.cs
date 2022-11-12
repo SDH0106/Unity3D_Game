@@ -16,7 +16,6 @@ public class CardCreate : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.T))
         {
             Instantiate(cardUI);
-            Debug.Log("1");
         }
     }
 }

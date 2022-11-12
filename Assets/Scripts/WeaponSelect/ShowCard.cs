@@ -33,6 +33,5 @@ public class ShowCard : MonoBehaviour
 
         for (int i = 0; i < cards.Length; i++)
             cards[i].selectedWeapon = cards[i].weaponInfo[numArray[i]];
-
     }
 }

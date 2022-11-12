@@ -8,7 +8,7 @@ using static WeaponInfo;
 
 public class WeaponCardUI : MonoBehaviour
 {
-    [SerializeField] WeaponInfo[] weaponInfo;
+    [SerializeField] public WeaponInfo[] weaponInfo;
     [SerializeField] Image itemSprite;
     [SerializeField] Text weaponName;
     [SerializeField] Text type;
@@ -19,21 +19,16 @@ public class WeaponCardUI : MonoBehaviour
     int randNum;
     int selectNum;
 
-    WeaponInfo selectedWeapon;
+    [HideInInspector] public WeaponInfo selectedWeapon;
 
     private void Start()
     {
-        randNum = Random.Range(0, weaponInfo.Length);
-        selectNum = randNum;
-        selectedWeapon = weaponInfo[randNum];
-
         Setting();
     }
 
     private void Update()
     {
-        if (Character.Instance.weaponPosNum >= 6)
-            Destroy(gameObject);
+        
     }
 
     void Setting()
@@ -48,8 +43,7 @@ public class WeaponCardUI : MonoBehaviour
 
     public void Click()
     {
-        ItemManager.Instance.GetItemInfo(selectedWeapon);
-        Character.Instance.EquipWeapon();
+        ItemManager.Instance.GetWeaponInfo(selectedWeapon);
         Destroy(gameObject);
     }
 }

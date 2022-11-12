@@ -10,13 +10,43 @@ public class ItemManager : Singleton<ItemManager>
     [SerializeField] GameObject weaponPrefab;
     [SerializeField] public Transform coinStorage;
 
-    [HideInInspector] public WeaponInfo CardItem;
+    [HideInInspector] public WeaponInfo weaponCardItem;
+    [HideInInspector] public PassiveInfo passiveCardItem;
+
+    [HideInInspector] public WeaponInfo[] storedWeapon;
+    [HideInInspector] public PassiveInfo[] storedPassive;
+
+    int weaponCount;
+    int passiveCount;
 
     public GameObject WeaponPrefab => weaponPrefab;
 
-    public void GetItemInfo(WeaponInfo weaponInfo)
+    private void Start()
     {
-        CardItem = weaponInfo;
+        weaponCount = 0;
+        passiveCount = 0;
+        storedWeapon = new WeaponInfo[6];
+        storedPassive = new PassiveInfo[18];
+    }
+
+    public void GetWeaponInfo(WeaponInfo weaponInfo)
+    {
+        if (weaponCount < 6)
+        {
+            weaponCardItem = weaponInfo;
+            storedWeapon[weaponCount] = weaponInfo;
+            weaponCount++;
+        }
+    }
+
+    public void GetPassiveInfo(PassiveInfo passiveInfo)
+    {
+        if (weaponCount < 18)
+        {
+            passiveCardItem = passiveInfo;
+            storedPassive[passiveCount] = passiveInfo;
+            passiveCount++;
+        }
     }
 
     public void Equip(Transform[] pos, int num)

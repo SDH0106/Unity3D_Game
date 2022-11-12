@@ -47,9 +47,8 @@ public class SelectSceneCard : MonoBehaviour
 
     public void MoveScene(string sceneName)
     {
-        ItemManager.Instance.GetItemInfo(selectedWeapon);
+        ItemManager.Instance.GetWeaponInfo(selectedWeapon);
         count++;
         SceneManager.LoadScene(sceneName);
     }
-
 }
