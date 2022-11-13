@@ -13,14 +13,15 @@ MonoBehaviour:
   m_Name: LargePotion
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 2d7d9ae02b7159843ac7d5ead0f8b89a, type: 3}
-  itemName: "\uC131\uC7A5\uBB3C\uC57D(\uB300)"
+  itemName: "\uC131\uC7A5 \uBB3C\uC57D(\uB300)"
   hp: 0
   recoverHp: 0
-  asorbHp: 0
+  absorbHp: 0
   defence: 0
   weaponDamage: 0
   elementDamage: -3
   attackSpeed: 2
-  range: 6
   speed: 0
+  range: 6
   luck: 0
+  description: 

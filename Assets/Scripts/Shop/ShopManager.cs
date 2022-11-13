@@ -1,98 +1,211 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ShopManager : MonoBehaviour
 {
-    //[SerializeField] Image[] weaponImages;
-    [SerializeField] Image[] passiveImages;
+    [SerializeField] Transform cardsParent;
+    [SerializeField] GameObject weaponCardUI;
+    [SerializeField] GameObject passiveCardUI;
 
-    //[SerializeField] WeaponCardUI[] weapons;
-    [SerializeField] PassiveCardUI[] passiveCards;
+    [Header("")]
+    [SerializeField] GameObject[] weaponSlots;
+    [SerializeField] GameObject[] passiveSlots;
 
-    int[] numArray;
+    [HideInInspector] public int[] passiveItem;
 
-    private void Awake()
+    PassiveInfo[] storedPassive;
+
+    GameObject[] cards;
+    int[] num;
+
+    bool[] bools;
+
+    private void Start()
     {
-        /*numArray = new int[weapons[0].weaponInfo.Length];
-        GetRandomCard(weapons.Length, weapons[0].weaponInfo.Length);*/
-
-        numArray = new int[passiveCards[0].passiveInfo.Length];
-        GetRandomCard(passiveCards.Length, passiveCards[0].passiveInfo.Length);
+        bools = new bool[4];
+        num = new int[4];
+        cards = new GameObject[4];
+        passiveItem = new int[passiveSlots.Length];
+        storedPassive = ItemManager.Instance.storedPassive;
+        CardSlot();
     }
 
     private void Update()
     {
+        CheckLock();
         WeaponSlot();
         PassiveSlot();
+        Refill();
     }
 
-    void AlphaChange(int i, int a, Image[] image)
+    void ImageAlphaChange(int i, int a, Image image)
     {
-        Color color = image[i].color;
-        color.a = a;
-        image[i].color = color;
+        Color imageColor = image.color;
+        imageColor.a = a;
+        image.color = imageColor;
+    }
+
+    void TextAlphaChange(int i, int a, Text text)
+    {
+        Color textColor = text.color;
+        textColor.a = a;
+        text.color = textColor;
+    }
+
+    void Refill()
+    {
+        int refillNum = 0;
+
+        for (int i = 0; i < 4; i++)
+        {
+            if (cardsParent.GetChild(i).childCount == 0)
+            {
+                refillNum++;
+            }
+        }
+
+        if (refillNum == 4)
+            CardSlot();
+    }
+
+    public void Reroll()
+    {
+        for (int i = 0; i < cardsParent.childCount; i++)
+        {
+            if (cards[i] != null)
+            {
+                if (bools[i] == false)
+                    Destroy(cardsParent.GetChild(i).GetChild(0).gameObject);
+            }
+        }
+
+        CardSlot();
+    }
+
+    void CheckLock()
+    {
+        for (int i = 0; i < cardsParent.childCount; i++)
+        {
+            if (cards[i] != null)
+            {
+                if (num[i] == 0)
+                {
+                    bools[i] = cards[i].GetComponent<WeaponCardUI>().isLock;
+                }
+
+                else if (num[i] == 1)
+                {
+                    bools[i] = cards[i].GetComponent<PassiveCardUI>().isLock;
+                }
+            }
+        }
+    }
+
+    void CardSlot()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            if (bools[i] == false)
+            {
+                int rand = UnityEngine.Random.Range(0, 100);
+
+                if (rand >= 80)
+                {
+                    GetRandomWeaponCard();
+                    GameObject instance = Instantiate(weaponCardUI, cardsParent.GetChild(i).transform);
+                    cards[i] = instance;
+                    num[i] = 0;
+                    instance.transform.SetParent(cardsParent.GetChild(i));
+                }
+
+                else if (rand < 80)
+                {
+                    GetRandomPassiveCard();
+                    GameObject instance = Instantiate(passiveCardUI, cardsParent.GetChild(i).transform);
+                    cards[i] = instance;
+                    num[i] = 1;
+                    instance.transform.SetParent(cardsParent.GetChild(i));
+                }
+            }
+
+        }
     }
 
     void WeaponSlot()
     {
-        /*for(int i = 0; i < weaponImages.Length; i++)
+        for(int i = 0; i < weaponSlots.Length; i++)
         {
+            Image image = weaponSlots[i].transform.GetChild(2).GetComponent<Image>();
+            Text text = weaponSlots[i].transform.GetChild(3).GetComponent<Text>();
+            Text x = weaponSlots[i].transform.GetChild(4).GetComponent<Text>();
+
+            TextAlphaChange(i, 0, text);
+            TextAlphaChange(i, 0, x);
+
             if (ItemManager.Instance.storedWeapon[i] != null)
             {
-                AlphaChange(i, 1);
-                weaponImages[i].sprite = ItemManager.Instance.storedWeapon[i].ItemSprite;
+                ImageAlphaChange(i, 1, image);
+                image.sprite = ItemManager.Instance.storedWeapon[i].ItemSprite;
             }
 
             else if (ItemManager.Instance.storedWeapon[i] == null)
             {
-                AlphaChange(i, 0);
+                ImageAlphaChange(i, 0, image);
             }
-        }*/
+        }
     }
 
     void PassiveSlot()
     {
-        for(int i = 0; i < passiveImages.Length; i++)
+        for (int i = 0; i < passiveSlots.Length; i++)
         {
+            Image image = passiveSlots[i].transform.GetChild(2).GetComponent<Image>();
+            Text text = passiveSlots[i].transform.GetChild(3).GetComponent<Text>();
+            Text x = passiveSlots[i].transform.GetChild(4).GetComponent<Text>();
+
             if (ItemManager.Instance.storedPassive[i] != null)
             {
-                AlphaChange(i, 1, passiveImages);
-                passiveImages[i].sprite = ItemManager.Instance.storedPassive[i].ItemSprite;
+                ImageAlphaChange(i, 1, image);
+                image.sprite = ItemManager.Instance.storedPassive[i].ItemSprite;
+                text.text = passiveItem[i].ToString();
+
+                if (passiveItem[i] > 1)
+                {
+                    TextAlphaChange(i, 1, text);
+                    TextAlphaChange(i, 1, x);
+                }
+
+                else if (passiveItem[i] <= 1)
+                {
+                    TextAlphaChange(i, 0, text);
+                    TextAlphaChange(i, 0, x);
+                }
             }
 
             else if (ItemManager.Instance.storedPassive[i] == null)
             {
-                AlphaChange(i, 0, passiveImages);
+                ImageAlphaChange(i, 0, image);
+                TextAlphaChange(i, 0, text);
+                TextAlphaChange(i, 0, x);
             }
         }
     }
 
-    void GetRandomCard(int count, int length)
+    void GetRandomWeaponCard()
     {
-        for (int i = 0; i < count; i++)
-        {
-            numArray[i] = UnityEngine.Random.Range(0, length);
+        WeaponCardUI weaponCard = weaponCardUI.GetComponent<WeaponCardUI>();
+        int rand = Random.Range(0, weaponCardUI.GetComponent<WeaponCardUI>().weaponInfo.Length);
+        weaponCard.selectedWeapon= weaponCard.weaponInfo[rand];
+    }
 
-            for (int j = 0; j < i; j++)
-            {
-                if (numArray[j] == numArray[i])
-                {
-                    i--;
-                    break;
-                }
-            }
-        }
-
-        /*for (int i = 0; i < weapons.Length; i++)
-            weapons[i].selectedWeapon = weapons[i].weaponInfo[numArray[i]];*/
-
-        for (int i = 0; i < passiveCards.Length; i++)
-        {
-            passiveCards[i].selectedPassive = passiveCards[i].passiveInfo[numArray[i]];
-        }
-
+    void GetRandomPassiveCard()
+    {
+        PassiveCardUI passiveCard = passiveCardUI.GetComponent<PassiveCardUI>();
+        int rand = Random.Range(0, passiveCardUI.GetComponent<PassiveCardUI>().passiveInfo.Length);
+        passiveCard.selectedPassive= passiveCard.passiveInfo[rand];
     }
 }

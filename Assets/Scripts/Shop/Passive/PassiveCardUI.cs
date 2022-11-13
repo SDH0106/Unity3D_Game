@@ -1,12 +1,17 @@
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PassiveCardUI : MonoBehaviour
 {
     [SerializeField] public PassiveInfo[] passiveInfo;
+
+    [SerializeField] Image lockBackImage;
+    [SerializeField] Image lockImage;
+    [SerializeField] Text lockText;
 
     [Header("decript")]
     [SerializeField] GameObject[] descriptPrefabs;
@@ -15,30 +20,29 @@ public class PassiveCardUI : MonoBehaviour
     [SerializeField] Image itemSprite;
     [SerializeField] Text itemName;
 
-    Text hp;
-    Text recoverHp;
-    Text absorbHp;
-    Text defence;
-    Text weaponDamage;
-    Text elementDamage;
-    Text attackSpeed;
-    Text speed;
-    Text range;
-    Text luck;
-
-    int randNum;
-    int selectNum;
-
     [HideInInspector] public PassiveInfo selectedPassive;
 
     float[] stats = new float[10];
     string[] statTypes = new string[10];
 
+    Color LockImageColor;
+    Color LockTextColor;
+
+    [HideInInspector] public bool isLock = false;
+
     private void Start()
     {
+        LockImageColor = lockBackImage.color;
+        LockTextColor = lockText.color;
+
         Setting();
         StatArray();
         DescriptionInfo();
+    }
+
+    private void Update()
+    {
+        lockImage.gameObject.SetActive(isLock);
     }
 
     void Setting()
@@ -97,5 +101,23 @@ public class PassiveCardUI : MonoBehaviour
     {
         ItemManager.Instance.GetPassiveInfo(selectedPassive);
         Destroy(gameObject);
+        isLock = false;
+    }
+
+    public void Lock()
+    {
+        if (!isLock)
+        {
+            lockBackImage.color = Color.white;
+            lockText.color = Color.black;
+            isLock = true;
+        }
+
+        else if (isLock)
+        {
+            lockBackImage.color = LockImageColor;
+            lockText.color = LockTextColor;
+            isLock = false;
+        }
     }
 }

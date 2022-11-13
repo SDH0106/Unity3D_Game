@@ -217,9 +217,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9b6a32b004962f4299550bcc35c5853, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponPrefab: {fileID: 3953021356634962379, guid: 8fff92543533dad479a675a562543ce1, type: 3}
   coinStorage: {fileID: 1248675029}
-  CardItem: {fileID: 0}
+  weaponPrefab: {fileID: 3953021356634962379, guid: 8fff92543533dad479a675a562543ce1, type: 3}
+  PassivePerfab: {fileID: 0}
+  weaponCardItem: {fileID: 0}
+  passiveCardItem: {fileID: 0}
+  storedWeapon: []
+  storedPassive: []
+  shopManager: {fileID: 0}
 --- !u!1 &467084896
 GameObject:
   m_ObjectHideFlags: 0
