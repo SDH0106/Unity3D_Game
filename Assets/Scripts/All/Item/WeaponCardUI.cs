@@ -21,6 +21,7 @@ public class WeaponCardUI : MonoBehaviour
     [SerializeField] Text weaponDamage;
     [SerializeField] Text elementDamage;
     [SerializeField] Text weaponRange;
+    [SerializeField]
 
     Color LockImageColor;
     Color LockTextColor;
@@ -53,8 +54,9 @@ public class WeaponCardUI : MonoBehaviour
 
     public void Click()
     {
-        if (ItemManager.Instance.weaponCount < 6)
+        if (ItemManager.Instance.foolCount < 5)
         {
+            ItemManager.Instance.foolCount++;
             ItemManager.Instance.GetWeaponInfo(selectedWeapon);
             Destroy(gameObject);
             isLock = false;

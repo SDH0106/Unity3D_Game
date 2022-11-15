@@ -18,3 +18,4 @@ MonoBehaviour:
   weaponDamage: 2
   elementDamage: 0
   weaponRange: 8
+  weaponPrice: 20

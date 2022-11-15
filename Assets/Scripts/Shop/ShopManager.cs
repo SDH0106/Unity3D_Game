@@ -1,18 +1,28 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Purchasing.MiniJSON;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class ShopManager : MonoBehaviour
+public class ShopManager : Singleton<ShopManager>
 {
+    [SerializeField] Text round;
+    [SerializeField] Text money;
+    [SerializeField] Text rerollMoneyText;
     [SerializeField] Transform cardsParent;
     [SerializeField] GameObject weaponCardUI;
     [SerializeField] GameObject passiveCardUI;
 
     [Header("")]
-    [SerializeField] GameObject[] weaponSlots;
+    [SerializeField] public GameObject backgroundImage;
+    [SerializeField] GameObject sellUI;
+
+    [Header("")]
+    [SerializeField] public GameObject[] weaponSlots;
     [SerializeField] GameObject[] passiveSlots;
 
     [HideInInspector] public int[] passiveItem;
@@ -24,22 +34,54 @@ public class ShopManager : MonoBehaviour
 
     bool[] bools;
 
+    int rerollMoney;
+
+    [HideInInspector] public int WeaponSlotCount = 0;
+
     private void Start()
     {
+        sellUI.gameObject.SetActive(false);
+        rerollMoney = -GameManager.Instance.round;
         bools = new bool[4];
         num = new int[4];
         cards = new GameObject[4];
         passiveItem = new int[passiveSlots.Length];
         storedPassive = ItemManager.Instance.storedPassive;
+
         CardSlot();
     }
 
     private void Update()
     {
-        CheckLock();
-        WeaponSlot();
-        PassiveSlot();
-        Refill();
+        round.text = GameManager.Instance.round.ToString();
+        money.text = GameManager.Instance.money.ToString();
+        rerollMoneyText.text = rerollMoney.ToString();
+
+        if (GameManager.Instance.currentScene == "Shop")
+        {
+            gameObject.SetActive(true);
+
+            CheckLock();
+            WeaponSlot();
+            PassiveSlot();
+            Refill();
+        }
+
+        else if (GameManager.Instance.currentScene == "Game")
+        {
+            gameObject.SetActive(false);
+            rerollMoney = 0;
+        }
+    }
+
+    public void ToGameScene()
+    {
+        GameManager.Instance.currentScene = "Game";
+        SceneManager.LoadScene("Game");
+        Character.Instance.transform.position = Vector3.zero;
+        GameManager.Instance.round++;
+        rerollMoney = -GameManager.Instance.round;
+        GameManager.Instance.gameTime = GameManager.Instance.initgameTime;
     }
 
     void ImageAlphaChange(int i, int a, Image image)
@@ -54,6 +96,12 @@ public class ShopManager : MonoBehaviour
         Color textColor = text.color;
         textColor.a = a;
         text.color = textColor;
+    }
+
+    public void CloseUI()
+    {
+        backgroundImage.SetActive(false);
+        sellUI.gameObject.SetActive(false);
     }
 
     void Refill()
@@ -82,6 +130,9 @@ public class ShopManager : MonoBehaviour
                     Destroy(cardsParent.GetChild(i).GetChild(0).gameObject);
             }
         }
+
+        rerollMoney -= (GameManager.Instance.round) / 2;
+        GameManager.Instance.money += rerollMoney;
 
         CardSlot();
     }
@@ -137,7 +188,7 @@ public class ShopManager : MonoBehaviour
 
     void WeaponSlot()
     {
-        for(int i = 0; i < weaponSlots.Length; i++)
+        for (int i = 0; i < weaponSlots.Length; i++)
         {
             Image image = weaponSlots[i].transform.GetChild(2).GetComponent<Image>();
             Text text = weaponSlots[i].transform.GetChild(3).GetComponent<Text>();
@@ -151,6 +202,7 @@ public class ShopManager : MonoBehaviour
                 ImageAlphaChange(i, 1, image);
                 image.sprite = ItemManager.Instance.storedWeapon[i].ItemSprite;
             }
+
 
             else if (ItemManager.Instance.storedWeapon[i] == null)
             {
@@ -198,14 +250,14 @@ public class ShopManager : MonoBehaviour
     void GetRandomWeaponCard()
     {
         WeaponCardUI weaponCard = weaponCardUI.GetComponent<WeaponCardUI>();
-        int rand = Random.Range(0, weaponCardUI.GetComponent<WeaponCardUI>().weaponInfo.Length);
+        int rand = UnityEngine.Random.Range(0, weaponCardUI.GetComponent<WeaponCardUI>().weaponInfo.Length);
         weaponCard.selectedWeapon= weaponCard.weaponInfo[rand];
     }
 
     void GetRandomPassiveCard()
     {
         PassiveCardUI passiveCard = passiveCardUI.GetComponent<PassiveCardUI>();
-        int rand = Random.Range(0, passiveCardUI.GetComponent<PassiveCardUI>().passiveInfo.Length);
+        int rand = UnityEngine.Random.Range(0, passiveCardUI.GetComponent<PassiveCardUI>().passiveInfo.Length);
         passiveCard.selectedPassive= passiveCard.passiveInfo[rand];
     }
 }

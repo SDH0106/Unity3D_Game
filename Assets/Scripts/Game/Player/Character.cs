@@ -24,7 +24,6 @@ public class Character : Singleton<Character>
     bool isRun, isAttacked, isDead = false;
 
     [HideInInspector] public int maxHp;
-    [HideInInspector] public int money;
     [HideInInspector] public float exp;
 
     public int AttackDamage => attackDamage;
@@ -41,7 +40,6 @@ public class Character : Singleton<Character>
 
         weaponPosNum = 0;
         maxHp = hp;
-        money = 0;
         exp = 0f;
 
         rigid = GetComponent<Rigidbody>();
@@ -59,19 +57,6 @@ public class Character : Singleton<Character>
 
         anim.SetBool("isRun", isRun);
 
-    }
-
-    void ReleaseInvincible()
-    {
-        isAttacked = false;
-    }
-
-    public void EquipWeapon()
-    {
-        GameObject weapon = ItemManager.Instance.WeaponPrefab;
-        weapon.transform.position = weaponPoses[weaponPosNum].position;
-        weapon.transform.SetParent(weaponPoses[weaponPosNum]);
-        weaponPosNum++;
     }
 
     void Move()
@@ -157,39 +142,4 @@ public class Character : Singleton<Character>
         rend.color = Color.white;
         isAttacked = false;
     }
-    /*    void GetCoin()
-        {
-            float radius = 2;
-
-            bool isInRadius = Physics.CheckSphere(transform.position, radius, coinLayer);
-
-            if (isInRadius)
-            {
-                Coin.Instance.MoveCoin(transform.position, radius);
-            }
-
-
-            Collider[] hit = Physics.OverlapSphere(transform.position, radius, coinLayer);
-
-            foreach (Collider c in hit)
-            {
-                int i = 0;
-                if (c.name == "Coin")
-                {
-                    i++;
-                    continue;
-                }
-                Debug.Log(i);
-
-                Coin.Instance.MoveCoin(transform.position, radius);
-            }
-
-            //Debug.Log(money);
-        }
-        private void OnDrawGizmos()
-        {
-            UnityEditor.Handles.color = Color.blue;
-            UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.up, 2);
-        }
-        */
 }

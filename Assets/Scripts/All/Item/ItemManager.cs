@@ -19,15 +19,19 @@ public class ItemManager : Singleton<ItemManager>
     [HideInInspector] public WeaponInfo[] storedWeapon;
     [HideInInspector] public PassiveInfo[] storedPassive;
 
-    [SerializeField] ShopManager shopManager;
-
-    public int weaponCount;
+    int weaponCount;
     int passiveItemCount;
+
+    GameObject weapon;
+
+    public bool isFool = false;
+    public int foolCount;
 
     public GameObject WeaponPrefab => weaponPrefab;
 
     private void Start()
     {
+        foolCount = 0;
         weaponCount = 0;
         passiveItemCount = 0;
         storedWeapon = new WeaponInfo[6];
@@ -36,11 +40,27 @@ public class ItemManager : Singleton<ItemManager>
 
     public void GetWeaponInfo(WeaponInfo weaponInfo)
     {
-        if (weaponCount < storedWeapon.Length)
+        if (foolCount > 5)
         {
-            weaponCardItem = weaponInfo;
+            isFool = true;
+        }
+
+        else if (foolCount <= 5)
+            isFool = false;
+
+        weaponCardItem = weaponInfo;
+
+        if (isFool == false)
+        {
+            for (int i = 0; i < storedWeapon.Length; i++)
+            {
+                if (storedWeapon[i] == null)
+                {
+                    weaponCount = i;
+                    break;
+                }
+            }
             storedWeapon[weaponCount] = weaponInfo;
-            weaponCount++;
         }
     }
 
@@ -51,7 +71,7 @@ public class ItemManager : Singleton<ItemManager>
 
         if (passiveItemCount == 0)
         {
-            shopManager.passiveItem[passiveItemCount]++;
+            ShopManager.Instance.passiveItem[passiveItemCount]++;
         }
 
         else if (passiveItemCount > 0)
@@ -62,7 +82,6 @@ public class ItemManager : Singleton<ItemManager>
         passiveItemCount++;
     }
 
-
     void CheckItemEquel()
     {
         for (int i = 0; i < passiveItemCount; i++)
@@ -70,7 +89,7 @@ public class ItemManager : Singleton<ItemManager>
             if (storedPassive[passiveItemCount] == storedPassive[i])
             {
                 storedPassive[passiveItemCount] = null;
-                shopManager.passiveItem[i]++;
+                ShopManager.Instance.passiveItem[i]++;
                 passiveItemCount--;
                 break;
             }
@@ -78,13 +97,13 @@ public class ItemManager : Singleton<ItemManager>
             else
             {
                 if (i == passiveItemCount - 1)
-                    shopManager.passiveItem[passiveItemCount]++;
+                    ShopManager.Instance.passiveItem[passiveItemCount]++;
             }
         }
     }
     public void Equip(Transform[] pos, int num)
     {
-        GameObject weapon = Instantiate(weaponPrefab);
+        weapon = Instantiate(weaponPrefab);
         weapon.transform.SetParent(pos[num]);
         weapon.transform.position = pos[num].position;
         num++;

@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Pool;
 using UnityEngine.UI;
 
-public class CharacterUI : MonoBehaviour
+public class GameSceneUI : MonoBehaviour
 {
     [Header("HP")]
     [SerializeField] Text hpText;
@@ -19,6 +19,12 @@ public class CharacterUI : MonoBehaviour
     [Header("COIN")]
     [SerializeField] Text coinText;
 
+    [Header("Time")]
+    [SerializeField] Text timeText;
+
+    [Header("Round")]
+    [SerializeField] Text roundText;
+
     Character character;
 
     private void Start()
@@ -31,6 +37,8 @@ public class CharacterUI : MonoBehaviour
         HpUI();
         ExpUI();
         CoinUI();
+        RoundUI();
+        TimeUI();
     }
 
     void HpUI()
@@ -48,6 +56,22 @@ public class CharacterUI : MonoBehaviour
 
     void CoinUI()
     {
-        coinText.text = character.money.ToString();
+        coinText.text = GameManager.Instance.money.ToString();
+    }
+
+    void RoundUI()
+    {
+        roundText.text = GameManager.Instance.round.ToString();
+    }
+
+    void TimeUI()
+    {
+        if (GameManager.Instance.gameTime >= 1)
+            timeText.text = ((int)GameManager.Instance.gameTime).ToString();
+        else
+        {
+            timeText.color = Color.red;
+            timeText.text = (GameManager.Instance.gameTime).ToString("F2");
+        }
     }
 }

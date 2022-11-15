@@ -12,6 +12,7 @@ public class Weapon : MonoBehaviour
     int weaponDamage;
     int elementDamage;
     float weaponRange;
+    int weaponPrice;
 
     SpriteRenderer spriteRenderer;
 
@@ -32,5 +33,6 @@ public class Weapon : MonoBehaviour
         weaponDamage = weaponInfo.WeaponDamage;
         elementDamage= weaponInfo.ElementDamage;
         weaponRange = weaponInfo.WeaponRange;
+        weaponPrice = weaponInfo.WeaponPrice;
     }
 }

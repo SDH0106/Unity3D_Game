@@ -50,7 +50,7 @@ public class Coin : Singleton<Coin>
     {
         if(other.gameObject.CompareTag("Character"))
         {
-            Character.Instance.money += coinValue;
+            GameManager.Instance.money += coinValue;
             DestroyPool();
         }
     }
