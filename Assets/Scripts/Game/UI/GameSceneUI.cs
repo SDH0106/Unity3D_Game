@@ -11,7 +11,6 @@ public class GameSceneUI : MonoBehaviour
     [SerializeField] Text hpText;
     [SerializeField] Text maxHpText;
     [SerializeField] Slider hpBar;
-    [SerializeField] Slider playerHpBar;
 
     [Header("EXP")]
     [SerializeField] Slider expBar;
@@ -25,13 +24,6 @@ public class GameSceneUI : MonoBehaviour
     [Header("Round")]
     [SerializeField] Text roundText;
 
-    Character character;
-
-    private void Start()
-    {
-        character = Character.Instance;
-    }
-
     private void Update()
     {
         HpUI();
@@ -43,15 +35,14 @@ public class GameSceneUI : MonoBehaviour
 
     void HpUI()
     {
-        maxHpText.text = character.maxHp.ToString();
-        hpText.text = character.hp.ToString();
-        hpBar.value = 1 - ((float)character.hp / (float)character.maxHp);
-        playerHpBar.value = hpBar.value;
+        maxHpText.text = GameManager.Instance.maxHp.ToString();
+        hpText.text = GameManager.Instance.hp.ToString();
+        hpBar.value = 1 - ((float)GameManager.Instance.hp / (float)GameManager.Instance.maxHp);
     }
 
     void ExpUI()
     {
-        expBar.value = 1- (character.exp / character.maxExp);
+        expBar.value = 1- (GameManager.Instance.exp / GameManager.Instance.maxExp);
     }
 
     void CoinUI()
@@ -66,12 +57,12 @@ public class GameSceneUI : MonoBehaviour
 
     void TimeUI()
     {
-        if (GameManager.Instance.gameTime >= 1)
-            timeText.text = ((int)GameManager.Instance.gameTime).ToString();
+        if (GameManager.Instance.currentGameTime >= 1)
+            timeText.text = ((int)GameManager.Instance.currentGameTime).ToString();
         else
         {
             timeText.color = Color.red;
-            timeText.text = (GameManager.Instance.gameTime).ToString("F2");
+            timeText.text = (GameManager.Instance.currentGameTime).ToString("F2");
         }
     }
 }

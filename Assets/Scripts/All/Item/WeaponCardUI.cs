@@ -21,7 +21,7 @@ public class WeaponCardUI : MonoBehaviour
     [SerializeField] Text weaponDamage;
     [SerializeField] Text elementDamage;
     [SerializeField] Text weaponRange;
-    [SerializeField]
+    [SerializeField] Text weaponPrice;
 
     Color LockImageColor;
     Color LockTextColor;
@@ -30,8 +30,11 @@ public class WeaponCardUI : MonoBehaviour
 
     [HideInInspector] public bool isLock = false;
 
+    Color initPriceColor;
+
     private void Start()
     {
+        initPriceColor = weaponPrice.color;
         LockImageColor = lockBackImage.color;
         LockTextColor = lockText.color;
         Setting();
@@ -40,6 +43,12 @@ public class WeaponCardUI : MonoBehaviour
     private void Update()
     {
         lockImage.gameObject.SetActive(isLock);
+
+        if (GameManager.Instance.money < selectedWeapon.WeaponPrice)
+            weaponPrice.color = Color.red;
+
+        else if (GameManager.Instance.money >= selectedWeapon.WeaponPrice)
+            weaponPrice.color = initPriceColor;
     }
 
     void Setting()
@@ -50,12 +59,14 @@ public class WeaponCardUI : MonoBehaviour
         weaponDamage.text = selectedWeapon.WeaponDamage.ToString();
         elementDamage.text = selectedWeapon.ElementDamage.ToString();
         weaponRange.text = selectedWeapon.WeaponRange.ToString();
+        weaponPrice.text = selectedWeapon.WeaponPrice.ToString();
     }
 
     public void Click()
     {
-        if (ItemManager.Instance.foolCount < 5)
+        if (ItemManager.Instance.foolCount < 5 && GameManager.Instance.money >= selectedWeapon.WeaponPrice)
         {
+            GameManager.Instance.money -= selectedWeapon.WeaponPrice;
             ItemManager.Instance.foolCount++;
             ItemManager.Instance.GetWeaponInfo(selectedWeapon);
             Destroy(gameObject);

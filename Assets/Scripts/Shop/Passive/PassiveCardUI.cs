@@ -20,6 +20,8 @@ public class PassiveCardUI : MonoBehaviour
     [SerializeField] Image itemSprite;
     [SerializeField] Text itemName;
 
+    [SerializeField] Text itemPrice;
+
     [HideInInspector] public PassiveInfo selectedPassive;
 
     float[] stats = new float[10];
@@ -30,8 +32,12 @@ public class PassiveCardUI : MonoBehaviour
 
     [HideInInspector] public bool isLock = false;
 
+    Color initPriceColor;
+
     private void Start()
     {
+        initPriceColor = itemPrice.color;
+
         LockImageColor = lockBackImage.color;
         LockTextColor = lockText.color;
 
@@ -43,12 +49,20 @@ public class PassiveCardUI : MonoBehaviour
     private void Update()
     {
         lockImage.gameObject.SetActive(isLock);
+
+        if (GameManager.Instance.money < selectedPassive.ItemPrice)
+            itemPrice.color = Color.red;
+
+        else if (GameManager.Instance.money >= selectedPassive.ItemPrice)
+            itemPrice.color = initPriceColor;
+
     }
 
     void Setting()
     {
         itemSprite.sprite = selectedPassive.ItemSprite;
         itemName.text = selectedPassive.ItemName;
+        itemPrice.text = selectedPassive.ItemPrice.ToString();
     }
 
     void StatArray()
@@ -99,9 +113,13 @@ public class PassiveCardUI : MonoBehaviour
 
     public void Click()
     {
-        ItemManager.Instance.GetPassiveInfo(selectedPassive);
-        Destroy(gameObject);
-        isLock = false;
+        if (GameManager.Instance.money >= selectedPassive.ItemPrice)
+        {
+            ItemManager.Instance.GetPassiveInfo(selectedPassive);
+            Destroy(gameObject);
+            isLock = false;
+            GameManager.Instance.money -= selectedPassive.ItemPrice;
+        }
     }
 
     public void Lock()

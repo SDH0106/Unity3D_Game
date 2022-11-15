@@ -22,15 +22,14 @@ public class ItemManager : Singleton<ItemManager>
     int weaponCount;
     int passiveItemCount;
 
+    [HideInInspector] public bool isFool = false;
+    [HideInInspector] public int foolCount;
+
     GameObject weapon;
-
-    public bool isFool = false;
-    public int foolCount;
-
-    public GameObject WeaponPrefab => weaponPrefab;
 
     private void Start()
     {
+        DontDestroyOnLoad(gameObject);
         foolCount = 0;
         weaponCount = 0;
         passiveItemCount = 0;
@@ -62,6 +61,8 @@ public class ItemManager : Singleton<ItemManager>
             }
             storedWeapon[weaponCount] = weaponInfo;
         }
+
+        Equip();
     }
 
     public void GetPassiveInfo(PassiveInfo passiveInfo)
@@ -101,11 +102,10 @@ public class ItemManager : Singleton<ItemManager>
             }
         }
     }
-    public void Equip(Transform[] pos, int num)
+    public void Equip()
     {
         weapon = Instantiate(weaponPrefab);
-        weapon.transform.SetParent(pos[num]);
-        weapon.transform.position = pos[num].position;
-        num++;
+        weapon.transform.SetParent(Character.Instance.weaponParent[weaponCount]);
+        weapon.transform.position = Character.Instance.weaponParent[weaponCount].position;
     }
 }

@@ -16,11 +16,13 @@ MonoBehaviour:
   itemName: "\uB9C8\uBC95\uC0AC\uC758 \uBAA8\uC790"
   hp: -10
   recoverHp: 0
-  asorbHp: 0
+  absorbHp: 0
   defence: 1
   weaponDamage: 0
   elementDamage: 2
   attackSpeed: 0
-  range: 0
   speed: 0
+  range: 0
   luck: 0
+  itemPrice: 19
+  description: 

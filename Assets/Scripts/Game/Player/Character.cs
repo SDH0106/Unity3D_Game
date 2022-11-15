@@ -1,62 +1,55 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Character : Singleton<Character>
 {
     [SerializeField] Rigidbody rigid;
     [SerializeField] SpriteRenderer rend;
     [SerializeField] Animator anim;
-    [SerializeField] Transform damageStorage;
     [SerializeField] LayerMask coinLayer;
+
+    [SerializeField] Slider playerHpBar;
 
     [Header("Stat")]
     [SerializeField] public float speed;
     [SerializeField] float invincibleTime;
-    [SerializeField] public int hp = 10;
     [SerializeField] int attackDamage = 1;
-    [SerializeField] public float maxExp;
 
     [Header("WeaponPos")]
-    [SerializeField] Transform[] weaponPoses;
-    [SerializeField] public Transform bulletStorage;
+    [SerializeField] public Transform[] weaponParent;
 
     bool isRun, isAttacked, isDead = false;
 
-    [HideInInspector] public int maxHp;
-    [HideInInspector] public float exp;
+    int hp;
+    int maxHp;
 
     public int AttackDamage => attackDamage;
 
-    public Transform DamageStorage => damageStorage;
-
-    WeaponCardUI weaponCardUI;
-
-    [HideInInspector] public int weaponPosNum;
-
     void Start()
     {
-        ItemManager.Instance.Equip(weaponPoses, weaponPosNum);
-
-        weaponPosNum = 0;
-        maxHp = hp;
-        exp = 0f;
+        DontDestroyOnLoad(this);
 
         rigid = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
-        weaponCardUI = GetComponent<WeaponCardUI>();
+
+        transform.position = Vector3.zero;
     }
 
-    // Update is called once per frame
     void Update()
-    {
-        if (isDead == false)
+    {   
+        playerHpBar.value = 1 - ((float)GameManager.Instance.hp / (float)GameManager.Instance.maxHp);
+
+        if (GameManager.Instance.currentScene == "Game")
         {
-            Move();
+            if (isDead == false)
+            {
+                Move();
+            }
+
+            anim.SetBool("isRun", isRun);
         }
-
-        anim.SetBool("isRun", isRun);
-
     }
 
     void Move()
@@ -106,13 +99,13 @@ public class Character : Singleton<Character>
     {
         if (other.tag == "Monster" && isAttacked == false)
         {
-            hp -= other.gameObject.GetComponent<Monster>().AttackDamage;
+            GameManager.Instance.hp -= other.gameObject.GetComponent<Monster>().AttackDamage;
             StartCoroutine(OnInvincible());
         }
 
-        if (hp <= 0)
+        if (GameManager.Instance.hp <= 0)
         {
-            hp = 0;
+            GameManager.Instance.hp = 0;
             isDead = true;
 
             anim.SetBool("isDead", isDead);

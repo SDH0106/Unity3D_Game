@@ -1,24 +1,46 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>       
 {
-    [SerializeField] public float gameTime;
+    [Header("GameData")]
+    [SerializeField] float gameTime;
     [SerializeField] public int money;
     [SerializeField] public int round;
 
-    [HideInInspector] public float initgameTime;
+    [HideInInspector] public int hp;
+    [HideInInspector] public int exp;
+    [HideInInspector] public int damage;
+    [HideInInspector] public int characterDamage;
+    [HideInInspector] public int weaponDamage;
+    [HideInInspector] public int elementDamage;
+    [HideInInspector] public float defence;
+    [HideInInspector] public float absorbHp;
+    [HideInInspector] public float recoverHp;
+    [HideInInspector] public float attackSpeed;
+    [HideInInspector] public float speed;
+    [HideInInspector] public float range;
+    [HideInInspector] public float luck;
 
-    public string currentScene;
+    [Header("CharacterData")]
+    [SerializeField] public int maxHp;
+    [SerializeField] public int maxExp;
+
+    [HideInInspector] public float currentGameTime;
+
+    [HideInInspector] public string currentScene;
 
     UnityEngine.SceneManagement.Scene scene;
 
     private void Start()
     {
-        initgameTime = gameTime;
+        hp = maxHp;
+        DontDestroyOnLoad(gameObject);
+        currentGameTime = gameTime;
     }
 
     private void Update()
@@ -26,37 +48,33 @@ public class GameManager : Singleton<GameManager>
         scene = SceneManager.GetActiveScene();
         currentScene = scene.name;
 
-        if (currentScene == "Shop")
-        {
-            Character.Instance.gameObject.SetActive(false);
-        }
-
-        else if (currentScene == "Game")
-        {
-            Character.Instance.gameObject.SetActive(true);
-        }
-
         if (currentScene == "Game")
         {
-            gameTime -= Time.deltaTime;
+            //Character.Instance.gameObject.SetActive(true);
+            currentGameTime -= Time.deltaTime;
 
-            if (gameTime <= 0)
-                gameTime = 0;
+            if (currentGameTime <= 0)
+            {
+                currentGameTime = 0;
+                ToShopScene();
+            }
 
             if (money <= 0)
                 money = 0;
-
-            ToShopScene();
         }
 
+        else if(currentScene != "StartTitle")
+        {
+            //Character.Instance.gameObject.SetActive(false);
+        }
     }
 
     void ToShopScene()
     {
-        if (gameTime == 0)
-        {
-            currentScene = "Shop";
-            SceneManager.LoadScene(currentScene);
-        }
+        Character.Instance.transform.position = Vector3.zero;
+        currentScene = "Shop";
+        SceneManager.LoadScene(currentScene);
+        hp = maxHp;
+        currentGameTime = gameTime;
     }
 }

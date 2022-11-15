@@ -21,7 +21,7 @@ public class Monster : MonoBehaviour
     bool isRun, isDead, isAttacked = false;
 
     int maxHp;
-    float exp = 2;
+    int exp = 2;
 
     Vector3 initScale;
 
@@ -107,8 +107,6 @@ public class Monster : MonoBehaviour
 
         hp -= Character.Instance.AttackDamage;
 
-        //anim.SetTrigger("isAttacked");
-
         StartCoroutine(MonsterColorBlink());
     }
 
@@ -118,15 +116,12 @@ public class Monster : MonoBehaviour
         {
             Vector3 deadPos = transform.position;
 
-            //anim.SetTrigger("isAttacked");
             anim.SetBool("isAttacked", isAttacked);
 
             isAttacked = true;
             isDead = true;
 
             coll.enabled = false;
-
-            //anim.SetBool("isDead", isDead);
 
             if (anim.GetCurrentAnimatorStateInfo(0).IsName("Die"))
             {
@@ -146,7 +141,7 @@ public class Monster : MonoBehaviour
 
     public void DestroyMonster()
     {
-        Character.Instance.exp += exp;
+        GameManager.Instance.exp += exp;
         managedPool.Release(this);
         SetInitMonster();
     }

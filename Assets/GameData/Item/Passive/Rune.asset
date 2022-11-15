@@ -21,6 +21,8 @@ MonoBehaviour:
   weaponDamage: 0
   elementDamage: 5
   attackSpeed: 0
-  range: 0
   speed: 0
+  range: 0
   luck: 2
+  itemPrice: 40
+  description: 

@@ -34,13 +34,16 @@ public class WeaponControl : MonoBehaviour
 
     void Update()
     {
-        mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mouse.y = transform.position.y;
+        if (GameManager.Instance.currentScene == "Game")
+        {
+            mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mouse.y = transform.position.y;
 
-        dir = mouse - Character.Instance.transform.position;
+            dir = mouse - Character.Instance.transform.position;
 
-        LookMousePosition();
-        FireBullet();
+            LookMousePosition();
+            FireBullet();
+        }
     }
 
     void LookMousePosition()
@@ -73,7 +76,7 @@ public class WeaponControl : MonoBehaviour
     {
         Bullet bullet = Instantiate(bulletPrefab, firePos.position, transform.rotation).GetComponent<Bullet>();
         bullet.SetManagedPool(pool);
-        bullet.transform.SetParent(Character.Instance.bulletStorage);
+        bullet.transform.SetParent(Character.Instance.transform.GetChild(3));
         return bullet;
     }
 

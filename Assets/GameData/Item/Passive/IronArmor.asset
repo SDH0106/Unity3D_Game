@@ -24,4 +24,5 @@ MonoBehaviour:
   speed: -1
   range: 0
   luck: 0
+  itemPrice: 21
   description: 

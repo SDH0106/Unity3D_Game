@@ -10,12 +10,13 @@ public class PassiveItem : MonoBehaviour
     float recoverHp;
     float absorbHp;
     float defence;
-    float weaponDamage;
-    float elementDamage;
+    int weaponDamage;
+    int elementDamage;
     float attackSpeed;
     float speed;
     float range;
     float luck;
+    string itemPrice;
 
     SpriteRenderer spriteRenderer;
 
@@ -42,5 +43,6 @@ public class PassiveItem : MonoBehaviour
         speed = passiveInfo.Speed;
         range = passiveInfo.Range;
         luck = passiveInfo.Luck;
+        itemName = passiveInfo.ItemName;
     }
 }

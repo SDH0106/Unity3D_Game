@@ -36,10 +36,13 @@ public class ShopManager : Singleton<ShopManager>
 
     int rerollMoney;
 
+    Color initPriceColor;
+
     [HideInInspector] public int WeaponSlotCount = 0;
 
     private void Start()
     {
+        initPriceColor = rerollMoneyText.color;
         sellUI.gameObject.SetActive(false);
         rerollMoney = -GameManager.Instance.round;
         bools = new bool[4];
@@ -56,6 +59,12 @@ public class ShopManager : Singleton<ShopManager>
         round.text = GameManager.Instance.round.ToString();
         money.text = GameManager.Instance.money.ToString();
         rerollMoneyText.text = rerollMoney.ToString();
+
+        if (GameManager.Instance.money < -rerollMoney)
+            rerollMoneyText.color = Color.red;
+
+        else if (GameManager.Instance.money >= -rerollMoney)
+            rerollMoneyText.color = initPriceColor;
 
         if (GameManager.Instance.currentScene == "Shop")
         {
@@ -78,10 +87,9 @@ public class ShopManager : Singleton<ShopManager>
     {
         GameManager.Instance.currentScene = "Game";
         SceneManager.LoadScene("Game");
-        Character.Instance.transform.position = Vector3.zero;
+        //Character.Instance.transform.position = Vector3.zero;
         GameManager.Instance.round++;
         rerollMoney = -GameManager.Instance.round;
-        GameManager.Instance.gameTime = GameManager.Instance.initgameTime;
     }
 
     void ImageAlphaChange(int i, int a, Image image)
@@ -122,19 +130,22 @@ public class ShopManager : Singleton<ShopManager>
 
     public void Reroll()
     {
-        for (int i = 0; i < cardsParent.childCount; i++)
+        if (GameManager.Instance.money >= -rerollMoney)
         {
-            if (cards[i] != null)
+            for (int i = 0; i < cardsParent.childCount; i++)
             {
-                if (bools[i] == false)
-                    Destroy(cardsParent.GetChild(i).GetChild(0).gameObject);
+                if (cards[i] != null)
+                {
+                    if (bools[i] == false)
+                        Destroy(cardsParent.GetChild(i).GetChild(0).gameObject);
+                }
             }
+
+            rerollMoney -= (GameManager.Instance.round) / 2;
+            GameManager.Instance.money += rerollMoney;
+
+            CardSlot();
         }
-
-        rerollMoney -= (GameManager.Instance.round) / 2;
-        GameManager.Instance.money += rerollMoney;
-
-        CardSlot();
     }
 
     void CheckLock()

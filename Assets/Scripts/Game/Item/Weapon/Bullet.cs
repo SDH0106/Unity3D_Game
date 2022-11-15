@@ -11,13 +11,6 @@ public class Bullet : MonoBehaviour
     float angle;
     Vector3 dir;
 
-    Monster monster;
-
-    private void Start()
-    {
-        monster = GetComponent<Monster>();
-    }
-
     void Update()
     {
         transform.position += new Vector3(dir.x, 0, dir.z) * speed * Time.deltaTime;
