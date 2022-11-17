@@ -10,8 +10,8 @@ public class PassiveItem : MonoBehaviour
     float recoverHp;
     float absorbHp;
     float defence;
-    int weaponDamage;
-    int elementDamage;
+    float physicDamage;
+    float elementDamage;
     float attackSpeed;
     float speed;
     float range;
@@ -37,7 +37,7 @@ public class PassiveItem : MonoBehaviour
         recoverHp = passiveInfo.RecoverHp;
         absorbHp = passiveInfo.AbsorbHp;
         defence = passiveInfo.Defence;
-        weaponDamage = passiveInfo.WeaponDamage;
+        physicDamage = passiveInfo.PhysicDamage;
         elementDamage = passiveInfo.ElementDamage;
         attackSpeed = passiveInfo.AttackSpeed;
         speed = passiveInfo.Speed;

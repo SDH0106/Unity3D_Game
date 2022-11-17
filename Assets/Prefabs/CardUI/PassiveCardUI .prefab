@@ -608,7 +608,7 @@ MonoBehaviour:
   itemSprite: {fileID: 1009497355040056144}
   itemName: {fileID: 3667563659590199475}
   itemPrice: {fileID: 2162777225447614391}
-  selectedPassive: {fileID: 11400000, guid: d9714db6600bc9f4c820b6e832f124c4, type: 2}
+  selectedPassive: {fileID: 11400000, guid: 9c8f8f1ddfa9e3941bad682fe545ce87, type: 2}
   isLock: 0
 --- !u!1 &3950642370217644491
 GameObject:

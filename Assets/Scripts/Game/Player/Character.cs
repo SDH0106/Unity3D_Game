@@ -1,7 +1,9 @@
+using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static WeaponInfo;
 
 public class Character : Singleton<Character>
 {
@@ -27,6 +29,8 @@ public class Character : Singleton<Character>
 
     public int AttackDamage => attackDamage;
 
+    public float[] damages;
+
     void Start()
     {
         DontDestroyOnLoad(this);
@@ -38,7 +42,13 @@ public class Character : Singleton<Character>
     }
 
     void Update()
-    {   
+    {
+        for (int i = 0; i < weaponParent.Length; i++)
+        {
+            //if (weaponParent[i].transform.childCount != 0)
+                //Debug.Log(weaponParent[i].transform.GetChild(0).gameObject.GetComponent<Weapon>().weaponName);
+        }
+
         playerHpBar.value = 1 - ((float)GameManager.Instance.hp / (float)GameManager.Instance.maxHp);
 
         if (GameManager.Instance.currentScene == "Game")

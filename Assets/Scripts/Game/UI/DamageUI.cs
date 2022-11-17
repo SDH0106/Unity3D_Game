@@ -10,17 +10,12 @@ using UnityEngine.UIElements;
 
 public class DamageUI : MonoBehaviour
 {
+    [SerializeField] Weapon weapon;
     [SerializeField] Text damageText;
 
     private IObjectPool<DamageUI> managedPool;
 
-    Vector3 initPos;
-
-    Scale damageScale;
-
     float printTime, initPrintTime;
-
-    string nextText;
 
     private void Start()
     {
@@ -38,7 +33,7 @@ public class DamageUI : MonoBehaviour
 
     private void Update()
     {
-        nextText = Character.Instance.AttackDamage.ToString();
+        transform.position += Vector3.forward * 0.5f * Time.deltaTime;
 
         printTime -= Time.deltaTime;
 
@@ -48,8 +43,6 @@ public class DamageUI : MonoBehaviour
         }
 
         ChangeAlpha(printTime / initPrintTime);
-
-        transform.position += Vector3.forward * 0.35f * Time.deltaTime;
     }
 
     public void TextUpdate()

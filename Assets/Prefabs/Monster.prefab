@@ -45,7 +45,6 @@ GameObject:
   - component: {fileID: 81727465642485590}
   - component: {fileID: 2100492170074265801}
   - component: {fileID: 405998318861722249}
-  - component: {fileID: 1601650622626363655}
   - component: {fileID: -86984978635086923}
   m_Layer: 7
   m_Name: Monster
@@ -191,20 +190,6 @@ MonoBehaviour:
   hp: 1000
   speed: 0
   attackDamage: 1
---- !u!114 &1601650622626363655
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2378124750920518384}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee581e7496ea03e4d9a05d7d71023c44, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damagePrefab: {fileID: 4972879093213316329, guid: aae3e76428e39fd4b8c7e277125f8208, type: 3}
-  poolCount: 10
 --- !u!114 &-86984978635086923
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -27,7 +27,7 @@ public class Monster : MonoBehaviour
 
     private IObjectPool<Monster> managedPool;
 
-    PrintDamage printDamage;
+    //PrintDamage printDamage;
     DropCoin coin;
 
     public int AttackDamage => attackDamage;
@@ -39,7 +39,7 @@ public class Monster : MonoBehaviour
         maxHp = hp;
         initScale = transform.localScale;
         anim = GetComponent<Animator>();
-        printDamage = GetComponent<PrintDamage>();
+        //printDamage = GetComponent<PrintDamage>();
         coin = GetComponent<DropCoin>();
     }
 
@@ -103,7 +103,7 @@ public class Monster : MonoBehaviour
 
     public void OnDamaged()
     {
-        printDamage.PrintDamageText(printPos.position);
+        //printDamage.PrintDamageText(printPos.position);
 
         hp -= Character.Instance.AttackDamage;
 
@@ -112,7 +112,7 @@ public class Monster : MonoBehaviour
 
     void OnDead()
     {
-        if (hp <= 0)
+        if (hp <= 0 || GameManager.Instance.currentGameTime <= 0)
         {
             Vector3 deadPos = transform.position;
 
@@ -127,8 +127,12 @@ public class Monster : MonoBehaviour
             {
                 if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
                 {
+                    if (hp <= 0)
+                    {
+                        coin.Drop(deadPos);
+                        GameManager.Instance.exp += exp;
+                    }
                     DestroyMonster();
-                    coin.Drop(deadPos);
                 }
             }
         }
@@ -141,7 +145,6 @@ public class Monster : MonoBehaviour
 
     public void DestroyMonster()
     {
-        GameManager.Instance.exp += exp;
         managedPool.Release(this);
         SetInitMonster();
     }

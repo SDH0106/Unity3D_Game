@@ -10,18 +10,32 @@ using UnityEngine.UI;
 
 public class ShopManager : Singleton<ShopManager>
 {
+    [Header("UI")]
     [SerializeField] Text round;
     [SerializeField] Text money;
     [SerializeField] Text rerollMoneyText;
+    [SerializeField] public GameObject backgroundImage;
+
+    [Header("Stat")]
+    [SerializeField] Text maxHp;
+    [SerializeField] Text reHp;
+    [SerializeField] Text apHp;
+    [SerializeField] Text def;
+    [SerializeField] Text wAtk;
+    [SerializeField] Text eAtk;
+    [SerializeField] Text aSpd;
+    [SerializeField] Text spd;
+    [SerializeField] Text ran;
+    [SerializeField] Text luk;
+
+    [Header("Prefabs")]
     [SerializeField] Transform cardsParent;
     [SerializeField] GameObject weaponCardUI;
     [SerializeField] GameObject passiveCardUI;
-
-    [Header("")]
-    [SerializeField] public GameObject backgroundImage;
     [SerializeField] GameObject sellUI;
 
-    [Header("")]
+
+    [Header("Slots")]
     [SerializeField] public GameObject[] weaponSlots;
     [SerializeField] GameObject[] passiveSlots;
 
@@ -69,6 +83,7 @@ public class ShopManager : Singleton<ShopManager>
         if (GameManager.Instance.currentScene == "Shop")
         {
             gameObject.SetActive(true);
+            SettingStatText();
 
             CheckLock();
             WeaponSlot();
@@ -83,11 +98,25 @@ public class ShopManager : Singleton<ShopManager>
         }
     }
 
+    void SettingStatText()
+    {
+        maxHp.text = GameManager.Instance.maxHp.ToString();
+        reHp.text = GameManager.Instance.recoverHp.ToString();
+        apHp.text = GameManager.Instance.absorbHp.ToString();
+        def.text = GameManager.Instance.defence.ToString();
+        wAtk.text = GameManager.Instance.physicDamage.ToString();
+        eAtk.text = GameManager.Instance.elementDamage.ToString();
+        aSpd.text = GameManager.Instance.attackSpeed.ToString();
+        spd.text = GameManager.Instance.speed.ToString();
+        ran.text = GameManager.Instance.range.ToString();
+        luk.text = GameManager.Instance.luck.ToString();
+    }
+
     public void ToGameScene()
     {
         GameManager.Instance.currentScene = "Game";
         SceneManager.LoadScene("Game");
-        //Character.Instance.transform.position = Vector3.zero;
+        Character.Instance.transform.position = Vector3.zero;
         GameManager.Instance.round++;
         rerollMoney = -GameManager.Instance.round;
     }
@@ -141,8 +170,9 @@ public class ShopManager : Singleton<ShopManager>
                 }
             }
 
-            rerollMoney -= (GameManager.Instance.round) / 2;
             GameManager.Instance.money += rerollMoney;
+
+            rerollMoney -= Mathf.CeilToInt((float)(GameManager.Instance.round) / 2);
 
             CardSlot();
         }

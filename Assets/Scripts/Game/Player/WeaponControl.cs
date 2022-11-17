@@ -76,7 +76,7 @@ public class WeaponControl : MonoBehaviour
     {
         Bullet bullet = Instantiate(bulletPrefab, firePos.position, transform.rotation).GetComponent<Bullet>();
         bullet.SetManagedPool(pool);
-        bullet.transform.SetParent(Character.Instance.transform.GetChild(3));
+        bullet.transform.SetParent(GameSceneUI.Instance.bulletStorage);
         return bullet;
     }
 

@@ -16,6 +16,6 @@ MonoBehaviour:
   weaponName: "\uC5BC\uC74C \uC9C0\uD321\uC774"
   type: 1
   weaponDamage: 0
-  elementDamage: 5
+  magicDamage: 10
   weaponRange: 10
   weaponPrice: 25

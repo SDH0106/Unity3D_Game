@@ -24,7 +24,15 @@ public class MonsterSpawn : MonoBehaviour
 
     private void Start()
     {
-        InvokeRepeating("RendSpawnImage", 2f, spawnDelay);
+        InvokeRepeating("RendSpawnImage", 1f, spawnDelay);
+    }
+
+    private void Update()
+    {
+        if (GameManager.Instance.currentGameTime <= 0)
+        {
+            CancelInvoke("RendSpawnImage");
+        }
     }
 
     void SpawnMonster()

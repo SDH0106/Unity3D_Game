@@ -24,6 +24,9 @@ public class Coin : Singleton<Coin>
     private void Update()
     {
         MoveCoin();
+
+        if (GameManager.Instance.currentGameTime <= 0)
+            DestroyPool();
     }
 
     public void MoveCoin()

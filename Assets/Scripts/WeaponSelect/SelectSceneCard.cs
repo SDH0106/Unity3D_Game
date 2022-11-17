@@ -16,9 +16,6 @@ public class SelectSceneCard : MonoBehaviour
     [SerializeField] Text elementDamage;
     [SerializeField] Text weaponRange;
 
-    int randNum;
-    int selectNum;
-
     [HideInInspector] public WeaponInfo selectedWeapon;
 
     int count;
@@ -41,7 +38,7 @@ public class SelectSceneCard : MonoBehaviour
         weaponName.text = selectedWeapon.WeaponName.ToString();
         type.text = selectedWeapon.Type.ToString();
         weaponDamage.text = selectedWeapon.WeaponDamage.ToString();
-        elementDamage.text = selectedWeapon.ElementDamage.ToString();
+        elementDamage.text = selectedWeapon.MagicDamage.ToString();
         weaponRange.text = selectedWeapon.WeaponRange.ToString();
     }
 

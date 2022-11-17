@@ -852,8 +852,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 3.21, y: 0}
+  m_SizeDelta: {x: 6.42, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7672233090979139975
 CanvasRenderer:
@@ -896,7 +896,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uBB3C\uB9AC\uACF5\uACA9\uB825"
+  m_Text: "\uBB3C\uB9AC \uACF5\uACA9\uB825"
 --- !u!1 &1885190665032723813
 GameObject:
   m_ObjectHideFlags: 0
@@ -1011,7 +1011,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 95.997314, y: 4.4}
+  m_AnchoredPosition: {x: 99.8, y: 4.4}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1932746315540904965
@@ -1352,8 +1352,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 3.57, y: 0}
+  m_SizeDelta: {x: 7.14, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4986721895787728519
 CanvasRenderer:
@@ -1396,7 +1396,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uC6D0\uC18C\uACF5\uACA9\uB825"
+  m_Text: "\uB9C8\uBC95 \uACF5\uACA9\uB825"
 --- !u!1 &3760902542562831320
 GameObject:
   m_ObjectHideFlags: 0
@@ -1432,7 +1432,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 57.3, y: 3.9}
+  m_AnchoredPosition: {x: 61.103394, y: 3.9000015}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6991866762977469140
@@ -1665,7 +1665,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 57.3, y: 3.9}
+  m_AnchoredPosition: {x: 61.103394, y: 3.9000015}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5014362472016177076
@@ -2282,7 +2282,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8267558037021225625}
   m_Layer: 5
-  m_Name: ElementDamge
+  m_Name: MagicDamge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2614,7 +2614,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 95.997314, y: 4.4}
+  m_AnchoredPosition: {x: 99.800705, y: 4.4}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &8512320902706831812

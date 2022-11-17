@@ -5,11 +5,21 @@ public class Bullet : MonoBehaviour
 {
     GameObject effectPrefab;
     [SerializeField] float speed = 3f;
+    Weapon weapon;
 
     private IObjectPool<Bullet> managedPool;
 
     float angle;
     Vector3 dir;
+
+    PrintDamage damage;
+
+    private void Start()
+    {
+        weapon = Character.Instance.GetComponent<Weapon>(); 
+        Debug.Log(weapon.type);
+        damage = GetComponent<PrintDamage>();
+    }
 
     void Update()
     {
@@ -31,6 +41,7 @@ public class Bullet : MonoBehaviour
     {
         if (other.tag == "Monster")
         {
+            damage.PrintDamageText(transform.position);
             other.GetComponent<Monster>().OnDamaged();
             DestroyBullet();
             CancleDestroyInvoke();

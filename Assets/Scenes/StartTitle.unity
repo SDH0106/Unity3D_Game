@@ -1780,6 +1780,7 @@ GameObject:
   - component: {fileID: 936130855}
   - component: {fileID: 936130854}
   - component: {fileID: 936130856}
+  - component: {fileID: 936130857}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1800,13 +1801,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameTime: 1
-  money: 1000
+  money: 100
   round: 1
-  hp: 0
   exp: 0
-  damage: 0
-  characterDamage: 0
-  weaponDamage: 0
+  hp: 0
+  maxHp: 50
+  maxExp: 10
+  totalDamage: 0
+  physicDamage: 0
   elementDamage: 0
   defence: 0
   absorbHp: 0
@@ -1815,10 +1817,10 @@ MonoBehaviour:
   speed: 0
   range: 0
   luck: 0
-  maxHp: 50
-  maxExp: 10
   currentGameTime: 0
   currentScene: 
+  levelUpCount: 0
+  stats: []
 --- !u!4 &936130855
 Transform:
   m_ObjectHideFlags: 0
@@ -1842,6 +1844,64 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 936130853}
   m_Enabled: 1
+--- !u!114 &936130857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 936130853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53ef701d7eb7b3a44bd5d656e90dd55d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statInfos:
+  - statName: "\uC2EC\uC7A5"
+    statType: "\uCCB4\uB825"
+    statSprite: Health
+    grade: "\uC77C\uBC18"
+    statValue: 1
+  - statName: "\uD398\uD65C\uB7C9"
+    statType: "\uCCB4\uB825 \uD68C\uBCF5"
+    statSprite: ReHealth
+    grade: "\uC77C\uBC18"
+    statValue: 1
+  - statName: "\uC774\uBE68"
+    statType: "\uCCB4\uB825 \uD761\uC218"
+    statSprite: AbHealth
+    grade: "\uC77C\uBC18"
+    statValue: 1
+  - statName: "\uAC15\uC778\uD568"
+    statType: "\uBC29\uC5B4\uB825"
+    statSprite: defence
+    grade: "\uC77C\uBC18"
+    statValue: 1
+  - statName: "\uBB34\uB825"
+    statType: "\uBB3C\uB9AC \uACF5\uACA9\uB825"
+    statSprite: WDamage
+    grade: "\uC77C\uBC18"
+    statValue: 1
+  - statName: "\uC9C0\uB825"
+    statType: "\uC6D0\uC18C \uACF5\uACA9\uB825"
+    statSprite: EDamage
+    grade: "\uC77C\uBC18"
+    statValue: 1
+  - statName: "\uBC18\uC0AC \uC2E0\uACBD"
+    statType: "\uACF5\uACA9 \uC18D\uB3C4"
+    statSprite: AtSpeed
+    grade: "\uC77C\uBC18"
+    statValue: 1
+  - statName: "\uC2E0\uBC1C"
+    statType: "\uC774\uB3D9 \uC18D\uB3C4"
+    statSprite: Speed
+    grade: "\uC77C\uBC18"
+    statValue: 1
+  - statName: "\uB124\uC78E\uD074\uB85C\uBC84"
+    statType: "\uD589\uC6B4"
+    statSprite: Luck
+    grade: "\uC77C\uBC18"
+    statValue: 1
 --- !u!1 &994559795
 GameObject:
   m_ObjectHideFlags: 0

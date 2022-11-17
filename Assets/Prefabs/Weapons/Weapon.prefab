@@ -133,6 +133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponName: 
+  damage: 0
 --- !u!1 &3953021356963906098
 GameObject:
   m_ObjectHideFlags: 0

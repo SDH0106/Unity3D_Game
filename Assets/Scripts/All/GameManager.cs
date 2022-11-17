@@ -1,6 +1,8 @@
+using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -12,12 +14,17 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] public int money;
     [SerializeField] public int round;
 
-    [HideInInspector] public int hp;
-    [HideInInspector] public int exp;
-    [HideInInspector] public int damage;
-    [HideInInspector] public int characterDamage;
-    [HideInInspector] public int weaponDamage;
-    [HideInInspector] public int elementDamage;
+    [HideInInspector] public float exp;
+    [HideInInspector] public float hp;
+
+
+    [Header("CharacterData")]
+    int level;
+    [SerializeField] public float maxHp;
+    [SerializeField] public float maxExp;
+    [HideInInspector] public float totalDamage;
+    [HideInInspector] public float physicDamage;
+    [HideInInspector] public float elementDamage;
     [HideInInspector] public float defence;
     [HideInInspector] public float absorbHp;
     [HideInInspector] public float recoverHp;
@@ -26,20 +33,24 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector] public float range;
     [HideInInspector] public float luck;
 
-    [Header("CharacterData")]
-    [SerializeField] public int maxHp;
-    [SerializeField] public int maxExp;
-
     [HideInInspector] public float currentGameTime;
 
     [HideInInspector] public string currentScene;
 
     UnityEngine.SceneManagement.Scene scene;
 
+     public int levelUpCount;
+
+    public float[] stats;
+
     private void Start()
     {
-        hp = maxHp;
         DontDestroyOnLoad(gameObject);
+        stats = new float[10];
+        stats[0] = maxHp;
+        level = 1;
+        //levelUpCount = 0;
+        hp = maxHp;
         currentGameTime = gameTime;
     }
 
@@ -48,29 +59,51 @@ public class GameManager : Singleton<GameManager>
         scene = SceneManager.GetActiveScene();
         currentScene = scene.name;
 
+        if(exp ==  maxExp)
+        {
+            level++;
+            levelUpCount++;
+            maxExp *= level;
+            exp = 0;
+        }
+
+        StatArray();
+        OnGameScene();
+    }
+
+    void StatArray()
+    {
+        maxHp = stats[0];
+        recoverHp = stats[1];
+        absorbHp = stats[2];
+        defence = stats[3];
+        physicDamage = stats[4];
+        elementDamage = stats[5];
+        attackSpeed = stats[6];
+        speed = stats[7];
+        luck = stats[8];
+        range = stats[9];
+    }
+
+    void OnGameScene()
+    {
         if (currentScene == "Game")
         {
-            //Character.Instance.gameObject.SetActive(true);
             currentGameTime -= Time.deltaTime;
 
             if (currentGameTime <= 0)
             {
                 currentGameTime = 0;
-                ToShopScene();
             }
 
             if (money <= 0)
                 money = 0;
         }
-
-        else if(currentScene != "StartTitle")
-        {
-            //Character.Instance.gameObject.SetActive(false);
-        }
     }
 
-    void ToShopScene()
+    public void ToShopScene()
     {
+        Character.Instance.gameObject.SetActive(true);
         Character.Instance.transform.position = Vector3.zero;
         currentScene = "Shop";
         SceneManager.LoadScene(currentScene);

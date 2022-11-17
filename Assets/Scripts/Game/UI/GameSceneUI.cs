@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Pool;
 using UnityEngine.UI;
 
-public class GameSceneUI : MonoBehaviour
+public class GameSceneUI : Singleton<GameSceneUI>
 {
     [Header("HP")]
     [SerializeField] Text hpText;
@@ -24,6 +24,17 @@ public class GameSceneUI : MonoBehaviour
     [Header("Round")]
     [SerializeField] Text roundText;
 
+    [SerializeField] public Transform bulletStorage;
+    [SerializeField] public Transform damageStorage;
+    [SerializeField] GameObject clearText;
+    [SerializeField] GameObject statCardParent;
+
+    private void Start()
+    {
+        clearText.SetActive(false);
+        statCardParent.gameObject.SetActive(false);
+    }
+
     private void Update()
     {
         HpUI();
@@ -31,13 +42,29 @@ public class GameSceneUI : MonoBehaviour
         CoinUI();
         RoundUI();
         TimeUI();
+
+        if (GameManager.Instance.currentGameTime <= 0)
+        {
+            clearText.SetActive(true);
+        }
+
+        if (clearText.GetComponent<TypingText>().isOver == true)
+        {
+            clearText.SetActive(false);
+
+            if (GameManager.Instance.levelUpCount <= 0)
+                GameManager.Instance.ToShopScene();
+
+            if (GameManager.Instance.levelUpCount > 0)
+                statCardParent.gameObject.SetActive(true);
+        }
     }
 
     void HpUI()
     {
         maxHpText.text = GameManager.Instance.maxHp.ToString();
         hpText.text = GameManager.Instance.hp.ToString();
-        hpBar.value = 1 - ((float)GameManager.Instance.hp / (float)GameManager.Instance.maxHp);
+        hpBar.value = 1 - (GameManager.Instance.hp / GameManager.Instance.maxHp);
     }
 
     void ExpUI()

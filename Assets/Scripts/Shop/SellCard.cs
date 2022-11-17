@@ -27,7 +27,7 @@ public class SellCard : MonoBehaviour
         weaponName.text = selectedWeapon.WeaponName.ToString();
         type.text = selectedWeapon.Type.ToString();
         weaponDamage.text = selectedWeapon.WeaponDamage.ToString();
-        elementDamage.text = selectedWeapon.ElementDamage.ToString();
+        elementDamage.text = selectedWeapon.MagicDamage.ToString();
         weaponRange.text = selectedWeapon.WeaponRange.ToString();
         weaponPrice.text = selectedWeapon.WeaponPrice.ToString();
     }

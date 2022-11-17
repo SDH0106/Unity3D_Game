@@ -8,15 +8,17 @@ using static WeaponInfo;
 public class Weapon : MonoBehaviour
 {
     public string weaponName;
-    WEAPON_TYPE type;
-    int weaponDamage;
-    int elementDamage;
+    public WEAPON_TYPE type;
+    public float weaponDamage;
+    public float magicDamage;
     float weaponRange;
     int weaponPrice;
 
     SpriteRenderer spriteRenderer;
 
     WeaponInfo weaponInfo;
+
+    float demage;
 
     private void Start()
     {
@@ -25,13 +27,31 @@ public class Weapon : MonoBehaviour
         Setting();
     }
 
+    private void Update()
+    {
+        Damage();
+    }
+
+    public void Damage()
+    { 
+        if(type == WEAPON_TYPE.½ºÅÂÇÁ)
+        {
+            demage = magicDamage + GameManager.Instance.elementDamage;
+        }
+
+        else
+        {
+            demage = weaponDamage + GameManager.Instance.physicDamage;
+        }
+    }
+
     void Setting()
     {
         spriteRenderer.sprite = weaponInfo.ItemSprite;
         weaponName = weaponInfo.WeaponName;
         type = weaponInfo.Type;
         weaponDamage = weaponInfo.WeaponDamage;
-        elementDamage= weaponInfo.ElementDamage;
+        magicDamage= weaponInfo.MagicDamage;
         weaponRange = weaponInfo.WeaponRange;
         weaponPrice = weaponInfo.WeaponPrice;
     }

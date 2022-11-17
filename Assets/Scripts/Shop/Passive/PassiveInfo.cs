@@ -12,8 +12,8 @@ public class PassiveInfo : ScriptableObject
     [SerializeField] float recoverHp;
     [SerializeField] float absorbHp;
     [SerializeField] float defence;
-    [SerializeField] int weaponDamage;
-    [SerializeField] int elementDamage;
+    [SerializeField] float physicDamage;
+    [SerializeField] float elementDamage;
     [SerializeField] float attackSpeed;
     [SerializeField] float speed;
     [SerializeField] float range;
@@ -23,8 +23,8 @@ public class PassiveInfo : ScriptableObject
 
     public Sprite ItemSprite => itemSprite;
     public string ItemName => itemName;
-    public int WeaponDamage => weaponDamage;
-    public int ElementDamage => elementDamage;
+    public float PhysicDamage => physicDamage;
+    public float ElementDamage => elementDamage;
     public float Range => range;
     public float Defence => defence;
     public float Speed => speed;

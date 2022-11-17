@@ -71,7 +71,7 @@ public class PassiveCardUI : MonoBehaviour
         stats[1] = selectedPassive.RecoverHp;
         stats[2] = selectedPassive.AbsorbHp;
         stats[3] = selectedPassive.Defence;
-        stats[4] = selectedPassive.WeaponDamage;
+        stats[4] = selectedPassive.PhysicDamage;
         stats[5] = selectedPassive.ElementDamage;
         stats[6] = selectedPassive.AttackSpeed;
         stats[7] = selectedPassive.Speed;
@@ -82,8 +82,8 @@ public class PassiveCardUI : MonoBehaviour
         statTypes[1] = "체력 회복";
         statTypes[2] = "체력 흡수";
         statTypes[3] = "방어력";
-        statTypes[4] = "물리 대미지";
-        statTypes[5] = "원소 대미지";
+        statTypes[4] = "물리 공격력";
+        statTypes[5] = "원소 공격력";
         statTypes[6] = "공격 속도";
         statTypes[7] = "이동 속도";
         statTypes[8] = "사거리";
