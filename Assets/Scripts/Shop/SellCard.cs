@@ -40,7 +40,7 @@ public class SellCard : MonoBehaviour
             GameManager.Instance.money += selectedWeapon.WeaponPrice;
             ItemManager.Instance.storedWeapon[selectedNum] = null;
             ItemManager.Instance.foolCount--;
-            Destroy(Character.Instance.weaponParent[selectedNum].GetChild(0).gameObject);
+            Character.Instance.weapons[selectedNum].gameObject.SetActive(false);
         }
     }
 }

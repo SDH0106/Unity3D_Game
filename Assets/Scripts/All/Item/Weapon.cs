@@ -22,7 +22,6 @@ public class Weapon : MonoBehaviour
 
     private void Start()
     {
-        weaponInfo = ItemManager.Instance.weaponCardItem;
         spriteRenderer = GetComponent<SpriteRenderer>();
         Setting();
     }

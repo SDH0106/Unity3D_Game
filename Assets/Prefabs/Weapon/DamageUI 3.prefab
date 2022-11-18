@@ -111,7 +111,7 @@ GameObject:
   - component: {fileID: 7694887781048525289}
   - component: {fileID: 7694887781048525286}
   m_Layer: 5
-  m_Name: DamageUI
+  m_Name: DamageUI 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -227,10 +227,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a3aa58d9dc793e418880e8fabf03106, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponName: 
-  type: 0
-  weaponDamage: 0
-  magicDamage: 0
-  printDamage: {fileID: 0}
-  damage: 0
+  weapon: {fileID: -4970618607374384726, guid: bd12c0de619502d4e88c622fdf77ea62, type: 3}
   damageText: {fileID: 7694887780445064421}

@@ -9,11 +9,6 @@ public class ItemManager : Singleton<ItemManager>
 {
     [SerializeField] public Transform coinStorage;
 
-    [Header("Item")]
-    [SerializeField] GameObject weaponPrefab;
-    [SerializeField] GameObject PassivePerfab;
-
-    [HideInInspector] public WeaponInfo weaponCardItem;
     [HideInInspector] public PassiveInfo passiveCardItem;
 
     [HideInInspector] public WeaponInfo[] storedWeapon;
@@ -25,11 +20,10 @@ public class ItemManager : Singleton<ItemManager>
     [HideInInspector] public bool isFool = false;
     [HideInInspector] public int foolCount;
 
-    GameObject weapon;
-
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
+
         foolCount = 0;
         weaponCount = 0;
         passiveItemCount = 0;
@@ -47,8 +41,6 @@ public class ItemManager : Singleton<ItemManager>
         else if (foolCount <= 5)
             isFool = false;
 
-        weaponCardItem = weaponInfo;
-
         if (isFool == false)
         {
             for (int i = 0; i < storedWeapon.Length; i++)
@@ -61,8 +53,6 @@ public class ItemManager : Singleton<ItemManager>
             }
             storedWeapon[weaponCount] = weaponInfo;
         }
-
-        Equip();
     }
 
     public void GetPassiveInfo(PassiveInfo passiveInfo)
@@ -101,11 +91,5 @@ public class ItemManager : Singleton<ItemManager>
                     ShopManager.Instance.passiveItem[passiveItemCount]++;
             }
         }
-    }
-    public void Equip()
-    {
-        weapon = Instantiate(weaponPrefab);
-        weapon.transform.SetParent(Character.Instance.weaponParent[weaponCount]);
-        weapon.transform.position = Character.Instance.weaponParent[weaponCount].position;
     }
 }

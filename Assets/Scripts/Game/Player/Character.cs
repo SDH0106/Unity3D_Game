@@ -7,7 +7,6 @@ using static WeaponInfo;
 
 public class Character : Singleton<Character>
 {
-    [SerializeField] Rigidbody rigid;
     [SerializeField] SpriteRenderer rend;
     [SerializeField] Animator anim;
     [SerializeField] LayerMask coinLayer;
@@ -20,7 +19,8 @@ public class Character : Singleton<Character>
     [SerializeField] int attackDamage = 1;
 
     [Header("WeaponPos")]
-    [SerializeField] public Transform[] weaponParent;
+    [SerializeField] public Weapon[] weapons;
+    [SerializeField] DamageUI[] damageUIs;
 
     bool isRun, isAttacked, isDead = false;
 
@@ -29,13 +29,21 @@ public class Character : Singleton<Character>
 
     public int AttackDamage => attackDamage;
 
-    public float[] damages;
+    //public float[] damages;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        DontDestroyOnLoad(this);
+
+        for (int i = 0; i < weapons.Length; i++)
+        {
+            weapons[i].gameObject.SetActive(false);
+        }
+    }
 
     void Start()
     {
-        DontDestroyOnLoad(this);
-
-        rigid = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
 
         transform.position = Vector3.zero;
@@ -43,11 +51,7 @@ public class Character : Singleton<Character>
 
     void Update()
     {
-        for (int i = 0; i < weaponParent.Length; i++)
-        {
-            /*if (weaponParent[i].transform.childCount != 0)
-                Debug.Log(weaponParent[i].transform.GetChild(0).gameObject.GetComponent<Weapon>();*/
-        }
+        Equip();
 
         playerHpBar.value = 1 - ((float)GameManager.Instance.hp / (float)GameManager.Instance.maxHp);
 
@@ -59,6 +63,23 @@ public class Character : Singleton<Character>
             }
 
             anim.SetBool("isRun", isRun);
+        }
+    }
+
+    void Equip()
+    {
+        for (int i = 0; i < weapons.Length; i++)
+        {
+
+            if (ItemManager.Instance.storedWeapon[i] != null)
+            {
+                Debug.Log(ItemManager.Instance.storedWeapon[i]);
+                weapons[i].weaponInfo = ItemManager.Instance.storedWeapon[i];
+                weapons[i].gameObject.SetActive(true);
+            }
+
+            else if ((ItemManager.Instance.storedWeapon[i] == null))
+                weapons[i].gameObject.SetActive(false);
         }
     }
 
@@ -81,7 +102,7 @@ public class Character : Singleton<Character>
             isRun = true;
         }
 
-        else if(Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
+        else if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
         {
             isRun = true;
         }
@@ -145,4 +166,5 @@ public class Character : Singleton<Character>
         rend.color = Color.white;
         isAttacked = false;
     }
+
 }

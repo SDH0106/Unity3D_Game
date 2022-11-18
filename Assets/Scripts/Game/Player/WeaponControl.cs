@@ -5,41 +5,29 @@ using UnityEngine.Pool;
 
 public class WeaponControl : MonoBehaviour
 {
-    [SerializeField] Weapon weaponInfo;
     [SerializeField] GameObject bulletPrefab;
-    [SerializeField] Transform firePos; 
+    [SerializeField] Transform firePos;
     [SerializeField] int poolCount;
 
     private IObjectPool<Bullet> pool;
 
     SpriteRenderer rend;
 
-    /*int weaponDamage;
-    int elementDamage;
-    float weaponRange;*/
-
     float angle;
-    Vector3 dir,mouse;
+    Vector3 dir, mouse;
 
     private void Awake()
     {
-       pool = new ObjectPool<Bullet>(CreateBullet, OnGetBullet, OnReleaseBullet, OnDestroyBullet, maxSize: poolCount);
+        pool = new ObjectPool<Bullet>(CreateBullet, OnGetBullet, OnReleaseBullet, OnDestroyBullet, maxSize: poolCount);
     }
 
     private void Start()
     {
-        weaponInfo = GetComponent<Weapon>();
         rend = GetComponent<SpriteRenderer>();
-    }
-
-    void DamageSetting()
-    {
-        //weaponInfo.damage;
     }
 
     void Update()
     {
-        Debug.Log(weaponInfo.damage);
         if (GameManager.Instance.currentScene == "Game")
         {
             mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -73,7 +61,7 @@ public class WeaponControl : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Bullet bullet = pool.Get();
-            bullet.transform.position = transform.position;
+            bullet.transform.position = firePos.position;
             bullet.Shoot(dir.normalized);
         }
     }
@@ -88,7 +76,6 @@ public class WeaponControl : MonoBehaviour
 
     private void OnGetBullet(Bullet bullet)
     {
-        //Debug.Log("1");
         bullet.gameObject.SetActive(true);
     }
 

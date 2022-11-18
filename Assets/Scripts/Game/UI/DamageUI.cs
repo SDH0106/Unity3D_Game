@@ -11,6 +11,7 @@ using static WeaponInfo;
 
 public class DamageUI : MonoBehaviour
 {
+    [SerializeField] Weapon weapon;
     [SerializeField] Text damageText;
 
     private IObjectPool<DamageUI> managedPool;
@@ -19,6 +20,7 @@ public class DamageUI : MonoBehaviour
 
     private void Start()
     {
+        damageText.text = Character.Instance.AttackDamage.ToString();
         printTime = 1f;
         initPrintTime = printTime;
     }
@@ -36,7 +38,7 @@ public class DamageUI : MonoBehaviour
 
         printTime -= Time.deltaTime;
 
-        if(printTime <= 0)
+        if (printTime <= 0)
         {
             DestroyPool();
         }
@@ -44,7 +46,7 @@ public class DamageUI : MonoBehaviour
         ChangeAlpha(printTime / initPrintTime);
     }
 
-    public void TextUpdate(int damage)
+    public void TextUpdate(float damage)
     {
         damageText.text = damage.ToString();
     }

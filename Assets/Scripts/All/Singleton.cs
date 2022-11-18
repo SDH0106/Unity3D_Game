@@ -8,7 +8,7 @@ public class Singleton<T> : MonoBehaviour
     static T instance;
     public static T Instance => instance;
 
-    protected void Awake()                              // ObjectPool의 Awake에서 호출하기 위해 Protected
+    protected virtual void Awake()                              // ObjectPool의 Awake에서 호출하기 위해 Protected
     {
         instance = this as T;                           // 나(Singleton)을 T형으로 변환후 대입
     }

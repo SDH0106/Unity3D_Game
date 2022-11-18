@@ -3,20 +3,14 @@ using UnityEngine.Pool;
 
 public class Bullet : MonoBehaviour
 {
-    GameObject effectPrefab;
+    [SerializeField] GameObject weapon;
     [SerializeField] float speed = 3f;
+    GameObject effectPrefab;
 
     private IObjectPool<Bullet> managedPool;
 
     float angle;
     Vector3 dir;
-
-    PrintDamage printDamage;
-
-    private void Start()
-    {
-        printDamage = Character.Instance.gameObject.GetComponent<PrintDamage>();
-    }
 
     void Update()
     {
@@ -38,7 +32,8 @@ public class Bullet : MonoBehaviour
     {
         if (other.tag == "Monster")
         {
-            //printDamage.PrintDamageText(transform.position,);
+            Debug.Log(weapon.GetComponent<PrintDamage>());
+            weapon.GetComponent<PrintDamage>().PrintDamageText(transform.position);
             other.GetComponent<Monster>().OnDamaged();
             DestroyBullet();
             CancleDestroyInvoke();

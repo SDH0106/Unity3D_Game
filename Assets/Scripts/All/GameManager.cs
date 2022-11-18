@@ -44,7 +44,13 @@ public class GameManager : Singleton<GameManager>
 
      public int levelUpCount;
 
-    public float[] stats;
+    [HideInInspector] public float[] stats;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        DontDestroyOnLoad(this);
+    }
 
     private void Start()
     {

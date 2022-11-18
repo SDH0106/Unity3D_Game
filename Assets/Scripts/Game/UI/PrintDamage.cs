@@ -6,6 +6,7 @@ using UnityEngine.Pool;
 
 public class PrintDamage : MonoBehaviour
 {
+    [SerializeField] Weapon weapon;
     [SerializeField] GameObject damagePrefab;
     [SerializeField] int poolCount;
 
@@ -20,7 +21,7 @@ public class PrintDamage : MonoBehaviour
     {
         DamageUI damage = objectPool.Get();
         damage.transform.position = pos;
-        //damage[i].TextUpdate();
+        damage.TextUpdate(weapon.damage);
     }
 
     private DamageUI CreatePool()
