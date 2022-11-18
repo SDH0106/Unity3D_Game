@@ -227,5 +227,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a3aa58d9dc793e418880e8fabf03106, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: -4970618607374384726, guid: 8fff92543533dad479a675a562543ce1, type: 3}
+  weaponName: 
+  type: 0
+  weaponDamage: 0
+  magicDamage: 0
+  printDamage: {fileID: 0}
+  damage: 0
   damageText: {fileID: 7694887780445064421}

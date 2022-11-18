@@ -16,9 +16,9 @@ public class Weapon : MonoBehaviour
 
     SpriteRenderer spriteRenderer;
 
-    WeaponInfo weaponInfo;
+    [HideInInspector] public WeaponInfo weaponInfo;
 
-    float demage;
+    public float damage;
 
     private void Start()
     {
@@ -36,12 +36,12 @@ public class Weapon : MonoBehaviour
     { 
         if(type == WEAPON_TYPE.½ºÅÂÇÁ)
         {
-            demage = magicDamage + GameManager.Instance.elementDamage;
+            damage = magicDamage + GameManager.Instance.elementDamage;
         }
 
         else
         {
-            demage = weaponDamage + GameManager.Instance.physicDamage;
+            damage = weaponDamage + GameManager.Instance.physicDamage;
         }
     }
 

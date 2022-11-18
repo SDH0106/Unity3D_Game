@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Pool;
 using UnityEngine.UI;
 
-public class GameSceneUI : Singleton<GameSceneUI>
+public class GameSceneUI : MonoBehaviour
 {
     [Header("HP")]
     [SerializeField] Text hpText;

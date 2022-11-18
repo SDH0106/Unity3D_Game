@@ -20,14 +20,14 @@ public class PrintDamage : MonoBehaviour
     {
         DamageUI damage = objectPool.Get();
         damage.transform.position = pos;
-        damage.TextUpdate();
+        //damage[i].TextUpdate();
     }
 
     private DamageUI CreatePool()
     {
         DamageUI pool = Instantiate(damagePrefab).GetComponent<DamageUI>();
         pool.SetManagedPool(objectPool);
-        pool.transform.SetParent(GameSceneUI.Instance.damageStorage);
+        pool.transform.SetParent(GameManager.Instance.damageStorage);
 
         return pool;
     }

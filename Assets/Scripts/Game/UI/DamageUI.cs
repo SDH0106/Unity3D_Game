@@ -7,10 +7,10 @@ using UnityEngine.PlayerLoop;
 using UnityEngine.Pool;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
+using static WeaponInfo;
 
 public class DamageUI : MonoBehaviour
 {
-    [SerializeField] Weapon weapon;
     [SerializeField] Text damageText;
 
     private IObjectPool<DamageUI> managedPool;
@@ -19,7 +19,6 @@ public class DamageUI : MonoBehaviour
 
     private void Start()
     {
-        damageText.text = Character.Instance.AttackDamage.ToString();
         printTime = 1f;
         initPrintTime = printTime;
     }
@@ -45,9 +44,9 @@ public class DamageUI : MonoBehaviour
         ChangeAlpha(printTime / initPrintTime);
     }
 
-    public void TextUpdate()
+    public void TextUpdate(int damage)
     {
-        damageText.text = Character.Instance.AttackDamage.ToString();
+        damageText.text = damage.ToString();
     }
 
     void InitSetting()

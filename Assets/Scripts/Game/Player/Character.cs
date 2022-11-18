@@ -45,8 +45,8 @@ public class Character : Singleton<Character>
     {
         for (int i = 0; i < weaponParent.Length; i++)
         {
-            //if (weaponParent[i].transform.childCount != 0)
-                //Debug.Log(weaponParent[i].transform.GetChild(0).gameObject.GetComponent<Weapon>().weaponName);
+            /*if (weaponParent[i].transform.childCount != 0)
+                Debug.Log(weaponParent[i].transform.GetChild(0).gameObject.GetComponent<Weapon>();*/
         }
 
         playerHpBar.value = 1 - ((float)GameManager.Instance.hp / (float)GameManager.Instance.maxHp);

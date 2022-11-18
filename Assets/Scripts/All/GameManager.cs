@@ -9,6 +9,9 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>       
 {
+    [SerializeField] public Transform bulletStorage;
+    [SerializeField] public Transform damageStorage;
+
     [Header("GameData")]
     [SerializeField] float gameTime;
     [SerializeField] public int money;

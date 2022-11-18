@@ -5,6 +5,7 @@ using UnityEngine.Pool;
 
 public class WeaponControl : MonoBehaviour
 {
+    [SerializeField] Weapon weaponInfo;
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] Transform firePos; 
     [SerializeField] int poolCount;
@@ -12,11 +13,10 @@ public class WeaponControl : MonoBehaviour
     private IObjectPool<Bullet> pool;
 
     SpriteRenderer rend;
-    Weapon weaponInfo;
 
-    int weaponDamage;
+    /*int weaponDamage;
     int elementDamage;
-    float weaponRange;
+    float weaponRange;*/
 
     float angle;
     Vector3 dir,mouse;
@@ -32,8 +32,14 @@ public class WeaponControl : MonoBehaviour
         rend = GetComponent<SpriteRenderer>();
     }
 
+    void DamageSetting()
+    {
+        //weaponInfo.damage;
+    }
+
     void Update()
     {
+        Debug.Log(weaponInfo.damage);
         if (GameManager.Instance.currentScene == "Game")
         {
             mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -76,12 +82,13 @@ public class WeaponControl : MonoBehaviour
     {
         Bullet bullet = Instantiate(bulletPrefab, firePos.position, transform.rotation).GetComponent<Bullet>();
         bullet.SetManagedPool(pool);
-        bullet.transform.SetParent(GameSceneUI.Instance.bulletStorage);
+        bullet.transform.SetParent(GameManager.Instance.bulletStorage);
         return bullet;
     }
 
     private void OnGetBullet(Bullet bullet)
     {
+        //Debug.Log("1");
         bullet.gameObject.SetActive(true);
     }
 
