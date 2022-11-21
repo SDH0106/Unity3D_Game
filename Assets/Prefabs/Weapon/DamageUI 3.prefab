@@ -227,5 +227,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a3aa58d9dc793e418880e8fabf03106, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: -4970618607374384726, guid: bd12c0de619502d4e88c622fdf77ea62, type: 3}
   damageText: {fileID: 7694887780445064421}
+  weaponDamage: 0

@@ -16,6 +16,6 @@ MonoBehaviour:
   weaponName: "\uC720\uB3C4 \uCD1D"
   type: 0
   weaponDamage: 2
-  elementDamage: 0
+  magicDamage: 0
   weaponRange: 8
   weaponPrice: 20

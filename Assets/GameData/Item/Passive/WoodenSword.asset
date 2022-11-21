@@ -18,7 +18,7 @@ MonoBehaviour:
   recoverHp: 0
   absorbHp: 0
   defence: 0
-  weaponDamage: 2
+  physicDamage: 1
   elementDamage: 0
   attackSpeed: 1
   speed: 0

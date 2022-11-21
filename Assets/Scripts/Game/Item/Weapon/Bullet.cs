@@ -1,9 +1,11 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting;
+using UnityEditor.Search;
+using UnityEngine;
 using UnityEngine.Pool;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] GameObject weapon;
+    [SerializeField] DamageUI damageUI;
     [SerializeField] float speed = 3f;
     GameObject effectPrefab;
 
@@ -32,8 +34,8 @@ public class Bullet : MonoBehaviour
     {
         if (other.tag == "Monster")
         {
-            Debug.Log(weapon.GetComponent<PrintDamage>());
-            weapon.GetComponent<PrintDamage>().PrintDamageText(transform.position);
+            GameObject pool = Instantiate(damageUI,transform.position,Quaternion.Euler(90,0,0)).gameObject;
+            pool.transform.SetParent(GameManager.Instance.damageStorage);
             other.GetComponent<Monster>().OnDamaged();
             DestroyBullet();
             CancleDestroyInvoke();

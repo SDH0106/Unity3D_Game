@@ -2,7 +2,7 @@
     "stats": [
         {
             "statName": "심장",
-            "statType": "체력",
+            "statType": "최대 체력",
             "statSprite": "Health",
             "grade": "일반",
             "statValue": 1.0

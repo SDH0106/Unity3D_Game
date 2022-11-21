@@ -41,8 +41,6 @@ public class ShopManager : Singleton<ShopManager>
 
     [HideInInspector] public int[] passiveItem;
 
-    PassiveInfo[] storedPassive;
-
     GameObject[] cards;
     int[] num;
 
@@ -63,7 +61,6 @@ public class ShopManager : Singleton<ShopManager>
         num = new int[4];
         cards = new GameObject[4];
         passiveItem = new int[passiveSlots.Length];
-        storedPassive = ItemManager.Instance.storedPassive;
 
         CardSlot();
     }
@@ -119,6 +116,7 @@ public class ShopManager : Singleton<ShopManager>
         Character.Instance.transform.position = Vector3.zero;
         GameManager.Instance.round++;
         rerollMoney = -GameManager.Instance.round;
+        GameManager.Instance.hp = GameManager.Instance.maxHp;
     }
 
     void ImageAlphaChange(int i, int a, Image image)

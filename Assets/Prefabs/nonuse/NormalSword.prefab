@@ -138,8 +138,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7229147310949103082}
   - component: {fileID: 5705455011257794821}
-  - component: {fileID: 7487453357910611482}
-  - component: {fileID: 564549585776292173}
   m_Layer: 0
   m_Name: NormalSword
   m_TagString: Untagged
@@ -216,36 +214,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7487453357910611482
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7740522959280858876}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4af302aa0064464c94cad52708a5c91, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  info: {fileID: 11400000, guid: 6f446d46d65248142aa5b7d0c0311df9, type: 2}
-  bulletPrefab: {fileID: 8154831264171076226, guid: af6b2db259797fc48a47d68401f82ed8, type: 3}
-  storageParent: {fileID: 0}
-  firePos: {fileID: 5313717166032395704}
-  poolCount: 10
---- !u!54 &564549585776292173
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7740522959280858876}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 120
-  m_CollisionDetection: 0

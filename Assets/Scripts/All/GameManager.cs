@@ -2,6 +2,7 @@ using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
+using System.Xml.Schema;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEditor.SearchService;
 using UnityEngine;
@@ -68,7 +69,7 @@ public class GameManager : Singleton<GameManager>
         scene = SceneManager.GetActiveScene();
         currentScene = scene.name;
 
-        if(exp ==  maxExp)
+        if (exp ==  maxExp)
         {
             level++;
             levelUpCount++;
@@ -116,7 +117,6 @@ public class GameManager : Singleton<GameManager>
         Character.Instance.transform.position = Vector3.zero;
         currentScene = "Shop";
         SceneManager.LoadScene(currentScene);
-        hp = maxHp;
         currentGameTime = gameTime;
     }
 }

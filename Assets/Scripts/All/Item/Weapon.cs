@@ -18,20 +18,20 @@ public class Weapon : MonoBehaviour
 
     [HideInInspector] public WeaponInfo weaponInfo;
 
-    public float damage;
+    [HideInInspector] public float damage;
 
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        Setting();
+        InitSetting();
     }
 
     private void Update()
     {
-        Damage();
+        weaponSetting();
     }
 
-    public void Damage()
+    public void weaponSetting()
     { 
         if(type == WEAPON_TYPE.½ºÅÂÇÁ)
         {
@@ -44,7 +44,7 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    void Setting()
+    void InitSetting()
     {
         spriteRenderer.sprite = weaponInfo.ItemSprite;
         weaponName = weaponInfo.WeaponName;

@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 8154831264171076225}
   - component: {fileID: 9078078465588959345}
   - component: {fileID: 8154831264171076231}
-  - component: {fileID: -8557741743296975608}
   - component: {fileID: -1798598165808827110}
+  - component: {fileID: -8557741743296975608}
   m_Layer: 0
   m_Name: PlayerBullet 2
   m_TagString: myBullet
@@ -121,20 +121,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &-8557741743296975608
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8154831264171076226}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5049efe9bf8845d498e2aa71d5937e86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weapon: {fileID: 3953021356634962379, guid: f2eb3b056817b7c478a55db0607e9876, type: 3}
-  speed: 8
 --- !u!54 &-1798598165808827110
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -151,3 +137,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
+--- !u!114 &-8557741743296975608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8154831264171076226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5049efe9bf8845d498e2aa71d5937e86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageUI: {fileID: 7694887781048525286, guid: 4e5badd5cf114334eb18a60b47678558, type: 3}
+  speed: 8

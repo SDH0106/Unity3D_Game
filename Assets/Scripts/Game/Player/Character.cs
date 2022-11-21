@@ -20,16 +20,13 @@ public class Character : Singleton<Character>
 
     [Header("WeaponPos")]
     [SerializeField] public Weapon[] weapons;
-    [SerializeField] DamageUI[] damageUIs;
+    [SerializeField] DamageUI[] damages;
 
     bool isRun, isAttacked, isDead = false;
 
-    int hp;
-    int maxHp;
-
     public int AttackDamage => attackDamage;
 
-    //public float[] damages;
+    [HideInInspector] public float totalDamage;
 
     protected override void Awake()
     {
@@ -73,9 +70,19 @@ public class Character : Singleton<Character>
 
             if (ItemManager.Instance.storedWeapon[i] != null)
             {
-                Debug.Log(ItemManager.Instance.storedWeapon[i]);
                 weapons[i].weaponInfo = ItemManager.Instance.storedWeapon[i];
                 weapons[i].gameObject.SetActive(true);
+                if (damages[i].gameObject.activeSelf == true)
+                {
+                    totalDamage = weapons[i].damage;
+                    damages[i].weaponDamage = weapons[i].damage;
+
+                    if (weapons[i].type == WEAPON_TYPE.½ºÅÂÇÁ)
+                        damages[i].damageText.color = Color.cyan;
+
+                    else
+                        damages[i].damageText.color = new Color(1, 0.4871f, 0);
+                }
             }
 
             else if ((ItemManager.Instance.storedWeapon[i] == null))

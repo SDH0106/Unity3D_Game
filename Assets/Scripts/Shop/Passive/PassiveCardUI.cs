@@ -75,8 +75,8 @@ public class PassiveCardUI : MonoBehaviour
         stats[5] = selectedPassive.ElementDamage;
         stats[6] = selectedPassive.AttackSpeed;
         stats[7] = selectedPassive.Speed;
-        stats[8] = selectedPassive.Range;
-        stats[9] = selectedPassive.Luck;
+        stats[8] = selectedPassive.Luck;
+        stats[9] = selectedPassive.Range;
 
         statTypes[0] = "최대 체력";
         statTypes[1] = "체력 회복";
@@ -86,8 +86,8 @@ public class PassiveCardUI : MonoBehaviour
         statTypes[5] = "원소 공격력";
         statTypes[6] = "공격 속도";
         statTypes[7] = "이동 속도";
-        statTypes[8] = "사거리";
-        statTypes[9] = "행운";
+        statTypes[8] = "행운";
+        statTypes[9] = "사거리";
     }
 
     void DescriptionInfo()
@@ -119,6 +119,11 @@ public class PassiveCardUI : MonoBehaviour
             Destroy(gameObject);
             isLock = false;
             GameManager.Instance.money -= selectedPassive.ItemPrice;
+
+            for (int i = 0; i < stats.Length; i++)
+            {
+                GameManager.Instance.stats[i] += stats[i];
+            }
         }
     }
 

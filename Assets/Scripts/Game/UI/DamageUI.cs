@@ -4,23 +4,20 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
-using UnityEngine.Pool;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 using static WeaponInfo;
 
 public class DamageUI : MonoBehaviour
 {
-    [SerializeField] Weapon weapon;
-    [SerializeField] Text damageText;
-
-    private IObjectPool<DamageUI> managedPool;
+    [SerializeField] public Text damageText;
 
     float printTime, initPrintTime;
 
+    public float weaponDamage;
+
     private void Start()
     {
-        damageText.text = Character.Instance.AttackDamage.ToString();
         printTime = 1f;
         initPrintTime = printTime;
     }
@@ -34,37 +31,17 @@ public class DamageUI : MonoBehaviour
 
     private void Update()
     {
+        damageText.text = weaponDamage.ToString();
+
         transform.position += Vector3.forward * 0.5f * Time.deltaTime;
 
         printTime -= Time.deltaTime;
 
         if (printTime <= 0)
         {
-            DestroyPool();
+            Destroy(gameObject);
         }
 
         ChangeAlpha(printTime / initPrintTime);
-    }
-
-    public void TextUpdate(float damage)
-    {
-        damageText.text = damage.ToString();
-    }
-
-    void InitSetting()
-    {
-        printTime = initPrintTime;
-        ChangeAlpha(1);
-    }
-
-    public void SetManagedPool(IObjectPool<DamageUI> pool)
-    {
-        managedPool = pool;
-    }
-
-    public void DestroyPool()
-    {
-        managedPool.Release(this);
-        InitSetting();
     }
 }

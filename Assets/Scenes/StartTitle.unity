@@ -1802,8 +1802,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletStorage: {fileID: 1005871281}
   damageStorage: {fileID: 1692643827}
-  gameTime: 20
-  money: 100
+  gameTime: 5
+  money: 1000
   round: 1
   exp: 0
   hp: 0
@@ -1862,7 +1862,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statInfos:
   - statName: "\uC2EC\uC7A5"
-    statType: "\uCCB4\uB825"
+    statType: "\uCD5C\uB300 \uCCB4\uB825"
     statSprite: Health
     grade: "\uC77C\uBC18"
     statValue: 1
@@ -1878,7 +1878,7 @@ MonoBehaviour:
     statValue: 1
   - statName: "\uAC15\uC778\uD568"
     statType: "\uBC29\uC5B4\uB825"
-    statSprite: defence
+    statSprite: Defence
     grade: "\uC77C\uBC18"
     statValue: 1
   - statName: "\uBB34\uB825"
@@ -1891,7 +1891,7 @@ MonoBehaviour:
     statSprite: EDamage
     grade: "\uC77C\uBC18"
     statValue: 1
-  - statName: "\uBC18\uC0AC \uC2E0\uACBD"
+  - statName: "\uB3C4\uD551"
     statType: "\uACF5\uACA9 \uC18D\uB3C4"
     statSprite: AtSpeed
     grade: "\uC77C\uBC18"
@@ -2128,14 +2128,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1692643826}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 936130855}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &1791595234
 GameObject:
   m_ObjectHideFlags: 0
