@@ -7,51 +7,31 @@ using static WeaponInfo;
 
 public class Weapon : MonoBehaviour
 {
-    public string weaponName;
-    public WEAPON_TYPE type;
-    public float weaponDamage;
-    public float magicDamage;
-    float weaponRange;
-    int weaponPrice;
-
-    SpriteRenderer spriteRenderer;
-
-    [HideInInspector] public WeaponInfo weaponInfo;
+    [SerializeField] public WeaponInfo weaponInfo;
+    [SerializeField] DamageUI damageUI;
 
     [HideInInspector] public float damage;
-
-    private void Start()
-    {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        InitSetting();
-    }
 
     private void Update()
     {
         weaponSetting();
+        Debug.Log(damage);
     }
 
     public void weaponSetting()
     { 
-        if(type == WEAPON_TYPE.스태프)
+        if(weaponInfo.Type == WEAPON_TYPE.스태프)
         {
-            damage = magicDamage + GameManager.Instance.elementDamage;
+            damage = weaponInfo.MagicDamage + GameManager.Instance.elementDamage;
+            damageUI.damageText.color = Color.cyan;
         }
 
         else
         {
-            damage = weaponDamage + GameManager.Instance.physicDamage;
+            damage = weaponInfo.WeaponDamage + GameManager.Instance.physicDamage;
+            damageUI.damageText.color = new Color(1, 0.4871f, 0);
         }
-    }
 
-    void InitSetting()
-    {
-        spriteRenderer.sprite = weaponInfo.ItemSprite;
-        weaponName = weaponInfo.WeaponName;
-        type = weaponInfo.Type;
-        weaponDamage = weaponInfo.WeaponDamage;
-        magicDamage= weaponInfo.MagicDamage;
-        weaponRange = weaponInfo.WeaponRange;
-        weaponPrice = weaponInfo.WeaponPrice;
+        damageUI.weaponDamage = damage;
     }
 }

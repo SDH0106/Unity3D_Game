@@ -8,7 +8,7 @@ using System;
 
 public class SelectSceneCard : MonoBehaviour
 {
-    [SerializeField] public WeaponInfo[] weaponInfo;
+    [SerializeField] public WeaponInfo[] weaponInfos;
     [SerializeField] Image itemSprite;
     [SerializeField] Text weaponName;
     [SerializeField] Text type;
@@ -47,5 +47,6 @@ public class SelectSceneCard : MonoBehaviour
         ItemManager.Instance.GetWeaponInfo(selectedWeapon);
         count++;
         SceneManager.LoadScene(sceneName);
+        Character.Instance.Equip();
     }
 }

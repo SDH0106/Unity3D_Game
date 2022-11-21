@@ -11,19 +11,12 @@ public class WeaponControl : MonoBehaviour
 
     private IObjectPool<Bullet> pool;
 
-    SpriteRenderer rend;
-
     float angle;
     Vector3 dir, mouse;
 
     private void Awake()
     {
         pool = new ObjectPool<Bullet>(CreateBullet, OnGetBullet, OnReleaseBullet, OnDestroyBullet, maxSize: poolCount);
-    }
-
-    private void Start()
-    {
-        rend = GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -33,7 +26,7 @@ public class WeaponControl : MonoBehaviour
             mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mouse.y = transform.position.y;
 
-            dir = mouse - Character.Instance.transform.position;
+            dir = mouse - transform.position;
 
             LookMousePosition();
             FireBullet();
@@ -46,19 +39,22 @@ public class WeaponControl : MonoBehaviour
         transform.rotation = Quaternion.Euler(90, -angle, 0);
 
         if (dir.x < 0)
-        {
-            rend.flipY = true;
-        }
+            transform.rotation *= Quaternion.Euler(180, 0, 0);
+            //transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = true;
 
         else
+            transform.rotation *= Quaternion.Euler(0, 0, 0);
+        //transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = false;
+
+        /*if (transform.localRotation.z > 0.9 || transform.localRotation.z < -0.9)
         {
-            rend.flipY = false;
-        }
+            transform.rotation *= Quaternion.Euler(180, 0, 0);
+        }*/
     }
 
     void FireBullet()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && firePos != null)
         {
             Bullet bullet = pool.Get();
             bullet.transform.position = firePos.position;

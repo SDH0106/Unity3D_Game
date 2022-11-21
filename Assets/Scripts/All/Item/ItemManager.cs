@@ -4,6 +4,7 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static WeaponInfo;
 
 public class ItemManager : Singleton<ItemManager>
 {
@@ -14,7 +15,7 @@ public class ItemManager : Singleton<ItemManager>
     [HideInInspector] public WeaponInfo[] storedWeapon;
     [HideInInspector] public PassiveInfo[] storedPassive;
 
-    int weaponCount;
+    [HideInInspector] public int weaponCount;
     int passiveItemCount;
 
     [HideInInspector] public bool isFool = false;

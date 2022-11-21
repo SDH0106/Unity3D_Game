@@ -1,6 +1,7 @@
 using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
 using static WeaponInfo;
@@ -18,9 +19,9 @@ public class Character : Singleton<Character>
     [SerializeField] float invincibleTime;
     [SerializeField] int attackDamage = 1;
 
-    [Header("WeaponPos")]
-    [SerializeField] public Weapon[] weapons;
-    [SerializeField] DamageUI[] damages;
+    [Header("Weapon")]
+    [SerializeField] public GameObject[] weapons;
+    [SerializeField] Transform[] weaponPoses;
 
     bool isRun, isAttacked, isDead = false;
 
@@ -28,15 +29,12 @@ public class Character : Singleton<Character>
 
     [HideInInspector] public float totalDamage;
 
+    Weapon[] equipWeapon = new Weapon[6];
+
     protected override void Awake()
     {
         base.Awake();
         DontDestroyOnLoad(this);
-
-        for (int i = 0; i < weapons.Length; i++)
-        {
-            weapons[i].gameObject.SetActive(false);
-        }
     }
 
     void Start()
@@ -48,8 +46,6 @@ public class Character : Singleton<Character>
 
     void Update()
     {
-        Equip();
-
         playerHpBar.value = 1 - ((float)GameManager.Instance.hp / (float)GameManager.Instance.maxHp);
 
         if (GameManager.Instance.currentScene == "Game")
@@ -63,31 +59,23 @@ public class Character : Singleton<Character>
         }
     }
 
-    void Equip()
+    public void Equip()
     {
+        int count = ItemManager.Instance.weaponCount;
+
         for (int i = 0; i < weapons.Length; i++)
         {
-
-            if (ItemManager.Instance.storedWeapon[i] != null)
+            if (weapons[i].GetComponent<Weapon>().weaponInfo.WeaponName == ItemManager.Instance.storedWeapon[count].WeaponName)
             {
-                weapons[i].weaponInfo = ItemManager.Instance.storedWeapon[i];
-                weapons[i].gameObject.SetActive(true);
-                if (damages[i].gameObject.activeSelf == true)
-                {
-                    totalDamage = weapons[i].damage;
-                    damages[i].weaponDamage = weapons[i].damage;
-
-                    if (weapons[i].type == WEAPON_TYPE.½ºÅÂÇÁ)
-                        damages[i].damageText.color = Color.cyan;
-
-                    else
-                        damages[i].damageText.color = new Color(1, 0.4871f, 0);
-                }
+                Debug.Log(weapons[i].GetComponent<Weapon>().weaponInfo.WeaponName);
+                Instantiate(weapons[i], weaponPoses[count]);
             }
-
-            else if ((ItemManager.Instance.storedWeapon[i] == null))
-                weapons[i].gameObject.SetActive(false);
         }
+    }
+
+    public void ReleaseEquip(int num)
+    {
+        Destroy(weaponPoses[num].GetChild(0).gameObject);
     }
 
     void Move()

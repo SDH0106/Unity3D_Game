@@ -10,6 +10,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>       
 {
+    [SerializeField] Texture2D aimCursor;
     [SerializeField] public Transform bulletStorage;
     [SerializeField] public Transform damageStorage;
 
@@ -108,6 +109,8 @@ public class GameManager : Singleton<GameManager>
 
             if (money <= 0)
                 money = 0;
+
+            //Cursor.SetCursor(aimCursor, new Vector2(aimCursor.width / 2, aimCursor.height / 2), CursorMode.Auto);
         }
     }
 

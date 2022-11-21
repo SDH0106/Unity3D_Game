@@ -11,8 +11,8 @@ public class ShowCard : MonoBehaviour
 
     private void Start()
     {
-        numArray = new int[cards[0].weaponInfo.Length];
-        GetRandomNum(cards.Length ,cards[0].weaponInfo.Length);
+        numArray = new int[cards[0].weaponInfos.Length];
+        GetRandomNum(cards.Length ,cards[0].weaponInfos.Length);
     }
 
     void GetRandomNum(int count, int length)
@@ -32,6 +32,6 @@ public class ShowCard : MonoBehaviour
         }
 
         for (int i = 0; i < cards.Length; i++)
-            cards[i].selectedWeapon = cards[i].weaponInfo[numArray[i]];
+            cards[i].selectedWeapon = cards[i].weaponInfos[numArray[i]];
     }
 }

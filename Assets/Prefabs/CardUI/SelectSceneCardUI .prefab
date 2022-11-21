@@ -1200,7 +1200,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &7719271856648617477
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1246,7 +1246,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57e61bb924299c243b38c2dfa6903449, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponInfo:
+  weaponInfos:
   - {fileID: 11400000, guid: 6615742e6cf5ad14fa258375f21f0959, type: 2}
   - {fileID: 11400000, guid: a7e88bf1966034444ac1b821061e8a2f, type: 2}
   - {fileID: 11400000, guid: 1f39dc14ed7e6ff48972eb1676b9eeb2, type: 2}

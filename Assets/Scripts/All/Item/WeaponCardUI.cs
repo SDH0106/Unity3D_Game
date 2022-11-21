@@ -71,6 +71,7 @@ public class WeaponCardUI : MonoBehaviour
             ItemManager.Instance.GetWeaponInfo(selectedWeapon);
             Destroy(gameObject);
             isLock = false;
+            Character.Instance.Equip();
         }
     }
 
