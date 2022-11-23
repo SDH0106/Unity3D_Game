@@ -8,17 +8,12 @@ using static WeaponInfo;
 public class Weapon : MonoBehaviour
 {
     [SerializeField] public WeaponInfo weaponInfo;
-    [SerializeField] DamageUI damageUI;
 
+    [HideInInspector] public DamageUI damageUI;
     [HideInInspector] public float damage;
+    [HideInInspector] public int count;
 
-    private void Update()
-    {
-        weaponSetting();
-        Debug.Log(damage);
-    }
-
-    public void weaponSetting()
+    public void WeaponSetting()
     { 
         if(weaponInfo.Type == WEAPON_TYPE.ฝบลยวม)
         {

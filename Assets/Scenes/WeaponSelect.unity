@@ -248,14 +248,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9b6a32b004962f4299550bcc35c5853, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coinStorage: {fileID: 1248675029}
-  damages:
+  damageUI:
   - {fileID: 7694887781048525286, guid: 753c57903dfa6c343ac44acffa5bde8b, type: 3}
   - {fileID: 7694887781048525286, guid: 4e5badd5cf114334eb18a60b47678558, type: 3}
   - {fileID: 7694887781048525286, guid: 231cb6e6551ebee4db01c0403f84206d, type: 3}
   - {fileID: 7694887781048525286, guid: d3b131ce2abf71247a74d5d2c87dea83, type: 3}
   - {fileID: 7694887781048525286, guid: f097853f4ba4b684fafcefbab37d3f0c, type: 3}
   - {fileID: 7694887781048525286, guid: 06c8d1f88557e1e45a61ed75a938cd57, type: 3}
+  coinStorage: {fileID: 1248675029}
   passiveCardItem: {fileID: 0}
   storedWeapon: []
   storedPassive: []
@@ -1129,7 +1129,7 @@ MonoBehaviour:
     m_Bits: 512
   playerHpBar: {fileID: 661988715}
   speed: 3
-  invincibleTime: 1
+  invincibleTime: 2
   attackDamage: 1
   weapons:
   - {fileID: 4942268788761087581, guid: 941e5330dd1395442b47913c209b6bed, type: 3}

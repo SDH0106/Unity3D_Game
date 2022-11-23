@@ -48,5 +48,6 @@ public class SelectSceneCard : MonoBehaviour
         count++;
         SceneManager.LoadScene(sceneName);
         Character.Instance.Equip();
+        SoundManager.Instance.PlayES("WeaponSelect");
     }
 }

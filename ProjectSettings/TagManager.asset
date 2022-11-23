@@ -8,6 +8,7 @@ TagManager:
   - myBullet
   - monsterBullet
   - Coin
+  - Sword
   - Character
   layers:
   - Default

@@ -15,7 +15,7 @@ public class MonsterSpawn : MonoBehaviour
 
     private IObjectPool<Monster> pool;
 
-    public Vector3 spawnPos;
+    [HideInInspector] public Vector3 spawnPos;
 
     private void Awake()
     {

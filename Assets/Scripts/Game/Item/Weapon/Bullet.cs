@@ -5,7 +5,6 @@ using UnityEngine.Pool;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] DamageUI damageUI;
     [SerializeField] float speed = 3f;
     GameObject effectPrefab;
 
@@ -13,6 +12,8 @@ public class Bullet : MonoBehaviour
 
     float angle;
     Vector3 dir;
+
+    public DamageUI damageUI;
 
     void Update()
     {
@@ -36,9 +37,10 @@ public class Bullet : MonoBehaviour
         {
             GameObject pool = Instantiate(damageUI,transform.position,Quaternion.Euler(90,0,0)).gameObject;
             pool.transform.SetParent(GameManager.Instance.damageStorage);
-            other.GetComponent<Monster>().OnDamaged();
+            other.GetComponent<Monster>().OnDamaged(damageUI.weaponDamage);
+            GameManager.Instance.hp += GameManager.Instance.absorbHp;
             DestroyBullet();
-            CancleDestroyInvoke();
+            CancelInvoke("DestroyBullet");
 
             effectPrefab = Resources.Load("BulletEffect") as GameObject;
             Instantiate(effectPrefab, transform.position, transform.rotation);
@@ -53,10 +55,5 @@ public class Bullet : MonoBehaviour
     public void DestroyBullet()
     {
         managedPool.Release(this);
-    }
-
-    public void CancleDestroyInvoke()
-    {
-        CancelInvoke("DestroyBullet");
     }
 }

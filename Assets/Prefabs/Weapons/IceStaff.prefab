@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4197057813751389701}
   - component: {fileID: -7336226696313076829}
-  - component: {fileID: 3420292567770377522}
   m_Layer: 0
   m_Name: IceStaff
   m_TagString: Untagged
@@ -46,24 +45,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4af302aa0064464c94cad52708a5c91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponInfo: {fileID: 11400000, guid: 0b82d2f972fedde4583b397ab8b47eaf, type: 2}
+  damageUI: {fileID: 0}
+  damage: 0
+  count: 0
   bulletPrefab: {fileID: 8154831264171076226, guid: fb50a2d0acb329f41913b54c21c58872, type: 3}
   firePos: {fileID: 3255279343309902265}
   poolCount: 10
---- !u!114 &3420292567770377522
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2248372346044479991}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62a5d220590aa794e88273f600fb97ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponInfo: {fileID: 11400000, guid: 0b82d2f972fedde4583b397ab8b47eaf, type: 2}
-  damageUI: {fileID: 7694887781048525286, guid: 231cb6e6551ebee4db01c0403f84206d, type: 3}
-  damage: 0
 --- !u!1 &7175759745226116089
 GameObject:
   m_ObjectHideFlags: 0

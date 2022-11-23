@@ -13,8 +13,11 @@ public class StatCardUI : StatCardInfo
 
     [HideInInspector] public Stat selectedCard;
 
+    GameManager gameManager;
+
     private void Start()
     {
+        gameManager = GameManager.Instance; 
         Setting();
     }
 
@@ -28,20 +31,21 @@ public class StatCardUI : StatCardInfo
 
     public void SelectCard()
     {
+        SoundManager.Instance.PlayES("SelectButton");
         ShowStatCard.Instance.isSelected = true;
 
-        GameManager.Instance.levelUpCount--;
+        gameManager.levelUpCount--;
 
         for (int i = 0; i < 9; i++)
         {
-            if (selectedCard.statName == GameManager.Instance.gameObject.GetComponent<StatCardInfo>().statInfos[i].statName)
-                GameManager.Instance.stats[i] += GameManager.Instance.gameObject.GetComponent<StatCardInfo>().statInfos[i].statValue;
+            if (selectedCard.statName == gameManager.gameObject.GetComponent<StatCardInfo>().statInfos[i].statName)
+                gameManager.stats[i] += gameManager.gameObject.GetComponent<StatCardInfo>().statInfos[i].statValue;
         }
 
-        if (GameManager.Instance.levelUpCount <= 0)
-            GameManager.Instance.ToShopScene();
+        if (gameManager.levelUpCount <= 0)
+            gameManager.ToShopScene();
 
-        else if (GameManager.Instance.levelUpCount > 0)
+        else if (gameManager.levelUpCount > 0)
             ShowStatCard.Instance.ShowRandomCards();
     }
 }

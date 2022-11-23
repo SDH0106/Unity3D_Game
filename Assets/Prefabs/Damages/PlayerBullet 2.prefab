@@ -149,5 +149,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5049efe9bf8845d498e2aa71d5937e86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageUI: {fileID: 7694887781048525286, guid: 4e5badd5cf114334eb18a60b47678558, type: 3}
+  weapon: {fileID: 7577098388267529578, guid: cedc7bc35d28ac5418d3797670a41177, type: 3}
   speed: 8

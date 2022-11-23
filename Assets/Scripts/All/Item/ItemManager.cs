@@ -8,6 +8,7 @@ using static WeaponInfo;
 
 public class ItemManager : Singleton<ItemManager>
 {
+    [SerializeField] public DamageUI[] damageUI;
     [SerializeField] public Transform coinStorage;
 
     [HideInInspector] public PassiveInfo passiveCardItem;

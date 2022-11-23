@@ -39,7 +39,7 @@ public class Coin : Singleton<Coin>
         {
             if (distance <= 2)
             {
-                speed = Character.Instance.speed + 1;
+                speed = GameManager.Instance.speed + 1;
                 isGet = true;
             }
             else
@@ -53,6 +53,7 @@ public class Coin : Singleton<Coin>
     {
         if(other.gameObject.CompareTag("Character"))
         {
+            SoundManager.Instance.PlayES("Coin");
             GameManager.Instance.money += coinValue;
             DestroyPool();
         }

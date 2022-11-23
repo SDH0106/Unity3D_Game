@@ -32,8 +32,14 @@ public class WeaponCardUI : MonoBehaviour
 
     Color initPriceColor;
 
+    GameManager gameManager;
+    ItemManager itemManager;
+
     private void Start()
     {
+        gameManager = GameManager.Instance;
+        itemManager = ItemManager.Instance;
+
         initPriceColor = weaponPrice.color;
         LockImageColor = lockBackImage.color;
         LockTextColor = lockText.color;
@@ -44,10 +50,10 @@ public class WeaponCardUI : MonoBehaviour
     {
         lockImage.gameObject.SetActive(isLock);
 
-        if (GameManager.Instance.money < selectedWeapon.WeaponPrice)
+        if (gameManager.money < selectedWeapon.WeaponPrice)
             weaponPrice.color = Color.red;
 
-        else if (GameManager.Instance.money >= selectedWeapon.WeaponPrice)
+        else if (gameManager.money >= selectedWeapon.WeaponPrice)
             weaponPrice.color = initPriceColor;
     }
 
@@ -64,11 +70,12 @@ public class WeaponCardUI : MonoBehaviour
 
     public void Click()
     {
-        if (ItemManager.Instance.foolCount < 5 && GameManager.Instance.money >= selectedWeapon.WeaponPrice)
+        if (itemManager.foolCount < 5 && gameManager.money >= selectedWeapon.WeaponPrice)
         {
-            GameManager.Instance.money -= selectedWeapon.WeaponPrice;
-            ItemManager.Instance.foolCount++;
-            ItemManager.Instance.GetWeaponInfo(selectedWeapon);
+            SoundManager.Instance.PlayES("WeaponSelect");
+            gameManager.money -= selectedWeapon.WeaponPrice;
+            itemManager.foolCount++;
+            itemManager.GetWeaponInfo(selectedWeapon);
             Destroy(gameObject);
             isLock = false;
             Character.Instance.Equip();

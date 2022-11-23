@@ -14,33 +14,32 @@ public class Monster : MonoBehaviour
     [SerializeField] Transform printPos;
 
     [Header("Stat")]
-    [SerializeField] int hp = 10;
+    [SerializeField] float hp = 10;
     [SerializeField] float speed;
     [SerializeField] int attackDamage;
 
     bool isRun, isDead, isAttacked = false;
 
-    int maxHp;
+    float maxHp;
     int exp = 2;
 
     Vector3 initScale;
 
+    Collider myCollider;
+
     private IObjectPool<Monster> managedPool;
 
-    //PrintDamage printDamage;
     DropCoin coin;
 
     public int AttackDamage => attackDamage;
-    public int Hp => hp;
-    public bool IsDead => isDead;
 
     void Start()
     {
         maxHp = hp;
         initScale = transform.localScale;
         anim = GetComponent<Animator>();
-        //printDamage = GetComponent<PrintDamage>();
         coin = GetComponent<DropCoin>();
+        myCollider = GetComponent<Collider>();
     }
 
     void Update()
@@ -63,7 +62,6 @@ public class Monster : MonoBehaviour
         coll.enabled = true;
         transform.localScale = initScale;
         rend.color = Color.white;
-        hp = maxHp;
     }
 
     void Move()
@@ -101,11 +99,17 @@ public class Monster : MonoBehaviour
         rend.color = Color.white;
     }
 
-    public void OnDamaged()
+    private void OnTriggerStay(Collider other)
     {
-        //printDamage.PrintDamageText(printPos.position);
+        if (other.CompareTag("Character"))
+        {
+            Character.Instance.OnDamaged(myCollider);
+        }
+    }
 
-        hp -= Character.Instance.AttackDamage;
+    public void OnDamaged(float damage)
+    {
+        hp -= damage;
 
         StartCoroutine(MonsterColorBlink());
     }

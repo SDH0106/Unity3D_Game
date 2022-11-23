@@ -19,18 +19,21 @@ public class ShowStatCard : Singleton<ShowStatCard>
 
     [HideInInspector] public bool isSelected;
 
+    GameManager gameManager;
+
     private void Start()
     {
+        gameManager = GameManager.Instance;
         initPriceColor = rerollMoneyText.color;
         rerollMoney = -3;
         Character.Instance.gameObject.SetActive(false);
 
         statCards = new GameObject[4];
-        statInfo = new Stat[GameManager.Instance.gameObject.GetComponent<StatCardInfo>().statInfos.Length];
+        statInfo = new Stat[gameManager.gameObject.GetComponent<StatCardInfo>().statInfos.Length];
 
         for (int i = 0; i < statInfo.Length; i++)
         {
-            statInfo[i] = GameManager.Instance.gameObject.GetComponent<StatCardInfo>().statInfos[i];
+            statInfo[i] = gameManager.gameObject.GetComponent<StatCardInfo>().statInfos[i];
         }
 
         numArray = new int[statInfo.Length];
@@ -40,10 +43,10 @@ public class ShowStatCard : Singleton<ShowStatCard>
 
     private void Update()
     {
-        if (GameManager.Instance.money < -rerollMoney)
+        if (gameManager.money < -rerollMoney)
             rerollMoneyText.color = Color.red;
 
-        else if (GameManager.Instance.money >= -rerollMoney)
+        else if (gameManager.money >= -rerollMoney)
             rerollMoneyText.color = initPriceColor;
 
         rerollMoneyText.text = rerollMoney.ToString();
@@ -61,12 +64,14 @@ public class ShowStatCard : Singleton<ShowStatCard>
                     Destroy(gameObject.transform.GetChild(i).GetChild(0).gameObject);
             }
         }
-        ShowStatCard.Instance.isSelected = false;
+        isSelected = false;
     }
 
     public void Reroll()
     {
-        if (GameManager.Instance.money >= -rerollMoney)
+        SoundManager.Instance.PlayES("SelectButton");
+
+        if (gameManager.money >= -rerollMoney)
         {
             for (int i = 1; i < this.transform.childCount - 2; i++)
             {
@@ -74,7 +79,7 @@ public class ShowStatCard : Singleton<ShowStatCard>
                 Destroy(this.transform.GetChild(i).GetChild(0).gameObject);
             }
 
-            GameManager.Instance.money += rerollMoney;
+            gameManager.money += rerollMoney;
             rerollMoney -= 2;
 
             ShowRandomCards();
@@ -102,8 +107,8 @@ public class ShowStatCard : Singleton<ShowStatCard>
         {
             StatCardUI card = statCard.GetComponent<StatCardUI>();
             card.selectedCard = statInfo[numArray[i - 1]];
-            GameObject instance = Instantiate(statCard, this.transform.GetChild(i).transform);
-            statCards[i - 1] = instance;
+            GameObject instant = Instantiate(statCard, this.transform.GetChild(i).transform);
+            statCards[i - 1] = instant;
             statCards[i - 1].transform.SetParent(this.transform.GetChild(i));
         }
     }

@@ -15,21 +15,17 @@ public class Character : Singleton<Character>
     [SerializeField] Slider playerHpBar;
 
     [Header("Stat")]
-    [SerializeField] public float speed;
     [SerializeField] float invincibleTime;
-    [SerializeField] int attackDamage = 1;
 
     [Header("Weapon")]
     [SerializeField] public GameObject[] weapons;
-    [SerializeField] Transform[] weaponPoses;
+    [SerializeField] public Transform[] weaponPoses;
 
     bool isRun, isAttacked, isDead = false;
 
-    public int AttackDamage => attackDamage;
-
     [HideInInspector] public float totalDamage;
 
-    Weapon[] equipWeapon = new Weapon[6];
+    GameManager gameManager;
 
     protected override void Awake()
     {
@@ -42,13 +38,15 @@ public class Character : Singleton<Character>
         anim = GetComponent<Animator>();
 
         transform.position = Vector3.zero;
+
+        gameManager = GameManager.Instance;
     }
 
     void Update()
     {
-        playerHpBar.value = 1 - ((float)GameManager.Instance.hp / (float)GameManager.Instance.maxHp);
+        playerHpBar.value = 1 - (gameManager.hp / gameManager.maxHp);
 
-        if (GameManager.Instance.currentScene == "Game")
+        if (gameManager.currentScene == "Game")
         {
             if (isDead == false)
             {
@@ -56,6 +54,7 @@ public class Character : Singleton<Character>
             }
 
             anim.SetBool("isRun", isRun);
+            OnDead();
         }
     }
 
@@ -67,7 +66,6 @@ public class Character : Singleton<Character>
         {
             if (weapons[i].GetComponent<Weapon>().weaponInfo.WeaponName == ItemManager.Instance.storedWeapon[count].WeaponName)
             {
-                Debug.Log(weapons[i].GetComponent<Weapon>().weaponInfo.WeaponName);
                 Instantiate(weapons[i], weaponPoses[count]);
             }
         }
@@ -83,7 +81,7 @@ public class Character : Singleton<Character>
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 
-        transform.position += new Vector3(x, 0, z) * speed * Time.deltaTime;
+        transform.position += new Vector3(x, 0, z) * gameManager.speed * Time.deltaTime;
 
         if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
         {
@@ -121,18 +119,23 @@ public class Character : Singleton<Character>
         }
     }
 
-    void Ondamaged(Collider other)
+     public void OnDamaged(Collider other)
     {
         if (other.tag == "Monster" && isAttacked == false)
         {
-            GameManager.Instance.hp -= other.gameObject.GetComponent<Monster>().AttackDamage;
+            gameManager.hp -= (int)(other.gameObject.GetComponent<Monster>().AttackDamage / gameManager.defence);
             StartCoroutine(OnInvincible());
         }
+    }
 
-        if (GameManager.Instance.hp <= 0)
+    void OnDead()
+    {
+        if (gameManager.hp <= 0)
         {
-            GameManager.Instance.hp = 0;
+            SoundManager.Instance.PlayES("Death");
+            gameManager.hp = 0;
             isDead = true;
+            isAttacked = true;
 
             anim.SetBool("isDead", isDead);
 
@@ -146,12 +149,7 @@ public class Character : Singleton<Character>
         }
     }
 
-    private void OnTriggerStay(Collider other)
-    {
-        Ondamaged(other);
-    }
-
-    IEnumerator OnInvincible()
+    public IEnumerator OnInvincible()
     {
         anim.SetTrigger("isAttacked");
         isAttacked = true;
@@ -161,5 +159,4 @@ public class Character : Singleton<Character>
         rend.color = Color.white;
         isAttacked = false;
     }
-
 }

@@ -143,7 +143,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 0.05
+  spritePixelsToUnits: 15
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -906,8 +906,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Wall 2: -7326330765846486680
-      Water 5: 3841374895227053369
+      Wall 3: 2398694386035660818
       Water 7: 4243927867023665446
       Soil 2: -6833445872158455971
       Wall 1: -7369953315678303813
@@ -937,7 +936,7 @@ TextureImporter:
       Water 2: -7956832237065629149
       Soil 8: -8955812619259062215
       Gress 7: 9045646400296435942
-      Wall 3: 2398694386035660818
+      Wall 2: -7326330765846486680
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -20,6 +20,7 @@ public class WeaponInfo : ScriptableObject
     [SerializeField] float magicDamage;
     [SerializeField] float weaponRange;
     [SerializeField] int weaponPrice;
+    [SerializeField] AudioClip weaponSound;
 
     public Sprite ItemSprite => itemSprite;
     public string WeaponName => weaponName;
@@ -28,4 +29,5 @@ public class WeaponInfo : ScriptableObject
     public float MagicDamage => magicDamage;
     public float WeaponRange => weaponRange;
     public int WeaponPrice => weaponPrice;
+    public AudioClip WeaponSound => weaponSound;
 }

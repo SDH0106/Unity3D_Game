@@ -19,3 +19,4 @@ MonoBehaviour:
   magicDamage: 10
   weaponRange: 10
   weaponPrice: 25
+  weaponSound: {fileID: 8300000, guid: 0241bfc3127aac144b93a08bf787b64c, type: 3}

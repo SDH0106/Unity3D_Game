@@ -29,8 +29,13 @@ public class GameSceneUI : MonoBehaviour
     [SerializeField] GameObject clearText;
     [SerializeField] GameObject statCardParent;
 
+    GameManager gameManager;
+
     private void Start()
     {
+        SoundManager.Instance.PlayBGM(1);
+        SoundManager.Instance.Volume(0.3f);
+        gameManager = GameManager.Instance;
         clearText.SetActive(false);
         statCardParent.gameObject.SetActive(false);
     }
@@ -43,7 +48,7 @@ public class GameSceneUI : MonoBehaviour
         RoundUI();
         TimeUI();
 
-        if (GameManager.Instance.currentGameTime <= 0)
+        if (gameManager.currentGameTime <= 0)
         {
             clearText.SetActive(true);
         }
@@ -52,44 +57,44 @@ public class GameSceneUI : MonoBehaviour
         {
             clearText.SetActive(false);
 
-            if (GameManager.Instance.levelUpCount <= 0)
-                GameManager.Instance.ToShopScene();
+            if (gameManager.levelUpCount <= 0)
+                gameManager.ToShopScene();
 
-            if (GameManager.Instance.levelUpCount > 0)
+            if (gameManager.levelUpCount > 0)
                 statCardParent.gameObject.SetActive(true);
         }
     }
 
     void HpUI()
     {
-        maxHpText.text = GameManager.Instance.maxHp.ToString();
-        hpText.text = GameManager.Instance.hp.ToString();
-        hpBar.value = 1 - (GameManager.Instance.hp / GameManager.Instance.maxHp);
+        maxHpText.text = gameManager.maxHp.ToString();
+        hpText.text = gameManager.hp.ToString();
+        hpBar.value = 1 - (gameManager.hp / gameManager.maxHp);
     }
 
     void ExpUI()
     {
-        expBar.value = 1- (GameManager.Instance.exp / GameManager.Instance.maxExp);
+        expBar.value = 1- (gameManager.exp / gameManager.maxExp);
     }
 
     void CoinUI()
     {
-        coinText.text = GameManager.Instance.money.ToString();
+        coinText.text = gameManager.money.ToString();
     }
 
     void RoundUI()
     {
-        roundText.text = GameManager.Instance.round.ToString();
+        roundText.text = gameManager.round.ToString();
     }
 
     void TimeUI()
     {
-        if (GameManager.Instance.currentGameTime >= 1)
-            timeText.text = ((int)GameManager.Instance.currentGameTime).ToString();
+        if (gameManager.currentGameTime >= 1)
+            timeText.text = ((int)gameManager.currentGameTime).ToString();
         else
         {
             timeText.color = Color.red;
-            timeText.text = (GameManager.Instance.currentGameTime).ToString("F2");
+            timeText.text = (gameManager.currentGameTime).ToString("F2");
         }
     }
 }

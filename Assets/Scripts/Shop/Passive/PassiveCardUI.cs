@@ -34,8 +34,11 @@ public class PassiveCardUI : MonoBehaviour
 
     Color initPriceColor;
 
+    GameManager gameManager;
+
     private void Start()
     {
+        gameManager = GameManager.Instance;
         initPriceColor = itemPrice.color;
 
         LockImageColor = lockBackImage.color;
@@ -50,10 +53,10 @@ public class PassiveCardUI : MonoBehaviour
     {
         lockImage.gameObject.SetActive(isLock);
 
-        if (GameManager.Instance.money < selectedPassive.ItemPrice)
+        if (gameManager.money < selectedPassive.ItemPrice)
             itemPrice.color = Color.red;
 
-        else if (GameManager.Instance.money >= selectedPassive.ItemPrice)
+        else if (gameManager.money >= selectedPassive.ItemPrice)
             itemPrice.color = initPriceColor;
 
     }
@@ -113,16 +116,18 @@ public class PassiveCardUI : MonoBehaviour
 
     public void Click()
     {
-        if (GameManager.Instance.money >= selectedPassive.ItemPrice)
+        SoundManager.Instance.PlayES("SelectButton");
+
+        if (gameManager.money >= selectedPassive.ItemPrice)
         {
             ItemManager.Instance.GetPassiveInfo(selectedPassive);
             Destroy(gameObject);
             isLock = false;
-            GameManager.Instance.money -= selectedPassive.ItemPrice;
+            gameManager.money -= selectedPassive.ItemPrice;
 
             for (int i = 0; i < stats.Length; i++)
             {
-                GameManager.Instance.stats[i] += stats[i];
+                gameManager.stats[i] += stats[i];
             }
         }
     }

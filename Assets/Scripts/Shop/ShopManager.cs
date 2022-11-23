@@ -52,11 +52,17 @@ public class ShopManager : Singleton<ShopManager>
 
     [HideInInspector] public int WeaponSlotCount = 0;
 
+    GameManager gameManager;
+    ItemManager itemManager;
+
     private void Start()
     {
+        SoundManager.Instance.PlayBGM(2);
+        gameManager = GameManager.Instance;
+        itemManager = ItemManager.Instance;
         initPriceColor = rerollMoneyText.color;
         sellUI.gameObject.SetActive(false);
-        rerollMoney = -GameManager.Instance.round;
+        rerollMoney = -gameManager.round;
         bools = new bool[4];
         num = new int[4];
         cards = new GameObject[4];
@@ -67,17 +73,17 @@ public class ShopManager : Singleton<ShopManager>
 
     private void Update()
     {
-        round.text = GameManager.Instance.round.ToString();
-        money.text = GameManager.Instance.money.ToString();
+        round.text = gameManager.round.ToString();
+        money.text = gameManager.money.ToString();
         rerollMoneyText.text = rerollMoney.ToString();
 
-        if (GameManager.Instance.money < -rerollMoney)
+        if (gameManager.money < -rerollMoney)
             rerollMoneyText.color = Color.red;
 
-        else if (GameManager.Instance.money >= -rerollMoney)
+        else if (gameManager.money >= -rerollMoney)
             rerollMoneyText.color = initPriceColor;
 
-        if (GameManager.Instance.currentScene == "Shop")
+        if (gameManager.currentScene == "Shop")
         {
             gameObject.SetActive(true);
             SettingStatText();
@@ -88,7 +94,7 @@ public class ShopManager : Singleton<ShopManager>
             Refill();
         }
 
-        else if (GameManager.Instance.currentScene == "Game")
+        else if (gameManager.currentScene == "Game")
         {
             gameObject.SetActive(false);
             rerollMoney = 0;
@@ -97,26 +103,26 @@ public class ShopManager : Singleton<ShopManager>
 
     void SettingStatText()
     {
-        maxHp.text = GameManager.Instance.maxHp.ToString();
-        reHp.text = GameManager.Instance.recoverHp.ToString();
-        apHp.text = GameManager.Instance.absorbHp.ToString();
-        def.text = GameManager.Instance.defence.ToString();
-        wAtk.text = GameManager.Instance.physicDamage.ToString();
-        eAtk.text = GameManager.Instance.elementDamage.ToString();
-        aSpd.text = GameManager.Instance.attackSpeed.ToString();
-        spd.text = GameManager.Instance.speed.ToString();
-        ran.text = GameManager.Instance.range.ToString();
-        luk.text = GameManager.Instance.luck.ToString();
+        maxHp.text = gameManager.maxHp.ToString();
+        reHp.text = gameManager.recoverHp.ToString();
+        apHp.text = gameManager.absorbHp.ToString();
+        def.text = gameManager.defence.ToString();
+        wAtk.text = gameManager.physicDamage.ToString();
+        eAtk.text = gameManager.elementDamage.ToString();
+        aSpd.text = gameManager.attackSpeed.ToString();
+        spd.text = gameManager.speed.ToString();
+        ran.text = gameManager.range.ToString();
+        luk.text = gameManager.luck.ToString();
     }
 
     public void ToGameScene()
     {
-        GameManager.Instance.currentScene = "Game";
+        gameManager.currentScene = "Game";
         SceneManager.LoadScene("Game");
         Character.Instance.transform.position = Vector3.zero;
-        GameManager.Instance.round++;
-        rerollMoney = -GameManager.Instance.round;
-        GameManager.Instance.hp = GameManager.Instance.maxHp;
+        gameManager.round++;
+        rerollMoney = -gameManager.round;
+        gameManager.hp = gameManager.maxHp;
     }
 
     void ImageAlphaChange(int i, int a, Image image)
@@ -157,7 +163,9 @@ public class ShopManager : Singleton<ShopManager>
 
     public void Reroll()
     {
-        if (GameManager.Instance.money >= -rerollMoney)
+        SoundManager.Instance.PlayES("SelectButton");
+
+        if (gameManager.money >= -rerollMoney)
         {
             for (int i = 0; i < cardsParent.childCount; i++)
             {
@@ -168,9 +176,9 @@ public class ShopManager : Singleton<ShopManager>
                 }
             }
 
-            GameManager.Instance.money += rerollMoney;
+            gameManager.money += rerollMoney;
 
-            rerollMoney -= Mathf.CeilToInt((float)(GameManager.Instance.round) / 2);
+            rerollMoney -= Mathf.CeilToInt((float)(gameManager.round) / 2);
 
             CardSlot();
         }
@@ -206,19 +214,19 @@ public class ShopManager : Singleton<ShopManager>
                 if (rand >= 80)
                 {
                     GetRandomWeaponCard();
-                    GameObject instance = Instantiate(weaponCardUI, cardsParent.GetChild(i).transform);
-                    cards[i] = instance;
+                    GameObject instant = Instantiate(weaponCardUI, cardsParent.GetChild(i).transform);
+                    cards[i] = instant;
                     num[i] = 0;
-                    instance.transform.SetParent(cardsParent.GetChild(i));
+                    instant.transform.SetParent(cardsParent.GetChild(i));
                 }
 
                 else if (rand < 80)
                 {
                     GetRandomPassiveCard();
-                    GameObject instance = Instantiate(passiveCardUI, cardsParent.GetChild(i).transform);
-                    cards[i] = instance;
+                    GameObject instant = Instantiate(passiveCardUI, cardsParent.GetChild(i).transform);
+                    cards[i] = instant;
                     num[i] = 1;
-                    instance.transform.SetParent(cardsParent.GetChild(i));
+                    instant.transform.SetParent(cardsParent.GetChild(i));
                 }
             }
 
@@ -236,14 +244,14 @@ public class ShopManager : Singleton<ShopManager>
             TextAlphaChange(i, 0, text);
             TextAlphaChange(i, 0, x);
 
-            if (ItemManager.Instance.storedWeapon[i] != null)
+            if (itemManager.storedWeapon[i] != null)
             {
                 ImageAlphaChange(i, 1, image);
-                image.sprite = ItemManager.Instance.storedWeapon[i].ItemSprite;
+                image.sprite = itemManager.storedWeapon[i].ItemSprite;
             }
 
 
-            else if (ItemManager.Instance.storedWeapon[i] == null)
+            else if (itemManager.storedWeapon[i] == null)
             {
                 ImageAlphaChange(i, 0, image);
             }
@@ -258,10 +266,10 @@ public class ShopManager : Singleton<ShopManager>
             Text text = passiveSlots[i].transform.GetChild(3).GetComponent<Text>();
             Text x = passiveSlots[i].transform.GetChild(4).GetComponent<Text>();
 
-            if (ItemManager.Instance.storedPassive[i] != null)
+            if (itemManager.storedPassive[i] != null)
             {
                 ImageAlphaChange(i, 1, image);
-                image.sprite = ItemManager.Instance.storedPassive[i].ItemSprite;
+                image.sprite = itemManager.storedPassive[i].ItemSprite;
                 text.text = passiveItem[i].ToString();
 
                 if (passiveItem[i] > 1)
@@ -277,7 +285,7 @@ public class ShopManager : Singleton<ShopManager>
                 }
             }
 
-            else if (ItemManager.Instance.storedPassive[i] == null)
+            else if (itemManager.storedPassive[i] == null)
             {
                 ImageAlphaChange(i, 0, image);
                 TextAlphaChange(i, 0, text);

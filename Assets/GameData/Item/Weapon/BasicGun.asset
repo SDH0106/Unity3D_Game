@@ -16,6 +16,7 @@ MonoBehaviour:
   weaponName: "\uCD1D"
   type: 0
   weaponDamage: 1
-  elementDamage: 0
+  magicDamage: 0
   weaponRange: 10
   weaponPrice: 15
+  weaponSound: {fileID: 8300000, guid: f4482d2a369392142ab84b0be1285ae3, type: 3}

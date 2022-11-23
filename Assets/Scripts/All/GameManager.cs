@@ -30,12 +30,12 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector] public float totalDamage;
     [HideInInspector] public float physicDamage;
     [HideInInspector] public float elementDamage;
-    [HideInInspector] public float defence;
-    [HideInInspector] public float absorbHp;
-    [HideInInspector] public float recoverHp;
-    [HideInInspector] public float attackSpeed;
-    [HideInInspector] public float speed;
-    [HideInInspector] public float range;
+    [SerializeField] public float recoverHp;
+    [SerializeField] public float absorbHp;
+    [SerializeField] public float defence;
+    [SerializeField] public float attackSpeed;
+    [SerializeField] public float speed;
+    [SerializeField] public float range;
     [HideInInspector] public float luck;
 
     [HideInInspector] public float currentGameTime;
@@ -48,6 +48,8 @@ public class GameManager : Singleton<GameManager>
 
     [HideInInspector] public float[] stats;
 
+    float recoverTime = 3;
+
     protected override void Awake()
     {
         base.Awake();
@@ -57,12 +59,42 @@ public class GameManager : Singleton<GameManager>
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
+        InitStatSetting();
+        InitArray();
+
+        currentGameTime = gameTime;
+        hp = maxHp;
+
+    }
+
+    void InitStatSetting()
+    {
+        level = 1;
+        levelUpCount = 0;
+        maxHp = 10;
+        maxExp = 10;
+        recoverHp = 0;
+        absorbHp = 0;
+        defence = 1;
+        attackSpeed = 1;
+        speed = 2;
+        range = 1;
+        luck = 0;
+    }
+
+    void InitArray()
+    {
         stats = new float[10];
         stats[0] = maxHp;
-        level = 1;
-        //levelUpCount = 0;
-        hp = maxHp;
-        currentGameTime = gameTime;
+        stats[1] = recoverHp;
+        stats[2] = absorbHp;
+        stats[3] = defence;
+        stats[4] = physicDamage;
+        stats[5] = elementDamage;
+        stats[6] = attackSpeed;
+        stats[7] = speed;
+        stats[8] = luck;
+        stats[9] = range;
     }
 
     private void Update()
@@ -72,10 +104,16 @@ public class GameManager : Singleton<GameManager>
 
         if (exp ==  maxExp)
         {
+            SoundManager.Instance.PlayES("LevelUp");
             level++;
             levelUpCount++;
             maxExp *= level;
             exp = 0;
+        }
+
+        if (hp > maxHp)
+        {
+            hp = maxHp;
         }
 
         StatArray();
@@ -110,7 +148,22 @@ public class GameManager : Singleton<GameManager>
             if (money <= 0)
                 money = 0;
 
+            AutoRecoverHp();
+
             //Cursor.SetCursor(aimCursor, new Vector2(aimCursor.width / 2, aimCursor.height / 2), CursorMode.Auto);
+        }
+    }
+
+    void AutoRecoverHp()
+    {
+        if (recoverHp > 0 && hp != maxHp)
+        {
+            recoverTime -= Time.deltaTime;
+            if(recoverTime <= 0)
+            {
+                recoverTime = 3;
+                hp += recoverHp;
+            }
         }
     }
 
