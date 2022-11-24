@@ -1128,9 +1128,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   playerHpBar: {fileID: 661988715}
-  speed: 3
   invincibleTime: 2
-  attackDamage: 1
   weapons:
   - {fileID: 4942268788761087581, guid: 941e5330dd1395442b47913c209b6bed, type: 3}
   - {fileID: 8135749844320535992, guid: cedc7bc35d28ac5418d3797670a41177, type: 3}
@@ -1155,7 +1153,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 926263698}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.19, y: 0.18, z: 0}

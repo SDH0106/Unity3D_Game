@@ -6,7 +6,8 @@ using UnityEngine.Pool;
 
 public class MonsterSpawn : MonoBehaviour
 {
-    [SerializeField] GameObject monsterPrefab;
+    [SerializeField] GameObject[] normalMonsterPrefab;
+    [SerializeField] GameObject[] bossMonsterPrefab;
     [SerializeField] Transform storageParent;
     [SerializeField] GameObject spawnImage;
     [SerializeField] int poolCount;
@@ -17,6 +18,9 @@ public class MonsterSpawn : MonoBehaviour
 
     [HideInInspector] public Vector3 spawnPos;
 
+    int[] weightValue;
+    int totalWeight = 0;
+
     private void Awake()
     {
         pool = new ObjectPool<Monster>(CreateMonster, OnGetMonster, OnReleaseMonster, OnDestroyMonster, maxSize: poolCount);
@@ -24,6 +28,13 @@ public class MonsterSpawn : MonoBehaviour
 
     private void Start()
     {
+        weightValue = new int[] { 0, 5 };
+
+        for (int i = 0; i < weightValue.Length; i++)
+        {
+            totalWeight += weightValue[i];
+        }
+
         InvokeRepeating("RendSpawnImage", 1f, spawnDelay);
     }
 
@@ -69,11 +80,32 @@ public class MonsterSpawn : MonoBehaviour
 
     private Monster CreateMonster()
     {
-        Monster monster = Instantiate(monsterPrefab).GetComponent<Monster>();
+        int num = RandomMonster();
+        Monster monster = Instantiate(normalMonsterPrefab[num]).GetComponent<Monster>();
+        monster.stat = MonsterInfo.Instance.monsterInfos[num];
         monster.SetManagedPool(pool);
         monster.transform.SetParent(storageParent);
 
         return monster;
+    }
+
+    int RandomMonster()
+    {
+        int rand = Random.Range(0, totalWeight);
+        int spawnNum = 0;
+        int total = 0;
+
+        for (int i = 0; i < normalMonsterPrefab.Length; i++)
+        { 
+            total += weightValue[i];
+            if (rand < total)
+            {
+                spawnNum = i;
+                break;
+            }
+        }
+
+        return spawnNum;
     }
 
     private void OnGetMonster(Monster monster)

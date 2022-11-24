@@ -1952,7 +1952,9 @@ GameObject:
   - component: {fileID: 936130854}
   - component: {fileID: 936130856}
   - component: {fileID: 936130857}
+  - component: {fileID: 936130859}
   - component: {fileID: 936130858}
+  - component: {fileID: 936130860}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2091,6 +2093,68 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0e5a951dea014e4d891718c65e70039, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &936130859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 936130853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 114f76aa60398694990d8a63f2642863, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monsterInfos:
+  - monsterName: "\uC6B0\uB4DC \uB9C8\uC2A4\uD06C"
+    monsterMaxHp: 10
+    monsterDamage: 1
+    monsterSpeed: 1
+    monsterDefence: 0
+    monsterExp: 1
+    monsterCoin: 0
+  - monsterName: "\uD53C\uADF8"
+    monsterMaxHp: 15
+    monsterDamage: 2
+    monsterSpeed: 1
+    monsterDefence: 0
+    monsterExp: 2
+    monsterCoin: 0
+  - monsterName: "\uBAAC\uC2A4\uD130"
+    monsterMaxHp: 0
+    monsterDamage: 0
+    monsterSpeed: 0
+    monsterDefence: 0
+    monsterExp: 0
+    monsterCoin: 0
+  - monsterName: "\uBAAC\uC2A4\uD130"
+    monsterMaxHp: 0
+    monsterDamage: 0
+    monsterSpeed: 0
+    monsterDefence: 0
+    monsterExp: 0
+    monsterCoin: 0
+  - monsterName: "\uBAAC\uC2A4\uD130"
+    monsterMaxHp: 0
+    monsterDamage: 0
+    monsterSpeed: 0
+    monsterDefence: 0
+    monsterExp: 0
+    monsterCoin: 0
+--- !u!114 &936130860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 936130853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d110b962e6b44cd47982cdaca64ad1ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinPrefab: {fileID: 23589428460927000, guid: 12f6e59d9af8090449131818b277bd10, type: 3}
+  poolCount: 10
 --- !u!1 &994559795
 GameObject:
   m_ObjectHideFlags: 0

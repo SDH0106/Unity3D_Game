@@ -123,7 +123,7 @@ public class Character : Singleton<Character>
     {
         if (other.tag == "Monster" && isAttacked == false)
         {
-            gameManager.hp -= (int)(other.gameObject.GetComponent<Monster>().AttackDamage / gameManager.defence);
+            gameManager.hp -= (int)(other.gameObject.GetComponent<Monster>().stat.monsterDamage / gameManager.defence);
             StartCoroutine(OnInvincible());
         }
     }

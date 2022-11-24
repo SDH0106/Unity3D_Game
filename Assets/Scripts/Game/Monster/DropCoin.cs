@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class DropCoin : MonoBehaviour
+public class DropCoin : Singleton<DropCoin>
 {
     [SerializeField] GameObject coinPrefab;
     [SerializeField] int poolCount;
 
     private IObjectPool<Coin> objectPool;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         objectPool = new ObjectPool<Coin>(CreatePool, OnGetPool, OnReleasePool, OnDestroyPool, maxSize: poolCount);
     }
 

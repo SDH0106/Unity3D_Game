@@ -8,38 +8,29 @@ using static UnityEditor.PlayerSettings;
 
 public class Monster : MonoBehaviour
 {
-    [SerializeField] SpriteRenderer rend;
-    [SerializeField] Animator anim;
-    [SerializeField] Collider coll;
-    [SerializeField] Transform printPos;
+    [HideInInspector] public SpriteRenderer rend;
+    [HideInInspector] public Animator anim;
+    [HideInInspector] public Collider coll;
 
-    [Header("Stat")]
-    [SerializeField] float hp = 10;
-    [SerializeField] float speed;
-    [SerializeField] int attackDamage;
+    [HideInInspector] public bool isWalk, isDead, isAttacked, isAttack = false;
 
-    bool isRun, isDead, isAttacked = false;
+    public float hp;
 
-    float maxHp;
-    int exp = 2;
-
-    Vector3 initScale;
-
-    Collider myCollider;
+    [HideInInspector] public Vector3 initScale;
+    [HideInInspector] public MonsterStat stat;
 
     private IObjectPool<Monster> managedPool;
 
-    DropCoin coin;
-
-    public int AttackDamage => attackDamage;
+    public float speed;
 
     void Start()
     {
-        maxHp = hp;
+        hp = stat.monsterMaxHp;
         initScale = transform.localScale;
+        speed = stat.monsterSpeed;
+        rend = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
-        coin = GetComponent<DropCoin>();
-        myCollider = GetComponent<Collider>();
+        coll = GetComponent<Collider>();
     }
 
     void Update()
@@ -47,7 +38,7 @@ public class Monster : MonoBehaviour
         if (isDead == false)
         {
             Move();
-            anim.SetBool("isRun", isRun);
+            anim.SetBool("isWalk", isWalk);
         }
 
         OnDead();
@@ -55,26 +46,28 @@ public class Monster : MonoBehaviour
 
     void SetInitMonster()
     {
-        hp = maxHp;
-        isRun = false;
+        hp = stat.monsterMaxHp;
+        speed = stat.monsterSpeed;
+        isWalk = false;
         isDead = false;
         isAttacked = false;
+        isAttack = false;
         coll.enabled = true;
         transform.localScale = initScale;
         rend.color = Color.white;
     }
 
-    void Move()
+    public void Move()
     {
         Vector3 characterPos = Character.Instance.transform.position;
         Vector3 dir = characterPos - transform.position;
 
         transform.position = Vector3.MoveTowards(transform.position, characterPos, speed * Time.deltaTime);
 
-        isRun = true;
+        isWalk = true;
 
-        if (dir == Vector3.zero)
-            isRun = false;
+        if (dir == Vector3.zero || speed == 0)
+            isWalk = false;
 
         if (dir.x < 0)
             rend.flipX = true;
@@ -99,33 +92,32 @@ public class Monster : MonoBehaviour
         rend.color = Color.white;
     }
 
-    private void OnTriggerStay(Collider other)
+    public void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Character"))
         {
-            Character.Instance.OnDamaged(myCollider);
+            Character.Instance.OnDamaged(coll);
         }
     }
 
     public void OnDamaged(float damage)
     {
-        hp -= damage;
+        hp -= (damage - stat.monsterDefence);
 
         StartCoroutine(MonsterColorBlink());
     }
 
-    void OnDead()
+    public void OnDead()
     {
         if (hp <= 0 || GameManager.Instance.currentGameTime <= 0)
         {
             Vector3 deadPos = transform.position;
 
-            anim.SetBool("isAttacked", isAttacked);
-
-            isAttacked = true;
-            isDead = true;
-
             coll.enabled = false;
+            isDead = true;
+            isAttacked = true;
+
+            anim.SetBool("isAttacked", isAttacked);
 
             if (anim.GetCurrentAnimatorStateInfo(0).IsName("Die"))
             {
@@ -133,8 +125,8 @@ public class Monster : MonoBehaviour
                 {
                     if (hp <= 0)
                     {
-                        coin.Drop(deadPos);
-                        GameManager.Instance.exp += exp;
+                        DropCoin.Instance.Drop(deadPos);
+                        GameManager.Instance.exp += stat.monsterExp;
                     }
                     DestroyMonster();
                 }
