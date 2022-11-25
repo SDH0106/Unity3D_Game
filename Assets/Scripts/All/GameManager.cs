@@ -24,7 +24,7 @@ public class GameManager : Singleton<GameManager>
 
 
     [Header("CharacterData")]
-    int level;
+    public int level;
     [SerializeField] public float maxHp;
     [SerializeField] public float maxExp;
     [HideInInspector] public float totalDamage;
@@ -53,6 +53,8 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector] public bool isPause = false;
     [HideInInspector] public bool isClear = false;
 
+    int beforeLevel;
+
     protected override void Awake()
     {
         base.Awake();
@@ -61,6 +63,7 @@ public class GameManager : Singleton<GameManager>
 
     private void Start()
     {
+        beforeLevel = level;
         DontDestroyOnLoad(gameObject);
         //InitStatSetting();
         InitArray();
@@ -111,9 +114,13 @@ public class GameManager : Singleton<GameManager>
         {
             SoundManager.Instance.PlayES("LevelUp");
             level++;
-            levelUpCount++;
             maxExp *= level;
             exp = 0;
+        }
+
+        if(level != beforeLevel)
+        {
+            levelUpCount = level - beforeLevel;
         }
 
         if (hp > maxHp)
@@ -121,6 +128,7 @@ public class GameManager : Singleton<GameManager>
             hp = maxHp;
         }
 
+        ClearRound();
         StatArray();
         OnGameScene();
     }
@@ -189,5 +197,6 @@ public class GameManager : Singleton<GameManager>
         SceneManager.LoadScene(currentScene);
         currentGameTime = gameTime;
         isClear = false;
+        beforeLevel = level;
     }
 }

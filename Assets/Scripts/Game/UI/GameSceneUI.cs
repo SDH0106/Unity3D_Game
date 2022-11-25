@@ -14,6 +14,7 @@ public class GameSceneUI : MonoBehaviour
     [SerializeField] Slider hpBar;
 
     [Header("EXP")]
+    [SerializeField] Text lvText;
     [SerializeField] Slider expBar;
 
     [Header("COIN")]
@@ -93,6 +94,7 @@ public class GameSceneUI : MonoBehaviour
 
     void ExpUI()
     {
+        lvText.text = gameManager.level.ToString();
         expBar.value = 1- (gameManager.exp / gameManager.maxExp);
     }
 

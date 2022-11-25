@@ -1978,11 +1978,12 @@ MonoBehaviour:
   aimCursor: {fileID: 2800000, guid: b8e78032f8af0954784d1fe9e5a09187, type: 3}
   bulletStorage: {fileID: 1005871281}
   damageStorage: {fileID: 1692643827}
-  gameTime: 100
+  gameTime: 1
   money: 1000
-  round: 1
+  round: 10
   exp: 0
   hp: 0
+  level: 1
   maxHp: 50
   maxExp: 10
   totalDamage: 0
@@ -2000,6 +2001,7 @@ MonoBehaviour:
   levelUpCount: 0
   stats: []
   isPause: 0
+  isClear: 0
 --- !u!4 &936130855
 Transform:
   m_ObjectHideFlags: 0
@@ -2127,12 +2129,12 @@ MonoBehaviour:
     monsterDamage: 3
     monsterSpeed: 0
     monsterDefence: 0
-    monsterExp: 0
+    monsterExp: 10
     monsterCoin: 0
-  - monsterName: "\uBAAC\uC2A4\uD130"
-    monsterMaxHp: 0
-    monsterDamage: 0
-    monsterSpeed: 0
+  - monsterName: "\uACE0\uC2A4\uD2B8"
+    monsterMaxHp: 1
+    monsterDamage: 10
+    monsterSpeed: 1
     monsterDefence: 0
     monsterExp: 0
     monsterCoin: 0

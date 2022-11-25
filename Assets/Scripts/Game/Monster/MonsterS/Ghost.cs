@@ -29,7 +29,7 @@ public class Ghost : Monster
         {
             if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
             {
-                gameObject.SetActive(false);
+                coll.enabled = false;
                 Appear();
             }
         }
@@ -43,11 +43,35 @@ public class Ghost : Monster
             }
         }
 
-        OnDead();
-
-        if (isDead == true)
-            GameManager.Instance.isClear = true;
+        BossDead();
     }
+
+    public void BossDead()
+    {
+        if (hp <= 0 || GameManager.Instance.hp <= 0)
+        {
+            coll.enabled = false;
+            isDead = true;
+            isAttacked = true;
+
+            anim.SetBool("isAttacked", isAttacked);
+
+            if (anim.GetCurrentAnimatorStateInfo(0).IsName("Die"))
+            {
+                if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+                {
+                    if (hp <= 0)
+                    {
+                        GameManager.Instance.isClear = true;
+                        GameManager.Instance.money += 100;
+                        GameManager.Instance.level++;
+                    }
+                    Destroy(gameObject);
+                }
+            }
+        }
+    }
+
 
     void Disappear()
     {
@@ -58,7 +82,5 @@ public class Ghost : Monster
     {
         state = 2;
         transform.position = Character.Instance.transform.position;
-        gameObject.SetActive(true);
-        coll.enabled = false;
     }
 }

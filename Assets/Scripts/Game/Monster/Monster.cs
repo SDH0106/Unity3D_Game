@@ -23,11 +23,8 @@ public class Monster : MonoBehaviour
 
     public float speed;
 
-    GameManager gameManager;
-
     void Start()
     {
-        gameManager = GameManager.Instance;
         hp = stat.monsterMaxHp;
         initScale = transform.localScale;
         speed = stat.monsterSpeed;
@@ -112,10 +109,8 @@ public class Monster : MonoBehaviour
 
     public void OnDead()
     {
-        if (hp <= 0 || gameManager.isClear || gameManager.hp <= 0)
+        if (hp <= 0 || GameManager.Instance.isClear || GameManager.Instance.hp <= 0)
         {
-            Vector3 deadPos = transform.position;
-
             coll.enabled = false;
             isDead = true;
             isAttacked = true;
@@ -128,8 +123,8 @@ public class Monster : MonoBehaviour
                 {
                     if (hp <= 0)
                     {
-                        DropCoin.Instance.Drop(deadPos);
-                        gameManager.exp += stat.monsterExp;
+                        DropCoin.Instance.Drop(transform.position);
+                        GameManager.Instance.exp += stat.monsterExp;
                     }
                     DestroyMonster();
                 }
