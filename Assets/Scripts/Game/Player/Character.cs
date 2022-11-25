@@ -126,13 +126,18 @@ public class Character : Singleton<Character>
             gameManager.hp -= (int)(other.gameObject.GetComponent<Monster>().stat.monsterDamage / gameManager.defence);
             StartCoroutine(OnInvincible());
         }
+
+        else if(other.CompareTag("monsterBullet") && isAttacked == false)
+        {
+            gameManager.hp -= (int)(other.gameObject.GetComponent<MonsterBullet>().bulletDamage / gameManager.defence);
+            StartCoroutine(OnInvincible());
+        }
     }
 
     void OnDead()
     {
         if (gameManager.hp <= 0)
         {
-            SoundManager.Instance.PlayES("Death");
             gameManager.hp = 0;
             isDead = true;
             isAttacked = true;
@@ -143,7 +148,7 @@ public class Character : Singleton<Character>
             {
                 if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
                 {
-                    Time.timeScale = 0;
+                    gameObject.SetActive(false);
                 }
             }
         }

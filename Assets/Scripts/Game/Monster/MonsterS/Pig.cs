@@ -12,7 +12,7 @@ public class Pig : Monster
     {
         hp = stat.monsterMaxHp;
         initScale = transform.localScale;
-        base.speed = stat.monsterSpeed;
+        speed = stat.monsterSpeed;
         rend = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         coll = GetComponent<Collider>();

@@ -50,6 +50,9 @@ public class GameManager : Singleton<GameManager>
 
     float recoverTime = 3;
 
+    [HideInInspector] public bool isPause = false;
+    [HideInInspector] public bool isClear = false;
+
     protected override void Awake()
     {
         base.Awake();
@@ -59,12 +62,14 @@ public class GameManager : Singleton<GameManager>
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
-        InitStatSetting();
+        //InitStatSetting();
         InitArray();
 
         currentGameTime = gameTime;
         hp = maxHp;
 
+        isPause = false;
+        Time.timeScale = 1;
     }
 
     void InitStatSetting()
@@ -120,6 +125,15 @@ public class GameManager : Singleton<GameManager>
         OnGameScene();
     }
 
+    void ClearRound()
+    {
+        if (round % 10 != 0)
+        {
+            if (currentGameTime == 0)
+                isClear = true;
+        }
+    }
+
     void StatArray()
     {
         maxHp = stats[0];
@@ -136,7 +150,7 @@ public class GameManager : Singleton<GameManager>
 
     void OnGameScene()
     {
-        if (currentScene == "Game")
+        if (currentScene == "Game" && hp > 0)
         {
             currentGameTime -= Time.deltaTime;
 
@@ -174,5 +188,6 @@ public class GameManager : Singleton<GameManager>
         currentScene = "Shop";
         SceneManager.LoadScene(currentScene);
         currentGameTime = gameTime;
+        isClear = false;
     }
 }

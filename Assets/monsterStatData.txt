@@ -19,19 +19,19 @@
             "monsterCoin": 0.0
         },
         {
-            "monsterName": "몬스터",
-            "monsterMaxHp": 0.0,
-            "monsterDamage": 0.0,
+            "monsterName": "네펜데스",
+            "monsterMaxHp": 10.0,
+            "monsterDamage": 3.0,
             "monsterSpeed": 0.0,
             "monsterDefence": 0.0,
             "monsterExp": 0.0,
             "monsterCoin": 0.0
         },
         {
-            "monsterName": "몬스터",
-            "monsterMaxHp": 0.0,
-            "monsterDamage": 0.0,
-            "monsterSpeed": 0.0,
+            "monsterName": "고스트",
+            "monsterMaxHp": 300.0,
+            "monsterDamage": 10.0,
+            "monsterSpeed": 1.0,
             "monsterDefence": 0.0,
             "monsterExp": 0.0,
             "monsterCoin": 0.0

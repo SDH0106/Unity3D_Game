@@ -16,8 +16,11 @@ public class Coin : Singleton<Coin>
 
     Vector3 characterPos;
 
+    GameManager gameManager;
+
     private void Start()
     {
+        gameManager = GameManager.Instance;
         RandomValue();
     }
 
@@ -25,7 +28,7 @@ public class Coin : Singleton<Coin>
     {
         MoveCoin();
 
-        if (GameManager.Instance.currentGameTime <= 0)
+        if (gameManager.isClear)
             DestroyPool();
     }
 
@@ -39,7 +42,7 @@ public class Coin : Singleton<Coin>
         {
             if (distance <= 2)
             {
-                speed = GameManager.Instance.speed + 1;
+                speed = gameManager.speed + 1;
                 isGet = true;
             }
             else
@@ -54,7 +57,7 @@ public class Coin : Singleton<Coin>
         if(other.gameObject.CompareTag("Character"))
         {
             SoundManager.Instance.PlayES("Coin");
-            GameManager.Instance.money += coinValue;
+            gameManager.money += coinValue;
             DestroyPool();
         }
     }

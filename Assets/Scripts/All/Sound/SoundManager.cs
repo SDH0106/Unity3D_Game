@@ -10,7 +10,7 @@ public class SoundManager : Singleton<SoundManager>
     [SerializeField] AudioClip[] effects;
     [SerializeField] AudioClip[] bgms;
     [SerializeField] int poolCount = 10;
-    AudioSource audioSource;
+    public AudioSource audioSource;
 
     private IObjectPool<EffectSound> objectPool;
 

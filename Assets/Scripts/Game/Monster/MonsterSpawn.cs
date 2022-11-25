@@ -10,6 +10,7 @@ public class MonsterSpawn : MonoBehaviour
     [SerializeField] GameObject[] bossMonsterPrefab;
     [SerializeField] Transform storageParent;
     [SerializeField] GameObject spawnImage;
+    [SerializeField] GameObject bossSpawnImage;
     [SerializeField] int poolCount;
     [SerializeField] int spawnRange;
     [SerializeField] float spawnDelay;
@@ -21,6 +22,8 @@ public class MonsterSpawn : MonoBehaviour
     int[] weightValue;
     int totalWeight = 0;
 
+    GameManager gameManager;
+
     private void Awake()
     {
         pool = new ObjectPool<Monster>(CreateMonster, OnGetMonster, OnReleaseMonster, OnDestroyMonster, maxSize: poolCount);
@@ -28,7 +31,8 @@ public class MonsterSpawn : MonoBehaviour
 
     private void Start()
     {
-        weightValue = new int[] { 0, 5 };
+        gameManager = GameManager.Instance;
+        weightValue = new int[] { 0, 0, 5 };
 
         for (int i = 0; i < weightValue.Length; i++)
         {
@@ -36,11 +40,14 @@ public class MonsterSpawn : MonoBehaviour
         }
 
         InvokeRepeating("RendSpawnImage", 1f, spawnDelay);
+
+        if (gameManager.round%10 == 0)
+            RendBossSpawnImage();
     }
 
     private void Update()
     {
-        if (GameManager.Instance.currentGameTime <= 0)
+        if (gameManager.isClear || gameManager.hp <= 0)
         {
             CancelInvoke("RendSpawnImage");
         }
@@ -78,6 +85,13 @@ public class MonsterSpawn : MonoBehaviour
         Invoke("SpawnMonster", 1f);
     }
 
+    void RendBossSpawnImage()
+    {
+        GameObject spawnMark = Instantiate(bossSpawnImage, new Vector3(3,0,3), bossSpawnImage.transform.rotation);
+        Destroy(spawnMark, 2f);
+        StartCoroutine(CreateBossMonster());
+    }
+
     private Monster CreateMonster()
     {
         int num = RandomMonster();
@@ -87,6 +101,16 @@ public class MonsterSpawn : MonoBehaviour
         monster.transform.SetParent(storageParent);
 
         return monster;
+    }
+
+    private IEnumerator CreateBossMonster()
+    {
+        yield return new WaitForSeconds(2);
+
+        GameObject inst = Instantiate(bossMonsterPrefab[0]);
+        Monster monster = inst.GetComponent<Monster>();
+        monster.stat = MonsterInfo.Instance.monsterInfos[normalMonsterPrefab.Length];
+        monster.transform.position = new Vector3(3, 0, 3);
     }
 
     int RandomMonster()

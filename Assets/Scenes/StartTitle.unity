@@ -348,14 +348,15 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 38ac936070f6c1146837cf5507ac05a0, type: 3}
   - {fileID: 8300000, guid: f06e2c24002a24e4aace1edb796f5067, type: 3}
   - {fileID: 8300000, guid: 65482616e025bad4a985c14f19a9995e, type: 3}
-  - {fileID: 8300000, guid: 38ae0b40e1775404683a1c2aa7d9fd61, type: 3}
   - {fileID: 8300000, guid: b760741aada265c4aa11113d492466d9, type: 3}
   - {fileID: 8300000, guid: 943ec57891d76e64b8a52c15bf7f5ddc, type: 3}
   bgms:
   - {fileID: 8300000, guid: c72e1fc0e90cf814d83171c9ec4d5e98, type: 3}
   - {fileID: 8300000, guid: e75df5cd9c1f944ce99e585d983fa119, type: 3}
   - {fileID: 8300000, guid: d2ae8a2cc13fc1e429e67465f3c3bd11, type: 3}
+  - {fileID: 8300000, guid: 38ae0b40e1775404683a1c2aa7d9fd61, type: 3}
   poolCount: 10
+  audioSource: {fileID: 0}
 --- !u!1 &198781541
 GameObject:
   m_ObjectHideFlags: 0
@@ -465,7 +466,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.92013705, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -616,7 +617,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_UiScaleMode: 1
-  m_ReferencePixelsPerUnit: 100
+  m_ReferencePixelsPerUnit: 10
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
@@ -1178,7 +1179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.92013705, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1977,7 +1978,7 @@ MonoBehaviour:
   aimCursor: {fileID: 2800000, guid: b8e78032f8af0954784d1fe9e5a09187, type: 3}
   bulletStorage: {fileID: 1005871281}
   damageStorage: {fileID: 1692643827}
-  gameTime: 20
+  gameTime: 100
   money: 1000
   round: 1
   exp: 0
@@ -1998,6 +1999,7 @@ MonoBehaviour:
   currentScene: 
   levelUpCount: 0
   stats: []
+  isPause: 0
 --- !u!4 &936130855
 Transform:
   m_ObjectHideFlags: 0
@@ -2120,9 +2122,9 @@ MonoBehaviour:
     monsterDefence: 0
     monsterExp: 2
     monsterCoin: 0
-  - monsterName: "\uBAAC\uC2A4\uD130"
-    monsterMaxHp: 0
-    monsterDamage: 0
+  - monsterName: "\uB124\uD39C\uB370\uC2A4"
+    monsterMaxHp: 10
+    monsterDamage: 3
     monsterSpeed: 0
     monsterDefence: 0
     monsterExp: 0
@@ -2638,7 +2640,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.92013705, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

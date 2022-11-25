@@ -35,7 +35,7 @@ public class WeaponControl : Weapon
 
     void Update()
     {
-        if (gameManager.currentScene == "Game")
+        if (gameManager.currentScene == "Game" && !gameManager.isPause)
         {
             mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mouse.y = transform.position.y;
