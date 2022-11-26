@@ -22,9 +22,13 @@ public class ItemManager : Singleton<ItemManager>
     [HideInInspector] public bool isFool = false;
     [HideInInspector] public int foolCount;
 
+    public Grade[] weaponGrade;
+
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
+
+        weaponGrade = new Grade[6];
 
         foolCount = 0;
         weaponCount = 0;

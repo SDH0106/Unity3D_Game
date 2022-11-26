@@ -13,17 +13,19 @@ public class Weapon : MonoBehaviour
     [HideInInspector] public float damage;
     [HideInInspector] public int count;
 
+    public int grade;
+
     public void WeaponSetting()
     { 
         if(weaponInfo.Type == WEAPON_TYPE.½ºÅÂÇÁ)
         {
-            damage = weaponInfo.MagicDamage + GameManager.Instance.elementDamage;
+            damage = weaponInfo.MagicDamage * grade+ GameManager.Instance.elementDamage;
             damageUI.damageText.color = Color.cyan;
         }
 
         else
         {
-            damage = weaponInfo.WeaponDamage + GameManager.Instance.physicDamage;
+            damage = weaponInfo.WeaponDamage *grade + GameManager.Instance.physicDamage;
             damageUI.damageText.color = new Color(1, 0.4871f, 0);
         }
 

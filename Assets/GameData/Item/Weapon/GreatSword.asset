@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b702467f022889c4a8cc17c04fb53eb2, type: 3}
   m_Name: GreatSword
   m_EditorClassIdentifier: 
+  weaponGrade: 0
   itemSprite: {fileID: 21300000, guid: b58f02bb4dc948746aeb4c220999473a, type: 3}
   weaponName: "\uC131\uAC80"
   type: 2
   weaponDamage: 10
   magicDamage: 0
   weaponRange: 4
-  weaponPrice: 30
+  weaponPrice: 100
   weaponSound: {fileID: 8300000, guid: bd6d89ea1bf965e41be2784f4c51d3dc, type: 3}

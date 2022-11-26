@@ -40,7 +40,6 @@ public class GameSceneUI : MonoBehaviour
     private void Start()
     {
         SoundManager.Instance.PlayBGM(1);
-        SoundManager.Instance.Volume(0.3f);
         gameManager = GameManager.Instance;
         clearText.SetActive(false);
         gameOverUI.SetActive(false);

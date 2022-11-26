@@ -2,6 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Grade
+{
+    일반,
+    희귀,
+    전설,
+    신화,
+    gradeCount,
+}
 
 [CreateAssetMenu(fileName = "new Weapon", menuName = "GameData/Item/Weapon")]
 public class WeaponInfo : ScriptableObject
@@ -12,6 +20,8 @@ public class WeaponInfo : ScriptableObject
         스태프,
         검,
     }
+
+    public Grade weaponGrade;
 
     [SerializeField] Sprite itemSprite;
     [SerializeField] string weaponName;

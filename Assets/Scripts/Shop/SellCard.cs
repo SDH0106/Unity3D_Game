@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class SellCard : MonoBehaviour
 {
     [Header("Info")]
+    [SerializeField] Image cardBack;
+    [SerializeField] Image cardBackLine;
     [SerializeField] Image itemSprite;
     [SerializeField] Text weaponName;
     [SerializeField] Text type;
@@ -13,6 +15,7 @@ public class SellCard : MonoBehaviour
     [SerializeField] Text elementDamage;
     [SerializeField] Text weaponRange;
     [SerializeField] Text weaponPrice;
+    [SerializeField] Text weaponGrade;
 
     [HideInInspector] public WeaponInfo selectedWeapon;
 
@@ -26,10 +29,49 @@ public class SellCard : MonoBehaviour
         itemSprite.sprite = selectedWeapon.ItemSprite;
         weaponName.text = selectedWeapon.WeaponName.ToString();
         type.text = selectedWeapon.Type.ToString();
-        weaponDamage.text = selectedWeapon.WeaponDamage.ToString();
-        elementDamage.text = selectedWeapon.MagicDamage.ToString();
+        weaponDamage.text = (selectedWeapon.WeaponDamage * (int)(ItemManager.Instance.weaponGrade[num] + 1)).ToString();
+        elementDamage.text = (selectedWeapon.MagicDamage * (int)(ItemManager.Instance.weaponGrade[num] + 1)).ToString();
         weaponRange.text = selectedWeapon.WeaponRange.ToString();
-        weaponPrice.text = selectedWeapon.WeaponPrice.ToString();
+        weaponPrice.text = (selectedWeapon.WeaponPrice * (int)(ItemManager.Instance.weaponGrade[num] + 1)).ToString();
+        weaponGrade.text = selectedWeapon.weaponGrade.ToString();
+    }
+
+    public void CardImage(int num)
+    {
+        selectedNum = num;
+        selectedWeapon = ItemManager.Instance.storedWeapon[num];
+
+        if (ItemManager.Instance.weaponGrade[num] == Grade.¿œπ›)
+        {
+            cardBack.color = new Color(0.142f, 0.142f, 0.142f, 0.8235f);
+            cardBackLine.color = Color.black;
+            weaponName.color = Color.white;
+            weaponGrade.color = Color.white;
+        }
+
+        else if (ItemManager.Instance.weaponGrade[num] == Grade.»Ò±Õ)
+        {
+            cardBack.color = new Color(0, 0.77f, 1, 0.8235f);
+            cardBackLine.color = Color.blue;
+            weaponName.color = Color.blue;
+            weaponGrade.color = Color.blue;
+        }
+
+        else if (ItemManager.Instance.weaponGrade[num] == Grade.¿¸º≥)
+        {
+            cardBack.color = new Color(0.5f, 0.2f, 0.4f, 0.8235f);
+            cardBackLine.color = new Color(0.5f, 0, 0.5f, 1);
+            weaponName.color = new Color(0.5f, 0, 0.5f, 1);
+            weaponGrade.color = new Color(0.5f, 0, 0.5f, 1);
+        }
+
+        else if (ItemManager.Instance.weaponGrade[num] == Grade.Ω≈»≠)
+        {
+            cardBack.color = new Color(1, 0.31f, 0.31f, 0.8235f);
+            cardBackLine.color = Color.red;
+            weaponName.color = Color.red;
+            weaponGrade.color = Color.red;
+        }
     }
 
     public void SellWeapon()
@@ -37,8 +79,9 @@ public class SellCard : MonoBehaviour
         if (ItemManager.Instance.foolCount > 0)
         {
             selectedWeapon = ItemManager.Instance.storedWeapon[selectedNum];
-            GameManager.Instance.money += selectedWeapon.WeaponPrice;
+            GameManager.Instance.money += (selectedWeapon.WeaponPrice * (int)(ItemManager.Instance.weaponGrade[selectedNum] + 1));
             ItemManager.Instance.storedWeapon[selectedNum] = null;
+            ItemManager.Instance.weaponGrade[selectedNum] = Grade.¿œπ›;
             ItemManager.Instance.foolCount--;
             Character.Instance.ReleaseEquip(selectedNum);
         }

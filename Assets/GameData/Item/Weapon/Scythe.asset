@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b702467f022889c4a8cc17c04fb53eb2, type: 3}
   m_Name: Scythe
   m_EditorClassIdentifier: 
+  weaponGrade: 0
   itemSprite: {fileID: 21300000, guid: 74bb343429ea2cc4b83e564920ea104b, type: 3}
   weaponName: "\uB0AB"
   type: 2
-  weaponDamage: 7
+  weaponDamage: 8
   magicDamage: 0
   weaponRange: 6
-  weaponPrice: 25
+  weaponPrice: 70
   weaponSound: {fileID: 8300000, guid: bd6d89ea1bf965e41be2784f4c51d3dc, type: 3}

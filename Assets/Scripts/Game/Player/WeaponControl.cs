@@ -28,6 +28,7 @@ public class WeaponControl : Weapon
 
     private void Start()
     {
+        grade = (int)(weaponInfo.weaponGrade) + 1;
         gameManager = GameManager.Instance;
         count = ItemManager.Instance.weaponCount;
         damageUI = ItemManager.Instance.damageUI[count];

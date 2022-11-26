@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
@@ -55,8 +54,11 @@ public class ShopManager : Singleton<ShopManager>
     GameManager gameManager;
     ItemManager itemManager;
 
+    float[] weightValue;
+
     private void Start()
     {
+        weightValue = new float[4];
         SoundManager.Instance.PlayBGM(2);
         gameManager = GameManager.Instance;
         itemManager = ItemManager.Instance;
@@ -294,11 +296,54 @@ public class ShopManager : Singleton<ShopManager>
         }
     }
 
+    Grade RandomGrade()
+    {
+        float totalWeight = 0;
+
+        weightValue[0] = 150 - gameManager.round * 5;
+        weightValue[1] = 10 + gameManager.round * 20;
+        weightValue[2] = gameManager.round;
+        weightValue[3] = gameManager.round / 2;
+
+        for (int i = 0; i < weightValue.Length; i++)
+        {
+            totalWeight += weightValue[i];
+        }
+
+        float rand = Random.Range(0, totalWeight);
+        float gradeNum = 0;
+        float total = 0;
+
+        for (int i = 0; i < weightValue.Length; i++)
+        {
+            total += weightValue[i];
+            if (rand < total)
+            {
+                gradeNum = i;
+                break;
+            }
+        }
+
+        Grade grade;
+
+        if(gradeNum == 1)
+            grade = Grade.Èñ±Í;
+        else if (gradeNum == 2)
+            grade = Grade.Àü¼³;
+        else if (gradeNum == 3)
+            grade = Grade.½ÅÈ­;
+        else
+            grade = Grade.ÀÏ¹Ý;
+
+        return grade;
+    }
+
     void GetRandomWeaponCard()
     {
         WeaponCardUI weaponCard = weaponCardUI.GetComponent<WeaponCardUI>();
         int rand = UnityEngine.Random.Range(0, weaponCardUI.GetComponent<WeaponCardUI>().weaponInfo.Length);
-        weaponCard.selectedWeapon= weaponCard.weaponInfo[rand];
+        weaponCard.selectedWeapon.weaponGrade = RandomGrade();
+        weaponCard.selectedWeapon = weaponCard.weaponInfo[rand];
     }
 
     void GetRandomPassiveCard()

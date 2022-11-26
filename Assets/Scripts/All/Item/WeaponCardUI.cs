@@ -11,10 +11,14 @@ public class WeaponCardUI : MonoBehaviour
 {
     [SerializeField] public WeaponInfo[] weaponInfo;
 
+    [Header("Lock")]
     [SerializeField] Image lockBackImage;
     [SerializeField] Image lockImage;
     [SerializeField] Text lockText;
 
+    [Header("Card")]
+    [SerializeField] Image cardBack;
+    [SerializeField] Image cardBackLine;
     [SerializeField] Image itemSprite;
     [SerializeField] Text weaponName;
     [SerializeField] Text type;
@@ -22,6 +26,7 @@ public class WeaponCardUI : MonoBehaviour
     [SerializeField] Text elementDamage;
     [SerializeField] Text weaponRange;
     [SerializeField] Text weaponPrice;
+    [SerializeField] Text weaponGrade;
 
     Color LockImageColor;
     Color LockTextColor;
@@ -44,6 +49,7 @@ public class WeaponCardUI : MonoBehaviour
         LockImageColor = lockBackImage.color;
         LockTextColor = lockText.color;
         Setting();
+        CardImage();
     }
 
     private void Update()
@@ -62,10 +68,46 @@ public class WeaponCardUI : MonoBehaviour
         itemSprite.sprite = selectedWeapon.ItemSprite;
         weaponName.text = selectedWeapon.WeaponName.ToString();
         type.text = selectedWeapon.Type.ToString();
-        weaponDamage.text = selectedWeapon.WeaponDamage.ToString();
-        elementDamage.text = selectedWeapon.MagicDamage.ToString();
+        weaponDamage.text = (selectedWeapon.WeaponDamage * (int)(selectedWeapon.weaponGrade + 1)).ToString();
+        elementDamage.text = (selectedWeapon.MagicDamage * (int)(selectedWeapon.weaponGrade + 1)).ToString();
         weaponRange.text = selectedWeapon.WeaponRange.ToString();
-        weaponPrice.text = selectedWeapon.WeaponPrice.ToString();
+        weaponPrice.text = (selectedWeapon.WeaponPrice * (int)(selectedWeapon.weaponGrade + 1)).ToString();
+        weaponGrade.text = selectedWeapon.weaponGrade.ToString();
+    }
+
+    void CardImage()
+    {
+        if (selectedWeapon.weaponGrade == Grade.¿œπ›)
+        {
+            cardBack.color = new Color(0.142f, 0.142f, 0.142f, 0.8235f);
+            cardBackLine.color = Color.black;
+            weaponName.color = Color.white;
+            weaponGrade.color = Color.white;
+        }
+
+        else if(selectedWeapon.weaponGrade == Grade.»Ò±Õ)
+        {
+            cardBack.color = new Color(0, 0.77f, 1, 0.8235f);
+            cardBackLine.color = Color.blue;
+            weaponName.color = Color.blue;
+            weaponGrade.color = Color.blue;
+        }
+
+        else if (selectedWeapon.weaponGrade == Grade.¿¸º≥)
+        {
+            cardBack.color = new Color(0.5f, 0.2f, 0.4f, 0.8235f);
+            cardBackLine.color = new Color(0.5f, 0, 0.5f, 1);
+            weaponName.color = new Color(0.5f, 0, 0.5f, 1);
+            weaponGrade.color = new Color(0.5f, 0, 0.5f, 1);
+        }
+
+        else if (selectedWeapon.weaponGrade == Grade.Ω≈»≠)
+        {
+            cardBack.color = new Color(1, 0.31f, 0.31f, 0.8235f);
+            cardBackLine.color = Color.red;
+            weaponName.color = Color.red;
+            weaponGrade.color = Color.red;
+        }
     }
 
     public void Click()
@@ -73,9 +115,10 @@ public class WeaponCardUI : MonoBehaviour
         if (itemManager.foolCount < 5 && gameManager.money >= selectedWeapon.WeaponPrice)
         {
             SoundManager.Instance.PlayES("WeaponSelect");
-            gameManager.money -= selectedWeapon.WeaponPrice;
+            gameManager.money -= (selectedWeapon.WeaponPrice * (int)(selectedWeapon.weaponGrade + 1));
             itemManager.foolCount++;
             itemManager.GetWeaponInfo(selectedWeapon);
+            ItemManager.Instance.weaponGrade[ItemManager.Instance.weaponCount] = selectedWeapon.weaponGrade;
             Destroy(gameObject);
             isLock = false;
             Character.Instance.Equip();

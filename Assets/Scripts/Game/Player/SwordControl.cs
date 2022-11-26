@@ -21,6 +21,7 @@ public class SwordControl : Weapon
 
     private void Start()
     {
+        grade = (int)(weaponInfo.weaponGrade) + 1;
         anim = GetComponent<Animator>();
         gameManager = GameManager.Instance;
         character = Character.Instance;
@@ -37,10 +38,10 @@ public class SwordControl : Weapon
 
             dir = mouse - transform.position;
             LookMousePosition();
+            Attack();
         }
 
         WeaponSetting();
-        Attack();
     }
 
     void LookMousePosition()
