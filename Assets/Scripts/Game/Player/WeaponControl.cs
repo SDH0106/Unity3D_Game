@@ -28,7 +28,6 @@ public class WeaponControl : Weapon
 
     private void Start()
     {
-        grade = (int)(weaponInfo.weaponGrade) + 1;
         gameManager = GameManager.Instance;
         count = ItemManager.Instance.weaponCount;
         damageUI = ItemManager.Instance.damageUI[count];
@@ -36,6 +35,8 @@ public class WeaponControl : Weapon
 
     void Update()
     {
+        grade = (int)(ItemManager.Instance.weaponGrade[count] + 1);
+
         if (gameManager.currentScene == "Game" && !gameManager.isPause)
         {
             mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);

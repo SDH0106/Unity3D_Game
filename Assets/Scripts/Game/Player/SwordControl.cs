@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -21,7 +22,6 @@ public class SwordControl : Weapon
 
     private void Start()
     {
-        grade = (int)(weaponInfo.weaponGrade) + 1;
         anim = GetComponent<Animator>();
         gameManager = GameManager.Instance;
         character = Character.Instance;
@@ -31,6 +31,8 @@ public class SwordControl : Weapon
 
     void Update()
     {
+        grade = (int)(ItemManager.Instance.weaponGrade[count] + 1);
+
         if (gameManager.currentScene == "Game" && !gameManager.isPause)
         {
             mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);

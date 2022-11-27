@@ -45,7 +45,7 @@ public class WeaponSlot : MonoBehaviour
         }
     }
 
-    public void ShowSellUI()
+    public void ShowClickUI()
     {
         selectedWeapon = ItemManager.Instance.storedWeapon[slotNum];
 
@@ -54,8 +54,8 @@ public class WeaponSlot : MonoBehaviour
             ShopManager.Instance.backgroundImage.SetActive(true);
             sellUI.gameObject.SetActive(true);
             sellUI.transform.position = Input.mousePosition;
-            sellUI.GetComponent<SellCard>().Setting(slotNum);
-            sellUI.GetComponent<SellCard>().CardImage(slotNum);
+            sellUI.GetComponent<CardClick>().Setting(slotNum);
+            sellUI.GetComponent<CardClick>().CardImage(slotNum);
         }
     }
 }

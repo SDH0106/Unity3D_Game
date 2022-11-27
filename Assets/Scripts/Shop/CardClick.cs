@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SellCard : MonoBehaviour
+public class CardClick : MonoBehaviour
 {
     [Header("Info")]
     [SerializeField] Image cardBack;
@@ -84,6 +84,27 @@ public class SellCard : MonoBehaviour
             ItemManager.Instance.weaponGrade[selectedNum] = Grade.일반;
             ItemManager.Instance.foolCount--;
             Character.Instance.ReleaseEquip(selectedNum);
+        }
+    }
+    public void CombineWeapon()
+    {
+        for (int i = 0; i < ItemManager.Instance.storedWeapon.Length; i++)
+        {
+            if (ItemManager.Instance.storedWeapon[i] != null)
+            {
+                if (i != selectedNum && ItemManager.Instance.weaponGrade[selectedNum] != Grade.신화)
+                {
+                    if ((selectedWeapon.WeaponName == ItemManager.Instance.storedWeapon[i].WeaponName) && (ItemManager.Instance.weaponGrade[selectedNum] == ItemManager.Instance.weaponGrade[i]))
+                    {
+                        ItemManager.Instance.weaponGrade[selectedNum]++;
+                        ItemManager.Instance.storedWeapon[i] = null;
+                        ItemManager.Instance.weaponGrade[i] = Grade.일반;
+                        ItemManager.Instance.foolCount--;
+                        Character.Instance.ReleaseEquip(i);
+                        break;
+                    }
+                }
+            }
         }
     }
 }

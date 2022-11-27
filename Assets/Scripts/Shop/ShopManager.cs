@@ -31,7 +31,7 @@ public class ShopManager : Singleton<ShopManager>
     [SerializeField] Transform cardsParent;
     [SerializeField] GameObject weaponCardUI;
     [SerializeField] GameObject passiveCardUI;
-    [SerializeField] GameObject sellUI;
+    [SerializeField] GameObject clickUI;
 
 
     [Header("Slots")]
@@ -63,7 +63,7 @@ public class ShopManager : Singleton<ShopManager>
         gameManager = GameManager.Instance;
         itemManager = ItemManager.Instance;
         initPriceColor = rerollMoneyText.color;
-        sellUI.gameObject.SetActive(false);
+        clickUI.gameObject.SetActive(false);
         rerollMoney = -gameManager.round;
         bools = new bool[4];
         num = new int[4];
@@ -144,7 +144,7 @@ public class ShopManager : Singleton<ShopManager>
     public void CloseUI()
     {
         backgroundImage.SetActive(false);
-        sellUI.gameObject.SetActive(false);
+        clickUI.gameObject.SetActive(false);
     }
 
     void Refill()
