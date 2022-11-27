@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: MonsterBlood
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 3a481bc5b3972b54ab4918d5226622af, type: 3}
+  itemGrade: 1
   itemName: "\uBAAC\uC2A4\uD130\uC758 \uCCB4\uC561"
   hp: 0
   recoverHp: 2
   absorbHp: 3
   defence: 0
-  weaponDamage: 0
+  physicDamage: 0
   elementDamage: 0
   attackSpeed: 0
   speed: 0

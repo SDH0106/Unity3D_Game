@@ -54,11 +54,13 @@ public class ShopManager : Singleton<ShopManager>
     GameManager gameManager;
     ItemManager itemManager;
 
-    float[] weightValue;
+    float[] weightWeaponValue;
+    float[] weightPassiveValue;
 
     private void Start()
     {
-        weightValue = new float[4];
+        weightWeaponValue = new float[4];
+        weightPassiveValue = new float[4];
         SoundManager.Instance.PlayBGM(2);
         gameManager = GameManager.Instance;
         itemManager = ItemManager.Instance;
@@ -264,6 +266,7 @@ public class ShopManager : Singleton<ShopManager>
     {
         for (int i = 0; i < passiveSlots.Length; i++)
         {
+            Image back = passiveSlots[i].transform.GetChild(0).GetComponent<Image>();
             Image image = passiveSlots[i].transform.GetChild(2).GetComponent<Image>();
             Text text = passiveSlots[i].transform.GetChild(3).GetComponent<Text>();
             Text x = passiveSlots[i].transform.GetChild(4).GetComponent<Text>();
@@ -273,6 +276,26 @@ public class ShopManager : Singleton<ShopManager>
                 ImageAlphaChange(i, 1, image);
                 image.sprite = itemManager.storedPassive[i].ItemSprite;
                 text.text = passiveItem[i].ToString();
+
+                if (itemManager.storedPassive[i].ItemGrade == Grade.ÀÏ¹Ý)
+                {
+                    back.color = new Color(0.53f, 0.53f, 0.53f, 0.8235f);
+                }
+
+                else if (itemManager.storedPassive[i].ItemGrade == Grade.Èñ±Í)
+                {
+                    back.color = new Color(0, 0.77f, 1, 0.8235f);
+                }
+
+                else if (itemManager.storedPassive[i].ItemGrade == Grade.Àü¼³)
+                {
+                    back.color = new Color(0.5f, 0.2f, 0.4f, 0.8235f);
+                }
+
+                else if (itemManager.storedPassive[i].ItemGrade == Grade.½ÅÈ­)
+                {
+                    back.color = new Color(1, 0.31f, 0.31f, 0.8235f);
+                }
 
                 if (passiveItem[i] > 1)
                 {
@@ -289,6 +312,7 @@ public class ShopManager : Singleton<ShopManager>
 
             else if (itemManager.storedPassive[i] == null)
             {
+                back.color = new Color(0.53f, 0.53f, 0.53f, 0.8235f);
                 ImageAlphaChange(i, 0, image);
                 TextAlphaChange(i, 0, text);
                 TextAlphaChange(i, 0, x);
@@ -296,28 +320,28 @@ public class ShopManager : Singleton<ShopManager>
         }
     }
 
-    Grade RandomGrade()
+    Grade RandomWeaponGrade()
     {
         float totalWeight = 0;
 
-        weightValue[0] = 150 - gameManager.round * 5;
-        weightValue[1] = 10 + gameManager.round * 20;
-        weightValue[2] = gameManager.round;
-        weightValue[3] = gameManager.round / 2;
+        weightWeaponValue[0] = 150 - (gameManager.round - 1) * 5;
+        weightWeaponValue[1] = 10 + (gameManager.round - 1) * 20;
+        weightWeaponValue[2] = (gameManager.round - 1);
+        weightWeaponValue[3] = (gameManager.round - 1) / 2;
 
-        for (int i = 0; i < weightValue.Length; i++)
+        for (int i = 0; i < weightWeaponValue.Length; i++)
         {
-            totalWeight += weightValue[i];
+            totalWeight += weightWeaponValue[i];
         }
 
         float rand = Random.Range(0, totalWeight);
         float gradeNum = 0;
         float total = 0;
 
-        for (int i = 0; i < weightValue.Length; i++)
+        for (int i = 0; i < weightWeaponValue.Length; i++)
         {
-            total += weightValue[i];
-            if (rand < total)
+            total += weightWeaponValue[i];
+            if (rand <= total)
             {
                 gradeNum = i;
                 break;
@@ -342,14 +366,40 @@ public class ShopManager : Singleton<ShopManager>
     {
         WeaponCardUI weaponCard = weaponCardUI.GetComponent<WeaponCardUI>();
         int rand = UnityEngine.Random.Range(0, weaponCardUI.GetComponent<WeaponCardUI>().weaponInfo.Length);
-        weaponCard.selectedWeapon.weaponGrade = RandomGrade();
+        weaponCard.selectedWeapon.weaponGrade = RandomWeaponGrade();
         weaponCard.selectedWeapon = weaponCard.weaponInfo[rand];
     }
 
     void GetRandomPassiveCard()
     {
+        float totalWeight = 0;
+
+        weightPassiveValue[0] = 150 - (gameManager.round - 1) * 6;
+        weightPassiveValue[1] = 10 + (gameManager.round - 1) * 20;
+        weightPassiveValue[2] = (gameManager.round - 1);
+        weightPassiveValue[3] = (gameManager.round - 1) / 2;
+
         PassiveCardUI passiveCard = passiveCardUI.GetComponent<PassiveCardUI>();
-        int rand = UnityEngine.Random.Range(0, passiveCardUI.GetComponent<PassiveCardUI>().passiveInfo.Length);
-        passiveCard.selectedPassive= passiveCard.passiveInfo[rand];
+
+        for (int i = 0; i < passiveCardUI.GetComponent<PassiveCardUI>().passiveInfo.Length; i++)
+        {
+            passiveCard.passiveInfo[i].weight = weightPassiveValue[(int)passiveCard.passiveInfo[i].ItemGrade];
+            totalWeight += passiveCard.passiveInfo[i].weight;
+        }
+
+        float rand = Random.Range(0, totalWeight);
+        float total = 0;
+
+        for (int i = 0; i < passiveCardUI.GetComponent<PassiveCardUI>().passiveInfo.Length; i++)
+        {
+            Debug.Log(passiveCard.passiveInfo[i].weight);
+            total += passiveCard.passiveInfo[i].weight;
+
+            if (rand <= total)
+            {
+                passiveCard.selectedPassive = passiveCard.passiveInfo[i];
+                break;
+            }
+        }
     }
 }

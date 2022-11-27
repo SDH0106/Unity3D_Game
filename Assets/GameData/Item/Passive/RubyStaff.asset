@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: RubyStaff
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: a30e9a59a4ffb884489afda27a4945c3, type: 3}
+  itemGrade: 1
   itemName: "\uB8E8\uBE44 \uC2A4\uD0DC\uD504"
   hp: 0
   recoverHp: 0
   absorbHp: 0
   defence: 0
-  weaponDamage: 0
+  physicDamage: 0
   elementDamage: 4
   attackSpeed: 2
   speed: 0

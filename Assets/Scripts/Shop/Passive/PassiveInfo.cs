@@ -7,6 +7,7 @@ using static WeaponInfo;
 public class PassiveInfo : ScriptableObject
 {
     [SerializeField] Sprite itemSprite;
+    [SerializeField] Grade itemGrade;
     [SerializeField] string itemName;
     [SerializeField] float hp;
     [SerializeField] float recoverHp;
@@ -21,7 +22,10 @@ public class PassiveInfo : ScriptableObject
     [SerializeField] int itemPrice;
     [SerializeField] string description;
 
+    public float weight;
+
     public Sprite ItemSprite => itemSprite;
+    public Grade ItemGrade => itemGrade;
     public string ItemName => itemName;
     public float PhysicDamage => physicDamage;
     public float ElementDamage => elementDamage;

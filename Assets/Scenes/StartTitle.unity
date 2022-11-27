@@ -1980,7 +1980,7 @@ MonoBehaviour:
   damageStorage: {fileID: 1692643827}
   gameTime: 0
   money: 100000
-  round: 1
+  round: 19
   exp: 0
   hp: 0
   level: 1

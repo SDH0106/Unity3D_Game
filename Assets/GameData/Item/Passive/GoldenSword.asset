@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: GoldenSword
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 90e99a7fde056a4418b9fe16084adb5c, type: 3}
+  itemGrade: 2
   itemName: "\uD669\uAE08 \uAC80"
   hp: 0
   recoverHp: 0

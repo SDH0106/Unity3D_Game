@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: Bow
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: bbf8638a8a75d9c42b93639213c92c9b, type: 3}
+  itemGrade: 1
   itemName: "\uBA85\uC0AC\uC218\uC758 \uD65C"
   hp: 0
   recoverHp: 0
   absorbHp: 0
   defence: 0
-  weaponDamage: 0
+  physicDamage: 0
   elementDamage: 0
   attackSpeed: 0
   speed: 0

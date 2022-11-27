@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: MasicScroll
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 615ecf391b0ba0b40a9c3882ac5e6afc, type: 3}
+  itemGrade: 1
   itemName: "\uB9C8\uBC95 \uC2A4\uD06C\uB864"
   hp: 0
   recoverHp: 0
   absorbHp: 0
   defence: 0
-  weaponDamage: 0
+  physicDamage: 0
   elementDamage: 3
   attackSpeed: 0
   speed: 0

@@ -9,6 +9,7 @@ public class PassiveCardUI : MonoBehaviour
 {
     [SerializeField] public PassiveInfo[] passiveInfo;
 
+    [Header("Lock")]
     [SerializeField] Image lockBackImage;
     [SerializeField] Image lockImage;
     [SerializeField] Text lockText;
@@ -17,10 +18,14 @@ public class PassiveCardUI : MonoBehaviour
     [SerializeField] GameObject[] descriptPrefabs;
     [SerializeField] Transform decriptParent;
 
+    [Header("Card")]
+    [SerializeField] Image cardBack;
+    [SerializeField] Image cardBackLine;
     [SerializeField] Image itemSprite;
     [SerializeField] Text itemName;
-
     [SerializeField] Text itemPrice;
+    [SerializeField] Text itemGrade;
+
 
     [HideInInspector] public PassiveInfo selectedPassive;
 
@@ -45,6 +50,7 @@ public class PassiveCardUI : MonoBehaviour
         LockTextColor = lockText.color;
 
         Setting();
+        CardImage();
         StatArray();
         DescriptionInfo();
     }
@@ -66,6 +72,42 @@ public class PassiveCardUI : MonoBehaviour
         itemSprite.sprite = selectedPassive.ItemSprite;
         itemName.text = selectedPassive.ItemName;
         itemPrice.text = selectedPassive.ItemPrice.ToString();
+        itemGrade.text = selectedPassive.ItemGrade.ToString();
+    }
+
+    void CardImage()
+    {
+        if (selectedPassive.ItemGrade == Grade.¿œπ›)
+        {
+            cardBack.color = new Color(0.142f, 0.142f, 0.142f, 0.8235f);
+            cardBackLine.color = Color.black;
+            itemName.color = Color.white;
+            itemGrade.color = Color.white;
+        }
+
+        else if (selectedPassive.ItemGrade == Grade.»Ò±Õ)
+        {
+            cardBack.color = new Color(0, 0.77f, 1, 0.8235f);
+            cardBackLine.color = Color.blue;
+            itemName.color = Color.blue;
+            itemGrade.color = Color.blue;
+        }
+
+        else if (selectedPassive.ItemGrade == Grade.¿¸º≥)
+        {
+            cardBack.color = new Color(0.5f, 0.2f, 0.4f, 0.8235f);
+            cardBackLine.color = new Color(0.5f, 0, 0.5f, 1);
+            itemName.color = new Color(0.5f, 0, 0.5f, 1);
+            itemGrade.color = new Color(0.5f, 0, 0.5f, 1);
+        }
+
+        else if (selectedPassive.ItemGrade == Grade.Ω≈»≠)
+        {
+            cardBack.color = new Color(1, 0.31f, 0.31f, 0.8235f);
+            cardBackLine.color = Color.red;
+            itemName.color = Color.red;
+            itemGrade.color = Color.red;
+        }
     }
 
     void StatArray()
