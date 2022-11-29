@@ -262,6 +262,7 @@ MonoBehaviour:
   weaponCount: 0
   isFool: 0
   foolCount: 0
+  weaponGrade: 
 --- !u!1 &344089636
 GameObject:
   m_ObjectHideFlags: 0
@@ -1256,7 +1257,7 @@ Transform:
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: -0, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 5}
-  m_ConstrainProportionsScale: 1
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1607047397}
   - {fileID: 827745786}

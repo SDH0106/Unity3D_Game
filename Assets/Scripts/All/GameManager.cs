@@ -52,6 +52,7 @@ public class GameManager : Singleton<GameManager>
 
     [HideInInspector] public bool isPause = false;
     [HideInInspector] public bool isClear = false;
+    [HideInInspector] public bool isBossDead = false;
 
     int beforeLevel;
 
@@ -128,18 +129,11 @@ public class GameManager : Singleton<GameManager>
             hp = maxHp;
         }
 
-        ClearRound();
+        if (currentGameTime == 0)
+            isClear = true;
+
         StatArray();
         OnGameScene();
-    }
-
-    void ClearRound()
-    {
-        if (round % 10 != 0)
-        {
-            if (currentGameTime == 0)
-                isClear = true;
-        }
     }
 
     void StatArray()

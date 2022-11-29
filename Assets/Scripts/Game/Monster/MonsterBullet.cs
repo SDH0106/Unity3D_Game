@@ -12,6 +12,7 @@ public class MonsterBullet : MonoBehaviour
 
     float angle;
     Vector3 dir;
+
     private void Start()
     {
         coll = GetComponent<Collider>();

@@ -7,6 +7,7 @@ public class Pig : Monster
     bool isRush = false;
     float rushTime = 2f;
     float breakTime = 0f;
+    float distance;
 
     private void Start()
     {
@@ -32,7 +33,7 @@ public class Pig : Monster
 
     void Attack()
     {
-        float distance = Vector3.Magnitude(Character.Instance.transform.position - transform.position);
+        distance = Vector3.Magnitude(Character.Instance.transform.position - transform.position);
         anim.SetBool("isAttack", isAttack);
 
         if (distance <= 3)

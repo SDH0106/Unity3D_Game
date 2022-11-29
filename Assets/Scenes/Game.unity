@@ -2805,7 +2805,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1492117603}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2825,9 +2826,12 @@ MonoBehaviour:
   - {fileID: 2378124750920518384, guid: ebd51a4933ff8d44ea71f53fab99f986, type: 3}
   - {fileID: 8196997286311768358, guid: a9c00237e96fd8f4dbf82bae70b22233, type: 3}
   - {fileID: 8511157677885495436, guid: 19207d061d993a742876a0f8c0146de4, type: 3}
+  - {fileID: 5311847245855685345, guid: 3c5408d2c66f1b04b8c642f84ffbb2c4, type: 3}
   bossMonsterPrefab:
   - {fileID: 1308642240962655303, guid: 3bd77e8a21c514f42bccb4daa2e222e5, type: 3}
+  - {fileID: 8249713724850414469, guid: ab2498f1c00fdb043948707f1ebbba18, type: 3}
   storageParent: {fileID: 1070064765}
+  bosssParent: {fileID: 1492117603}
   spawnImage: {fileID: 995458817036204544, guid: 46c63591fdc1b544a9187fc96944aebc, type: 3}
   bossSpawnImage: {fileID: 2892993388896840969, guid: 2fb3d3cdedbebd24080663a334260a98, type: 3}
   poolCount: 20
@@ -3872,6 +3876,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1471252404}
   m_CullTransparentMesh: 1
+--- !u!1 &1492117602
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1492117603}
+  m_Layer: 0
+  m_Name: bossStorage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1492117603
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1492117602}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1070064765}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1514583265
 GameObject:
   m_ObjectHideFlags: 0

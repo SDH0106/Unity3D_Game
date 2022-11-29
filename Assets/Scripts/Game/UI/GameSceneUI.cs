@@ -57,7 +57,7 @@ public class GameSceneUI : MonoBehaviour
 
         if (gameManager.hp > 0)
         {
-            if (gameManager.isClear)
+            if (gameManager.isClear && gameManager.isBossDead)
             {
                 clearText.SetActive(true);
             }

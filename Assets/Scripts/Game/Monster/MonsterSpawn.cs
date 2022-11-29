@@ -1,14 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Pool;
+using UnityEngine.XR;
 
 public class MonsterSpawn : MonoBehaviour
 {
     [SerializeField] GameObject[] normalMonsterPrefab;
     [SerializeField] GameObject[] bossMonsterPrefab;
     [SerializeField] Transform storageParent;
+    [SerializeField] Transform bosssParent;
     [SerializeField] GameObject spawnImage;
     [SerializeField] GameObject bossSpawnImage;
     [SerializeField] int poolCount;
@@ -32,7 +35,7 @@ public class MonsterSpawn : MonoBehaviour
     private void Start()
     {
         gameManager = GameManager.Instance;
-        weightValue = new int[] { 0, 0, 5 };
+        weightValue = new int[] { 0, 0, 1, 0 };
 
         for (int i = 0; i < weightValue.Length; i++)
         {
@@ -41,8 +44,11 @@ public class MonsterSpawn : MonoBehaviour
 
         InvokeRepeating("RendSpawnImage", 1f, spawnDelay);
 
-        if (gameManager.round%10 == 0)
-            RendBossSpawnImage();
+        if (gameManager.round % 10 == 0)
+        {
+            gameManager.isBossDead = false;
+            RendBossSpawnImage(gameManager.round);
+        }
     }
 
     private void Update()
@@ -51,6 +57,9 @@ public class MonsterSpawn : MonoBehaviour
         {
             CancelInvoke("RendSpawnImage");
         }
+
+        if (bosssParent.transform.childCount == 0)
+            gameManager.isBossDead = true;
     }
 
     void SpawnMonster()
@@ -85,11 +94,26 @@ public class MonsterSpawn : MonoBehaviour
         Invoke("SpawnMonster", 1f);
     }
 
-    void RendBossSpawnImage()
+    void RendBossSpawnImage(int round)
     {
-        GameObject spawnMark = Instantiate(bossSpawnImage, new Vector3(3,0,3), bossSpawnImage.transform.rotation);
-        Destroy(spawnMark, 2f);
-        StartCoroutine(CreateBossMonster());
+        if (round == 10)
+        {
+            GameObject spawnMark = Instantiate(bossSpawnImage, new Vector3(3, 0, 3), bossSpawnImage.transform.rotation);
+            Destroy(spawnMark, 2.1f);
+            spawnMark.transform.SetParent(bosssParent);
+            StartCoroutine(CreateBossMonster(round));
+        }
+
+        else if (round == 20)
+        {
+            GameObject spawnMark = Instantiate(bossSpawnImage, new Vector3(3, 0, 3), bossSpawnImage.transform.rotation);
+            Destroy(spawnMark, 2.1f);
+            spawnMark.transform.SetParent(bosssParent);
+            GameObject spawnMark2 = Instantiate(bossSpawnImage, new Vector3(-3, 0, 3), bossSpawnImage.transform.rotation);
+            Destroy(spawnMark2, 2.1f);
+            spawnMark2.transform.SetParent(bosssParent);
+            StartCoroutine(CreateBossMonster(round));
+        }
     }
 
     private Monster CreateMonster()
@@ -103,14 +127,33 @@ public class MonsterSpawn : MonoBehaviour
         return monster;
     }
 
-    private IEnumerator CreateBossMonster()
+    private IEnumerator CreateBossMonster(int round)
     {
         yield return new WaitForSeconds(2);
 
-        GameObject inst = Instantiate(bossMonsterPrefab[0]);
-        Monster monster = inst.GetComponent<Monster>();
-        monster.stat = MonsterInfo.Instance.monsterInfos[normalMonsterPrefab.Length];
-        monster.transform.position = new Vector3(3, 0, 3);
+        if (round == 10)
+        {
+            int rand = Random.Range(0, 2);
+            GameObject inst = Instantiate(bossMonsterPrefab[rand]);
+            Monster monster = inst.GetComponent<Monster>();
+            monster.stat = MonsterInfo.Instance.monsterInfos[normalMonsterPrefab.Length + rand];
+            monster.transform.position = new Vector3(3, 0, 3);
+            monster.transform.SetParent(bosssParent);
+        }
+
+        else if (round == 20)
+        {
+            GameObject inst1 = Instantiate(bossMonsterPrefab[0]);
+            GameObject inst2 = Instantiate(bossMonsterPrefab[1]);
+            Monster monster1 = inst1.GetComponent<Monster>();
+            Monster monster2 = inst2.GetComponent<Monster>();
+            monster1.stat = MonsterInfo.Instance.monsterInfos[normalMonsterPrefab.Length];
+            monster1.transform.position = new Vector3(3, 0, 3);
+            monster2.stat = MonsterInfo.Instance.monsterInfos[normalMonsterPrefab.Length + 1];
+            monster2.transform.position = new Vector3(-3, 0, 3);
+            monster2.transform.SetParent(bosssParent);
+            monster1.transform.SetParent(bosssParent);
+        }
     }
 
     int RandomMonster()

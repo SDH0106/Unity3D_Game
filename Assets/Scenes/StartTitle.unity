@@ -1980,7 +1980,7 @@ MonoBehaviour:
   damageStorage: {fileID: 1692643827}
   gameTime: 0
   money: 100000
-  round: 19
+  round: 10
   exp: 0
   hp: 0
   level: 1
@@ -2002,6 +2002,7 @@ MonoBehaviour:
   stats: []
   isPause: 0
   isClear: 0
+  isBossDead: 0
 --- !u!4 &936130855
 Transform:
   m_ObjectHideFlags: 0
@@ -2129,19 +2130,26 @@ MonoBehaviour:
     monsterDamage: 3
     monsterSpeed: 0
     monsterDefence: 0
-    monsterExp: 10
+    monsterExp: 0
+    monsterCoin: 0
+  - monsterName: "\uCE74\uBA5C\uB808\uC628"
+    monsterMaxHp: 20
+    monsterDamage: 2
+    monsterSpeed: 1
+    monsterDefence: 0
+    monsterExp: 0
     monsterCoin: 0
   - monsterName: "\uACE0\uC2A4\uD2B8"
-    monsterMaxHp: 1000
+    monsterMaxHp: 1
     monsterDamage: 10
     monsterSpeed: 1
     monsterDefence: 0
     monsterExp: 0
     monsterCoin: 0
-  - monsterName: "\uBAAC\uC2A4\uD130"
-    monsterMaxHp: 0
-    monsterDamage: 0
-    monsterSpeed: 0
+  - monsterName: "\uD574\uACE8"
+    monsterMaxHp: 1
+    monsterDamage: 10
+    monsterSpeed: 1
     monsterDefence: 0
     monsterExp: 0
     monsterCoin: 0

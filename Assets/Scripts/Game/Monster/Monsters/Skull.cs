@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ghost : Monster
+public class Skull : Monster
 {
-    int state = 0;
+    [SerializeField] GameObject skullBullet;
+    [SerializeField] Transform[] bulletPoses;
+
     GameManager gameManager;
 
     void Start()
@@ -16,34 +18,26 @@ public class Ghost : Monster
         rend = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         coll = GetComponent<Collider>();
-        InvokeRepeating("Disappear", 3f, 3f);
+        StartCoroutine(Attack());
     }
 
     void Update()
     {
-        if (isDead == false)
+        if (isDead == false && !isAttack)
         {
             Move();
-            anim.SetInteger("state", state);
         }
 
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Disappear"))
+
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("EndAttack"))
         {
             if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
             {
-                coll.enabled = false;
-                Appear();
+                isAttack = false;
             }
         }
 
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Appear"))
-        {
-            if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
-            {
-                state = 0;
-                coll.enabled = true;
-            }
-        }
+        anim.SetBool("isAttack", isAttack);
 
         BossDead();
     }
@@ -73,15 +67,18 @@ public class Ghost : Monster
         }
     }
 
-
-    void Disappear()
+    IEnumerator Attack()
     {
-        state = 1;
-    }
+        while (!isDead)
+        {
+            yield return new WaitForSeconds(5f);
+            isAttack = true;
 
-    void Appear()
-    {
-        state = 2;
-        transform.position = Character.Instance.transform.position;
+            yield return new WaitForSeconds(0.5f);
+            for (int i = 0; i < bulletPoses.Length; i++)
+            {
+                Instantiate(skullBullet, bulletPoses[i].position, skullBullet.transform.rotation);
+            }
+        }
     }
 }

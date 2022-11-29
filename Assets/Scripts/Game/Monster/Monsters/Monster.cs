@@ -23,6 +23,8 @@ public class Monster : MonoBehaviour
 
     public float speed;
 
+    [HideInInspector] public Vector3 dir;
+
     void Start()
     {
         hp = stat.monsterMaxHp;
@@ -60,7 +62,7 @@ public class Monster : MonoBehaviour
     public void Move()
     {
         Vector3 characterPos = Character.Instance.transform.position;
-        Vector3 dir = characterPos - transform.position;
+        dir = characterPos - transform.position;
 
         transform.position = Vector3.MoveTowards(transform.position, characterPos, speed * Time.deltaTime);
 
@@ -92,7 +94,7 @@ public class Monster : MonoBehaviour
         rend.color = Color.white;
     }
 
-    public void OnTriggerStay(Collider other)
+    protected virtual void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Character"))
         {
