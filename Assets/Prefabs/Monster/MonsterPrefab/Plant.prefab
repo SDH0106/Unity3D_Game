@@ -111,7 +111,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 7059297670216363161, guid: 326dd6eeaa0ca144ca01194dbacf63fa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 0.44, y: 0.42}
@@ -132,7 +132,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: -0.2, y: 0.31, z: 0}
-  m_Center: {x: 0.04, y: -0.04, z: 0}
+  m_Center: {x: 0, y: -0.04, z: 0}
 --- !u!54 &8769755401566913622
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -199,5 +199,6 @@ MonoBehaviour:
     monsterExp: 0
     monsterCoin: 0
   speed: 0
+  dir: {x: 0, y: 0, z: 0}
   plantBullet: {fileID: 3246047406680868606, guid: 589c1546ef27ae84d923c9c39d9c1c52, type: 3}
   bulletPos: {fileID: 4486898294191438690}
