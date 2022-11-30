@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.Pool;
@@ -31,8 +32,11 @@ public class GameSceneUI : MonoBehaviour
     [SerializeField] Slider Sound;
 
     [Header("Text")]
-    [SerializeField] GameObject clearText;
+    [SerializeField] GameObject roundClearText;
     [SerializeField] GameObject gameOverUI;
+    [SerializeField] GameObject gameOverText;
+    [SerializeField] GameObject gameClearUI;
+    [SerializeField] GameObject gameClearText;
     [SerializeField] GameObject statCardParent;
 
     GameManager gameManager;
@@ -41,10 +45,11 @@ public class GameSceneUI : MonoBehaviour
     {
         SoundManager.Instance.PlayBGM(1);
         gameManager = GameManager.Instance;
-        clearText.SetActive(false);
+        roundClearText.SetActive(false);
         gameOverUI.SetActive(false);
         statCardParent.gameObject.SetActive(false);
         PauseUI.SetActive(false);
+        gameClearUI.SetActive(false);
     }
 
     private void Update()
@@ -57,31 +62,50 @@ public class GameSceneUI : MonoBehaviour
 
         if (gameManager.hp > 0)
         {
-            if (gameManager.isClear && gameManager.isBossDead)
+            if (gameManager.round != 20)
             {
-                clearText.SetActive(true);
+                if (gameManager.isClear && gameManager.isBossDead)
+                {
+                    roundClearText.SetActive(true);
+                }
+
+                if (roundClearText.GetComponent<TypingText>().isOver == true)
+                {
+                    roundClearText.SetActive(false);
+
+                    if (gameManager.levelUpCount <= 0)
+                        gameManager.ToShopScene();
+
+                    if (gameManager.levelUpCount > 0)
+                        statCardParent.gameObject.SetActive(true);
+                }
+
+                if (Input.GetKeyDown(KeyCode.Escape) && !gameManager.isPause)
+                    PauseGame();
+
+                else if (Input.GetKeyDown(KeyCode.Escape) && gameManager.isPause)
+                    ReturnToGame();
             }
 
-            if (clearText.GetComponent<TypingText>().isOver == true)
+            else if(gameManager.round == 20)
             {
-                clearText.SetActive(false);
+                if (gameManager.isClear && gameManager.isBossDead)
+                {
+                    gameClearUI.SetActive(true);
+                }
 
-                if (gameManager.levelUpCount <= 0)
-                    gameManager.ToShopScene();
-
-                if (gameManager.levelUpCount > 0)
-                    statCardParent.gameObject.SetActive(true);
-            }
-
-            if (Input.GetKeyDown(KeyCode.Escape) && !gameManager.isPause)
-                PauseGame();
-
-            else if (Input.GetKeyDown(KeyCode.Escape) && gameManager.isPause)
-                ReturnToGame();
+                if (gameClearText.GetComponent<TypingText>().isOver == true)
+                    SceneManager.LoadScene("End");
+            }    
         }
 
         else if (gameManager.hp <= 0)
+        {
             gameOverUI.SetActive(true);
+
+            if (gameOverText.GetComponent<TypingText>().isOver == true)
+                SceneManager.LoadScene("End");
+        }
     }
 
     void HpUI()

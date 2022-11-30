@@ -15,6 +15,7 @@ public class ItemManager : Singleton<ItemManager>
 
     [HideInInspector] public WeaponInfo[] storedWeapon;
     [HideInInspector] public PassiveInfo[] storedPassive;
+    [HideInInspector] public int[] storedPassiveCount;
 
     [HideInInspector] public int weaponCount;
     int passiveItemCount;
@@ -35,6 +36,7 @@ public class ItemManager : Singleton<ItemManager>
         passiveItemCount = 0;
         storedWeapon = new WeaponInfo[6];
         storedPassive = new PassiveInfo[30];
+        storedPassiveCount = new int[storedPassive.Length];
     }
 
     public void GetWeaponInfo(WeaponInfo weaponInfo)
@@ -68,7 +70,7 @@ public class ItemManager : Singleton<ItemManager>
 
         if (passiveItemCount == 0)
         {
-            ShopManager.Instance.passiveItem[passiveItemCount]++;
+            storedPassiveCount[passiveItemCount]++;
         }
 
         else if (passiveItemCount > 0)
@@ -86,7 +88,7 @@ public class ItemManager : Singleton<ItemManager>
             if (storedPassive[passiveItemCount] == storedPassive[i])
             {
                 storedPassive[passiveItemCount] = null;
-                ShopManager.Instance.passiveItem[i]++;
+                storedPassiveCount[i]++;
                 passiveItemCount--;
                 break;
             }
@@ -94,7 +96,7 @@ public class ItemManager : Singleton<ItemManager>
             else
             {
                 if (i == passiveItemCount - 1)
-                    ShopManager.Instance.passiveItem[passiveItemCount]++;
+                    storedPassiveCount[passiveItemCount]++;
             }
         }
     }

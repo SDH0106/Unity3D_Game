@@ -38,8 +38,6 @@ public class ShopManager : Singleton<ShopManager>
     [SerializeField] public GameObject[] weaponSlots;
     [SerializeField] GameObject[] passiveSlots;
 
-    [HideInInspector] public int[] passiveItem;
-
     GameObject[] cards;
     int[] num;
 
@@ -70,7 +68,6 @@ public class ShopManager : Singleton<ShopManager>
         bools = new bool[4];
         num = new int[4];
         cards = new GameObject[4];
-        passiveItem = new int[passiveSlots.Length];
 
         CardSlot();
     }
@@ -268,14 +265,14 @@ public class ShopManager : Singleton<ShopManager>
         {
             Image back = passiveSlots[i].transform.GetChild(0).GetComponent<Image>();
             Image image = passiveSlots[i].transform.GetChild(2).GetComponent<Image>();
-            Text text = passiveSlots[i].transform.GetChild(3).GetComponent<Text>();
+            Text countText = passiveSlots[i].transform.GetChild(3).GetComponent<Text>();
             Text x = passiveSlots[i].transform.GetChild(4).GetComponent<Text>();
 
             if (itemManager.storedPassive[i] != null)
             {
                 ImageAlphaChange(i, 1, image);
                 image.sprite = itemManager.storedPassive[i].ItemSprite;
-                text.text = passiveItem[i].ToString();
+                countText.text = itemManager.storedPassiveCount[i].ToString();
 
                 if (itemManager.storedPassive[i].ItemGrade == Grade.¿œπ›)
                 {
@@ -297,15 +294,15 @@ public class ShopManager : Singleton<ShopManager>
                     back.color = new Color(1, 0.31f, 0.31f, 0.8235f);
                 }
 
-                if (passiveItem[i] > 1)
+                if (itemManager.storedPassiveCount[i] > 1)
                 {
-                    TextAlphaChange(i, 1, text);
+                    TextAlphaChange(i, 1, countText);
                     TextAlphaChange(i, 1, x);
                 }
 
-                else if (passiveItem[i] <= 1)
+                else if (itemManager.storedPassiveCount[i] <= 1)
                 {
-                    TextAlphaChange(i, 0, text);
+                    TextAlphaChange(i, 0, countText);
                     TextAlphaChange(i, 0, x);
                 }
             }
@@ -314,7 +311,7 @@ public class ShopManager : Singleton<ShopManager>
             {
                 back.color = new Color(0.53f, 0.53f, 0.53f, 0.8235f);
                 ImageAlphaChange(i, 0, image);
-                TextAlphaChange(i, 0, text);
+                TextAlphaChange(i, 0, countText);
                 TextAlphaChange(i, 0, x);
             }
         }
@@ -352,10 +349,13 @@ public class ShopManager : Singleton<ShopManager>
 
         if(gradeNum == 1)
             grade = Grade.»Ò±Õ;
+
         else if (gradeNum == 2)
             grade = Grade.¿¸º≥;
+
         else if (gradeNum == 3)
             grade = Grade.Ω≈»≠;
+
         else
             grade = Grade.¿œπ›;
 
@@ -392,7 +392,6 @@ public class ShopManager : Singleton<ShopManager>
 
         for (int i = 0; i < passiveCardUI.GetComponent<PassiveCardUI>().passiveInfo.Length; i++)
         {
-            Debug.Log(passiveCard.passiveInfo[i].weight);
             total += passiveCard.passiveInfo[i].weight;
 
             if (rand <= total)
