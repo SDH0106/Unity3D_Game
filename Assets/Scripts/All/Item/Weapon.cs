@@ -13,7 +13,7 @@ public class Weapon : MonoBehaviour
     [HideInInspector] public float damage;
     [HideInInspector] public int count;
 
-    public int grade;
+    [HideInInspector] public int grade;
 
     public void WeaponSetting()
     { 

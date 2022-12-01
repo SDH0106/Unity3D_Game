@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 9078078465588959345}
   - component: {fileID: 8154831264171076231}
   - component: {fileID: -1798598165808827110}
-  - component: {fileID: -8557741743296975608}
+  - component: {fileID: -2876359202089966154}
   m_Layer: 0
-  m_Name: PlayerBullet 1
+  m_Name: AutoBullet
   m_TagString: myBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 9687b8cba872c4f50aeb3b2b3ff1a0b7, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.493288, g: 0.9811321, b: 0.43965825, a: 1}
   m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
@@ -96,7 +96,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8154831264171076226}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.15, y: 0.18, z: 0}
@@ -137,7 +137,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
---- !u!114 &-8557741743296975608
+--- !u!114 &-2876359202089966154
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -146,8 +146,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8154831264171076226}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5049efe9bf8845d498e2aa71d5937e86, type: 3}
+  m_Script: {fileID: 11500000, guid: 3a7e21d821824704980b9b2e8bd57970, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: -8302760893583694437, guid: 941e5330dd1395442b47913c209b6bed, type: 3}
   speed: 8
+  effectPrefab: {fileID: 0}
+  damageUI: {fileID: 0}

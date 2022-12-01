@@ -16,7 +16,7 @@ public class Ghost : Monster
         rend = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         coll = GetComponent<Collider>();
-        InvokeRepeating("Disappear", 3f, 3f);
+        InvokeRepeating("Disappear", 5f, 7f);
     }
 
     void Update()

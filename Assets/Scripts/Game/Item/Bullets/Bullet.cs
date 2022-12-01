@@ -5,15 +5,15 @@ using UnityEngine.Pool;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] float speed = 3f;
-    GameObject effectPrefab;
+    [SerializeField] protected float speed = 3f;
+    public GameObject effectPrefab;
 
     private IObjectPool<Bullet> managedPool;
 
-    float angle;
-    Vector3 dir;
+    protected float angle;
+    protected Vector3 dir;
 
-    public DamageUI damageUI;
+    [HideInInspector] public DamageUI damageUI;
 
     void Update()
     {
@@ -24,14 +24,14 @@ public class Bullet : MonoBehaviour
         transform.rotation = Quaternion.Euler(90, -angle, 0);
     }
 
-    public void Shoot(Vector3 dir)
+    public virtual void Shoot(Vector3 dir)
     {
         this.dir = dir;
 
         Invoke("DestroyBullet", 2f);
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Monster")
         {
@@ -52,7 +52,7 @@ public class Bullet : MonoBehaviour
         managedPool = pool;
     }
 
-    public void DestroyBullet()
+    public virtual void DestroyBullet()
     {
         managedPool.Release(this);
     }

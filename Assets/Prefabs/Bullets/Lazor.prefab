@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 9078078465588959345}
   - component: {fileID: 8154831264171076231}
   - component: {fileID: -1798598165808827110}
-  - component: {fileID: -8557741743296975608}
+  - component: {fileID: 6988479444479180741}
   m_Layer: 0
-  m_Name: PlayerBullet 4
+  m_Name: Lazor
   m_TagString: myBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 8154831264171076226}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 2.75, y: -0.28, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -77,9 +77,9 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 9687b8cba872c4f50aeb3b2b3ff1a0b7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6ce7d758dac494cc393bd4437dfdb24e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 1
+  m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 0.48, y: 0.32}
@@ -99,8 +99,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.15, y: 0.18, z: 0}
-  m_Center: {x: 0.125, y: 0, z: 0}
+  m_Size: {x: 0.6, y: 0.1, z: 0}
+  m_Center: {x: 0.55, y: -0.02, z: 0}
 --- !u!95 &8154831264171076231
 Animator:
   serializedVersion: 4
@@ -111,7 +111,7 @@ Animator:
   m_GameObject: {fileID: 8154831264171076226}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 2216a07adddae4cf792492157b6ffa0e, type: 2}
+  m_Controller: {fileID: 9100000, guid: 4e396206683b3403e989bbcc368d1a99, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -133,11 +133,11 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 120
-  m_CollisionDetection: 0
---- !u!114 &-8557741743296975608
+  m_CollisionDetection: 1
+--- !u!114 &6988479444479180741
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -146,8 +146,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8154831264171076226}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5049efe9bf8845d498e2aa71d5937e86, type: 3}
+  m_Script: {fileID: 11500000, guid: 092d87240225f9642a91f9dd0a344ee3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 56627168278650052, guid: fbb664a8801da9e4a9628218a1e9dcff, type: 3}
-  speed: 8
+  speed: 0
+  effectPrefab: {fileID: 3107154487039013155, guid: 15ee057397a04534080349a91f7e3add, type: 3}
+  damageUI: {fileID: 0}
