@@ -9,6 +9,7 @@ public class Skull : Monster
 
     GameManager gameManager;
 
+    float attackTime = 5;
     void Start()
     {
         gameManager = GameManager.Instance;
@@ -18,14 +19,21 @@ public class Skull : Monster
         rend = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         coll = GetComponent<Collider>();
-        StartCoroutine(Attack());
     }
 
     void Update()
     {
-        if (isDead == false && !isAttack)
+        if (isDead == false && !isAttack && !isFreeze)
         {
             Move();
+
+            attackTime -= Time.deltaTime;
+
+            if(attackTime <= 0)
+            {
+                attackTime = 5;
+                Attack();
+            }
         }
 
 
@@ -67,18 +75,19 @@ public class Skull : Monster
         }
     }
 
-    IEnumerator Attack()
+    void Attack()
     {
-        while (!isDead)
-        {
-            yield return new WaitForSeconds(5f);
-            isAttack = true;
+        isAttack = true;
+        StartCoroutine(Shoot());
+    }
 
-            yield return new WaitForSeconds(0.5f);
-            for (int i = 0; i < bulletPoses.Length; i++)
-            {
-                Instantiate(skullBullet, bulletPoses[i].position, skullBullet.transform.rotation);
-            }
+    IEnumerator Shoot()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        for (int i = 0; i < bulletPoses.Length; i++)
+        {
+            Instantiate(skullBullet, bulletPoses[i].position, skullBullet.transform.rotation);
         }
     }
 }

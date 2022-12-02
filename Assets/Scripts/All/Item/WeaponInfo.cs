@@ -21,7 +21,7 @@ public class WeaponInfo : ScriptableObject
         °Ë,
     }
 
-    public Grade weaponGrade;
+    [HideInInspector] public Grade weaponGrade;
 
     [SerializeField] Sprite itemSprite;
     [SerializeField] string weaponName;

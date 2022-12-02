@@ -7,6 +7,8 @@ public class Ghost : Monster
     int state = 0;
     GameManager gameManager;
 
+    float disappearTime = 7;
+
     void Start()
     {
         gameManager = GameManager.Instance;
@@ -16,15 +18,24 @@ public class Ghost : Monster
         rend = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         coll = GetComponent<Collider>();
-        InvokeRepeating("Disappear", 5f, 7f);
+        //InvokeRepeating("Disappear", 5f, 7f);
     }
 
     void Update()
     {
-        if (isDead == false)
+        if (isDead == false && !isFreeze)
         {
             Move();
             anim.SetInteger("state", state);
+
+            disappearTime -= Time.deltaTime;
+
+            if(disappearTime <= 0)
+            {
+                disappearTime = 7;
+                Disappear();
+            }
+
         }
 
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("Disappear"))

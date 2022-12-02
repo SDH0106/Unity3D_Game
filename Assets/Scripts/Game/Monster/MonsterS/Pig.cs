@@ -21,7 +21,7 @@ public class Pig : Monster
 
     private void Update()
     {
-        if (isDead == false)
+        if (isDead == false && !isFreeze)
         {
             Move();
             anim.SetBool("isWalk", isWalk);

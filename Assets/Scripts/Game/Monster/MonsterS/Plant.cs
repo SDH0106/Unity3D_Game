@@ -8,6 +8,8 @@ public class Plant : Monster
     [SerializeField] GameObject plantBullet;
     [SerializeField] Transform bulletPos;
 
+    float attackTime = 3;
+
     private void Start()
     {
         hp = stat.monsterMaxHp;
@@ -16,30 +18,36 @@ public class Plant : Monster
         rend = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         coll = GetComponent<Collider>();
-        StartCoroutine(Attack());
     }
 
     private void Update()
     {
-        if (isDead == false)
+        if (isDead == false && !isFreeze)
         {
             Move();
+            attackTime -= Time.deltaTime;
+
+            if(attackTime <= 0)
+            {
+                attackTime = 3;
+                Attack();
+            }
         }
 
         OnDead();
     }
 
-    IEnumerator Attack()
+    void Attack()
     {
-        while (isDead == false)
-        {
-            yield return new WaitForSeconds(3f);
+        anim.SetTrigger("isAttack");
+        StartCoroutine(Shoot());
+    }
 
-            anim.SetTrigger("isAttack");
+    IEnumerator Shoot()
+    {
 
-            yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.3f);
 
-            Instantiate(plantBullet, bulletPos.position, plantBullet.transform.rotation);
-        }
+        Instantiate(plantBullet, bulletPos.position, plantBullet.transform.rotation);
     }
 }

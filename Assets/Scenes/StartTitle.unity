@@ -1980,7 +1980,7 @@ MonoBehaviour:
   damageStorage: {fileID: 1692643827}
   gameTime: 100
   money: 100000
-  round: 10
+  round: 20
   exp: 0
   hp: 0
   level: 1
@@ -2126,14 +2126,14 @@ MonoBehaviour:
     monsterExp: 2
     monsterCoin: 0
   - monsterName: "\uB124\uD39C\uB370\uC2A4"
-    monsterMaxHp: 10
+    monsterMaxHp: 12
     monsterDamage: 3
     monsterSpeed: 0
     monsterDefence: 0
     monsterExp: 0
     monsterCoin: 0
   - monsterName: "\uCE74\uBA5C\uB808\uC628"
-    monsterMaxHp: 20
+    monsterMaxHp: 100
     monsterDamage: 2
     monsterSpeed: 1
     monsterDefence: 0

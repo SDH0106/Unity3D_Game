@@ -25,6 +25,8 @@ public class Monster : MonoBehaviour
 
     [HideInInspector] public Vector3 dir;
 
+    protected bool isFreeze = false;
+
     void Start()
     {
         hp = stat.monsterMaxHp;
@@ -37,7 +39,7 @@ public class Monster : MonoBehaviour
 
     void Update()
     {
-        if (isDead == false)
+        if (isDead == false && !isFreeze)
         {
             Move();
             anim.SetBool("isWalk", isWalk);
@@ -94,6 +96,15 @@ public class Monster : MonoBehaviour
         rend.color = Color.white;
     }
 
+    private IEnumerator MonsterFreeze()
+    {
+        rend.color = Color.cyan;
+        yield return new WaitForSeconds(2f);
+
+        isFreeze = false;
+        rend.color = Color.white;
+    }
+
     protected virtual void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Character"))
@@ -107,6 +118,15 @@ public class Monster : MonoBehaviour
         hp -= (damage - stat.monsterDefence);
 
         StartCoroutine(MonsterColorBlink());
+    }
+
+    public void OnDamaged(float damage, bool freeze)
+    {
+        isFreeze = freeze;
+        hp -= (damage - stat.monsterDefence);
+
+        if (isFreeze == true)
+            StartCoroutine(MonsterFreeze());
     }
 
     public void OnDead()

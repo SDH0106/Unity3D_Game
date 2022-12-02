@@ -35,7 +35,7 @@ public class MonsterSpawn : MonoBehaviour
     private void Start()
     {
         gameManager = GameManager.Instance;
-        weightValue = new int[] { 0, 0, 1, 0 };
+        weightValue = new int[] { 0, 0, 0, 1 };
 
         for (int i = 0; i < weightValue.Length; i++)
         {

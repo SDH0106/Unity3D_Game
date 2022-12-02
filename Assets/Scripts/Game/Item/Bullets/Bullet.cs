@@ -42,7 +42,6 @@ public class Bullet : MonoBehaviour
             DestroyBullet();
             CancelInvoke("DestroyBullet");
 
-            effectPrefab = Resources.Load("BulletEffect") as GameObject;
             Instantiate(effectPrefab, transform.position, transform.rotation);
         }
     }

@@ -23,7 +23,7 @@ public class ItemManager : Singleton<ItemManager>
     [HideInInspector] public bool isFool = false;
     [HideInInspector] public int foolCount;
 
-    public Grade[] weaponGrade;
+    [HideInInspector] public Grade[] weaponGrade;
 
     private void Start()
     {

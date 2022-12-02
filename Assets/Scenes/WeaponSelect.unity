@@ -259,6 +259,7 @@ MonoBehaviour:
   passiveCardItem: {fileID: 0}
   storedWeapon: []
   storedPassive: []
+  storedPassiveCount: 
   weaponCount: 0
   isFool: 0
   foolCount: 0
@@ -1138,6 +1139,8 @@ MonoBehaviour:
   - {fileID: 9028005816716633080, guid: fbb664a8801da9e4a9628218a1e9dcff, type: 3}
   - {fileID: 3017180892472580022, guid: 949b7201d47b60940bbdfa9dec543bf5, type: 3}
   - {fileID: 5714639909406512148, guid: 8e91689e30c1e564ea5e83e87ef0b52a, type: 3}
+  - {fileID: 9074234498593581902, guid: ccfc3c65966facd459af73ff761bff11, type: 3}
+  - {fileID: 7974142016502416161, guid: e4ab428c25307904e95417e1b89af9fc, type: 3}
   weaponPoses:
   - {fileID: 344089637}
   - {fileID: 355390063}

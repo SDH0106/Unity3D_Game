@@ -25,7 +25,7 @@ public class Chameleon : Monster
 
     private void Update()
     {
-        if (isDead == false && isWalk)
+        if (isDead == false && isWalk && !isFreeze)
         {
             Move();
             anim.SetBool("isWalk", isWalk);
