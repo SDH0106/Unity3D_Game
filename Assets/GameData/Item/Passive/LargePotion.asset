@@ -27,3 +27,4 @@ MonoBehaviour:
   luck: 0
   itemPrice: 36
   description: 
+  weight: 5

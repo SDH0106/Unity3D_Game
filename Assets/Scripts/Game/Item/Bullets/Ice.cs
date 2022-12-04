@@ -17,10 +17,10 @@ public class Ice : Bullet
 
     protected override void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Monster")
+        if (other.tag == "Monster" && other.GetComponent<Monster>() != null)
         {
-            int rand = Random.Range(0, 40);
-            if (rand == 20)
+            int rand = Random.Range(0, 1);
+            if (rand == 0)
                 isFreeze = true;
             else
                 isFreeze = false;

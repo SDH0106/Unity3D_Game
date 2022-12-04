@@ -1,24 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro.EditorUtilities;
 using UnityEngine;
 
 public class Ghost : Monster
 {
     int state = 0;
-    GameManager gameManager;
 
     float disappearTime = 7;
 
     void Start()
     {
+        character = Character.Instance;
         gameManager = GameManager.Instance;
-        hp = stat.monsterMaxHp;
+        hp = stat.monsterMaxHp * (1 + (float)((gameManager.round - 1) * 0.25));
         initScale = transform.localScale;
         speed = stat.monsterSpeed;
+        initSpeed = speed;
         rend = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         coll = GetComponent<Collider>();
-        //InvokeRepeating("Disappear", 5f, 7f);
+    }
+
+    protected override void SetInitMonster()
+    {
+        base.SetInitMonster();
+        state = 0;
+        disappearTime = 7;
     }
 
     void Update()
@@ -28,14 +36,16 @@ public class Ghost : Monster
             Move();
             anim.SetInteger("state", state);
 
-            disappearTime -= Time.deltaTime;
-
-            if(disappearTime <= 0)
+            if (!isFreeze)
             {
-                disappearTime = 7;
-                Disappear();
-            }
+                disappearTime -= Time.deltaTime;
 
+                if (disappearTime <= 0)
+                {
+                    disappearTime = 7;
+                    Disappear();
+                }
+            }
         }
 
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("Disappear"))
@@ -93,6 +103,6 @@ public class Ghost : Monster
     void Appear()
     {
         state = 2;
-        transform.position = Character.Instance.transform.position;
+        transform.position = character.transform.position;
     }
 }

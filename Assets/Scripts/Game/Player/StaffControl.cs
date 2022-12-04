@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -11,13 +12,15 @@ public class StaffControl : Weapon
 
     private IObjectPool<Bullet> pool;
 
-    float angle;
     Vector3 dir, mouse;
 
     float delay = 0;
     float bulletDelay = 1;
+    float thunderDelay = 3;
 
     bool canAttack = true;
+    bool isTargetFind = false;
+    Transform target;
 
     GameManager gameManager;
 
@@ -62,26 +65,87 @@ public class StaffControl : Weapon
 
     void FireBullet()
     {
-        if (canAttack == true)
+        if (weaponInfo.WeaponName != "번개 스태프")
         {
-            if (Input.GetMouseButton(0))
+            if (canAttack == true)
             {
-                Bullet bullet = pool.Get();
-                bullet.transform.position = firePos.position;
-                bullet.Shoot(dir.normalized);
-                bullet.damageUI = damageUI;
-                SoundManager.Instance.PlayES(weaponInfo.WeaponSound);
-                canAttack = false;
+                if (Input.GetMouseButton(0))
+                {
+                    Bullet bullet = pool.Get();
+                    bullet.transform.position = firePos.position;
+                    bullet.Shoot(dir.normalized);
+                    bullet.damageUI = damageUI;
+                    SoundManager.Instance.PlayES(weaponInfo.WeaponSound);
+                    canAttack = false;
+                }
+            }
+
+            else if (canAttack == false)
+            {
+                delay += Time.deltaTime;
+                if (delay >= (bulletDelay / (1 + gameManager.attackSpeed / 10)))
+                {
+                    canAttack = true;
+                    delay = 0;
+                }
             }
         }
 
-        else if (canAttack == false)
+        else if (weaponInfo.WeaponName == "번개 스태프")
         {
-            delay += Time.deltaTime;
-            if (delay >= (bulletDelay / gameManager.attackSpeed))
+            if (canAttack == true)
             {
-                canAttack = true;
-                delay = 0;
+                if (!isTargetFind)
+                    FindTarget();
+
+                else if (isTargetFind)
+                {
+                    Bullet bullet = pool.Get();
+                    bullet.transform.position = new Vector3(target.transform.position.x, 0, target.transform.position.z + 3);
+                    bullet.damageUI = damageUI;
+                    SoundManager.Instance.PlayES(weaponInfo.WeaponSound);
+                    canAttack = false;
+                    isTargetFind = false;
+                }
+            }
+
+            else if (canAttack == false)
+            {
+                delay += Time.deltaTime;
+                if (delay >= (thunderDelay / (1 + gameManager.attackSpeed / 10)))
+                {
+                    canAttack = true;
+                    delay = 0;
+                }
+            }
+        }
+    }
+
+    void FindTarget()
+    {
+        Collider[] colliders = Physics.OverlapSphere(Character.Instance.transform.position, 6f + (gameManager.range/10));
+
+        if (colliders.Length > 0)
+        {
+            int rand = Random.Range(0, colliders.Length);
+
+            for (int i = 0; i < colliders.Length; i++)
+            {
+                if (colliders[i].tag == "Monster" && colliders[i].GetComponent<Monster>() != null)
+                {
+                    if (i == rand)
+                    {
+                        target = colliders[i].transform;
+
+                        GameObject pool = Instantiate(damageUI, colliders[i].transform.position, Quaternion.Euler(90, 0, 0)).gameObject;
+                        pool.transform.SetParent(GameManager.Instance.damageStorage);
+                        colliders[i].GetComponent<Monster>().OnDamaged(damageUI.weaponDamage);
+                        GameManager.Instance.hp += GameManager.Instance.absorbHp;
+
+                        isTargetFind = true;
+                        break;
+                    }
+                }
             }
         }
     }
@@ -113,5 +177,8 @@ public class StaffControl : Weapon
     {
         Gizmos.color = Color.red;
         Gizmos.DrawLine(transform.position, mouse);
+
+        Handles.color = Color.blue;
+        Handles.DrawWireDisc(Character.Instance.transform.position,Vector3.up, 6f + (gameManager.range/10));
     }
 }

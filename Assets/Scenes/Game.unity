@@ -2853,7 +2853,7 @@ MonoBehaviour:
   bossSpawnImage: {fileID: 2892993388896840969, guid: 2fb3d3cdedbebd24080663a334260a98, type: 3}
   poolCount: 20
   spawnRange: 5
-  spawnDelay: 100
+  spawnDelay: 3
   spawnPos: {x: 0, y: 0, z: 0}
 --- !u!114 &1070064767
 MonoBehaviour:

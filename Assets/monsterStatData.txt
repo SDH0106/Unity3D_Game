@@ -7,51 +7,51 @@
             "monsterSpeed": 1.0,
             "monsterDefence": 0.0,
             "monsterExp": 1.0,
-            "monsterCoin": 0.0
+            "monsterCoin": 5.0
         },
         {
             "monsterName": "피그",
-            "monsterMaxHp": 15.0,
-            "monsterDamage": 2.0,
+            "monsterMaxHp": 20.0,
+            "monsterDamage": 3.0,
             "monsterSpeed": 1.0,
-            "monsterDefence": 0.0,
-            "monsterExp": 2.0,
-            "monsterCoin": 0.0
+            "monsterDefence": 2.0,
+            "monsterExp": 5.0,
+            "monsterCoin": 20.0
         },
         {
             "monsterName": "네펜데스",
-            "monsterMaxHp": 10.0,
-            "monsterDamage": 3.0,
+            "monsterMaxHp": 13.0,
+            "monsterDamage": 1.0,
             "monsterSpeed": 0.0,
             "monsterDefence": 0.0,
-            "monsterExp": 0.0,
-            "monsterCoin": 0.0
+            "monsterExp": 3.0,
+            "monsterCoin": 15.0
         },
         {
             "monsterName": "카멜레온",
-            "monsterMaxHp": 20.0,
-            "monsterDamage": 2.0,
+            "monsterMaxHp": 15.0,
+            "monsterDamage": 5.0,
             "monsterSpeed": 1.0,
-            "monsterDefence": 0.0,
-            "monsterExp": 0.0,
-            "monsterCoin": 0.0
+            "monsterDefence": 1.0,
+            "monsterExp": 2.0,
+            "monsterCoin": 10.0
         },
         {
             "monsterName": "고스트",
-            "monsterMaxHp": 300.0,
+            "monsterMaxHp": 200.0,
             "monsterDamage": 10.0,
             "monsterSpeed": 1.0,
-            "monsterDefence": 0.0,
-            "monsterExp": 0.0,
+            "monsterDefence": 10.0,
+            "monsterExp": 100.0,
             "monsterCoin": 0.0
         },
         {
             "monsterName": "해골",
-            "monsterMaxHp": 300.0,
+            "monsterMaxHp": 200.0,
             "monsterDamage": 10.0,
             "monsterSpeed": 1.0,
-            "monsterDefence": 0.0,
-            "monsterExp": 0.0,
+            "monsterDefence": 10.0,
+            "monsterExp": 100.0,
             "monsterCoin": 0.0
         }
     ]

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponGrade: 0
   itemSprite: {fileID: 21300000, guid: 1917e96d46925584fa740f3f35bd6d56, type: 3}
-  weaponName: "\uBC88\uAC1C\uC2A4\uD0DC\uD504"
+  weaponName: "\uBC88\uAC1C \uC2A4\uD0DC\uD504"
   type: 1
   weaponDamage: 0
   magicDamage: 8

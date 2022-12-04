@@ -14,49 +14,56 @@ public class Chameleon : Monster
     void Start()
     {
         isWalk = true;
-        hp = stat.monsterMaxHp;
+        gameManager = GameManager.Instance;
+        character = Character.Instance;
+        hp = stat.monsterMaxHp * (1 + (float)((gameManager.round - 1) * 0.25));
         initScale = transform.localScale;
         speed = stat.monsterSpeed;
+        initScale = transform.localScale;
+        initSpeed = speed;
         rend = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         coll = GetComponent<Collider>();
-        initScale = transform.localScale;
     }
 
     private void Update()
     {
-        if (isDead == false && isWalk && !isFreeze)
+        if (isDead == false && isWalk)
         {
+            rightAttackColl.gameObject.SetActive(false);
+            leftAttackColl.gameObject.SetActive(false);
             Move();
             anim.SetBool("isWalk", isWalk);
+
+            if (!isFreeze)
+                Attack();
         }
 
-        Attack();
         OnDead();
     }
 
     void Attack()
     {
-        xDistance = Mathf.Abs(Character.Instance.transform.position.x - transform.position.x);
-        zDistance = Mathf.Abs(Character.Instance.transform.position.z - transform.position.z);
+        xDistance = Mathf.Abs(character.transform.position.x - transform.position.x);
+        zDistance = Mathf.Abs(character.transform.position.z - transform.position.z);
         anim.SetBool("isAttack", isAttack);
 
         if (xDistance < 3 && zDistance <= 0.4)
         {
             isWalk = false;
             isAttack = true;
-        }
 
-        if (dir.x < 0)
-        {
-            rightAttackColl.gameObject.SetActive(false);
-            leftAttackColl.gameObject.SetActive(true);
-        }
+            if (dir.x < 0)
+            {
+                rightAttackColl.gameObject.SetActive(false);
+                leftAttackColl.gameObject.SetActive(true);
+            }
 
-        else if (dir.x >= 0)
-        {
-            rightAttackColl.gameObject.SetActive(true);
-            leftAttackColl.gameObject.SetActive(false);
+            else if (dir.x >= 0)
+            {
+                rightAttackColl.gameObject.SetActive(true);
+                leftAttackColl.gameObject.SetActive(false);
+            }
         }
 
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
@@ -75,8 +82,8 @@ public class Chameleon : Monster
 
         if (other.CompareTag("Character"))
         {
-            Character.Instance.OnDamaged(rightAttackColl);
-            Character.Instance.OnDamaged(leftAttackColl);
+            character.OnDamaged(rightAttackColl);
+            character.OnDamaged(leftAttackColl);
         }
     }
 

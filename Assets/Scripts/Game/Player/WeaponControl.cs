@@ -81,7 +81,7 @@ public class WeaponControl : Weapon
         else if (canAttack == false)
         {
             delay += Time.deltaTime;
-            if (delay >= (bulletDelay / gameManager.attackSpeed))
+            if (delay >= (bulletDelay / (1 + gameManager.attackSpeed / 10)))
             {
                 canAttack = true;
                 delay = 0;

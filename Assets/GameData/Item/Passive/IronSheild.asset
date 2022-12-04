@@ -18,7 +18,7 @@ MonoBehaviour:
   hp: 0
   recoverHp: 0
   absorbHp: 0
-  defence: 10
+  defence: 5
   physicDamage: 0
   elementDamage: 0
   attackSpeed: -1
@@ -27,3 +27,4 @@ MonoBehaviour:
   luck: 0
   itemPrice: 36
   description: 
+  weight: 0

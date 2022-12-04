@@ -27,11 +27,20 @@ public class Monster : MonoBehaviour
 
     protected bool isFreeze = false;
 
+    protected float initSpeed = 0;
+
+    protected GameManager gameManager;
+    protected Character character;
+
     void Start()
     {
-        hp = stat.monsterMaxHp;
+        gameManager = GameManager.Instance;
+        character = Character.Instance;
+        hp = stat.monsterMaxHp * (1 + ((gameManager.round - 1) * 0.25f));
         initScale = transform.localScale;
         speed = stat.monsterSpeed;
+        initSpeed = speed;
+        initSpeed = speed;
         rend = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         coll = GetComponent<Collider>();
@@ -39,7 +48,7 @@ public class Monster : MonoBehaviour
 
     void Update()
     {
-        if (isDead == false && !isFreeze)
+        if (isDead == false)
         {
             Move();
             anim.SetBool("isWalk", isWalk);
@@ -48,25 +57,27 @@ public class Monster : MonoBehaviour
         OnDead();
     }
 
-    void SetInitMonster()
+    protected virtual void SetInitMonster()
     {
-        hp = stat.monsterMaxHp;
+        hp = stat.monsterMaxHp * (1 + ((gameManager.round - 1) * 0.25f));
         speed = stat.monsterSpeed;
-        isWalk = false;
+        isWalk = true;
         isDead = false;
         isAttacked = false;
         isAttack = false;
         coll.enabled = true;
         transform.localScale = initScale;
+        initScale = transform.localScale;
         rend.color = Color.white;
     }
 
     public void Move()
     {
-        Vector3 characterPos = Character.Instance.transform.position;
+        Vector3 characterPos = character.transform.position;
         dir = characterPos - transform.position;
 
-        transform.position = Vector3.MoveTowards(transform.position, characterPos, speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(new Vector3(transform.position.x,0,transform.position.z), characterPos, speed * Time.deltaTime);
+
 
         isWalk = true;
 
@@ -102,6 +113,7 @@ public class Monster : MonoBehaviour
         yield return new WaitForSeconds(2f);
 
         isFreeze = false;
+        speed = initSpeed;
         rend.color = Color.white;
     }
 
@@ -109,13 +121,13 @@ public class Monster : MonoBehaviour
     {
         if (other.CompareTag("Character"))
         {
-            Character.Instance.OnDamaged(coll);
+            character.OnDamaged(coll);
         }
     }
 
     public void OnDamaged(float damage)
     {
-        hp -= (damage - stat.monsterDefence);
+        hp -= (damage - (stat.monsterDefence + (gameManager.round * 0.25f)));
 
         StartCoroutine(MonsterColorBlink());
     }
@@ -123,15 +135,18 @@ public class Monster : MonoBehaviour
     public void OnDamaged(float damage, bool freeze)
     {
         isFreeze = freeze;
-        hp -= (damage - stat.monsterDefence);
+        hp -= (damage - (stat.monsterDefence + (gameManager.round * 0.25f)));
 
         if (isFreeze == true)
+        {
+            speed = 0;
             StartCoroutine(MonsterFreeze());
+        }
     }
 
     public void OnDead()
     {
-        if (hp <= 0 || GameManager.Instance.isClear || GameManager.Instance.hp <= 0)
+        if (hp <= 0 || gameManager.isClear || gameManager.hp <= 0)
         {
             coll.enabled = false;
             isDead = true;
@@ -146,7 +161,7 @@ public class Monster : MonoBehaviour
                     if (hp <= 0)
                     {
                         DropCoin.Instance.Drop(transform.position);
-                        GameManager.Instance.exp += stat.monsterExp;
+                        gameManager.exp += stat.monsterExp;
                     }
                     DestroyMonster();
                 }

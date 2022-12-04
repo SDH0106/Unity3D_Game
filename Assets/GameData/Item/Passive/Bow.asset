@@ -23,7 +23,8 @@ MonoBehaviour:
   elementDamage: 0
   attackSpeed: 0
   speed: 0
-  range: 10
+  range: 1
   luck: 0
   itemPrice: 25
   description: 
+  weight: 110

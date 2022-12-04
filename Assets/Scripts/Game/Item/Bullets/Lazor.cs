@@ -34,7 +34,7 @@ public class Lazor : Bullet
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.tag == "Monster")
+        if (collision.collider.tag == "Monster" && collision.collider.GetComponent<Monster>())
         {
             GameObject pool = Instantiate(damageUI, collision.contacts[0].point, Quaternion.Euler(90, 0, 0)).gameObject;
             pool.transform.SetParent(gameManager.damageStorage);

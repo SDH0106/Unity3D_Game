@@ -22,8 +22,8 @@ public class MonsterSpawn : MonoBehaviour
 
     [HideInInspector] public Vector3 spawnPos;
 
-    int[] weightValue;
-    int totalWeight = 0;
+    float[] weightValue;
+    float totalWeight = 0;
 
     GameManager gameManager;
 
@@ -35,14 +35,14 @@ public class MonsterSpawn : MonoBehaviour
     private void Start()
     {
         gameManager = GameManager.Instance;
-        weightValue = new int[] { 0, 0, 0, 1 };
+        weightValue = new float[] { 100, 0, 0, 0 };
 
         for (int i = 0; i < weightValue.Length; i++)
         {
             totalWeight += weightValue[i];
         }
 
-        InvokeRepeating("RendSpawnImage", 1f, spawnDelay);
+        InvokeRepeating("RendSpawnImage", 1f, spawnDelay / ((gameManager.round + 4) / 5));
 
         if (gameManager.round % 10 == 0)
         {
@@ -62,10 +62,12 @@ public class MonsterSpawn : MonoBehaviour
             gameManager.isBossDead = true;
     }
 
-    void SpawnMonster()
+    IEnumerator SpawnMonster(Vector3 pos)
     {
+        yield return new WaitForSeconds(1);
+
         Monster monster = pool.Get();
-        monster.transform.position = spawnPos;
+        monster.transform.position = pos;
     }
 
     Vector3 SpawnPosition()
@@ -88,10 +90,11 @@ public class MonsterSpawn : MonoBehaviour
 
     void RendSpawnImage()
     {
-        GameObject spawnMark = Instantiate(spawnImage, SpawnPosition(), spawnImage.transform.rotation);
+        Vector3 pos = SpawnPosition();
+        GameObject spawnMark = Instantiate(spawnImage, pos, spawnImage.transform.rotation);
         spawnMark.transform.SetParent(storageParent);
         Destroy(spawnMark, 1f);
-        Invoke("SpawnMonster", 1f);
+        StartCoroutine(SpawnMonster(pos));
     }
 
     void RendBossSpawnImage(int round)
@@ -158,9 +161,17 @@ public class MonsterSpawn : MonoBehaviour
 
     int RandomMonster()
     {
-        int rand = Random.Range(0, totalWeight);
+        if (gameManager.round >= 5)
+        {
+            weightValue[0] = 100 - (gameManager.round * 3f);
+            weightValue[1] = (gameManager.round * 3f) * 0.2f;
+            weightValue[2] = (gameManager.round * 3f) * 0.3f;
+            weightValue[3] = (gameManager.round * 3f) * 0.5f;
+        }
+
+        float rand = Random.Range(0, totalWeight);
         int spawnNum = 0;
-        int total = 0;
+        float total = 0;
 
         for (int i = 0; i < normalMonsterPrefab.Length; i++)
         { 

@@ -33,9 +33,9 @@ public class Bullet : MonoBehaviour
 
     protected virtual void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Monster")
+        if (other.tag == "Monster" && other.GetComponent<Monster>() != null)
         {
-            GameObject pool = Instantiate(damageUI,transform.position,Quaternion.Euler(90,0,0)).gameObject;
+            GameObject pool = Instantiate(damageUI, transform.position, Quaternion.Euler(90, 0, 0)).gameObject;
             pool.transform.SetParent(GameManager.Instance.damageStorage);
             other.GetComponent<Monster>().OnDamaged(damageUI.weaponDamage);
             GameManager.Instance.hp += GameManager.Instance.absorbHp;

@@ -60,7 +60,7 @@ public class SwordControl : Weapon
 
     void Attack()
     {
-        Vector3 range = (mouse - character.transform.position).normalized * gameManager.range;
+        Vector3 range = (mouse - character.transform.position).normalized * (1 + gameManager.range / 10);
 
         if (canAttack == true)
         {
@@ -96,7 +96,7 @@ public class SwordControl : Weapon
         if(canAttack == false)
         {
             delay += Time.deltaTime;
-            if (delay >= (swordDelay/ gameManager.attackSpeed))
+            if (delay >= (swordDelay / (1 + gameManager.attackSpeed / 10)))
             {
                 canAttack = true;
                 delay = 0;

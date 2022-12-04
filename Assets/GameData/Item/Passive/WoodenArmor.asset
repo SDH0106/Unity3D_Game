@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: WoodenArmor
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 541ae020fad5efc48a89a38c6218a601, type: 3}
+  itemGrade: 0
   itemName: "\uB098\uBB34 \uAC11\uC637"
-  hp: 10
+  hp: 5
   recoverHp: 0
   absorbHp: 0
-  defence: 2
-  weaponDamage: 0
+  defence: 1
+  physicDamage: 0
   elementDamage: 0
   attackSpeed: 0
   speed: 0
@@ -26,3 +27,4 @@ MonoBehaviour:
   luck: 0
   itemPrice: 12
   description: 
+  weight: 0

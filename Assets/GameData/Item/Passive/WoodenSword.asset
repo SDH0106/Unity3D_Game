@@ -13,16 +13,18 @@ MonoBehaviour:
   m_Name: WoodenSword
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 2ddf0348701148a4d8a7c6a0f7f146b3, type: 3}
+  itemGrade: 0
   itemName: "\uB098\uBB34 \uAC80"
   hp: 0
   recoverHp: 0
   absorbHp: 0
   defence: 0
-  physicDamage: 1
+  physicDamage: 2
   elementDamage: 0
-  attackSpeed: 1
+  attackSpeed: 2
   speed: 0
   range: 0
   luck: 0
   itemPrice: 14
   description: 
+  weight: 120

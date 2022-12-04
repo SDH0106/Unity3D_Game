@@ -22,8 +22,9 @@ MonoBehaviour:
   physicDamage: 0
   elementDamage: 0
   attackSpeed: 5
-  speed: 5
+  speed: 2
   range: 0
   luck: 0
   itemPrice: 38
   description: 
+  weight: 5

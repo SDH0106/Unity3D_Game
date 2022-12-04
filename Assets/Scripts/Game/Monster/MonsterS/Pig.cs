@@ -11,21 +11,34 @@ public class Pig : Monster
 
     private void Start()
     {
-        hp = stat.monsterMaxHp;
+        gameManager = GameManager.Instance;
+        character = Character.Instance;
+        hp = stat.monsterMaxHp * (1 + (float)((gameManager.round - 1) * 0.25)); ;
         initScale = transform.localScale;
         speed = stat.monsterSpeed;
+        initSpeed = speed;
         rend = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         coll = GetComponent<Collider>();
     }
 
+    protected override void SetInitMonster()
+    {
+        base.SetInitMonster();
+        isRush = false;
+        rushTime = 2f;
+        breakTime = 0f;
+    }
+
     private void Update()
     {
-        if (isDead == false && !isFreeze)
+        if (isDead == false)
         {
             Move();
             anim.SetBool("isWalk", isWalk);
-            Attack();
+
+            if (!isFreeze)
+                Attack();
         }
 
         OnDead();
@@ -33,7 +46,7 @@ public class Pig : Monster
 
     void Attack()
     {
-        distance = Vector3.Magnitude(Character.Instance.transform.position - transform.position);
+        distance = Vector3.Magnitude(character.transform.position - transform.position);
         anim.SetBool("isAttack", isAttack);
 
         if (distance <= 3)

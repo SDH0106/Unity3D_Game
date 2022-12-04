@@ -17,10 +17,10 @@ public class Fire : Bullet
 
     protected override void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Monster")
+        if (other.tag == "Monster" && other.GetComponent<Monster>() != null)
         {
-            int rand = Random.Range(0, 2);
-            if (rand == 1)
+            int rand = Random.Range(0, 40);
+            if (rand == 10)
                 Instantiate(explosion, transform.position, transform.rotation);
 
             GameObject pool = Instantiate(damageUI, transform.position, Quaternion.Euler(90, 0, 0)).gameObject;

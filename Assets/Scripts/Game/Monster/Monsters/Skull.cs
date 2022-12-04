@@ -7,32 +7,42 @@ public class Skull : Monster
     [SerializeField] GameObject skullBullet;
     [SerializeField] Transform[] bulletPoses;
 
-    GameManager gameManager;
-
     float attackTime = 5;
+
     void Start()
     {
         gameManager = GameManager.Instance;
-        hp = stat.monsterMaxHp;
+        character = Character.Instance;
+        hp = stat.monsterMaxHp * (1 + (float)((gameManager.round - 1) * 0.25)); ;
         initScale = transform.localScale;
         speed = stat.monsterSpeed;
+        initSpeed = speed;
         rend = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         coll = GetComponent<Collider>();
     }
 
+    protected override void SetInitMonster()
+    {
+        base.SetInitMonster();
+        attackTime = 5;
+    }
+
     void Update()
     {
-        if (isDead == false && !isAttack && !isFreeze)
+        if (isDead == false && !isAttack)
         {
             Move();
 
-            attackTime -= Time.deltaTime;
-
-            if(attackTime <= 0)
+            if (!isFreeze)
             {
-                attackTime = 5;
-                Attack();
+                attackTime -= Time.deltaTime;
+
+                if (attackTime <= 0)
+                {
+                    attackTime = 5;
+                    Attack();
+                }
             }
         }
 

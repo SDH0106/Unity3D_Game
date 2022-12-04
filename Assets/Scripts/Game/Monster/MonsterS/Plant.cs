@@ -12,25 +12,38 @@ public class Plant : Monster
 
     private void Start()
     {
-        hp = stat.monsterMaxHp;
+        gameManager = GameManager.Instance;
+        character = Character.Instance;
+        hp = stat.monsterMaxHp * (1 + (float)((gameManager.round - 1) * 0.25)); ;
         initScale = transform.localScale;
         speed = stat.monsterSpeed;
+        initSpeed = speed;
         rend = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         coll = GetComponent<Collider>();
     }
 
+    protected override void SetInitMonster()
+    {
+        base.SetInitMonster();
+        attackTime = 3;
+    }
+
     private void Update()
     {
-        if (isDead == false && !isFreeze)
+        if (isDead == false)
         {
             Move();
-            attackTime -= Time.deltaTime;
 
-            if(attackTime <= 0)
+            if (!isFreeze)
             {
-                attackTime = 3;
-                Attack();
+                attackTime -= Time.deltaTime;
+
+                if (attackTime <= 0)
+                {
+                    attackTime = 3;
+                    Attack();
+                }
             }
         }
 
