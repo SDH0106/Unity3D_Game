@@ -66,7 +66,7 @@ public class GameManager : Singleton<GameManager>
     {
         beforeLevel = level;
         DontDestroyOnLoad(gameObject);
-        InitStatSetting();
+        //InitStatSetting();
         InitArray();
 
         currentGameTime = gameTime;
@@ -80,7 +80,7 @@ public class GameManager : Singleton<GameManager>
     {
         level = 1;
         levelUpCount = 0;
-        maxHp = 50;
+        maxHp = 20;
         maxExp = 10;
         recoverHp = 0;
         absorbHp = 0;

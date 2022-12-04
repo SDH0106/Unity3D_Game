@@ -53,6 +53,7 @@ public class PassiveCardUI : MonoBehaviour
         CardImage();
         StatArray();
         DescriptionInfo();
+        StartLockColor();   
     }
 
     private void Update()
@@ -188,6 +189,21 @@ public class PassiveCardUI : MonoBehaviour
             lockBackImage.color = LockImageColor;
             lockText.color = LockTextColor;
             isLock = false;
+        }
+    }
+
+    void StartLockColor()
+    {
+        if (isLock)
+        {
+            lockBackImage.color = Color.white;
+            lockText.color = Color.black;
+        }
+
+        else if (!isLock)
+        {
+            lockBackImage.color = LockImageColor;
+            lockText.color = LockTextColor;
         }
     }
 }

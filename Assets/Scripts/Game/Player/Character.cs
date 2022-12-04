@@ -27,10 +27,10 @@ public class Character : Singleton<Character>
 
     GameManager gameManager;
 
-    float dashCoolTime = 2;
-    float initDashCoolTime;
+    public float dashCoolTime = 2;
+    public float initDashCoolTime;
 
-    bool isDash = true;
+    public bool isDash = true;
 
     float x;
     float z;
@@ -102,7 +102,7 @@ public class Character : Singleton<Character>
 
                 transform.position = Vector3.Lerp(beforePos, afterPos, 1);
                 isDash = false;
-                Invoke("particleOff", 0.5f);
+                Invoke("particleOff", 0.4f);
             }
         }
 

@@ -25,6 +25,11 @@ public class ItemManager : Singleton<ItemManager>
 
     [HideInInspector] public Grade[] weaponGrade;
 
+    [HideInInspector] public PassiveInfo[] lockedPassCards;
+    [HideInInspector] public WeaponInfo[] lockedWeaCards;
+    [HideInInspector] public bool[] cardLocks;
+    [HideInInspector] public Grade[] cardGrades;
+
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
@@ -37,6 +42,10 @@ public class ItemManager : Singleton<ItemManager>
         storedWeapon = new WeaponInfo[6];
         storedPassive = new PassiveInfo[30];
         storedPassiveCount = new int[storedPassive.Length];
+        lockedPassCards = new PassiveInfo[4];
+        lockedWeaCards = new WeaponInfo[4];
+        cardLocks = new bool[4] { false, false, false, false };
+        cardGrades = new Grade[4];
     }
 
     public void GetWeaponInfo(WeaponInfo weaponInfo)

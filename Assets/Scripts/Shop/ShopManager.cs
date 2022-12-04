@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.Purchasing.MiniJSON;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.XR;
 
 public class ShopManager : Singleton<ShopManager>
 {
@@ -39,9 +40,9 @@ public class ShopManager : Singleton<ShopManager>
     [SerializeField] GameObject[] passiveSlots;
 
     GameObject[] cards;
-    int[] num;
+    int[] wpCheck;
 
-    bool[] bools;
+    bool[] lockBools;
 
     int rerollMoney;
 
@@ -65,24 +66,15 @@ public class ShopManager : Singleton<ShopManager>
         initPriceColor = rerollMoneyText.color;
         clickUI.gameObject.SetActive(false);
         rerollMoney = -gameManager.round;
-        bools = new bool[4];
-        num = new int[4];
+        lockBools = new bool[4];
+        wpCheck = new int[4];
         cards = new GameObject[4];
-
-        CardSlot();
+        StartCardSlot();
+        StartCheckLock();
     }
 
     private void Update()
     {
-        round.text = gameManager.round.ToString();
-        money.text = gameManager.money.ToString();
-        rerollMoneyText.text = rerollMoney.ToString();
-
-        if (gameManager.money < -rerollMoney)
-            rerollMoneyText.color = Color.red;
-
-        else if (gameManager.money >= -rerollMoney)
-            rerollMoneyText.color = initPriceColor;
 
         if (gameManager.currentScene == "Shop")
         {
@@ -93,6 +85,16 @@ public class ShopManager : Singleton<ShopManager>
             WeaponSlot();
             PassiveSlot();
             Refill();
+
+            round.text = gameManager.round.ToString();
+            money.text = gameManager.money.ToString();
+            rerollMoneyText.text = rerollMoney.ToString();
+
+            if (gameManager.money < -rerollMoney)
+                rerollMoneyText.color = Color.red;
+
+            else if (gameManager.money >= -rerollMoney)
+                rerollMoneyText.color = initPriceColor;
         }
 
         else if (gameManager.currentScene == "Game")
@@ -159,29 +161,45 @@ public class ShopManager : Singleton<ShopManager>
         }
 
         if (refillNum == 4)
+        {
             CardSlot();
+        }
     }
 
     public void Reroll()
     {
+        bool allLock = false;
+        int lockCount = 0;
+
+        for (int i = 0; i < lockBools.Length; i++)
+        {
+            allLock = lockBools[i];
+
+            if (allLock == true)
+                lockCount++;
+        }
+
         SoundManager.Instance.PlayES("SelectButton");
 
-        if (gameManager.money >= -rerollMoney)
+        if (lockCount != 4)
         {
-            for (int i = 0; i < cardsParent.childCount; i++)
+            if (gameManager.money >= -rerollMoney)
             {
-                if (cards[i] != null)
+                for (int i = 0; i < cardsParent.childCount; i++)
                 {
-                    if (bools[i] == false)
-                        Destroy(cardsParent.GetChild(i).GetChild(0).gameObject);
+                    if (cards[i] != null)
+                    {
+                        if (lockBools[i] == false)
+                            Destroy(cardsParent.GetChild(i).GetChild(0).gameObject);
+                    }
                 }
+
+                gameManager.money += rerollMoney;
+
+                rerollMoney -= Mathf.CeilToInt((float)(gameManager.round) / 2);
+
+                CardSlot();
             }
-
-            gameManager.money += rerollMoney;
-
-            rerollMoney -= Mathf.CeilToInt((float)(gameManager.round) / 2);
-
-            CardSlot();
         }
     }
 
@@ -191,15 +209,25 @@ public class ShopManager : Singleton<ShopManager>
         {
             if (cards[i] != null)
             {
-                if (num[i] == 0)
+                if (wpCheck[i] == 0)
                 {
-                    bools[i] = cards[i].GetComponent<WeaponCardUI>().isLock;
+                    lockBools[i] = cards[i].GetComponent<WeaponCardUI>().isLock;
+
+                    if (lockBools[i] == true)
+                    {
+                        itemManager.lockedWeaCards[i] = cards[i].GetComponent<WeaponCardUI>().selectedWeapon;
+                        itemManager.cardGrades[i] = cards[i].GetComponent<WeaponCardUI>().selectedWeapon.weaponGrade;
+                    }
                 }
 
-                else if (num[i] == 1)
+                else if (wpCheck[i] == 1)
                 {
-                    bools[i] = cards[i].GetComponent<PassiveCardUI>().isLock;
+                    lockBools[i] = cards[i].GetComponent<PassiveCardUI>().isLock;
+                    if (lockBools[i] == true)
+                        itemManager.lockedPassCards[i] = cards[i].GetComponent<PassiveCardUI>().selectedPassive;
                 }
+
+                itemManager.cardLocks[i] = lockBools[i];
             }
         }
     }
@@ -208,7 +236,7 @@ public class ShopManager : Singleton<ShopManager>
     {
         for (int i = 0; i < 4; i++)
         {
-            if (bools[i] == false)
+            if (itemManager.cardLocks[i] == false)
             {
                 int rand = UnityEngine.Random.Range(0, 100);
 
@@ -217,7 +245,7 @@ public class ShopManager : Singleton<ShopManager>
                     GetRandomWeaponCard();
                     GameObject instant = Instantiate(weaponCardUI, cardsParent.GetChild(i).transform);
                     cards[i] = instant;
-                    num[i] = 0;
+                    wpCheck[i] = 0;
                     instant.transform.SetParent(cardsParent.GetChild(i));
                 }
 
@@ -226,11 +254,80 @@ public class ShopManager : Singleton<ShopManager>
                     GetRandomPassiveCard();
                     GameObject instant = Instantiate(passiveCardUI, cardsParent.GetChild(i).transform);
                     cards[i] = instant;
-                    num[i] = 1;
+                    wpCheck[i] = 1;
+                    instant.transform.SetParent(cardsParent.GetChild(i));
+                }
+            }
+        }
+    }
+
+    void StartCardSlot()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            if (itemManager.cardLocks[i] == false)
+            {
+                int rand = UnityEngine.Random.Range(0, 100);
+
+                if (rand >= 80)
+                {
+                    GetRandomWeaponCard();
+                    GameObject instant = Instantiate(weaponCardUI, cardsParent.GetChild(i).transform);
+                    cards[i] = instant;
+                    wpCheck[i] = 0;
+                    instant.transform.SetParent(cardsParent.GetChild(i));
+                }
+
+                else if (rand < 80)
+                {
+                    GetRandomPassiveCard();
+                    GameObject instant = Instantiate(passiveCardUI, cardsParent.GetChild(i).transform);
+                    cards[i] = instant;
+                    wpCheck[i] = 1;
                     instant.transform.SetParent(cardsParent.GetChild(i));
                 }
             }
 
+            else if (itemManager.cardLocks[i] == true)
+            {
+                if (itemManager.lockedWeaCards[i] != null)
+                {
+                    GameObject instant = Instantiate(weaponCardUI, cardsParent.GetChild(i).transform);
+                    cards[i] = instant;
+                    cards[i].GetComponent<WeaponCardUI>().selectedWeapon = itemManager.lockedWeaCards[i];
+                    cards[i].GetComponent<WeaponCardUI>().selectedWeapon.weaponGrade = itemManager.cardGrades[i];
+                    wpCheck[i] = 0;
+                    instant.transform.SetParent(cardsParent.GetChild(i));
+                }
+
+                else if (itemManager.lockedPassCards[i] != null)
+                {
+                    GameObject instant = Instantiate(passiveCardUI, cardsParent.GetChild(i).transform);
+                    cards[i] = instant;
+                    cards[i].GetComponent<PassiveCardUI>().selectedPassive = itemManager.lockedPassCards[i];
+                    wpCheck[i] = 1;
+                    instant.transform.SetParent(cardsParent.GetChild(i));
+                }
+            }
+        }
+    }
+
+    void StartCheckLock()
+    {
+        for (int i = 0; i < cardsParent.childCount; i++)
+        {
+            if (cards[i] != null)
+            {
+                if (wpCheck[i] == 0)
+                {
+                    cards[i].GetComponent<WeaponCardUI>().isLock = itemManager.lockedWeaCards[i];
+                }
+
+                else if (wpCheck[i] == 1)
+                {
+                    cards[i].GetComponent<PassiveCardUI>().isLock = itemManager.cardLocks[i];
+                }
+            }
         }
     }
 

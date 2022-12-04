@@ -1980,11 +1980,11 @@ MonoBehaviour:
   damageStorage: {fileID: 1692643827}
   gameTime: 60
   money: 0
-  round: 10
+  round: 1
   exp: 0
   hp: 0
   level: 1
-  maxHp: 50
+  maxHp: 20
   maxExp: 10
   totalDamage: 0
   physicDamage: 0

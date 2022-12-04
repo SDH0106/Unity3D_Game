@@ -50,6 +50,7 @@ public class WeaponCardUI : MonoBehaviour
         LockTextColor = lockText.color;
         Setting();
         CardImage();
+        StartLockColor();
     }
 
     private void Update()
@@ -118,7 +119,7 @@ public class WeaponCardUI : MonoBehaviour
             gameManager.money -= (selectedWeapon.WeaponPrice * (int)(selectedWeapon.weaponGrade + 1));
             itemManager.foolCount++;
             itemManager.GetWeaponInfo(selectedWeapon);
-            ItemManager.Instance.weaponGrade[ItemManager.Instance.weaponCount] = selectedWeapon.weaponGrade;
+            itemManager.weaponGrade[itemManager.weaponCount] = selectedWeapon.weaponGrade;
             Destroy(gameObject);
             isLock = false;
             Character.Instance.Equip();
@@ -139,6 +140,21 @@ public class WeaponCardUI : MonoBehaviour
             lockBackImage.color = LockImageColor;
             lockText.color = LockTextColor;
             isLock = false;
+        }
+    }
+
+    void StartLockColor()
+    {
+        if (isLock)
+        {
+            lockBackImage.color = Color.white;
+            lockText.color = Color.black;
+        }
+
+        else if (!isLock)
+        {
+            lockBackImage.color = LockImageColor;
+            lockText.color = LockTextColor;
         }
     }
 }

@@ -31,6 +31,10 @@ public class GameSceneUI : MonoBehaviour
     [SerializeField] GameObject PauseUI;
     [SerializeField] Slider Sound;
 
+    [Header("Dash")]
+    [SerializeField] Image dashImage;
+    [SerializeField] Text dashCoolTime;
+
     [Header("Text")]
     [SerializeField] GameObject roundClearText;
     [SerializeField] GameObject gameOverUI;
@@ -40,11 +44,13 @@ public class GameSceneUI : MonoBehaviour
     [SerializeField] GameObject statCardParent;
 
     GameManager gameManager;
+    Character character;
 
     private void Start()
     {
         SoundManager.Instance.PlayBGM(1);
         gameManager = GameManager.Instance;
+        character = Character.Instance;
         roundClearText.SetActive(false);
         gameOverUI.SetActive(false);
         statCardParent.gameObject.SetActive(false);
@@ -59,6 +65,7 @@ public class GameSceneUI : MonoBehaviour
         CoinUI();
         RoundUI();
         TimeUI();
+        DashUI();
 
         if (gameManager.hp > 0)
         {
@@ -105,6 +112,27 @@ public class GameSceneUI : MonoBehaviour
 
             if (gameOverText.GetComponent<TypingText>().isOver == true)
                 SceneManager.LoadScene("End");
+        }
+    }
+
+    void DashUI()
+    {
+        if (!character.isDash)
+        {
+            Color color = dashImage.color;
+            color.a = 0.5f;
+            dashImage.color = color;
+            dashImage.fillAmount = 1 -(character.dashCoolTime / character.initDashCoolTime);
+            dashCoolTime.gameObject.SetActive(true);
+            dashCoolTime.text = character.dashCoolTime.ToString("F2");
+        }
+
+        else if(character.isDash)
+        {
+            Color color = dashImage.color;
+            color.a = 1f;
+            dashImage.color = color;
+            dashCoolTime.gameObject.SetActive(false);
         }
     }
 
@@ -160,8 +188,8 @@ public class GameSceneUI : MonoBehaviour
 
     public void TitleScene()
     {
-        Destroy(GameManager.Instance.gameObject);
-        Destroy(Character.Instance.gameObject);
+        Destroy(gameManager.gameObject);
+        Destroy(character.gameObject);
         Destroy(ItemManager.Instance.gameObject);
         Destroy(SoundManager.Instance.gameObject);
         SceneManager.LoadScene("StartTitle");
