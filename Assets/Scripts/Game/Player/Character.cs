@@ -9,8 +9,8 @@ using static WeaponInfo;
 public class Character : Singleton<Character>
 {
     [SerializeField] SpriteRenderer rend;
-    [SerializeField] Animator anim;
-    [SerializeField] LayerMask coinLayer;
+    Animator anim;
+    [SerializeField] ParticleSystem particle;
 
     [SerializeField] Slider playerHpBar;
 
@@ -27,6 +27,14 @@ public class Character : Singleton<Character>
 
     GameManager gameManager;
 
+    float dashCoolTime = 2;
+    float initDashCoolTime;
+
+    bool isDash = true;
+
+    float x;
+    float z;
+
     protected override void Awake()
     {
         base.Awake();
@@ -36,14 +44,19 @@ public class Character : Singleton<Character>
     void Start()
     {
         anim = GetComponent<Animator>();
+        particle.GetComponentInChildren<Renderer>().enabled = false;
 
         transform.position = Vector3.zero;
+        initDashCoolTime = dashCoolTime;
 
         gameManager = GameManager.Instance;
     }
 
     void Update()
     {
+        x = Input.GetAxisRaw("Horizontal");
+        z = Input.GetAxisRaw("Vertical");
+
         playerHpBar.value = 1 - (gameManager.hp / gameManager.maxHp);
 
         if (gameManager.currentScene == "Game")
@@ -51,11 +64,63 @@ public class Character : Singleton<Character>
             if (isDead == false)
             {
                 Move();
+                Dash();
             }
 
             anim.SetBool("isRun", isRun);
             OnDead();
         }
+    }
+
+    void Dash()
+    {
+        Vector3 beforePos;
+        Vector3 afterPos;
+
+        if (isDash)
+        {
+            if (rend.flipX == true)
+            {
+                particle.transform.localScale = new Vector3(-1, 1, 1);
+            }
+
+            else if (rend.flipX == false)
+            {
+                particle.transform.localScale = new Vector3(1, 1, 1);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                particle.GetComponentInChildren<Renderer>().enabled = true;
+
+                beforePos = transform.position;
+
+                if (x == 0 && z == 0)
+                    afterPos = new Vector3(transform.position.x + 2, 0, 0);
+                else
+                    afterPos = transform.position + new Vector3(x, 0, z) * 4;
+
+                transform.position = Vector3.Lerp(beforePos, afterPos, 1);
+                isDash = false;
+                Invoke("particleOff", 0.5f);
+            }
+        }
+
+        else if(!isDash)
+        {
+            dashCoolTime -= Time.deltaTime;
+
+            if(dashCoolTime <=0)
+            {
+                isDash = true;
+                dashCoolTime = initDashCoolTime;
+            }
+        }    
+    }
+
+    void particleOff()
+    {
+        particle.GetComponentInChildren<Renderer>().enabled = false;
     }
 
     public void Equip()
@@ -78,9 +143,6 @@ public class Character : Singleton<Character>
 
     void Move()
     {
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
-
         transform.position += new Vector3(x, 0, z) * gameManager.speed * Time.deltaTime;
 
         if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))

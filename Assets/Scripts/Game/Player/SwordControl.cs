@@ -106,7 +106,7 @@ public class SwordControl : Weapon
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Monster"))
+        if(other.CompareTag("Monster") && other.GetComponent<Monster>() != null)
         {
             GameObject pool = Instantiate(damageUI, transform.position, Quaternion.Euler(90, 0, 0)).gameObject;
             pool.transform.SetParent(gameManager.damageStorage);
