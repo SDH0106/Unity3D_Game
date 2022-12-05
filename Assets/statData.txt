@@ -62,6 +62,20 @@
             "statSprite": "Luck",
             "grade": "일반",
             "statValue": 1.0
+        },
+         {
+            "statName": "시력",
+            "statType": "사거리",
+            "statSprite": "Range",
+            "grade": "일반",
+            "statValue": 1.0
+        },
+        {
+            "statName": "강타",
+            "statType": "크리티컬",
+            "statSprite": "Critical",
+            "grade": "일반",
+            "statValue": 5.0
         }
     ]
 }

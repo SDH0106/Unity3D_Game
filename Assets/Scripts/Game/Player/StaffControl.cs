@@ -22,8 +22,6 @@ public class StaffControl : Weapon
     bool isTargetFind = false;
     Transform target;
 
-    GameManager gameManager;
-
     private void Awake()
     {
         pool = new ObjectPool<Bullet>(CreateBullet, OnGetBullet, OnReleaseBullet, OnDestroyBullet, maxSize: poolCount);

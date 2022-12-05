@@ -27,6 +27,7 @@ public class ShopManager : Singleton<ShopManager>
     [SerializeField] Text spd;
     [SerializeField] Text ran;
     [SerializeField] Text luk;
+    [SerializeField] Text cri;
 
     [Header("Prefabs")]
     [SerializeField] Transform cardsParent;
@@ -116,6 +117,7 @@ public class ShopManager : Singleton<ShopManager>
         spd.text = gameManager.speed.ToString();
         ran.text = gameManager.range.ToString();
         luk.text = gameManager.luck.ToString();
+        cri.text = gameManager.critical.ToString();
     }
 
     public void ToGameScene()

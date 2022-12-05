@@ -1,6 +1,7 @@
 using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.ConstrainedExecution;
 using System.Security.Cryptography;
 using System.Xml.Schema;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
@@ -36,7 +37,8 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] public float attackSpeed;
     [SerializeField] public float speed;
     [SerializeField] public float range;
-    [HideInInspector] public float luck;
+    [SerializeField] public float luck;
+    [SerializeField] public float critical;
 
     [HideInInspector] public float currentGameTime;
 
@@ -89,11 +91,12 @@ public class GameManager : Singleton<GameManager>
         speed = 2;
         range = 1;
         luck = 0;
+        critical = 10;
     }
 
     void InitArray()
     {
-        stats = new float[10];
+        stats = new float[11];
         stats[0] = maxHp;
         stats[1] = recoverHp;
         stats[2] = absorbHp;
@@ -104,6 +107,7 @@ public class GameManager : Singleton<GameManager>
         stats[7] = speed;
         stats[8] = luck;
         stats[9] = range;
+        stats[10] = critical;
     }
 
     private void Update()
@@ -148,6 +152,7 @@ public class GameManager : Singleton<GameManager>
         speed = stats[7];
         luck = stats[8];
         range = stats[9];
+        critical = stats[10];
     }
 
     void OnGameScene()

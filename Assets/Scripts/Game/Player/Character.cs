@@ -186,13 +186,15 @@ public class Character : Singleton<Character>
         if (other.tag == "Monster" && isAttacked == false)
         {
             gameManager.hp -= (int)(other.gameObject.GetComponent<Monster>().stat.monsterDamage / gameManager.defence);
-            StartCoroutine(OnInvincible());
+            if ((other.gameObject.GetComponent<Monster>().stat.monsterDamage / gameManager.defence) != 0)
+                StartCoroutine(OnInvincible());
         }
 
         else if(other.CompareTag("monsterBullet") && isAttacked == false)
         {
             gameManager.hp -= (int)(other.gameObject.GetComponent<MonsterBullet>().bulletDamage / gameManager.defence);
-            StartCoroutine(OnInvincible());
+            if ((other.gameObject.GetComponent<Monster>().stat.monsterDamage / gameManager.defence) != 0)
+                StartCoroutine(OnInvincible());
         }
     }
 

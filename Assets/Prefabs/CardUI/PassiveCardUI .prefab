@@ -624,7 +624,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &7115974904562025005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -707,7 +707,7 @@ MonoBehaviour:
   itemName: {fileID: 3667563659590199475}
   itemPrice: {fileID: 2162777225447614391}
   itemGrade: {fileID: 2034016708954755514}
-  selectedPassive: {fileID: 11400000, guid: 9c8f8f1ddfa9e3941bad682fe545ce87, type: 2}
+  selectedPassive: {fileID: 11400000, guid: 27fccdcb983a51f4c9d52012843c3023, type: 2}
   isLock: 0
 --- !u!1 &3950642370217644491
 GameObject:

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Pool;
@@ -17,7 +18,6 @@ public class SwordControl : Weapon
 
     bool canAttack = true;
 
-    GameManager gameManager;
     Character character;
 
     private void Start()
@@ -108,6 +108,7 @@ public class SwordControl : Weapon
     {
         if(other.CompareTag("Monster") && other.GetComponent<Monster>() != null)
         {
+            criRand = UnityEngine.Random.Range(0, 100);
             GameObject pool = Instantiate(damageUI, transform.position, Quaternion.Euler(90, 0, 0)).gameObject;
             pool.transform.SetParent(gameManager.damageStorage);
             other.GetComponent<Monster>().OnDamaged(damageUI.weaponDamage);

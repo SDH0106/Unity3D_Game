@@ -1978,8 +1978,8 @@ MonoBehaviour:
   aimCursor: {fileID: 2800000, guid: b8e78032f8af0954784d1fe9e5a09187, type: 3}
   bulletStorage: {fileID: 1005871281}
   damageStorage: {fileID: 1692643827}
-  gameTime: 60
-  money: 0
+  gameTime: 0
+  money: 10000
   round: 1
   exp: 0
   hp: 0
@@ -1996,9 +1996,10 @@ MonoBehaviour:
   speed: 2
   range: 1
   luck: 0
+  critical: 50
   currentGameTime: 0
   currentScene: 
-  levelUpCount: 0
+  levelUpCount: 1
   stats: []
   isPause: 0
   isClear: 0
@@ -2086,6 +2087,16 @@ MonoBehaviour:
     statSprite: Luck
     grade: "\uC77C\uBC18"
     statValue: 1
+  - statName: "\uC2DC\uB825"
+    statType: "\uC0AC\uAC70\uB9AC"
+    statSprite: Range
+    grade: "\uC77C\uBC18"
+    statValue: 1
+  - statName: "\uAC15\uD0C0"
+    statType: "\uD06C\uB9AC\uD2F0\uCEEC"
+    statSprite: Critical
+    grade: "\uC77C\uBC18"
+    statValue: 5
 --- !u!114 &936130858
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -12,11 +12,6 @@ public class Stat
     public string grade;
     public float statValue;
 
-    public Stat()
-    {
-
-    }
-
     public Stat(string statName, string statType, string statSprite, string grade, float statValue)
     {
         this.statName = statName;

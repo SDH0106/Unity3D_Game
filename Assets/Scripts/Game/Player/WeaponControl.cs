@@ -19,8 +19,6 @@ public class WeaponControl : Weapon
 
     bool canAttack = true;
 
-    GameManager gameManager;
-
     private void Awake()
     {
         pool = new ObjectPool<Bullet>(CreateBullet, OnGetBullet, OnReleaseBullet, OnDestroyBullet, maxSize: poolCount);

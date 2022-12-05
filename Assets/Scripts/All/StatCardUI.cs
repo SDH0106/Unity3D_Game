@@ -36,7 +36,7 @@ public class StatCardUI : StatCardInfo
 
         gameManager.levelUpCount--;
 
-        for (int i = 0; i < 9; i++)
+        for (int i = 0; i < 11; i++)
         {
             if (selectedCard.statName == gameManager.gameObject.GetComponent<StatCardInfo>().statInfos[i].statName)
                 gameManager.stats[i] += gameManager.gameObject.GetComponent<StatCardInfo>().statInfos[i].statValue;
