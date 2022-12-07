@@ -42,6 +42,7 @@ public class Bullet : MonoBehaviour
             DestroyBullet();
             CancelInvoke("DestroyBullet");
 
+
             Instantiate(effectPrefab, transform.position, transform.rotation);
         }
     }

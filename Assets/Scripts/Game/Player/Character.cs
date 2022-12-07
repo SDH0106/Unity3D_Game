@@ -102,7 +102,7 @@ public class Character : Singleton<Character>
 
                 transform.position = Vector3.Lerp(beforePos, afterPos, 1);
                 isDash = false;
-                Invoke("particleOff", 0.4f);
+                Invoke("ParticleOff", 0.4f);
             }
         }
 
@@ -110,7 +110,7 @@ public class Character : Singleton<Character>
         {
             dashCoolTime -= Time.deltaTime;
 
-            if(dashCoolTime <=0)
+            if (dashCoolTime <= 0)
             {
                 isDash = true;
                 dashCoolTime = initDashCoolTime;
@@ -118,7 +118,8 @@ public class Character : Singleton<Character>
         }    
     }
 
-    void particleOff()
+
+    void ParticleOff()
     {
         particle.GetComponentInChildren<Renderer>().enabled = false;
     }
@@ -185,16 +186,20 @@ public class Character : Singleton<Character>
     {
         if (other.tag == "Monster" && isAttacked == false)
         {
-            gameManager.hp -= (int)(other.gameObject.GetComponent<Monster>().stat.monsterDamage / gameManager.defence);
-            if ((other.gameObject.GetComponent<Monster>().stat.monsterDamage / gameManager.defence) != 0)
+            if (other.gameObject.GetComponent<Monster>().stat.monsterDamage - gameManager.defence > 0)
+            {
+                gameManager.hp -= (other.gameObject.GetComponent<Monster>().stat.monsterDamage - gameManager.defence);
                 StartCoroutine(OnInvincible());
+            }
         }
 
         else if(other.CompareTag("monsterBullet") && isAttacked == false)
         {
-            gameManager.hp -= (int)(other.gameObject.GetComponent<MonsterBullet>().bulletDamage / gameManager.defence);
-            if ((other.gameObject.GetComponent<Monster>().stat.monsterDamage / gameManager.defence) != 0)
+            if ((other.gameObject.GetComponent<MonsterBullet>().bulletDamage - gameManager.defence) > 0)
+            {
+                gameManager.hp -= (other.gameObject.GetComponent<MonsterBullet>().bulletDamage - gameManager.defence);
                 StartCoroutine(OnInvincible());
+            }
         }
     }
 

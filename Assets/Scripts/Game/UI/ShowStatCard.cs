@@ -19,10 +19,14 @@ public class ShowStatCard : Singleton<ShowStatCard>
 
     [HideInInspector] public bool isSelected;
 
+    float[] weightValue;
+    Grade cardGrade;
+
     GameManager gameManager;
 
     private void Start()
     {
+        weightValue = new float[4];
         gameManager = GameManager.Instance;
         initPriceColor = rerollMoneyText.color;
         rerollMoney = -3;
@@ -51,10 +55,10 @@ public class ShowStatCard : Singleton<ShowStatCard>
 
         rerollMoneyText.text = rerollMoney.ToString();
 
-        Refill();
+        CardDestroy();
     }
 
-    void Refill()
+    void CardDestroy()
     {
         for (int i = 1; i < 5; i++)
         {
@@ -107,9 +111,55 @@ public class ShowStatCard : Singleton<ShowStatCard>
         {
             StatCardUI card = statCard.GetComponent<StatCardUI>();
             card.selectedCard = statInfo[numArray[i - 1]];
+            card.cardGrade = RandomGrade();
             GameObject instant = Instantiate(statCard, this.transform.GetChild(i).transform);
             statCards[i - 1] = instant;
             statCards[i - 1].transform.SetParent(this.transform.GetChild(i));
         }
+    }
+
+    Grade RandomGrade()
+    {
+        float totalWeight = 0;
+
+        weightValue[0] = 150 - (gameManager.round - 1) * 5;
+        weightValue[1] = 10 + (gameManager.round - 1) * 20;
+        weightValue[2] = (gameManager.round - 1);
+        weightValue[3] = (gameManager.round - 1) / 2;
+
+        for (int i = 0; i < weightValue.Length; i++)
+        {
+            totalWeight += weightValue[i];
+        }
+
+        float rand = Random.Range(0, totalWeight);
+        float gradeNum = 0;
+        float total = 0;
+
+        for (int i = 0; i < weightValue.Length; i++)
+        {
+            total += weightValue[i];
+            if (rand <= total)
+            {
+                gradeNum = i;
+                break;
+            }
+        }
+
+        Grade grade;
+
+        if (gradeNum == 1)
+            grade = Grade.Èñ±Í;
+
+        else if (gradeNum == 2)
+            grade = Grade.Àü¼³;
+
+        else if (gradeNum == 3)
+            grade = Grade.½ÅÈ­;
+
+        else
+            grade = Grade.ÀÏ¹Ý;
+
+        return grade;
     }
 }

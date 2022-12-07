@@ -13,9 +13,6 @@ public class AttackEffect : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-            Time.timeScale = 0;
-
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("Hit"))
         {
             if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)

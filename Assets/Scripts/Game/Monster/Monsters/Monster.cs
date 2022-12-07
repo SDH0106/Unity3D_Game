@@ -127,15 +127,17 @@ public class Monster : MonoBehaviour
 
     public void OnDamaged(float damage)
     {
-        hp -= (damage - (stat.monsterDefence + (gameManager.round * 0.25f)));
+        Debug.Log("Damaged");
+        hp -= (damage - (stat.monsterDefence * (1 + gameManager.round * 0.1f)));
 
         StartCoroutine(MonsterColorBlink());
     }
 
     public void OnDamaged(float damage, bool freeze)
     {
+        Debug.Log("Damaged");
         isFreeze = freeze;
-        hp -= (damage - (stat.monsterDefence + (gameManager.round * 0.25f)));
+        hp -= (damage - (stat.monsterDefence * (1 + gameManager.round * 0.1f)));
 
         if (isFreeze == true)
         {

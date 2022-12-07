@@ -15,6 +15,8 @@ MonoBehaviour:
   itemSprite: {fileID: 21300000, guid: 2d7d9ae02b7159843ac7d5ead0f8b89a, type: 3}
   itemGrade: 2
   itemName: "\uC131\uC7A5 \uBB3C\uC57D(\uB300)"
+  itemPrice: 36
+  maxCount: 100
   hp: 0
   recoverHp: 0
   absorbHp: 0
@@ -25,6 +27,4 @@ MonoBehaviour:
   speed: 0
   range: 6
   luck: 0
-  itemPrice: 36
-  description: 
   weight: 5

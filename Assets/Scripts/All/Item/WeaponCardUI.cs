@@ -49,7 +49,7 @@ public class WeaponCardUI : MonoBehaviour
         LockImageColor = lockBackImage.color;
         LockTextColor = lockText.color;
         Setting();
-        CardImage();
+        CardColor();
         StartLockColor();
     }
 
@@ -76,7 +76,7 @@ public class WeaponCardUI : MonoBehaviour
         weaponGrade.text = selectedWeapon.weaponGrade.ToString();
     }
 
-    void CardImage()
+    void CardColor()
     {
         if (selectedWeapon.weaponGrade == Grade.¿œπ›)
         {

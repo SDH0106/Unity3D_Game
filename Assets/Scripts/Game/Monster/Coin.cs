@@ -42,7 +42,7 @@ public class Coin : Singleton<Coin>
         {
             if (distance <= 2)
             {
-                speed = gameManager.speed + 1;
+                speed = gameManager.speed + 2;
                 isGet = true;
             }
             else

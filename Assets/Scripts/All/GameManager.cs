@@ -46,7 +46,7 @@ public class GameManager : Singleton<GameManager>
 
     UnityEngine.SceneManagement.Scene scene;
 
-     public int levelUpCount;
+    public int levelUpCount;
 
     [HideInInspector] public float[] stats;
 

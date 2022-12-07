@@ -9,6 +9,8 @@ public class PassiveInfo : ScriptableObject
     [SerializeField] Sprite itemSprite;
     [SerializeField] Grade itemGrade;
     [SerializeField] string itemName;
+    [SerializeField] int itemPrice;
+    [SerializeField] int maxCount;
     [SerializeField] float hp;
     [SerializeField] float recoverHp;
     [SerializeField] float absorbHp;
@@ -19,10 +21,9 @@ public class PassiveInfo : ScriptableObject
     [SerializeField] float speed;
     [SerializeField] float range;
     [SerializeField] float luck;
-    [SerializeField] int itemPrice;
-    [SerializeField] string description;
 
-    public float weight;
+    [HideInInspector] public float weight;
+
 
     public Sprite ItemSprite => itemSprite;
     public Grade ItemGrade => itemGrade;
@@ -37,6 +38,5 @@ public class PassiveInfo : ScriptableObject
     public float AbsorbHp => absorbHp;
     public float RecoverHp => recoverHp;
     public float AttackSpeed => attackSpeed;
-    public string Description => description;
     public int ItemPrice => itemPrice;
 }

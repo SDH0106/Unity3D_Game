@@ -9,14 +9,12 @@ public class Stat
     public string statName;
     public string statType;
     public string statSprite;
-    public string grade;
     public float statValue;
 
-    public Stat(string statName, string statType, string statSprite, string grade, float statValue)
+    public Stat(string statName, string statType, string statSprite, float statValue)
     {
         this.statName = statName;
         this.statSprite = statSprite;
-        this.grade = grade;
         this.statType = statType;
         this.statValue = statValue;
     }
@@ -39,7 +37,7 @@ public class StatCardInfo : MonoBehaviour
     [ContextMenu("MakeJsonFile")]
     public void MakeJsonFile()
     {
-        StatJson statJson = new StatJson(GetStatArray(9));      // 그래서 item배열을 가지는 클래스를 하나 만들어서 여러 객체를 저장할 수 있게 만듦
+        StatJson statJson = new StatJson(GetStatArray(11));      // 그래서 item배열을 가지는 클래스를 하나 만들어서 여러 객체를 저장할 수 있게 만듦
 
         // ToJson(obj, bool): bool값이 true인 경우 가독성이 좋게, false인 경우 최소값으로 obj값을 출력
         string json = JsonUtility.ToJson(statJson, true);       // Json은 객체 하나만 저장가능
@@ -52,7 +50,7 @@ public class StatCardInfo : MonoBehaviour
 
         for (int i = 0; i < stats.Length; i++)
         {
-            Stat newStat = new Stat("강인함", "체력", "스탯 이미지", "일반", 1);
+            Stat newStat = new Stat("강인함", "체력", "스탯 이미지", 1);
             stats[i] = newStat;
         }
 

@@ -1585,7 +1585,6 @@ GameObject:
   - component: {fileID: 5361027113453739058}
   - component: {fileID: 1927193374837317974}
   - component: {fileID: 7719271856648617477}
-  - component: {fileID: 8710068272198256309}
   - component: {fileID: -643204392626406560}
   m_Layer: 5
   m_Name: WeaponCardUI
@@ -1660,7 +1659,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &7719271856648617477
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1678,22 +1677,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!54 &8710068272198256309
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4429883375355207956}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 120
-  m_CollisionDetection: 0
 --- !u!114 &-643204392626406560
 MonoBehaviour:
   m_ObjectHideFlags: 0
