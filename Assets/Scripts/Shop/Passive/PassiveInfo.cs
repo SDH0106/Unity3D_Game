@@ -33,6 +33,7 @@ public class PassiveInfo : ScriptableObject
     [SerializeField] int dashCount;
     [SerializeField] int fireCount;
     [SerializeField] int gradeCost;*/
+    [SerializeField] string description;
     
     [HideInInspector] public float weight;
 
@@ -53,4 +54,6 @@ public class PassiveInfo : ScriptableObject
     public float AttackSpeed => attackSpeed;
     public int ItemPrice => itemPrice;
     public float Critical => critical;
+    public float SalePercent => salePercent;
+    public string Description => description;
 }

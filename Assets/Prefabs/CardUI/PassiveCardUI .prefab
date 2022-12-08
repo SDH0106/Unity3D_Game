@@ -623,7 +623,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &7115974904562025005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -674,6 +674,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6c83ca2726759e746aebc8031428bb75, type: 2}
   - {fileID: 11400000, guid: 27fccdcb983a51f4c9d52012843c3023, type: 2}
   - {fileID: 11400000, guid: c42b7f58ac19f044d956139cb47bf4e3, type: 2}
+  - {fileID: 11400000, guid: 51eee72e67a9657469b11be9395c3190, type: 2}
   lockBackImage: {fileID: 4778071493522451700}
   lockImage: {fileID: 8296031119694492482}
   lockText: {fileID: 4972568240297667687}
@@ -690,7 +691,7 @@ MonoBehaviour:
   itemName: {fileID: 3667563659590199475}
   itemPrice: {fileID: 2162777225447614391}
   itemGrade: {fileID: 2034016708954755514}
-  selectedPassive: {fileID: 11400000, guid: 27fccdcb983a51f4c9d52012843c3023, type: 2}
+  selectedPassive: {fileID: 11400000, guid: 51eee72e67a9657469b11be9395c3190, type: 2}
   isLock: 0
 --- !u!1 &3950642370217644491
 GameObject:

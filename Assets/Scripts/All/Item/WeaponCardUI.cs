@@ -40,6 +40,8 @@ public class WeaponCardUI : MonoBehaviour
     GameManager gameManager;
     ItemManager itemManager;
 
+    int price;
+
     private void Start()
     {
         gameManager = GameManager.Instance;
@@ -66,13 +68,14 @@ public class WeaponCardUI : MonoBehaviour
 
     void Setting()
     {
+        price = Mathf.CeilToInt(selectedWeapon.WeaponPrice * (1 - gameManager.passiveVariables[0]));
         itemSprite.sprite = selectedWeapon.ItemSprite;
         weaponName.text = selectedWeapon.WeaponName.ToString();
         type.text = selectedWeapon.Type.ToString();
         weaponDamage.text = (selectedWeapon.WeaponDamage * (int)(selectedWeapon.weaponGrade + 1)).ToString();
         elementDamage.text = (selectedWeapon.MagicDamage * (int)(selectedWeapon.weaponGrade + 1)).ToString();
         weaponRange.text = selectedWeapon.WeaponRange.ToString();
-        weaponPrice.text = (selectedWeapon.WeaponPrice * (int)(selectedWeapon.weaponGrade + 1)).ToString();
+        weaponPrice.text = (price * (int)(selectedWeapon.weaponGrade + 1)).ToString();
         weaponGrade.text = selectedWeapon.weaponGrade.ToString();
     }
 
@@ -116,7 +119,7 @@ public class WeaponCardUI : MonoBehaviour
         if (itemManager.foolCount < 5 && gameManager.money >= selectedWeapon.WeaponPrice)
         {
             SoundManager.Instance.PlayES("WeaponSelect");
-            gameManager.money -= (selectedWeapon.WeaponPrice * (int)(selectedWeapon.weaponGrade + 1));
+            gameManager.money -= (price * (int)(selectedWeapon.weaponGrade + 1));
             itemManager.foolCount++;
             itemManager.GetWeaponInfo(selectedWeapon);
             itemManager.weaponGrade[itemManager.weaponCount] = selectedWeapon.weaponGrade;

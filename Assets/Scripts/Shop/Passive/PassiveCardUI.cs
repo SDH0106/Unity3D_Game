@@ -32,6 +32,8 @@ public class PassiveCardUI : MonoBehaviour
     float[] stats = new float[11];
     string[] statTypes = new string[11];
 
+    float[] passiveVariables = new float[10];
+
     Color LockImageColor;
     Color LockTextColor;
 
@@ -40,10 +42,15 @@ public class PassiveCardUI : MonoBehaviour
     Color initPriceColor;
 
     GameManager gameManager;
+    ItemManager itemManager;
+
+    int arrayCount;
+    int price;
 
     private void Start()
     {
         gameManager = GameManager.Instance;
+        itemManager = ItemManager.Instance;
         initPriceColor = itemPrice.color;
 
         LockImageColor = lockBackImage.color;
@@ -54,6 +61,15 @@ public class PassiveCardUI : MonoBehaviour
         StatArray();
         DescriptionInfo();
         StartLockColor();   
+
+        for(int i=0;i<passiveInfo.Length;i++)
+        {
+            if (passiveInfo[i].ItemName == selectedPassive.ItemName)
+            {
+                arrayCount = i;
+                break;
+            }
+        }
     }
 
     private void Update()
@@ -70,9 +86,10 @@ public class PassiveCardUI : MonoBehaviour
 
     void Setting()
     {
+        price = Mathf.CeilToInt(selectedPassive.ItemPrice * (1 - gameManager.passiveVariables[0]));
         itemSprite.sprite = selectedPassive.ItemSprite;
         itemName.text = selectedPassive.ItemName;
-        itemPrice.text = selectedPassive.ItemPrice.ToString();
+        itemPrice.text = price.ToString();
         itemGrade.text = selectedPassive.ItemGrade.ToString();
     }
 
@@ -136,6 +153,8 @@ public class PassiveCardUI : MonoBehaviour
         statTypes[8] = "青款";
         statTypes[9] = "荤芭府";
         statTypes[10] = "农府萍拿";
+
+        passiveVariables[0] = selectedPassive.SalePercent;
     }
 
     void DescriptionInfo()
@@ -149,13 +168,24 @@ public class PassiveCardUI : MonoBehaviour
             {
                 descriptPrefabs[count].transform.GetChild(0).GetComponent<Text>().text = statTypes[i];
                 descriptPrefabs[count].transform.GetChild(2).GetComponent<Text>().text = stats[i].ToString();
+                descriptPrefabs[count].transform.GetChild(3).gameObject.SetActive(false);
                 count++;
             }
         }
 
         for (int i = max - 1; i >= count; i--)
         {
-            descriptPrefabs[i].gameObject.SetActive(false);
+            if (i == count)
+            {
+                descriptPrefabs[count].transform.GetChild(0).gameObject.SetActive(false);
+                descriptPrefabs[count].transform.GetChild(1).gameObject.SetActive(false);
+                descriptPrefabs[count].transform.GetChild(2).gameObject.SetActive(false);
+                descriptPrefabs[count].transform.GetChild(3).gameObject.SetActive(true);
+                descriptPrefabs[count].transform.GetChild(3).GetComponent<Text>().text = selectedPassive.Description;
+            }
+
+            else
+                descriptPrefabs[i].gameObject.SetActive(false);
         }
     }
 
@@ -163,16 +193,22 @@ public class PassiveCardUI : MonoBehaviour
     {
         SoundManager.Instance.PlayES("SelectButton");
 
-        if (gameManager.money >= selectedPassive.ItemPrice)
+        if (gameManager.money >= selectedPassive.ItemPrice && itemManager.passiveCounts[arrayCount] > 0)
         {
-            ItemManager.Instance.GetPassiveInfo(selectedPassive);
+            itemManager.GetPassiveInfo(selectedPassive);
+            itemManager.passiveCounts[arrayCount]--;
             Destroy(gameObject);
             isLock = false;
-            gameManager.money -= selectedPassive.ItemPrice;
+            gameManager.money -= price;
 
             for (int i = 0; i < stats.Length; i++)
             {
                 gameManager.stats[i] += stats[i];
+            }
+
+            for (int i = 0; i < passiveVariables.Length; i++)
+            {
+                gameManager.passiveVariables[i] += passiveVariables[i];
             }
         }
     }

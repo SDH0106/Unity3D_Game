@@ -40,6 +40,8 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] public float luck;
     [SerializeField] public float critical;
 
+    [HideInInspector] public float salePercent;
+
     [HideInInspector] public float currentGameTime;
 
     [HideInInspector] public string currentScene;
@@ -49,6 +51,7 @@ public class GameManager : Singleton<GameManager>
     public int levelUpCount;
 
     [HideInInspector] public float[] stats;
+    [HideInInspector] public float[] passiveVariables;
 
     float recoverTime = 3;
 
@@ -92,6 +95,7 @@ public class GameManager : Singleton<GameManager>
         range = 1;
         luck = 0;
         critical = 10;
+        salePercent = 0;
     }
 
     void InitArray()
@@ -108,6 +112,29 @@ public class GameManager : Singleton<GameManager>
         stats[8] = luck;
         stats[9] = range;
         stats[10] = critical;
+
+        passiveVariables = new float[10];
+        passiveVariables[0] = salePercent;
+    }
+
+    void StatArray()
+    {
+        maxHp = stats[0];
+        recoverHp = stats[1];
+        absorbHp = stats[2];
+        defence = stats[3];
+        physicDamage = stats[4];
+        elementDamage = stats[5];
+        attackSpeed = stats[6];
+        speed = stats[7];
+        luck = stats[8];
+        range = stats[9];
+        critical = stats[10];
+    }
+
+    void VariableArray()
+    {
+        salePercent = passiveVariables[0];
     }
 
     private void Update()
@@ -137,22 +164,8 @@ public class GameManager : Singleton<GameManager>
             isClear = true;
 
         StatArray();
+        VariableArray();
         OnGameScene();
-    }
-
-    void StatArray()
-    {
-        maxHp = stats[0];
-        recoverHp = stats[1];
-        absorbHp = stats[2];
-        defence = stats[3];
-        physicDamage = stats[4];
-        elementDamage = stats[5];
-        attackSpeed = stats[6];
-        speed = stats[7];
-        luck = stats[8];
-        range = stats[9];
-        critical = stats[10];
     }
 
     void OnGameScene()

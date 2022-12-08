@@ -256,6 +256,7 @@ MonoBehaviour:
   - {fileID: 7694887781048525286, guid: f097853f4ba4b684fafcefbab37d3f0c, type: 3}
   - {fileID: 7694887781048525286, guid: 06c8d1f88557e1e45a61ed75a938cd57, type: 3}
   coinStorage: {fileID: 1248675029}
+  passiveCard: {fileID: 2156325227211688543, guid: 40a621f6b82f5cc42aaaa3cb0c261144, type: 3}
   passiveCardItem: {fileID: 0}
   storedWeapon: []
   storedPassive: []
@@ -268,6 +269,7 @@ MonoBehaviour:
   lockedWeaCards: []
   cardLocks: 
   cardGrades: 
+  passiveCounts: 
 --- !u!1 &283379644
 GameObject:
   m_ObjectHideFlags: 0

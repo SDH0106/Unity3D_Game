@@ -495,8 +495,18 @@ public class ShopManager : Singleton<ShopManager>
 
             if (rand <= total)
             {
-                passiveCard.selectedPassive = passiveCard.passiveInfo[i];
-                break;
+                if (itemManager.passiveCounts[i] != 0)
+                {
+                    passiveCard.selectedPassive = passiveCard.passiveInfo[i];
+                    break;
+                }
+
+                else
+                {
+                    rand = Random.Range(0, totalWeight);
+                    total = 0;
+                    i = 0;
+                }
             }
         }
     }

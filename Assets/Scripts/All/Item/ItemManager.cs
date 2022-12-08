@@ -10,6 +10,7 @@ public class ItemManager : Singleton<ItemManager>
 {
     [SerializeField] public DamageUI[] damageUI;
     [SerializeField] public Transform coinStorage;
+    [SerializeField] PassiveCardUI passiveCard;
 
     [HideInInspector] public PassiveInfo passiveCardItem;
 
@@ -30,11 +31,19 @@ public class ItemManager : Singleton<ItemManager>
     [HideInInspector] public bool[] cardLocks;
     [HideInInspector] public Grade[] cardGrades;
 
+    [HideInInspector] public int[] passiveCounts;
+
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
 
         weaponGrade = new Grade[6];
+        passiveCounts = new int[passiveCard.passiveInfo.Length];
+
+        for (int i = 0; i < passiveCounts.Length; i++)
+        {
+            passiveCounts[i] = passiveCard.passiveInfo[i].MaxCount; 
+        }
 
         foolCount = 0;
         weaponCount = 0;
