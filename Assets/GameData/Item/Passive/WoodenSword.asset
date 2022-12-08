@@ -27,4 +27,6 @@ MonoBehaviour:
   speed: 0
   range: 0
   luck: 0
-  weight: 120
+  critical: 2
+  salePercent: 0
+  weight: 144

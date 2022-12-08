@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 using static WeaponInfo;
 
@@ -21,13 +22,25 @@ public class PassiveInfo : ScriptableObject
     [SerializeField] float speed;
     [SerializeField] float range;
     [SerializeField] float luck;
-
+    [SerializeField] float critical;
+    [SerializeField] float salePercent;
+    /*[SerializeField] float coinRange;
+    [SerializeField] int coinCount;
+    [SerializeField] int monsterCount;
+    [SerializeField] float monsterSpeed;
+    [SerializeField] int exp;
+    [SerializeField] int waveCount;
+    [SerializeField] int dashCount;
+    [SerializeField] int fireCount;
+    [SerializeField] int gradeCost;*/
+    
     [HideInInspector] public float weight;
 
 
     public Sprite ItemSprite => itemSprite;
     public Grade ItemGrade => itemGrade;
     public string ItemName => itemName;
+    public int MaxCount => maxCount;
     public float PhysicDamage => physicDamage;
     public float ElementDamage => elementDamage;
     public float Range => range;
@@ -39,4 +52,5 @@ public class PassiveInfo : ScriptableObject
     public float RecoverHp => recoverHp;
     public float AttackSpeed => attackSpeed;
     public int ItemPrice => itemPrice;
+    public float Critical => critical;
 }

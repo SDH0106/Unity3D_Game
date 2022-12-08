@@ -1978,9 +1978,9 @@ MonoBehaviour:
   aimCursor: {fileID: 2800000, guid: b8e78032f8af0954784d1fe9e5a09187, type: 3}
   bulletStorage: {fileID: 1005871281}
   damageStorage: {fileID: 1692643827}
-  gameTime: 60
+  gameTime: 0
   money: 10000
-  round: 1
+  round: 2
   exp: 0
   hp: 0
   level: 1
@@ -1999,7 +1999,7 @@ MonoBehaviour:
   critical: 50
   currentGameTime: 0
   currentScene: 
-  levelUpCount: 1
+  levelUpCount: 0
   stats: []
   isPause: 0
   isClear: 0

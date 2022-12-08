@@ -29,8 +29,8 @@ public class PassiveCardUI : MonoBehaviour
 
     [HideInInspector] public PassiveInfo selectedPassive;
 
-    float[] stats = new float[10];
-    string[] statTypes = new string[10];
+    float[] stats = new float[11];
+    string[] statTypes = new string[11];
 
     Color LockImageColor;
     Color LockTextColor;
@@ -123,6 +123,7 @@ public class PassiveCardUI : MonoBehaviour
         stats[7] = selectedPassive.Speed;
         stats[8] = selectedPassive.Luck;
         stats[9] = selectedPassive.Range;
+        stats[10] = selectedPassive.Critical;
 
         statTypes[0] = "최대 체력";
         statTypes[1] = "체력 회복";
@@ -134,6 +135,7 @@ public class PassiveCardUI : MonoBehaviour
         statTypes[7] = "이동 속도";
         statTypes[8] = "행운";
         statTypes[9] = "사거리";
+        statTypes[10] = "크리티컬";
     }
 
     void DescriptionInfo()
