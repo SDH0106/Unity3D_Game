@@ -32,8 +32,12 @@ public class GameSceneUI : MonoBehaviour
     [SerializeField] Slider Sound;
 
     [Header("Dash")]
+    [SerializeField] GameObject dash;
     [SerializeField] Image dashImage;
     [SerializeField] Text dashCoolTime;
+    [SerializeField] GameObject dashCountParent;
+    [SerializeField] Text dashCount;
+    [SerializeField] Text maxDashCount;
 
     [Header("Text")]
     [SerializeField] GameObject roundClearText;
@@ -56,6 +60,7 @@ public class GameSceneUI : MonoBehaviour
         statCardParent.gameObject.SetActive(false);
         PauseUI.SetActive(false);
         gameClearUI.SetActive(false);
+        dash.SetActive(false);
     }
 
     private void Update()
@@ -117,22 +122,34 @@ public class GameSceneUI : MonoBehaviour
 
     void DashUI()
     {
-        if (!character.isDash)
+        if (gameManager.dashCount > 0)
         {
+            dash.SetActive(true);
             Color color = dashImage.color;
-            color.a = 0.5f;
-            dashImage.color = color;
-            dashImage.fillAmount = 1 -(character.dashCoolTime / character.initDashCoolTime);
-            dashCoolTime.gameObject.SetActive(true);
-            dashCoolTime.text = character.dashCoolTime.ToString("F2");
-        }
 
-        else if(character.isDash)
-        {
-            Color color = dashImage.color;
-            color.a = 1f;
-            dashImage.color = color;
-            dashCoolTime.gameObject.SetActive(false);
+            if (character.dashCount == 0)
+            {
+                color.a = 0.5f;
+                dashImage.color = color;
+
+                dashCountParent.gameObject.SetActive(false);
+
+                dashCoolTime.gameObject.SetActive(true);
+                dashImage.fillAmount = 1 - (character.dashCoolTime / character.initDashCoolTime);
+                dashCoolTime.text = character.dashCoolTime.ToString("F2");
+            }
+
+            else if (character.dashCount > 0)
+            {
+                color.a = 1f;
+                dashImage.color = color;
+
+                dashCountParent.gameObject.SetActive(true);
+                dashCount.text = character.dashCount.ToString();
+                maxDashCount.text = gameManager.dashCount.ToString();
+
+                dashCoolTime.gameObject.SetActive(false);
+            }
         }
     }
 

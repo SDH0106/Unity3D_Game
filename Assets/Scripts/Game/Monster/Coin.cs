@@ -12,8 +12,6 @@ public class Coin : Singleton<Coin>
 
     public int coinValue;
 
-    bool isGet = false;
-
     Vector3 characterPos;
 
     GameManager gameManager;
@@ -21,7 +19,6 @@ public class Coin : Singleton<Coin>
     private void Start()
     {
         gameManager = GameManager.Instance;
-        RandomValue();
     }
 
     private void Update()
@@ -38,16 +35,14 @@ public class Coin : Singleton<Coin>
 
         float distance = Vector3.Distance(characterPos, transform.position);
 
-        if (isGet == false)
+
+        if (distance <= 2 * (1 + gameManager.coinRange * 0.1f))
         {
-            if (distance <= 2)
-            {
-                speed = gameManager.speed + 2;
-                isGet = true;
-            }
-            else
-                speed = 0;
+            speed = gameManager.speed + 2;
         }
+
+        else
+            speed = 0;
 
         transform.position = Vector3.MoveTowards(transform.position, characterPos, speed * Time.deltaTime);
     }
@@ -62,16 +57,9 @@ public class Coin : Singleton<Coin>
         }
     }
 
-    void RandomValue()
-    {
-        coinValue = Random.Range(1,11);
-    }
-
     void InitSetting()
     {
-        isGet = false;
         speed = 0;
-        RandomValue();
     }
 
     public void SetManagedPool(IObjectPool<Coin> pool)
@@ -83,5 +71,11 @@ public class Coin : Singleton<Coin>
     {
         managedPool.Release(this);
         InitSetting();
+    }
+
+    private void OnDrawGizmos()
+    {
+        Handles.color = Color.red;
+        Handles.DrawWireDisc(transform.position, Vector3.up, 2 * (1 + gameManager.coinRange * 0.1f));
     }
 }

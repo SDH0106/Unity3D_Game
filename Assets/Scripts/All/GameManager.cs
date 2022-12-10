@@ -40,7 +40,13 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] public float luck;
     [SerializeField] public float critical;
 
-    [HideInInspector] public float salePercent;
+    #region 특수 패시브
+    [HideInInspector] public int[] passiveIntVariables;
+    [HideInInspector] public float[] passiveFloatVariables;
+    [HideInInspector] public int salePercent;
+    [HideInInspector] public int dashCount;
+    [HideInInspector] public float coinRange;
+    #endregion
 
     [HideInInspector] public float currentGameTime;
 
@@ -51,9 +57,8 @@ public class GameManager : Singleton<GameManager>
     public int levelUpCount;
 
     [HideInInspector] public float[] stats;
-    [HideInInspector] public float[] passiveVariables;
 
-    float recoverTime = 3;
+    float recoverTime;
 
     [HideInInspector] public bool isPause = false;
     [HideInInspector] public bool isClear = false;
@@ -83,6 +88,8 @@ public class GameManager : Singleton<GameManager>
 
     void InitStatSetting()
     {
+        recoverTime = 3;
+
         level = 1;
         levelUpCount = 0;
         maxHp = 20;
@@ -96,6 +103,7 @@ public class GameManager : Singleton<GameManager>
         luck = 0;
         critical = 10;
         salePercent = 0;
+        dashCount = 0;
     }
 
     void InitArray()
@@ -113,8 +121,12 @@ public class GameManager : Singleton<GameManager>
         stats[9] = range;
         stats[10] = critical;
 
-        passiveVariables = new float[10];
-        passiveVariables[0] = salePercent;
+        passiveIntVariables = new int[10];
+        passiveIntVariables[0] = salePercent;
+        passiveIntVariables[1] = dashCount;
+
+        passiveFloatVariables = new float[10];
+        passiveFloatVariables[0] = coinRange;
     }
 
     void StatArray()
@@ -132,9 +144,15 @@ public class GameManager : Singleton<GameManager>
         critical = stats[10];
     }
 
-    void VariableArray()
+    void IntVariableArray()
     {
-        salePercent = passiveVariables[0];
+        salePercent = passiveIntVariables[0];
+        dashCount = passiveIntVariables[1];
+    }
+
+    void FloatVariableArray()
+    {
+        coinRange = passiveFloatVariables[0];
     }
 
     private void Update()
@@ -164,7 +182,8 @@ public class GameManager : Singleton<GameManager>
             isClear = true;
 
         StatArray();
-        VariableArray();
+        IntVariableArray();
+        FloatVariableArray();
         OnGameScene();
     }
 

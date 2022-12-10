@@ -160,7 +160,8 @@ public class Monster : MonoBehaviour
                 {
                     if (hp <= 0)
                     {
-                        DropCoin.Instance.Drop(transform.position);
+                        int coinValue = Random.Range(stat.monsterCoin - 5, stat.monsterCoin + 1);
+                        DropCoin.Instance.Drop(transform.position, coinValue);
                         gameManager.exp += stat.monsterExp;
                     }
                     DestroyMonster();

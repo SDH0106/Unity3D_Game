@@ -28,8 +28,9 @@ MonoBehaviour:
   range: 0
   luck: 0
   critical: 0
-  salePercent: 0.1
+  salePercent: 0
+  dashCount: 0
   description: "\uBAA8\uB4E0 \uC544\uC774\uD15C\uC758 \uC0C1\uC810 \uAD6C\uB9E4\uAC00\uB97C
     10\uD37C\uC13C\uD2B8 \uD560\uC778\uD574\uC900\uB2E4.                   (\uCD5C\uB300
     5\uAC1C \uAD6C\uC785\uAC00\uB2A5)"
-  weight: 17
+  weight: 0

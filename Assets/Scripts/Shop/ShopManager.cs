@@ -53,6 +53,7 @@ public class ShopManager : Singleton<ShopManager>
 
     GameManager gameManager;
     ItemManager itemManager;
+    Character character;
 
     float[] weightWeaponValue;
     float[] weightPassiveValue;
@@ -64,6 +65,7 @@ public class ShopManager : Singleton<ShopManager>
         SoundManager.Instance.PlayBGM(2);
         gameManager = GameManager.Instance;
         itemManager = ItemManager.Instance;
+        character = Character.Instance;
         initPriceColor = rerollMoneyText.color;
         clickUI.gameObject.SetActive(false);
         rerollMoney = -gameManager.round;
@@ -128,6 +130,8 @@ public class ShopManager : Singleton<ShopManager>
         gameManager.round++;
         rerollMoney = -gameManager.round;
         gameManager.hp = gameManager.maxHp;
+        character.dashCount = gameManager.dashCount;
+        character.dashCoolTime = character.initDashCoolTime;
     }
 
     void ImageAlphaChange(int i, int a, Image image)

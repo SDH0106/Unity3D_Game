@@ -16,9 +16,10 @@ public class DropCoin : Singleton<DropCoin>
         objectPool = new ObjectPool<Coin>(CreatePool, OnGetPool, OnReleasePool, OnDestroyPool, maxSize: poolCount);
     }
 
-    public void Drop(Vector3 dropPos)
+    public void Drop(Vector3 dropPos, int coinValue)
     {
         Coin coin = objectPool.Get();
+        coin.coinValue = coinValue;
         coin.transform.position = dropPos;
     }
 

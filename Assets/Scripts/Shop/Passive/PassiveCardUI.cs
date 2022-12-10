@@ -26,13 +26,13 @@ public class PassiveCardUI : MonoBehaviour
     [SerializeField] Text itemPrice;
     [SerializeField] Text itemGrade;
 
-
     [HideInInspector] public PassiveInfo selectedPassive;
 
     float[] stats = new float[11];
     string[] statTypes = new string[11];
 
-    float[] passiveVariables = new float[10];
+    int[] passiveIntVariables = new int[10];
+    float[] passiveFloatVariables = new float[10];
 
     Color LockImageColor;
     Color LockTextColor;
@@ -86,7 +86,7 @@ public class PassiveCardUI : MonoBehaviour
 
     void Setting()
     {
-        price = Mathf.CeilToInt(selectedPassive.ItemPrice * (1 - gameManager.passiveVariables[0]));
+        price = Mathf.CeilToInt(selectedPassive.ItemPrice * (1 - gameManager.passiveIntVariables[0]));
         itemSprite.sprite = selectedPassive.ItemSprite;
         itemName.text = selectedPassive.ItemName;
         itemPrice.text = price.ToString();
@@ -154,7 +154,10 @@ public class PassiveCardUI : MonoBehaviour
         statTypes[9] = "사거리";
         statTypes[10] = "크리티컬";
 
-        passiveVariables[0] = selectedPassive.SalePercent;
+        passiveIntVariables[0] = selectedPassive.SalePercent;
+        passiveIntVariables[1] = selectedPassive.DashCount;
+
+        passiveFloatVariables[0] = selectedPassive.CoinRange;
     }
 
     void DescriptionInfo()
@@ -206,9 +209,14 @@ public class PassiveCardUI : MonoBehaviour
                 gameManager.stats[i] += stats[i];
             }
 
-            for (int i = 0; i < passiveVariables.Length; i++)
+            for (int i = 0; i < passiveIntVariables.Length; i++)
             {
-                gameManager.passiveVariables[i] += passiveVariables[i];
+                gameManager.passiveIntVariables[i] += passiveIntVariables[i];
+            }
+
+            for(int i=0;i<passiveFloatVariables.Length;i++)
+            {
+                gameManager.passiveFloatVariables[i] += passiveFloatVariables[i];
             }
         }
     }

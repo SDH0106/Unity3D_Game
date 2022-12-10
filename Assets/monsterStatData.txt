@@ -7,7 +7,7 @@
             "monsterSpeed": 1.0,
             "monsterDefence": 0.0,
             "monsterExp": 1.0,
-            "monsterCoin": 5.0
+            "monsterCoin": 10.0
         },
         {
             "monsterName": "피그",
@@ -34,7 +34,7 @@
             "monsterSpeed": 1.0,
             "monsterDefence": 1.0,
             "monsterExp": 2.0,
-            "monsterCoin": 10.0
+            "monsterCoin": 13.0
         },
         {
             "monsterName": "고스트",

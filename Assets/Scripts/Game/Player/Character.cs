@@ -16,6 +16,11 @@ public class Character : Singleton<Character>
 
     [Header("Stat")]
     [SerializeField] float invincibleTime;
+    [HideInInspector] public float totalDamage;
+
+    [HideInInspector] public float dashCoolTime;
+    [HideInInspector] public float initDashCoolTime;
+    [HideInInspector] public int dashCount;
 
     [Header("Weapon")]
     [SerializeField] public GameObject[] weapons;
@@ -23,15 +28,9 @@ public class Character : Singleton<Character>
 
     bool isRun, isAttacked, isDead = false;
 
-    [HideInInspector] public float totalDamage;
-
     GameManager gameManager;
 
-    public float dashCoolTime = 2;
-    public float initDashCoolTime;
-
-    public bool isDash = true;
-
+    Vector3 dir;
     float x;
     float z;
 
@@ -46,10 +45,13 @@ public class Character : Singleton<Character>
         anim = GetComponent<Animator>();
         particle.GetComponentInChildren<Renderer>().enabled = false;
 
+        gameManager = GameManager.Instance;
         transform.position = Vector3.zero;
+
+        dashCoolTime = 4;
+        dashCount = gameManager.dashCount;
         initDashCoolTime = dashCoolTime;
 
-        gameManager = GameManager.Instance;
     }
 
     void Update()
@@ -74,50 +76,52 @@ public class Character : Singleton<Character>
 
     void Dash()
     {
-        Vector3 beforePos;
-        Vector3 afterPos;
-
-        if (isDash)
+        if (gameManager.dashCount > 0)
         {
-            if (rend.flipX == true)
+            Vector3 beforePos;
+            Vector3 afterPos;
+
+            if (dashCount > 0)
             {
-                particle.transform.localScale = new Vector3(-1, 1, 1);
+                if (rend.flipX == true)
+                {
+                    particle.transform.localScale = new Vector3(-1, 1, 1);
+                }
+
+                else if (rend.flipX == false)
+                {
+                    particle.transform.localScale = new Vector3(1, 1, 1);
+                }
+
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    particle.GetComponentInChildren<Renderer>().enabled = true;
+
+                    beforePos = transform.position;
+
+                    if (x == 0 && z == 0)
+                        afterPos = new Vector3(transform.position.x + 2, 0, 0);
+                    else
+                        afterPos = transform.position + new Vector3(x, 0, z) * 4;
+
+                    transform.position = Vector3.Lerp(beforePos, afterPos, 1);
+                    dashCount--;
+                    Invoke("ParticleOff", 0.4f);
+                }
             }
 
-            else if (rend.flipX == false)
+            if (dashCount != gameManager.dashCount)
             {
-                particle.transform.localScale = new Vector3(1, 1, 1);
-            }
+                dashCoolTime -= Time.deltaTime;
 
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                particle.GetComponentInChildren<Renderer>().enabled = true;
-
-                beforePos = transform.position;
-
-                if (x == 0 && z == 0)
-                    afterPos = new Vector3(transform.position.x + 2, 0, 0);
-                else
-                    afterPos = transform.position + new Vector3(x, 0, z) * 4;
-
-                transform.position = Vector3.Lerp(beforePos, afterPos, 1);
-                isDash = false;
-                Invoke("ParticleOff", 0.4f);
+                if (dashCoolTime <= 0)
+                {
+                    dashCount++;
+                    dashCoolTime = initDashCoolTime;
+                }
             }
         }
-
-        else if(!isDash)
-        {
-            dashCoolTime -= Time.deltaTime;
-
-            if (dashCoolTime <= 0)
-            {
-                isDash = true;
-                dashCoolTime = initDashCoolTime;
-            }
-        }    
     }
-
 
     void ParticleOff()
     {
@@ -144,7 +148,8 @@ public class Character : Singleton<Character>
 
     void Move()
     {
-        transform.position += new Vector3(x, 0, z) * gameManager.speed * Time.deltaTime;
+        dir = (Vector3.right * x + Vector3.forward * z).normalized;
+        transform.position += dir * gameManager.speed * Time.deltaTime;
 
         if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
         {

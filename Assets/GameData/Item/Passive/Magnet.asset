@@ -10,24 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c1f4669ec3ffcb344a7356cc6d5d1c79, type: 3}
-  m_Name: IronArmor
+  m_Name: Magnet
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 21300000, guid: 567fdd2e557fefc478f8aaa7ae56fb11, type: 3}
+  itemSprite: {fileID: 21300000, guid: dc5ecaa7e3b11c447bc3dd521bb9d4b0, type: 3}
   itemGrade: 0
-  itemName: "\uBB34\uC1E0 \uAC11\uC637"
-  itemPrice: 21
-  maxCount: 100
-  hp: 5
+  itemName: "\uC790\uC11D"
+  itemPrice: 30
+  maxCount: 20
+  hp: 0
   recoverHp: 0
   absorbHp: 0
-  defence: 1
+  defence: 0
   physicDamage: 0
   elementDamage: 0
   attackSpeed: 0
-  speed: -1
+  speed: 0
   range: 0
   luck: 0
   critical: 0
   salePercent: 0
-  description: 
-  weight: 0
+  dashCount: 0
+  coinRange: 1
+  description: "\uCF54\uC778 \uD68D\uB4DD \uBC94\uC704\uB97C 10% \uC99D\uAC00\uC2DC\uCF1C\uC900\uB2E4.
+    (\uCD5C\uB300 20\uAC1C)"
+  weight: 144

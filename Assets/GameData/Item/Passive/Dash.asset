@@ -10,24 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c1f4669ec3ffcb344a7356cc6d5d1c79, type: 3}
-  m_Name: IronArmor
+  m_Name: Dash
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 21300000, guid: 567fdd2e557fefc478f8aaa7ae56fb11, type: 3}
-  itemGrade: 0
-  itemName: "\uBB34\uC1E0 \uAC11\uC637"
-  itemPrice: 21
-  maxCount: 100
-  hp: 5
+  itemSprite: {fileID: 21300000, guid: 90bff91d933adcf418c694164251c7f3, type: 3}
+  itemGrade: 2
+  itemName: "\uB300\uC26C \uC99D\uAC00"
+  itemPrice: 200
+  maxCount: 2
+  hp: 0
   recoverHp: 0
   absorbHp: 0
-  defence: 1
+  defence: 0
   physicDamage: 0
   elementDamage: 0
   attackSpeed: 0
-  speed: -1
+  speed: 0
   range: 0
   luck: 0
   critical: 0
   salePercent: 0
-  description: 
-  weight: 0
+  dashCount: 1
+  coinRange: 0
+  description: "\uB300\uC26C \uC2A4\uD0AC\uC758 \uAC2F\uC218\uB97C 1\uAC1C \uB298\uB824\uC900\uB2E4.
+    (\uCD5C\uB300 2\uAC1C)"
+  weight: 1

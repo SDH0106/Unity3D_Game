@@ -12,9 +12,9 @@ public class MonsterStat
     public float monsterSpeed;
     public float monsterDefence;
     public float monsterExp;
-    public float monsterCoin;
+    public int monsterCoin;
 
-    public MonsterStat(string statName, float monsterMaxHp, float monsterDamage, float monsterSpeed, float monsterDefence, float monsterExp, float monsterCoin)
+    public MonsterStat(string statName, float monsterMaxHp, float monsterDamage, float monsterSpeed, float monsterDefence, float monsterExp, int monsterCoin)
     {
         this.monsterName = statName;
         this.monsterMaxHp = monsterMaxHp;
