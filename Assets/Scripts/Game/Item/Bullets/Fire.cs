@@ -19,8 +19,8 @@ public class Fire : Bullet
     {
         if (other.tag == "Monster" && other.GetComponent<Monster>() != null)
         {
-            int rand = Random.Range(0, 40);
-            if (rand == 10)
+            int rand = Random.Range(0, 1);
+            if (rand == 0)
                 Instantiate(explosion, transform.position, transform.rotation);
 
             GameObject pool = Instantiate(damageUI, transform.position, Quaternion.Euler(90, 0, 0)).gameObject;

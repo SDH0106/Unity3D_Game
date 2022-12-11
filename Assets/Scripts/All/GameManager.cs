@@ -43,9 +43,16 @@ public class GameManager : Singleton<GameManager>
     #region 특수 패시브
     [HideInInspector] public int[] passiveIntVariables;
     [HideInInspector] public float[] passiveFloatVariables;
+    [HideInInspector] public bool[] passiveBoolVariables;
     [HideInInspector] public int salePercent;
     [HideInInspector] public int dashCount;
+    [HideInInspector] public float increaseExp;
     [HideInInspector] public float coinRange;
+    [HideInInspector] public float monsterSpeed;
+    [HideInInspector] public bool luckCoin;
+    [HideInInspector] public bool luckDamage;
+    [HideInInspector] public bool luckCritical;
+    [HideInInspector] public bool doubleShot;
     #endregion
 
     [HideInInspector] public float currentGameTime;
@@ -76,7 +83,7 @@ public class GameManager : Singleton<GameManager>
     {
         beforeLevel = level;
         DontDestroyOnLoad(gameObject);
-        //InitStatSetting();
+        //InitSetting();
         InitArray();
 
         currentGameTime = gameTime;
@@ -86,15 +93,14 @@ public class GameManager : Singleton<GameManager>
         Time.timeScale = 1;
     }
 
-    void InitStatSetting()
+    void InitSetting()
     {
-        recoverTime = 3;
-
         level = 1;
         levelUpCount = 0;
         maxHp = 20;
         maxExp = 10;
         recoverHp = 0;
+        recoverTime = 3;
         absorbHp = 0;
         defence = 1;
         attackSpeed = 1;
@@ -104,6 +110,13 @@ public class GameManager : Singleton<GameManager>
         critical = 10;
         salePercent = 0;
         dashCount = 0;
+        increaseExp = 0;
+        monsterSpeed = 0;
+
+        for (int i=0;i< passiveBoolVariables.Length;i++)
+        {
+            passiveBoolVariables[i] = false;
+        }
     }
 
     void InitArray()
@@ -127,6 +140,14 @@ public class GameManager : Singleton<GameManager>
 
         passiveFloatVariables = new float[10];
         passiveFloatVariables[0] = coinRange;
+        passiveFloatVariables[1] = increaseExp;
+        passiveFloatVariables[2] = monsterSpeed;
+
+        passiveBoolVariables = new bool[4];
+        passiveBoolVariables[0] = luckCoin;
+        passiveBoolVariables[1] = luckDamage;
+        passiveBoolVariables[2] = luckCritical;
+        passiveBoolVariables[3] = doubleShot;
     }
 
     void StatArray()
@@ -153,6 +174,16 @@ public class GameManager : Singleton<GameManager>
     void FloatVariableArray()
     {
         coinRange = passiveFloatVariables[0];
+        increaseExp = passiveFloatVariables[1];
+        monsterSpeed = passiveFloatVariables[2];
+    }
+
+    void BoolVariableArray()
+    {
+        luckCoin = passiveBoolVariables[0];
+        luckDamage = passiveBoolVariables[1];
+        luckCritical = passiveBoolVariables[2];
+        doubleShot = passiveBoolVariables[3];
     }
 
     private void Update()
@@ -184,6 +215,7 @@ public class GameManager : Singleton<GameManager>
         StatArray();
         IntVariableArray();
         FloatVariableArray();
+        BoolVariableArray();
         OnGameScene();
     }
 

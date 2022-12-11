@@ -1978,9 +1978,9 @@ MonoBehaviour:
   aimCursor: {fileID: 2800000, guid: b8e78032f8af0954784d1fe9e5a09187, type: 3}
   bulletStorage: {fileID: 1005871281}
   damageStorage: {fileID: 1692643827}
-  gameTime: 30
-  money: 10000
-  round: 5
+  gameTime: 0
+  money: 10500
+  round: 19
   exp: 0
   hp: 0
   level: 1
@@ -1999,9 +1999,16 @@ MonoBehaviour:
   critical: 50
   passiveIntVariables: 
   passiveFloatVariables: []
+  passiveBoolVariables: 
   salePercent: 0
   dashCount: 0
+  increaseExp: 0
   coinRange: 0
+  monsterSpeed: 0
+  luckCoin: 0
+  luckDamage: 0
+  luckCritical: 0
+  doubleShot: 0
   currentGameTime: 0
   currentScene: 
   levelUpCount: 0
@@ -2122,7 +2129,7 @@ MonoBehaviour:
     monsterSpeed: 1
     monsterDefence: 0
     monsterExp: 1
-    monsterCoin: 5
+    monsterCoin: 10
   - monsterName: "\uD53C\uADF8"
     monsterMaxHp: 20
     monsterDamage: 3
@@ -2143,7 +2150,7 @@ MonoBehaviour:
     monsterSpeed: 1
     monsterDefence: 1
     monsterExp: 2
-    monsterCoin: 10
+    monsterCoin: 13
   - monsterName: "\uACE0\uC2A4\uD2B8"
     monsterMaxHp: 200
     monsterDamage: 10

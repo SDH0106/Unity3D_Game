@@ -11,15 +11,7 @@ public class Skull : Monster
 
     void Start()
     {
-        gameManager = GameManager.Instance;
-        character = Character.Instance;
-        hp = stat.monsterMaxHp * (1 + (float)((gameManager.round - 1) * 0.25)); ;
-        initScale = transform.localScale;
-        speed = stat.monsterSpeed;
-        initSpeed = speed;
-        rend = GetComponent<SpriteRenderer>();
-        anim = GetComponent<Animator>();
-        coll = GetComponent<Collider>();
+        InitSetting();
     }
 
     protected override void SetInitMonster()
@@ -64,6 +56,8 @@ public class Skull : Monster
     {
         if (hp <= 0 || gameManager.hp <= 0)
         {
+            rend.color = Color.white;
+            isFreeze = false;
             coll.enabled = false;
             isDead = true;
             isAttacked = true;

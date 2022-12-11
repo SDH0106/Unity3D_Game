@@ -52,7 +52,23 @@ public class Coin : Singleton<Coin>
         if(other.gameObject.CompareTag("Character"))
         {
             SoundManager.Instance.PlayES("Coin");
-            gameManager.money += coinValue;
+
+            if (!gameManager.luckCoin)
+            {
+                gameManager.money += coinValue;
+            }
+
+            else if (gameManager.luckCoin)
+            {
+                int rand = Random.Range(0, 100);
+
+                if (rand <= gameManager.luck || gameManager.luck >= 100)
+                    gameManager.money += coinValue * 2;
+
+                else if(rand > gameManager.luck)
+                    gameManager.money += coinValue;
+            }
+
             DestroyPool();
         }
     }

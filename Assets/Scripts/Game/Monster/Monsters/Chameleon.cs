@@ -13,26 +13,16 @@ public class Chameleon : Monster
 
     void Start()
     {
-        isWalk = true;
-        gameManager = GameManager.Instance;
-        character = Character.Instance;
-        hp = stat.monsterMaxHp * (1 + (float)((gameManager.round - 1) * 0.25));
-        initScale = transform.localScale;
-        speed = stat.monsterSpeed;
-        initScale = transform.localScale;
-        initSpeed = speed;
-        rend = GetComponent<SpriteRenderer>();
-        anim = GetComponent<Animator>();
-        coll = GetComponent<Collider>();
+        InitSetting();
     }
 
     private void Update()
     {
-        if (isDead == false && isWalk)
+        if (isDead == false)
         {
+            Move();
             rightAttackColl.gameObject.SetActive(false);
             leftAttackColl.gameObject.SetActive(false);
-            Move();
             anim.SetBool("isWalk", isWalk);
 
             if (!isFreeze)

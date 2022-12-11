@@ -16,7 +16,7 @@ MonoBehaviour:
   itemSprite: {fileID: 21300000, guid: 9e47b6d3ae931e843b2fa9c930cc0205, type: 3}
   weaponName: "\uB808\uC774\uC800 "
   type: 0
-  weaponDamage: 2
+  weaponDamage: 3
   magicDamage: 0
   weaponRange: 10
   weaponPrice: 50

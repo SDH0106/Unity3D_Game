@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
+using UnityEngine.Experimental.XR.Interaction;
 using static WeaponInfo;
 
 [CreateAssetMenu(fileName = "new Item", menuName = "GameData/Item/Passive")]
@@ -23,21 +24,23 @@ public class PassiveInfo : ScriptableObject
     [SerializeField] float range;
     [SerializeField] float luck;
     [SerializeField] float critical;
+    [SerializeField] float coinRange;
+    [SerializeField] float increaseExp;
+    [SerializeField] float monsterSpeed;
     [SerializeField] int salePercent;
     [SerializeField] int dashCount;
-    [SerializeField] float coinRange;
-
-    /*[SerializeField] int coinCount;
-    [SerializeField] int monsterCount;
-    [SerializeField] float monsterSpeed;
-    [SerializeField] int exp;
-    [SerializeField] int waveCount;
     [SerializeField] int fireCount;
-    [SerializeField] int gradeCost;*/
+    [SerializeField] bool luckCoin;
+    [SerializeField] bool luckDamage;
+    [SerializeField] bool luckCritical;
+    [SerializeField] bool doubleShot;
     [SerializeField] string description;
-    
+
     [HideInInspector] public float weight;
 
+    /*
+    [SerializeField] int monsterCount;
+    */
 
     public Sprite ItemSprite => itemSprite;
     public Grade ItemGrade => itemGrade;
@@ -55,8 +58,15 @@ public class PassiveInfo : ScriptableObject
     public float AttackSpeed => attackSpeed;
     public int ItemPrice => itemPrice;
     public float Critical => critical;
+    public float MonsterSpeed => monsterSpeed;
     public int SalePercent => salePercent;
     public int DashCount => dashCount;
+    public int FireCount => fireCount;
     public float CoinRange => coinRange;
+    public float IncreaseExp => increaseExp;
+    public bool LuckCoin => luckCoin;
+    public bool LuckDamage => luckDamage;
+    public bool LuckCritical => luckCritical;
+    public bool DoubleShot => doubleShot;
     public string Description => description;
 }

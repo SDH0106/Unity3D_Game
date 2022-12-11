@@ -6,7 +6,9 @@ using UnityEngine.Pool;
 public class WeaponControl : Weapon
 {
     [SerializeField] GameObject bulletPrefab;
-    [SerializeField] Transform firePos;
+    [SerializeField] Transform normalFirePos;
+    [SerializeField] Transform doubleFirePos1;
+    [SerializeField] Transform doubleFirePos2;
     [SerializeField] int poolCount;
 
     private IObjectPool<Bullet> pool;
@@ -67,10 +69,26 @@ public class WeaponControl : Weapon
         {
             if (Input.GetMouseButton(0))
             {
-                Bullet bullet = pool.Get();
-                bullet.transform.position = firePos.position;
-                bullet.Shoot(dir.normalized);
-                bullet.damageUI = damageUI;
+                if (!gameManager.doubleShot)
+                {
+                    Bullet bullet = pool.Get();
+                    bullet.transform.position = normalFirePos.position;
+                    bullet.Shoot(dir.normalized);
+                    bullet.damageUI = damageUI;
+                }
+
+                if (gameManager.doubleShot)
+                {
+                    Bullet bullet1 = pool.Get();
+                    Bullet bullet2 = pool.Get();
+                    bullet1.transform.position = doubleFirePos1.position;
+                    bullet2.transform.position = doubleFirePos2.position;
+                    bullet1.Shoot(dir.normalized);
+                    bullet2.Shoot(dir.normalized);
+                    bullet1.damageUI = damageUI;
+                    bullet2.damageUI = damageUI;
+                }
+
                 SoundManager.Instance.PlayES(weaponInfo.WeaponSound);
                 canAttack = false;
             }
@@ -89,7 +107,7 @@ public class WeaponControl : Weapon
 
     private Bullet CreateBullet()
     {
-        Bullet bullet = Instantiate(bulletPrefab, firePos.position, transform.rotation).GetComponent<Bullet>();
+        Bullet bullet = Instantiate(bulletPrefab, normalFirePos.position, transform.rotation).GetComponent<Bullet>();
         bullet.SetManagedPool(pool);
         bullet.transform.SetParent(gameManager.bulletStorage);
         return bullet;

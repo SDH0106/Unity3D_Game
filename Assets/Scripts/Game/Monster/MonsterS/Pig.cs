@@ -11,15 +11,7 @@ public class Pig : Monster
 
     private void Start()
     {
-        gameManager = GameManager.Instance;
-        character = Character.Instance;
-        hp = stat.monsterMaxHp * (1 + (float)((gameManager.round - 1) * 0.25)); ;
-        initScale = transform.localScale;
-        speed = stat.monsterSpeed;
-        initSpeed = speed;
-        rend = GetComponent<SpriteRenderer>();
-        anim = GetComponent<Animator>();
-        coll = GetComponent<Collider>();
+        InitSetting();
     }
 
     protected override void SetInitMonster()

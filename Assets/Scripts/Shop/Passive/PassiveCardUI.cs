@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class PassiveCardUI : MonoBehaviour
@@ -33,6 +34,7 @@ public class PassiveCardUI : MonoBehaviour
 
     int[] passiveIntVariables = new int[10];
     float[] passiveFloatVariables = new float[10];
+    bool[] passiveBoolVariables = new bool[4];
 
     Color LockImageColor;
     Color LockTextColor;
@@ -158,6 +160,13 @@ public class PassiveCardUI : MonoBehaviour
         passiveIntVariables[1] = selectedPassive.DashCount;
 
         passiveFloatVariables[0] = selectedPassive.CoinRange;
+        passiveFloatVariables[1] = selectedPassive.IncreaseExp;
+        passiveFloatVariables[2] = selectedPassive.MonsterSpeed;
+
+        passiveBoolVariables[0] = selectedPassive.LuckCoin;
+        passiveBoolVariables[1] = selectedPassive.LuckDamage;
+        passiveBoolVariables[2] = selectedPassive.LuckCritical;
+        passiveBoolVariables[3] = selectedPassive.DoubleShot;
     }
 
     void DescriptionInfo()
@@ -171,6 +180,8 @@ public class PassiveCardUI : MonoBehaviour
             {
                 descriptPrefabs[count].transform.GetChild(0).GetComponent<Text>().text = statTypes[i];
                 descriptPrefabs[count].transform.GetChild(2).GetComponent<Text>().text = stats[i].ToString();
+                if (stats[i] < 0)
+                    descriptPrefabs[count].transform.GetChild(2).GetComponent<Text>().color = Color.red;
                 descriptPrefabs[count].transform.GetChild(3).gameObject.SetActive(false);
                 count++;
             }
@@ -217,6 +228,12 @@ public class PassiveCardUI : MonoBehaviour
             for(int i=0;i<passiveFloatVariables.Length;i++)
             {
                 gameManager.passiveFloatVariables[i] += passiveFloatVariables[i];
+            }
+
+            for(int i=0;i<passiveBoolVariables.Length;i++)
+            {
+                if (passiveBoolVariables[i] == true)
+                    gameManager.passiveBoolVariables[i] = passiveBoolVariables[i];
             }
         }
     }

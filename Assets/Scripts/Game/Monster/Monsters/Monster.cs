@@ -34,13 +34,18 @@ public class Monster : MonoBehaviour
 
     void Start()
     {
+        InitSetting();
+    }
+
+    protected void InitSetting()
+    {
         gameManager = GameManager.Instance;
         character = Character.Instance;
         hp = stat.monsterMaxHp * (1 + ((gameManager.round - 1) * 0.25f));
         initScale = transform.localScale;
-        speed = stat.monsterSpeed;
+        speed = stat.monsterSpeed * (1 + gameManager.monsterSpeed);
         initSpeed = speed;
-        initSpeed = speed;
+        isWalk = true;
         rend = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         coll = GetComponent<Collider>();
@@ -60,7 +65,7 @@ public class Monster : MonoBehaviour
     protected virtual void SetInitMonster()
     {
         hp = stat.monsterMaxHp * (1 + ((gameManager.round - 1) * 0.25f));
-        speed = stat.monsterSpeed;
+        speed = stat.monsterSpeed * (1 + gameManager.monsterSpeed);
         isWalk = true;
         isDead = false;
         isAttacked = false;
@@ -73,22 +78,26 @@ public class Monster : MonoBehaviour
 
     public void Move()
     {
-        Vector3 characterPos = character.transform.position;
-        dir = characterPos - transform.position;
+        if (!isFreeze)
+        {
+            Vector3 characterPos = character.transform.position;
+            dir = characterPos - transform.position;
 
-        transform.position = Vector3.MoveTowards(new Vector3(transform.position.x,0,transform.position.z), characterPos, speed * Time.deltaTime);
+            speed = stat.monsterSpeed * (1 + gameManager.monsterSpeed);
 
+            transform.position = Vector3.MoveTowards(new Vector3(transform.position.x, 0, transform.position.z), characterPos, speed * Time.deltaTime);
 
-        isWalk = true;
+            isWalk = true;
 
-        if (dir == Vector3.zero || speed == 0)
-            isWalk = false;
+            if (dir == Vector3.zero || speed == 0)
+                isWalk = false;
 
-        if (dir.x < 0)
-            rend.flipX = true;
+            if (dir.x < 0)
+                rend.flipX = true;
 
-        else if (dir.x >= 0)
-            rend.flipX = false;
+            else if (dir.x >= 0)
+                rend.flipX = false;
+        }
     }
 
     private IEnumerator MonsterColorBlink()
@@ -110,7 +119,7 @@ public class Monster : MonoBehaviour
     private IEnumerator MonsterFreeze()
     {
         rend.color = Color.cyan;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3f);
 
         isFreeze = false;
         speed = initSpeed;
@@ -139,7 +148,7 @@ public class Monster : MonoBehaviour
 
         if (isFreeze == true)
         {
-            speed = 0;
+            isWalk = false;
             StartCoroutine(MonsterFreeze());
         }
     }
@@ -148,6 +157,9 @@ public class Monster : MonoBehaviour
     {
         if (hp <= 0 || gameManager.isClear || gameManager.hp <= 0)
         {
+            rend.color = Color.white;
+            isFreeze = false;
+            StopCoroutine(MonsterFreeze());
             coll.enabled = false;
             isDead = true;
             isAttacked = true;
@@ -162,7 +174,7 @@ public class Monster : MonoBehaviour
                     {
                         int coinValue = Random.Range(stat.monsterCoin - 5, stat.monsterCoin + 1);
                         DropCoin.Instance.Drop(transform.position, coinValue);
-                        gameManager.exp += stat.monsterExp;
+                        gameManager.exp += stat.monsterExp * (1 + gameManager.increaseExp);
                     }
                     DestroyMonster();
                 }

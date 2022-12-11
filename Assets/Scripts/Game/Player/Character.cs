@@ -51,7 +51,6 @@ public class Character : Singleton<Character>
         dashCoolTime = 4;
         dashCount = gameManager.dashCount;
         initDashCoolTime = dashCoolTime;
-
     }
 
     void Update()
