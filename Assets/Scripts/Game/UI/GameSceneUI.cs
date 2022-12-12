@@ -72,7 +72,7 @@ public class GameSceneUI : MonoBehaviour
         TimeUI();
         DashUI();
 
-        if (gameManager.hp > 0)
+        if (!character.isDead)
         {
             if (gameManager.round != 20)
             {
@@ -111,7 +111,7 @@ public class GameSceneUI : MonoBehaviour
             }    
         }
 
-        else if (gameManager.hp <= 0)
+        else if (character.isDead)
         {
             gameOverUI.SetActive(true);
 
@@ -195,7 +195,7 @@ public class GameSceneUI : MonoBehaviour
 
     public void PauseGame()
     {
-        if (gameManager.hp > 0)
+        if (!character.isDead)
         {
             PauseUI.SetActive(true);
             gameManager.isPause = true;

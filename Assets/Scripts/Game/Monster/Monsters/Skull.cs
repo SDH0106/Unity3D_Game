@@ -54,7 +54,7 @@ public class Skull : Monster
 
     void BossDead()
     {
-        if (hp <= 0 || gameManager.hp <= 0)
+        if (hp <= 0 || character.isDead)
         {
             rend.color = Color.white;
             isFreeze = false;

@@ -2,6 +2,7 @@ using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using static WeaponInfo;
@@ -11,6 +12,8 @@ public class Character : Singleton<Character>
     [SerializeField] SpriteRenderer rend;
     Animator anim;
     [SerializeField] ParticleSystem particle;
+    [SerializeField] GameObject gardianAngel;
+    [SerializeField] GameObject gardianEffect;
 
     [SerializeField] Slider playerHpBar;
 
@@ -26,7 +29,8 @@ public class Character : Singleton<Character>
     [SerializeField] public GameObject[] weapons;
     [SerializeField] public Transform[] weaponPoses;
 
-    bool isRun, isAttacked, isDead = false;
+    bool isRun, isAttacked = false;
+    public bool isDead = false;
 
     GameManager gameManager;
 
@@ -48,6 +52,9 @@ public class Character : Singleton<Character>
         gameManager = GameManager.Instance;
         transform.position = Vector3.zero;
 
+        gardianAngel.SetActive(false);
+        gardianEffect.SetActive(false);
+
         dashCoolTime = 4;
         dashCount = gameManager.dashCount;
         initDashCoolTime = dashCoolTime;
@@ -60,16 +67,18 @@ public class Character : Singleton<Character>
 
         playerHpBar.value = 1 - (gameManager.hp / gameManager.maxHp);
 
+        if (gameManager.revive)
+            gardianAngel.SetActive(true);
+
         if (gameManager.currentScene == "Game")
         {
-            if (isDead == false)
+            if (gameManager.hp > 0)
             {
                 Move();
                 Dash();
             }
 
             anim.SetBool("isRun", isRun);
-            OnDead();
         }
     }
 
@@ -186,30 +195,40 @@ public class Character : Singleton<Character>
         }
     }
 
-     public void OnDamaged(Collider other)
+    public void OnDamaged(Collider other)
     {
         if (other.tag == "Monster" && isAttacked == false)
         {
             if (other.gameObject.GetComponent<Monster>().stat.monsterDamage - gameManager.defence > 0)
             {
                 gameManager.hp -= (other.gameObject.GetComponent<Monster>().stat.monsterDamage - gameManager.defence);
-                StartCoroutine(OnInvincible());
+
+                if (gameManager.hp > 0)
+                    StartCoroutine(OnInvincible());
+
+                else if (gameManager.hp <= 0)
+                    OnDead();
             }
         }
 
-        else if(other.CompareTag("monsterBullet") && isAttacked == false)
+        else if (other.CompareTag("monsterBullet") && isAttacked == false)
         {
             if ((other.gameObject.GetComponent<MonsterBullet>().bulletDamage - gameManager.defence) > 0)
             {
                 gameManager.hp -= (other.gameObject.GetComponent<MonsterBullet>().bulletDamage - gameManager.defence);
-                StartCoroutine(OnInvincible());
+
+                if (gameManager.hp > 0)
+                    StartCoroutine(OnInvincible());
+
+                else if (gameManager.hp <= 0)
+                    OnDead();
             }
         }
     }
 
     void OnDead()
     {
-        if (gameManager.hp <= 0)
+        if (!gameManager.revive)
         {
             gameManager.hp = 0;
             isDead = true;
@@ -225,16 +244,39 @@ public class Character : Singleton<Character>
                 }
             }
         }
+
+        else if (gameManager.revive)
+        {
+            isAttacked = true;
+            isRun = false;
+            StartCoroutine(OnRevive());
+        }
     }
 
     public IEnumerator OnInvincible()
     {
         anim.SetTrigger("isAttacked");
         isAttacked = true;
-        StartCoroutine(PlayerColorBlink());
+        if (gameManager.hp > 0)
+            StartCoroutine(PlayerColorBlink());
 
         yield return new WaitForSeconds(invincibleTime);
         rend.color = Color.white;
         isAttacked = false;
+    }
+
+    IEnumerator OnRevive()
+    {
+        rend.color = new Color(1, 1, 1, 0.5f);
+        gardianEffect.SetActive(true);
+
+        yield return new WaitForSeconds(2.5f);
+        gameManager.passiveBoolVariables[4] = false;    // gameManager.revive = false
+        gameManager.hp = Mathf.Ceil(gameManager.maxHp * 0.5f);
+
+        yield return new WaitForSeconds(1.5f);
+        rend.color = Color.white;
+        isAttacked = false;
+        gardianAngel.SetActive(false);
     }
 }

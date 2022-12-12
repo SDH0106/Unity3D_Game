@@ -53,6 +53,7 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector] public bool luckDamage;
     [HideInInspector] public bool luckCritical;
     [HideInInspector] public bool doubleShot;
+    [HideInInspector] public bool revive;
     #endregion
 
     [HideInInspector] public float currentGameTime;
@@ -67,9 +68,9 @@ public class GameManager : Singleton<GameManager>
 
     float recoverTime;
 
-    [HideInInspector] public bool isPause = false;
-    [HideInInspector] public bool isClear = false;
-    [HideInInspector] public bool isBossDead = false;
+    [HideInInspector] public bool isPause;
+    [HideInInspector] public bool isClear;
+    [HideInInspector] public bool isBossDead;
 
     int beforeLevel;
 
@@ -91,6 +92,10 @@ public class GameManager : Singleton<GameManager>
 
         isPause = false;
         Time.timeScale = 1;
+
+        isPause = false;
+        isClear = false;
+        isBossDead = false;
     }
 
     void InitSetting()
@@ -112,11 +117,11 @@ public class GameManager : Singleton<GameManager>
         dashCount = 0;
         increaseExp = 0;
         monsterSpeed = 0;
-
-        for (int i=0;i< passiveBoolVariables.Length;i++)
-        {
-            passiveBoolVariables[i] = false;
-        }
+        luckCoin = false;
+        luckDamage = false;
+        luckCritical = false;
+        doubleShot = false;
+        revive = false;
     }
 
     void InitArray()
@@ -143,11 +148,12 @@ public class GameManager : Singleton<GameManager>
         passiveFloatVariables[1] = increaseExp;
         passiveFloatVariables[2] = monsterSpeed;
 
-        passiveBoolVariables = new bool[4];
+        passiveBoolVariables = new bool[5];
         passiveBoolVariables[0] = luckCoin;
         passiveBoolVariables[1] = luckDamage;
         passiveBoolVariables[2] = luckCritical;
         passiveBoolVariables[3] = doubleShot;
+        passiveBoolVariables[4] = revive;
     }
 
     void StatArray()
@@ -184,6 +190,7 @@ public class GameManager : Singleton<GameManager>
         luckDamage = passiveBoolVariables[1];
         luckCritical = passiveBoolVariables[2];
         doubleShot = passiveBoolVariables[3];
+        revive = passiveBoolVariables[4];
     }
 
     private void Update()

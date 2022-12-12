@@ -26,6 +26,7 @@ public class MonsterSpawn : MonoBehaviour
     float totalWeight = 0;
 
     GameManager gameManager;
+    Character character;
 
     private void Awake()
     {
@@ -35,6 +36,7 @@ public class MonsterSpawn : MonoBehaviour
     private void Start()
     {
         gameManager = GameManager.Instance;
+        character = Character.Instance;
         weightValue = new float[] { 100, 0, 0, 0 };
 
         for (int i = 0; i < weightValue.Length; i++)
@@ -53,7 +55,7 @@ public class MonsterSpawn : MonoBehaviour
 
     private void Update()
     {
-        if (gameManager.isClear || gameManager.hp <= 0)
+        if (gameManager.isClear || character.isDead)
         {
             CancelInvoke("RendSpawnImage");
         }
@@ -72,7 +74,7 @@ public class MonsterSpawn : MonoBehaviour
 
     Vector3 SpawnPosition()
     {
-        Vector3 playerPos = Character.Instance.transform.position;
+        Vector3 playerPos = character.transform.position;
         Vector3 randPoint = Random.onUnitSphere * spawnRange;
         randPoint.y = 0;
 

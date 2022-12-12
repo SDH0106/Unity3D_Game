@@ -623,7 +623,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &7115974904562025005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -682,6 +682,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5e0a7361f3afbc6468a8ba1ea02f8c06, type: 2}
   - {fileID: 11400000, guid: 926ecf94a21811848b031d356d56ddea, type: 2}
   - {fileID: 11400000, guid: 611424f6aa8213845bb9b3b117b76237, type: 2}
+  - {fileID: 11400000, guid: 7f2a752374aeb7e4ea6a3cc4cde1724d, type: 2}
   lockBackImage: {fileID: 4778071493522451700}
   lockImage: {fileID: 8296031119694492482}
   lockText: {fileID: 4972568240297667687}

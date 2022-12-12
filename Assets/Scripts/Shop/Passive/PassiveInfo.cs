@@ -34,6 +34,7 @@ public class PassiveInfo : ScriptableObject
     [SerializeField] bool luckDamage;
     [SerializeField] bool luckCritical;
     [SerializeField] bool doubleShot;
+    [SerializeField] bool revive;
     [SerializeField] string description;
 
     [HideInInspector] public float weight;
@@ -68,5 +69,6 @@ public class PassiveInfo : ScriptableObject
     public bool LuckDamage => luckDamage;
     public bool LuckCritical => luckCritical;
     public bool DoubleShot => doubleShot;
+    public bool Revive => revive;
     public string Description => description;
 }

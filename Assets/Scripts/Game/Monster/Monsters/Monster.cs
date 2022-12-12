@@ -155,7 +155,7 @@ public class Monster : MonoBehaviour
 
     public void OnDead()
     {
-        if (hp <= 0 || gameManager.isClear || gameManager.hp <= 0)
+        if (hp <= 0 || gameManager.isClear || character.isDead)
         {
             rend.color = Color.white;
             isFreeze = false;

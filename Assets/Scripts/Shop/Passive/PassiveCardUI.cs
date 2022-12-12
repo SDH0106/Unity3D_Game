@@ -34,7 +34,7 @@ public class PassiveCardUI : MonoBehaviour
 
     int[] passiveIntVariables = new int[10];
     float[] passiveFloatVariables = new float[10];
-    bool[] passiveBoolVariables = new bool[4];
+    bool[] passiveBoolVariables = new bool[5];
 
     Color LockImageColor;
     Color LockTextColor;
@@ -167,6 +167,7 @@ public class PassiveCardUI : MonoBehaviour
         passiveBoolVariables[1] = selectedPassive.LuckDamage;
         passiveBoolVariables[2] = selectedPassive.LuckCritical;
         passiveBoolVariables[3] = selectedPassive.DoubleShot;
+        passiveBoolVariables[4] = selectedPassive.Revive;
     }
 
     void DescriptionInfo()

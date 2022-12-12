@@ -8,7 +8,6 @@ public enum Grade
     Èñ±Í,
     Àü¼³,
     ½ÅÈ­,
-    gradeCount,
 }
 
 [CreateAssetMenu(fileName = "new Weapon", menuName = "GameData/Item/Weapon")]

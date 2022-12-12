@@ -126,7 +126,7 @@ public class ShopManager : Singleton<ShopManager>
     {
         gameManager.currentScene = "Game";
         SceneManager.LoadScene("Game");
-        Character.Instance.transform.position = Vector3.zero;
+        character.transform.position = Vector3.zero;
         gameManager.round++;
         rerollMoney = -gameManager.round;
         gameManager.hp = gameManager.maxHp;

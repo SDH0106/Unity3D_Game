@@ -34,7 +34,6 @@ public class MonsterBullet : MonoBehaviour
         if (other.tag == "Character")
         {
             other.GetComponent<Character>().OnDamaged(coll);
-            GameManager.Instance.hp += GameManager.Instance.absorbHp;
             DestroyBullet();
             CancelInvoke("DestroyBullet");
         }
