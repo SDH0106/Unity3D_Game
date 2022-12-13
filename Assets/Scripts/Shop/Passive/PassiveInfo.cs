@@ -19,6 +19,8 @@ public class PassiveInfo : ScriptableObject
     [SerializeField] float defence;
     [SerializeField] float physicDamage;
     [SerializeField] float elementDamage;
+    [SerializeField] float shortDamage;
+    [SerializeField] float longDamage;
     [SerializeField] float attackSpeed;
     [SerializeField] float speed;
     [SerializeField] float range;
@@ -49,6 +51,8 @@ public class PassiveInfo : ScriptableObject
     public int MaxCount => maxCount;
     public float PhysicDamage => physicDamage;
     public float ElementDamage => elementDamage;
+    public float ShortDamage => shortDamage;
+    public float LongDamage => longDamage;
     public float Range => range;
     public float Defence => defence;
     public float Speed => speed;

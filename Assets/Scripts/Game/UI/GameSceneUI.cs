@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
@@ -7,7 +8,7 @@ using UnityEngine.Pool;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GameSceneUI : MonoBehaviour
+public class GameSceneUI : Singleton<GameSceneUI>
 {
     [Header("HP")]
     [SerializeField] Text hpText;
@@ -39,6 +40,22 @@ public class GameSceneUI : MonoBehaviour
     [SerializeField] Text dashCount;
     [SerializeField] Text maxDashCount;
 
+    [Header("Stat")]
+    [SerializeField] GameObject statWindow;
+    [SerializeField] Text maxHp;
+    [SerializeField] Text reHp;
+    [SerializeField] Text apHp;
+    [SerializeField] Text def;
+    [SerializeField] Text wAtk;
+    [SerializeField] Text eAtk;
+    [SerializeField] Text sAtk;
+    [SerializeField] Text lAtk;
+    [SerializeField] Text aSpd;
+    [SerializeField] Text spd;
+    [SerializeField] Text ran;
+    [SerializeField] Text luk;
+    [SerializeField] Text cri;
+
     [Header("Text")]
     [SerializeField] GameObject roundClearText;
     [SerializeField] GameObject gameOverUI;
@@ -46,9 +63,12 @@ public class GameSceneUI : MonoBehaviour
     [SerializeField] GameObject gameClearUI;
     [SerializeField] GameObject gameClearText;
     [SerializeField] GameObject statCardParent;
+    [SerializeField] GameObject chestPassive;
 
     GameManager gameManager;
     Character character;
+
+    [HideInInspector] public int chestCount;
 
     private void Start()
     {
@@ -57,10 +77,12 @@ public class GameSceneUI : MonoBehaviour
         character = Character.Instance;
         roundClearText.SetActive(false);
         gameOverUI.SetActive(false);
-        statCardParent.gameObject.SetActive(false);
+        statCardParent.SetActive(false);
         PauseUI.SetActive(false);
         gameClearUI.SetActive(false);
         dash.SetActive(false);
+        statWindow.SetActive(false);
+        chestPassive.SetActive(false);
     }
 
     private void Update()
@@ -71,6 +93,7 @@ public class GameSceneUI : MonoBehaviour
         RoundUI();
         TimeUI();
         DashUI();
+        SettingStatText();
 
         if (!character.isDead)
         {
@@ -85,11 +108,21 @@ public class GameSceneUI : MonoBehaviour
                 {
                     roundClearText.SetActive(false);
 
-                    if (gameManager.levelUpCount <= 0)
+                    if (gameManager.levelUpCount <= 0 && chestCount <= 0)
                         gameManager.ToShopScene();
 
                     if (gameManager.levelUpCount > 0)
+                    {
                         statCardParent.gameObject.SetActive(true);
+                        statWindow.SetActive(true);
+                    }
+
+                    if (gameManager.levelUpCount <= 0 && chestCount > 0)
+                    {
+                        statCardParent.gameObject.SetActive(false);
+                        chestPassive.gameObject.SetActive(true);
+                        statWindow.SetActive(true);
+                    }
                 }
 
                 if (Input.GetKeyDown(KeyCode.Escape) && !gameManager.isPause)
@@ -118,6 +151,23 @@ public class GameSceneUI : MonoBehaviour
             if (gameOverText.GetComponent<TypingText>().isOver == true)
                 SceneManager.LoadScene("End");
         }
+    }
+
+    void SettingStatText()
+    {
+        maxHp.text = gameManager.maxHp.ToString();
+        reHp.text = gameManager.recoverHp.ToString();
+        apHp.text = gameManager.absorbHp.ToString();
+        def.text = gameManager.defence.ToString();
+        wAtk.text = gameManager.physicDamage.ToString();
+        eAtk.text = gameManager.elementDamage.ToString();
+        sAtk.text = gameManager.shortDamage.ToString();
+        lAtk.text = gameManager.longDamage.ToString();
+        aSpd.text = gameManager.attackSpeed.ToString();
+        spd.text = gameManager.speed.ToString();
+        ran.text = gameManager.range.ToString();
+        luk.text = gameManager.luck.ToString();
+        cri.text = gameManager.critical.ToString();
     }
 
     void DashUI()
@@ -155,9 +205,12 @@ public class GameSceneUI : MonoBehaviour
 
     void HpUI()
     {
-        maxHpText.text = gameManager.maxHp.ToString();
-        hpText.text = gameManager.hp.ToString();
-        hpBar.value = 1 - (gameManager.hp / gameManager.maxHp);
+        if (gameManager.currentScene == "Game")
+        {
+            maxHpText.text = gameManager.maxHp.ToString();
+            hpText.text = gameManager.hp.ToString();
+            hpBar.value = 1 - (gameManager.hp / gameManager.maxHp);
+        }
     }
 
     void ExpUI()

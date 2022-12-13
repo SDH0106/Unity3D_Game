@@ -42,7 +42,7 @@ public class ItemManager : Singleton<ItemManager>
 
         for (int i = 0; i < passiveCounts.Length; i++)
         {
-            passiveCounts[i] = passiveCard.passiveInfo[i].MaxCount; 
+            passiveCounts[i] = passiveCard.passiveInfo[i].MaxCount;
         }
 
         foolCount = 0;

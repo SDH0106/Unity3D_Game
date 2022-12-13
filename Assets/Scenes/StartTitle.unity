@@ -1978,17 +1978,18 @@ MonoBehaviour:
   aimCursor: {fileID: 2800000, guid: b8e78032f8af0954784d1fe9e5a09187, type: 3}
   bulletStorage: {fileID: 1005871281}
   damageStorage: {fileID: 1692643827}
-  gameTime: 60
-  money: 10500
+  gameTime: 0
+  money: 0
   round: 1
   exp: 0
   hp: 0
   level: 1
   maxHp: 2
   maxExp: 10
-  totalDamage: 0
   physicDamage: 0
   elementDamage: 0
+  shortDamage: 0
+  longDamage: 0
   recoverHp: 0
   absorbHp: 0
   defence: 0
@@ -2012,7 +2013,7 @@ MonoBehaviour:
   revive: 0
   currentGameTime: 0
   currentScene: 
-  levelUpCount: 0
+  levelUpCount: 1
   stats: []
   isPause: 0
   isClear: 0

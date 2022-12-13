@@ -84,10 +84,7 @@ public class StatCardUI : StatCardInfo
                 gameManager.stats[i] += (gameManager.gameObject.GetComponent<StatCardInfo>().statInfos[i].statValue * (int)(cardGrade + 1));
         }
 
-        if (gameManager.levelUpCount <= 0)
-            gameManager.ToShopScene();
-
-        else if (gameManager.levelUpCount > 0)
+        if (gameManager.levelUpCount > 0)
             ShowStatCard.Instance.ShowRandomCards();
     }
 }

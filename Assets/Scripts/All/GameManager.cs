@@ -28,9 +28,10 @@ public class GameManager : Singleton<GameManager>
     public int level;
     [SerializeField] public float maxHp;
     [SerializeField] public float maxExp;
-    [HideInInspector] public float totalDamage;
     [HideInInspector] public float physicDamage;
     [HideInInspector] public float elementDamage;
+    [HideInInspector] public float shortDamage;
+    [HideInInspector] public float longDamage;
     [SerializeField] public float recoverHp;
     [SerializeField] public float absorbHp;
     [SerializeField] public float defence;
@@ -126,18 +127,20 @@ public class GameManager : Singleton<GameManager>
 
     void InitArray()
     {
-        stats = new float[11];
+        stats = new float[13];
         stats[0] = maxHp;
         stats[1] = recoverHp;
         stats[2] = absorbHp;
         stats[3] = defence;
         stats[4] = physicDamage;
         stats[5] = elementDamage;
-        stats[6] = attackSpeed;
-        stats[7] = speed;
-        stats[8] = luck;
-        stats[9] = range;
-        stats[10] = critical;
+        stats[6] = shortDamage;
+        stats[7] = longDamage;
+        stats[8] = attackSpeed;
+        stats[9] = speed;
+        stats[10] = luck;
+        stats[11] = range;
+        stats[12] = critical;
 
         passiveIntVariables = new int[10];
         passiveIntVariables[0] = salePercent;
@@ -164,11 +167,13 @@ public class GameManager : Singleton<GameManager>
         defence = stats[3];
         physicDamage = stats[4];
         elementDamage = stats[5];
-        attackSpeed = stats[6];
-        speed = stats[7];
-        luck = stats[8];
-        range = stats[9];
-        critical = stats[10];
+        shortDamage = stats[6];
+        longDamage  = stats[7];
+        attackSpeed = stats[8];
+        speed = stats[9];
+        luck = stats[10];
+        range = stats[11];
+        critical = stats[12];
     }
 
     void IntVariableArray()

@@ -25,15 +25,27 @@
             "statValue": 1.0
         },
         {
-            "statName": "무력",
+            "statName": "근력",
             "statType": "물리 공격력",
             "statSprite": "WDamage",
             "statValue": 1.0
         },
-                {
-            "statName": "지력",
+        {
+            "statName": "마력 포션",
             "statType": "원소 공격력",
             "statSprite": "EDamage",
+            "statValue": 1.0
+        },
+        {
+            "statName": "무력",
+            "statType": "근거리 공격력",
+            "statSprite": "SDamage",
+            "statValue": 1.0
+        },
+        {
+            "statName": "지력",
+            "statType": "원거리 공격력",
+            "statSprite": "LDamage",
             "statValue": 1.0
         },
         {

@@ -8,7 +8,7 @@ public class ShowStatCard : Singleton<ShowStatCard>
     [SerializeField] GameObject statCard;
     [SerializeField] Text rerollMoneyText;
 
-    public Stat[] statInfo;
+    Stat[] statInfo;
     int[] numArray;
 
     GameObject[] statCards;

@@ -1,19 +1,11 @@
-using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
-using UnityEngine.Rendering;
 using UnityEngine.UI;
 
-public class PassiveCardUI : MonoBehaviour
+public class ChestPassiveCard : MonoBehaviour
 {
     [SerializeField] public PassiveInfo[] passiveInfo;
-
-    [Header("Lock")]
-    [SerializeField] Image lockBackImage;
-    [SerializeField] Image lockImage;
-    [SerializeField] Text lockText;
 
     [Header("decript")]
     [SerializeField] GameObject[] descriptPrefabs;
@@ -24,8 +16,8 @@ public class PassiveCardUI : MonoBehaviour
     [SerializeField] Image cardBackLine;
     [SerializeField] Image itemSprite;
     [SerializeField] Text itemName;
-    [SerializeField] Text itemPrice;
     [SerializeField] Text itemGrade;
+    [SerializeField] Text sellPriceText;
 
     [HideInInspector] public PassiveInfo selectedPassive;
 
@@ -36,35 +28,25 @@ public class PassiveCardUI : MonoBehaviour
     float[] passiveFloatVariables = new float[10];
     bool[] passiveBoolVariables = new bool[5];
 
-    Color LockImageColor;
-    Color LockTextColor;
-
-    [HideInInspector] public bool isLock = false;
-
-    Color initPriceColor;
-
     GameManager gameManager;
     ItemManager itemManager;
 
     int arrayCount;
-    int price;
+    int sellPrice;
 
     private void Start()
     {
         gameManager = GameManager.Instance;
         itemManager = ItemManager.Instance;
-        initPriceColor = itemPrice.color;
 
-        LockImageColor = lockBackImage.color;
-        LockTextColor = lockText.color;
+        sellPrice = Mathf.CeilToInt(selectedPassive.ItemPrice * 0.7f);
 
         Setting();
         CardImage();
         StatArray();
         DescriptionInfo();
-        StartLockColor();   
 
-        for(int i=0;i<passiveInfo.Length;i++)
+        for (int i = 0; i < passiveInfo.Length; i++)
         {
             if (passiveInfo[i].ItemName == selectedPassive.ItemName)
             {
@@ -74,32 +56,20 @@ public class PassiveCardUI : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        lockImage.gameObject.SetActive(isLock);
-
-        if (gameManager.money < selectedPassive.ItemPrice)
-            itemPrice.color = Color.red;
-
-        else if (gameManager.money >= selectedPassive.ItemPrice)
-            itemPrice.color = initPriceColor;
-
-    }
-
     void Setting()
     {
-        price = Mathf.CeilToInt(selectedPassive.ItemPrice * (1 - gameManager.passiveIntVariables[0]));
+        sellPrice = Mathf.CeilToInt(selectedPassive.ItemPrice * (1 - gameManager.passiveIntVariables[0]));
         itemSprite.sprite = selectedPassive.ItemSprite;
         itemName.text = selectedPassive.ItemName;
-        itemPrice.text = price.ToString();
         itemGrade.text = selectedPassive.ItemGrade.ToString();
+        sellPriceText.text = sellPrice.ToString();
     }
 
     void CardImage()
     {
         if (selectedPassive.ItemGrade == Grade.ÀÏ¹Ý)
         {
-            cardBack.color = new Color(0.142f, 0.142f, 0.142f, 0.8235f);
+            cardBack.color = new Color(0.142f, 0.142f, 0.142f, 1);
             cardBackLine.color = Color.black;
             itemName.color = Color.white;
             itemGrade.color = Color.white;
@@ -107,7 +77,7 @@ public class PassiveCardUI : MonoBehaviour
 
         else if (selectedPassive.ItemGrade == Grade.Èñ±Í)
         {
-            cardBack.color = new Color(0, 0.77f, 1, 0.8235f);
+            cardBack.color = new Color(0, 0.77f, 1, 1);
             cardBackLine.color = Color.blue;
             itemName.color = Color.blue;
             itemGrade.color = Color.blue;
@@ -115,7 +85,7 @@ public class PassiveCardUI : MonoBehaviour
 
         else if (selectedPassive.ItemGrade == Grade.Àü¼³)
         {
-            cardBack.color = new Color(0.5f, 0.2f, 0.4f, 0.8235f);
+            cardBack.color = new Color(0.5f, 0.2f, 0.4f, 1);
             cardBackLine.color = new Color(0.5f, 0, 0.5f, 1);
             itemName.color = new Color(0.5f, 0, 0.5f, 1);
             itemGrade.color = new Color(0.5f, 0, 0.5f, 1);
@@ -123,7 +93,7 @@ public class PassiveCardUI : MonoBehaviour
 
         else if (selectedPassive.ItemGrade == Grade.½ÅÈ­)
         {
-            cardBack.color = new Color(1, 0.31f, 0.31f, 0.8235f);
+            cardBack.color = new Color(1, 0.31f, 0.31f, 1);
             cardBackLine.color = Color.red;
             itemName.color = Color.red;
             itemGrade.color = Color.red;
@@ -208,70 +178,50 @@ public class PassiveCardUI : MonoBehaviour
         }
     }
 
-    public void Click()
+    public void Select()
     {
         SoundManager.Instance.PlayES("SelectButton");
 
-        if (gameManager.money >= selectedPassive.ItemPrice && itemManager.passiveCounts[arrayCount] > 0)
+        itemManager.GetPassiveInfo(selectedPassive);
+        itemManager.passiveCounts[arrayCount]--;
+        GameSceneUI.Instance.chestCount--;
+        Destroy(gameObject);
+
+        for (int i = 0; i < stats.Length; i++)
         {
-            itemManager.GetPassiveInfo(selectedPassive);
-            itemManager.passiveCounts[arrayCount]--;
-            Destroy(gameObject);
-            isLock = false;
-            gameManager.money -= price;
-
-            for (int i = 0; i < stats.Length; i++)
-            {
-                gameManager.stats[i] += stats[i];
-            }
-
-            for (int i = 0; i < passiveIntVariables.Length; i++)
-            {
-                gameManager.passiveIntVariables[i] += passiveIntVariables[i];
-            }
-
-            for(int i=0;i<passiveFloatVariables.Length;i++)
-            {
-                gameManager.passiveFloatVariables[i] += passiveFloatVariables[i];
-            }
-
-            for(int i=0;i<passiveBoolVariables.Length;i++)
-            {
-                if (passiveBoolVariables[i] == true)
-                    gameManager.passiveBoolVariables[i] = passiveBoolVariables[i];
-            }
+            gameManager.stats[i] += stats[i];
         }
+
+        for (int i = 0; i < passiveIntVariables.Length; i++)
+        {
+            gameManager.passiveIntVariables[i] += passiveIntVariables[i];
+        }
+
+        for (int i = 0; i < passiveFloatVariables.Length; i++)
+        {
+            gameManager.passiveFloatVariables[i] += passiveFloatVariables[i];
+        }
+
+        for (int i = 0; i < passiveBoolVariables.Length; i++)
+        {
+            if (passiveBoolVariables[i] == true)
+                gameManager.passiveBoolVariables[i] = passiveBoolVariables[i];
+        }
+
+        if (GameSceneUI.Instance.chestCount > 0)
+            ShowPassive.Instance.ShowRandomPassiveCard();
     }
 
-    public void Lock()
+    public void Sell()
     {
-        if (!isLock)
-        {
-            lockBackImage.color = Color.white;
-            lockText.color = Color.black;
-            isLock = true;
-        }
+        SoundManager.Instance.PlayES("SelectButton");
 
-        else if (isLock)
-        {
-            lockBackImage.color = LockImageColor;
-            lockText.color = LockTextColor;
-            isLock = false;
-        }
-    }
+        itemManager.passiveCounts[arrayCount]--;
+        GameSceneUI.Instance.chestCount--;
+        Destroy(gameObject);
+        gameManager.money += sellPrice;
 
-    void StartLockColor()
-    {
-        if (isLock)
-        {
-            lockBackImage.color = Color.white;
-            lockText.color = Color.black;
-        }
-
-        else if (!isLock)
-        {
-            lockBackImage.color = LockImageColor;
-            lockText.color = LockTextColor;
-        }
+        if (GameSceneUI.Instance.chestCount > 0)
+            ShowPassive.Instance.ShowRandomPassiveCard();
     }
 }

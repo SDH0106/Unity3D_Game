@@ -21,7 +21,7 @@ public class Chest : MonoBehaviour
         if(other.CompareTag("Character"))
         {
             anim.SetTrigger("isOpen");
-            GameManager.Instance.levelUpCount++;
+            GameSceneUI.Instance.chestCount++;
             SoundManager.Instance.PlayES("Chest");
         }
     }

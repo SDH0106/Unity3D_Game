@@ -23,8 +23,23 @@ MonoBehaviour:
   defence: 0
   physicDamage: 0
   elementDamage: 0
+  shortDamage: -1
+  longDamage: 0
   attackSpeed: 0
   speed: 0
   range: 1
   luck: 0
+  critical: 0
+  coinRange: 0
+  increaseExp: 0
+  monsterSpeed: 0
+  salePercent: 0
+  dashCount: 0
+  fireCount: 0
+  luckCoin: 0
+  luckDamage: 0
+  luckCritical: 0
+  doubleShot: 0
+  revive: 0
+  description: 
   weight: 110
