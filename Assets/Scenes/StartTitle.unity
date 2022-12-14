@@ -1978,13 +1978,13 @@ MonoBehaviour:
   aimCursor: {fileID: 2800000, guid: b8e78032f8af0954784d1fe9e5a09187, type: 3}
   bulletStorage: {fileID: 1005871281}
   damageStorage: {fileID: 1692643827}
-  gameTime: 0
+  gameTime: 60
   money: 0
   round: 1
   exp: 0
   hp: 0
   level: 1
-  maxHp: 2
+  maxHp: 20
   maxExp: 10
   physicDamage: 0
   elementDamage: 0
@@ -1993,11 +1993,11 @@ MonoBehaviour:
   recoverHp: 0
   absorbHp: 0
   defence: 0
-  attackSpeed: 1
+  attackSpeed: 0
   speed: 2
-  range: 1
+  range: 0
   luck: 0
-  critical: 50
+  critical: 10
   passiveIntVariables: 
   passiveFloatVariables: []
   passiveBoolVariables: 
@@ -2013,7 +2013,7 @@ MonoBehaviour:
   revive: 0
   currentGameTime: 0
   currentScene: 
-  levelUpCount: 1
+  levelUpCount: 0
   stats: []
   isPause: 0
   isClear: 0

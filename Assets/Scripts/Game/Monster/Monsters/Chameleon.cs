@@ -14,6 +14,8 @@ public class Chameleon : Monster
     void Start()
     {
         InitSetting();
+        rightAttackColl.gameObject.SetActive(false);
+        leftAttackColl.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -21,8 +23,6 @@ public class Chameleon : Monster
         if (isDead == false)
         {
             Move();
-            rightAttackColl.gameObject.SetActive(false);
-            leftAttackColl.gameObject.SetActive(false);
             anim.SetBool("isWalk", isWalk);
 
             if (!isFreeze)
@@ -64,6 +64,13 @@ public class Chameleon : Monster
                 isAttack = false;
             }
         }
+    }
+
+    protected override void SetInitMonster()
+    {
+        base.SetInitMonster();
+        rightAttackColl.gameObject.SetActive(false);
+        leftAttackColl.gameObject.SetActive(false);
     }
 
     protected override void OnTriggerStay(Collider other)

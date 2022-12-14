@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: IronArmor
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 567fdd2e557fefc478f8aaa7ae56fb11, type: 3}
-  itemGrade: 0
+  itemGrade: 1
   itemName: "\uBB34\uC1E0 \uAC11\uC637"
-  itemPrice: 21
+  itemPrice: 35
   maxCount: 100
   hp: 5
   recoverHp: 0
@@ -23,11 +23,22 @@ MonoBehaviour:
   defence: 1
   physicDamage: 0
   elementDamage: 0
+  shortDamage: 0
+  longDamage: -2
   attackSpeed: 0
-  speed: -1
+  speed: 0
   range: 0
   luck: 0
   critical: 0
+  coinRange: 0
+  increaseExp: 0
+  monsterSpeed: 0
   salePercent: 0
+  dashCount: 0
+  luckCoin: 0
+  luckDamage: 0
+  luckCritical: 0
+  doubleShot: 0
+  revive: 0
   description: 
   weight: 0

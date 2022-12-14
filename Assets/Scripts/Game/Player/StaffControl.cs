@@ -16,9 +16,11 @@ public class StaffControl : Weapon
 
     Vector3 dir, mouse;
 
-    float delay = 0;
-    float bulletDelay = 1;
-    float thunderDelay = 3;
+    float delay;
+    float bulletDelay;
+    float thunderDelay;
+
+    float detectRange;
 
     bool canAttack = true;
     bool isTargetFind = false;
@@ -34,6 +36,10 @@ public class StaffControl : Weapon
         gameManager = GameManager.Instance;
         count = ItemManager.Instance.weaponCount;
         damageUI = ItemManager.Instance.damageUI[count];
+
+        delay = 0;
+        bulletDelay = 1;
+        thunderDelay = 3;
     }
 
     void Update()
@@ -99,10 +105,23 @@ public class StaffControl : Weapon
             else if (canAttack == false)
             {
                 delay += Time.deltaTime;
-                if (delay >= (bulletDelay / (1 + gameManager.attackSpeed / 10)))
+
+                if (gameManager.attackSpeed >= 0)
                 {
-                    canAttack = true;
-                    delay = 0;
+                    if (delay >= (bulletDelay / (1 + gameManager.attackSpeed * 0.1)))
+                    {
+                        canAttack = true;
+                        delay = 0;
+                    }
+                }
+
+                else if(gameManager.attackSpeed < 0)
+                {
+                    if (delay >= (bulletDelay - (gameManager.attackSpeed * 0.1)))
+                    {
+                        canAttack = true;
+                        delay = 0;
+                    }
                 }
             }
         }
@@ -128,10 +147,22 @@ public class StaffControl : Weapon
             else if (canAttack == false)
             {
                 delay += Time.deltaTime;
-                if (delay >= (thunderDelay / (1 + gameManager.attackSpeed / 10)))
+                if (gameManager.attackSpeed >= 0)
                 {
-                    canAttack = true;
-                    delay = 0;
+                    if (delay >= (thunderDelay / (1 + gameManager.attackSpeed * 0.1)))
+                    {
+                        canAttack = true;
+                        delay = 0;
+                    }
+                }
+
+                else  if (gameManager.attackSpeed < 0)
+                {
+                    if (delay >= (thunderDelay - gameManager.attackSpeed * 0.1))
+                    {
+                        canAttack = true;
+                        delay = 0;
+                    }
                 }
             }
         }
@@ -139,7 +170,12 @@ public class StaffControl : Weapon
 
     void FindTarget()
     {
-        Collider[] colliders = Physics.OverlapSphere(Character.Instance.transform.position, 6f + (gameManager.range/10));
+        detectRange = 4f + (gameManager.range * 0.1f);
+
+        if (detectRange < 1)
+            detectRange = 1;
+
+        Collider[] colliders = Physics.OverlapSphere(Character.Instance.transform.position, detectRange);
 
         if (colliders.Length > 0)
         {
@@ -154,9 +190,10 @@ public class StaffControl : Weapon
                         target = colliders[i].transform;
 
                         GameObject pool = Instantiate(damageUI, colliders[i].transform.position, Quaternion.Euler(90, 0, 0)).gameObject;
-                        pool.transform.SetParent(GameManager.Instance.damageStorage);
+                        pool.transform.SetParent(gameManager.damageStorage);
                         colliders[i].GetComponent<Monster>().OnDamaged(damageUI.weaponDamage);
-                        GameManager.Instance.hp += GameManager.Instance.absorbHp;
+                        if (gameManager.absorbHp > 0)
+                            gameManager.hp += gameManager.absorbHp;
 
                         isTargetFind = true;
                         break;
@@ -193,8 +230,5 @@ public class StaffControl : Weapon
     {
         Gizmos.color = Color.red;
         Gizmos.DrawLine(transform.position, mouse);
-
-        Handles.color = Color.blue;
-        Handles.DrawWireDisc(Character.Instance.transform.position,Vector3.up, 6f + (gameManager.range/10));
     }
 }

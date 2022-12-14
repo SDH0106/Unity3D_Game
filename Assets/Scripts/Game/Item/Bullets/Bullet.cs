@@ -15,6 +15,13 @@ public class Bullet : MonoBehaviour
 
     [HideInInspector] public DamageUI damageUI;
 
+    protected GameManager gameManager;
+
+    private void Start()
+    {
+        gameManager = GameManager.Instance;
+    }
+
     void Update()
     {
         transform.position += new Vector3(dir.x, 0, dir.z) * speed * Time.deltaTime;
@@ -28,7 +35,11 @@ public class Bullet : MonoBehaviour
     {
         this.dir = dir;
 
-        Invoke("DestroyBullet", 2f);
+        if (GameManager.Instance.range < 0)
+            Invoke("DestroyBullet", 1f);
+        
+        else if (GameManager.Instance.range >= 0)
+            Invoke("DestroyBullet", 1f + GameManager.Instance.range * 0.2f);
     }
 
     protected virtual void OnTriggerEnter(Collider other)
@@ -36,12 +47,12 @@ public class Bullet : MonoBehaviour
         if (other.tag == "Monster" && other.GetComponent<Monster>() != null)
         {
             GameObject pool = Instantiate(damageUI, transform.position, Quaternion.Euler(90, 0, 0)).gameObject;
-            pool.transform.SetParent(GameManager.Instance.damageStorage);
+            pool.transform.SetParent(gameManager.damageStorage);
             other.GetComponent<Monster>().OnDamaged(damageUI.weaponDamage);
-            GameManager.Instance.hp += GameManager.Instance.absorbHp;
+            if (gameManager.absorbHp > 0)
+                gameManager.hp += gameManager.absorbHp;
             DestroyBullet();
             CancelInvoke("DestroyBullet");
-
 
             Instantiate(effectPrefab, transform.position, transform.rotation);
         }

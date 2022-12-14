@@ -29,15 +29,15 @@ public class Weapon : MonoBehaviour
         if (weaponInfo.Type == WEAPON_TYPE.스태프)
         {
             if (!gameManager.doubleShot)
-                damage = weaponInfo.MagicDamage * grade + gameManager.elementDamage;
+                damage = weaponInfo.MagicDamage * grade + gameManager.elementDamage + gameManager.longDamage;
 
             else if (gameManager.doubleShot)
             {
-                if(weaponInfo.WeaponName == "번개 스태프")
-                    damage = weaponInfo.MagicDamage * grade + gameManager.elementDamage;
+                if (weaponInfo.WeaponName == "번개 스태프")
+                    damage = weaponInfo.MagicDamage * grade + gameManager.elementDamage + gameManager.longDamage;
 
                 if (weaponInfo.WeaponName != "번개 스태프")
-                    damage = Mathf.Ceil((weaponInfo.MagicDamage * grade + gameManager.elementDamage) * 0.7f);
+                    damage = (weaponInfo.MagicDamage * grade + gameManager.elementDamage + gameManager.longDamage) * 0.7f;
             }
             damageUI.damageText.color = Color.cyan;
         }
@@ -45,42 +45,45 @@ public class Weapon : MonoBehaviour
         else if (weaponInfo.Type == WEAPON_TYPE.총)
         {
             if (!gameManager.doubleShot)
-                damage = weaponInfo.WeaponDamage * grade + gameManager.physicDamage;
+                damage = weaponInfo.WeaponDamage * grade + gameManager.physicDamage + gameManager.longDamage;
 
             else if (gameManager.doubleShot)
-                damage = Mathf.Ceil((weaponInfo.WeaponDamage * grade + gameManager.physicDamage) * 0.7f);
+                damage = (weaponInfo.WeaponDamage * grade + gameManager.physicDamage + gameManager.longDamage) * 0.7f;
 
             damageUI.damageText.color = new Color(1, 0.4871f, 0);
         }
 
         else if (weaponInfo.Type == WEAPON_TYPE.검)
         {
-            if (criRand < gameManager.critical || gameManager.critical >= 100)
+            if (criRand <= gameManager.critical || gameManager.critical >= 100)
             {
                 if (!gameManager.luckCritical)
-                    damage = (int)(weaponInfo.WeaponDamage * grade + gameManager.physicDamage) * 1.5f;
+                    damage = (weaponInfo.WeaponDamage * grade + gameManager.physicDamage + gameManager.shortDamage) * 1.5f;
 
                 else if (gameManager.luckCritical)
                 {
-                    int rand = Random.Range(0, 100);
+                    int rand = Random.Range(1, 101);
 
                     if (rand <= gameManager.luck || gameManager.luck >= 100)
-                        damage = (int)(weaponInfo.WeaponDamage * grade + gameManager.physicDamage) * 2f;
+                        damage = (weaponInfo.WeaponDamage * grade + gameManager.physicDamage + gameManager.shortDamage) * 2f;
 
                     else if (rand > gameManager.luck)
-                        damage = (int)(weaponInfo.WeaponDamage * grade + gameManager.physicDamage) * 1.5f;
+                        damage = (weaponInfo.WeaponDamage * grade + gameManager.physicDamage + gameManager.shortDamage) * 1.5f;
                 }
 
                 damageUI.damageText.color = new Color(0.9f, 0, 0.7f, 1);
                 damageUI.damageText.fontSize = 65;
             }
 
-            else if (criRand >= gameManager.critical)
+            else if (criRand > gameManager.critical)
             {
-                damage = (int)(weaponInfo.WeaponDamage * grade + gameManager.physicDamage);
+                damage = (weaponInfo.WeaponDamage * grade + gameManager.physicDamage);
                 damageUI.damageText.color = new Color(1, 0.4871f, 0);
             }
         }
+
+        if (damage < 1)
+            damage = 1;
 
         if (!gameManager.luckDamage)
         {
@@ -89,7 +92,7 @@ public class Weapon : MonoBehaviour
 
         else if (gameManager.luckDamage)
         {
-            int rand = Random.Range(0, 100);
+            int rand = Random.Range(1, 101);
 
             if (rand <= gameManager.luck || gameManager.luck >= 100)
                 damageUI.weaponDamage = damage * 2;

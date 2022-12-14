@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Bow
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: bbf8638a8a75d9c42b93639213c92c9b, type: 3}
-  itemGrade: 1
+  itemGrade: 0
   itemName: "\uBA85\uC0AC\uC218\uC758 \uD65C"
-  itemPrice: 25
+  itemPrice: 18
   maxCount: 100
   hp: 0
   recoverHp: 0
@@ -24,10 +24,10 @@ MonoBehaviour:
   physicDamage: 0
   elementDamage: 0
   shortDamage: -1
-  longDamage: 0
+  longDamage: 1
   attackSpeed: 0
   speed: 0
-  range: 1
+  range: 0.5
   luck: 0
   critical: 0
   coinRange: 0
@@ -35,7 +35,6 @@ MonoBehaviour:
   monsterSpeed: 0
   salePercent: 0
   dashCount: 0
-  fireCount: 0
   luckCoin: 0
   luckDamage: 0
   luckCritical: 0

@@ -14,11 +14,13 @@ public class SwordControl : Weapon
     Vector3 dir, mouse;
 
     float delay = 0;
-    float swordDelay = 4;
+    float swordDelay = 3;
 
     bool canAttack = true;
 
     Character character;
+
+    float addRange;
 
     private void Start()
     {
@@ -39,28 +41,30 @@ public class SwordControl : Weapon
             mouse.y = transform.position.y;
 
             dir = mouse - transform.position;
-            LookMousePosition();
             Attack();
         }
 
         WeaponSetting();
     }
 
-    void LookMousePosition()
+/*    void LookMousePosition()
     {
-        angle = Mathf.Atan2(dir.z, dir.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(90, -angle, -90);
-
         if (dir.x < 0)
             transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = true;
 
         else
             transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = false;
-    }
+    }*/
 
     void Attack()
     {
-        Vector3 range = (mouse - character.transform.position).normalized * (1 + gameManager.range / 10);
+        if (gameManager.range > 0)
+            addRange = (1 + gameManager.range * 0.05f);
+
+        else if (gameManager.range <= 0)
+            addRange = 1;
+
+        Vector3 range = (mouse - character.transform.position).normalized * addRange;
 
         if (canAttack == true)
         {
@@ -96,10 +100,23 @@ public class SwordControl : Weapon
         if(canAttack == false)
         {
             delay += Time.deltaTime;
-            if (delay >= (swordDelay / (1 + gameManager.attackSpeed / 10)))
+
+            if (gameManager.attackSpeed >= 0)
             {
-                canAttack = true;
-                delay = 0;
+                if (delay >= (swordDelay / (1 + gameManager.attackSpeed * 0.1)))
+                {
+                    canAttack = true;
+                    delay = 0;
+                }
+            }
+
+            else if (gameManager.attackSpeed < 0)
+            {
+                if (delay >= (swordDelay - gameManager.attackSpeed * 0.1))
+                {
+                    canAttack = true;
+                    delay = 0;
+                }
             }
         }
     }
@@ -108,11 +125,12 @@ public class SwordControl : Weapon
     {
         if(other.CompareTag("Monster") && other.GetComponent<Monster>() != null)
         {
-            criRand = UnityEngine.Random.Range(0, 100);
+            criRand = UnityEngine.Random.Range(1, 101);
             GameObject pool = Instantiate(damageUI, transform.position, Quaternion.Euler(90, 0, 0)).gameObject;
             pool.transform.SetParent(gameManager.damageStorage);
             other.GetComponent<Monster>().OnDamaged(damageUI.weaponDamage);
-            gameManager.hp += gameManager.absorbHp;
+            if (gameManager.absorbHp > 0)
+                gameManager.hp += gameManager.absorbHp;
         }
     }
 

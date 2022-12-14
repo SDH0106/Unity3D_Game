@@ -35,10 +35,13 @@ public class Coin : Singleton<Coin>
 
         float distance = Vector3.Distance(characterPos, transform.position);
 
-
-        if (distance <= 2 * (1 + gameManager.coinRange * 0.1f))
+        if (distance <= 2 * (1 + gameManager.coinRange))
         {
-            speed = gameManager.speed + 2;
+            if(gameManager.speed <= 1)
+                speed = 2;
+
+            else if (gameManager.speed > 1)
+                speed = gameManager.speed + 2;
         }
 
         else
@@ -60,7 +63,7 @@ public class Coin : Singleton<Coin>
 
             else if (gameManager.luckCoin)
             {
-                int rand = Random.Range(0, 100);
+                int rand = Random.Range(1, 101);
 
                 if (rand <= gameManager.luck || gameManager.luck >= 100)
                     gameManager.money += coinValue * 2;

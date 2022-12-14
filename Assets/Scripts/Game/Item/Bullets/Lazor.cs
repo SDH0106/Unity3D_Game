@@ -6,8 +6,6 @@ public class Lazor : Bullet
 {
     Vector3 initScale;
 
-    GameManager gameManager;
-
     private void Start()
     {
         gameManager = GameManager.Instance;
@@ -19,12 +17,18 @@ public class Lazor : Bullet
         // ÃÑ¾Ë °¢µµ
         angle = Mathf.Atan2(dir.z, dir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(90, -angle, 0);
-        transform.localScale = new Vector3(initScale.x * gameManager.range, initScale.y, initScale.z);
+
+        if (gameManager.range <= 0)
+            transform.localScale = new Vector3(initScale.x, initScale.y, initScale.z);
+
+        else if (gameManager.range > 0)
+            transform.localScale = new Vector3(initScale.x * (1 + gameManager.range * 0.05f), initScale.y, initScale.z);
     }
 
     public override void Shoot(Vector3 dir)
     {
         this.dir = dir;
+
         Invoke("DestroyBullet", 0.3f);
     }
 
@@ -39,7 +43,8 @@ public class Lazor : Bullet
             GameObject pool = Instantiate(damageUI, collision.contacts[0].point, Quaternion.Euler(90, 0, 0)).gameObject;
             pool.transform.SetParent(gameManager.damageStorage);
             collision.collider.GetComponent<Monster>().OnDamaged(damageUI.weaponDamage);
-            gameManager.hp += gameManager.absorbHp;
+            if (gameManager.absorbHp > 0)
+                gameManager.hp += gameManager.absorbHp;
 
             Instantiate(effectPrefab, collision.contacts[0].point, transform.rotation);
         }

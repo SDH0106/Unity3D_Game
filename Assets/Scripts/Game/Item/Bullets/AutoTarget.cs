@@ -8,6 +8,11 @@ public class AutoTarget : Bullet
 {
     Transform target;
 
+    private void Start()
+    {
+        gameManager = GameManager.Instance;
+    }
+
     void Update()
     {
         transform.position += new Vector3(dir.x, 0, dir.z) * speed * Time.deltaTime;

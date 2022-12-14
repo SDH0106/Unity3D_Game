@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Diamond
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 3faa68d4e2f05f04786133598667ac36, type: 3}
-  itemGrade: 3
+  itemGrade: 2
   itemName: "\uB2E4\uC774\uC544\uBAAC\uB4DC"
-  itemPrice: 100
+  itemPrice: 77
   maxCount: 10
   hp: 0
   recoverHp: 0
@@ -27,7 +27,7 @@ MonoBehaviour:
   longDamage: 0
   attackSpeed: 0
   speed: 0
-  range: 0
+  range: -1
   luck: 10
   critical: 0
   coinRange: 0
@@ -35,7 +35,6 @@ MonoBehaviour:
   monsterSpeed: 0
   salePercent: 0
   dashCount: 0
-  fireCount: 0
   luckCoin: 0
   luckDamage: 0
   luckCritical: 0

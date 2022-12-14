@@ -14,17 +14,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 256205b9c6ca12c45ab7762da8a65631, type: 3}
   itemGrade: 2
-  itemName: "\uC1E0 \uBC29\uD328"
-  itemPrice: 36
+  itemName: "\uAC15\uCCA0 \uBC29\uD328"
+  itemPrice: 88
   maxCount: 100
-  hp: 0
+  hp: 10
   recoverHp: 0
   absorbHp: 0
-  defence: 5
+  defence: 2
   physicDamage: 0
   elementDamage: 0
-  attackSpeed: -1
-  speed: -1
+  shortDamage: 0
+  longDamage: 0
+  attackSpeed: 0
+  speed: -0.5
   range: 0
   luck: 0
+  critical: 0
+  coinRange: 0
+  increaseExp: 0
+  monsterSpeed: 0
+  salePercent: 0
+  dashCount: 0
+  luckCoin: 0
+  luckDamage: 0
+  luckCritical: 0
+  doubleShot: 0
+  revive: 0
+  description: 
   weight: 0

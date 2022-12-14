@@ -13,16 +13,18 @@ MonoBehaviour:
   m_Name: Encyclopedia
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: dc52677a402a4de44b0f56c6b9d6433e, type: 3}
-  itemGrade: 0
+  itemGrade: 1
   itemName: "\uBC31\uACFC\uC0AC\uC804"
   itemPrice: 50
   maxCount: 10
-  hp: 0
+  hp: -5
   recoverHp: 0
   absorbHp: 0
   defence: 0
   physicDamage: 0
   elementDamage: 0
+  shortDamage: 0
+  longDamage: 0
   attackSpeed: 0
   speed: 0
   range: 0
@@ -33,11 +35,10 @@ MonoBehaviour:
   monsterSpeed: 0
   salePercent: 0
   dashCount: 0
-  fireCount: 0
   luckCoin: 0
   luckDamage: 0
   luckCritical: 0
   doubleShot: 0
-  description: "\uACBD\uD5D8\uCE58 \uC99D\uAC00\uB7C9 10% \uC99D\uAC00        (\uCD5C\uB300
-    10\uAC1C)"
+  revive: 0
+  description: "\uACBD\uD5D8\uCE58 \uC99D\uAC00\uB7C9 10% \uC99D\uAC00."
   weight: 42

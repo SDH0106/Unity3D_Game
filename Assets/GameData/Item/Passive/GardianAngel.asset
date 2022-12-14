@@ -19,10 +19,12 @@ MonoBehaviour:
   maxCount: 1
   hp: 0
   recoverHp: 0
-  absorbHp: 0
+  absorbHp: -10
   defence: 0
   physicDamage: 0
   elementDamage: 0
+  shortDamage: 0
+  longDamage: 0
   attackSpeed: 0
   speed: 0
   range: 0
@@ -33,12 +35,11 @@ MonoBehaviour:
   monsterSpeed: 0
   salePercent: 0
   dashCount: 0
-  fireCount: 0
   luckCoin: 0
   luckDamage: 0
   luckCritical: 0
   doubleShot: 0
   revive: 1
   description: "\uCE90\uB9AD\uD130\uAC00 \uC0AC\uB9DD\uC2DC \uCD5C\uB300 \uCCB4\uB825\uC758
-    1/2 1\uD68C \uBD80\uD65C \uC2DC\uCF1C\uC900\uB2E4.(\uCD5C\uB300 1\uAC1C)"
+    1/2\uB85C 1\uD68C \uBD80\uD65C \uC2DC\uCF1C\uC900\uB2E4."
   weight: 0

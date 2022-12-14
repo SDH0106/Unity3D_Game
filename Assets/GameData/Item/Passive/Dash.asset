@@ -35,12 +35,10 @@ MonoBehaviour:
   monsterSpeed: 0
   salePercent: 0
   dashCount: 1
-  fireCount: 0
   luckCoin: 0
   luckDamage: 0
   luckCritical: 0
   doubleShot: 0
   revive: 0
-  description: "\uB300\uC26C \uC2A4\uD0AC\uC758 \uAC2F\uC218\uB97C 1\uAC1C \uB298\uB824\uC900\uB2E4.
-    (\uCD5C\uB300 2\uAC1C)"
+  description: "\uB300\uC26C \uC2A4\uD0AC\uC758 \uAC2F\uC218\uB97C 1\uAC1C \uB298\uB824\uC900\uB2E4. "
   weight: 1

@@ -45,8 +45,8 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector] public int[] passiveIntVariables;
     [HideInInspector] public float[] passiveFloatVariables;
     [HideInInspector] public bool[] passiveBoolVariables;
-    [HideInInspector] public int salePercent;
     [HideInInspector] public int dashCount;
+    [HideInInspector] public float salePercent;
     [HideInInspector] public float increaseExp;
     [HideInInspector] public float coinRange;
     [HideInInspector] public float monsterSpeed;
@@ -106,12 +106,12 @@ public class GameManager : Singleton<GameManager>
         maxHp = 20;
         maxExp = 10;
         recoverHp = 0;
-        recoverTime = 3;
+        recoverTime = 2;
         absorbHp = 0;
-        defence = 1;
-        attackSpeed = 1;
+        defence = 0;
+        attackSpeed = 0;
         speed = 2;
-        range = 1;
+        range = 0;
         luck = 0;
         critical = 10;
         salePercent = 0;
@@ -143,13 +143,13 @@ public class GameManager : Singleton<GameManager>
         stats[12] = critical;
 
         passiveIntVariables = new int[10];
-        passiveIntVariables[0] = salePercent;
-        passiveIntVariables[1] = dashCount;
+        passiveIntVariables[0] = dashCount;
 
         passiveFloatVariables = new float[10];
         passiveFloatVariables[0] = coinRange;
         passiveFloatVariables[1] = increaseExp;
         passiveFloatVariables[2] = monsterSpeed;
+        passiveFloatVariables[3] = salePercent;
 
         passiveBoolVariables = new bool[5];
         passiveBoolVariables[0] = luckCoin;
@@ -178,8 +178,7 @@ public class GameManager : Singleton<GameManager>
 
     void IntVariableArray()
     {
-        salePercent = passiveIntVariables[0];
-        dashCount = passiveIntVariables[1];
+        dashCount = passiveIntVariables[0];
     }
 
     void FloatVariableArray()
@@ -187,6 +186,7 @@ public class GameManager : Singleton<GameManager>
         coinRange = passiveFloatVariables[0];
         increaseExp = passiveFloatVariables[1];
         monsterSpeed = passiveFloatVariables[2];
+        salePercent = passiveFloatVariables[3];
     }
 
     void BoolVariableArray()
@@ -253,12 +253,12 @@ public class GameManager : Singleton<GameManager>
 
     void AutoRecoverHp()
     {
-        if (recoverHp > 0 && hp != maxHp)
+        if (recoverHp > 0 && hp < maxHp)
         {
             recoverTime -= Time.deltaTime;
             if(recoverTime <= 0)
             {
-                recoverTime = 3;
+                recoverTime = 1;
                 hp += recoverHp;
             }
         }

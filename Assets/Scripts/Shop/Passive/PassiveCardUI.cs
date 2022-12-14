@@ -160,12 +160,12 @@ public class PassiveCardUI : MonoBehaviour
         statTypes[11] = "사거리";
         statTypes[12] = "크리티컬";
 
-        passiveIntVariables[0] = selectedPassive.SalePercent;
-        passiveIntVariables[1] = selectedPassive.DashCount;
+        passiveIntVariables[0] = selectedPassive.DashCount;
 
         passiveFloatVariables[0] = selectedPassive.CoinRange;
         passiveFloatVariables[1] = selectedPassive.IncreaseExp;
         passiveFloatVariables[2] = selectedPassive.MonsterSpeed;
+        passiveFloatVariables[3] = selectedPassive.SalePercent;
 
         passiveBoolVariables[0] = selectedPassive.LuckCoin;
         passiveBoolVariables[1] = selectedPassive.LuckDamage;

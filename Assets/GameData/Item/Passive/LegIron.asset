@@ -13,29 +13,32 @@ MonoBehaviour:
   m_Name: LegIron
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: aa0426c33616b98469f321c81e3804a6, type: 3}
-  itemGrade: 0
+  itemGrade: 1
   itemName: "\uC871\uC1C4"
-  itemPrice: 30
-  maxCount: 5
+  itemPrice: 45
+  maxCount: 10
   hp: 0
   recoverHp: 0
   absorbHp: 0
   defence: 0
   physicDamage: 0
   elementDamage: 0
+  shortDamage: 0
+  longDamage: 0
   attackSpeed: 0
-  speed: -0.5
+  speed: -0.3
   range: 0
   luck: 0
   critical: 0
   coinRange: 0
   increaseExp: 0
-  monsterSpeed: -1
+  monsterSpeed: -5
   salePercent: 0
   dashCount: 0
   luckCoin: 0
   luckDamage: 0
   luckCritical: 0
-  description: "\uBAAC\uC2A4\uD130\uC758 \uC18D\uB3C4\uB97C 5% \uAC10\uC18C\uC2DC\uD0A8\uB2E4.
-    (\uCD5C\uB300 10\uAC1C)"
+  doubleShot: 0
+  revive: 0
+  description: "\uBAAC\uC2A4\uD130\uC758 \uC18D\uB3C4\uB97C 5% \uAC10\uC18C\uC2DC\uD0A8\uB2E4."
   weight: 0

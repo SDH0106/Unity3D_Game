@@ -167,5 +167,7 @@ MonoBehaviour:
   count: 0
   grade: 0
   bulletPrefab: {fileID: 8154831264171076226, guid: ea79e40c2000630439fac9af9f709bff, type: 3}
-  firePos: {fileID: 5760361066306355968}
+  normalFirePos: {fileID: 5760361066306355968}
+  doubleFirePos1: {fileID: 5760361066306355968}
+  doubleFirePos2: {fileID: 5760361066306355968}
   poolCount: 10

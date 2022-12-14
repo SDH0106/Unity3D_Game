@@ -6,6 +6,11 @@ public class Fire : Bullet
 {
     [SerializeField] GameObject explosion;
 
+    private void Start()
+    {
+        gameManager = GameManager.Instance;
+    }
+
     void Update()
     {
         transform.position += new Vector3(dir.x, 0, dir.z) * speed * Time.deltaTime;
@@ -24,9 +29,10 @@ public class Fire : Bullet
                 Instantiate(explosion, transform.position, transform.rotation);
 
             GameObject pool = Instantiate(damageUI, transform.position, Quaternion.Euler(90, 0, 0)).gameObject;
-            pool.transform.SetParent(GameManager.Instance.damageStorage);
+            pool.transform.SetParent(gameManager.damageStorage);
             other.GetComponent<Monster>().OnDamaged(damageUI.weaponDamage);
-            GameManager.Instance.hp += GameManager.Instance.absorbHp;
+            if (gameManager.absorbHp > 0)
+                gameManager.hp += gameManager.absorbHp;
             DestroyBullet();
             CancelInvoke("DestroyBullet");
 

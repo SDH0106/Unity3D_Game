@@ -157,7 +157,12 @@ public class Character : Singleton<Character>
     void Move()
     {
         dir = (Vector3.right * x + Vector3.forward * z).normalized;
-        transform.position += dir * gameManager.speed * Time.deltaTime;
+
+        if (gameManager.speed <= 1)
+            transform.position += dir * Time.deltaTime;
+
+        else if (gameManager.speed > 1)
+            transform.position += dir * gameManager.speed * Time.deltaTime;
 
         if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
         {
