@@ -79,7 +79,6 @@ public class ShowStatCard : Singleton<ShowStatCard>
         {
             for (int i = 1; i < this.transform.childCount - 2; i++)
             {
-
                 Destroy(this.transform.GetChild(i).GetChild(0).gameObject);
             }
 

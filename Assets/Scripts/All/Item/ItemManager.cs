@@ -21,7 +21,7 @@ public class ItemManager : Singleton<ItemManager>
     [HideInInspector] public int weaponCount;
     int passiveItemCount;
 
-    [HideInInspector] public bool isFool = false;
+    [HideInInspector] public bool isFool;
     [HideInInspector] public int foolCount;
 
     [HideInInspector] public Grade[] weaponGrade;
@@ -44,12 +44,12 @@ public class ItemManager : Singleton<ItemManager>
         {
             passiveCounts[i] = passiveCard.passiveInfo[i].MaxCount;
         }
-
+        isFool = false;
         foolCount = 0;
         weaponCount = 0;
         passiveItemCount = 0;
         storedWeapon = new WeaponInfo[6];
-        storedPassive = new PassiveInfo[30];
+        storedPassive = new PassiveInfo[40];
         storedPassiveCount = new int[storedPassive.Length];
         lockedPassCards = new PassiveInfo[4];
         lockedWeaCards = new WeaponInfo[4];
@@ -77,6 +77,7 @@ public class ItemManager : Singleton<ItemManager>
                     break;
                 }
             }
+
             storedWeapon[weaponCount] = weaponInfo;
         }
     }

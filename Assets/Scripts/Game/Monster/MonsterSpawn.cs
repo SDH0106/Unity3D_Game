@@ -45,6 +45,7 @@ public class MonsterSpawn : MonoBehaviour
         }
 
         InvokeRepeating("RendSpawnImage", 1f, spawnDelay / ((gameManager.round + 4) / 5));
+        InvokeRepeating("RendSpawnImage", 1.5f, spawnDelay / ((gameManager.round + 4) / 5));
 
         if (gameManager.round % 10 == 0)
         {

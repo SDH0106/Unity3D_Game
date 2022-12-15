@@ -14,10 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponGrade: 0
   itemSprite: {fileID: 21300000, guid: a9190a063f8c48c4f9b13013c1a7a428, type: 3}
-  weaponName: "\uAC80"
+  weaponName: "\uD6C8\uB828\uC6A9 \uAC80"
   type: 2
   weaponDamage: 5
   magicDamage: 0
-  weaponRange: 3
-  weaponPrice: 30
+  attackDelay: 1.8
+  bulletSpeed: 0
+  weaponRange: 0.8
+  weaponPrice: 17
+  description: "\uD6C8\uB828\uC2DC \uC0AC\uC6A9\uD558\uB294 \uC544\uC8FC \uAE30\uBCF8\uC801\uC778
+    \uAC80."
   weaponSound: {fileID: 8300000, guid: bd6d89ea1bf965e41be2784f4c51d3dc, type: 3}

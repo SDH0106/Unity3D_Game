@@ -17,7 +17,11 @@ MonoBehaviour:
   weaponName: "\uBC88\uAC1C \uC2A4\uD0DC\uD504"
   type: 1
   weaponDamage: 0
-  magicDamage: 8
-  weaponRange: 10
-  weaponPrice: 50
+  magicDamage: 4
+  attackDelay: 3
+  bulletSpeed: 0
+  weaponRange: 3
+  weaponPrice: 43
+  description: "\uC77C\uC815 \uC8FC\uAE30\uB9C8\uB2E4 \uC790\uB3D9\uC73C\uB85C \uC801\uC744
+    \uACF5\uACA9\uD558\uB294 \uBC88\uAC1C\uB97C \uB0B4\uB9AC\uB294 \uC2A4\uD0DC\uD504."
   weaponSound: {fileID: 8300000, guid: 0241bfc3127aac144b93a08bf787b64c, type: 3}

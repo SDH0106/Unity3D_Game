@@ -18,12 +18,13 @@ public class StaffControl : Weapon
 
     float delay;
     float bulletDelay;
-    float thunderDelay;
 
     float detectRange;
+    float attackRange;
 
-    bool canAttack = true;
-    bool isTargetFind = false;
+    bool canAttack;
+    bool isTargetFind;
+
     Transform target;
 
     private void Awake()
@@ -38,8 +39,11 @@ public class StaffControl : Weapon
         damageUI = ItemManager.Instance.damageUI[count];
 
         delay = 0;
-        bulletDelay = 1;
-        thunderDelay = 3;
+        bulletDelay = weaponInfo.AttackDelay;
+        attackRange = weaponInfo.WeaponRange;
+
+        canAttack = true;
+        isTargetFind = false;
     }
 
     void Update()
@@ -81,8 +85,9 @@ public class StaffControl : Weapon
                     {
                         Bullet bullet = pool.Get();
                         bullet.transform.position = normalFirePos.position;
-                        bullet.Shoot(dir.normalized);
+                        bullet.Shoot(dir.normalized, weaponInfo.WeaponRange);
                         bullet.damageUI = damageUI;
+                        bullet.speed = weaponInfo.BulletSpeed;
                     }
 
                     if (gameManager.doubleShot)
@@ -91,10 +96,12 @@ public class StaffControl : Weapon
                         Bullet bullet2 = pool.Get();
                         bullet1.transform.position = doubleFirePos1.position;
                         bullet2.transform.position = doubleFirePos2.position;
-                        bullet1.Shoot(dir.normalized);
-                        bullet2.Shoot(dir.normalized);
+                        bullet1.Shoot(dir.normalized, weaponInfo.WeaponRange);
+                        bullet2.Shoot(dir.normalized, weaponInfo.WeaponRange);
                         bullet1.damageUI = damageUI;
                         bullet2.damageUI = damageUI;
+                        bullet1.speed = weaponInfo.BulletSpeed;
+                        bullet2.speed = weaponInfo.BulletSpeed;
                     }
 
                     SoundManager.Instance.PlayES(weaponInfo.WeaponSound);
@@ -149,7 +156,7 @@ public class StaffControl : Weapon
                 delay += Time.deltaTime;
                 if (gameManager.attackSpeed >= 0)
                 {
-                    if (delay >= (thunderDelay / (1 + gameManager.attackSpeed * 0.1)))
+                    if (delay >= (bulletDelay / (1 + gameManager.attackSpeed * 0.1)))
                     {
                         canAttack = true;
                         delay = 0;
@@ -158,7 +165,7 @@ public class StaffControl : Weapon
 
                 else  if (gameManager.attackSpeed < 0)
                 {
-                    if (delay >= (thunderDelay - gameManager.attackSpeed * 0.1))
+                    if (delay >= (bulletDelay - gameManager.attackSpeed * 0.1))
                     {
                         canAttack = true;
                         delay = 0;
@@ -170,7 +177,7 @@ public class StaffControl : Weapon
 
     void FindTarget()
     {
-        detectRange = 4f + (gameManager.range * 0.1f);
+        detectRange = attackRange + (gameManager.range * 0.1f);
 
         if (detectRange < 1)
             detectRange = 1;

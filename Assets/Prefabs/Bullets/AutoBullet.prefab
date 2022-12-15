@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8154831264171076224}
   - component: {fileID: 8154831264171076225}
   - component: {fileID: 9078078465588959345}
-  - component: {fileID: -1798598165808827110}
+  - component: {fileID: 5107791615259954616}
   - component: {fileID: 8154831264171076231}
   - component: {fileID: -2876359202089966154}
   m_Layer: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 12
   m_Sprite: {fileID: 21300000, guid: 9687b8cba872c4f50aeb3b2b3ff1a0b7, type: 3}
   m_Color: {r: 0.493288, g: 0.9811321, b: 0.43965825, a: 1}
   m_FlipX: 1
@@ -101,7 +101,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.15, y: 0.18, z: 0}
   m_Center: {x: 0.125, y: 0, z: 0}
---- !u!54 &-1798598165808827110
+--- !u!54 &5107791615259954616
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -113,10 +113,10 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 120
-  m_CollisionDetection: 0
+  m_Constraints: 112
+  m_CollisionDetection: 1
 --- !u!95 &8154831264171076231
 Animator:
   serializedVersion: 4

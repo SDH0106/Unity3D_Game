@@ -73,8 +73,6 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector] public bool isClear;
     [HideInInspector] public bool isBossDead;
 
-    int beforeLevel;
-
     protected override void Awake()
     {
         base.Awake();
@@ -83,7 +81,6 @@ public class GameManager : Singleton<GameManager>
 
     private void Start()
     {
-        beforeLevel = level;
         DontDestroyOnLoad(gameObject);
         //InitSetting();
         InitArray();
@@ -207,13 +204,9 @@ public class GameManager : Singleton<GameManager>
         {
             SoundManager.Instance.PlayES("LevelUp");
             level++;
+            levelUpCount++;
             maxExp *= level;
             exp = 0;
-        }
-
-        if(level != beforeLevel)
-        {
-            levelUpCount = level - beforeLevel;
         }
 
         if (hp > maxHp)
@@ -222,7 +215,9 @@ public class GameManager : Singleton<GameManager>
         }
 
         if (currentGameTime == 0)
+        {
             isClear = true;
+        }
 
         StatArray();
         IntVariableArray();
@@ -272,6 +267,5 @@ public class GameManager : Singleton<GameManager>
         SceneManager.LoadScene(currentScene);
         currentGameTime = gameTime;
         isClear = false;
-        beforeLevel = level;
     }
 }

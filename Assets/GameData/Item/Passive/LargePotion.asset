@@ -27,7 +27,7 @@ MonoBehaviour:
   longDamage: 0
   attackSpeed: 2
   speed: 0
-  range: 6
+  range: 5
   luck: 0
   critical: 0
   coinRange: 0
@@ -41,4 +41,4 @@ MonoBehaviour:
   doubleShot: 0
   revive: 0
   description: 
-  weight: 5
+  weight: 18

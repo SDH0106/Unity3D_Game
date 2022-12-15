@@ -24,15 +24,17 @@ public class Fire : Bullet
     {
         if (other.tag == "Monster" && other.GetComponent<Monster>() != null)
         {
-            int rand = Random.Range(0, 1);
-            if (rand == 0)
+            GameObject pool = Instantiate(damageUI, transform.position, Quaternion.Euler(90, 0, 0)).gameObject;
+            other.GetComponent<Monster>().OnDamaged(damageUI.weaponDamage);
+            pool.transform.SetParent(gameManager.damageStorage);
+
+            int rand = Random.Range(0, 100);
+            if (rand <= 5 + gameManager.luck * 0.2)
                 Instantiate(explosion, transform.position, transform.rotation);
 
-            GameObject pool = Instantiate(damageUI, transform.position, Quaternion.Euler(90, 0, 0)).gameObject;
-            pool.transform.SetParent(gameManager.damageStorage);
-            other.GetComponent<Monster>().OnDamaged(damageUI.weaponDamage);
             if (gameManager.absorbHp > 0)
                 gameManager.hp += gameManager.absorbHp;
+
             DestroyBullet();
             CancelInvoke("DestroyBullet");
 

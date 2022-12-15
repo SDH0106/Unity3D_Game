@@ -4,25 +4,25 @@
             "statName": "심장",
             "statType": "최대 체력",
             "statSprite": "Health",
-            "statValue": 1.0
+            "statValue": 2.0
         },
         {
             "statName": "페활량",
             "statType": "체력 회복",
             "statSprite": "ReHealth",
-            "statValue": 1.0
+            "statValue": 0.2
         },
         {
             "statName": "이빨",
             "statType": "체력 흡수",
             "statSprite": "AbHealth",
-            "statValue": 1.0
+            "statValue": 0.2
         },
         {
             "statName": "강인함",
             "statType": "방어력",
             "statSprite": "Defence",
-            "statValue": 1.0
+            "statValue": 0.2
         },
         {
             "statName": "근력",
@@ -52,31 +52,31 @@
             "statName": "도핑",
             "statType": "공격 속도",
             "statSprite": "AtSpeed",
-            "statValue": 1.0
+            "statValue": 0.1
         },
         {
             "statName": "신발",
             "statType": "이동 속도",
             "statSprite": "Speed",
-            "statValue": 1.0
+            "statValue": 0.2
         },
         {
             "statName": "네잎클로버",
             "statType": "행운",
             "statSprite": "Luck",
-            "statValue": 1.0
+            "statValue": 2.5
         },
          {
             "statName": "시력",
             "statType": "사거리",
             "statSprite": "Range",
-            "statValue": 1.0
+            "statValue": 0.1
         },
         {
             "statName": "강타",
             "statType": "크리티컬",
             "statSprite": "Critical",
-            "statValue": 5.0
+            "statValue": 2.5
         }
     ]
 }

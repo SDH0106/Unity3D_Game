@@ -17,12 +17,12 @@ MonoBehaviour:
   itemName: "\uB8E8\uBE44 \uC2A4\uD0DC\uD504"
   itemPrice: 59
   maxCount: 100
-  hp: -6
+  hp: -3
   recoverHp: 0
   absorbHp: 0
   defence: 0
   physicDamage: 0
-  elementDamage: 4
+  elementDamage: 3
   shortDamage: 0
   longDamage: 0
   attackSpeed: 0
@@ -41,4 +41,4 @@ MonoBehaviour:
   doubleShot: 0
   revive: 0
   description: 
-  weight: 110
+  weight: 370

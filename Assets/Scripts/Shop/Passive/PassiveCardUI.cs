@@ -26,6 +26,7 @@ public class PassiveCardUI : MonoBehaviour
     [SerializeField] Text itemName;
     [SerializeField] Text itemPrice;
     [SerializeField] Text itemGrade;
+    [SerializeField] Text maxCount;
 
     [HideInInspector] public PassiveInfo selectedPassive;
 
@@ -39,7 +40,7 @@ public class PassiveCardUI : MonoBehaviour
     Color LockImageColor;
     Color LockTextColor;
 
-    [HideInInspector] public bool isLock = false;
+    [HideInInspector] public bool isLock;
 
     Color initPriceColor;
 
@@ -83,7 +84,6 @@ public class PassiveCardUI : MonoBehaviour
 
         else if (gameManager.money >= selectedPassive.ItemPrice)
             itemPrice.color = initPriceColor;
-
     }
 
     void Setting()
@@ -93,6 +93,7 @@ public class PassiveCardUI : MonoBehaviour
         itemName.text = selectedPassive.ItemName;
         itemPrice.text = price.ToString();
         itemGrade.text = selectedPassive.ItemGrade.ToString();
+        maxCount.text = selectedPassive.MaxCount.ToString();
     }
 
     void CardImage()

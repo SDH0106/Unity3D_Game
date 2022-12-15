@@ -16,8 +16,11 @@ public class SelectSceneCard : MonoBehaviour
     [SerializeField] Text type;
     [SerializeField] Text weaponDamage;
     [SerializeField] Text elementDamage;
+    [SerializeField] Text attackDelay;
+    [SerializeField] Text bulletSpeed;
     [SerializeField] Text weaponRange;
     [SerializeField] Text weaponGrade;
+    [SerializeField] Text description;
 
     [HideInInspector] public WeaponInfo selectedWeapon;
 
@@ -43,8 +46,11 @@ public class SelectSceneCard : MonoBehaviour
         type.text = selectedWeapon.Type.ToString();
         weaponDamage.text = selectedWeapon.WeaponDamage.ToString();
         elementDamage.text = selectedWeapon.MagicDamage.ToString();
+        attackDelay.text = selectedWeapon.AttackDelay.ToString();
+        bulletSpeed.text = selectedWeapon.BulletSpeed.ToString();
         weaponRange.text = selectedWeapon.WeaponRange.ToString();
         weaponGrade.text = selectedWeapon.weaponGrade.ToString();
+        description.text = selectedWeapon.Description.ToString();
     }
 
     void CardImage()

@@ -16,10 +16,10 @@ public class WeaponControl : Weapon
     float angle;
     Vector3 dir, mouse;
 
-    float delay = 0;
-    float bulletDelay = 1;
+    float delay;
+    float bulletDelay;
 
-    bool canAttack = true;
+    bool canAttack;
 
     private void Awake()
     {
@@ -31,6 +31,9 @@ public class WeaponControl : Weapon
         gameManager = GameManager.Instance;
         count = ItemManager.Instance.weaponCount;
         damageUI = ItemManager.Instance.damageUI[count];
+        delay = 0;
+        bulletDelay = weaponInfo.AttackDelay;
+        canAttack = true;
     }
 
     void Update()
@@ -73,8 +76,9 @@ public class WeaponControl : Weapon
                 {
                     Bullet bullet = pool.Get();
                     bullet.transform.position = normalFirePos.position;
-                    bullet.Shoot(dir.normalized);
+                    bullet.Shoot(dir.normalized, weaponInfo.WeaponRange);
                     bullet.damageUI = damageUI;
+                    bullet.speed = weaponInfo.BulletSpeed;
                 }
 
                 if (gameManager.doubleShot)
@@ -83,10 +87,12 @@ public class WeaponControl : Weapon
                     Bullet bullet2 = pool.Get();
                     bullet1.transform.position = doubleFirePos1.position;
                     bullet2.transform.position = doubleFirePos2.position;
-                    bullet1.Shoot(dir.normalized);
-                    bullet2.Shoot(dir.normalized);
+                    bullet1.Shoot(dir.normalized, weaponInfo.WeaponRange);
+                    bullet2.Shoot(dir.normalized, weaponInfo.WeaponRange);
                     bullet1.damageUI = damageUI;
                     bullet2.damageUI = damageUI;
+                    bullet1.speed = weaponInfo.BulletSpeed;
+                    bullet2.speed = weaponInfo.BulletSpeed;
                 }
 
                 SoundManager.Instance.PlayES(weaponInfo.WeaponSound);

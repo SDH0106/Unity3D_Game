@@ -18,6 +18,7 @@ public class DamageUI : MonoBehaviour
 
     private void Start()
     {
+        damageText.fontSize = 50;
         printTime = 1f;
         initPrintTime = printTime;
     }

@@ -18,6 +18,10 @@ MonoBehaviour:
   type: 1
   weaponDamage: 0
   magicDamage: 5
-  weaponRange: 10
-  weaponPrice: 70
+  attackDelay: 1.5
+  bulletSpeed: 5
+  weaponRange: 1
+  weaponPrice: 46
+  description: "\uC77C\uC815 \uD655\uB960\uB85C \uC801\uC744 \uC5BC\uB9AC\uB294 \uD0C4\uC744
+    \uBC1C\uC0AC\uD558\uB294 \uC2A4\uD0DC\uD504."
   weaponSound: {fileID: 8300000, guid: 0241bfc3127aac144b93a08bf787b64c, type: 3}

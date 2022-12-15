@@ -22,13 +22,13 @@ MonoBehaviour:
   absorbHp: 0
   defence: 0
   physicDamage: 0
-  elementDamage: 3
+  elementDamage: 2
   shortDamage: 0
   longDamage: 0
   attackSpeed: 0
   speed: 0
   range: 0
-  luck: 1
+  luck: 2
   critical: 0
   coinRange: 0
   increaseExp: 0
@@ -41,4 +41,4 @@ MonoBehaviour:
   doubleShot: 0
   revive: 0
   description: 
-  weight: 0
+  weight: 370

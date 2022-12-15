@@ -43,7 +43,7 @@ public class ShopManager : Singleton<ShopManager>
     [SerializeField] GameObject[] passiveSlots;
 
     GameObject[] cards;
-    int[] wpCheck;
+    int[] wpCheck;      // 무기(0)인지 패시브(1)인지 확인
 
     bool[] lockBools;
 
@@ -233,6 +233,7 @@ public class ShopManager : Singleton<ShopManager>
                 else if (wpCheck[i] == 1)
                 {
                     lockBools[i] = cards[i].GetComponent<PassiveCardUI>().isLock;
+
                     if (lockBools[i] == true)
                         itemManager.lockedPassCards[i] = cards[i].GetComponent<PassiveCardUI>().selectedPassive;
                 }
@@ -255,6 +256,7 @@ public class ShopManager : Singleton<ShopManager>
                     GetRandomWeaponCard();
                     GameObject instant = Instantiate(weaponCardUI, cardsParent.GetChild(i).transform);
                     cards[i] = instant;
+                    cards[i].GetComponent<WeaponCardUI>().isLock = false;
                     wpCheck[i] = 0;
                     instant.transform.SetParent(cardsParent.GetChild(i));
                 }
@@ -264,6 +266,7 @@ public class ShopManager : Singleton<ShopManager>
                     GetRandomPassiveCard();
                     GameObject instant = Instantiate(passiveCardUI, cardsParent.GetChild(i).transform);
                     cards[i] = instant;
+                    cards[i].GetComponent<PassiveCardUI>().isLock = false;
                     wpCheck[i] = 1;
                     instant.transform.SetParent(cardsParent.GetChild(i));
                 }
@@ -330,7 +333,7 @@ public class ShopManager : Singleton<ShopManager>
             {
                 if (wpCheck[i] == 0)
                 {
-                    cards[i].GetComponent<WeaponCardUI>().isLock = itemManager.lockedWeaCards[i];
+                    cards[i].GetComponent<WeaponCardUI>().isLock = itemManager.cardLocks[i];
                 }
 
                 else if (wpCheck[i] == 1)

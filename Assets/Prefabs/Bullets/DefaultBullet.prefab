@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 8154831264171076225}
   - component: {fileID: 9078078465588959345}
   - component: {fileID: 8154831264171076231}
-  - component: {fileID: -1798598165808827110}
   - component: {fileID: -8557741743296975608}
+  - component: {fileID: 4143293133346660603}
   m_Layer: 0
   m_Name: DefaultBullet
   m_TagString: myBullet
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 12
   m_Sprite: {fileID: 21300000, guid: 9687b8cba872c4f50aeb3b2b3ff1a0b7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
@@ -121,22 +121,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!54 &-1798598165808827110
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8154831264171076226}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 120
-  m_CollisionDetection: 0
 --- !u!114 &-8557741743296975608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,3 +136,19 @@ MonoBehaviour:
   speed: 8
   effectPrefab: {fileID: 8410533705926354888, guid: 5e46bb42b8d131540a84d834907b3bd5, type: 3}
   damageUI: {fileID: 0}
+--- !u!54 &4143293133346660603
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8154831264171076226}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 116
+  m_CollisionDetection: 1

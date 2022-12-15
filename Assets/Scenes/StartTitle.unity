@@ -1978,13 +1978,13 @@ MonoBehaviour:
   aimCursor: {fileID: 2800000, guid: b8e78032f8af0954784d1fe9e5a09187, type: 3}
   bulletStorage: {fileID: 1005871281}
   damageStorage: {fileID: 1692643827}
-  gameTime: 60
-  money: 0
-  round: 1
+  gameTime: 0
+  money: 1000000
+  round: 9
   exp: 0
   hp: 0
   level: 1
-  maxHp: 20
+  maxHp: 15
   maxExp: 10
   physicDamage: 0
   elementDamage: 0
@@ -2001,8 +2001,8 @@ MonoBehaviour:
   passiveIntVariables: 
   passiveFloatVariables: []
   passiveBoolVariables: 
-  salePercent: 0
   dashCount: 0
+  salePercent: 0
   increaseExp: 0
   coinRange: 0
   monsterSpeed: 0
@@ -2059,47 +2059,55 @@ MonoBehaviour:
   - statName: "\uC2EC\uC7A5"
     statType: "\uCD5C\uB300 \uCCB4\uB825"
     statSprite: Health
-    statValue: 1
+    statValue: 2
   - statName: "\uD398\uD65C\uB7C9"
     statType: "\uCCB4\uB825 \uD68C\uBCF5"
     statSprite: ReHealth
-    statValue: 1
+    statValue: 0.2
   - statName: "\uC774\uBE68"
     statType: "\uCCB4\uB825 \uD761\uC218"
     statSprite: AbHealth
-    statValue: 1
+    statValue: 0.2
   - statName: "\uAC15\uC778\uD568"
     statType: "\uBC29\uC5B4\uB825"
     statSprite: Defence
-    statValue: 1
-  - statName: "\uBB34\uB825"
+    statValue: 0.2
+  - statName: "\uADFC\uB825"
     statType: "\uBB3C\uB9AC \uACF5\uACA9\uB825"
     statSprite: WDamage
     statValue: 1
-  - statName: "\uC9C0\uB825"
+  - statName: "\uB9C8\uB825 \uD3EC\uC158"
     statType: "\uC6D0\uC18C \uACF5\uACA9\uB825"
     statSprite: EDamage
+    statValue: 1
+  - statName: "\uBB34\uB825"
+    statType: "\uADFC\uAC70\uB9AC \uACF5\uACA9\uB825"
+    statSprite: SDamage
+    statValue: 1
+  - statName: "\uC9C0\uB825"
+    statType: "\uC6D0\uAC70\uB9AC \uACF5\uACA9\uB825"
+    statSprite: LDamage
     statValue: 1
   - statName: "\uB3C4\uD551"
     statType: "\uACF5\uACA9 \uC18D\uB3C4"
     statSprite: AtSpeed
-    statValue: 1
+    statValue: 0.1
   - statName: "\uC2E0\uBC1C"
     statType: "\uC774\uB3D9 \uC18D\uB3C4"
     statSprite: Speed
-    statValue: 1
+    statValue: 0.2
   - statName: "\uB124\uC78E\uD074\uB85C\uBC84"
     statType: "\uD589\uC6B4"
     statSprite: Luck
-    statValue: 1
+    statValue: 2.5
   - statName: "\uC2DC\uB825"
     statType: "\uC0AC\uAC70\uB9AC"
     statSprite: Range
-    statValue: 1
+    statValue: 0.1
   - statName: "\uAC15\uD0C0"
     statType: "\uD06C\uB9AC\uD2F0\uCEEC"
     statSprite: Critical
-    statValue: 5
+    statValue: 2.5
 --- !u!114 &936130858
 MonoBehaviour:
   m_ObjectHideFlags: 0

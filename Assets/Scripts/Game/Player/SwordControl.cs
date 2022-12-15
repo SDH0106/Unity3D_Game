@@ -10,13 +10,14 @@ using UnityEngine.UIElements;
 public class SwordControl : Weapon
 {
     Animator anim;
-    float angle;
+
     Vector3 dir, mouse;
 
-    float delay = 0;
-    float swordDelay = 3;
+    float delay;
+    float swordDelay;
+    float attackRange;
 
-    bool canAttack = true;
+    bool canAttack;
 
     Character character;
 
@@ -29,6 +30,10 @@ public class SwordControl : Weapon
         character = Character.Instance;
         count = ItemManager.Instance.weaponCount;
         damageUI = ItemManager.Instance.damageUI[count];
+        delay = 0;
+        swordDelay = weaponInfo.AttackDelay;
+        attackRange = weaponInfo.WeaponRange;
+        canAttack = true;
     }
 
     void Update()
@@ -47,22 +52,13 @@ public class SwordControl : Weapon
         WeaponSetting();
     }
 
-/*    void LookMousePosition()
-    {
-        if (dir.x < 0)
-            transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = true;
-
-        else
-            transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = false;
-    }*/
-
     void Attack()
     {
         if (gameManager.range > 0)
-            addRange = (1 + gameManager.range * 0.05f);
+            addRange = (attackRange + gameManager.range * 0.05f);
 
         else if (gameManager.range <= 0)
-            addRange = 1;
+            addRange = attackRange;
 
         Vector3 range = (mouse - character.transform.position).normalized * addRange;
 

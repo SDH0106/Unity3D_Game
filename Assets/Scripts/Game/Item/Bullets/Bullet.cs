@@ -5,7 +5,7 @@ using UnityEngine.Pool;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] protected float speed = 3f;
+    public float speed;
     public GameObject effectPrefab;
 
     private IObjectPool<Bullet> managedPool;
@@ -24,22 +24,22 @@ public class Bullet : MonoBehaviour
 
     void Update()
     {
-        transform.position += new Vector3(dir.x, 0, dir.z) * speed * Time.deltaTime;
+        transform.position += new Vector3(dir.x, -transform.position.y, dir.z) * speed * Time.deltaTime;
 
         // 총알 각도
         angle = Mathf.Atan2(dir.z, dir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(90, -angle, 0);
     }
 
-    public virtual void Shoot(Vector3 dir)
+    public virtual void Shoot(Vector3 dir, float range)
     {
         this.dir = dir;
 
         if (GameManager.Instance.range < 0)
-            Invoke("DestroyBullet", 1f);
+            Invoke("DestroyBullet", range);
         
         else if (GameManager.Instance.range >= 0)
-            Invoke("DestroyBullet", 1f + GameManager.Instance.range * 0.2f);
+            Invoke("DestroyBullet", range + GameManager.Instance.range * 0.2f);
     }
 
     protected virtual void OnTriggerEnter(Collider other)

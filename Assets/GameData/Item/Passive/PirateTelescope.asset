@@ -24,7 +24,7 @@ MonoBehaviour:
   physicDamage: 0
   elementDamage: 0
   shortDamage: -3
-  longDamage: 4
+  longDamage: 3
   attackSpeed: 0
   speed: 0
   range: 0
@@ -41,4 +41,4 @@ MonoBehaviour:
   doubleShot: 0
   revive: 0
   description: 
-  weight: 0
+  weight: 18

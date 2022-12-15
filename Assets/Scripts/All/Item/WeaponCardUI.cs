@@ -24,16 +24,19 @@ public class WeaponCardUI : MonoBehaviour
     [SerializeField] Text type;
     [SerializeField] Text weaponDamage;
     [SerializeField] Text elementDamage;
+    [SerializeField] Text attackDelay;
+    [SerializeField] Text bulletSpeed;
     [SerializeField] Text weaponRange;
     [SerializeField] Text weaponPrice;
     [SerializeField] Text weaponGrade;
+    [SerializeField] Text description;
 
     Color LockImageColor;
     Color LockTextColor;
 
-    [HideInInspector] public WeaponInfo selectedWeapon = null;
+    [HideInInspector] public WeaponInfo selectedWeapon;
 
-    [HideInInspector] public bool isLock = false;
+    [HideInInspector] public bool isLock;
 
     Color initPriceColor;
 
@@ -50,6 +53,7 @@ public class WeaponCardUI : MonoBehaviour
         initPriceColor = weaponPrice.color;
         LockImageColor = lockBackImage.color;
         LockTextColor = lockText.color;
+
         Setting();
         CardColor();
         StartLockColor();
@@ -74,9 +78,12 @@ public class WeaponCardUI : MonoBehaviour
         type.text = selectedWeapon.Type.ToString();
         weaponDamage.text = (selectedWeapon.WeaponDamage * (int)(selectedWeapon.weaponGrade + 1)).ToString();
         elementDamage.text = (selectedWeapon.MagicDamage * (int)(selectedWeapon.weaponGrade + 1)).ToString();
+        attackDelay.text = selectedWeapon.AttackDelay.ToString();
+        bulletSpeed.text = selectedWeapon.BulletSpeed.ToString();
         weaponRange.text = selectedWeapon.WeaponRange.ToString();
         weaponPrice.text = (price * (int)(selectedWeapon.weaponGrade + 1)).ToString();
         weaponGrade.text = selectedWeapon.weaponGrade.ToString();
+        description.text = selectedWeapon.Description.ToString();
     }
 
     void CardColor()
@@ -116,7 +123,7 @@ public class WeaponCardUI : MonoBehaviour
 
     public void Click()
     {
-        if (itemManager.foolCount < 5 && gameManager.money >= selectedWeapon.WeaponPrice)
+        if (itemManager.foolCount < 5 && gameManager.money >= (price * (int)(selectedWeapon.weaponGrade + 1)))
         {
             SoundManager.Instance.PlayES("WeaponSelect");
             gameManager.money -= (price * (int)(selectedWeapon.weaponGrade + 1));

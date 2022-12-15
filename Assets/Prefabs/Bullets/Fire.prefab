@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 8154831264171076225}
   - component: {fileID: 9078078465588959345}
   - component: {fileID: 8154831264171076231}
-  - component: {fileID: -1798598165808827110}
   - component: {fileID: -7416306696501648722}
+  - component: {fileID: 8135681907494017946}
   m_Layer: 0
   m_Name: Fire
   m_TagString: myBullet
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 12
   m_Sprite: {fileID: 3059589969036096486, guid: 9d6eca86a6d53eb49bfe9eb3c425230a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -121,22 +121,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!54 &-1798598165808827110
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8154831264171076226}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 120
-  m_CollisionDetection: 0
 --- !u!114 &-7416306696501648722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,3 +137,19 @@ MonoBehaviour:
   effectPrefab: {fileID: 1712867322754860876, guid: 57e9917c903ac404e8ee0253dfa7ccf7, type: 3}
   damageUI: {fileID: 0}
   explosion: {fileID: 4783517211068358492, guid: 89e5eb48793f949419a92bcf3be36b34, type: 3}
+--- !u!54 &8135681907494017946
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8154831264171076226}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 116
+  m_CollisionDetection: 1

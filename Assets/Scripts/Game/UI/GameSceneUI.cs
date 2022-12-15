@@ -109,7 +109,9 @@ public class GameSceneUI : Singleton<GameSceneUI>
                     roundClearText.SetActive(false);
 
                     if (gameManager.levelUpCount <= 0 && chestCount <= 0)
+                    {
                         gameManager.ToShopScene();
+                    }
 
                     if (gameManager.levelUpCount > 0)
                     {

@@ -25,11 +25,11 @@ public class Lazor : Bullet
             transform.localScale = new Vector3(initScale.x * (1 + gameManager.range * 0.05f), initScale.y, initScale.z);
     }
 
-    public override void Shoot(Vector3 dir)
+    public override void Shoot(Vector3 dir, float range)
     {
         this.dir = dir;
 
-        Invoke("DestroyBullet", 0.3f);
+        Invoke("DestroyBullet", range);
     }
 
     protected override void OnTriggerEnter(Collider other)

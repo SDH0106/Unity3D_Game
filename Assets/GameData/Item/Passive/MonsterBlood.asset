@@ -18,15 +18,15 @@ MonoBehaviour:
   itemPrice: 53
   maxCount: 100
   hp: 0
-  recoverHp: 0.7
-  absorbHp: 2
-  defence: -1.2
+  recoverHp: 0
+  absorbHp: 0.6
+  defence: -0.5
   physicDamage: 0
   elementDamage: 0
   shortDamage: 0
   longDamage: 0
   attackSpeed: 0
-  speed: -0.4
+  speed: 0
   range: 0
   luck: 0
   critical: 0
@@ -41,4 +41,4 @@ MonoBehaviour:
   doubleShot: 0
   revive: 0
   description: 
-  weight: 0
+  weight: 370
