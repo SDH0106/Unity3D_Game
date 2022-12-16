@@ -88,7 +88,7 @@ public class PassiveCardUI : MonoBehaviour
 
     void Setting()
     {
-        price = Mathf.CeilToInt(selectedPassive.ItemPrice * (1 - gameManager.passiveIntVariables[0]));
+        price = Mathf.CeilToInt(selectedPassive.ItemPrice * (1 - gameManager.salePercent));
         itemSprite.sprite = selectedPassive.ItemSprite;
         itemName.text = selectedPassive.ItemName;
         itemPrice.text = price.ToString();
@@ -224,6 +224,7 @@ public class PassiveCardUI : MonoBehaviour
             for (int i = 0; i < stats.Length; i++)
             {
                 gameManager.stats[i] += stats[i];
+                gameManager.stats[i] = Mathf.Round(gameManager.stats[i] * 10) * 0.1f;
             }
 
             for (int i = 0; i < passiveIntVariables.Length; i++)
@@ -231,9 +232,10 @@ public class PassiveCardUI : MonoBehaviour
                 gameManager.passiveIntVariables[i] += passiveIntVariables[i];
             }
 
-            for(int i=0;i<passiveFloatVariables.Length;i++)
+            for (int i = 0; i < passiveFloatVariables.Length; i++)
             {
                 gameManager.passiveFloatVariables[i] += passiveFloatVariables[i];
+                gameManager.passiveFloatVariables[i] = Mathf.Round(gameManager.passiveFloatVariables[i] * 10) * 0.1f;
             }
 
             for(int i=0;i<passiveBoolVariables.Length;i++)

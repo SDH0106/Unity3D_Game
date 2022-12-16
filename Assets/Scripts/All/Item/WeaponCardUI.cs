@@ -72,7 +72,7 @@ public class WeaponCardUI : MonoBehaviour
 
     void Setting()
     {
-        price = Mathf.CeilToInt(selectedWeapon.WeaponPrice * (1 - gameManager.passiveIntVariables[0]));
+        price = Mathf.CeilToInt(selectedWeapon.WeaponPrice * (1 - gameManager.salePercent));
         itemSprite.sprite = selectedWeapon.ItemSprite;
         weaponName.text = selectedWeapon.WeaponName.ToString();
         type.text = selectedWeapon.Type.ToString();

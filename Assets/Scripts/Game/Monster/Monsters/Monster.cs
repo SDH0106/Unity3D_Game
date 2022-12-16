@@ -83,7 +83,7 @@ public class Monster : MonoBehaviour
             Vector3 characterPos = character.transform.position;
             dir = characterPos - transform.position;
 
-            speed = stat.monsterSpeed * (1 + gameManager.monsterSpeed);
+            speed = stat.monsterSpeed * (1 + gameManager.monsterSpeed * 0.01f);
 
             transform.position = Vector3.MoveTowards(new Vector3(transform.position.x, 0, transform.position.z), characterPos, speed * Time.deltaTime);
 
