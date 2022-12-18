@@ -75,7 +75,7 @@ public class WeaponControl : Weapon
                 if (!gameManager.doubleShot)
                 {
                     Bullet bullet = pool.Get();
-                    bullet.transform.position = new Vector3(normalFirePos.position.x, 0, normalFirePos.position.z);
+                    bullet.transform.position = new Vector3(normalFirePos.position.x, 0f, normalFirePos.position.z);
                     bullet.Shoot(dir.normalized, weaponInfo.WeaponRange);
                     bullet.damageUI = damageUI;
                     bullet.speed = weaponInfo.BulletSpeed;
