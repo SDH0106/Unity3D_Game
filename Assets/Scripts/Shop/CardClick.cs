@@ -86,6 +86,7 @@ public class CardClick : MonoBehaviour
             Character.Instance.ReleaseEquip(selectedNum);
         }
     }
+
     public void CombineWeapon()
     {
         for (int i = 0; i < ItemManager.Instance.storedWeapon.Length; i++)

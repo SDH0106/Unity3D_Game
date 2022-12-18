@@ -70,7 +70,7 @@ public class Skull : Monster
                 {
                     if (hp <= 0)
                     {
-                        gameManager.money += 100;
+                        gameManager.money += 500;
                         gameManager.level++;
                     }
                     Destroy(gameObject);

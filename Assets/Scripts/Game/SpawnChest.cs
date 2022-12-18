@@ -9,16 +9,25 @@ public class SpawnChest : MonoBehaviour
 
     [HideInInspector] public Vector3 spawnPos;
 
+    Vector3 playerPos;
+    Vector3 randPoint;
+
+    GameManager gameManager;
+    Character character;
+    float distance;
+
     private void Start()
     {
-        Invoke("GetChest", 10);
+        gameManager = GameManager.Instance;
+        character = Character.Instance;
+        Invoke("GetChest", 22);
     }
 
     void GetChest()
     {
         int num = Random.Range(0, 100);
 
-        if (num < 10 + GameManager.Instance.luck * 0.4)
+        if (num < 5 + gameManager.luck * 0.4)
         {
             Instantiate(chest, SpawnPosition(), chest.transform.rotation);
         }
@@ -26,13 +35,13 @@ public class SpawnChest : MonoBehaviour
 
     Vector3 SpawnPosition()
     {
-        Vector3 playerPos = Character.Instance.transform.position;
-        Vector3 randPoint = Random.onUnitSphere * spawnRange;
+        playerPos = character.transform.position;
+        randPoint = Random.onUnitSphere * spawnRange;
         randPoint.y = 0;
 
         spawnPos = randPoint + transform.position;
 
-        float distance = Vector3.Magnitude(playerPos - spawnPos);
+        distance = Vector3.Magnitude(playerPos - spawnPos);
 
         if (distance < 1)
         {

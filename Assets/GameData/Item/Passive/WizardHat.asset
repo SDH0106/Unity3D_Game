@@ -22,7 +22,7 @@ MonoBehaviour:
   absorbHp: 0
   defence: 0
   physicDamage: 0
-  elementDamage: 1
+  elementDamage: 0.5
   shortDamage: 0
   longDamage: 0
   attackSpeed: 0

@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 8c22ec8716aa81c45b0009e303b198bc, type: 3}
   itemGrade: 3
-  itemName: "\uB7ED\uD0A4 \uCF54\uC778"
+  itemName: "\uB7ED\uD0A4 \uD398\uB2C8"
   itemPrice: 200
   maxCount: 1
   hp: 0
-  recoverHp: -2
+  recoverHp: -3
   absorbHp: 0
   defence: 0
   physicDamage: 0

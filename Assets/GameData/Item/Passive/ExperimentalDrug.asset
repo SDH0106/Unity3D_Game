@@ -19,15 +19,15 @@ MonoBehaviour:
   maxCount: 100
   hp: 0
   recoverHp: 0
-  absorbHp: 0.2
-  defence: 0
+  absorbHp: 0
+  defence: 0.4
   physicDamage: 0
   elementDamage: 0
-  shortDamage: 2
+  shortDamage: 1.4
   longDamage: 0
   attackSpeed: 0
   speed: 0
-  range: -2
+  range: -1
   luck: 0
   critical: 0
   coinRange: 0

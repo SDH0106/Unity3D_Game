@@ -77,7 +77,7 @@ public class Weapon : MonoBehaviour
 
             else if (criRand > gameManager.critical)
             {
-                damage = (weaponInfo.WeaponDamage * grade + gameManager.physicDamage);
+                damage = (weaponInfo.WeaponDamage * grade + gameManager.physicDamage + gameManager.shortDamage);
                 damageUI.damageText.color = new Color(1, 0.4871f, 0);
             }
         }

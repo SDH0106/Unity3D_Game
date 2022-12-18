@@ -45,7 +45,7 @@ public class MonsterSpawn : MonoBehaviour
         }
 
         InvokeRepeating("RendSpawnImage", 1f, spawnDelay / ((gameManager.round + 4) / 5));
-        InvokeRepeating("RendSpawnImage", 1.5f, spawnDelay / ((gameManager.round + 4) / 5));
+        InvokeRepeating("RendSpawnImage", 1.5f, spawnDelay / ((gameManager.round + 5) / 5));
 
         if (gameManager.round % 10 == 0)
         {
@@ -65,21 +65,13 @@ public class MonsterSpawn : MonoBehaviour
             gameManager.isBossDead = true;
     }
 
-    IEnumerator SpawnMonster(Vector3 pos)
-    {
-        yield return new WaitForSeconds(1);
-
-        Monster monster = pool.Get();
-        monster.transform.position = pos;
-    }
-
     Vector3 SpawnPosition()
     {
         Vector3 playerPos = character.transform.position;
         Vector3 randPoint = Random.onUnitSphere * spawnRange;
         randPoint.y = 0;
 
-        spawnPos = randPoint + transform.position;
+        spawnPos = randPoint + playerPos;
 
         float distance = Vector3.Magnitude(playerPos - spawnPos);
 
@@ -91,6 +83,14 @@ public class MonsterSpawn : MonoBehaviour
         return spawnPos;
     }
 
+    IEnumerator SpawnMonster(Vector3 pos)
+    {
+        yield return new WaitForSeconds(1);
+
+        Monster monster = pool.Get();
+        monster.transform.position = pos;
+    }
+
     void RendSpawnImage()
     {
         Vector3 pos = SpawnPosition();
@@ -99,6 +99,25 @@ public class MonsterSpawn : MonoBehaviour
         Destroy(spawnMark, 1f);
         StartCoroutine(SpawnMonster(pos));
     }
+
+    /*IEnumerator RendSpawnImage()
+    {
+        while (gameManager.currentGameTime > 0)
+        {
+            yield return new WaitForSeconds(1);
+
+            Vector3 pos = SpawnPosition();
+            Debug.Log(pos);
+            GameObject spawnMark = Instantiate(spawnImage, pos, spawnImage.transform.rotation);
+            spawnMark.transform.SetParent(storageParent);
+
+            yield return new WaitForSeconds(1);
+            Destroy(spawnMark);
+
+            Monster monster = pool.Get();
+            monster.transform.position = pos;
+        }
+    }*/
 
     void RendBossSpawnImage(int round)
     {

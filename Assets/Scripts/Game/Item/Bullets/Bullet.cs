@@ -24,7 +24,7 @@ public class Bullet : MonoBehaviour
 
     void Update()
     {
-        transform.position += new Vector3(dir.x, -transform.position.y, dir.z) * speed * Time.deltaTime;
+        transform.position += new Vector3(dir.x, 0, dir.z) * speed * Time.deltaTime;
 
         // 총알 각도
         angle = Mathf.Atan2(dir.z, dir.x) * Mathf.Rad2Deg;

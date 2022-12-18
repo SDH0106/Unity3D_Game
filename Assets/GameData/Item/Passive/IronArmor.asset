@@ -17,7 +17,7 @@ MonoBehaviour:
   itemName: "\uBB34\uC1E0 \uAC11\uC637"
   itemPrice: 35
   maxCount: 100
-  hp: 5
+  hp: 7
   recoverHp: 0
   absorbHp: 0
   defence: 1
@@ -41,4 +41,4 @@ MonoBehaviour:
   doubleShot: 0
   revive: 0
   description: 
-  weight: 0
+  weight: 370

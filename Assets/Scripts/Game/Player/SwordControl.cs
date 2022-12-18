@@ -46,9 +46,9 @@ public class SwordControl : Weapon
             mouse.y = transform.position.y;
 
             dir = mouse - transform.position;
-            Attack();
         }
 
+        Attack();
         WeaponSetting();
     }
 
@@ -64,7 +64,7 @@ public class SwordControl : Weapon
 
         if (canAttack == true)
         {
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButton(0) && (gameManager.currentScene == "Game"))
             {
                 transform.position = Vector3.MoveTowards(transform.position, character.transform.position + range, 2);
 

@@ -15,7 +15,7 @@ MonoBehaviour:
   itemSprite: {fileID: 21300000, guid: 90bff91d933adcf418c694164251c7f3, type: 3}
   itemGrade: 2
   itemName: "\uB300\uC26C \uC99D\uAC00"
-  itemPrice: 200
+  itemPrice: 333
   maxCount: 2
   hp: 0
   recoverHp: 0

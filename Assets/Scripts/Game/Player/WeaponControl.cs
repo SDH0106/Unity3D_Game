@@ -75,7 +75,7 @@ public class WeaponControl : Weapon
                 if (!gameManager.doubleShot)
                 {
                     Bullet bullet = pool.Get();
-                    bullet.transform.position = normalFirePos.position;
+                    bullet.transform.position = new Vector3(normalFirePos.position.x, 0, normalFirePos.position.z);
                     bullet.Shoot(dir.normalized, weaponInfo.WeaponRange);
                     bullet.damageUI = damageUI;
                     bullet.speed = weaponInfo.BulletSpeed;
@@ -85,8 +85,8 @@ public class WeaponControl : Weapon
                 {
                     Bullet bullet1 = pool.Get();
                     Bullet bullet2 = pool.Get();
-                    bullet1.transform.position = doubleFirePos1.position;
-                    bullet2.transform.position = doubleFirePos2.position;
+                    bullet1.transform.position = new Vector3(doubleFirePos1.position.x, 0, doubleFirePos1.position.z);
+                    bullet2.transform.position = new Vector3(doubleFirePos2.position.x, 0, doubleFirePos2.position.z);
                     bullet1.Shoot(dir.normalized, weaponInfo.WeaponRange);
                     bullet2.Shoot(dir.normalized, weaponInfo.WeaponRange);
                     bullet1.damageUI = damageUI;

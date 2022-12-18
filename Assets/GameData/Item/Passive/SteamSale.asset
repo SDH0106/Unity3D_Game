@@ -22,10 +22,10 @@ MonoBehaviour:
   absorbHp: 0
   defence: 0
   physicDamage: 0
-  elementDamage: 0
-  shortDamage: 0
-  longDamage: 0
-  attackSpeed: 0
+  elementDamage: -1
+  shortDamage: -1
+  longDamage: -1
+  attackSpeed: -1
   speed: 0
   range: 0
   luck: 0
@@ -42,4 +42,4 @@ MonoBehaviour:
   revive: 0
   description: "\uBAA8\uB4E0 \uC544\uC774\uD15C\uC758 \uC0C1\uC810 \uAD6C\uB9E4\uAC00\uB97C
     10\uD37C\uC13C\uD2B8 \uD560\uC778\uD574\uC900\uB2E4."
-  weight: 0
+  weight: 1

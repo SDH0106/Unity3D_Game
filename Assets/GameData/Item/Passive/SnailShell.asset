@@ -23,7 +23,7 @@ MonoBehaviour:
   defence: 0
   physicDamage: 0
   elementDamage: 0
-  shortDamage: 3
+  shortDamage: 2
   longDamage: 0
   attackSpeed: 0
   speed: -0.2

@@ -17,7 +17,7 @@ MonoBehaviour:
   itemName: "\uAC15\uCCA0 \uBC29\uD328"
   itemPrice: 88
   maxCount: 100
-  hp: 10
+  hp: 20
   recoverHp: 0
   absorbHp: 0
   defence: 2
@@ -41,4 +41,4 @@ MonoBehaviour:
   doubleShot: 0
   revive: 0
   description: 
-  weight: 0
+  weight: 18

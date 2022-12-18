@@ -82,7 +82,7 @@ public class GameManager : Singleton<GameManager>
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
-        //InitSetting();
+        InitSetting();
         InitArray();
 
         currentGameTime = gameTime;
@@ -98,12 +98,15 @@ public class GameManager : Singleton<GameManager>
 
     void InitSetting()
     {
+        gameTime = 60;
+        money = 0;
+        round = 1;
         level = 1;
         levelUpCount = 0;
         maxHp = 20;
         maxExp = 10;
         recoverHp = 0;
-        recoverTime = 2;
+        recoverTime = 1;
         absorbHp = 0;
         defence = 0;
         attackSpeed = 0;

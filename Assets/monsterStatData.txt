@@ -3,7 +3,7 @@
         {
             "monsterName": "우드 마스크",
             "monsterMaxHp": 10.0,
-            "monsterDamage": 1.0,
+            "monsterDamage": 2.0,
             "monsterSpeed": 1.0,
             "monsterDefence": 0.0,
             "monsterExp": 1.0,
@@ -12,11 +12,11 @@
         {
             "monsterName": "피그",
             "monsterMaxHp": 20.0,
-            "monsterDamage": 3.0,
+            "monsterDamage": 5.0,
             "monsterSpeed": 1.0,
             "monsterDefence": 2.0,
             "monsterExp": 5.0,
-            "monsterCoin": 20.0
+            "monsterCoin": 15.0
         },
         {
             "monsterName": "네펜데스",
@@ -25,16 +25,16 @@
             "monsterSpeed": 0.0,
             "monsterDefence": 0.0,
             "monsterExp": 3.0,
-            "monsterCoin": 15.0
+            "monsterCoin": 13.0
         },
         {
             "monsterName": "카멜레온",
             "monsterMaxHp": 15.0,
-            "monsterDamage": 5.0,
+            "monsterDamage": 3.0,
             "monsterSpeed": 1.0,
             "monsterDefence": 1.0,
             "monsterExp": 2.0,
-            "monsterCoin": 13.0
+            "monsterCoin": 12.0
         },
         {
             "monsterName": "고스트",
@@ -42,7 +42,7 @@
             "monsterDamage": 10.0,
             "monsterSpeed": 1.0,
             "monsterDefence": 10.0,
-            "monsterExp": 100.0,
+            "monsterExp": 0.0,
             "monsterCoin": 0.0
         },
         {
@@ -51,7 +51,7 @@
             "monsterDamage": 10.0,
             "monsterSpeed": 1.0,
             "monsterDefence": 10.0,
-            "monsterExp": 100.0,
+            "monsterExp": 0.0,
             "monsterCoin": 0.0
         }
     ]

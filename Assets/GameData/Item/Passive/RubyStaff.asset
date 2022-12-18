@@ -17,12 +17,12 @@ MonoBehaviour:
   itemName: "\uB8E8\uBE44 \uC2A4\uD0DC\uD504"
   itemPrice: 59
   maxCount: 100
-  hp: -3
+  hp: -2
   recoverHp: 0
   absorbHp: 0
   defence: 0
   physicDamage: 0
-  elementDamage: 3
+  elementDamage: 1.8
   shortDamage: 0
   longDamage: 0
   attackSpeed: 0

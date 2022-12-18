@@ -134,6 +134,26 @@ public class WeaponCardUI : MonoBehaviour
             isLock = false;
             Character.Instance.Equip();
         }
+
+        else if(itemManager.foolCount >= 5 && gameManager.money >= (price * (int)(selectedWeapon.weaponGrade + 1)))
+        {
+            for (int i = 0; i < itemManager.storedWeapon.Length; i++)
+            {
+                if (itemManager.storedWeapon[i] != null && selectedWeapon.weaponGrade != Grade.½ÅÈ­)
+                {
+
+                    if ((selectedWeapon.WeaponName == itemManager.storedWeapon[i].WeaponName) && (selectedWeapon.weaponGrade == itemManager.weaponGrade[i]))
+                    {
+                        SoundManager.Instance.PlayES("WeaponSelect");
+                        gameManager.money -= (price * (int)(selectedWeapon.weaponGrade + 1));
+                        itemManager.weaponGrade[i]++;
+                        Destroy(gameObject);
+                        isLock = false;
+                        break;
+                    }
+                }
+            }
+        }
     }
 
     public void Lock()
