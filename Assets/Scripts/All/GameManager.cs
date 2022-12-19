@@ -19,6 +19,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] float gameTime;
     [SerializeField] public int money;
     [SerializeField] public int round;
+    [SerializeField] public Collider ground;
 
     [HideInInspector] public float exp;
     [HideInInspector] public float hp;
@@ -82,8 +83,10 @@ public class GameManager : Singleton<GameManager>
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
-        InitSetting();
+        //InitSetting();
         InitArray();
+
+        ground.gameObject.SetActive(false);
 
         currentGameTime = gameTime;
         hp = maxHp;
@@ -203,13 +206,13 @@ public class GameManager : Singleton<GameManager>
         scene = SceneManager.GetActiveScene();
         currentScene = scene.name;
 
-        if (exp ==  maxExp)
+        if (exp >= maxExp)
         {
             SoundManager.Instance.PlayES("LevelUp");
             level++;
             levelUpCount++;
             maxExp *= level;
-            exp = 0;
+            exp = exp - maxExp;
         }
 
         if (hp > maxHp)
@@ -233,6 +236,8 @@ public class GameManager : Singleton<GameManager>
     {
         if (currentScene == "Game" && hp > 0)
         {
+            ground.gameObject.SetActive(true);
+
             currentGameTime -= Time.deltaTime;
 
             if (currentGameTime <= 0)

@@ -22,7 +22,8 @@ public class Chameleon : Monster
     {
         if (isDead == false)
         {
-            Move();
+            if (!isAttack)
+                Move();
             anim.SetBool("isWalk", isWalk);
 
             if (!isFreeze)
@@ -71,22 +72,5 @@ public class Chameleon : Monster
         base.SetInitMonster();
         rightAttackColl.gameObject.SetActive(false);
         leftAttackColl.gameObject.SetActive(false);
-    }
-
-    protected override void OnTriggerStay(Collider other)
-    {
-        base.OnTriggerStay(other);
-
-        if (other.CompareTag("Character"))
-        {
-            character.OnDamaged(rightAttackColl);
-            character.OnDamaged(leftAttackColl);
-        }
-    }
-
-    private void OnDrawGizmos()
-    {
-        Handles.color = Color.red;
-        Handles.DrawWireDisc(transform.position,Vector3.up, 3);
     }
 }

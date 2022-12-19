@@ -27,7 +27,7 @@ public class SpawnChest : MonoBehaviour
     {
         int num = Random.Range(0, 100);
 
-        if (num < 5 + gameManager.luck * 0.4)
+        if (num < 3 + gameManager.luck * 0.4)
         {
             Instantiate(chest, SpawnPosition(), chest.transform.rotation);
         }

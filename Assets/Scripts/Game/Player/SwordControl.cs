@@ -64,7 +64,7 @@ public class SwordControl : Weapon
 
         if (canAttack == true)
         {
-            if (Input.GetMouseButton(0) && (gameManager.currentScene == "Game"))
+            if (Input.GetMouseButton(0) && gameManager.currentGameTime > 0)
             {
                 transform.position = Vector3.MoveTowards(transform.position, character.transform.position + range, 2);
 

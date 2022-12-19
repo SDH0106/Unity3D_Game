@@ -68,7 +68,7 @@ public class GameSceneUI : Singleton<GameSceneUI>
     GameManager gameManager;
     Character character;
 
-    [HideInInspector] public int chestCount;
+    /*[HideInInspector]*/ public int chestCount;
 
     private void Start()
     {

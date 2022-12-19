@@ -33,7 +33,7 @@ public class MonsterBullet : MonoBehaviour
     {
         if (other.tag == "Character")
         {
-            other.GetComponent<Character>().OnDamaged(coll);
+            other.GetComponent<Character>().OnDamaged(coll, bulletDamage);
             DestroyBullet();
             CancelInvoke("DestroyBullet");
         }

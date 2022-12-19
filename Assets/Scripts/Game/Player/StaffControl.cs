@@ -79,7 +79,7 @@ public class StaffControl : Weapon
         {
             if (canAttack == true)
             {
-                if (Input.GetMouseButton(0))
+                if (Input.GetMouseButton(0) && gameManager.currentGameTime > 0)
                 {
                     if (!gameManager.doubleShot)
                     {

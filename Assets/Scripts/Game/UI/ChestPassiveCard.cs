@@ -17,6 +17,7 @@ public class ChestPassiveCard : MonoBehaviour
     [SerializeField] Image itemSprite;
     [SerializeField] Text itemName;
     [SerializeField] Text itemGrade;
+    [SerializeField] Text itemCount;
     [SerializeField] Text sellPriceText;
 
     [HideInInspector] public PassiveInfo selectedPassive;
@@ -62,6 +63,7 @@ public class ChestPassiveCard : MonoBehaviour
         itemSprite.sprite = selectedPassive.ItemSprite;
         itemName.text = selectedPassive.ItemName;
         itemGrade.text = selectedPassive.ItemGrade.ToString();
+        itemCount.text = selectedPassive.MaxCount.ToString();
         sellPriceText.text = sellPrice.ToString();
     }
 

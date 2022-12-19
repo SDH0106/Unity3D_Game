@@ -130,7 +130,7 @@ public class Monster : MonoBehaviour
     {
         if (other.CompareTag("Character"))
         {
-            character.OnDamaged(coll);
+            character.OnDamaged(coll, stat.monsterDamage);
         }
     }
 

@@ -17,6 +17,7 @@ public class MonsterSpawn : MonoBehaviour
     [SerializeField] int poolCount;
     [SerializeField] int spawnRange;
     [SerializeField] float spawnDelay;
+    Collider ground;
 
     private IObjectPool<Monster> pool;
 
@@ -38,6 +39,7 @@ public class MonsterSpawn : MonoBehaviour
         gameManager = GameManager.Instance;
         character = Character.Instance;
         weightValue = new float[] { 100, 0, 0, 0 };
+        ground = gameManager.ground;
 
         for (int i = 0; i < weightValue.Length; i++)
         {
@@ -93,7 +95,8 @@ public class MonsterSpawn : MonoBehaviour
 
     void RendSpawnImage()
     {
-        Vector3 pos = SpawnPosition();
+        //Vector3 pos = ground.ClosestPointOnBounds(SpawnPosition());
+        Vector3 pos = ground.bounds.ClosestPoint(SpawnPosition());
         GameObject spawnMark = Instantiate(spawnImage, pos, spawnImage.transform.rotation);
         spawnMark.transform.SetParent(storageParent);
         Destroy(spawnMark, 1f);

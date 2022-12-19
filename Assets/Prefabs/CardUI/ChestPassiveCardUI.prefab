@@ -770,7 +770,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5461321316744444986}
   - {fileID: 4675789629549453840}
@@ -912,8 +912,9 @@ MonoBehaviour:
   itemSprite: {fileID: 1009497355040056144}
   itemName: {fileID: 3667563659590199475}
   itemGrade: {fileID: 2034016708954755514}
+  itemCount: {fileID: 5818705863974470788}
   sellPriceText: {fileID: 8816517834597159728}
-  selectedPassive: {fileID: 11400000, guid: 14430bde70166fb48b7b738c73f17854, type: 2}
+  selectedPassive: {fileID: 11400000, guid: 6c83ca2726759e746aebc8031428bb75, type: 2}
 --- !u!1 &3950642370217644491
 GameObject:
   m_ObjectHideFlags: 0
@@ -2232,6 +2233,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4806158060786923106}
     m_Modifications:
+    - target: {fileID: 25044715737592863, guid: 5973f6c5d7a92dc4c8eac253a3e16632, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1109898840169356761, guid: 5973f6c5d7a92dc4c8eac253a3e16632, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -3.5700073

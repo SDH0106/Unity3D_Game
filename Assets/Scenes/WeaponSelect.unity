@@ -5969,6 +5969,7 @@ MonoBehaviour:
   - {fileID: 613938827}
   - {fileID: 887535975}
   - {fileID: 61154120}
+  ground: {fileID: 0}
   isDead: 0
 --- !u!65 &926263700
 BoxCollider:

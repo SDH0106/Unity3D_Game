@@ -29,8 +29,10 @@ public class Character : Singleton<Character>
     [SerializeField] public GameObject[] weapons;
     [SerializeField] public Transform[] weaponPoses;
 
+    Collider ground;
+
     bool isRun, isAttacked = false;
-    public bool isDead = false;
+    [HideInInspector] public bool isDead = false;
 
     GameManager gameManager;
 
@@ -58,6 +60,8 @@ public class Character : Singleton<Character>
         dashCoolTime = 4;
         dashCount = gameManager.dashCount;
         initDashCoolTime = dashCoolTime;
+
+        ground = gameManager.ground;
     }
 
     void Update()
@@ -164,6 +168,8 @@ public class Character : Singleton<Character>
         else if (gameManager.speed > 1)
             transform.position += dir * gameManager.speed * Time.deltaTime;
 
+        transform.position = ground.bounds.ClosestPoint(transform.position);
+
         if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
         {
             rend.flipX = true;
@@ -200,34 +206,17 @@ public class Character : Singleton<Character>
         }
     }
 
-    public void OnDamaged(Collider other)
+    public void OnDamaged(Collider other, float damage)
     {
-        if (other.tag == "Monster" && isAttacked == false)
+        if (!isAttacked)
         {
-            if (other.gameObject.GetComponent<Monster>().stat.monsterDamage - gameManager.defence > 0)
-            {
-                gameManager.hp -= (other.gameObject.GetComponent<Monster>().stat.monsterDamage - gameManager.defence);
+            gameManager.hp -= (damage - gameManager.defence);
 
-                if (gameManager.hp > 0)
-                    StartCoroutine(OnInvincible());
+            if (gameManager.hp > 0)
+                StartCoroutine(OnInvincible());
 
-                else if (gameManager.hp <= 0)
-                    OnDead();
-            }
-        }
-
-        else if (other.CompareTag("monsterBullet") && isAttacked == false)
-        {
-            if ((other.gameObject.GetComponent<MonsterBullet>().bulletDamage - gameManager.defence) > 0)
-            {
-                gameManager.hp -= (other.gameObject.GetComponent<MonsterBullet>().bulletDamage - gameManager.defence);
-
-                if (gameManager.hp > 0)
-                    StartCoroutine(OnInvincible());
-
-                else if (gameManager.hp <= 0)
-                    OnDead();
-            }
+            else if (gameManager.hp <= 0)
+                OnDead();
         }
     }
 
