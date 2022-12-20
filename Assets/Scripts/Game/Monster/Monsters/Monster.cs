@@ -32,6 +32,8 @@ public class Monster : MonoBehaviour
     protected GameManager gameManager;
     protected Character character;
 
+    IEnumerator runningCoroutine;
+
     void Start()
     {
         InitSetting();
@@ -43,7 +45,7 @@ public class Monster : MonoBehaviour
         character = Character.Instance;
         hp = stat.monsterMaxHp * (1 + ((gameManager.round - 1) * 0.25f));
         initScale = transform.localScale;
-        speed = stat.monsterSpeed * (1 + gameManager.monsterSpeed * 0.01f);
+        speed = stat.monsterSpeed * (1 + gameManager.monsterSlow * 0.01f) * (1 - gameManager.monsterSlow);
         initSpeed = speed;
         isWalk = true;
         rend = GetComponent<SpriteRenderer>();
@@ -65,7 +67,7 @@ public class Monster : MonoBehaviour
     protected virtual void SetInitMonster()
     {
         hp = stat.monsterMaxHp * (1 + ((gameManager.round - 1) * 0.25f));
-        speed = stat.monsterSpeed * (1 + gameManager.monsterSpeed * 0.01f);
+        speed = stat.monsterSpeed * (1 + gameManager.monsterSlow * 0.01f) * (1 - gameManager.monsterSlow);
         isWalk = true;
         isDead = false;
         isAttacked = false;
@@ -83,8 +85,6 @@ public class Monster : MonoBehaviour
             Vector3 characterPos = character.transform.position;
             dir = characterPos - transform.position;
 
-            speed = stat.monsterSpeed * (1 + gameManager.monsterSpeed * 0.01f);
-
             transform.position = Vector3.MoveTowards(new Vector3(transform.position.x, 0, transform.position.z), characterPos, speed * Time.deltaTime);
 
             isWalk = true;
@@ -100,7 +100,7 @@ public class Monster : MonoBehaviour
         }
     }
 
-    private IEnumerator MonsterColorBlink()
+    protected IEnumerator MonsterColorBlink()
     {
         Color semiWhite = new Color(1, 1, 1, 0.5f);
 
@@ -116,7 +116,7 @@ public class Monster : MonoBehaviour
         rend.color = Color.white;
     }
 
-    private IEnumerator MonsterFreeze()
+    protected IEnumerator MonsterFreeze()
     {
         rend.color = Color.cyan;
         yield return new WaitForSeconds(3f);
@@ -138,24 +138,41 @@ public class Monster : MonoBehaviour
     {
         hp -= (damage - (stat.monsterDefence * (1 + gameManager.round * 0.1f)));
 
-        StartCoroutine(MonsterColorBlink());
+        if (!isFreeze)
+        {
+            runningCoroutine = MonsterColorBlink();
+            StartCoroutine(runningCoroutine);
+        }
     }
 
     public void OnDamaged(float damage, bool freeze)
     {
         isFreeze = freeze;
-        hp -= (damage - (stat.monsterDefence * (1 + gameManager.round * 0.1f)));
+
+        if (damage >= (stat.monsterDefence * (1 + gameManager.round * 0.1f)))
+            hp -= (damage - (stat.monsterDefence * (1 + gameManager.round * 0.1f)));
 
         if (isFreeze == true)
         {
             isWalk = false;
-            StartCoroutine(MonsterFreeze());
+
+            if (runningCoroutine != null)
+                StopCoroutine(runningCoroutine);
+
+            runningCoroutine = MonsterFreeze();
+            StartCoroutine(runningCoroutine);
+        }
+
+        if (isFreeze == false)
+        {
+            runningCoroutine = MonsterColorBlink();
+            StartCoroutine(runningCoroutine);
         }
     }
 
     public void OnDead()
     {
-        if (hp <= 0 || gameManager.isClear || character.isDead)
+        if (hp <= 0 || gameManager.isClear && gameManager.isBossDead || character.isDead)
         {
             rend.color = Color.white;
             isFreeze = false;

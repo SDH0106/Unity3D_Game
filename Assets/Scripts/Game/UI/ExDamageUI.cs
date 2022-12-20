@@ -8,13 +8,15 @@ public class ExDamageUI : MonoBehaviour
     [SerializeField] Text damageText;
     [SerializeField] GameObject explosion;
 
+    public float damage;
+
     float printTime, initPrintTime;
 
     private void Start()
     {
         printTime = 1f;
         initPrintTime = printTime;
-        damageText.text = (explosion.GetComponent<Explosion>().exDamage * GameManager.Instance.round).ToString();
+        damageText.text = damage.ToString();
     }
 
     private void ChangeAlpha(float alpha)

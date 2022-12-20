@@ -47,7 +47,14 @@ public class MonsterSpawn : MonoBehaviour
         }
 
         InvokeRepeating("RendSpawnImage", 1f, spawnDelay / ((gameManager.round + 4) / 5));
-        InvokeRepeating("RendSpawnImage", 1.5f, spawnDelay / ((gameManager.round + 5) / 5));
+
+        if (gameManager.round > 1)
+        {
+            InvokeRepeating("RendSpawnImage", 1.5f, spawnDelay / ((gameManager.round + 5) / 5));
+
+            if(gameManager.round > 10)
+                InvokeRepeating("RendSpawnImage", 1.5f, spawnDelay / ((gameManager.round + 5) / 5));
+        }
 
         if (gameManager.round % 10 == 0)
         {
@@ -124,7 +131,7 @@ public class MonsterSpawn : MonoBehaviour
 
     void RendBossSpawnImage(int round)
     {
-        if (round == 10)
+        if (round != 30)
         {
             GameObject spawnMark = Instantiate(bossSpawnImage, new Vector3(3, 0, 3), bossSpawnImage.transform.rotation);
             Destroy(spawnMark, 2.1f);
@@ -132,7 +139,7 @@ public class MonsterSpawn : MonoBehaviour
             StartCoroutine(CreateBossMonster(round));
         }
 
-        else if (round == 20)
+        else if (round == 30)
         {
             GameObject spawnMark = Instantiate(bossSpawnImage, new Vector3(3, 0, 3), bossSpawnImage.transform.rotation);
             Destroy(spawnMark, 2.1f);
@@ -159,17 +166,16 @@ public class MonsterSpawn : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
 
-        if (round == 10)
+        if (round != 30)
         {
-            int rand = Random.Range(0, 2);
-            GameObject inst = Instantiate(bossMonsterPrefab[rand]);
+            GameObject inst = Instantiate(bossMonsterPrefab[(round / 10) - 1]);
             Monster monster = inst.GetComponent<Monster>();
-            monster.stat = MonsterInfo.Instance.monsterInfos[normalMonsterPrefab.Length + rand];
+            monster.stat = MonsterInfo.Instance.monsterInfos[normalMonsterPrefab.Length + ((round / 10) - 1)];
             monster.transform.position = new Vector3(3, 0, 3);
             monster.transform.SetParent(bosssParent);
         }
 
-        else if (round == 20)
+        else if (round == 30)
         {
             GameObject inst1 = Instantiate(bossMonsterPrefab[0]);
             GameObject inst2 = Instantiate(bossMonsterPrefab[1]);

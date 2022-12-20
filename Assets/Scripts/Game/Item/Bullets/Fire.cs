@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Fire : Bullet
 {
-    [SerializeField] GameObject explosion;
+    [SerializeField] public GameObject explosion;
+
+    public int grade;
 
     private void Start()
     {
@@ -28,9 +30,12 @@ public class Fire : Bullet
             other.GetComponent<Monster>().OnDamaged(damageUI.weaponDamage);
             pool.transform.SetParent(gameManager.damageStorage);
 
-            int rand = Random.Range(0, 100);
+            int rand = Random.Range(0, 1);
             if (rand <= 5 + gameManager.luck * 0.2)
-                Instantiate(explosion, transform.position, transform.rotation);
+            {
+                GameObject ex = Instantiate(explosion, transform.position, transform.rotation);
+                ex.GetComponent<Explosion>().grade = grade;
+            }
 
             if (gameManager.absorbHp > 0)
                 gameManager.hp += gameManager.absorbHp;

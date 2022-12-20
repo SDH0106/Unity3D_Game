@@ -27,6 +27,8 @@ public class EndUI : Singleton<EndUI>
     [SerializeField] Text def;
     [SerializeField] Text wAtk;
     [SerializeField] Text eAtk;
+    [SerializeField] Text sAtk;
+    [SerializeField] Text lAtk;
     [SerializeField] Text aSpd;
     [SerializeField] Text spd;
     [SerializeField] Text ran;
@@ -100,6 +102,8 @@ public class EndUI : Singleton<EndUI>
         def.text = gameManager.defence.ToString();
         wAtk.text = gameManager.physicDamage.ToString();
         eAtk.text = gameManager.elementDamage.ToString();
+        sAtk.text = gameManager.shortDamage.ToString();
+        lAtk.text = gameManager.longDamage.ToString();
         aSpd.text = gameManager.attackSpeed.ToString();
         spd.text = gameManager.speed.ToString();
         ran.text = gameManager.range.ToString();

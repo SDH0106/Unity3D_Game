@@ -4,19 +4,19 @@
             "statName": "심장",
             "statType": "최대 체력",
             "statSprite": "Health",
-            "statValue": 2.0
+            "statValue": 5.0
         },
         {
             "statName": "페활량",
             "statType": "체력 회복",
             "statSprite": "ReHealth",
-            "statValue": 0.2
+            "statValue": 0.1
         },
         {
             "statName": "이빨",
             "statType": "체력 흡수",
             "statSprite": "AbHealth",
-            "statValue": 0.2
+            "statValue": 0.1
         },
         {
             "statName": "강인함",
@@ -52,7 +52,7 @@
             "statName": "도핑",
             "statType": "공격 속도",
             "statSprite": "AtSpeed",
-            "statValue": 0.1
+            "statValue": 0.2
         },
         {
             "statName": "신발",

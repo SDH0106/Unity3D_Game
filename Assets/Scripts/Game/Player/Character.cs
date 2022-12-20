@@ -40,6 +40,8 @@ public class Character : Singleton<Character>
     float x;
     float z;
 
+    float roundDamage;
+
     protected override void Awake()
     {
         base.Awake();
@@ -74,7 +76,7 @@ public class Character : Singleton<Character>
         if (gameManager.revive)
             gardianAngel.SetActive(true);
 
-        if (gameManager.currentScene == "Game")
+        if (gameManager.currentScene == "Game" && (!gameManager.isClear || !gameManager.isBossDead))
         {
             if (gameManager.hp > 0)
             {
@@ -210,7 +212,8 @@ public class Character : Singleton<Character>
     {
         if (!isAttacked)
         {
-            gameManager.hp -= (damage - gameManager.defence);
+            roundDamage = Mathf.Round((damage - gameManager.defence) * 10) / 10;
+            gameManager.hp -= roundDamage;
 
             if (gameManager.hp > 0)
                 StartCoroutine(OnInvincible());

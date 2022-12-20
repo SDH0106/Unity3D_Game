@@ -50,7 +50,7 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector] public float salePercent;
     [HideInInspector] public float increaseExp;
     [HideInInspector] public float coinRange;
-    [HideInInspector] public float monsterSpeed;
+    [HideInInspector] public float monsterSlow;
     [HideInInspector] public bool luckCoin;
     [HideInInspector] public bool luckDamage;
     [HideInInspector] public bool luckCritical;
@@ -120,7 +120,7 @@ public class GameManager : Singleton<GameManager>
         salePercent = 0;
         dashCount = 0;
         increaseExp = 0;
-        monsterSpeed = 0;
+        monsterSlow = 0;
         luckCoin = false;
         luckDamage = false;
         luckCritical = false;
@@ -151,7 +151,7 @@ public class GameManager : Singleton<GameManager>
         passiveFloatVariables = new float[10];
         passiveFloatVariables[0] = coinRange;
         passiveFloatVariables[1] = increaseExp;
-        passiveFloatVariables[2] = monsterSpeed;
+        passiveFloatVariables[2] = monsterSlow;
         passiveFloatVariables[3] = salePercent;
 
         passiveBoolVariables = new bool[5];
@@ -188,7 +188,7 @@ public class GameManager : Singleton<GameManager>
     {
         coinRange = passiveFloatVariables[0];
         increaseExp = passiveFloatVariables[1];
-        monsterSpeed = passiveFloatVariables[2];
+        monsterSlow = passiveFloatVariables[2];
         salePercent = passiveFloatVariables[3];
     }
 
@@ -211,8 +211,8 @@ public class GameManager : Singleton<GameManager>
             SoundManager.Instance.PlayES("LevelUp");
             level++;
             levelUpCount++;
-            maxExp *= level;
             exp = exp - maxExp;
+            maxExp = 10 * level;
         }
 
         if (hp > maxHp)

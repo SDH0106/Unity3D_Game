@@ -26165,14 +26165,14 @@ MonoBehaviour:
   aimCursor: {fileID: 2800000, guid: b8e78032f8af0954784d1fe9e5a09187, type: 3}
   bulletStorage: {fileID: 1005871281}
   damageStorage: {fileID: 1692643827}
-  gameTime: 0
-  money: 0
-  round: 1
+  gameTime: 1000
+  money: 100
+  round: 25
   ground: {fileID: 837245116}
   exp: 0
   hp: 0
   level: 1
-  maxHp: 15
+  maxHp: 10000
   maxExp: 10
   physicDamage: 0
   elementDamage: 0
@@ -26180,8 +26180,8 @@ MonoBehaviour:
   longDamage: 0
   recoverHp: 0
   absorbHp: 0
-  defence: 0
-  attackSpeed: 0
+  defence: 2.3
+  attackSpeed: 10
   speed: 2
   range: 0
   luck: 0
@@ -26193,7 +26193,7 @@ MonoBehaviour:
   salePercent: 0
   increaseExp: 0
   coinRange: 0
-  monsterSpeed: 0
+  monsterSlow: 0
   luckCoin: 0
   luckDamage: 0
   luckCritical: 0
@@ -26248,15 +26248,15 @@ MonoBehaviour:
   - statName: "\uC2EC\uC7A5"
     statType: "\uCD5C\uB300 \uCCB4\uB825"
     statSprite: Health
-    statValue: 2
+    statValue: 5
   - statName: "\uD398\uD65C\uB7C9"
     statType: "\uCCB4\uB825 \uD68C\uBCF5"
     statSprite: ReHealth
-    statValue: 0.2
+    statValue: 0.1
   - statName: "\uC774\uBE68"
     statType: "\uCCB4\uB825 \uD761\uC218"
     statSprite: AbHealth
-    statValue: 0.2
+    statValue: 0.1
   - statName: "\uAC15\uC778\uD568"
     statType: "\uBC29\uC5B4\uB825"
     statSprite: Defence
@@ -26280,7 +26280,7 @@ MonoBehaviour:
   - statName: "\uB3C4\uD551"
     statType: "\uACF5\uACA9 \uC18D\uB3C4"
     statSprite: AtSpeed
-    statValue: 0.1
+    statValue: 0.2
   - statName: "\uC2E0\uBC1C"
     statType: "\uC774\uB3D9 \uC18D\uB3C4"
     statSprite: Speed
@@ -26324,45 +26324,45 @@ MonoBehaviour:
   monsterInfos:
   - monsterName: "\uC6B0\uB4DC \uB9C8\uC2A4\uD06C"
     monsterMaxHp: 10
-    monsterDamage: 1
+    monsterDamage: 2
     monsterSpeed: 1
     monsterDefence: 0
     monsterExp: 1
-    monsterCoin: 5
-  - monsterName: "\uD53C\uADF8"
-    monsterMaxHp: 20
-    monsterDamage: 3
-    monsterSpeed: 1
-    monsterDefence: 2
-    monsterExp: 5
     monsterCoin: 10
+  - monsterName: "\uD53C\uADF8"
+    monsterMaxHp: 50
+    monsterDamage: 5
+    monsterSpeed: 1.5
+    monsterDefence: 5
+    monsterExp: 5
+    monsterCoin: 15
   - monsterName: "\uB124\uD39C\uB370\uC2A4"
-    monsterMaxHp: 13
+    monsterMaxHp: 20
     monsterDamage: 1
     monsterSpeed: 0
     monsterDefence: 0
     monsterExp: 3
-    monsterCoin: 8
+    monsterCoin: 13
   - monsterName: "\uCE74\uBA5C\uB808\uC628"
-    monsterMaxHp: 15
-    monsterDamage: 5
-    monsterSpeed: 1
-    monsterDefence: 1
+    monsterMaxHp: 30
+    monsterDamage: 3
+    monsterSpeed: 2
+    monsterDefence: 2
     monsterExp: 2
-    monsterCoin: 7
+    monsterCoin: 12
   - monsterName: "\uACE0\uC2A4\uD2B8"
-    monsterMaxHp: 200
+    monsterMaxHp: 5000
     monsterDamage: 10
     monsterSpeed: 1
-    monsterDefence: 10
-    monsterExp: 100
+    monsterDefence: 0
+    monsterExp: 0
     monsterCoin: 0
   - monsterName: "\uD574\uACE8"
-    monsterMaxHp: 200
+    monsterMaxHp: 5000
     monsterDamage: 10
     monsterSpeed: 1
     monsterDefence: 10
-    monsterExp: 100
+    monsterExp: 0
     monsterCoin: 0
 --- !u!114 &936130860
 MonoBehaviour:

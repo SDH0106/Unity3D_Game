@@ -8131,7 +8131,7 @@ MonoBehaviour:
   gameClearText: {fileID: 14961434}
   statCardParent: {fileID: 62289873}
   chestPassive: {fileID: 1566092128}
-  chestCount: 1
+  chestCount: 0
 --- !u!1 &1676374045
 GameObject:
   m_ObjectHideFlags: 0

@@ -75,11 +75,11 @@ public class StaffControl : Weapon
 
     void FireBullet()
     {
-        if (weaponInfo.WeaponName != "번개 스태프")
+        if (weaponInfo.WeaponName == "얼음 스태프")
         {
             if (canAttack == true)
             {
-                if (Input.GetMouseButton(0) && gameManager.currentGameTime > 0)
+                if (Input.GetMouseButton(0) && (!gameManager.isClear || !gameManager.isBossDead))
                 {
                     if (!gameManager.doubleShot)
                     {
@@ -122,7 +122,67 @@ public class StaffControl : Weapon
                     }
                 }
 
-                else if(gameManager.attackSpeed < 0)
+                else if (gameManager.attackSpeed < 0)
+                {
+                    if (delay >= (bulletDelay - (gameManager.attackSpeed * 0.1)))
+                    {
+                        canAttack = true;
+                        delay = 0;
+                    }
+                }
+            }
+        }
+        if (weaponInfo.WeaponName == "화염 스태프")
+        {
+            if (canAttack == true)
+            {
+                if (Input.GetMouseButton(0) && (!gameManager.isClear || !gameManager.isBossDead))
+                {
+                    if (!gameManager.doubleShot)
+                    {
+                        Bullet bullet = pool.Get();
+                        bullet.transform.position = normalFirePos.position;
+                        bullet.Shoot(dir.normalized, weaponInfo.WeaponRange);
+                        bullet.damageUI = damageUI;
+                        bullet.speed = weaponInfo.BulletSpeed;
+                        bullet.GetComponent<Fire>().grade = grade;
+                    }
+
+                    if (gameManager.doubleShot)
+                    {
+                        Bullet bullet1 = pool.Get();
+                        Bullet bullet2 = pool.Get();
+                        bullet1.transform.position = doubleFirePos1.position;
+                        bullet2.transform.position = doubleFirePos2.position;
+                        bullet1.Shoot(dir.normalized, weaponInfo.WeaponRange);
+                        bullet2.Shoot(dir.normalized, weaponInfo.WeaponRange);
+                        bullet1.damageUI = damageUI;
+                        bullet2.damageUI = damageUI;
+                        bullet1.speed = weaponInfo.BulletSpeed;
+                        bullet2.speed = weaponInfo.BulletSpeed;
+                        bullet1.GetComponent<Fire>().grade = grade;
+                        bullet2.GetComponent<Fire>().grade = grade;
+                    }
+
+                    SoundManager.Instance.PlayES(weaponInfo.WeaponSound);
+                    canAttack = false;
+                }
+            }
+
+            else if (canAttack == false)
+            {
+                delay += Time.deltaTime;
+
+                if (gameManager.attackSpeed >= 0)
+                {
+                    if (delay >= (bulletDelay / (1 + gameManager.attackSpeed * 0.1)))
+                    {
+                        canAttack = true;
+                        delay = 0;
+                    }
+                }
+
+                else if (gameManager.attackSpeed < 0)
                 {
                     if (delay >= (bulletDelay - (gameManager.attackSpeed * 0.1)))
                     {
@@ -133,7 +193,7 @@ public class StaffControl : Weapon
             }
         }
 
-        else if (weaponInfo.WeaponName == "번개 스태프")
+        if (weaponInfo.WeaponName == "번개 스태프")
         {
             if (canAttack == true)
             {

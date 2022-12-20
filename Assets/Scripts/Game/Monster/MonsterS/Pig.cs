@@ -46,9 +46,9 @@ public class Pig : Monster
 
         if (isRush)
         {
-            rushTime -= Time.deltaTime;
-            speed = stat.monsterSpeed * (1 + gameManager.monsterSpeed * 0.01f) * 2f;
             isAttack = true;
+            rushTime -= Time.deltaTime;
+            speed = stat.monsterSpeed * (1 + gameManager.monsterSlow * 0.01f) * (1 - gameManager.monsterSlow) * 2f;
 
             if (rushTime <= 0)
             {
@@ -61,10 +61,9 @@ public class Pig : Monster
                     rushTime = 2f;
                     breakTime = 0f;
                     isRush = false;
-                    speed = stat.monsterSpeed * (1 + gameManager.monsterSpeed * 0.01f);
+                    speed = stat.monsterSpeed * (1 + gameManager.monsterSlow * 0.01f) * (1 - gameManager.monsterSlow);
                 }
             }
         }
-
     }
 }

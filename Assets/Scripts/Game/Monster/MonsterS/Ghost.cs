@@ -7,7 +7,7 @@ public class Ghost : Monster
 {
     int state = 0;
 
-    float disappearTime = 7;
+    float disappearTime = 5;
 
     void Start()
     {
@@ -44,7 +44,6 @@ public class Ghost : Monster
         {
             if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
             {
-                coll.enabled = false;
                 Appear();
             }
         }
@@ -92,6 +91,7 @@ public class Ghost : Monster
     void Disappear()
     {
         state = 1;
+        coll.enabled = false;
     }
 
     void Appear()

@@ -97,6 +97,7 @@ public class CardClick : MonoBehaviour
                 {
                     if ((selectedWeapon.WeaponName == ItemManager.Instance.storedWeapon[i].WeaponName) && (ItemManager.Instance.weaponGrade[selectedNum] == ItemManager.Instance.weaponGrade[i]))
                     {
+                        GameManager.Instance.money -= (int)(ItemManager.Instance.weaponGrade[selectedNum] + 1) * 20;
                         ItemManager.Instance.weaponGrade[selectedNum]++;
                         ItemManager.Instance.storedWeapon[i] = null;
                         ItemManager.Instance.weaponGrade[i] = Grade.¿œπ›;

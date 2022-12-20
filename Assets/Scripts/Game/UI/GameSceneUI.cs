@@ -97,7 +97,7 @@ public class GameSceneUI : Singleton<GameSceneUI>
 
         if (!character.isDead)
         {
-            if (gameManager.round != 20)
+            if (gameManager.round != 30)
             {
                 if (gameManager.isClear && gameManager.isBossDead)
                 {
@@ -134,7 +134,7 @@ public class GameSceneUI : Singleton<GameSceneUI>
                     ReturnToGame();
             }
 
-            else if(gameManager.round == 20)
+            else if(gameManager.round == 30)
             {
                 if (gameManager.isClear && gameManager.isBossDead)
                 {

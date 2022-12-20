@@ -30,7 +30,6 @@ public class ShowStatCard : Singleton<ShowStatCard>
         gameManager = GameManager.Instance;
         initPriceColor = rerollMoneyText.color;
         rerollMoney = -3;
-        Character.Instance.gameObject.SetActive(false);
 
         statCards = new GameObject[4];
         statInfo = new Stat[gameManager.gameObject.GetComponent<StatCardInfo>().statInfos.Length];
@@ -77,7 +76,7 @@ public class ShowStatCard : Singleton<ShowStatCard>
 
         if (gameManager.money >= -rerollMoney)
         {
-            for (int i = 1; i < this.transform.childCount - 2; i++)
+            for (int i = 1; i < this.transform.childCount - 1; i++)
             {
                 Destroy(this.transform.GetChild(i).GetChild(0).gameObject);
             }
@@ -106,7 +105,7 @@ public class ShowStatCard : Singleton<ShowStatCard>
             }
         }
 
-        for (int i = 1; i < this.transform.childCount - 2; i++)
+        for (int i = 1; i < this.transform.childCount - 1; i++)
         {
             StatCardUI card = statCard.GetComponent<StatCardUI>();
             card.selectedCard = statInfo[numArray[i - 1]];

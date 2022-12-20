@@ -63,10 +63,10 @@ public class WeaponCardUI : MonoBehaviour
     {
         lockImage.gameObject.SetActive(isLock);
 
-        if (gameManager.money < selectedWeapon.WeaponPrice)
+        if (gameManager.money < price)
             weaponPrice.color = Color.red;
 
-        else if (gameManager.money >= selectedWeapon.WeaponPrice)
+        else if (gameManager.money >= price)
             weaponPrice.color = initPriceColor;
     }
 
@@ -145,6 +145,7 @@ public class WeaponCardUI : MonoBehaviour
                     if ((selectedWeapon.WeaponName == itemManager.storedWeapon[i].WeaponName) && (selectedWeapon.weaponGrade == itemManager.weaponGrade[i]))
                     {
                         SoundManager.Instance.PlayES("WeaponSelect");
+                        gameManager.money -= (int)(selectedWeapon.weaponGrade + 1) * 20;
                         gameManager.money -= (price * (int)(selectedWeapon.weaponGrade + 1));
                         itemManager.weaponGrade[i]++;
                         Destroy(gameObject);
