@@ -162,6 +162,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3bf594c38eefab4fa9b7affdc49e444, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  exDamage: 100
+  exDamage: 5
   damageUI: {fileID: -5576913372046765546, guid: c0773f636ba599f438ceb51024c2731d, type: 3}
   grade: 1

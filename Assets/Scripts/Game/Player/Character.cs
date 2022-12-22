@@ -76,9 +76,11 @@ public class Character : Singleton<Character>
         if (gameManager.revive)
             gardianAngel.SetActive(true);
 
-        if (gameManager.currentScene == "Game" && (!gameManager.isClear || !gameManager.isBossDead))
+        if (gameManager.currentScene == "Game")
         {
-            if (gameManager.hp > 0)
+            isRun = false;
+
+            if (gameManager.hp > 0 && (!gameManager.isClear || !gameManager.isBossDead))
             {
                 Move();
                 Dash();
@@ -150,7 +152,7 @@ public class Character : Singleton<Character>
         {
             if (weapons[i].GetComponent<Weapon>().weaponInfo.WeaponName == ItemManager.Instance.storedWeapon[count].WeaponName)
             {
-                Instantiate(weapons[i], weaponPoses[count]);
+               Instantiate(weapons[i], weaponPoses[count]);
             }
         }
     }
@@ -172,24 +174,21 @@ public class Character : Singleton<Character>
 
         transform.position = ground.bounds.ClosestPoint(transform.position);
 
-        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
-        {
-            rend.flipX = true;
-            isRun = true;
-        }
-
-        else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
-        {
-            rend.flipX = false;
-            isRun = true;
-        }
-
-        else if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
+        if (dir != Vector3.zero)
         {
             isRun = true;
+            if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+            {
+                rend.flipX = true;
+            }
+
+            else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+            {
+                rend.flipX = false;
+            }
         }
 
-        else
+        else if(dir == Vector3.zero)
             isRun = false;
     }
 

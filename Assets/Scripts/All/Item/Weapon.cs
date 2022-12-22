@@ -82,6 +82,8 @@ public class Weapon : MonoBehaviour
             }
         }
 
+        damage = Mathf.Round(damage * 10) * 0.1f;
+
         if (damage < 1)
             damage = 1;
 

@@ -112,18 +112,18 @@ public class ShopManager : Singleton<ShopManager>
     void SettingStatText()
     {
         maxHp.text = gameManager.maxHp.ToString();
-        reHp.text = gameManager.recoverHp.ToString();
-        apHp.text = gameManager.absorbHp.ToString();
-        def.text = gameManager.defence.ToString();
-        wAtk.text = gameManager.physicDamage.ToString();
-        eAtk.text = gameManager.elementDamage.ToString();
-        sAtk.text = gameManager.shortDamage.ToString();
-        lAtk.text = gameManager.longDamage.ToString();
-        aSpd.text = gameManager.attackSpeed.ToString();
-        spd.text = gameManager.speed.ToString();
-        ran.text = gameManager.range.ToString();
-        luk.text = gameManager.luck.ToString();
-        cri.text = gameManager.critical.ToString();
+        reHp.text = gameManager.recoverHp.ToString("0.#");
+        apHp.text = gameManager.absorbHp.ToString("0.#");
+        def.text = gameManager.defence.ToString("0.#");
+        wAtk.text = gameManager.physicDamage.ToString("0.#");
+        eAtk.text = gameManager.elementDamage.ToString("0.#");
+        sAtk.text = gameManager.shortDamage.ToString("0.#");
+        lAtk.text = gameManager.longDamage.ToString("0.#");
+        aSpd.text = gameManager.attackSpeed.ToString("0.#");
+        spd.text = gameManager.speed.ToString("0.#");
+        ran.text = gameManager.range.ToString("0.#");
+        luk.text = gameManager.luck.ToString("0.#");
+        cri.text = gameManager.critical.ToString("0.#");
     }
 
     public void ToGameScene()

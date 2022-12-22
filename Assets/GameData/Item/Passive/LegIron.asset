@@ -32,7 +32,7 @@ MonoBehaviour:
   critical: 0
   coinRange: 0
   increaseExp: 0
-  monsterSpeed: -5
+  monsterSpeed: 5
   salePercent: 0
   dashCount: 0
   luckCoin: 0
@@ -41,4 +41,4 @@ MonoBehaviour:
   doubleShot: 0
   revive: 0
   description: "\uBAAC\uC2A4\uD130\uC758 \uC18D\uB3C4\uB97C 5% \uAC10\uC18C\uC2DC\uD0A8\uB2E4."
-  weight: 0
+  weight: 70

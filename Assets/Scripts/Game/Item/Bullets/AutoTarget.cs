@@ -7,10 +7,12 @@ using UnityEngine.Pool;
 public class AutoTarget : Bullet
 {
     Transform target;
+    bool isFind;
 
     private void Start()
     {
         gameManager = GameManager.Instance;
+        isFind = false;
     }
 
     void Update()
@@ -28,7 +30,7 @@ public class AutoTarget : Bullet
         Collider[] colliders = Physics.OverlapSphere(transform.position, 2f);
         float[] distances = new float[colliders.Length];
 
-        if (colliders.Length > 0)
+        if (colliders.Length > 0 && !isFind)
         {
             for (int i = 0; i < colliders.Length; i++)
             {
@@ -49,8 +51,11 @@ public class AutoTarget : Bullet
                 }
             }
 
-            if (target != null)
+            if (target != null && !isFind)
+            {
                 dir = (target.transform.position - transform.position).normalized;
+                isFind = true;
+            }
         }
     }
 
@@ -58,5 +63,6 @@ public class AutoTarget : Bullet
     {
         base.DestroyBullet();
         target = null;
+        isFind = false;
     }
 }

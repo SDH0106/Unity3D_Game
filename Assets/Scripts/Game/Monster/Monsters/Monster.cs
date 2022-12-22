@@ -45,7 +45,7 @@ public class Monster : MonoBehaviour
         character = Character.Instance;
         hp = stat.monsterMaxHp * (1 + ((gameManager.round - 1) * 0.25f));
         initScale = transform.localScale;
-        speed = stat.monsterSpeed * (1 + gameManager.monsterSlow * 0.01f) * (1 - gameManager.monsterSlow);
+        speed = stat.monsterSpeed * (1 - gameManager.monsterSlow * 0.01f);
         initSpeed = speed;
         isWalk = true;
         rend = GetComponent<SpriteRenderer>();
@@ -67,7 +67,7 @@ public class Monster : MonoBehaviour
     protected virtual void SetInitMonster()
     {
         hp = stat.monsterMaxHp * (1 + ((gameManager.round - 1) * 0.25f));
-        speed = stat.monsterSpeed * (1 + gameManager.monsterSlow * 0.01f) * (1 - gameManager.monsterSlow);
+        speed = stat.monsterSpeed * (1 - gameManager.monsterSlow * 0.01f);
         isWalk = true;
         isDead = false;
         isAttacked = false;
@@ -140,6 +140,9 @@ public class Monster : MonoBehaviour
 
         if (!isFreeze)
         {
+            if (runningCoroutine != null)
+                StopCoroutine(runningCoroutine);
+
             runningCoroutine = MonsterColorBlink();
             StartCoroutine(runningCoroutine);
         }

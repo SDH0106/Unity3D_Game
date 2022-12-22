@@ -30,7 +30,7 @@ public class Fire : Bullet
             other.GetComponent<Monster>().OnDamaged(damageUI.weaponDamage);
             pool.transform.SetParent(gameManager.damageStorage);
 
-            int rand = Random.Range(0, 1);
+            int rand = Random.Range(0, 100);
             if (rand <= 5 + gameManager.luck * 0.2)
             {
                 GameObject ex = Instantiate(explosion, transform.position, transform.rotation);

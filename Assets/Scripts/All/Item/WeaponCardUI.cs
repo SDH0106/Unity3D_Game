@@ -63,10 +63,10 @@ public class WeaponCardUI : MonoBehaviour
     {
         lockImage.gameObject.SetActive(isLock);
 
-        if (gameManager.money < price)
+        if (gameManager.money < price * (int)(selectedWeapon.weaponGrade + 1))
             weaponPrice.color = Color.red;
 
-        else if (gameManager.money >= price)
+        else if (gameManager.money >= price * (int)(selectedWeapon.weaponGrade + 1))
             weaponPrice.color = initPriceColor;
     }
 

@@ -32,7 +32,7 @@ public class DamageUI : MonoBehaviour
 
     private void Update()
     {
-        damageText.text = weaponDamage.ToString();
+        damageText.text = weaponDamage.ToString("0.##");
 
         transform.position += Vector3.forward * 0.5f * Time.deltaTime;
 

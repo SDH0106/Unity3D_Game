@@ -5,12 +5,16 @@ using UnityEngine;
 public class Pig : Monster
 {
     bool isRush = false;
-    float rushTime = 2f;
-    float breakTime = 0f;
+    float rushTime;
+    float breakTime;
+    float attackCoolTime;
     float distance;
 
     private void Start()
     {
+        rushTime = 2f;
+        breakTime = 0f;
+        attackCoolTime = 2f;
         InitSetting();
     }
 
@@ -41,7 +45,7 @@ public class Pig : Monster
         distance = Vector3.Magnitude(character.transform.position - transform.position);
         anim.SetBool("isAttack", isAttack);
 
-        if (distance <= 3)
+        if (distance <= 3f && attackCoolTime >= 2f)
             isRush = true;
 
         if (isRush)
@@ -53,7 +57,7 @@ public class Pig : Monster
             if (rushTime <= 0)
             {
                 isAttack = false;
-                speed = 0;
+                speed = 0f;
                 breakTime += Time.deltaTime;
 
                 if (breakTime >= 1)
@@ -62,6 +66,11 @@ public class Pig : Monster
                     breakTime = 0f;
                     isRush = false;
                     speed = stat.monsterSpeed * (1 + gameManager.monsterSlow * 0.01f) * (1 - gameManager.monsterSlow);
+
+                    attackCoolTime -= Time.deltaTime;
+
+                    if (attackCoolTime <= 0f)
+                        attackCoolTime = 2f;
                 }
             }
         }

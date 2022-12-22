@@ -24,7 +24,7 @@ public class Ice : Bullet
     {
         if (other.tag == "Monster" && other.GetComponent<Monster>() != null)
         {
-            int rand = Random.Range(0, 100);
+            int rand = Random.Range(0, 1);
             if (rand <= 10 + gameManager.luck * 0.2)
                 isFreeze = true;
             else
