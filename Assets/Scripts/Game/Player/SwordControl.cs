@@ -34,7 +34,7 @@ public class SwordControl : Weapon
         swordDelay = weaponInfo.AttackDelay;
         attackRange = weaponInfo.WeaponRange;
         canAttack = true;
-        //WeaponRotate();
+        WeaponRotate();
     }
 
     void Update()
@@ -49,7 +49,7 @@ public class SwordControl : Weapon
             dir = mouse - transform.position;
             Attack();
         }
-        WeaponRotate();
+        //WeaponRotate();
         WeaponSetting();
     }
 
@@ -57,17 +57,16 @@ public class SwordControl : Weapon
     {
         if (transform.parent.transform.localPosition.x < 0)
         {
-            Debug.Log(transform.localRotation.eulerAngles);
+            Debug.Log("1");
             transform.localRotation *= Quaternion.AngleAxis(180, Vector3.up);
-            Debug.Log(transform.localRotation.eulerAngles);
+            Debug.Log(transform.localRotation.eulerAngles.ToString());
         }
 
         else if (transform.parent.transform.localPosition.x > 0)
         {
-            //transform.rotation = Quaternion.Euler(90, 70, 80);
-            Debug.Log(transform.localRotation.eulerAngles);
+            Debug.Log("2");
             transform.localRotation = Quaternion.Euler(10, 39, 20);
-            Debug.Log(transform.localRotation.eulerAngles);
+            Debug.Log(transform.localRotation.eulerAngles.ToString());
         }
     }
 
