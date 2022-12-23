@@ -23,6 +23,8 @@ public class SwordControl : Weapon
 
     float addRange;
 
+    Vector3 initPos;
+
     private void Start()
     {
         anim = GetComponent<Animator>();
@@ -34,7 +36,7 @@ public class SwordControl : Weapon
         swordDelay = weaponInfo.AttackDelay;
         attackRange = weaponInfo.WeaponRange;
         canAttack = true;
-        //WeaponRotate();
+        WeaponRotate();
     }
 
     void Update()
@@ -49,7 +51,8 @@ public class SwordControl : Weapon
             dir = mouse - transform.position;
             Attack();
         }
-        WeaponRotate();
+
+        //WeaponRotate();
         WeaponSetting();
     }
 
@@ -57,17 +60,24 @@ public class SwordControl : Weapon
     {
         if (transform.parent.transform.localPosition.x < 0)
         {
-            Debug.Log(transform.localRotation.eulerAngles);
-            transform.localRotation *= Quaternion.AngleAxis(180, Vector3.up);
-            Debug.Log(transform.localRotation.eulerAngles);
+            transform.parent.localRotation = Quaternion.Euler(0, 180, 0);
+
+            if (transform.parent.transform.localPosition.y > 0)
+                transform.parent.localRotation *= Quaternion.Euler(0, 0, 45);
+
+            else if (transform.parent.transform.localPosition.y < 0)
+                transform.parent.localRotation *= Quaternion.Euler(0, 0, -45);
         }
 
         else if (transform.parent.transform.localPosition.x > 0)
         {
-            //transform.rotation = Quaternion.Euler(90, 70, 80);
-            Debug.Log(transform.localRotation.eulerAngles);
-            transform.localRotation = Quaternion.Euler(10, 39, 20);
-            Debug.Log(transform.localRotation.eulerAngles);
+            transform.parent.localRotation = Quaternion.Euler(0, 0, 0);
+
+            if (transform.parent.transform.localPosition.y > 0)
+                transform.parent.localRotation *= Quaternion.Euler(0, 0, 45);
+
+            else if (transform.parent.transform.localPosition.y < 0)
+                transform.parent.localRotation *= Quaternion.Euler(0, 0, -45);
         }
     }
 
@@ -80,22 +90,25 @@ public class SwordControl : Weapon
             addRange = attackRange;
 
         Vector3 range = (mouse - character.transform.position).normalized * addRange;
+        range.y = 0;
 
         if (canAttack == true)
         {
             if (Input.GetMouseButton(0) && (!gameManager.isClear || !gameManager.isBossDead))
             {
-                transform.position = Vector3.MoveTowards(transform.position, character.transform.position + range, 2);
-
                 if (dir.x > 0)
                 {
-                    anim.SetTrigger("RightAttack");
+                    transform.parent.localRotation = Quaternion.Euler(0, 0, 0);
                 }
 
                 else
                 {
-                    anim.SetTrigger("LeftAttack");
+                    transform.parent.localRotation = Quaternion.Euler(0, 180, 0);
                 }
+
+                transform.position = Vector3.MoveTowards(transform.position, character.transform.position + range, 2);
+
+                anim.SetTrigger("RightAttack");
 
                 SoundManager.Instance.PlayES(weaponInfo.WeaponSound);
 
@@ -109,6 +122,7 @@ public class SwordControl : Weapon
             if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
             {
                 transform.position = Vector3.MoveTowards(transform.position, character.weaponPoses[count].position, 5);
+                WeaponRotate();
             }
         }
 
