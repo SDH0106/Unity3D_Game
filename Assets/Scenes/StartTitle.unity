@@ -26165,9 +26165,9 @@ MonoBehaviour:
   aimCursor: {fileID: 2800000, guid: b8e78032f8af0954784d1fe9e5a09187, type: 3}
   bulletStorage: {fileID: 1005871281}
   damageStorage: {fileID: 1692643827}
-  gameTime: 0
+  gameTime: 60
   money: 50000
-  round: 9
+  round: 5
   ground: {fileID: 837245116}
   exp: 0
   hp: 0
@@ -26182,7 +26182,7 @@ MonoBehaviour:
   absorbHp: 0
   defence: 2.3
   attackSpeed: 10
-  speed: 2
+  speed: 5
   range: 0
   luck: 0
   critical: 10
@@ -26260,31 +26260,31 @@ MonoBehaviour:
   - statName: "\uAC15\uC778\uD568"
     statType: "\uBC29\uC5B4\uB825"
     statSprite: Defence
-    statValue: 0.2
+    statValue: 0.1
   - statName: "\uADFC\uB825"
     statType: "\uBB3C\uB9AC \uACF5\uACA9\uB825"
     statSprite: WDamage
-    statValue: 1
+    statValue: 0.5
   - statName: "\uB9C8\uB825 \uD3EC\uC158"
     statType: "\uC6D0\uC18C \uACF5\uACA9\uB825"
     statSprite: EDamage
-    statValue: 1
+    statValue: 0.5
   - statName: "\uBB34\uB825"
     statType: "\uADFC\uAC70\uB9AC \uACF5\uACA9\uB825"
     statSprite: SDamage
-    statValue: 1
+    statValue: 0.5
   - statName: "\uC9C0\uB825"
     statType: "\uC6D0\uAC70\uB9AC \uACF5\uACA9\uB825"
     statSprite: LDamage
-    statValue: 1
+    statValue: 0.5
   - statName: "\uB3C4\uD551"
     statType: "\uACF5\uACA9 \uC18D\uB3C4"
     statSprite: AtSpeed
-    statValue: 0.2
+    statValue: 0.1
   - statName: "\uC2E0\uBC1C"
     statType: "\uC774\uB3D9 \uC18D\uB3C4"
     statSprite: Speed
-    statValue: 0.2
+    statValue: 0.1
   - statName: "\uB124\uC78E\uD074\uB85C\uBC84"
     statType: "\uD589\uC6B4"
     statSprite: Luck

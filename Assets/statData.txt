@@ -22,37 +22,37 @@
             "statName": "강인함",
             "statType": "방어력",
             "statSprite": "Defence",
-            "statValue": 0.2
+            "statValue": 0.1
         },
         {
             "statName": "근력",
             "statType": "물리 공격력",
             "statSprite": "WDamage",
-            "statValue": 1.0
+            "statValue": 0.5
         },
         {
             "statName": "마력 포션",
             "statType": "원소 공격력",
             "statSprite": "EDamage",
-            "statValue": 1.0
+            "statValue": 0.5
         },
         {
             "statName": "무력",
             "statType": "근거리 공격력",
             "statSprite": "SDamage",
-            "statValue": 1.0
+            "statValue": 0.5
         },
         {
             "statName": "지력",
             "statType": "원거리 공격력",
             "statSprite": "LDamage",
-            "statValue": 1.0
+            "statValue": 0.5
         },
         {
             "statName": "도핑",
             "statType": "공격 속도",
             "statSprite": "AtSpeed",
-            "statValue": 0.2
+            "statValue": 0.1
         },
         {
             "statName": "신발",
@@ -70,7 +70,7 @@
             "statName": "시력",
             "statType": "사거리",
             "statSprite": "Range",
-            "statValue": 0.1
+            "statValue": 0.2
         },
         {
             "statName": "강타",

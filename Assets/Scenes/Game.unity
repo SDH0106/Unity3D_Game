@@ -5538,9 +5538,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   normalMonsterPrefab:
   - {fileID: 2378124750920518384, guid: ebd51a4933ff8d44ea71f53fab99f986, type: 3}
-  - {fileID: 8196997286311768358, guid: a9c00237e96fd8f4dbf82bae70b22233, type: 3}
-  - {fileID: 8511157677885495436, guid: 19207d061d993a742876a0f8c0146de4, type: 3}
   - {fileID: 5311847245855685345, guid: 3c5408d2c66f1b04b8c642f84ffbb2c4, type: 3}
+  - {fileID: 8511157677885495436, guid: 19207d061d993a742876a0f8c0146de4, type: 3}
+  - {fileID: 8196997286311768358, guid: a9c00237e96fd8f4dbf82bae70b22233, type: 3}
   bossMonsterPrefab:
   - {fileID: 1308642240962655303, guid: 3bd77e8a21c514f42bccb4daa2e222e5, type: 3}
   - {fileID: 8249713724850414469, guid: ab2498f1c00fdb043948707f1ebbba18, type: 3}

@@ -192,20 +192,17 @@ public class MonsterSpawn : MonoBehaviour
 
     int RandomMonster()
     {
-        if (gameManager.round >= 5)
-        {
-            weightValue[0] = 100 - (gameManager.round * 3f);
-            weightValue[1] = (gameManager.round * 3f) * 0.2f;
-            weightValue[2] = (gameManager.round * 3f) * 0.3f;
-            weightValue[3] = (gameManager.round * 3f) * 0.5f;
-        }
+        weightValue[0] = 100 - (gameManager.round * 3f);
+        weightValue[1] = ((gameManager.round - 4) * 3f) * 0.2f;
+        weightValue[2] = ((gameManager.round - 10) * 3f) * 0.2f;
+        weightValue[3] = ((gameManager.round - 20) * 3f) * 0.5f;
 
         float rand = Random.Range(0, totalWeight);
         int spawnNum = 0;
         float total = 0;
 
         for (int i = 0; i < normalMonsterPrefab.Length; i++)
-        { 
+        {
             total += weightValue[i];
             if (rand < total)
             {

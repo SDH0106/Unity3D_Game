@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class Pig : Monster
@@ -14,7 +15,7 @@ public class Pig : Monster
     {
         rushTime = 2f;
         breakTime = 0f;
-        attackCoolTime = 2f;
+        attackCoolTime = 1f;
         InitSetting();
     }
 
@@ -24,6 +25,7 @@ public class Pig : Monster
         isRush = false;
         rushTime = 2f;
         breakTime = 0f;
+        attackCoolTime = 1f;
     }
 
     private void Update()
@@ -45,14 +47,15 @@ public class Pig : Monster
         distance = Vector3.Magnitude(character.transform.position - transform.position);
         anim.SetBool("isAttack", isAttack);
 
-        if (distance <= 3f && attackCoolTime >= 2f)
+        if (distance <= 3f && !isRush)
             isRush = true;
 
-        if (isRush)
+        if (isRush && attackCoolTime == 1f)
         {
             isAttack = true;
             rushTime -= Time.deltaTime;
             speed = stat.monsterSpeed * (1 + gameManager.monsterSlow * 0.01f) * (1 - gameManager.monsterSlow) * 2f;
+
 
             if (rushTime <= 0)
             {
@@ -60,17 +63,21 @@ public class Pig : Monster
                 speed = 0f;
                 breakTime += Time.deltaTime;
 
+
                 if (breakTime >= 1)
                 {
                     rushTime = 2f;
-                    breakTime = 0f;
-                    isRush = false;
                     speed = stat.monsterSpeed * (1 + gameManager.monsterSlow * 0.01f) * (1 - gameManager.monsterSlow);
 
                     attackCoolTime -= Time.deltaTime;
 
+
                     if (attackCoolTime <= 0f)
-                        attackCoolTime = 2f;
+                    {
+                        breakTime = 0f;
+                        attackCoolTime = 1f;
+                        isRush = false;
+                    }
                 }
             }
         }
