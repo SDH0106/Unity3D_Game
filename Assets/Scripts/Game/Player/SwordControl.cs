@@ -51,7 +51,6 @@ public class SwordControl : Weapon
             dir = mouse - transform.position;
             Attack();
         }
-
         //WeaponRotate();
         WeaponSetting();
     }
