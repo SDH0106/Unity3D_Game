@@ -23,6 +23,12 @@ public class SpawnChest : MonoBehaviour
         Invoke("GetChest", 22);
     }
 
+    private void Update()
+    {
+        if (gameManager.isClear && gameManager.isBossDead)
+            CancelInvoke("GetChest");
+    }
+
     void GetChest()
     {
         int num = Random.Range(0, 100);

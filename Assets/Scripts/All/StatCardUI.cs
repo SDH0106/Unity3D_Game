@@ -75,6 +75,7 @@ public class StatCardUI : StatCardInfo
     {
         SoundManager.Instance.PlayES("SelectButton");
         ShowStatCard.Instance.isSelected = true;
+        ShowStatCard.Instance.rerollMoney = -gameManager.round;
 
         gameManager.levelUpCount--;
 

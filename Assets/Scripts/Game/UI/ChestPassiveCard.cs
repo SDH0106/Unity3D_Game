@@ -59,7 +59,7 @@ public class ChestPassiveCard : MonoBehaviour
 
     void Setting()
     {
-        sellPrice = Mathf.CeilToInt(selectedPassive.ItemPrice * (1 - gameManager.passiveIntVariables[0]));
+        sellPrice = Mathf.CeilToInt(selectedPassive.ItemPrice * (1 - gameManager.salePercent) * 0.7f);
         itemSprite.sprite = selectedPassive.ItemSprite;
         itemName.text = selectedPassive.ItemName;
         itemGrade.text = selectedPassive.ItemGrade.ToString();

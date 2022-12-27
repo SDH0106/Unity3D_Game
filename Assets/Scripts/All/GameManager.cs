@@ -109,7 +109,7 @@ public class GameManager : Singleton<GameManager>
         maxHp = 20;
         maxExp = 10;
         recoverHp = 0;
-        recoverTime = 1;
+        recoverTime = 2;
         absorbHp = 0;
         defence = 0;
         attackSpeed = 0;
@@ -261,7 +261,7 @@ public class GameManager : Singleton<GameManager>
             recoverTime -= Time.deltaTime;
             if(recoverTime <= 0)
             {
-                recoverTime = 1;
+                recoverTime = 2;
                 hp += recoverHp;
             }
         }

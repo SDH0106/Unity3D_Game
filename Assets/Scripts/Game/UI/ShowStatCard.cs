@@ -13,14 +13,13 @@ public class ShowStatCard : Singleton<ShowStatCard>
 
     GameObject[] statCards;
 
-    int rerollMoney;
+    public int rerollMoney;
 
     Color initPriceColor;
 
     [HideInInspector] public bool isSelected;
 
     float[] weightValue;
-    Grade cardGrade;
 
     GameManager gameManager;
 
@@ -29,7 +28,7 @@ public class ShowStatCard : Singleton<ShowStatCard>
         weightValue = new float[4];
         gameManager = GameManager.Instance;
         initPriceColor = rerollMoneyText.color;
-        rerollMoney = -3;
+        rerollMoney = -gameManager.round;
 
         statCards = new GameObject[4];
         statInfo = new Stat[gameManager.gameObject.GetComponent<StatCardInfo>().statInfos.Length];
@@ -82,7 +81,7 @@ public class ShowStatCard : Singleton<ShowStatCard>
             }
 
             gameManager.money += rerollMoney;
-            rerollMoney -= 2;
+            rerollMoney--;
 
             ShowRandomCards();
         }

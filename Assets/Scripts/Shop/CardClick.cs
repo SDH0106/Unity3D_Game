@@ -13,6 +13,8 @@ public class CardClick : MonoBehaviour
     [SerializeField] Text type;
     [SerializeField] Text weaponDamage;
     [SerializeField] Text elementDamage;
+    [SerializeField] Text attackDelay;
+    [SerializeField] Text bulletSpeed;
     [SerializeField] Text weaponRange;
     [SerializeField] Text weaponPrice;
     [SerializeField] Text weaponGrade;
@@ -31,6 +33,8 @@ public class CardClick : MonoBehaviour
         type.text = selectedWeapon.Type.ToString();
         weaponDamage.text = (selectedWeapon.WeaponDamage * (int)(ItemManager.Instance.weaponGrade[num] + 1)).ToString();
         elementDamage.text = (selectedWeapon.MagicDamage * (int)(ItemManager.Instance.weaponGrade[num] + 1)).ToString();
+        attackDelay.text = selectedWeapon.AttackDelay.ToString();
+        bulletSpeed.text = selectedWeapon.BulletSpeed.ToString();
         weaponRange.text = selectedWeapon.WeaponRange.ToString();
         weaponPrice.text = (selectedWeapon.WeaponPrice * (int)(ItemManager.Instance.weaponGrade[num] + 1)).ToString();
         weaponGrade.text = selectedWeapon.weaponGrade.ToString();
