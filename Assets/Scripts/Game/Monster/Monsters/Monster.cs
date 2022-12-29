@@ -15,6 +15,7 @@ public class Monster : MonoBehaviour
     [HideInInspector] public bool isWalk, isDead, isAttacked, isAttack = false;
 
     public float hp;
+    public float maxHp;
 
     [HideInInspector] public Vector3 initScale;
     [HideInInspector] public MonsterStat stat;
@@ -44,6 +45,7 @@ public class Monster : MonoBehaviour
         gameManager = GameManager.Instance;
         character = Character.Instance;
         hp = stat.monsterMaxHp * (1 + ((gameManager.round - 1) * 0.25f));
+        maxHp = hp;
         initScale = transform.localScale;
         speed = stat.monsterSpeed * (1 - gameManager.monsterSlow * 0.01f);
         initSpeed = speed;
@@ -67,6 +69,7 @@ public class Monster : MonoBehaviour
     protected virtual void SetInitMonster()
     {
         hp = stat.monsterMaxHp * (1 + ((gameManager.round - 1) * 0.25f));
+        maxHp = hp;
         speed = stat.monsterSpeed * (1 - gameManager.monsterSlow * 0.01f);
         isWalk = true;
         isDead = false;
@@ -136,7 +139,8 @@ public class Monster : MonoBehaviour
 
     public void OnDamaged(float damage)
     {
-        hp -= (damage - (stat.monsterDefence * (1 + gameManager.round * 0.1f)));
+        if (damage >= (stat.monsterDefence * (1 + gameManager.round * 0.1f)))
+            hp -= (damage - (stat.monsterDefence * (1 + gameManager.round * 0.1f)));
 
         if (!isFreeze)
         {
@@ -175,13 +179,13 @@ public class Monster : MonoBehaviour
 
     public void OnDead()
     {
-        if (hp <= 0 || gameManager.isClear && gameManager.isBossDead || character.isDead)
+        if (hp <= 0 || (gameManager.isClear && gameManager.isBossDead) || character.isDead)
         {
+            isDead = true;
             rend.color = Color.white;
             isFreeze = false;
             StopCoroutine(MonsterFreeze());
             coll.enabled = false;
-            isDead = true;
             isAttacked = true;
 
             anim.SetBool("isAttacked", isAttacked);

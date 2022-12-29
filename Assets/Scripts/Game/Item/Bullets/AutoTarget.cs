@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Pool;
+using UnityEngine.Rendering.UI;
 
 public class AutoTarget : Bullet
 {
@@ -17,8 +18,8 @@ public class AutoTarget : Bullet
 
     void Update()
     {
-        transform.position += new Vector3(dir.x, 0, dir.z) * speed * Time.deltaTime;
         FindTarget();
+        transform.position += new Vector3(dir.x, 0, dir.z) * speed * Time.deltaTime;
 
         // ÃÑ¾Ë °¢µµ
         angle = Mathf.Atan2(dir.z, dir.x) * Mathf.Rad2Deg;
@@ -27,6 +28,12 @@ public class AutoTarget : Bullet
 
     void FindTarget()
     {
+        if (target != null && target.GetComponent<Monster>().hp <= 0)
+        {
+            target = null;
+            isFind = false;
+        }
+
         Collider[] colliders = Physics.OverlapSphere(transform.position, 2f);
         float[] distances = new float[colliders.Length];
 
@@ -36,25 +43,32 @@ public class AutoTarget : Bullet
             {
                 if (colliders[i].tag == "Monster")
                 {
-                    distances[i] = Vector3.Magnitude(colliders[i].transform.position - transform.position);
-                    if (i == 0)
-                        target = colliders[i].transform;
-
-                    else if (i > 0)
+                    if (colliders[i].GetComponent<Monster>().hp > 0)
                     {
-                        if (distances[i] > distances[i - 1])
+                        distances[i] = Vector3.Magnitude(colliders[i].transform.position - transform.position);
+                        if (i == 0)
                             target = colliders[i].transform;
 
-                        else if (distances[i] <= distances[i - 1])
-                            target = colliders[i].transform;
+                        else if (i > 0)
+                        {
+                            if (distances[i] > distances[i - 1])
+                                target = colliders[i].transform;
+
+                            else if (distances[i] <= distances[i - 1])
+                                target = colliders[i].transform;
+                        }
                     }
                 }
             }
 
-            if (target != null && !isFind)
+
+            if (target != null && target.GetComponent<Monster>().hp > 0)
             {
-                dir = (target.transform.position - transform.position).normalized;
-                isFind = true;
+                if (!isFind)
+                {
+                    dir = (target.transform.position - transform.position).normalized;
+                    isFind = true;
+                }
             }
         }
     }

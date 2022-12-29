@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Skull : Monster
 {
     [SerializeField] GameObject skullBullet;
     [SerializeField] Transform[] bulletPoses;
+    [SerializeField] Slider monsterHpBar;
 
     float attackTime = 5;
 
@@ -22,6 +24,8 @@ public class Skull : Monster
 
     void Update()
     {
+        monsterHpBar.value = 1 - (hp / maxHp);
+
         if (isDead == false && !isAttack)
         {
             Move();

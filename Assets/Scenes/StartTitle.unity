@@ -26165,16 +26165,16 @@ MonoBehaviour:
   aimCursor: {fileID: 2800000, guid: b8e78032f8af0954784d1fe9e5a09187, type: 3}
   bulletStorage: {fileID: 1005871281}
   damageStorage: {fileID: 1692643827}
-  gameTime: 10000
+  gameTime: 0
   money: 50000
-  round: 20
+  round: 19
   ground: {fileID: 837245116}
   exp: 0
   hp: 0
   level: 1
   maxHp: 1000
   maxExp: 10
-  physicDamage: 0
+  physicDamage: 1000
   elementDamage: 0
   shortDamage: 0
   longDamage: 0
@@ -26201,7 +26201,7 @@ MonoBehaviour:
   revive: 0
   currentGameTime: 0
   currentScene: 
-  levelUpCount: 3
+  levelUpCount: 0
   stats: []
   isPause: 0
   isClear: 0

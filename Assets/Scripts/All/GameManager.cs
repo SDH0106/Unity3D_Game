@@ -29,7 +29,7 @@ public class GameManager : Singleton<GameManager>
     public int level;
     [SerializeField] public float maxHp;
     [SerializeField] public float maxExp;
-    [HideInInspector] public float physicDamage;
+    /*[HideInInspector]*/ public float physicDamage;
     [HideInInspector] public float elementDamage;
     [HideInInspector] public float shortDamage;
     [HideInInspector] public float longDamage;

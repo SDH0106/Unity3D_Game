@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro.EditorUtilities;
 using UnityEngine;
-using UnityEngine.Rendering.UI;
+using UnityEngine.UI;
 
 public class Ghost : Monster
 {
+    [SerializeField] Slider monsterHpBar;
+
     int state = 0;
 
     float attackTime = 5;
@@ -30,6 +32,8 @@ public class Ghost : Monster
 
     void Update()
     {
+        monsterHpBar.value = 1 - (hp / maxHp);
+
         if (!isDead && !isFreeze)
         {
             attackTime -= Time.deltaTime;
