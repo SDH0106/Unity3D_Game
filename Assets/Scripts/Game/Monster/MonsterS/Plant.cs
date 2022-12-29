@@ -53,6 +53,7 @@ public class Plant : Monster
 
         yield return new WaitForSeconds(0.3f);
 
-        Instantiate(plantBullet, bulletPos.position, plantBullet.transform.rotation);
+        MonsterBullet bullet = Instantiate(plantBullet, bulletPos.position, plantBullet.transform.rotation).GetComponent<MonsterBullet>();
+        bullet.randNum = 0;
     }
 }

@@ -87,11 +87,14 @@ public class Skull : Monster
 
     IEnumerator Shoot()
     {
+        int rand = Random.Range(0, 2);
         yield return new WaitForSeconds(0.5f);
 
         for (int i = 0; i < bulletPoses.Length; i++)
         {
-            Instantiate(skullBullet, bulletPoses[i].position, skullBullet.transform.rotation);
+            MonsterBullet bullet = Instantiate(skullBullet, bulletPoses[i].position, skullBullet.transform.rotation).GetComponent<MonsterBullet>();
+            bullet.monsPos = transform.position;
+            bullet.randNum = rand;
         }
     }
 }
