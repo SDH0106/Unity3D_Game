@@ -10,7 +10,11 @@ public class SoundManager : Singleton<SoundManager>
     [SerializeField] AudioClip[] effects;
     [SerializeField] AudioClip[] bgms;
     [SerializeField] int poolCount = 10;
-    public AudioSource audioSource;
+
+    [HideInInspector] public AudioSource audioSource;
+    float wholeSoundVolume;
+    float bgmSoundVolume;
+    float esSoundVolume;
 
     private IObjectPool<EffectSound> objectPool;
 
@@ -23,6 +27,14 @@ public class SoundManager : Singleton<SoundManager>
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        wholeSoundVolume = 1;
+        bgmSoundVolume = 1;
+        esSoundVolume = 1;
+    }
+
+    private void Update()
+    {
+        audioSource.volume = wholeSoundVolume * bgmSoundVolume;
     }
 
     public void PlayBGM(int num)
@@ -31,9 +43,19 @@ public class SoundManager : Singleton<SoundManager>
         audioSource.Play();
     }
 
-    public void Volume(float num)
+    public void WholeVolume(float num)
     {
-        audioSource.volume = num;
+        wholeSoundVolume = num;
+    }
+
+    public void BgmVolume(float num)
+    {
+        bgmSoundVolume = num;
+    }
+
+    public void EsVolume(float num)
+    {
+        esSoundVolume = num ;
     }
 
     public void StopBGM()
@@ -51,9 +73,10 @@ public class SoundManager : Singleton<SoundManager>
         for (int i = 0; i < effects.Length; i++)
         {
             if (effects[i].name == name)
-            {                            
+            {
                 EffectSound effect = objectPool.Get();                  
-                effect.PlayES(effects[i]);                                         
+                effect.PlayES(effects[i]);
+                effect.source.volume = esSoundVolume * wholeSoundVolume;
                 break;
             }
         }
@@ -63,6 +86,7 @@ public class SoundManager : Singleton<SoundManager>
     {
         EffectSound effect = objectPool.Get();
         effect.PlayES(audioClip);
+        effect.source.volume = esSoundVolume * wholeSoundVolume;
     }
 
     private EffectSound CreatePool()

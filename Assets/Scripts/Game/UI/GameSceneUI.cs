@@ -29,8 +29,10 @@ public class GameSceneUI : Singleton<GameSceneUI>
     [SerializeField] Text roundText;
 
     [Header("Sound")]
-    [SerializeField] GameObject PauseUI;
-    [SerializeField] Slider Sound;
+    [SerializeField] GameObject pauseUI;
+    [SerializeField] Slider wholeSound;
+    [SerializeField] Slider bgmSound;
+    [SerializeField] Slider esSound;
 
     [Header("Dash")]
     [SerializeField] GameObject dash;
@@ -67,18 +69,20 @@ public class GameSceneUI : Singleton<GameSceneUI>
 
     GameManager gameManager;
     Character character;
+    SoundManager soundManager;
 
-    /*[HideInInspector]*/ public int chestCount;
+    [HideInInspector] public int chestCount;
 
     private void Start()
     {
-        SoundManager.Instance.PlayBGM(1);
         gameManager = GameManager.Instance;
         character = Character.Instance;
+        soundManager = SoundManager.Instance;
+        soundManager.PlayBGM(1);
         roundClearText.SetActive(false);
         gameOverUI.SetActive(false);
         statCardParent.SetActive(false);
-        PauseUI.SetActive(false);
+        pauseUI.SetActive(false);
         gameClearUI.SetActive(false);
         dash.SetActive(false);
         statWindow.SetActive(false);
@@ -242,17 +246,27 @@ public class GameSceneUI : Singleton<GameSceneUI>
             timeText.text = (gameManager.currentGameTime).ToString("F2");
         }
     }
-    
-    public void VolumeChange()
+
+    public void WholeVolumeChange()
     {
-        SoundManager.Instance.Volume(1 - Sound.value);
+        soundManager.WholeVolume(1 - wholeSound.value);
+    }
+
+    public void BgmVolumeChange()
+    {
+        soundManager.BgmVolume(1 - bgmSound.value);
+    }
+
+    public void EsVolumeChange()
+    {
+        soundManager.EsVolume(1 - esSound.value);
     }
 
     public void PauseGame()
     {
         if (!character.isDead)
         {
-            PauseUI.SetActive(true);
+            pauseUI.SetActive(true);
             gameManager.isPause = true;
             Time.timeScale = 0;
         }
@@ -269,7 +283,7 @@ public class GameSceneUI : Singleton<GameSceneUI>
 
     public void ReturnToGame()
     {
-        PauseUI.SetActive(false);
+        pauseUI.SetActive(false);
         gameManager.isPause = false;
         Time.timeScale = 1;
     } 

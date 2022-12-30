@@ -5,7 +5,7 @@ using UnityEngine.Pool;
 
 public class EffectSound : MonoBehaviour
 {
-    [SerializeField] AudioSource source;
+    [SerializeField] public AudioSource source;
 
     private IObjectPool<EffectSound> managedPool;
 
