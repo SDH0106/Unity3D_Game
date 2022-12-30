@@ -16,6 +16,9 @@ public class SoundManager : Singleton<SoundManager>
     float bgmSoundVolume;
     float esSoundVolume;
 
+    bool muteBgm;
+    bool muteSfx;
+
     private IObjectPool<EffectSound> objectPool;
 
     protected override void Awake()
@@ -30,11 +33,14 @@ public class SoundManager : Singleton<SoundManager>
         wholeSoundVolume = 1;
         bgmSoundVolume = 1;
         esSoundVolume = 1;
+        muteBgm = false;
+        muteSfx = false;
     }
 
     private void Update()
     {
         audioSource.volume = wholeSoundVolume * bgmSoundVolume;
+        audioSource.mute = muteBgm;
     }
 
     public void PlayBGM(int num)
@@ -48,14 +54,30 @@ public class SoundManager : Singleton<SoundManager>
         wholeSoundVolume = num;
     }
 
+    public void WholeVolumeOnOff(bool isMute)
+    {
+        muteBgm = isMute;
+        muteSfx = isMute;
+    }
+
     public void BgmVolume(float num)
     {
         bgmSoundVolume = num;
     }
 
+    public void BgmOnOff(bool isMute)
+    {
+        muteBgm = isMute;
+    }
+
     public void EsVolume(float num)
     {
         esSoundVolume = num ;
+    }
+
+    public void SfxOnOff(bool isMute)
+    {
+        muteSfx = isMute;
     }
 
     public void StopBGM()
@@ -70,23 +92,29 @@ public class SoundManager : Singleton<SoundManager>
 
     public void PlayES(string name)
     {
-        for (int i = 0; i < effects.Length; i++)
+        if (!muteSfx)
         {
-            if (effects[i].name == name)
+            for (int i = 0; i < effects.Length; i++)
             {
-                EffectSound effect = objectPool.Get();                  
-                effect.PlayES(effects[i]);
-                effect.source.volume = esSoundVolume * wholeSoundVolume;
-                break;
+                if (effects[i].name == name)
+                {
+                    EffectSound effect = objectPool.Get();
+                    effect.PlayES(effects[i]);
+                    effect.source.volume = esSoundVolume * wholeSoundVolume;
+                    break;
+                }
             }
         }
     }
 
     public void PlayES(AudioClip audioClip)
     {
-        EffectSound effect = objectPool.Get();
-        effect.PlayES(audioClip);
-        effect.source.volume = esSoundVolume * wholeSoundVolume;
+        if (!muteSfx)
+        {
+            EffectSound effect = objectPool.Get();
+            effect.PlayES(audioClip);
+            effect.source.volume = esSoundVolume * wholeSoundVolume;
+        }
     }
 
     private EffectSound CreatePool()

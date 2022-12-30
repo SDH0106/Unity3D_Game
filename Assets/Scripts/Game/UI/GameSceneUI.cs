@@ -33,6 +33,9 @@ public class GameSceneUI : Singleton<GameSceneUI>
     [SerializeField] Slider wholeSound;
     [SerializeField] Slider bgmSound;
     [SerializeField] Slider esSound;
+    [SerializeField] GameObject wUnMark;
+    [SerializeField] GameObject bUnMark;
+    [SerializeField] GameObject sUnMark;
 
     [Header("Dash")]
     [SerializeField] GameObject dash;
@@ -71,6 +74,10 @@ public class GameSceneUI : Singleton<GameSceneUI>
     Character character;
     SoundManager soundManager;
 
+    bool muteWholeVolume;
+    bool muteBgmVolume;
+    bool muteSfxVolume;
+
     [HideInInspector] public int chestCount;
 
     private void Start()
@@ -87,6 +94,12 @@ public class GameSceneUI : Singleton<GameSceneUI>
         dash.SetActive(false);
         statWindow.SetActive(false);
         chestPassive.SetActive(false);
+        muteWholeVolume = false;
+        muteBgmVolume = false;
+        muteSfxVolume = false;
+        wUnMark.SetActive(false);
+        bUnMark.SetActive(false);
+        sUnMark.SetActive(false);
     }
 
     private void Update()
@@ -98,6 +111,10 @@ public class GameSceneUI : Singleton<GameSceneUI>
         TimeUI();
         DashUI();
         SettingStatText();
+
+        wUnMark.SetActive(muteWholeVolume);
+        bUnMark.SetActive(muteBgmVolume);
+        sUnMark.SetActive(muteSfxVolume);
 
         if (!character.isDead)
         {
@@ -250,17 +267,82 @@ public class GameSceneUI : Singleton<GameSceneUI>
     public void WholeVolumeChange()
     {
         soundManager.WholeVolume(1 - wholeSound.value);
+
+        if (wholeSound.value == 1)
+        {
+            muteWholeVolume = true;
+            muteBgmVolume = muteWholeVolume;
+            muteSfxVolume = muteWholeVolume;
+        }
+
+        else
+        {
+            muteWholeVolume = false;
+            if (bgmSound.value != 1)
+                muteBgmVolume = muteWholeVolume;
+            if (esSound.value != 1)
+                muteSfxVolume = muteWholeVolume;
+        }
+    }
+
+    public void OnOffWholeVolume()
+    {
+        muteWholeVolume = !muteWholeVolume;
+        if (bgmSound.value != 1)
+            muteBgmVolume = muteWholeVolume;
+        if (esSound.value != 1)
+            muteSfxVolume = muteWholeVolume;
+        soundManager.WholeVolumeOnOff(muteWholeVolume);
     }
 
     public void BgmVolumeChange()
     {
         soundManager.BgmVolume(1 - bgmSound.value);
+
+        if (bgmSound.value == 1)
+        {
+            muteBgmVolume = true;
+        }
+
+        else
+        {
+            if (!muteWholeVolume)
+                muteBgmVolume = false;
+        }
+    }
+
+    public void OnOffBgmVolume()
+    {
+        if (!muteWholeVolume)
+        {
+            muteBgmVolume = !muteBgmVolume;
+            soundManager.BgmOnOff(muteBgmVolume);
+        }
     }
 
     public void EsVolumeChange()
     {
         soundManager.EsVolume(1 - esSound.value);
+
+        if (esSound.value == 1)
+            muteSfxVolume = true;
+
+        else
+        {
+            if (!muteWholeVolume)
+                muteSfxVolume = false;
+        }
     }
+
+    public void OnOffSfxVolume()
+    {
+        if (!muteWholeVolume)
+        {
+            muteSfxVolume = !muteSfxVolume;
+            soundManager.SfxOnOff(muteSfxVolume);
+        }
+    }
+
 
     public void PauseGame()
     {
