@@ -38,7 +38,7 @@ public class Fire : Bullet
             }
 
             if (gameManager.absorbHp > 0)
-                gameManager.hp += gameManager.absorbHp;
+                Character.Instance.currentHp += gameManager.absorbHp;
 
             DestroyBullet();
             CancelInvoke("DestroyBullet");

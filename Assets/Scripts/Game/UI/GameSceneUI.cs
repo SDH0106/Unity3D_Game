@@ -129,18 +129,18 @@ public class GameSceneUI : Singleton<GameSceneUI>
                 {
                     roundClearText.SetActive(false);
 
-                    if (gameManager.levelUpCount <= 0 && chestCount <= 0)
+                    if (character.levelUpCount <= 0 && chestCount <= 0)
                     {
                         gameManager.ToShopScene();
                     }
 
-                    if (gameManager.levelUpCount > 0)
+                    if (character.levelUpCount > 0)
                     {
                         statCardParent.gameObject.SetActive(true);
                         statWindow.SetActive(true);
                     }
 
-                    if (gameManager.levelUpCount <= 0 && chestCount > 0)
+                    if (character.levelUpCount <= 0 && chestCount > 0)
                     {
                         statCardParent.gameObject.SetActive(false);
                         chestPassive.gameObject.SetActive(true);
@@ -178,7 +178,7 @@ public class GameSceneUI : Singleton<GameSceneUI>
 
     void SettingStatText()
     {
-        maxHp.text = gameManager.maxHp.ToString();
+        maxHp.text = character.maxHp.ToString();
         reHp.text = gameManager.recoverHp.ToString("0.#");
         apHp.text = gameManager.absorbHp.ToString("0.#");
         def.text = gameManager.defence.ToString("0.#");
@@ -230,16 +230,16 @@ public class GameSceneUI : Singleton<GameSceneUI>
     {
         if (gameManager.currentScene == "Game")
         {
-            maxHpText.text = gameManager.maxHp.ToString();
-            hpText.text = gameManager.hp.ToString("0.#");
-            hpBar.value = 1 - (gameManager.hp / gameManager.maxHp);
+            maxHpText.text = character.maxHp.ToString();
+            hpText.text = character.currentHp.ToString("0.#");
+            hpBar.value = 1 - (character.currentHp / character.maxHp);
         }
     }
 
     void ExpUI()
     {
-        lvText.text = gameManager.level.ToString();
-        expBar.value = 1- (gameManager.exp / gameManager.maxExp);
+        lvText.text = character.level.ToString();
+        expBar.value = 1- (character.exp / character.maxExp);
     }
 
     void CoinUI()

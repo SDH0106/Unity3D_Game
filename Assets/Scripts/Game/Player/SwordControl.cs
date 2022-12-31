@@ -158,7 +158,7 @@ public class SwordControl : Weapon
             pool.transform.SetParent(gameManager.damageStorage);
             other.GetComponent<Monster>().OnDamaged(damageUI.weaponDamage);
             if (gameManager.absorbHp > 0)
-                gameManager.hp += gameManager.absorbHp;
+                character.currentHp += gameManager.absorbHp;
         }
     }
 

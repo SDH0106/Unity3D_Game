@@ -34,7 +34,7 @@ public class Ice : Bullet
             pool.transform.SetParent(gameManager.damageStorage);
             other.GetComponent<Monster>().OnDamaged(damageUI.weaponDamage, isFreeze);
             if (gameManager.absorbHp > 0)
-                gameManager.hp += gameManager.absorbHp;
+                Character.Instance.currentHp += gameManager.absorbHp;
             DestroyBullet();
             CancelInvoke("DestroyBullet");
 

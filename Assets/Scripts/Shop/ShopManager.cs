@@ -111,7 +111,7 @@ public class ShopManager : Singleton<ShopManager>
 
     void SettingStatText()
     {
-        maxHp.text = gameManager.maxHp.ToString();
+        maxHp.text = character.maxHp.ToString();
         reHp.text = gameManager.recoverHp.ToString("0.#");
         apHp.text = gameManager.absorbHp.ToString("0.#");
         def.text = gameManager.defence.ToString("0.#");
@@ -133,7 +133,7 @@ public class ShopManager : Singleton<ShopManager>
         character.transform.position = Vector3.zero;
         gameManager.round++;
         rerollMoney = -gameManager.round;
-        gameManager.hp = gameManager.maxHp;
+        character.currentHp = character.maxHp;
         character.dashCount = gameManager.dashCount;
         character.dashCoolTime = character.initDashCoolTime;
     }

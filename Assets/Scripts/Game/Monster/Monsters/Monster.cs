@@ -198,7 +198,7 @@ public class Monster : MonoBehaviour
                     {
                         int coinValue = Random.Range(stat.monsterCoin - 5, stat.monsterCoin + 1);
                         DropCoin.Instance.Drop(transform.position, coinValue);
-                        gameManager.exp += stat.monsterExp * (1 + gameManager.increaseExp);
+                        character.exp += stat.monsterExp * (1 + gameManager.increaseExp);
                     }
                     DestroyMonster();
                 }

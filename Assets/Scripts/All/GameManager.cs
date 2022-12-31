@@ -21,14 +21,8 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] public int round;
     [SerializeField] public Collider ground;
 
-    [HideInInspector] public float exp;
-    [HideInInspector] public float hp;
-
-
-    [Header("CharacterData")]
-    public int level;
+    [Header("StatData")]
     [SerializeField] public float maxHp;
-    [SerializeField] public float maxExp;
     /*[HideInInspector]*/ public float physicDamage;
     [HideInInspector] public float elementDamage;
     [HideInInspector] public float shortDamage;
@@ -64,11 +58,7 @@ public class GameManager : Singleton<GameManager>
 
     UnityEngine.SceneManagement.Scene scene;
 
-    public int levelUpCount;
-
     [HideInInspector] public float[] stats;
-
-    float recoverTime;
 
     [HideInInspector] public bool isPause;
     [HideInInspector] public bool isClear;
@@ -83,13 +73,12 @@ public class GameManager : Singleton<GameManager>
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
-        //InitSetting();
+        InitSetting();
         InitArray();
 
         ground.gameObject.SetActive(false);
 
         currentGameTime = gameTime;
-        hp = maxHp;
 
         isPause = false;
         Time.timeScale = 1;
@@ -104,12 +93,8 @@ public class GameManager : Singleton<GameManager>
         gameTime = 60;
         money = 0;
         round = 1;
-        level = 1;
-        levelUpCount = 0;
-        maxHp = 20;
-        maxExp = 10;
+        maxHp = 0;
         recoverHp = 0;
-        recoverTime = 2;
         absorbHp = 0;
         defence = 0;
         attackSpeed = 0;
@@ -206,20 +191,6 @@ public class GameManager : Singleton<GameManager>
         scene = SceneManager.GetActiveScene();
         currentScene = scene.name;
 
-        if (exp >= maxExp)
-        {
-            SoundManager.Instance.PlayES("LevelUp");
-            level++;
-            levelUpCount++;
-            exp = exp - maxExp;
-            maxExp = 10 * level;
-        }
-
-        if (hp > maxHp)
-        {
-            hp = maxHp;
-        }
-
         if (currentGameTime == 0)
         {
             isClear = true;
@@ -234,11 +205,12 @@ public class GameManager : Singleton<GameManager>
 
     void OnGameScene()
     {
-        if (currentScene == "Game" && hp > 0)
+        if (currentScene == "Game")
         {
             ground.gameObject.SetActive(true);
 
-            currentGameTime -= Time.deltaTime;
+            if (Character.Instance.currentHp > 0)
+                currentGameTime -= Time.deltaTime;
 
             if (currentGameTime <= 0)
             {
@@ -248,22 +220,7 @@ public class GameManager : Singleton<GameManager>
             if (money <= 0)
                 money = 0;
 
-            AutoRecoverHp();
-
             //Cursor.SetCursor(aimCursor, new Vector2(aimCursor.width / 2, aimCursor.height / 2), CursorMode.Auto);
-        }
-    }
-
-    void AutoRecoverHp()
-    {
-        if (recoverHp > 0 && hp < maxHp)
-        {
-            recoverTime -= Time.deltaTime;
-            if(recoverTime <= 0)
-            {
-                recoverTime = 2;
-                hp += recoverHp;
-            }
         }
     }
 

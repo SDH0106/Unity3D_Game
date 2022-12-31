@@ -35,6 +35,7 @@ public class EndUI : Singleton<EndUI>
     [SerializeField] Text luk;
 
     GameManager gameManager;
+    Character character;
     ItemManager itemManager;
 
     [HideInInspector] public int[] weaponCount;
@@ -42,6 +43,7 @@ public class EndUI : Singleton<EndUI>
     private void Start()
     {
         gameManager = GameManager.Instance;
+        character = Character.Instance;
         itemManager = ItemManager.Instance;
         weaponCount = new int[6];
         UISetting();
@@ -52,14 +54,14 @@ public class EndUI : Singleton<EndUI>
 
     void UISetting()
     {
-        if (gameManager.hp == 0)
+        if (character.currentHp == 0)
         {
             overUI.SetActive(true);
             clearUI.SetActive(false);
             round.text = gameManager.round.ToString();
         }
 
-        else if (gameManager.hp != 0)
+        else if (character.currentHp != 0)
         {
             overUI.SetActive(false);
             clearUI.SetActive(true);
@@ -95,8 +97,8 @@ public class EndUI : Singleton<EndUI>
 
     void SettingStatText()
     {
-        lv.text = gameManager.level.ToString();
-        maxHp.text = gameManager.maxHp.ToString();
+        lv.text = character.level.ToString();
+        maxHp.text = character.maxHp.ToString();
         reHp.text = gameManager.recoverHp.ToString("0.#");
         apHp.text = gameManager.absorbHp.ToString("0.#");
         def.text = gameManager.defence.ToString("0.#");

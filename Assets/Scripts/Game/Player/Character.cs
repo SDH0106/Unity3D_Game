@@ -10,7 +10,6 @@ using static WeaponInfo;
 public class Character : Singleton<Character>
 {
     [SerializeField] SpriteRenderer rend;
-    Animator anim;
     [SerializeField] ParticleSystem particle;
     [SerializeField] GameObject gardianAngel;
     [SerializeField] GameObject gardianEffect;
@@ -18,8 +17,11 @@ public class Character : Singleton<Character>
     [SerializeField] Slider playerHpBar;
 
     [Header("Stat")]
+    public int level;
+    [SerializeField] float characterHp;
+    [SerializeField] public float maxExp;
+    [SerializeField] public float damageRatio;
     [SerializeField] float invincibleTime;
-    [HideInInspector] public float totalDamage;
 
     [HideInInspector] public float dashCoolTime;
     [HideInInspector] public float initDashCoolTime;
@@ -29,6 +31,11 @@ public class Character : Singleton<Character>
     [SerializeField] public GameObject[] weapons;
     [SerializeField] public Transform[] weaponPoses;
 
+    [HideInInspector] public float exp;
+    [HideInInspector] public float maxHp;
+    [HideInInspector] public float currentHp;
+
+    Animator anim;
     Collider ground;
 
     bool isRun, isAttacked = false;
@@ -40,7 +47,9 @@ public class Character : Singleton<Character>
     float x;
     float z;
 
-    float roundDamage;
+    float recoverTime;
+
+    public int levelUpCount;
 
     protected override void Awake()
     {
@@ -59,6 +68,13 @@ public class Character : Singleton<Character>
         gardianAngel.SetActive(false);
         gardianEffect.SetActive(false);
 
+        characterHp = 10;
+        maxHp = characterHp + gameManager.maxHp;
+        currentHp = maxHp;
+        maxExp = 10;
+        level = 1;
+        levelUpCount = 1;
+        recoverTime = 2;
         dashCoolTime = 4;
         dashCount = gameManager.dashCount;
         initDashCoolTime = dashCoolTime;
@@ -71,7 +87,23 @@ public class Character : Singleton<Character>
         x = Input.GetAxisRaw("Horizontal");
         z = Input.GetAxisRaw("Vertical");
 
-        playerHpBar.value = 1 - (gameManager.hp / gameManager.maxHp);
+        maxHp = characterHp + gameManager.maxHp;
+
+        if (exp >= maxExp)
+        {
+            SoundManager.Instance.PlayES("LevelUp");
+            level++;
+            levelUpCount++;
+            exp = exp - maxExp;
+            maxExp = 10 * level;
+        }
+
+        if (currentHp > maxHp)
+        {
+            currentHp = maxHp;
+        }
+
+        playerHpBar.value = 1 - (currentHp / maxHp);
 
         if (gameManager.revive)
             gardianAngel.SetActive(true);
@@ -80,13 +112,26 @@ public class Character : Singleton<Character>
         {
             isRun = false;
 
-            if (gameManager.hp > 0 && (!gameManager.isClear || !gameManager.isBossDead))
+            if (currentHp > 0 && (!gameManager.isClear || !gameManager.isBossDead))
             {
                 Move();
                 Dash();
             }
 
             anim.SetBool("isRun", isRun);
+        }
+    }
+
+    void AutoRecoverHp()
+    {
+        if (gameManager.recoverHp > 0 && currentHp < maxHp)
+        {
+            recoverTime -= Time.deltaTime;
+            if (recoverTime <= 0)
+            {
+                recoverTime = 2;
+                currentHp += gameManager.recoverHp;
+            }
         }
     }
 
@@ -211,13 +256,12 @@ public class Character : Singleton<Character>
     {
         if (!isAttacked)
         {
-            roundDamage = Mathf.Round((damage - gameManager.defence) * 10) / 10;
-            gameManager.hp -= roundDamage;
+            currentHp -= Mathf.Round((damage - gameManager.defence) * 10) / 10;
 
-            if (gameManager.hp > 0)
+            if (currentHp > 0)
                 StartCoroutine(OnInvincible());
 
-            else if (gameManager.hp <= 0)
+            else if (currentHp <= 0)
                 OnDead();
         }
     }
@@ -226,7 +270,7 @@ public class Character : Singleton<Character>
     {
         if (!gameManager.revive)
         {
-            gameManager.hp = 0;
+            currentHp = 0;
             isDead = true;
             isAttacked = true;
 
@@ -253,7 +297,7 @@ public class Character : Singleton<Character>
     {
         anim.SetTrigger("isAttacked");
         isAttacked = true;
-        if (gameManager.hp > 0)
+        if (currentHp > 0)
             StartCoroutine(PlayerColorBlink());
 
         yield return new WaitForSeconds(invincibleTime);
@@ -268,7 +312,7 @@ public class Character : Singleton<Character>
 
         yield return new WaitForSeconds(2.5f);
         gameManager.passiveBoolVariables[4] = false;    // gameManager.revive = false
-        gameManager.hp = Mathf.Ceil(gameManager.maxHp * 0.5f);
+        currentHp = Mathf.Ceil(maxHp * 0.5f);
 
         yield return new WaitForSeconds(1.5f);
         rend.color = Color.white;

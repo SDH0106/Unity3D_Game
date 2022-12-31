@@ -86,7 +86,8 @@ public class Ghost : Monster
                     if (hp <= 0)
                     {
                         gameManager.money += 500;
-                        gameManager.level++;
+                        SoundManager.Instance.PlayES("LevelUp");
+                        character.level++;
                     }
                     Destroy(gameObject);
                 }

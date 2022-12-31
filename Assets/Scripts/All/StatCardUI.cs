@@ -77,7 +77,7 @@ public class StatCardUI : StatCardInfo
         ShowStatCard.Instance.isSelected = true;
         ShowStatCard.Instance.rerollMoney = -gameManager.round;
 
-        gameManager.levelUpCount--;
+        Character.Instance.levelUpCount--;
 
         for (int i = 0; i < 11; i++)
         {
@@ -88,7 +88,7 @@ public class StatCardUI : StatCardInfo
             }
         }
 
-        if (gameManager.levelUpCount > 0)
+        if (Character.Instance.levelUpCount > 0)
             ShowStatCard.Instance.ShowRandomCards();
     }
 }

@@ -260,7 +260,7 @@ public class StaffControl : Weapon
                         pool.transform.SetParent(gameManager.damageStorage);
                         colliders[i].GetComponent<Monster>().OnDamaged(damageUI.weaponDamage);
                         if (gameManager.absorbHp > 0)
-                            gameManager.hp += gameManager.absorbHp;
+                            Character.Instance.currentHp += gameManager.absorbHp;
 
                         isTargetFind = true;
                         break;

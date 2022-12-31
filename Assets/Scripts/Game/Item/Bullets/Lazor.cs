@@ -44,7 +44,7 @@ public class Lazor : Bullet
             pool.transform.SetParent(gameManager.damageStorage);
             collision.collider.GetComponent<Monster>().OnDamaged(damageUI.weaponDamage);
             if (gameManager.absorbHp > 0)
-                gameManager.hp += gameManager.absorbHp;
+                Character.Instance.currentHp += gameManager.absorbHp;
 
             Instantiate(effectPrefab, collision.contacts[0].point, transform.rotation);
         }
