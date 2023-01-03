@@ -9,6 +9,12 @@ using UnityEngine.UIElements;
 
 public class SwordControl : Weapon
 {
+    [SerializeField] GameObject swordBullet;
+    [SerializeField] Transform firePos;
+    [SerializeField] int poolCount;
+
+    private IObjectPool<Bullet> pool;
+
     Animator anim;
 
     Vector3 dir, mouse;
@@ -23,7 +29,10 @@ public class SwordControl : Weapon
 
     float addRange;
 
-    Vector3 initPos;
+    private void Awake()
+    {
+        pool = new ObjectPool<Bullet>(CreateBullet, OnGetBullet, OnReleaseBullet, OnDestroyBullet, maxSize: poolCount);
+    }
 
     private void Start()
     {
@@ -49,10 +58,10 @@ public class SwordControl : Weapon
             mouse.y = transform.position.y;
 
             dir = mouse - transform.position;
+            WeaponSetting();
             Attack();
         }
 
-        WeaponSetting();
     }
 
     void WeaponRotate()
@@ -95,6 +104,8 @@ public class SwordControl : Weapon
         {
             if (Input.GetMouseButton(0) && (!gameManager.isClear || !gameManager.isBossDead))
             {
+                criRand = UnityEngine.Random.Range(1, 101);
+
                 if (dir.x > 0)
                 {
                     transform.parent.localRotation = Quaternion.Euler(0, 0, 0);
@@ -111,9 +122,17 @@ public class SwordControl : Weapon
 
                 SoundManager.Instance.PlayES(weaponInfo.WeaponSound);
 
-                canAttack = false;            
-            }
+                if (character.characterNum == 1)
+                {
+                    Bullet bullet = pool.Get();
+                    bullet.transform.position = new Vector3(firePos.position.x, 0f, firePos.position.z);
+                    bullet.Shoot(dir.normalized, 2f);
+                    bullet.damageUI = damageUI;
+                    bullet.speed = 6f;
+                }
 
+                canAttack = false;
+            }
         }
 
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("RightAttack") || anim.GetCurrentAnimatorStateInfo(0).IsName("LeftAttack"))
@@ -160,6 +179,29 @@ public class SwordControl : Weapon
             if (gameManager.absorbHp > 0)
                 character.currentHp += gameManager.absorbHp;
         }
+    }
+
+    private Bullet CreateBullet()
+    {
+        Bullet bullet = Instantiate(swordBullet, firePos.position, transform.rotation).GetComponent<Bullet>();
+        bullet.SetManagedPool(pool);
+        bullet.transform.SetParent(gameManager.bulletStorage);
+        return bullet;
+    }
+
+    private void OnGetBullet(Bullet bullet)
+    {
+        bullet.gameObject.SetActive(true);
+    }
+
+    private void OnReleaseBullet(Bullet bullet)
+    {
+        bullet.gameObject.SetActive(false);
+    }
+
+    private void OnDestroyBullet(Bullet bullet)
+    {
+        Destroy(bullet.gameObject);
     }
 
     private void OnDrawGizmos()
