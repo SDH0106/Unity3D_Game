@@ -107,7 +107,7 @@ public class EndUI : Singleton<EndUI>
         sAtk.text = gameManager.shortDamage.ToString("0.#");
         lAtk.text = gameManager.longDamage.ToString("0.#");
         aSpd.text = gameManager.attackSpeed.ToString("0.#");
-        spd.text = gameManager.speed.ToString("0.#");
+        spd.text = character.speed.ToString("0.#");
         ran.text = gameManager.range.ToString("0.#");
         luk.text = gameManager.luck.ToString("0.#");
     }

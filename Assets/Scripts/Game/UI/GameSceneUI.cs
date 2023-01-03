@@ -187,7 +187,7 @@ public class GameSceneUI : Singleton<GameSceneUI>
         sAtk.text = gameManager.shortDamage.ToString("0.#");
         lAtk.text = gameManager.longDamage.ToString("0.#");
         aSpd.text = gameManager.attackSpeed.ToString("0.#");
-        spd.text = gameManager.speed.ToString("0.#");
+        spd.text = character.speed.ToString("0.#");
         ran.text = gameManager.range.ToString("0.#");
         luk.text = gameManager.luck.ToString("0.#");
         cri.text = gameManager.critical.ToString("0.#");
@@ -199,6 +199,7 @@ public class GameSceneUI : Singleton<GameSceneUI>
         {
             dash.SetActive(true);
             Color color = dashImage.color;
+            dashImage.fillAmount = 1;
 
             if (character.dashCount == 0)
             {

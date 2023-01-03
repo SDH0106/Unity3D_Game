@@ -5047,7 +5047,7 @@ Animator:
   m_GameObject: {fileID: 289213144344291185}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a603b253fbfabd94588173e4a72a3bee, type: 2}
+  m_Controller: {fileID: 9100000, guid: 7ea5fe27de3d7f745b0a85a598ef57a6, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -5103,8 +5103,13 @@ MonoBehaviour:
   gardianAngel: {fileID: 289213146096538536}
   gardianEffect: {fileID: 289213144160527762}
   playerHpBar: {fileID: 289213144616889224}
+  characterNum: 1
+  level: 0
+  characterHp: 30
+  maxExp: 0
+  damageRatio: 1.2
+  characterSpeed: 2
   invincibleTime: 1
-  totalDamage: 0
   dashCoolTime: 2
   initDashCoolTime: 0
   dashCount: 0
@@ -5125,7 +5130,12 @@ MonoBehaviour:
   - {fileID: 289213144639846504}
   - {fileID: 289213144374507396}
   - {fileID: 289213145091894699}
+  exp: 0
+  maxHp: 0
+  currentHp: 0
+  speed: 0
   isDead: 0
+  levelUpCount: 0
 --- !u!1 &289213144374507397
 GameObject:
   m_ObjectHideFlags: 0

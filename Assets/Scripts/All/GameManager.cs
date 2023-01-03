@@ -23,7 +23,7 @@ public class GameManager : Singleton<GameManager>
 
     [Header("StatData")]
     [SerializeField] public float maxHp;
-    /*[HideInInspector]*/ public float physicDamage;
+    [HideInInspector] public float physicDamage;
     [HideInInspector] public float elementDamage;
     [HideInInspector] public float shortDamage;
     [HideInInspector] public float longDamage;
@@ -73,7 +73,7 @@ public class GameManager : Singleton<GameManager>
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
-        InitSetting();
+        //InitSetting();
         InitArray();
 
         ground.gameObject.SetActive(false);
@@ -98,10 +98,10 @@ public class GameManager : Singleton<GameManager>
         absorbHp = 0;
         defence = 0;
         attackSpeed = 0;
-        speed = 2;
+        speed = 0;
         range = 0;
         luck = 0;
-        critical = 10;
+        critical = 5;
         salePercent = 0;
         dashCount = 0;
         increaseExp = 0;
@@ -208,6 +208,7 @@ public class GameManager : Singleton<GameManager>
         if (currentScene == "Game")
         {
             ground.gameObject.SetActive(true);
+            Character.Instance.gameObject.SetActive(true);
 
             if (Character.Instance.currentHp > 0)
                 currentGameTime -= Time.deltaTime;

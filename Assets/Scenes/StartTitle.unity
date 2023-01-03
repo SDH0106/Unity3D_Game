@@ -25291,7 +25291,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: WeaponSelect
+          m_StringArgument: CharacterSelect
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &512826531
@@ -26169,7 +26169,7 @@ MonoBehaviour:
   money: 50000
   round: 1
   ground: {fileID: 837245116}
-  maxHp: 100
+  maxHp: 0
   physicDamage: 0
   elementDamage: 0
   shortDamage: 0
@@ -26177,8 +26177,8 @@ MonoBehaviour:
   recoverHp: 0
   absorbHp: 0
   defence: 0
-  attackSpeed: 10
-  speed: 5
+  attackSpeed: 0
+  speed: 0
   range: 0
   luck: 0
   critical: 10

@@ -17,10 +17,12 @@ public class Character : Singleton<Character>
     [SerializeField] Slider playerHpBar;
 
     [Header("Stat")]
+    [SerializeField] public float characterNum;
     public int level;
     [SerializeField] float characterHp;
     [SerializeField] public float maxExp;
     [SerializeField] public float damageRatio;
+    [SerializeField] float characterSpeed;
     [SerializeField] float invincibleTime;
 
     [HideInInspector] public float dashCoolTime;
@@ -34,6 +36,7 @@ public class Character : Singleton<Character>
     [HideInInspector] public float exp;
     [HideInInspector] public float maxHp;
     [HideInInspector] public float currentHp;
+    [HideInInspector] public float speed;
 
     Animator anim;
     Collider ground;
@@ -49,7 +52,7 @@ public class Character : Singleton<Character>
 
     float recoverTime;
 
-    public int levelUpCount;
+    [HideInInspector] public int levelUpCount;
 
     protected override void Awake()
     {
@@ -71,9 +74,10 @@ public class Character : Singleton<Character>
         characterHp = 10;
         maxHp = characterHp + gameManager.maxHp;
         currentHp = maxHp;
+        speed = gameManager.speed + characterSpeed;
         maxExp = 10;
         level = 1;
-        levelUpCount = 1;
+        levelUpCount = 0;
         recoverTime = 2;
         dashCoolTime = 4;
         dashCount = gameManager.dashCount;
@@ -88,6 +92,7 @@ public class Character : Singleton<Character>
         z = Input.GetAxisRaw("Vertical");
 
         maxHp = characterHp + gameManager.maxHp;
+        speed = gameManager.speed + characterSpeed;
 
         if (exp >= maxExp)
         {
@@ -116,6 +121,7 @@ public class Character : Singleton<Character>
             {
                 Move();
                 Dash();
+                AutoRecoverHp();
             }
 
             anim.SetBool("isRun", isRun);
@@ -211,11 +217,11 @@ public class Character : Singleton<Character>
     {
         dir = (Vector3.right * x + Vector3.forward * z).normalized;
 
-        if (gameManager.speed <= 1)
+        if (speed <= 1)
             transform.position += dir * Time.deltaTime;
 
-        else if (gameManager.speed > 1)
-            transform.position += dir * gameManager.speed * Time.deltaTime;
+        else if (speed > 1)
+            transform.position += dir * speed * Time.deltaTime;
 
         transform.position = ground.bounds.ClosestPoint(transform.position);
 
