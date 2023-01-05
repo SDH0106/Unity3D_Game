@@ -10,6 +10,7 @@ public enum CHARACTER_NUM
 {
     Bagic,
     Legendary,
+    Count,
 }
 
 public class Character : Singleton<Character>

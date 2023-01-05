@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
+using UnityEngine.TextCore.Text;
 
 public class SelectSceneCard : MonoBehaviour
 {
@@ -63,11 +64,27 @@ public class SelectSceneCard : MonoBehaviour
 
     public void MoveScene(string sceneName)
     {
-        ItemManager.Instance.GetWeaponInfo(selectedWeapon);
-        ItemManager.Instance.weaponGrade[ItemManager.Instance.weaponCount] = selectedWeapon.weaponGrade;
-        count++;
-        SceneManager.LoadScene(sceneName);
-        Character.Instance.Equip();
-        SoundManager.Instance.PlayES("WeaponSelect");
+        if (selectedWeapon.Type == WeaponInfo.WEAPON_TYPE.°Ë)
+        {
+            ItemManager.Instance.GetWeaponInfo(selectedWeapon);
+            ItemManager.Instance.weaponGrade[ItemManager.Instance.weaponCount] = selectedWeapon.weaponGrade;
+            count++;
+            SceneManager.LoadScene(sceneName);
+            Character.Instance.Equip();
+            SoundManager.Instance.PlayES("WeaponSelect");
+        }
+
+        else
+        {
+            if (Character.Instance.characterNum != (int)CHARACTER_NUM.Legendary)
+            {
+                ItemManager.Instance.GetWeaponInfo(selectedWeapon);
+                ItemManager.Instance.weaponGrade[ItemManager.Instance.weaponCount] = selectedWeapon.weaponGrade;
+                count++;
+                SceneManager.LoadScene(sceneName);
+                Character.Instance.Equip();
+                SoundManager.Instance.PlayES("WeaponSelect");
+            }
+        }
     }
 }

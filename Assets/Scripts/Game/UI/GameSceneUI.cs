@@ -168,6 +168,9 @@ public class GameSceneUI : Singleton<GameSceneUI>
                 if (gameManager.isClear && gameManager.isBossDead)
                 {
                     gameClearUI.SetActive(true);
+
+                    if (character.characterNum == (int)CHARACTER_NUM.Bagic)
+                        PlayerPrefs.SetInt("BagicClear", 1);
                 }
 
                 if (gameClearText.GetComponent<TypingText>().isOver == true)

@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Purchasing;
+using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
 using static WeaponInfo;
 
@@ -123,34 +124,76 @@ public class WeaponCardUI : MonoBehaviour
 
     public void Click()
     {
-        if (itemManager.foolCount < 5 && gameManager.money >= (price * (int)(selectedWeapon.weaponGrade + 1)))
+        if (selectedWeapon.Type == WEAPON_TYPE.검)
         {
-            SoundManager.Instance.PlayES("WeaponSelect");
-            gameManager.money -= (price * (int)(selectedWeapon.weaponGrade + 1));
-            itemManager.foolCount++;
-            itemManager.GetWeaponInfo(selectedWeapon);
-            itemManager.weaponGrade[itemManager.weaponCount] = selectedWeapon.weaponGrade;
-            Destroy(gameObject);
-            isLock = false;
-            Character.Instance.Equip();
+            if (itemManager.foolCount < 5 && gameManager.money >= (price * (int)(selectedWeapon.weaponGrade + 1)))
+            {
+                SoundManager.Instance.PlayES("WeaponSelect");
+                gameManager.money -= (price * (int)(selectedWeapon.weaponGrade + 1));
+                itemManager.foolCount++;
+                itemManager.GetWeaponInfo(selectedWeapon);
+                itemManager.weaponGrade[itemManager.weaponCount] = selectedWeapon.weaponGrade;
+                Destroy(gameObject);
+                isLock = false;
+                Character.Instance.Equip();
+            }
+
+            else if (itemManager.foolCount >= 5 && gameManager.money >= (price * (int)(selectedWeapon.weaponGrade + 1)))
+            {
+                for (int i = 0; i < itemManager.storedWeapon.Length; i++)
+                {
+                    if (itemManager.storedWeapon[i] != null && selectedWeapon.weaponGrade != Grade.신화)
+                    {
+
+                        if ((selectedWeapon.WeaponName == itemManager.storedWeapon[i].WeaponName) && (selectedWeapon.weaponGrade == itemManager.weaponGrade[i]))
+                        {
+                            SoundManager.Instance.PlayES("WeaponSelect");
+                            gameManager.money -= (int)(selectedWeapon.weaponGrade + 1) * 20;
+                            gameManager.money -= (price * (int)(selectedWeapon.weaponGrade + 1));
+                            itemManager.weaponGrade[i]++;
+                            Destroy(gameObject);
+                            isLock = false;
+                            break;
+                        }
+                    }
+                }
+            }
         }
 
-        else if(itemManager.foolCount >= 5 && gameManager.money >= (price * (int)(selectedWeapon.weaponGrade + 1)))
+        else if (selectedWeapon.Type != WEAPON_TYPE.검)
         {
-            for (int i = 0; i < itemManager.storedWeapon.Length; i++)
+            if (Character.Instance.characterNum != (int)CHARACTER_NUM.Legendary)
             {
-                if (itemManager.storedWeapon[i] != null && selectedWeapon.weaponGrade != Grade.신화)
+                if (itemManager.foolCount < 5 && gameManager.money >= (price * (int)(selectedWeapon.weaponGrade + 1)))
                 {
+                    SoundManager.Instance.PlayES("WeaponSelect");
+                    gameManager.money -= (price * (int)(selectedWeapon.weaponGrade + 1));
+                    itemManager.foolCount++;
+                    itemManager.GetWeaponInfo(selectedWeapon);
+                    itemManager.weaponGrade[itemManager.weaponCount] = selectedWeapon.weaponGrade;
+                    Destroy(gameObject);
+                    isLock = false;
+                    Character.Instance.Equip();
+                }
 
-                    if ((selectedWeapon.WeaponName == itemManager.storedWeapon[i].WeaponName) && (selectedWeapon.weaponGrade == itemManager.weaponGrade[i]))
+                else if (itemManager.foolCount >= 5 && gameManager.money >= (price * (int)(selectedWeapon.weaponGrade + 1)))
+                {
+                    for (int i = 0; i < itemManager.storedWeapon.Length; i++)
                     {
-                        SoundManager.Instance.PlayES("WeaponSelect");
-                        gameManager.money -= (int)(selectedWeapon.weaponGrade + 1) * 20;
-                        gameManager.money -= (price * (int)(selectedWeapon.weaponGrade + 1));
-                        itemManager.weaponGrade[i]++;
-                        Destroy(gameObject);
-                        isLock = false;
-                        break;
+                        if (itemManager.storedWeapon[i] != null && selectedWeapon.weaponGrade != Grade.신화)
+                        {
+
+                            if ((selectedWeapon.WeaponName == itemManager.storedWeapon[i].WeaponName) && (selectedWeapon.weaponGrade == itemManager.weaponGrade[i]))
+                            {
+                                SoundManager.Instance.PlayES("WeaponSelect");
+                                gameManager.money -= (int)(selectedWeapon.weaponGrade + 1) * 20;
+                                gameManager.money -= (price * (int)(selectedWeapon.weaponGrade + 1));
+                                itemManager.weaponGrade[i]++;
+                                Destroy(gameObject);
+                                isLock = false;
+                                break;
+                            }
+                        }
                     }
                 }
             }
