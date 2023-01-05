@@ -16,9 +16,12 @@ public class Ghost : Monster
 
     Vector3 rushDir;
 
+    Collider ground;
+
     void Start()
     {
         InitSetting();
+        ground = GameSceneUI.Instance.ground;
     }
 
     protected override void SetInitMonster()
@@ -44,7 +47,7 @@ public class Ghost : Monster
             else if (isRush)
             {
                 transform.position += rushDir * 8 * Time.deltaTime;
-                transform.position = gameManager.ground.ClosestPoint(transform.position);
+                transform.position = ground.ClosestPoint(transform.position);
             }
 
             if (attackTime <= 0)

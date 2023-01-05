@@ -39,7 +39,7 @@ public class MonsterSpawn : MonoBehaviour
         gameManager = GameManager.Instance;
         character = Character.Instance;
         weightValue = new float[] { 100, 0, 0, 0 };
-        ground = gameManager.ground;
+        ground = GameSceneUI.Instance.ground;
 
         for (int i = 0; i < weightValue.Length; i++)
         {

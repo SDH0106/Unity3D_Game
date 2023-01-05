@@ -19,7 +19,6 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] float gameTime;
     [SerializeField] public int money;
     [SerializeField] public int round;
-    [SerializeField] public Collider ground;
 
     [Header("StatData")]
     [SerializeField] public float maxHp;
@@ -75,8 +74,6 @@ public class GameManager : Singleton<GameManager>
         DontDestroyOnLoad(gameObject);
         //InitSetting();
         InitArray();
-
-        ground.gameObject.SetActive(false);
 
         currentGameTime = gameTime;
 
@@ -207,7 +204,6 @@ public class GameManager : Singleton<GameManager>
     {
         if (currentScene == "Game")
         {
-            ground.gameObject.SetActive(true);
             Character.Instance.gameObject.SetActive(true);
 
             if (Character.Instance.currentHp > 0)

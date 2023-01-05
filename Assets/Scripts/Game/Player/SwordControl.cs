@@ -122,7 +122,7 @@ public class SwordControl : Weapon
 
                 SoundManager.Instance.PlayES(weaponInfo.WeaponSound);
 
-                if (character.characterNum == 1)
+                if (character.characterNum == (int)CHARACTER_NUM.Legendary)
                 {
                     Bullet bullet = pool.Get();
                     bullet.transform.position = new Vector3(firePos.position.x, 0f, firePos.position.z);

@@ -5,7 +5,12 @@ using System.Threading;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-using static WeaponInfo;
+
+public enum CHARACTER_NUM
+{
+    Bagic,
+    Legendary,
+}
 
 public class Character : Singleton<Character>
 {
@@ -82,8 +87,6 @@ public class Character : Singleton<Character>
         dashCoolTime = 4;
         dashCount = gameManager.dashCount;
         initDashCoolTime = dashCoolTime;
-
-        ground = gameManager.ground;
     }
 
     void Update()
@@ -215,6 +218,9 @@ public class Character : Singleton<Character>
 
     void Move()
     {
+        if (ground == null)
+            ground = GameSceneUI.Instance.ground;
+
         dir = (Vector3.right * x + Vector3.forward * z).normalized;
 
         if (speed <= 1)

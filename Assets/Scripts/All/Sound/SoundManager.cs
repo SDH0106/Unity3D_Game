@@ -30,9 +30,9 @@ public class SoundManager : Singleton<SoundManager>
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        wholeSoundVolume = 1;
-        bgmSoundVolume = 1;
-        esSoundVolume = 1;
+        wholeSoundVolume = PlayerPrefs.GetFloat("Sound_All", 1);
+        bgmSoundVolume = PlayerPrefs.GetFloat("Sound_Bgm", 1);
+        esSoundVolume = PlayerPrefs.GetFloat("Sound_Sfx", 1);
         muteBgm = false;
         muteSfx = false;
     }
@@ -52,6 +52,7 @@ public class SoundManager : Singleton<SoundManager>
     public void WholeVolume(float num)
     {
         wholeSoundVolume = num;
+        PlayerPrefs.SetFloat("Sound_All", wholeSoundVolume);
     }
 
     public void WholeVolumeOnOff(bool isMute)
@@ -63,6 +64,7 @@ public class SoundManager : Singleton<SoundManager>
     public void BgmVolume(float num)
     {
         bgmSoundVolume = num;
+        PlayerPrefs.SetFloat("Sound_Bgm", bgmSoundVolume);
     }
 
     public void BgmOnOff(bool isMute)
@@ -73,6 +75,7 @@ public class SoundManager : Singleton<SoundManager>
     public void EsVolume(float num)
     {
         esSoundVolume = num ;
+        PlayerPrefs.SetFloat("Sound_Sfx", esSoundVolume);
     }
 
     public void SfxOnOff(bool isMute)
@@ -92,7 +95,7 @@ public class SoundManager : Singleton<SoundManager>
 
     public void PlayES(string name)
     {
-        if (!muteSfx)
+        if (!muteSfx || esSoundVolume != 0)
         {
             for (int i = 0; i < effects.Length; i++)
             {

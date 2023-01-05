@@ -10,6 +10,9 @@ using UnityEngine.UI;
 
 public class GameSceneUI : Singleton<GameSceneUI>
 {
+    [SerializeField] public Collider ground;
+    [SerializeField] Camera subCam;
+
     [Header("HP")]
     [SerializeField] Text hpText;
     [SerializeField] Text maxHpText;
@@ -94,12 +97,17 @@ public class GameSceneUI : Singleton<GameSceneUI>
         dash.SetActive(false);
         statWindow.SetActive(false);
         chestPassive.SetActive(false);
-        muteWholeVolume = false;
-        muteBgmVolume = false;
-        muteSfxVolume = false;
-        wUnMark.SetActive(false);
-        bUnMark.SetActive(false);
-        sUnMark.SetActive(false);
+        subCam.gameObject.SetActive(false);
+
+        wholeSound.value = 1 - PlayerPrefs.GetFloat("Sound_All");
+        bgmSound.value = 1 - PlayerPrefs.GetFloat("Sound_Bgm");
+        esSound.value = 1 - PlayerPrefs.GetFloat("Sound_Sfx");
+        muteWholeVolume = (wholeSound.value == 1) ? true : false;
+        muteBgmVolume = (bgmSound.value == 1) ? true : false;
+        muteSfxVolume = (esSound.value == 1) ? true : false;
+        wUnMark.SetActive(muteWholeVolume);
+        bUnMark.SetActive(muteBgmVolume);
+        sUnMark.SetActive(muteSfxVolume);
     }
 
     private void Update()
@@ -229,7 +237,7 @@ public class GameSceneUI : Singleton<GameSceneUI>
 
     void HpUI()
     {
-        if (gameManager.currentScene == "Game")
+        if (gameManager.currentScene == "Game" && character.maxExp != 0)
         {
             maxHpText.text = character.maxHp.ToString();
             hpText.text = character.currentHp.ToString("0.#");
@@ -239,8 +247,11 @@ public class GameSceneUI : Singleton<GameSceneUI>
 
     void ExpUI()
     {
-        lvText.text = character.level.ToString();
-        expBar.value = 1- (character.exp / character.maxExp);
+        if (character.maxExp != 0)
+        {
+            lvText.text = character.level.ToString();
+            expBar.value = 1 - (character.exp / character.maxExp);
+        }
     }
 
     void CoinUI()
@@ -357,6 +368,9 @@ public class GameSceneUI : Singleton<GameSceneUI>
 
     public void TitleScene()
     {
+        subCam.transform.position = Camera.main.transform.position;
+        subCam.transform.rotation = Camera.main.transform.rotation;
+        subCam.gameObject.SetActive(true);
         Destroy(gameManager.gameObject);
         Destroy(character.gameObject);
         Destroy(ItemManager.Instance.gameObject);
