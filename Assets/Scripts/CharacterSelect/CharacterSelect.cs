@@ -25,10 +25,4 @@ public class CharacterSelect : MonoBehaviour
         character.GetComponent<Character>().characterNum = num;
         SceneManager.LoadScene("WeaponSelect");
     }
-
-    public void BackScene(string scene)
-    {
-        SoundManager.Instance.PlayES("SelectButton");
-        SceneManager.LoadScene(scene);
-    }
 }
