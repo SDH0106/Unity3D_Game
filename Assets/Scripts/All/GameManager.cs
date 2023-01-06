@@ -8,12 +8,15 @@ using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.TextCore.Text;
+using UnityEngine.Windows.WebCam;
 
 public class GameManager : Singleton<GameManager>       
 {
     [SerializeField] Texture2D aimCursor;
     [SerializeField] public Transform bulletStorage;
     [SerializeField] public Transform damageStorage;
+    [SerializeField] GameObject optionUI;
 
     [Header("GameData")]
     [SerializeField] float gameTime;

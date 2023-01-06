@@ -1980,17 +1980,17 @@ MonoBehaviour:
   damageStorage: {fileID: 1692643827}
   gameTime: 0
   money: 50000
-  round: 1
-  maxHp: 90
-  physicDamage: 0
+  round: 30
+  maxHp: 10000
+  physicDamage: 10000
   elementDamage: 0
   shortDamage: 0
   longDamage: 0
   recoverHp: 0
   absorbHp: 0
   defence: 0
-  attackSpeed: 0
-  speed: 0
+  attackSpeed: 20
+  speed: 5
   range: 0
   luck: 0
   critical: 10

@@ -31,15 +31,6 @@ public class GameSceneUI : Singleton<GameSceneUI>
     [Header("Round")]
     [SerializeField] Text roundText;
 
-    [Header("Sound")]
-    [SerializeField] GameObject pauseUI;
-    [SerializeField] Slider wholeSound;
-    [SerializeField] Slider bgmSound;
-    [SerializeField] Slider esSound;
-    [SerializeField] GameObject wUnMark;
-    [SerializeField] GameObject bUnMark;
-    [SerializeField] GameObject sUnMark;
-
     [Header("Dash")]
     [SerializeField] GameObject dash;
     [SerializeField] Image dashImage;
@@ -77,10 +68,6 @@ public class GameSceneUI : Singleton<GameSceneUI>
     Character character;
     SoundManager soundManager;
 
-    bool muteWholeVolume;
-    bool muteBgmVolume;
-    bool muteSfxVolume;
-
     [HideInInspector] public int chestCount;
 
     private void Start()
@@ -92,22 +79,11 @@ public class GameSceneUI : Singleton<GameSceneUI>
         roundClearText.SetActive(false);
         gameOverUI.SetActive(false);
         statCardParent.SetActive(false);
-        pauseUI.SetActive(false);
         gameClearUI.SetActive(false);
         dash.SetActive(false);
         statWindow.SetActive(false);
         chestPassive.SetActive(false);
         subCam.gameObject.SetActive(false);
-
-        wholeSound.value = 1 - PlayerPrefs.GetFloat("Sound_All");
-        bgmSound.value = 1 - PlayerPrefs.GetFloat("Sound_Bgm");
-        esSound.value = 1 - PlayerPrefs.GetFloat("Sound_Sfx");
-        muteWholeVolume = (wholeSound.value == 1) ? true : false;
-        muteBgmVolume = (bgmSound.value == 1) ? true : false;
-        muteSfxVolume = (esSound.value == 1) ? true : false;
-        wUnMark.SetActive(muteWholeVolume);
-        bUnMark.SetActive(muteBgmVolume);
-        sUnMark.SetActive(muteSfxVolume);
     }
 
     private void Update()
@@ -119,10 +95,6 @@ public class GameSceneUI : Singleton<GameSceneUI>
         TimeUI();
         DashUI();
         SettingStatText();
-
-        wUnMark.SetActive(muteWholeVolume);
-        bUnMark.SetActive(muteBgmVolume);
-        sUnMark.SetActive(muteSfxVolume);
 
         if (!character.isDead)
         {
@@ -155,12 +127,6 @@ public class GameSceneUI : Singleton<GameSceneUI>
                         statWindow.SetActive(true);
                     }
                 }
-
-                if (Input.GetKeyDown(KeyCode.Escape) && !gameManager.isPause)
-                    PauseGame();
-
-                else if (Input.GetKeyDown(KeyCode.Escape) && gameManager.isPause)
-                    ReturnToGame();
             }
 
             else if(gameManager.round == 30)
@@ -279,112 +245,10 @@ public class GameSceneUI : Singleton<GameSceneUI>
         }
     }
 
-    public void WholeVolumeChange()
-    {
-        soundManager.WholeVolume(1 - wholeSound.value);
-
-        if (wholeSound.value == 1)
-        {
-            muteWholeVolume = true;
-            muteBgmVolume = muteWholeVolume;
-            muteSfxVolume = muteWholeVolume;
-        }
-
-        else
-        {
-            muteWholeVolume = false;
-            if (bgmSound.value != 1)
-                muteBgmVolume = muteWholeVolume;
-            if (esSound.value != 1)
-                muteSfxVolume = muteWholeVolume;
-        }
-    }
-
-    public void OnOffWholeVolume()
-    {
-        muteWholeVolume = !muteWholeVolume;
-        if (bgmSound.value != 1)
-            muteBgmVolume = muteWholeVolume;
-        if (esSound.value != 1)
-            muteSfxVolume = muteWholeVolume;
-        soundManager.WholeVolumeOnOff(muteWholeVolume);
-    }
-
-    public void BgmVolumeChange()
-    {
-        soundManager.BgmVolume(1 - bgmSound.value);
-
-        if (bgmSound.value == 1)
-        {
-            muteBgmVolume = true;
-        }
-
-        else
-        {
-            if (!muteWholeVolume)
-                muteBgmVolume = false;
-        }
-    }
-
-    public void OnOffBgmVolume()
-    {
-        if (!muteWholeVolume)
-        {
-            muteBgmVolume = !muteBgmVolume;
-            soundManager.BgmOnOff(muteBgmVolume);
-        }
-    }
-
-    public void EsVolumeChange()
-    {
-        soundManager.EsVolume(1 - esSound.value);
-
-        if (esSound.value == 1)
-            muteSfxVolume = true;
-
-        else
-        {
-            if (!muteWholeVolume)
-                muteSfxVolume = false;
-        }
-    }
-
-    public void OnOffSfxVolume()
-    {
-        if (!muteWholeVolume)
-        {
-            muteSfxVolume = !muteSfxVolume;
-            soundManager.SfxOnOff(muteSfxVolume);
-        }
-    }
-
-
-    public void PauseGame()
-    {
-        if (!character.isDead)
-        {
-            pauseUI.SetActive(true);
-            gameManager.isPause = true;
-            Time.timeScale = 0;
-        }
-    }
-
     public void TitleScene()
     {
         subCam.transform.position = Camera.main.transform.position;
         subCam.transform.rotation = Camera.main.transform.rotation;
         subCam.gameObject.SetActive(true);
-        Destroy(gameManager.gameObject);
-        Destroy(character.gameObject);
-        Destroy(ItemManager.Instance.gameObject);
-        Destroy(SoundManager.Instance.gameObject);
-        SceneManager.LoadScene("StartTitle");
     }
-
-    public void ReturnToGame()
-    {
-        pauseUI.SetActive(false);
-        gameManager.isPause = false;
-        Time.timeScale = 1;
-    } 
 }

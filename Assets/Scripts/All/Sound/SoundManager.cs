@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,9 +13,9 @@ public class SoundManager : Singleton<SoundManager>
     [SerializeField] int poolCount = 10;
 
     [HideInInspector] public AudioSource audioSource;
-    float wholeSoundVolume;
+    float AllSoundVolume;
     float bgmSoundVolume;
-    float esSoundVolume;
+    float sfxSoundVolume;
 
     bool muteBgm;
     bool muteSfx;
@@ -27,19 +28,20 @@ public class SoundManager : Singleton<SoundManager>
         DontDestroyOnLoad(this);
         objectPool = new ObjectPool<EffectSound>(CreatePool, OnGetPool, OnReleasePool, OnDestroyPool, maxSize: poolCount);
     } 
+
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        wholeSoundVolume = PlayerPrefs.GetFloat("Sound_All", 1);
+        AllSoundVolume = PlayerPrefs.GetFloat("Sound_All", 1);
         bgmSoundVolume = PlayerPrefs.GetFloat("Sound_Bgm", 1);
-        esSoundVolume = PlayerPrefs.GetFloat("Sound_Sfx", 1);
-        muteBgm = false;
-        muteSfx = false;
+        sfxSoundVolume = PlayerPrefs.GetFloat("Sound_Sfx", 1);
+        muteBgm = Convert.ToBoolean(PlayerPrefs.GetInt("Mute_Bgm", 0));
+        muteSfx = Convert.ToBoolean(PlayerPrefs.GetInt("Mute_Sfx", 0));
     }
 
     private void Update()
     {
-        audioSource.volume = wholeSoundVolume * bgmSoundVolume;
+        audioSource.volume = AllSoundVolume * bgmSoundVolume;
         audioSource.mute = muteBgm;
     }
 
@@ -49,10 +51,12 @@ public class SoundManager : Singleton<SoundManager>
         audioSource.Play();
     }
 
-    public void WholeVolume(float num)
+    public void WholeVolume(float num, bool isBgmMute, bool isSfxMute)
     {
-        wholeSoundVolume = num;
-        PlayerPrefs.SetFloat("Sound_All", wholeSoundVolume);
+        AllSoundVolume = num;
+        muteBgm = isBgmMute;
+        muteSfx = isSfxMute;
+        PlayerPrefs.SetFloat("Sound_All", AllSoundVolume);
     }
 
     public void WholeVolumeOnOff(bool isMute)
@@ -61,9 +65,11 @@ public class SoundManager : Singleton<SoundManager>
         muteSfx = isMute;
     }
 
-    public void BgmVolume(float num)
+    public void BgmVolume(float num, bool isMute)
     {
         bgmSoundVolume = num;
+        muteBgm = isMute;
+
         PlayerPrefs.SetFloat("Sound_Bgm", bgmSoundVolume);
     }
 
@@ -72,10 +78,12 @@ public class SoundManager : Singleton<SoundManager>
         muteBgm = isMute;
     }
 
-    public void EsVolume(float num)
+    public void EsVolume(float num, bool isMute)
     {
-        esSoundVolume = num ;
-        PlayerPrefs.SetFloat("Sound_Sfx", esSoundVolume);
+        sfxSoundVolume = num ;
+        muteSfx = isMute;
+
+        PlayerPrefs.SetFloat("Sound_Sfx", sfxSoundVolume);
     }
 
     public void SfxOnOff(bool isMute)
@@ -95,7 +103,7 @@ public class SoundManager : Singleton<SoundManager>
 
     public void PlayES(string name)
     {
-        if (!muteSfx || esSoundVolume != 0)
+        if (!muteSfx)
         {
             for (int i = 0; i < effects.Length; i++)
             {
@@ -103,7 +111,7 @@ public class SoundManager : Singleton<SoundManager>
                 {
                     EffectSound effect = objectPool.Get();
                     effect.PlayES(effects[i]);
-                    effect.source.volume = esSoundVolume * wholeSoundVolume;
+                    effect.source.volume = sfxSoundVolume * AllSoundVolume;
                     break;
                 }
             }
@@ -116,7 +124,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             EffectSound effect = objectPool.Get();
             effect.PlayES(audioClip);
-            effect.source.volume = esSoundVolume * wholeSoundVolume;
+            effect.source.volume = sfxSoundVolume * AllSoundVolume;
         }
     }
 

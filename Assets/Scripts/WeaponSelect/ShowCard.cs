@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ShowCard : MonoBehaviour
 {
@@ -36,5 +37,12 @@ public class ShowCard : MonoBehaviour
             cards[i].selectedWeapon = cards[i].weaponInfos[numArray[i]];
             cards[i].selectedWeapon.weaponGrade = Grade.¿œπ›;
         }
+    }
+
+    public void BackScene()
+    {
+        SoundManager.Instance.PlayES("SelectButton");
+        Destroy(Character.Instance.gameObject);
+        SceneManager.LoadScene("CharacterSelect");
     }
 }

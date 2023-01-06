@@ -4959,7 +4959,7 @@ GameObject:
   - component: {fileID: 289213144344291191}
   - component: {fileID: 289213144344291184}
   m_Layer: 6
-  m_Name: Character
+  m_Name: BagicCharacter
   m_TagString: Character
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
