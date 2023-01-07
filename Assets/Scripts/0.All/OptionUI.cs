@@ -49,7 +49,7 @@ public class OptionUI : MonoBehaviour
         bUnMark.SetActive(muteBgmVolume);
         sUnMark.SetActive(muteSfxVolume);
 
-        if (Input.GetKeyDown(KeyCode.Escape) && !gameManager.isPause)
+        if (Input.GetKeyDown(KeyCode.Escape)&& !gameManager.isPause)
             PauseGame();
 
         else if (Input.GetKeyDown(KeyCode.Escape) && gameManager.isPause)
@@ -152,16 +152,22 @@ public class OptionUI : MonoBehaviour
 
     public void PauseGame()
     {
-        panel.SetActive(true);
-        gameManager.isPause = true;
-        Time.timeScale = 0;
+        if (!gameManager.isPause)
+        {
+            panel.SetActive(true);
+            gameManager.isPause = true;
+            Time.timeScale = 0;
+        }
     }
 
     public void ReturnToGame()
     {
-        panel.SetActive(false);
-        gameManager.isPause = false;
-        Time.timeScale = 1;
+        if (gameManager.isPause)
+        {
+            panel.SetActive(false);
+            gameManager.isPause = false;
+            Time.timeScale = 1;
+        }
     }
 
     public void TitleScene()

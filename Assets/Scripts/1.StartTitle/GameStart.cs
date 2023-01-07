@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameStart : MonoBehaviour
 {
+    [SerializeField] GameObject optionPanel;
     SoundManager soundManager;
 
     private void Start()
@@ -22,6 +23,7 @@ public class GameStart : MonoBehaviour
     public void ClickOption()
     {
         soundManager.PlayES("SelectButton");
+        optionPanel.SetActive(true);
     }
 
     public void ClickExit()
