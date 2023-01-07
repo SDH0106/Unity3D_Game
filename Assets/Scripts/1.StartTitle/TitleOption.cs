@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -25,9 +26,9 @@ public class TitleOption : MonoBehaviour
     bool muteBgmVolume;
     bool muteSfxVolume;
 
-    KeyCode[] defaultKeys = new KeyCode[] { KeyCode.W, KeyCode.S, KeyCode.A, KeyCode.D, KeyCode.Space };
-
+    int[] defaultKeys;
     int key = -1;
+    int checkKey = -1;
 
     [SerializeField] Text[] keyTexts;
 
@@ -49,12 +50,17 @@ public class TitleOption : MonoBehaviour
         bUnMark.SetActive(muteBgmVolume);
         sUnMark.SetActive(muteSfxVolume);
 
+        defaultKeys = new int[] { PlayerPrefs.GetInt("Key_Up", (int)KeyCode.W),
+                                    PlayerPrefs.GetInt("Key_Down", (int)KeyCode.S),
+                                    PlayerPrefs.GetInt("Key_Left", (int)KeyCode.A),
+                                    PlayerPrefs.GetInt("Key_Right", (int)KeyCode.D),
+                                    PlayerPrefs.GetInt("Key_Dash", (int)KeyCode.Space)};
+        
         for (int i = 0; i < (int)KeyAction.COUNT; i++)
         {
             if (!KeySetting.keys.ContainsKey((KeyAction)i))                 // Dictionary keys에 값이 없다면
             {
-                KeySetting.keys.Add((KeyAction)i, defaultKeys[i]);          // keys값에 default값 대입
-                
+                KeySetting.keys.Add((KeyAction)i, (KeyCode)defaultKeys[i]);          // keys값에 default값 대입
             }
         }
 
@@ -82,6 +88,74 @@ public class TitleOption : MonoBehaviour
         if (keyEvent.isKey)                 // 키보드 입력이 있다면 
         {
             KeySetting.keys[(KeyAction)key] = keyEvent.keyCode;     // 지금 입력된 키를 받아와 KeySetting 클래스의 Dictionary형 변수 keys의 key번째에 등록.
+            switch((KeyAction)key)
+            {
+                case KeyAction.UP:
+                    PlayerPrefs.SetInt("Key_Up", (int)keyEvent.keyCode);
+                    break;
+
+                case KeyAction.DOWN:
+                    PlayerPrefs.SetInt("Key_Down", (int)keyEvent.keyCode);
+                    break;
+
+                case KeyAction.LEFT:
+                    PlayerPrefs.SetInt("Key_Left", (int)keyEvent.keyCode);
+                    break;
+
+                case KeyAction.RIGHT:
+                    PlayerPrefs.SetInt("Key_Right", (int)keyEvent.keyCode);
+                    break;
+
+                case KeyAction.DASH:
+                    PlayerPrefs.SetInt("Key_Dash", (int)keyEvent.keyCode);
+                    break;
+            }
+
+            KeyCode keycode = keyEvent.keyCode;
+
+            // 똑같은 키가 존재하면 존재하던 키를 none으로 교체
+            for (int i = 0; i < defaultKeys.Length; i++)
+            {
+                if (i != checkKey)
+                {
+                    if (KeySetting.keys[(KeyAction)i] == KeySetting.keys[(KeyAction)checkKey])
+                    {
+                        switch (i)
+                        {
+                            case 0:
+                                PlayerPrefs.SetInt("Key_Up", 0);
+                                KeySetting.keys.Remove((KeyAction)i);
+                                KeySetting.keys.Add((KeyAction)i, KeyCode.None);
+                                break;
+
+                            case 1:
+                                PlayerPrefs.SetInt("Key_Down", 0);
+                                KeySetting.keys.Remove((KeyAction)i);
+                                KeySetting.keys.Add((KeyAction)i, KeyCode.None);
+                                break;
+
+                            case 2:
+                                PlayerPrefs.SetInt("Key_Left", 0);
+                                KeySetting.keys.Remove((KeyAction)i);
+                                KeySetting.keys.Add((KeyAction)i, KeyCode.None);
+                                break;
+
+                            case 3:
+                                PlayerPrefs.SetInt("Key_Right", 0);
+                                KeySetting.keys.Remove((KeyAction)i);
+                                KeySetting.keys.Add((KeyAction)i, KeyCode.None);
+                                break;
+
+                            case 4:
+                                PlayerPrefs.SetInt("Key_Dash", 0);
+                                KeySetting.keys.Remove((KeyAction)i);
+                                KeySetting.keys.Add((KeyAction)i, KeyCode.None);
+                                break;
+                        }
+                    }
+                }
+            }
+
             key = -1;
         }
     }
@@ -89,6 +163,7 @@ public class TitleOption : MonoBehaviour
     public void ChangeKey(int num)
     {
         key = num;      // 버튼에 함수를 등록시키고 num값을 받아와 key값에 num값을 대입
+        checkKey = key;
     }
 
     public void ChangeWholeVolume()

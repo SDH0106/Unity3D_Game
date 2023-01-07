@@ -5103,6 +5103,7 @@ MonoBehaviour:
   gardianAngel: {fileID: 289213146096538536}
   gardianEffect: {fileID: 289213144160527762}
   playerHpBar: {fileID: 289213144616889224}
+  characterNum: 0
   level: 0
   characterHp: 20
   maxExp: 0

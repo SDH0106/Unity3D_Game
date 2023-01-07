@@ -53,8 +53,8 @@ public class Character : Singleton<Character>
     GameManager gameManager;
 
     Vector3 dir;
-    float x;
-    float z;
+    public float x;
+    public float z;
 
     float recoverTime;
 
@@ -92,8 +92,35 @@ public class Character : Singleton<Character>
 
     void Update()
     {
-        x = Input.GetAxisRaw("Horizontal");
-        z = Input.GetAxisRaw("Vertical");
+        bool xInput = (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Left"))) || (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Right")));
+        bool zInput = (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Up"))) || (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Down")));
+
+        if (!xInput)
+            x = 0;
+
+        if (!zInput)
+            z = 0;
+
+        if (zInput)
+        {
+            if (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Up")))
+                z = 1;
+
+            else if (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Down")))
+                z = -1;
+        }
+
+        if (xInput)
+        {
+            if (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Left")))
+                x = -1;
+
+            else if (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Right")))
+                x = 1;
+        }
+
+        /*x = Input.GetAxisRaw("Horizontal");
+        z = Input.GetAxisRaw("Vertical");*/
 
         maxHp = characterHp + gameManager.maxHp;
         speed = gameManager.speed + characterSpeed;
@@ -164,7 +191,7 @@ public class Character : Singleton<Character>
                     particle.transform.localScale = new Vector3(1, 1, 1);
                 }
 
-                if (Input.GetKeyDown(KeyCode.Space))
+                if (Input.GetKeyDown((KeyCode)PlayerPrefs.GetInt("Key_Dash")))
                 {
                     particle.GetComponentInChildren<Renderer>().enabled = true;
 
@@ -235,12 +262,12 @@ public class Character : Singleton<Character>
         if (dir != Vector3.zero)
         {
             isRun = true;
-            if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+            if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Left")))
             {
                 rend.flipX = true;
             }
 
-            else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+            else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Right")))
             {
                 rend.flipX = false;
             }
