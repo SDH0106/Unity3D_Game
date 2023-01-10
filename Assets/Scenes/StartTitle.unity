@@ -4376,11 +4376,11 @@ MonoBehaviour:
   bulletStorage: {fileID: 1005871281}
   damageStorage: {fileID: 1692643827}
   optionUI: {fileID: 0}
-  gameTime: 1
+  gameTime: 10000
   money: 50000
-  round: 30
-  maxHp: 10000
-  physicDamage: 10000
+  round: 1
+  maxHp: 0
+  physicDamage: 0
   elementDamage: 0
   shortDamage: 0
   longDamage: 0
@@ -4388,14 +4388,14 @@ MonoBehaviour:
   absorbHp: 0
   defence: 0
   attackSpeed: 20
-  speed: 5
+  speed: 2
   range: 0
   luck: 0
   critical: 10
   passiveIntVariables: 
   passiveFloatVariables: []
   passiveBoolVariables: 
-  dashCount: 0
+  dashCount: 2
   salePercent: 0
   increaseExp: 0
   coinRange: 0

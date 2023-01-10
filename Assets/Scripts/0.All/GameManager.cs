@@ -42,7 +42,7 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector] public int[] passiveIntVariables;
     [HideInInspector] public float[] passiveFloatVariables;
     [HideInInspector] public bool[] passiveBoolVariables;
-    [HideInInspector] public int dashCount;
+    /*[HideInInspector]*/ public int dashCount;
     [HideInInspector] public float salePercent;
     [HideInInspector] public float increaseExp;
     [HideInInspector] public float coinRange;

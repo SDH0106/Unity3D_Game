@@ -4959,7 +4959,7 @@ GameObject:
   - component: {fileID: 289213144344291191}
   - component: {fileID: 289213144344291184}
   m_Layer: 6
-  m_Name: LegendaryWarrior
+  m_Name: Lilpa
   m_TagString: Character
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4975,7 +4975,7 @@ Transform:
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: -0, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 5}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 289213145837196806}
   - {fileID: 289213144316783385}
@@ -5026,7 +5026,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 2028307459, guid: 42017ac4bd9949a4bb667c8ead8cf6e1, type: 3}
+  m_Sprite: {fileID: 2028838469, guid: 36222f973b81d0e439c89434f77bb7be, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -5047,7 +5047,7 @@ Animator:
   m_GameObject: {fileID: 289213144344291185}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 7ea5fe27de3d7f745b0a85a598ef57a6, type: 2}
+  m_Controller: {fileID: 9100000, guid: a603b253fbfabd94588173e4a72a3bee, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -5103,16 +5103,16 @@ MonoBehaviour:
   gardianAngel: {fileID: 289213146096538536}
   gardianEffect: {fileID: 289213144160527762}
   playerHpBar: {fileID: 289213144616889224}
-  characterNum: 1
+  characterNum: 0
   level: 0
-  characterHp: 30
+  characterHp: 20
   maxExp: 0
-  damageRatio: 1.2
+  damageRatio: 1
   characterSpeed: 2
   invincibleTime: 1
   dashCoolTime: 2
   initDashCoolTime: 0
-  dashCount: 0
+  dashCount: 2
   weapons:
   - {fileID: 4942268788761087581, guid: 941e5330dd1395442b47913c209b6bed, type: 3}
   - {fileID: 8135749844320535992, guid: cedc7bc35d28ac5418d3797670a41177, type: 3}
@@ -10178,7 +10178,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6c4fcde2f3ff21d40866a1ba3b9f128f, type: 2}
+  - {fileID: 2100000, guid: 55d6bfe83ac8ed8439be833437fefb1e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -10514,7 +10514,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 289213145619181373}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.00000059604645}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10524,7 +10524,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 47.00001}
+  m_AnchoredPosition: {x: 0, y: 50}
   m_SizeDelta: {x: 200, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &289213145837196800
@@ -10627,7 +10627,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 289213146096538536}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.2, z: 0}
+  m_LocalPosition: {x: 0, y: 0.217, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:

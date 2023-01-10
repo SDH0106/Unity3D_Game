@@ -1080,7 +1080,7 @@ GameObject:
   m_Component:
   - component: {fileID: 510041336}
   m_Layer: 5
-  m_Name: LegendaryWarrior
+  m_Name: SwordLilpa
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3350,7 +3350,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uC804\uC124\uC758 \uAC80\uC0AC"
+  m_Text: "\uAC80\uC2E0 \uB1E8\uD30C"
 --- !u!114 &1555817666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3584,7 +3584,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -6056987297122131021, guid: cd947491a13509945aa1b644f9db3ef2, type: 3}
+  m_Sprite: {fileID: 2028307459, guid: 42017ac4bd9949a4bb667c8ead8cf6e1, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3619,8 +3619,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 9}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: -10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1683701344
 GameObject:
@@ -4097,7 +4097,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1.2
-  m_Text: "\uC804\uC124\uB85C\uB9CC \uC804\uD574\uC9C0\uB358 \uAC80\uC0AC.\n\uAC80\uB958
+  m_Text: "\uBAA8\uD5D8\uC5D0 \uD1B5\uB2EC\uD574 \uAC80\uC2E0\uC774 \uB41C \uB1E8\uD30C.\n\uAC80\uB958
     \uBB34\uAE30\uB9CC \uC0AC\uC6A9\uAC00\uB2A5\uD558\uBA70 \uACF5\uACA9\uC2DC \uAC80\uAE30\uB97C
     \uBC1C\uC0AC\uD55C\uB2E4."
 --- !u!114 &1907075930
@@ -4707,7 +4707,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uCD08\uBCF4 \uBAA8\uD5D8\uAC00"
+  m_Text: "\uB1E8\uD30C"
 --- !u!1 &335320442439370758
 GameObject:
   m_ObjectHideFlags: 0
@@ -4756,7 +4756,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7713910176777810717}
   m_Layer: 5
-  m_Name: BagicCharacter
+  m_Name: Lilpa
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5165,7 +5165,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -6367560908665664636, guid: d348dff3819df794186a80cb95777629, type: 3}
+  m_Sprite: {fileID: 2028838469, guid: 36222f973b81d0e439c89434f77bb7be, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5269,7 +5269,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1.2
-  m_Text: "\uBAA8\uD5D8\uC5D0 \uC775\uC219\uCE58 \uC54A\uC740 \uCD08\uBCF4 \uBAA8\uD5D8\uAC00.\n\uAC00\uC7A5
+  m_Text: "\uBAA8\uD5D8\uC744 \uCC98\uC74C \uC2DC\uC791\uD558\uB294 \uB1E8\uD30C.\n\uAC00\uC7A5
     \uAE30\uBCF8\uC801\uC778 \uCE90\uB9AD\uD130\uC774\uB2E4."
 --- !u!222 &5817209089331355133
 CanvasRenderer:
@@ -5438,8 +5438,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 9}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: -10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7051720780449869038
 MonoBehaviour:
