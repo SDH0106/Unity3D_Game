@@ -1,7 +1,7 @@
 {
     "stats": [
         {
-            "monsterName": "우드 마스크",
+            "monsterName": "애기 박쥐",
             "monsterMaxHp": 10.0,
             "monsterDamage": 2.0,
             "monsterSpeed": 1.0,
@@ -10,16 +10,16 @@
             "monsterCoin": 5.0
         },
         {
-            "monsterName": "피그",
-            "monsterMaxHp": 50.0,
-            "monsterDamage": 5.0,
-            "monsterSpeed": 1.5,
-            "monsterDefence": 5.0,
-            "monsterExp": 5.0,
-            "monsterCoin": 10.0
+            "monsterName": "파아아악쥐",
+            "monsterMaxHp": 30.0,
+            "monsterDamage": 3.0,
+            "monsterSpeed": 2.0,
+            "monsterDefence": 2.0,
+            "monsterExp": 2.0,
+            "monsterCoin": 7.0
         },
         {
-            "monsterName": "네펜데스",
+            "monsterName": "하트 박쥐",
             "monsterMaxHp": 20.0,
             "monsterDamage": 1.0,
             "monsterSpeed": 0.0,
@@ -28,13 +28,13 @@
             "monsterCoin": 8.0
         },
         {
-            "monsterName": "카멜레온",
-            "monsterMaxHp": 30.0,
-            "monsterDamage": 3.0,
-            "monsterSpeed": 2.0,
-            "monsterDefence": 2.0,
-            "monsterExp": 2.0,
-            "monsterCoin": 7.0
+            "monsterName": "안아줘요 박쥐",
+            "monsterMaxHp": 50.0,
+            "monsterDamage": 5.0,
+            "monsterSpeed": 1.5,
+            "monsterDefence": 5.0,
+            "monsterExp": 5.0,
+            "monsterCoin": 10.0
         },
         {
             "monsterName": "고스트",

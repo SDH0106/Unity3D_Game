@@ -19,11 +19,6 @@ public class Weapon : MonoBehaviour
 
     protected GameManager gameManager;
 
-    private void Start()
-    {
-        gameManager = GameManager.Instance;
-    }
-
     public void WeaponSetting()
     {
         if (weaponInfo.Type == WEAPON_TYPE.ฝบลยวม)

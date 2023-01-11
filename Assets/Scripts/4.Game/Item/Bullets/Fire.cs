@@ -26,9 +26,18 @@ public class Fire : Bullet
     {
         if (other.tag == "Monster" && other.GetComponent<Monster>() != null)
         {
-            GameObject pool = Instantiate(damageUI, transform.position, Quaternion.Euler(90, 0, 0)).gameObject;
             other.GetComponent<Monster>().OnDamaged(damageUI.weaponDamage);
-            pool.transform.SetParent(gameManager.damageStorage);
+
+            if (damageUI.weaponDamage > other.GetComponent<Monster>().stat.monsterDefence * (1 + gameManager.round * 0.1f))
+                damageUI.isMiss = false;
+
+            else if (damageUI.weaponDamage <= other.GetComponent<Monster>().stat.monsterDefence * (1 + gameManager.round * 0.1f))
+                damageUI.isMiss = true;
+
+            damageUI.realDamage = damageUI.weaponDamage - other.GetComponent<Monster>().stat.monsterDefence * (1 + gameManager.round * 0.1f);
+
+            DamageUI pool = Instantiate(damageUI, transform.position, Quaternion.Euler(90, 0, 0)).GetComponent<DamageUI>();
+            pool.gameObject.transform.SetParent(gameManager.damageStorage);
 
             int rand = Random.Range(0, 100);
             if (rand <= 5 + gameManager.luck * 0.2)

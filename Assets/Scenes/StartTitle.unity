@@ -4376,11 +4376,11 @@ MonoBehaviour:
   bulletStorage: {fileID: 1005871281}
   damageStorage: {fileID: 1692643827}
   optionUI: {fileID: 0}
-  gameTime: 10000
+  gameTime: 5
   money: 50000
-  round: 1
-  maxHp: 0
-  physicDamage: 0
+  round: 18
+  maxHp: 100
+  physicDamage: 30
   elementDamage: 0
   shortDamage: 0
   longDamage: 0
@@ -4526,45 +4526,45 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monsterInfos:
-  - monsterName: "\uC6B0\uB4DC \uB9C8\uC2A4\uD06C"
+  - monsterName: "\uC560\uAE30 \uBC15\uC950"
     monsterMaxHp: 10
     monsterDamage: 2
     monsterSpeed: 1
     monsterDefence: 0
     monsterExp: 1
-    monsterCoin: 10
-  - monsterName: "\uD53C\uADF8"
-    monsterMaxHp: 50
-    monsterDamage: 5
-    monsterSpeed: 1.5
-    monsterDefence: 5
-    monsterExp: 5
-    monsterCoin: 15
-  - monsterName: "\uB124\uD39C\uB370\uC2A4"
-    monsterMaxHp: 20
-    monsterDamage: 1
-    monsterSpeed: 0
-    monsterDefence: 0
-    monsterExp: 3
-    monsterCoin: 13
-  - monsterName: "\uCE74\uBA5C\uB808\uC628"
+    monsterCoin: 5
+  - monsterName: "\uD30C\uC544\uC544\uC545\uC950"
     monsterMaxHp: 30
     monsterDamage: 3
     monsterSpeed: 2
     monsterDefence: 2
     monsterExp: 2
-    monsterCoin: 12
+    monsterCoin: 7
+  - monsterName: "\uD558\uD2B8 \uBC15\uC950"
+    monsterMaxHp: 20
+    monsterDamage: 1
+    monsterSpeed: 0
+    monsterDefence: 0
+    monsterExp: 3
+    monsterCoin: 8
+  - monsterName: "\uC548\uC544\uC918\uC694 \uBC15\uC950"
+    monsterMaxHp: 50
+    monsterDamage: 5
+    monsterSpeed: 1.5
+    monsterDefence: 5
+    monsterExp: 5
+    monsterCoin: 10
   - monsterName: "\uACE0\uC2A4\uD2B8"
     monsterMaxHp: 5000
     monsterDamage: 10
-    monsterSpeed: 1
-    monsterDefence: 0
+    monsterSpeed: 3
+    monsterDefence: 10
     monsterExp: 0
     monsterCoin: 0
   - monsterName: "\uD574\uACE8"
     monsterMaxHp: 5000
     monsterDamage: 10
-    monsterSpeed: 1
+    monsterSpeed: 3
     monsterDefence: 10
     monsterExp: 0
     monsterCoin: 0

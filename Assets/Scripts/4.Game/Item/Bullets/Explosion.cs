@@ -15,7 +15,7 @@ public class Explosion : MonoBehaviour
             GameObject pool = Instantiate(damageUI, collision.contacts[0].point, Quaternion.Euler(90, 0, 0)).gameObject;
             pool.GetComponent<ExDamageUI>().damage = exDamage * grade;
             pool.transform.SetParent(GameManager.Instance.damageStorage);
-            collision.collider.GetComponent<Monster>().OnDamaged(exDamage * grade);
+            collision.collider.GetComponent<Monster>().ExOnDamaged(exDamage * grade);
         }
     }
 }

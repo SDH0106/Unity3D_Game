@@ -256,9 +256,18 @@ public class StaffControl : Weapon
                     {
                         target = colliders[i].transform;
 
-                        GameObject pool = Instantiate(damageUI, colliders[i].transform.position, Quaternion.Euler(90, 0, 0)).gameObject;
-                        pool.transform.SetParent(gameManager.damageStorage);
                         colliders[i].GetComponent<Monster>().OnDamaged(damageUI.weaponDamage);
+
+                        if (damageUI.weaponDamage > colliders[i].GetComponent<Monster>().stat.monsterDefence * (1 + gameManager.round * 0.1f))
+                            damageUI.isMiss = false;
+
+                        else if (damageUI.weaponDamage <= colliders[i].GetComponent<Monster>().stat.monsterDefence * (1 + gameManager.round * 0.1f))
+                            damageUI.isMiss = true;
+
+                        damageUI.realDamage = damageUI.weaponDamage - colliders[i].GetComponent<Monster>().stat.monsterDefence * (1 + gameManager.round * 0.1f);
+
+                        DamageUI pool = Instantiate(damageUI, colliders[i].transform.position, Quaternion.Euler(90, 0, 0)).GetComponent<DamageUI>();
+                        pool.gameObject.transform.SetParent(gameManager.damageStorage);
                         if (gameManager.absorbHp > 0)
                             Character.Instance.currentHp += gameManager.absorbHp;
 

@@ -26,7 +26,7 @@ public class GameManager : Singleton<GameManager>
     [Header("StatData")]
     [SerializeField] public float maxHp;
     /*[HideInInspector]*/ public float physicDamage;
-    [HideInInspector] public float elementDamage;
+    /*[HideInInspector]*/ public float elementDamage;
     [HideInInspector] public float shortDamage;
     [HideInInspector] public float longDamage;
     [SerializeField] public float recoverHp;

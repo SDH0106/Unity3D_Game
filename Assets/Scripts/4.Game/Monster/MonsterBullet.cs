@@ -14,7 +14,7 @@ public class MonsterBullet : MonoBehaviour
     float angle;
     Vector3 dir;
 
-    public int randNum;
+    [HideInInspector] public int randNum;
     [HideInInspector] public Vector3 monsPos;
 
     private void Start()
@@ -27,12 +27,10 @@ public class MonsterBullet : MonoBehaviour
 
     void Update()
     {
-        if (randNum == 0)
-            transform.position += new Vector3(dir.x, 0, dir.z) * speed * Time.deltaTime;
+        transform.Translate(new Vector3(dir.x, dir.z, 0) * speed * Time.deltaTime);
 
         if(randNum == 1)
         {
-            transform.Translate(new Vector3(dir.x, dir.z, 0) * speed * Time.deltaTime);
             transform.RotateAround(monsPos, Vector3.up, 120 * Time.deltaTime);
         }
     }
@@ -42,10 +40,6 @@ public class MonsterBullet : MonoBehaviour
         if (randNum == 0)
         {
             dir = (Character.Instance.transform.position - transform.position).normalized;
-
-            // ÃÑ¾Ë °¢µµ
-            angle = Mathf.Atan2(dir.z, dir.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(90, -angle, 0);
         }
 
         else if (randNum == 1)

@@ -15,12 +15,24 @@ public class DamageUI : MonoBehaviour
     float printTime, initPrintTime;
 
     public float weaponDamage;
+    public float realDamage;
+
+    public bool isMiss;
 
     private void Start()
     {
         damageText.fontSize = 50;
         printTime = 1f;
         initPrintTime = printTime;
+
+        if (!isMiss)
+            damageText.text = realDamage.ToString("0.##");
+
+        else if (isMiss)
+        {
+            damageText.color = Color.red;
+            damageText.text = "Miss";
+        }
     }
 
     private void ChangeAlpha(float alpha)
@@ -32,8 +44,6 @@ public class DamageUI : MonoBehaviour
 
     private void Update()
     {
-        damageText.text = weaponDamage.ToString("0.##");
-
         transform.position += Vector3.forward * 0.5f * Time.deltaTime;
 
         printTime -= Time.deltaTime;

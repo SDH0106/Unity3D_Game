@@ -137,43 +137,59 @@ public class Monster : MonoBehaviour
         }
     }
 
+    public void ExOnDamaged(float damage)
+    {
+        hp -= damage;
+
+        if (runningCoroutine != null)
+            StopCoroutine(runningCoroutine);
+
+        runningCoroutine = MonsterColorBlink();
+        StartCoroutine(runningCoroutine);
+    }
+
     public void OnDamaged(float damage)
     {
-        if (damage >= (stat.monsterDefence * (1 + gameManager.round * 0.1f)))
+        if (damage > (stat.monsterDefence * (1 + gameManager.round * 0.1f)))
+        {
             hp -= (damage - (stat.monsterDefence * (1 + gameManager.round * 0.1f)));
 
-        if (!isFreeze)
-        {
-            if (runningCoroutine != null)
-                StopCoroutine(runningCoroutine);
+            if (!isFreeze)
+            {
+                if (runningCoroutine != null)
+                    StopCoroutine(runningCoroutine);
 
-            runningCoroutine = MonsterColorBlink();
-            StartCoroutine(runningCoroutine);
+                runningCoroutine = MonsterColorBlink();
+                StartCoroutine(runningCoroutine);
+            }
         }
     }
 
     public void OnDamaged(float damage, bool freeze)
     {
-        isFreeze = freeze;
+        if (!isFreeze)
+            isFreeze = freeze;
 
-        if (damage >= (stat.monsterDefence * (1 + gameManager.round * 0.1f)))
+        if (damage > (stat.monsterDefence * (1 + gameManager.round * 0.1f)))
+        {
             hp -= (damage - (stat.monsterDefence * (1 + gameManager.round * 0.1f)));
 
-        if (isFreeze == true)
-        {
-            isWalk = false;
+            if (isFreeze == true)
+            {
+                isWalk = false;
 
-            if (runningCoroutine != null)
-                StopCoroutine(runningCoroutine);
+                if (runningCoroutine != null)
+                    StopCoroutine(runningCoroutine);
 
-            runningCoroutine = MonsterFreeze();
-            StartCoroutine(runningCoroutine);
-        }
+                runningCoroutine = MonsterFreeze();
+                StartCoroutine(runningCoroutine);
+            }
 
-        if (isFreeze == false)
-        {
-            runningCoroutine = MonsterColorBlink();
-            StartCoroutine(runningCoroutine);
+            if (isFreeze == false)
+            {
+                runningCoroutine = MonsterColorBlink();
+                StartCoroutine(runningCoroutine);
+            }
         }
     }
 

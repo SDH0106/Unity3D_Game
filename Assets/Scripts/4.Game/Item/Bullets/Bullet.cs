@@ -46,9 +46,18 @@ public class Bullet : MonoBehaviour
     {
         if (other.tag == "Monster" && other.GetComponent<Monster>() != null)
         {
-            GameObject pool = Instantiate(damageUI, transform.position, Quaternion.Euler(90, 0, 0)).gameObject;
-            pool.transform.SetParent(gameManager.damageStorage);
             other.GetComponent<Monster>().OnDamaged(damageUI.weaponDamage);
+
+            if (damageUI.weaponDamage > other.GetComponent<Monster>().stat.monsterDefence * (1 + gameManager.round * 0.1f))
+                damageUI.isMiss = false;
+
+            else if (damageUI.weaponDamage <= other.GetComponent<Monster>().stat.monsterDefence * (1 + gameManager.round * 0.1f))
+                damageUI.isMiss = true;
+
+            damageUI.realDamage = damageUI.weaponDamage - other.GetComponent<Monster>().stat.monsterDefence * (1 + gameManager.round * 0.1f);
+
+            DamageUI pool = Instantiate(damageUI, transform.position, Quaternion.Euler(90, 0, 0)).GetComponent<DamageUI>();
+            pool.gameObject.transform.SetParent(gameManager.damageStorage);
             if (gameManager.absorbHp > 0)
                 Character.Instance.currentHp += gameManager.absorbHp;
             DestroyBullet();
