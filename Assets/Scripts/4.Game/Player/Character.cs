@@ -15,7 +15,7 @@ public enum CHARACTER_NUM
 
 public class Character : Singleton<Character>
 {
-    [SerializeField] SpriteRenderer rend;
+    [SerializeField] public SpriteRenderer rend;
     [SerializeField] ParticleSystem particle;
     [SerializeField] GameObject gardianAngel;
     [SerializeField] GameObject gardianEffect;

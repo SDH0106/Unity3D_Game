@@ -4378,8 +4378,8 @@ MonoBehaviour:
   optionUI: {fileID: 0}
   gameTime: 5
   money: 50000
-  round: 18
-  maxHp: 100
+  round: 20
+  maxHp: 10000
   physicDamage: 30
   elementDamage: 0
   shortDamage: 0

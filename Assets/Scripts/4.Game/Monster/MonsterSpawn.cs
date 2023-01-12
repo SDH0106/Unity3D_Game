@@ -56,8 +56,6 @@ public class MonsterSpawn : MonoBehaviour
                 InvokeRepeating("RendSpawnImage", 1.5f, spawnDelay / ((gameManager.round + 5) / 5));
         }*/
 
-        RendSpawnImage();
-
         if (gameManager.round % 10 == 0)
         {
             gameManager.isBossDead = false;
@@ -213,8 +211,7 @@ public class MonsterSpawn : MonoBehaviour
             }
         }
 
-        //return spawnNum;
-        return 3;
+        return spawnNum;
     }
 
     private void OnGetMonster(Monster monster)

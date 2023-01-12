@@ -14,6 +14,7 @@ public class GameSceneUI : Singleton<GameSceneUI>
     [SerializeField] Camera subCam;
 
     [Header("HP")]
+    [SerializeField] Image chararcterImage;
     [SerializeField] Text hpText;
     [SerializeField] Text maxHpText;
     [SerializeField] Slider hpBar;
@@ -33,6 +34,7 @@ public class GameSceneUI : Singleton<GameSceneUI>
 
     [Header("Dash")]
     [SerializeField] GameObject dash;
+    [SerializeField] Text dashKey;
     [SerializeField] Image dashImage;
     [SerializeField] Text dashCoolTime;
     [SerializeField] GameObject dashCountParent;
@@ -84,6 +86,7 @@ public class GameSceneUI : Singleton<GameSceneUI>
         statWindow.SetActive(false);
         chestPassive.SetActive(false);
         subCam.gameObject.SetActive(false);
+        chararcterImage.sprite = character.rend.sprite;
     }
 
     private void Update()
@@ -175,6 +178,7 @@ public class GameSceneUI : Singleton<GameSceneUI>
         if (gameManager.dashCount > 0)
         {
             dash.SetActive(true);
+            dashKey.text = KeySetting.keys[KeyAction.DASH].ToString();
             Color color = dashImage.color;
             dashImage.fillAmount = 1;
 
