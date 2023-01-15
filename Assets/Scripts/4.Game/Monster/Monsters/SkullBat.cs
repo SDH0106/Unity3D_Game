@@ -24,7 +24,6 @@ public class SkullBat : Monster
 
     void Update()
     {
-        Debug.Log(attackTime);
         monsterHpBar.value = 1 - (hp / maxHp);
 
         if (isDead == false && !isAttack)

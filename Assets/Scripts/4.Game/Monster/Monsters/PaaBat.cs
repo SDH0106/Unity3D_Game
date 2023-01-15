@@ -38,7 +38,7 @@ public class PaaBat : Monster
         zDistance = Mathf.Abs(character.transform.position.z - transform.position.z);
         anim.SetBool("isAttack", isAttack);
 
-        if (xDistance < 2 && zDistance <= 0.4f)
+        if (xDistance < 3 && zDistance <= 0.8f)
         {
             isWalk = false;
             isAttack = true;

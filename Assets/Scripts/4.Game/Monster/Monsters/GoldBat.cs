@@ -111,6 +111,12 @@ public class GoldBat : Monster
         transform.position = character.transform.position;
     }
 
+    public void StartAppear()
+    {
+        state = 2;
+        isWalk = false;
+    }
+
     public void EndAppear()
     {
         state = 0;
