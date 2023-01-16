@@ -4380,7 +4380,8 @@ MonoBehaviour:
   money: 50000
   round: 1
   maxHp: 10000
-  physicDamage: 30
+  percentDamage: 0
+  physicDamage: 0
   elementDamage: 0
   shortDamage: 0
   longDamage: 0
@@ -4392,10 +4393,11 @@ MonoBehaviour:
   range: 0
   luck: 0
   critical: 10
+  avoid: 0
   passiveIntVariables: 
   passiveFloatVariables: []
   passiveBoolVariables: 
-  dashCount: 2
+  dashCount: 0
   salePercent: 0
   increaseExp: 0
   coinRange: 0

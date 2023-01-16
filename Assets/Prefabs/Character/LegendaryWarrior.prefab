@@ -5109,6 +5109,7 @@ MonoBehaviour:
   maxExp: 0
   damageRatio: 1.2
   characterSpeed: 2
+  avoid: 20
   invincibleTime: 1
   dashCoolTime: 2
   initDashCoolTime: 0

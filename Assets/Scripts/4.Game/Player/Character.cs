@@ -29,6 +29,7 @@ public class Character : Singleton<Character>
     [SerializeField] public float maxExp;
     [SerializeField] public float damageRatio;
     [SerializeField] float characterSpeed;
+    [SerializeField] float avoid;
     [SerializeField] float invincibleTime;
 
     [HideInInspector] public float dashCoolTime;
@@ -81,6 +82,8 @@ public class Character : Singleton<Character>
         maxHp = characterHp + gameManager.maxHp;
         currentHp = maxHp;
         speed = gameManager.speed + characterSpeed;
+        gameManager.stats[13] = damageRatio;
+        gameManager.stats[14] = avoid;
         maxExp = 10;
         level = 1;
         levelUpCount = 0;
@@ -292,11 +295,18 @@ public class Character : Singleton<Character>
         }
     }
 
+    int avoidRand;
+
     public void OnDamaged(Collider other, float damage)
     {
         if (!isAttacked)
         {
-            currentHp -= Mathf.Round((damage - gameManager.defence) * 10) / 10;
+            avoidRand = Random.Range(0, 100);
+
+            if (avoidRand > avoid)
+            {
+                currentHp -= Mathf.Round((damage - gameManager.defence) * 10) / 10;
+            }
 
             if (currentHp > 0)
                 StartCoroutine(OnInvincible());
@@ -337,7 +347,7 @@ public class Character : Singleton<Character>
     {
         anim.SetTrigger("isAttacked");
         isAttacked = true;
-        if (currentHp > 0)
+        if (currentHp > 0 && avoidRand > avoid)
             StartCoroutine(PlayerColorBlink());
 
         yield return new WaitForSeconds(invincibleTime);

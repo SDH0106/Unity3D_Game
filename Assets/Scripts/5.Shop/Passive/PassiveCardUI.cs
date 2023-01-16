@@ -30,8 +30,8 @@ public class PassiveCardUI : MonoBehaviour
 
     [HideInInspector] public PassiveInfo selectedPassive;
 
-    float[] stats = new float[13];
-    string[] statTypes = new string[13];
+    float[] stats = new float[15];
+    string[] statTypes = new string[15];
 
     int[] passiveIntVariables = new int[10];
     float[] passiveFloatVariables = new float[10];
@@ -146,6 +146,8 @@ public class PassiveCardUI : MonoBehaviour
         stats[10] = selectedPassive.Luck;
         stats[11] = selectedPassive.Range;
         stats[12] = selectedPassive.Critical;
+        stats[13] = selectedPassive.PercentDamage;
+        stats[14] = selectedPassive.Avoid;
 
         statTypes[0] = "최대 체력";
         statTypes[1] = "체력 회복";
@@ -160,6 +162,8 @@ public class PassiveCardUI : MonoBehaviour
         statTypes[10] = "행운";
         statTypes[11] = "사거리";
         statTypes[12] = "크리티컬";
+        statTypes[13] = "공격력 배율";
+        statTypes[14] = "회피율";
 
         passiveIntVariables[0] = selectedPassive.DashCount;
 

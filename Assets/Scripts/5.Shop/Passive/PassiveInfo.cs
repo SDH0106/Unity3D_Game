@@ -13,6 +13,8 @@ public class PassiveInfo : ScriptableObject
     [SerializeField] string itemName;
     [SerializeField] int itemPrice;
     [SerializeField] int maxCount;
+
+    [Header("Stat")]
     [SerializeField] float hp;
     [SerializeField] float recoverHp;
     [SerializeField] float absorbHp;
@@ -26,6 +28,10 @@ public class PassiveInfo : ScriptableObject
     [SerializeField] float range;
     [SerializeField] float luck;
     [SerializeField] float critical;
+    [SerializeField] float percentDamage;
+    [SerializeField] float avoid;
+
+    [Header("Item")]
     [SerializeField] float coinRange;
     [SerializeField] float increaseExp;
     [SerializeField] float monsterSpeed;
@@ -39,10 +45,6 @@ public class PassiveInfo : ScriptableObject
     [SerializeField] string description;
 
     [HideInInspector] public float weight;
-
-    /*
-    [SerializeField] int monsterCount;
-    */
 
     public Sprite ItemSprite => itemSprite;
     public Grade ItemGrade => itemGrade;
@@ -73,4 +75,6 @@ public class PassiveInfo : ScriptableObject
     public bool DoubleShot => doubleShot;
     public bool Revive => revive;
     public string Description => description;
+    public float PercentDamage => percentDamage;
+    public float Avoid => avoid;
 }

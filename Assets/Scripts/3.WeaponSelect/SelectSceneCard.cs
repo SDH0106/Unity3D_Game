@@ -9,6 +9,7 @@ using UnityEngine.TextCore.Text;
 
 public class SelectSceneCard : MonoBehaviour
 {
+    [SerializeField] GameObject lockPanel;
     [SerializeField] public WeaponInfo[] weaponInfos;
     [SerializeField] Image cardBack;
     [SerializeField] Image cardBackLine;
@@ -32,6 +33,20 @@ public class SelectSceneCard : MonoBehaviour
         count = 0;
         Setting();
         CardImage();
+
+        if (Character.Instance.characterNum == 0)
+        {
+            lockPanel.SetActive(false);
+        }
+
+        if (Character.Instance.characterNum == 1)
+        {
+            if (selectedWeapon.Type == WeaponInfo.WEAPON_TYPE.°Ë)
+                lockPanel.SetActive(false);
+
+            else
+                lockPanel.SetActive(true);
+        }
     }
 
     private void Update()

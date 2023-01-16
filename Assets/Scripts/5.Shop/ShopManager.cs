@@ -31,6 +31,8 @@ public class ShopManager : Singleton<ShopManager>
     [SerializeField] Text ran;
     [SerializeField] Text luk;
     [SerializeField] Text cri;
+    [SerializeField] Text percentDamage;
+    [SerializeField] Text avoid;
 
     [Header("Prefabs")]
     [SerializeField] Transform cardsParent;
@@ -63,19 +65,25 @@ public class ShopManager : Singleton<ShopManager>
 
     private void Start()
     {
+        SoundManager.Instance.PlayBGM(2);
+
         weightWeaponValue = new float[4];
         weightPassiveValue = new float[4];
-        SoundManager.Instance.PlayBGM(2);
-        gameManager = GameManager.Instance;
-        itemManager = ItemManager.Instance;
-        character = Character.Instance;
-        initPriceColor = rerollMoneyText.color;
-        clickUI.gameObject.SetActive(false);
-        rerollMoney = -gameManager.round;
         lockBools = new bool[4];
         wpCheck = new int[4];
         cards = new GameObject[4];
+        
+        gameManager = GameManager.Instance;
+        itemManager = ItemManager.Instance;
+        character = Character.Instance;
+
+        clickUI.gameObject.SetActive(false);
         descripUI.SetActive(false);
+
+        initPriceColor = rerollMoneyText.color;
+        
+        rerollMoney = -gameManager.round;
+        
         StartCardSlot();
         StartCheckLock();
     }
@@ -125,6 +133,8 @@ public class ShopManager : Singleton<ShopManager>
         ran.text = gameManager.range.ToString("0.#");
         luk.text = gameManager.luck.ToString("0.#");
         cri.text = gameManager.critical.ToString("0.#");
+        percentDamage.text = gameManager.percentDamage.ToString("0.0#");
+        avoid.text = gameManager.avoid.ToString("0.#");
     }
 
     public void ShowStatDescription(int num)

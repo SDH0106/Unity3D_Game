@@ -77,7 +77,7 @@ public class Weapon : MonoBehaviour
             }
         }
 
-        damage = Mathf.Round(damage * Character.Instance.damageRatio * 10) * 0.1f;
+        damage = Mathf.Round(damage * gameManager.percentDamage * 10) * 0.1f;
 
         if (damage < 0)
             damage = 0;

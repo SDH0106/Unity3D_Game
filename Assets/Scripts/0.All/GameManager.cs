@@ -25,8 +25,9 @@ public class GameManager : Singleton<GameManager>
 
     [Header("StatData")]
     [SerializeField] public float maxHp;
-    /*[HideInInspector]*/ public float physicDamage;
-    /*[HideInInspector]*/ public float elementDamage;
+    [HideInInspector] public float percentDamage;
+    [HideInInspector] public float physicDamage;
+    [HideInInspector] public float elementDamage;
     [HideInInspector] public float shortDamage;
     [HideInInspector] public float longDamage;
     [SerializeField] public float recoverHp;
@@ -37,12 +38,13 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] public float range;
     [SerializeField] public float luck;
     [SerializeField] public float critical;
+    [SerializeField] public float avoid;
 
     #region 특수 패시브
     [HideInInspector] public int[] passiveIntVariables;
     [HideInInspector] public float[] passiveFloatVariables;
     [HideInInspector] public bool[] passiveBoolVariables;
-    /*[HideInInspector]*/ public int dashCount;
+    [HideInInspector] public int dashCount;
     [HideInInspector] public float salePercent;
     [HideInInspector] public float increaseExp;
     [HideInInspector] public float coinRange;
@@ -115,7 +117,7 @@ public class GameManager : Singleton<GameManager>
 
     void InitArray()
     {
-        stats = new float[13];
+        stats = new float[15];
         stats[0] = maxHp;
         stats[1] = recoverHp;
         stats[2] = absorbHp;
@@ -129,6 +131,8 @@ public class GameManager : Singleton<GameManager>
         stats[10] = luck;
         stats[11] = range;
         stats[12] = critical;
+        stats[13] = percentDamage;
+        stats[14] = avoid;
 
         passiveIntVariables = new int[10];
         passiveIntVariables[0] = dashCount;
@@ -162,6 +166,8 @@ public class GameManager : Singleton<GameManager>
         luck = stats[10];
         range = stats[11];
         critical = stats[12];
+        percentDamage = stats[13];
+        avoid = stats[14];
     }
 
     void IntVariableArray()
