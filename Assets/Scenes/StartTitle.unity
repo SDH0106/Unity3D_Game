@@ -4376,7 +4376,7 @@ MonoBehaviour:
   bulletStorage: {fileID: 1005871281}
   damageStorage: {fileID: 1692643827}
   optionUI: {fileID: 0}
-  gameTime: 100
+  gameTime: 0
   money: 50000
   round: 1
   maxHp: 10000

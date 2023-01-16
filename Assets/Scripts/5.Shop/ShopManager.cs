@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
@@ -6,7 +7,6 @@ using UnityEngine;
 using UnityEngine.Purchasing.MiniJSON;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.XR;
 
 public class ShopManager : Singleton<ShopManager>
 {
@@ -17,6 +17,7 @@ public class ShopManager : Singleton<ShopManager>
     [SerializeField] public GameObject backgroundImage;
 
     [Header("Stat")]
+    [SerializeField] GameObject descripUI;
     [SerializeField] Text maxHp;
     [SerializeField] Text reHp;
     [SerializeField] Text apHp;
@@ -74,13 +75,13 @@ public class ShopManager : Singleton<ShopManager>
         lockBools = new bool[4];
         wpCheck = new int[4];
         cards = new GameObject[4];
+        descripUI.SetActive(false);
         StartCardSlot();
         StartCheckLock();
     }
 
     private void Update()
     {
-
         if (gameManager.currentScene == "Shop")
         {
             gameObject.SetActive(true);
@@ -126,16 +127,27 @@ public class ShopManager : Singleton<ShopManager>
         cri.text = gameManager.critical.ToString("0.#");
     }
 
+    public void ShowStatDescription(int num)
+    {
+        descripUI.SetActive(true);
+        descripUI.GetComponent<DescriptionUI>().SetTextInfo(num);
+    }
+
+    public void CloseStatDescription()
+    {
+        descripUI.SetActive(false);
+    }
+
     public void ToGameScene()
     {
         gameManager.currentScene = "Game";
-        SceneManager.LoadScene("Game");
         character.transform.position = Vector3.zero;
         gameManager.round++;
         rerollMoney = -gameManager.round;
         character.currentHp = character.maxHp;
         character.dashCount = gameManager.dashCount;
         character.dashCoolTime = character.initDashCoolTime;
+        SceneManager.LoadScene("Game");
     }
 
     void ImageAlphaChange(int i, int a, Image image)
@@ -441,7 +453,7 @@ public class ShopManager : Singleton<ShopManager>
             totalWeight += weightWeaponValue[i];
         }
 
-        float rand = Random.Range(0, totalWeight);
+        float rand = UnityEngine.Random.Range(0, totalWeight);
         float gradeNum = 0;
         float total = 0;
 
@@ -497,7 +509,7 @@ public class ShopManager : Singleton<ShopManager>
             totalWeight += passiveCard.passiveInfo[i].weight;
         }
 
-        float rand = Random.Range(0, totalWeight);
+        float rand = UnityEngine.Random.Range(0, totalWeight);
         float total = 0;
 
         for (int i = 0; i < passiveCardUI.GetComponent<PassiveCardUI>().passiveInfo.Length; i++)
@@ -514,7 +526,7 @@ public class ShopManager : Singleton<ShopManager>
 
                 else
                 {
-                    rand = Random.Range(0, totalWeight);
+                    rand = UnityEngine.Random.Range(0, totalWeight);
                     total = 0;
                     i = 0;
                 }
