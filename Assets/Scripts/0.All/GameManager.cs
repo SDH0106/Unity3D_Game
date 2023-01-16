@@ -7,6 +7,7 @@ using System.Xml.Schema;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 using UnityEngine.TextCore.Text;
 using UnityEngine.Windows.WebCam;
@@ -16,7 +17,6 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] Texture2D aimCursor;
     [SerializeField] public Transform bulletStorage;
     [SerializeField] public Transform damageStorage;
-    [SerializeField] GameObject optionUI;
 
     [Header("GameData")]
     [SerializeField] float gameTime;
@@ -68,23 +68,22 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector] public bool isClear;
     [HideInInspector] public bool isBossDead;
 
+    public float gameStartTime;
+    public float gameEndTime;
+
     protected override void Awake()
     {
         base.Awake();
         DontDestroyOnLoad(this);
     }
-
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
         //InitSetting();
         InitArray();
-
         currentGameTime = gameTime;
-
         isPause = false;
         Time.timeScale = 1;
-
         isPause = false;
         isClear = false;
         isBossDead = false;

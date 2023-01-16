@@ -11,6 +11,11 @@ public class EndUI : Singleton<EndUI>
     [SerializeField] GameObject clearUI;
     [SerializeField] Text round;
 
+    [Header("Time")]
+    [SerializeField] Text hTimeText;
+    [SerializeField] Text mTimeText;
+    [SerializeField] Text sTimeText;
+
     [Header("WeaponSlot")]
     [SerializeField] Transform weaponSlotParent;
     [SerializeField] GameObject weaponSlotPrefab;
@@ -40,6 +45,11 @@ public class EndUI : Singleton<EndUI>
 
     [HideInInspector] public int[] weaponCount;
 
+    float endTime;
+    float endTimeS;
+    float endTimeM;
+    float endTimeH;
+
     private void Start()
     {
         gameManager = GameManager.Instance;
@@ -50,6 +60,20 @@ public class EndUI : Singleton<EndUI>
         SettingStatText();
         WeaponSlotSetting();
         PassiveSlotSetting();
+        TimeSetting();
+    }
+
+    void TimeSetting()
+    {
+        endTime = Mathf.Round(gameManager.gameEndTime - gameManager.gameStartTime);
+
+        endTimeS = Mathf.Floor((endTime % 3600) % 60);
+        endTimeM = Mathf.Floor(((endTime - endTimeS) % 3600) / 60);
+        endTimeH = Mathf.Floor((endTime - endTimeM) / 3600);
+
+        hTimeText.text = endTimeH.ToString();
+        mTimeText.text = endTimeM.ToString();
+        sTimeText.text = endTimeS.ToString();
     }
 
     void UISetting()

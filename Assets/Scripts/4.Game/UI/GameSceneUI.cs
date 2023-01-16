@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.UI;
 using UnityEngine;
@@ -87,6 +88,9 @@ public class GameSceneUI : Singleton<GameSceneUI>
         chestPassive.SetActive(false);
         subCam.gameObject.SetActive(false);
         chararcterImage.sprite = character.rend.sprite;
+
+        if (gameManager.round == 1)
+            gameManager.gameStartTime = Time.realtimeSinceStartup;
     }
 
     private void Update()
@@ -136,6 +140,9 @@ public class GameSceneUI : Singleton<GameSceneUI>
             {
                 if (gameManager.isClear && gameManager.isBossDead)
                 {
+                    if (!gameClearUI.activeSelf)
+                        gameManager.gameEndTime = Time.realtimeSinceStartup;
+
                     gameClearUI.SetActive(true);
 
                     if (character.characterNum == (int)CHARACTER_NUM.Bagic)
@@ -149,6 +156,9 @@ public class GameSceneUI : Singleton<GameSceneUI>
 
         else if (character.isDead)
         {
+            if (!gameOverUI.activeSelf)
+                gameManager.gameEndTime = Time.realtimeSinceStartup;
+
             gameOverUI.SetActive(true);
 
             if (gameOverText.GetComponent<TypingText>().isOver == true)
