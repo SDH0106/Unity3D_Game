@@ -65,6 +65,12 @@ public class Bullet : MonoBehaviour
 
             Instantiate(effectPrefab, transform.position, transform.rotation);
         }
+
+        if(other.CompareTag("Tree"))
+        {
+            DestroyBullet();
+            CancelInvoke("DestroyBullet");
+        }
     }
 
     public void SetManagedPool(IObjectPool<Bullet> pool)

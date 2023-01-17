@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.UI;
@@ -12,6 +13,7 @@ using UnityEngine.UI;
 public class GameSceneUI : Singleton<GameSceneUI>
 {
     [SerializeField] public Collider ground;
+    [SerializeField] GameObject treePrefab;
     [SerializeField] Camera subCam;
 
     [Header("HP")]
@@ -91,6 +93,22 @@ public class GameSceneUI : Singleton<GameSceneUI>
 
         if (gameManager.round == 1)
             gameManager.gameStartTime = Time.realtimeSinceStartup;
+
+        SpawnTree();
+    }
+
+    void SpawnTree()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            GameObject tree = Instantiate(treePrefab);
+            float groundX = ground.bounds.size.x;
+            float groundZ = ground.bounds.size.z;
+            groundX = UnityEngine.Random.Range((groundX / 2) * -1 + ground.bounds.center.x, groundX / 2 + ground.bounds.center.x);
+            groundZ = UnityEngine.Random.Range((groundZ / 2) * -1 + ground.bounds.center.z, groundZ / 2 + ground.bounds.center.z);
+
+            tree.transform.position = new Vector3(groundX, 0, groundZ);
+        }
     }
 
     private void Update()

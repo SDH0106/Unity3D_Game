@@ -4375,11 +4375,10 @@ MonoBehaviour:
   aimCursor: {fileID: 2800000, guid: b8e78032f8af0954784d1fe9e5a09187, type: 3}
   bulletStorage: {fileID: 1005871281}
   damageStorage: {fileID: 1692643827}
-  optionUI: {fileID: 0}
-  gameTime: 60
+  gameTime: 20
   money: 50000
   round: 1
-  maxHp: 0
+  maxHp: 100
   percentDamage: 0
   physicDamage: 0
   elementDamage: 0
@@ -4388,7 +4387,7 @@ MonoBehaviour:
   recoverHp: 0
   absorbHp: 0
   defence: 0
-  attackSpeed: 20
+  attackSpeed: 0
   speed: 2
   range: 0
   luck: 0
@@ -4398,6 +4397,7 @@ MonoBehaviour:
   passiveFloatVariables: []
   passiveBoolVariables: 
   dashCount: 0
+  buffNum: 0
   salePercent: 0
   increaseExp: 0
   coinRange: 0
@@ -4407,6 +4407,9 @@ MonoBehaviour:
   luckCritical: 0
   doubleShot: 0
   revive: 0
+  ggoGgoSummon: 0
+  ilsoonSummon: 0
+  wakgoodSummon: 0
   currentGameTime: 0
   currentScene: 
   stats: []

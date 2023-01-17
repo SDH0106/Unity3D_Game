@@ -45,6 +45,13 @@ public class Character : Singleton<Character>
     [HideInInspector] public float currentHp;
     [HideInInspector] public float speed;
 
+    [Header("Summon")]
+    [SerializeField] GameObject ggoGgoPrefab;
+    [SerializeField] GameObject ilsoonPrefab;
+    [SerializeField] GameObject wakgoodPrefab;
+    [SerializeField]  public Transform[] summonPos;
+    [HideInInspector] public int summonNum;
+
     Animator anim;
     Collider ground;
 
@@ -54,12 +61,16 @@ public class Character : Singleton<Character>
     GameManager gameManager;
 
     Vector3 dir;
-    public float x;
-    public float z;
+    [HideInInspector] public float x;
+    [HideInInspector] public float z;
 
     float recoverTime;
 
     [HideInInspector] public int levelUpCount;
+
+    [HideInInspector] public bool isBuff = false;
+    [HideInInspector] public float charBuffDmg = 0;
+    [HideInInspector] public float buffTime = 8;
 
     protected override void Awake()
     {
@@ -95,6 +106,12 @@ public class Character : Singleton<Character>
 
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.I))
+        {
+            GameObject summon= Instantiate(ggoGgoPrefab, summonPos[0].position, ggoGgoPrefab.transform.rotation);
+            summon.transform.parent = gameManager.transform;
+        }
+
         bool xInput = (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Left"))) || (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Right")));
         bool zInput = (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Up"))) || (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Down")));
 
@@ -126,7 +143,21 @@ public class Character : Singleton<Character>
         z = Input.GetAxisRaw("Vertical");*/
 
         maxHp = characterHp + gameManager.maxHp;
-        speed = gameManager.speed + characterSpeed;
+
+        if (!isBuff)
+            speed = gameManager.speed + characterSpeed;
+
+        else if (isBuff)
+        {
+            OnBuff();
+            buffTime -= Time.deltaTime;
+
+            if(buffTime <= 0)
+            {
+                isBuff = false;
+                buffTime = 8;
+            }
+        }
 
         if (exp >= maxExp)
         {
@@ -159,6 +190,60 @@ public class Character : Singleton<Character>
             }
 
             anim.SetBool("isRun", isRun);
+        }
+
+        if (summonNum < 3)
+            SummonPet();
+    }
+
+    void SummonPet()
+    {
+        if(gameManager.ggoGgoSummon)
+        {
+            GameObject Summon = Instantiate(ggoGgoPrefab);
+            Summon.transform.position = summonPos[summonNum].position;
+            summonNum++;
+            gameManager.passiveBoolVariables[5] = false;
+        }
+
+        else if(gameManager.ilsoonSummon)
+        {
+            GameObject Summon = Instantiate(ilsoonPrefab);
+            Summon.transform.position = summonPos[summonNum].position;
+            summonNum++;
+            gameManager.passiveBoolVariables[6] = false;
+        }
+
+        else if(gameManager.wakgoodSummon)
+        {
+            GameObject Summon = Instantiate(wakgoodPrefab);
+            Summon.transform.position = summonPos[summonNum].position;
+            summonNum++;
+            gameManager.passiveBoolVariables[7] = false;
+        }
+    }
+
+    void OnBuff()
+    {
+        if (gameManager.buffNum == 1)
+        {
+            speed = gameManager.speed + characterSpeed;
+            gameManager.attackSpeed = gameManager.stats[8] + 5;
+            gameManager.percentDamage = gameManager.stats[13];
+        }
+
+        else if (gameManager.buffNum == 2)
+        {
+            speed = gameManager.speed + characterSpeed + 3f;
+            gameManager.attackSpeed = gameManager.stats[8];
+            gameManager.percentDamage = gameManager.stats[13];
+        }
+
+        else if (gameManager.buffNum == 3)
+        {
+            speed = gameManager.speed + characterSpeed;
+            gameManager.attackSpeed = gameManager.stats[8];
+            gameManager.percentDamage = gameManager.stats[13] + 0.5f;
         }
     }
 

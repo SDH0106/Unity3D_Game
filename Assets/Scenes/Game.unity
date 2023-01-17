@@ -47307,6 +47307,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ground: {fileID: 896421749}
+  treePrefab: {fileID: 7007229096887857488, guid: 4fe82b81e5e6ef04ca006cabf70df4fe, type: 3}
   subCam: {fileID: 2109050294}
   chararcterImage: {fileID: 187368260}
   hpText: {fileID: 835948309}

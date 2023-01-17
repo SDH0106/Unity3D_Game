@@ -137,7 +137,8 @@ public class Monster : MonoBehaviour
         }
     }
 
-    public void ExOnDamaged(float damage)
+    // 방어력 없이 바로 깎이는 대미지
+    public void PureOnDamaged(float damage)
     {
         hp -= damage;
 

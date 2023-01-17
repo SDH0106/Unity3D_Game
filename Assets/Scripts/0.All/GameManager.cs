@@ -45,6 +45,7 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector] public float[] passiveFloatVariables;
     [HideInInspector] public bool[] passiveBoolVariables;
     [HideInInspector] public int dashCount;
+    [HideInInspector] public int buffNum;
     [HideInInspector] public float salePercent;
     [HideInInspector] public float increaseExp;
     [HideInInspector] public float coinRange;
@@ -54,6 +55,10 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector] public bool luckCritical;
     [HideInInspector] public bool doubleShot;
     [HideInInspector] public bool revive;
+    [HideInInspector] public bool ggoGgoSummon;
+    [HideInInspector] public bool ilsoonSummon;
+    [HideInInspector] public bool wakgoodSummon;
+
     #endregion
 
     [HideInInspector] public float currentGameTime;
@@ -68,14 +73,15 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector] public bool isClear;
     [HideInInspector] public bool isBossDead;
 
-    public float gameStartTime;
-    public float gameEndTime;
+    [HideInInspector] public float gameStartTime;
+    [HideInInspector] public float gameEndTime;
 
     protected override void Awake()
     {
         base.Awake();
         DontDestroyOnLoad(this);
     }
+
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
@@ -112,6 +118,9 @@ public class GameManager : Singleton<GameManager>
         luckCritical = false;
         doubleShot = false;
         revive = false;
+        ggoGgoSummon = false;
+        ilsoonSummon = false;
+        wakgoodSummon = false;
     }
 
     void InitArray()
@@ -142,12 +151,15 @@ public class GameManager : Singleton<GameManager>
         passiveFloatVariables[2] = monsterSlow;
         passiveFloatVariables[3] = salePercent;
 
-        passiveBoolVariables = new bool[5];
+        passiveBoolVariables = new bool[8];
         passiveBoolVariables[0] = luckCoin;
         passiveBoolVariables[1] = luckDamage;
         passiveBoolVariables[2] = luckCritical;
         passiveBoolVariables[3] = doubleShot;
         passiveBoolVariables[4] = revive;
+        passiveBoolVariables[5] = ggoGgoSummon;
+        passiveBoolVariables[6] = ilsoonSummon;
+        passiveBoolVariables[7] = wakgoodSummon;
     }
 
     void StatArray()
@@ -159,13 +171,15 @@ public class GameManager : Singleton<GameManager>
         physicDamage = stats[4];
         elementDamage = stats[5];
         shortDamage = stats[6];
-        longDamage  = stats[7];
-        attackSpeed = stats[8];
+        longDamage = stats[7];
+        if (!Character.Instance.isBuff)
+            attackSpeed = stats[8];
         speed = stats[9];
         luck = stats[10];
         range = stats[11];
         critical = stats[12];
-        percentDamage = stats[13];
+        if (!Character.Instance.isBuff)
+            percentDamage = stats[13];
         avoid = stats[14];
     }
 
@@ -189,6 +203,9 @@ public class GameManager : Singleton<GameManager>
         luckCritical = passiveBoolVariables[2];
         doubleShot = passiveBoolVariables[3];
         revive = passiveBoolVariables[4];
+        ggoGgoSummon = passiveBoolVariables[5];
+        ilsoonSummon = passiveBoolVariables[6];
+        wakgoodSummon = passiveBoolVariables[7];
     }
 
     private void Update()
@@ -201,11 +218,15 @@ public class GameManager : Singleton<GameManager>
             isClear = true;
         }
 
-        StatArray();
-        IntVariableArray();
-        FloatVariableArray();
-        BoolVariableArray();
-        OnGameScene();
+        if (scene.buildIndex > 1)
+        {
+            StatArray();
+            IntVariableArray();
+            FloatVariableArray();
+            BoolVariableArray();
+
+            OnGameScene();
+        }
     }
 
     void OnGameScene()
