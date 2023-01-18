@@ -108,7 +108,7 @@ public class Character : Singleton<Character>
     {
         if(Input.GetKeyDown(KeyCode.I))
         {
-            GameObject summon= Instantiate(ggoGgoPrefab, summonPos[0].position, ggoGgoPrefab.transform.rotation);
+            GameObject summon= Instantiate(wakgoodPrefab, summonPos[0].position, wakgoodPrefab.transform.rotation);
             summon.transform.parent = gameManager.transform;
         }
 

@@ -9,6 +9,7 @@ public class Summons : MonoBehaviour
     [SerializeField] protected Transform bulletTransform;
     [SerializeField] protected float speed;
     [SerializeField] protected float moveRange;
+    [SerializeField] protected float attackDelay;
 
     protected float defaultSpeed;
 
@@ -24,9 +25,6 @@ public class Summons : MonoBehaviour
 
     protected Character character;
     protected GameManager gameManager;
-
-    protected int summonRound;
-    protected int summonPosNum;
 
     virtual protected void InitSetting()
     {
@@ -69,14 +67,14 @@ public class Summons : MonoBehaviour
         randomPos = character.transform.position + randPoint;
     }
 
-    protected IEnumerator IEAttackDelay()
+    virtual protected IEnumerator IEAttackDelay()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(attackDelay);
 
         canAttack = true;
     }
 
-    public void EndAttack()
+    virtual public void EndAttack()
     {
         isAttack = false;
         speed = defaultSpeed;
@@ -103,12 +101,12 @@ public class Summons : MonoBehaviour
                 else if (dir.x >= 0)
                     rend.flipX = false;
 
-                canAttack = false;
-                speed = 0;
                 CancelInvoke("GetRandomPos");
                 SummonsBullet bullet = Instantiate(bulletPrefab).GetComponent<SummonsBullet>();
                 bullet.transform.position = new Vector3(transform.position.x + firePos.x, 0, transform.position.z + firePos.y);
                 bullet.Fire(dir);
+                speed = 0;
+                canAttack = false;
             }
         }
     }

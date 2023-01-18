@@ -1,10 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 
-public class Chicken : Summons
+public class Wakgood : Summons
 {
+    [SerializeField] DamageUI damageUIPreFab;
+
+    float angle;
+    float damage;
+
+    Collider monster;
+
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -13,6 +19,7 @@ public class Chicken : Summons
     void Start()
     {
         InitSetting();
+        damage = gameManager.shortDamage * 2;
     }
 
     private void Update()
@@ -23,9 +30,11 @@ public class Chicken : Summons
 
             if (isNear)
                 transform.position = Vector3.MoveTowards(transform.position, randomPos, speed * Time.deltaTime);
+
             else if (!isNear)
                 transform.position = Vector3.MoveTowards(transform.position, character.transform.position, character.speed * 2 * Time.deltaTime);
         }
+
         anim.SetBool("isAttack", isAttack);
     }
 
@@ -35,28 +44,29 @@ public class Chicken : Summons
         {
             if (other.CompareTag("Monster"))
             {
+                monster = other;
                 isAttack = true;
                 Vector3 dir = other.gameObject.transform.position - transform.position;
-                Vector3 firePos = bulletTransform.localPosition;
 
                 if (dir.x < 0)
-                {
-                    firePos.x = firePos.x * -1;
                     rend.flipX = true;
-                }
 
                 else if (dir.x >= 0)
                     rend.flipX = false;
 
                 CancelInvoke("GetRandomPos");
-                SummonLazor bullet = Instantiate(bulletPrefab).GetComponent<SummonLazor>();
-                bullet.transform.SetParent(transform);
-                bullet.transform.localPosition = firePos;
-                bullet.Fire(dir);
 
                 speed = 0;
                 canAttack = false;
             }
         }
+    }
+
+    public override void EndAttack()
+    {
+        base.EndAttack();
+        DamageUI damageUI = Instantiate(damageUIPreFab, monster.transform.position, damageUIPreFab.transform.rotation);
+        damageUI.realDamage = damage;
+        monster.GetComponent<Monster>().PureOnDamaged(damage);
     }
 }

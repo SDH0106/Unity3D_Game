@@ -5137,8 +5137,8 @@ MonoBehaviour:
   currentHp: 0
   speed: 0
   ggoGgoPrefab: {fileID: 1833209001676319963, guid: e18b7301abb3eba46873923471b06604, type: 3}
-  ilsoonPrefab: {fileID: 0}
-  wakgoodPrefab: {fileID: 0}
+  ilsoonPrefab: {fileID: 2838086975826504327, guid: 62b3b6506075461468c4e1fe886ffd89, type: 3}
+  wakgoodPrefab: {fileID: 7587413795906497304, guid: 31cda6ce4d249264db7aacdc0bb8d751, type: 3}
   summonPos:
   - {fileID: 4730637806876175491}
   - {fileID: 4863989664208287945}

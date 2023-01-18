@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class SummonsBullet : MonoBehaviour
 {
-    [SerializeField] float speed;
-    [SerializeField] DamageUI damageUIPreFab;
+    [SerializeField] protected float speed;
+    [SerializeField] protected DamageUI damageUIPreFab;
 
-    float damage;
+    protected float damage;
 
-    Vector3 dir;
-    float angle;
+    protected Vector3 dir;
+    protected float angle;
 
     private void Start()
     {
-        Invoke("DestroyBullet", 5);
+        Invoke("DestroyBullet", 3);
         damage = GameManager.Instance.round * 2;
     }
 
@@ -32,7 +32,7 @@ public class SummonsBullet : MonoBehaviour
         this.dir = dir.normalized;
     }
 
-    private void OnTriggerEnter(Collider other)
+    virtual protected void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Monster"))
         {
@@ -44,7 +44,7 @@ public class SummonsBullet : MonoBehaviour
         }
     }
 
-    void DestroyBullet()
+    protected void DestroyBullet()
     {
         Destroy(gameObject);
     }

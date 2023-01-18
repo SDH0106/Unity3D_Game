@@ -6,6 +6,9 @@ public class Chick : Summons
 {
     [SerializeField] GameObject chickenPrefab;
 
+    int summonRound;
+    int summonPosNum;
+
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);

@@ -28,7 +28,7 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector] public float percentDamage;
     [HideInInspector] public float physicDamage;
     [HideInInspector] public float elementDamage;
-    [HideInInspector] public float shortDamage;
+    /*[HideInInspector]*/ public float shortDamage;
     [HideInInspector] public float longDamage;
     [SerializeField] public float recoverHp;
     [SerializeField] public float absorbHp;

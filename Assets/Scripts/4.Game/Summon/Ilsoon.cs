@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
 
-public class Chicken : Summons
+public class Ilsoon : Summons
 {
     private void Awake()
     {
@@ -23,9 +23,11 @@ public class Chicken : Summons
 
             if (isNear)
                 transform.position = Vector3.MoveTowards(transform.position, randomPos, speed * Time.deltaTime);
+
             else if (!isNear)
                 transform.position = Vector3.MoveTowards(transform.position, character.transform.position, character.speed * 2 * Time.deltaTime);
         }
+
         anim.SetBool("isAttack", isAttack);
     }
 
@@ -37,22 +39,16 @@ public class Chicken : Summons
             {
                 isAttack = true;
                 Vector3 dir = other.gameObject.transform.position - transform.position;
-                Vector3 firePos = bulletTransform.localPosition;
 
                 if (dir.x < 0)
-                {
-                    firePos.x = firePos.x * -1;
                     rend.flipX = true;
-                }
 
                 else if (dir.x >= 0)
                     rend.flipX = false;
 
                 CancelInvoke("GetRandomPos");
-                SummonLazor bullet = Instantiate(bulletPrefab).GetComponent<SummonLazor>();
-                bullet.transform.SetParent(transform);
-                bullet.transform.localPosition = firePos;
-                bullet.Fire(dir);
+                IlsoonBullet bullet = Instantiate(bulletPrefab).GetComponent<IlsoonBullet>();
+                bullet.transform.position = other.transform.position;
 
                 speed = 0;
                 canAttack = false;
