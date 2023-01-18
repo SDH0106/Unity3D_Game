@@ -97,6 +97,8 @@ public class GameSceneUI : Singleton<GameSceneUI>
             gameManager.gameStartTime = Time.realtimeSinceStartup;
 
         SpawnTree();
+        if (gameManager.spawnTree)
+            Invoke("SpawnOneTree", 10f);
     }
 
     void SpawnTree()
@@ -111,6 +113,17 @@ public class GameSceneUI : Singleton<GameSceneUI>
 
             tree.transform.position = new Vector3(groundX, 0, groundZ);
         }
+    }
+
+    void SpawnOneTree()
+    {
+        GameObject tree = Instantiate(treePrefab);
+        float groundX = ground.bounds.size.x;
+        float groundZ = ground.bounds.size.z;
+        groundX = UnityEngine.Random.Range((groundX / 2) * -1 + ground.bounds.center.x, groundX / 2 + ground.bounds.center.x);
+        groundZ = UnityEngine.Random.Range((groundZ / 2) * -1 + ground.bounds.center.z, groundZ / 2 + ground.bounds.center.z);
+
+        tree.transform.position = new Vector3(groundX, 0, groundZ);
     }
 
     private void Update()
@@ -195,7 +208,7 @@ public class GameSceneUI : Singleton<GameSceneUI>
         avoid.text = gameManager.avoid.ToString("0.#");
         percentDamage.text = gameManager.percentDamage.ToString("0.0#");
         wAtk.text = gameManager.physicDamage.ToString("0.#");
-        eAtk.text = gameManager.elementDamage.ToString("0.#");
+        eAtk.text = gameManager.magicDamage.ToString("0.#");
         sAtk.text = gameManager.shortDamage.ToString("0.#");
         lAtk.text = gameManager.longDamage.ToString("0.#");
         aSpd.text = gameManager.attackSpeed.ToString("0.#");

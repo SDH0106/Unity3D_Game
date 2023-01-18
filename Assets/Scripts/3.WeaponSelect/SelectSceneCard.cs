@@ -17,7 +17,7 @@ public class SelectSceneCard : MonoBehaviour
     [SerializeField] Text weaponName;
     [SerializeField] Text type;
     [SerializeField] Text weaponDamage;
-    [SerializeField] Text elementDamage;
+    [SerializeField] Text magicDamage;
     [SerializeField] Text attackDelay;
     [SerializeField] Text bulletSpeed;
     [SerializeField] Text weaponRange;
@@ -61,7 +61,7 @@ public class SelectSceneCard : MonoBehaviour
         weaponName.text = selectedWeapon.WeaponName.ToString();
         type.text = selectedWeapon.Type.ToString();
         weaponDamage.text = selectedWeapon.WeaponDamage.ToString();
-        elementDamage.text = selectedWeapon.MagicDamage.ToString();
+        magicDamage.text = selectedWeapon.MagicDamage.ToString();
         attackDelay.text = selectedWeapon.AttackDelay.ToString();
         bulletSpeed.text = selectedWeapon.BulletSpeed.ToString();
         weaponRange.text = selectedWeapon.WeaponRange.ToString();

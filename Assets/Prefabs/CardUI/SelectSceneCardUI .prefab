@@ -1712,7 +1712,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &7719271856648617477
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1754,7 +1754,7 @@ MonoBehaviour:
   weaponName: {fileID: 2013569446696701560}
   type: {fileID: 6204667624783056386}
   weaponDamage: {fileID: 1445464021982260933}
-  elementDamage: {fileID: 1951879854259284740}
+  magicDamage: {fileID: 1951879854259284740}
   attackDelay: {fileID: 2636182103579118973}
   bulletSpeed: {fileID: 1073483140582677474}
   weaponRange: {fileID: 6358410489333772704}

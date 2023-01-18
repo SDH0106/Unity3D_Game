@@ -24,15 +24,15 @@ public class Weapon : MonoBehaviour
         if (weaponInfo.Type == WEAPON_TYPE.스태프)
         {
             if (!gameManager.doubleShot)
-                damage = weaponInfo.MagicDamage * grade + gameManager.elementDamage + gameManager.longDamage;
+                damage = weaponInfo.MagicDamage * grade + gameManager.magicDamage + gameManager.longDamage;
 
             else if (gameManager.doubleShot)
             {
                 if (weaponInfo.WeaponName == "번개 스태프")
-                    damage = weaponInfo.MagicDamage * grade + gameManager.elementDamage + gameManager.longDamage;
+                    damage = weaponInfo.MagicDamage * grade + gameManager.magicDamage + gameManager.longDamage;
 
                 if (weaponInfo.WeaponName != "번개 스태프")
-                    damage = (weaponInfo.MagicDamage * grade + gameManager.elementDamage + gameManager.longDamage) * 0.7f;
+                    damage = (weaponInfo.MagicDamage * grade + gameManager.magicDamage + gameManager.longDamage) * 0.7f;
             }
             damageUI.damageText.color = Color.cyan;
         }

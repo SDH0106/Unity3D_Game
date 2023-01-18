@@ -109,7 +109,7 @@ public class ChestPassiveCard : MonoBehaviour
         stats[2] = selectedPassive.AbsorbHp;
         stats[3] = selectedPassive.Defence;
         stats[4] = selectedPassive.PhysicDamage;
-        stats[5] = selectedPassive.ElementDamage;
+        stats[5] = selectedPassive.MagicDamage;
         stats[6] = selectedPassive.ShortDamage;
         stats[7] = selectedPassive.LongDamage;
         stats[8] = selectedPassive.AttackSpeed;
@@ -123,7 +123,7 @@ public class ChestPassiveCard : MonoBehaviour
         statTypes[2] = "체력 흡수";
         statTypes[3] = "방어력";
         statTypes[4] = "물리 공격력";
-        statTypes[5] = "원소 공격력";
+        statTypes[5] = "마법 공격력";
         statTypes[6] = "근거리 공격력";
         statTypes[7] = "원거리 공격력";
         statTypes[8] = "공격 속도";

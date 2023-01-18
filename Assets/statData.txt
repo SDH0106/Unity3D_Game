@@ -32,7 +32,7 @@
         },
         {
             "statName": "마력 포션",
-            "statType": "원소 공격력",
+            "statType": "마법 공격력",
             "statSprite": "EDamage",
             "statValue": 0.5
         },

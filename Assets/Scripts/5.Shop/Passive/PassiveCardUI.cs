@@ -30,12 +30,12 @@ public class PassiveCardUI : MonoBehaviour
 
     [HideInInspector] public PassiveInfo selectedPassive;
 
-    float[] stats = new float[15];
-    string[] statTypes = new string[15];
+    float[] stats;
+    string[] statTypes;
 
-    int[] passiveIntVariables = new int[10];
-    float[] passiveFloatVariables = new float[10];
-    bool[] passiveBoolVariables = new bool[5];
+    int[] passiveIntVariables;
+    float[] passiveFloatVariables;
+    bool[] passiveBoolVariables;
 
     Color LockImageColor;
     Color LockTextColor;
@@ -56,8 +56,8 @@ public class PassiveCardUI : MonoBehaviour
         itemManager = ItemManager.Instance;
         initPriceColor = itemPrice.color;
 
-        LockImageColor = lockBackImage.color;
-        LockTextColor = lockText.color;
+        LockImageColor = new Color(0.17f, 0.17f, 0.17f);
+        LockTextColor = Color.white;
 
         Setting();
         CardImage();
@@ -133,12 +133,13 @@ public class PassiveCardUI : MonoBehaviour
 
     void StatArray()
     {
+        stats = new float[15];
         stats[0] = selectedPassive.Hp;
         stats[1] = selectedPassive.RecoverHp;
         stats[2] = selectedPassive.AbsorbHp;
         stats[3] = selectedPassive.Defence;
         stats[4] = selectedPassive.PhysicDamage;
-        stats[5] = selectedPassive.ElementDamage;
+        stats[5] = selectedPassive.MagicDamage;
         stats[6] = selectedPassive.ShortDamage;
         stats[7] = selectedPassive.LongDamage;
         stats[8] = selectedPassive.AttackSpeed;
@@ -149,12 +150,13 @@ public class PassiveCardUI : MonoBehaviour
         stats[13] = selectedPassive.PercentDamage;
         stats[14] = selectedPassive.Avoid;
 
+        statTypes = new string[15];
         statTypes[0] = "최대 체력";
         statTypes[1] = "체력 회복";
         statTypes[2] = "체력 흡수";
         statTypes[3] = "방어력";
         statTypes[4] = "물리 공격력";
-        statTypes[5] = "원소 공격력";
+        statTypes[5] = "마법 공격력";
         statTypes[6] = "근거리 공격력";
         statTypes[7] = "원거리 공격력";
         statTypes[8] = "공격 속도";
@@ -165,18 +167,29 @@ public class PassiveCardUI : MonoBehaviour
         statTypes[13] = "공격력 배율";
         statTypes[14] = "회피율";
 
+        passiveIntVariables = new int[2];
         passiveIntVariables[0] = selectedPassive.DashCount;
+        passiveIntVariables[1] = selectedPassive.BuffNum;
 
+        passiveFloatVariables = new float[10];
         passiveFloatVariables[0] = selectedPassive.CoinRange;
         passiveFloatVariables[1] = selectedPassive.IncreaseExp;
         passiveFloatVariables[2] = selectedPassive.MonsterSpeed;
         passiveFloatVariables[3] = selectedPassive.SalePercent;
 
+        passiveBoolVariables = new bool[12];
         passiveBoolVariables[0] = selectedPassive.LuckCoin;
         passiveBoolVariables[1] = selectedPassive.LuckDamage;
         passiveBoolVariables[2] = selectedPassive.LuckCritical;
         passiveBoolVariables[3] = selectedPassive.DoubleShot;
         passiveBoolVariables[4] = selectedPassive.Revive;
+        passiveBoolVariables[5] = selectedPassive.GgoGgo;
+        passiveBoolVariables[6] = selectedPassive.Ilsoon;
+        passiveBoolVariables[7] = selectedPassive.Wakgood;
+        passiveBoolVariables[8] = selectedPassive.Ddilpa;
+        passiveBoolVariables[9] = selectedPassive.Butterfly;
+        passiveBoolVariables[10] = selectedPassive.SubscriptionFee;
+        passiveBoolVariables[11] = selectedPassive.SpawnTree;
     }
 
     void DescriptionInfo()
@@ -219,33 +232,93 @@ public class PassiveCardUI : MonoBehaviour
 
         if (gameManager.money >= selectedPassive.ItemPrice && itemManager.passiveCounts[arrayCount] > 0)
         {
-            itemManager.GetPassiveInfo(selectedPassive);
-            itemManager.passiveCounts[arrayCount]--;
-            Destroy(gameObject);
-            isLock = false;
-            gameManager.money -= price;
-
-            for (int i = 0; i < stats.Length; i++)
+            if (selectedPassive.GgoGgo || selectedPassive.Ilsoon || selectedPassive.Wakgood)
             {
-                gameManager.stats[i] = Mathf.Round((gameManager.stats[i] + stats[i]) * 10) * 0.1f;
+                if (Character.Instance.summonNum < 3)
+                {
+                    itemManager.GetPassiveInfo(selectedPassive);
+                    itemManager.passiveCounts[arrayCount]--;
+                    Destroy(gameObject);
+
+                    isLock = false;
+                    gameManager.money -= price;
+
+                    for (int i = 0; i < passiveBoolVariables.Length; i++)
+                    {
+                        if (passiveBoolVariables[i] == true)
+                            gameManager.passiveBoolVariables[i] = passiveBoolVariables[i];
+                    }
+                }
             }
 
-            for (int i = 0; i < passiveIntVariables.Length; i++)
+            else
             {
-                gameManager.passiveIntVariables[i] += passiveIntVariables[i];
-            }
+                itemManager.GetPassiveInfo(selectedPassive);
+                itemManager.passiveCounts[arrayCount]--;
+                Destroy(gameObject);
 
-            for (int i = 0; i < passiveFloatVariables.Length; i++)
-            {
-                gameManager.passiveFloatVariables[i] = Mathf.Round((gameManager.passiveFloatVariables[i] + passiveFloatVariables[i]) * 10) * 0.1f;
-            }
+                isLock = false;
+                gameManager.money -= price;
 
-            for(int i=0;i<passiveBoolVariables.Length;i++)
-            {
-                if (passiveBoolVariables[i] == true)
-                    gameManager.passiveBoolVariables[i] = passiveBoolVariables[i];
+                for (int i = 0; i < stats.Length; i++)
+                {
+                    gameManager.stats[i] = Mathf.Round((gameManager.stats[i] + stats[i]) * 10) * 0.1f;
+                }
+
+                for (int i = 0; i < passiveIntVariables.Length; i++)
+                {
+                    if (i == 1)
+                    {
+                        gameManager.passiveIntVariables[i] = passiveIntVariables[i];
+                    }
+
+                    else
+                    {
+                        gameManager.passiveIntVariables[i] += passiveIntVariables[i];
+                    }
+
+                }
+
+                for (int i = 0; i < passiveFloatVariables.Length; i++)
+                {
+                    gameManager.passiveFloatVariables[i] = Mathf.Round((gameManager.passiveFloatVariables[i] + passiveFloatVariables[i]) * 10) * 0.1f;
+                }
+
+                for (int i = 0; i < passiveBoolVariables.Length; i++)
+                {
+                    if (passiveBoolVariables[i] == true)
+                    {
+                        gameManager.passiveBoolVariables[i] = passiveBoolVariables[i];
+
+                        if (i == 8)
+                        {
+                            Ddilpa();
+                            passiveBoolVariables[i] = false;
+                        }
+
+                        else if (i == 9)
+                        {
+                            Butterfly();
+                            passiveBoolVariables[i] = false;
+                        }
+                    }
+                }
             }
         }
+    }
+
+    void Ddilpa()
+    {
+        // 마뎀(5) > 물뎀(4)
+        gameManager.stats[4] += (gameManager.stats[5] / 2);
+        gameManager.stats[5] = 0;
+    }
+
+    void Butterfly()
+    {
+        // 물뎀(4) > 마뎀(5)
+        gameManager.stats[5] += (gameManager.stats[4] / 2);
+        gameManager.stats[4] = 0;
     }
 
     public void Lock()
@@ -275,6 +348,7 @@ public class PassiveCardUI : MonoBehaviour
 
         else if (!isLock)
         {
+            Debug.Log("1");
             lockBackImage.color = LockImageColor;
             lockText.color = LockTextColor;
         }

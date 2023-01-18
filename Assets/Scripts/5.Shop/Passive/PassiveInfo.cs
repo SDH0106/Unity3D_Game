@@ -20,7 +20,7 @@ public class PassiveInfo : ScriptableObject
     [SerializeField] float absorbHp;
     [SerializeField] float defence;
     [SerializeField] float physicDamage;
-    [SerializeField] float elementDamage;
+    [SerializeField] float magicDamage;
     [SerializeField] float shortDamage;
     [SerializeField] float longDamage;
     [SerializeField] float attackSpeed;
@@ -37,11 +37,19 @@ public class PassiveInfo : ScriptableObject
     [SerializeField] float monsterSpeed;
     [SerializeField] float salePercent;
     [SerializeField] int dashCount;
+    [SerializeField] int buffNum;
     [SerializeField] bool luckCoin;
     [SerializeField] bool luckDamage;
     [SerializeField] bool luckCritical;
     [SerializeField] bool doubleShot;
     [SerializeField] bool revive;
+    [SerializeField] bool ggoGgo;
+    [SerializeField] bool ilsoon;
+    [SerializeField] bool wakgood;
+    [SerializeField] bool ddilpa;
+    [SerializeField] bool butterfly;
+    [SerializeField] bool subscriptionFee;
+    [SerializeField] bool spawnTree;
     [SerializeField] string description;
 
     [HideInInspector] public float weight;
@@ -51,7 +59,7 @@ public class PassiveInfo : ScriptableObject
     public string ItemName => itemName;
     public int MaxCount => maxCount;
     public float PhysicDamage => physicDamage;
-    public float ElementDamage => elementDamage;
+    public float MagicDamage => magicDamage;
     public float ShortDamage => shortDamage;
     public float LongDamage => longDamage;
     public float Range => range;
@@ -63,6 +71,7 @@ public class PassiveInfo : ScriptableObject
     public float RecoverHp => recoverHp;
     public float AttackSpeed => attackSpeed;
     public int ItemPrice => itemPrice;
+    public int BuffNum => buffNum;
     public float Critical => critical;
     public float MonsterSpeed => monsterSpeed;
     public float SalePercent => salePercent;
@@ -74,6 +83,13 @@ public class PassiveInfo : ScriptableObject
     public bool LuckCritical => luckCritical;
     public bool DoubleShot => doubleShot;
     public bool Revive => revive;
+    public bool GgoGgo => ggoGgo;
+    public bool Ilsoon => ilsoon;
+    public bool Wakgood => wakgood;
+    public bool Ddilpa => ddilpa;
+    public bool Butterfly => butterfly;
+    public bool SubscriptionFee => subscriptionFee;
+    public bool SpawnTree => spawnTree;
     public string Description => description;
     public float PercentDamage => percentDamage;
     public float Avoid => avoid;

@@ -131,7 +131,7 @@ public class EndUI : Singleton<EndUI>
         avoid.text = gameManager.avoid.ToString("0.#");
         percentDamage.text = gameManager.percentDamage.ToString("0.0#");
         wAtk.text = gameManager.physicDamage.ToString("0.#");
-        eAtk.text = gameManager.elementDamage.ToString("0.#");
+        eAtk.text = gameManager.magicDamage.ToString("0.#");
         sAtk.text = gameManager.shortDamage.ToString("0.#");
         lAtk.text = gameManager.longDamage.ToString("0.#");
         aSpd.text = gameManager.attackSpeed.ToString("0.#");

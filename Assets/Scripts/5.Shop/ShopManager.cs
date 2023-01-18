@@ -125,7 +125,7 @@ public class ShopManager : Singleton<ShopManager>
         apHp.text = gameManager.absorbHp.ToString("0.#");
         def.text = gameManager.defence.ToString("0.#");
         wAtk.text = gameManager.physicDamage.ToString("0.#");
-        eAtk.text = gameManager.elementDamage.ToString("0.#");
+        eAtk.text = gameManager.magicDamage.ToString("0.#");
         sAtk.text = gameManager.shortDamage.ToString("0.#");
         lAtk.text = gameManager.longDamage.ToString("0.#");
         aSpd.text = gameManager.attackSpeed.ToString("0.#");
@@ -506,10 +506,10 @@ public class ShopManager : Singleton<ShopManager>
     {
         float totalWeight = 0;
 
-        weightPassiveValue[0] = 150 - (gameManager.round - 1) * 6;
-        weightPassiveValue[1] = 10 + (gameManager.round - 1) * (10 + gameManager.round);
-        weightPassiveValue[2] = (gameManager.round - 1) * 0.6f;
-        weightPassiveValue[3] = (gameManager.round - 1) * 0.2f;
+        weightPassiveValue[0] = 200 - (gameManager.round - 1) * 6;
+        weightPassiveValue[1] = 10 * gameManager.round;
+        weightPassiveValue[2] = (gameManager.round - 1) * (gameManager.round) * 0.1f;
+        weightPassiveValue[3] = (gameManager.round - 1) * (gameManager.round) * 0.02f;
 
         PassiveCardUI passiveCard = passiveCardUI.GetComponent<PassiveCardUI>();
 

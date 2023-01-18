@@ -106,12 +106,6 @@ public class Character : Singleton<Character>
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.I))
-        {
-            GameObject summon= Instantiate(wakgoodPrefab, summonPos[0].position, wakgoodPrefab.transform.rotation);
-            summon.transform.parent = gameManager.transform;
-        }
-
         bool xInput = (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Left"))) || (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Right")));
         bool zInput = (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Up"))) || (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Down")));
 
@@ -198,28 +192,31 @@ public class Character : Singleton<Character>
 
     void SummonPet()
     {
-        if(gameManager.ggoGgoSummon)
+        if (summonNum < 3)
         {
-            GameObject Summon = Instantiate(ggoGgoPrefab);
-            Summon.transform.position = summonPos[summonNum].position;
-            summonNum++;
-            gameManager.passiveBoolVariables[5] = false;
-        }
+            if (gameManager.ggoGgoSummon)
+            {
+                GameObject Summon = Instantiate(ggoGgoPrefab);
+                Summon.transform.position = summonPos[summonNum].position;
+                summonNum++;
+                gameManager.passiveBoolVariables[5] = false;
+            }
 
-        else if(gameManager.ilsoonSummon)
-        {
-            GameObject Summon = Instantiate(ilsoonPrefab);
-            Summon.transform.position = summonPos[summonNum].position;
-            summonNum++;
-            gameManager.passiveBoolVariables[6] = false;
-        }
+            else if (gameManager.ilsoonSummon)
+            {
+                GameObject Summon = Instantiate(ilsoonPrefab);
+                Summon.transform.position = summonPos[summonNum].position;
+                summonNum++;
+                gameManager.passiveBoolVariables[6] = false;
+            }
 
-        else if(gameManager.wakgoodSummon)
-        {
-            GameObject Summon = Instantiate(wakgoodPrefab);
-            Summon.transform.position = summonPos[summonNum].position;
-            summonNum++;
-            gameManager.passiveBoolVariables[7] = false;
+            else if (gameManager.wakgoodSummon)
+            {
+                GameObject Summon = Instantiate(wakgoodPrefab);
+                Summon.transform.position = summonPos[summonNum].position;
+                summonNum++;
+                gameManager.passiveBoolVariables[7] = false;
+            }
         }
     }
 
@@ -388,7 +385,7 @@ public class Character : Singleton<Character>
         {
             avoidRand = Random.Range(0, 100);
 
-            if (avoidRand > avoid)
+            if (avoidRand > gameManager.avoid)
             {
                 currentHp -= Mathf.Round((damage - gameManager.defence) * 10) / 10;
             }
@@ -432,7 +429,7 @@ public class Character : Singleton<Character>
     {
         anim.SetTrigger("isAttacked");
         isAttacked = true;
-        if (currentHp > 0 && avoidRand > avoid)
+        if (currentHp > 0 && avoidRand > gameManager.avoid)
             StartCoroutine(PlayerColorBlink());
 
         yield return new WaitForSeconds(invincibleTime);

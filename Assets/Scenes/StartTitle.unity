@@ -4375,15 +4375,15 @@ MonoBehaviour:
   aimCursor: {fileID: 2800000, guid: b8e78032f8af0954784d1fe9e5a09187, type: 3}
   bulletStorage: {fileID: 1005871281}
   damageStorage: {fileID: 1692643827}
-  gameTime: 1000
-  money: 500000
+  gameTime: 0
+  money: 50000
   round: 1
   maxHp: 100
   percentDamage: 0
   physicDamage: 0
-  elementDamage: 0
-  shortDamage: 30
-  longDamage: 100
+  magicDamage: 0
+  shortDamage: 0
+  longDamage: 0
   recoverHp: 0
   absorbHp: 0
   defence: 0
@@ -4410,6 +4410,10 @@ MonoBehaviour:
   ggoGgoSummon: 0
   ilsoonSummon: 0
   wakgoodSummon: 0
+  ddilpa: 0
+  butterfly: 0
+  subscriptionFee: 0
+  spawnTree: 0
   currentGameTime: 0
   currentScene: 
   stats: []

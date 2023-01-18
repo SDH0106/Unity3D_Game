@@ -137,6 +137,17 @@ public class Monster : MonoBehaviour
         }
     }
 
+    public void SubscriptionFee()
+    {
+        if (gameManager.subscriptionFee)
+        {
+            int feeRand = Random.Range(0, 100);
+
+            if (feeRand < 3)
+                gameManager.money += 38;
+        }
+    }
+
     // 방어력 없이 바로 깎이는 대미지
     public void PureOnDamaged(float damage)
     {
@@ -198,6 +209,7 @@ public class Monster : MonoBehaviour
     {
         if (hp <= 0 || (gameManager.isClear && gameManager.isBossDead) || character.isDead)
         {
+            SubscriptionFee();
             isDead = true;
             rend.color = Color.white;
             isFreeze = false;

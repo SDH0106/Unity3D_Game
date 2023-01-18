@@ -2121,7 +2121,7 @@ MonoBehaviour:
   weaponName: {fileID: 4252686762506654875}
   type: {fileID: 3585836290175334649}
   weaponDamage: {fileID: 6415608380972359988}
-  elementDamage: {fileID: 7523559424812163381}
+  magicDamage: {fileID: 7523559424812163381}
   attackDelay: {fileID: 3152300679490057097}
   bulletSpeed: {fileID: 9082944306964852388}
   weaponRange: {fileID: 4164174996257846040}
@@ -2903,7 +2903,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.1698113, g: 0.1698113, b: 0.1698113, a: 1}
+  m_Color: {r: 0.17, g: 0.17, b: 0.17, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

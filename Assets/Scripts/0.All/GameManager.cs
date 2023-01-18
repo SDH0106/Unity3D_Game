@@ -27,9 +27,9 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] public float maxHp;
     [HideInInspector] public float percentDamage;
     [HideInInspector] public float physicDamage;
-    [HideInInspector] public float elementDamage;
+    [HideInInspector] public float magicDamage;
     /*[HideInInspector]*/ public float shortDamage;
-    [HideInInspector] public float longDamage;
+    /*[HideInInspector]*/ public float longDamage;
     [SerializeField] public float recoverHp;
     [SerializeField] public float absorbHp;
     [SerializeField] public float defence;
@@ -58,6 +58,10 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector] public bool ggoGgoSummon;
     [HideInInspector] public bool ilsoonSummon;
     [HideInInspector] public bool wakgoodSummon;
+    [HideInInspector] public bool ddilpa;
+    [HideInInspector] public bool butterfly;
+    [HideInInspector] public bool subscriptionFee;
+    [HideInInspector] public bool spawnTree;
 
     #endregion
 
@@ -111,6 +115,7 @@ public class GameManager : Singleton<GameManager>
         critical = 5;
         salePercent = 0;
         dashCount = 0;
+        buffNum = 0;
         increaseExp = 0;
         monsterSlow = 0;
         luckCoin = false;
@@ -121,6 +126,7 @@ public class GameManager : Singleton<GameManager>
         ggoGgoSummon = false;
         ilsoonSummon = false;
         wakgoodSummon = false;
+        subscriptionFee = false;
     }
 
     void InitArray()
@@ -131,7 +137,7 @@ public class GameManager : Singleton<GameManager>
         stats[2] = absorbHp;
         stats[3] = defence;
         stats[4] = physicDamage;
-        stats[5] = elementDamage;
+        stats[5] = magicDamage;
         stats[6] = shortDamage;
         stats[7] = longDamage;
         stats[8] = attackSpeed;
@@ -142,8 +148,9 @@ public class GameManager : Singleton<GameManager>
         stats[13] = percentDamage;
         stats[14] = avoid;
 
-        passiveIntVariables = new int[10];
+        passiveIntVariables = new int[2];
         passiveIntVariables[0] = dashCount;
+        passiveIntVariables[1] = buffNum;
 
         passiveFloatVariables = new float[10];
         passiveFloatVariables[0] = coinRange;
@@ -151,7 +158,7 @@ public class GameManager : Singleton<GameManager>
         passiveFloatVariables[2] = monsterSlow;
         passiveFloatVariables[3] = salePercent;
 
-        passiveBoolVariables = new bool[8];
+        passiveBoolVariables = new bool[12];
         passiveBoolVariables[0] = luckCoin;
         passiveBoolVariables[1] = luckDamage;
         passiveBoolVariables[2] = luckCritical;
@@ -160,6 +167,10 @@ public class GameManager : Singleton<GameManager>
         passiveBoolVariables[5] = ggoGgoSummon;
         passiveBoolVariables[6] = ilsoonSummon;
         passiveBoolVariables[7] = wakgoodSummon;
+        passiveBoolVariables[8] = ddilpa;
+        passiveBoolVariables[9] = butterfly;
+        passiveBoolVariables[10] = subscriptionFee;
+        passiveBoolVariables[11] = spawnTree;
     }
 
     void StatArray()
@@ -169,7 +180,7 @@ public class GameManager : Singleton<GameManager>
         absorbHp = stats[2];
         defence = stats[3];
         physicDamage = stats[4];
-        elementDamage = stats[5];
+        magicDamage = stats[5];
         shortDamage = stats[6];
         longDamage = stats[7];
         if (!Character.Instance.isBuff)
@@ -186,6 +197,7 @@ public class GameManager : Singleton<GameManager>
     void IntVariableArray()
     {
         dashCount = passiveIntVariables[0];
+        buffNum = passiveIntVariables[1];
     }
 
     void FloatVariableArray()
@@ -206,6 +218,10 @@ public class GameManager : Singleton<GameManager>
         ggoGgoSummon = passiveBoolVariables[5];
         ilsoonSummon = passiveBoolVariables[6];
         wakgoodSummon = passiveBoolVariables[7];
+        ddilpa = passiveBoolVariables[8];
+        butterfly = passiveBoolVariables[9];
+        subscriptionFee = passiveBoolVariables[10];
+        spawnTree = passiveBoolVariables[11];
     }
 
     private void Update()
