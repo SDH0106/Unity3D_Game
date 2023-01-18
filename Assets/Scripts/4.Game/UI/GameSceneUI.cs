@@ -50,6 +50,8 @@ public class GameSceneUI : Singleton<GameSceneUI>
     [SerializeField] Text reHp;
     [SerializeField] Text apHp;
     [SerializeField] Text def;
+    [SerializeField] Text avoid;
+    [SerializeField] Text percentDamage;
     [SerializeField] Text wAtk;
     [SerializeField] Text eAtk;
     [SerializeField] Text sAtk;
@@ -190,6 +192,8 @@ public class GameSceneUI : Singleton<GameSceneUI>
         reHp.text = gameManager.recoverHp.ToString("0.#");
         apHp.text = gameManager.absorbHp.ToString("0.#");
         def.text = gameManager.defence.ToString("0.#");
+        avoid.text = gameManager.avoid.ToString("0.#");
+        percentDamage.text = gameManager.percentDamage.ToString("0.0#");
         wAtk.text = gameManager.physicDamage.ToString("0.#");
         eAtk.text = gameManager.elementDamage.ToString("0.#");
         sAtk.text = gameManager.shortDamage.ToString("0.#");

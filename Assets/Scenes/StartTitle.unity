@@ -4375,9 +4375,9 @@ MonoBehaviour:
   aimCursor: {fileID: 2800000, guid: b8e78032f8af0954784d1fe9e5a09187, type: 3}
   bulletStorage: {fileID: 1005871281}
   damageStorage: {fileID: 1692643827}
-  gameTime: 20
-  money: 50000
-  round: 1
+  gameTime: 0
+  money: 500000
+  round: 29
   maxHp: 100
   percentDamage: 0
   physicDamage: 0

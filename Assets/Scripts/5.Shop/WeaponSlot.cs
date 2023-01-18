@@ -10,8 +10,6 @@ public class WeaponSlot : MonoBehaviour
 
     [HideInInspector] public int slotNum;
 
-    WeaponInfo selectedWeapon;
-
     private void Start()
     {
         slotNum = transform.GetSiblingIndex();
@@ -47,8 +45,6 @@ public class WeaponSlot : MonoBehaviour
 
     public void ShowClickUI()
     {
-        selectedWeapon = ItemManager.Instance.storedWeapon[slotNum];
-
         if (ItemManager.Instance.storedWeapon[slotNum] != null)
         {
             ShopManager.Instance.backgroundImage.SetActive(true);
