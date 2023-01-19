@@ -49,7 +49,6 @@ public class Ilsoon : Summons
                 CancelInvoke("GetRandomPos");
                 IlsoonBullet bullet = Instantiate(bulletPrefab).GetComponent<IlsoonBullet>();
                 bullet.transform.position = other.transform.position;
-
                 speed = 0;
                 canAttack = false;
             }

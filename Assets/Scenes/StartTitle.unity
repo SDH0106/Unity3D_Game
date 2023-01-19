@@ -4377,13 +4377,13 @@ MonoBehaviour:
   damageStorage: {fileID: 1692643827}
   gameTime: 0
   money: 50000
-  round: 1
+  round: 29
   maxHp: 100
   percentDamage: 0
   physicDamage: 0
   magicDamage: 0
-  shortDamage: 0
-  longDamage: 0
+  shortDamage: 10
+  longDamage: 10
   recoverHp: 0
   absorbHp: 0
   defence: 0
@@ -4398,10 +4398,13 @@ MonoBehaviour:
   passiveBoolVariables: 
   dashCount: 0
   buffNum: 0
+  exDmg: 0
   salePercent: 0
   increaseExp: 0
   coinRange: 0
   monsterSlow: 0
+  summonASpd: 0
+  summonPDmg: 0
   luckCoin: 0
   luckDamage: 0
   luckCritical: 0
@@ -4414,6 +4417,7 @@ MonoBehaviour:
   butterfly: 0
   subscriptionFee: 0
   spawnTree: 0
+  dotgu: 0
   currentGameTime: 0
   currentScene: 
   stats: []

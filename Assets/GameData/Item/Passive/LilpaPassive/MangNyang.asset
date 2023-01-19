@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1f4669ec3ffcb344a7356cc6d5d1c79, type: 3}
   m_Name: MangNyang
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 21300000, guid: ce6be74a14c0049468ebccc7d1972537, type: 3}
+  itemSprite: {fileID: 21300000, guid: 0571fc32355d7c5409d3c37887c00881, type: 3}
   itemGrade: 0
   itemName: "\uB9DD\uB0E5\uB0E5"
   itemPrice: 28
@@ -36,8 +36,11 @@ MonoBehaviour:
   increaseExp: 0
   monsterSpeed: 0
   salePercent: 0
+  summonASpd: 0
+  summonPDmg: 0
   dashCount: 0
   buffNum: 0
+  exDmg: 0
   luckCoin: 0
   luckDamage: 0
   luckCritical: 0
@@ -50,5 +53,6 @@ MonoBehaviour:
   butterfly: 0
   subscriptionFee: 0
   spawnTree: 0
+  dotgu: 0
   description: 
-  weight: 200
+  weight: 32

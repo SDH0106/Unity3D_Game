@@ -6,7 +6,6 @@ public class Wakgood : Summons
 {
     [SerializeField] DamageUI damageUIPreFab;
 
-    float angle;
     float damage;
 
     Collider monster;
@@ -19,7 +18,7 @@ public class Wakgood : Summons
     void Start()
     {
         InitSetting();
-        damage = gameManager.shortDamage * 2;
+        damage = Mathf.Round(gameManager.shortDamage * 5 * (1 + gameManager.summonPDmg) * 10) * 0.1f;
     }
 
     private void Update()

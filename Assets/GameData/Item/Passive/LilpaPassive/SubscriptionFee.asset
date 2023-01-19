@@ -38,6 +38,7 @@ MonoBehaviour:
   salePercent: 0
   dashCount: 0
   buffNum: 0
+  exDmg: 0
   luckCoin: 0
   luckDamage: 0
   luckCritical: 0
@@ -49,6 +50,8 @@ MonoBehaviour:
   ddilpa: 0
   butterfly: 0
   subscriptionFee: 1
+  spawnTree: 0
+  dotgu: 0
   description: "\uBAAC\uC2A4\uD130\uAC00 \uC0AC\uB9DD\uC2DC 3% \uD655\uB960\uB85C
-    38\uC6D0 \uD68D\uB4DD"
-  weight: 20
+    38\uC6D0 \uD68D\uB4DD. \uB3D9\uC804 \uD68D\uB4DD \uBC94\uC704 50% \uAC10\uC18C."
+  weight: 30

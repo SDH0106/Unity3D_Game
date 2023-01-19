@@ -22,12 +22,12 @@ public class ChestPassiveCard : MonoBehaviour
 
     [HideInInspector] public PassiveInfo selectedPassive;
 
-    float[] stats = new float[13];
-    string[] statTypes = new string[13];
+    float[] stats;
+    string[] statTypes;
 
-    int[] passiveIntVariables = new int[10];
-    float[] passiveFloatVariables = new float[10];
-    bool[] passiveBoolVariables = new bool[5];
+    int[] passiveIntVariables;
+    float[] passiveFloatVariables;
+    bool[] passiveBoolVariables;
 
     GameManager gameManager;
     ItemManager itemManager;
@@ -104,6 +104,7 @@ public class ChestPassiveCard : MonoBehaviour
 
     void StatArray()
     {
+        stats = new float[15];
         stats[0] = selectedPassive.Hp;
         stats[1] = selectedPassive.RecoverHp;
         stats[2] = selectedPassive.AbsorbHp;
@@ -117,7 +118,10 @@ public class ChestPassiveCard : MonoBehaviour
         stats[10] = selectedPassive.Luck;
         stats[11] = selectedPassive.Range;
         stats[12] = selectedPassive.Critical;
+        stats[13] = selectedPassive.PercentDamage;
+        stats[14] = selectedPassive.Avoid;
 
+        statTypes = new string[15];
         statTypes[0] = "최대 체력";
         statTypes[1] = "체력 회복";
         statTypes[2] = "체력 흡수";
@@ -128,22 +132,39 @@ public class ChestPassiveCard : MonoBehaviour
         statTypes[7] = "원거리 공격력";
         statTypes[8] = "공격 속도";
         statTypes[9] = "이동 속도";
-        statTypes[10] = "행운";
+        statTypes[10] = "행운 (%)";
         statTypes[11] = "사거리";
-        statTypes[12] = "크리티컬";
+        statTypes[12] = "크리티컬 (%)";
+        statTypes[13] = "공격력 배율 (배)";
+        statTypes[14] = "회피율 (%)";
 
+        passiveIntVariables = new int[3];
         passiveIntVariables[0] = selectedPassive.DashCount;
+        passiveIntVariables[1] = selectedPassive.BuffNum;
+        passiveIntVariables[2] = selectedPassive.ExDmg;
 
+        passiveFloatVariables = new float[10];
         passiveFloatVariables[0] = selectedPassive.CoinRange;
         passiveFloatVariables[1] = selectedPassive.IncreaseExp;
         passiveFloatVariables[2] = selectedPassive.MonsterSpeed;
         passiveFloatVariables[3] = selectedPassive.SalePercent;
+        passiveFloatVariables[4] = selectedPassive.SummonASpd;
+        passiveFloatVariables[5] = selectedPassive.SummonPDmg;
 
+        passiveBoolVariables = new bool[13];
         passiveBoolVariables[0] = selectedPassive.LuckCoin;
         passiveBoolVariables[1] = selectedPassive.LuckDamage;
         passiveBoolVariables[2] = selectedPassive.LuckCritical;
         passiveBoolVariables[3] = selectedPassive.DoubleShot;
         passiveBoolVariables[4] = selectedPassive.Revive;
+        passiveBoolVariables[5] = selectedPassive.GgoGgo;
+        passiveBoolVariables[6] = selectedPassive.Ilsoon;
+        passiveBoolVariables[7] = selectedPassive.Wakgood;
+        passiveBoolVariables[8] = selectedPassive.Ddilpa;
+        passiveBoolVariables[9] = selectedPassive.Butterfly;
+        passiveBoolVariables[10] = selectedPassive.SubscriptionFee;
+        passiveBoolVariables[11] = selectedPassive.SpawnTree;
+        passiveBoolVariables[12] = selectedPassive.Dotgu;
     }
 
     void DescriptionInfo()

@@ -63,6 +63,8 @@ public class ShopManager : Singleton<ShopManager>
     float[] weightWeaponValue;
     float[] weightPassiveValue;
 
+    int clickCount;
+
     private void Start()
     {
         SoundManager.Instance.PlayBGM(2);
@@ -81,9 +83,15 @@ public class ShopManager : Singleton<ShopManager>
         descripUI.SetActive(false);
 
         initPriceColor = rerollMoneyText.color;
-        
-        rerollMoney = -gameManager.round;
-        
+
+        clickCount = 0;
+
+        if (!gameManager.dotgu)
+            rerollMoney = -gameManager.round;
+
+        else if (gameManager.dotgu)
+            rerollMoney = 0;
+
         StartCardSlot();
         StartCheckLock();
     }
@@ -227,6 +235,10 @@ public class ShopManager : Singleton<ShopManager>
                 }
 
                 gameManager.money += rerollMoney;
+                clickCount++;
+
+                if (clickCount == 1)
+                    rerollMoney = -gameManager.round;
 
                 rerollMoney -= Mathf.CeilToInt((float)(gameManager.round) / 2);
 

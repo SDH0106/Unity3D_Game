@@ -8,6 +8,11 @@ public class Explosion : MonoBehaviour
     [SerializeField] ExDamageUI damageUI;
     public int grade;
 
+    private void Start()
+    {
+        exDamage = exDamage + GameManager.Instance.exDmg;
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.tag == "Monster")

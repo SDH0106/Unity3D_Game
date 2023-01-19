@@ -46,10 +46,13 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector] public bool[] passiveBoolVariables;
     [HideInInspector] public int dashCount;
     [HideInInspector] public int buffNum;
+    [HideInInspector] public int exDmg;
     [HideInInspector] public float salePercent;
     [HideInInspector] public float increaseExp;
     [HideInInspector] public float coinRange;
     [HideInInspector] public float monsterSlow;
+    [HideInInspector] public float summonASpd;
+    [HideInInspector] public float summonPDmg;
     [HideInInspector] public bool luckCoin;
     [HideInInspector] public bool luckDamage;
     [HideInInspector] public bool luckCritical;
@@ -62,6 +65,7 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector] public bool butterfly;
     [HideInInspector] public bool subscriptionFee;
     [HideInInspector] public bool spawnTree;
+    [HideInInspector] public bool dotgu;
 
     #endregion
 
@@ -148,17 +152,20 @@ public class GameManager : Singleton<GameManager>
         stats[13] = percentDamage;
         stats[14] = avoid;
 
-        passiveIntVariables = new int[2];
+        passiveIntVariables = new int[3];
         passiveIntVariables[0] = dashCount;
         passiveIntVariables[1] = buffNum;
+        passiveIntVariables[2] = exDmg;
 
         passiveFloatVariables = new float[10];
         passiveFloatVariables[0] = coinRange;
         passiveFloatVariables[1] = increaseExp;
         passiveFloatVariables[2] = monsterSlow;
         passiveFloatVariables[3] = salePercent;
+        passiveFloatVariables[4] = summonASpd;
+        passiveFloatVariables[5] = summonPDmg;
 
-        passiveBoolVariables = new bool[12];
+        passiveBoolVariables = new bool[13];
         passiveBoolVariables[0] = luckCoin;
         passiveBoolVariables[1] = luckDamage;
         passiveBoolVariables[2] = luckCritical;
@@ -171,6 +178,7 @@ public class GameManager : Singleton<GameManager>
         passiveBoolVariables[9] = butterfly;
         passiveBoolVariables[10] = subscriptionFee;
         passiveBoolVariables[11] = spawnTree;
+        passiveBoolVariables[12] = dotgu;
     }
 
     void StatArray()
@@ -198,6 +206,7 @@ public class GameManager : Singleton<GameManager>
     {
         dashCount = passiveIntVariables[0];
         buffNum = passiveIntVariables[1];
+        exDmg = passiveIntVariables[2];
     }
 
     void FloatVariableArray()
@@ -206,6 +215,8 @@ public class GameManager : Singleton<GameManager>
         increaseExp = passiveFloatVariables[1];
         monsterSlow = passiveFloatVariables[2];
         salePercent = passiveFloatVariables[3];
+        summonASpd = passiveFloatVariables[4];
+        summonPDmg = passiveFloatVariables[5];
     }
 
     void BoolVariableArray()
@@ -222,6 +233,7 @@ public class GameManager : Singleton<GameManager>
         butterfly = passiveBoolVariables[9];
         subscriptionFee = passiveBoolVariables[10];
         spawnTree = passiveBoolVariables[11];
+        dotgu = passiveBoolVariables[12];
     }
 
     private void Update()

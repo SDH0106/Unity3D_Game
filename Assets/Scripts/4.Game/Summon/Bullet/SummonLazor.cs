@@ -6,14 +6,17 @@ public class SummonLazor : MonoBehaviour
 {
     [SerializeField] DamageUI damageUIPreFab;
 
-    float damage;
+    public float damage;
 
     Vector3 dir;
     float angle;
 
+    protected GameManager gameManager;
+
     private void Start()
     {
-        damage = GameManager.Instance.round * 5f;
+        gameManager = GameManager.Instance;
+        damage = Mathf.Round(GameManager.Instance.round * 5 * (1 + GameManager.Instance.summonPDmg) * 10) * 0.1f;
     }
 
     private void Update()

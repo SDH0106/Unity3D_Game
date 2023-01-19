@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1f4669ec3ffcb344a7356cc6d5d1c79, type: 3}
   m_Name: JingJongGuk
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 21300000, guid: e27e30d65f5fe6142bbd0319e560c7ca, type: 3}
+  itemSprite: {fileID: 21300000, guid: c0bdf2ab5cb70fc47819ff89b9598796, type: 3}
   itemGrade: 2
   itemName: "\uC9D5\uC885\uAD6D"
   itemPrice: 64
@@ -36,8 +36,11 @@ MonoBehaviour:
   increaseExp: 0
   monsterSpeed: 0
   salePercent: 0
+  summonASpd: 0
+  summonPDmg: 0
   dashCount: 0
   buffNum: 0
+  exDmg: 0
   luckCoin: 0
   luckDamage: 0
   luckCritical: 0
@@ -50,5 +53,6 @@ MonoBehaviour:
   butterfly: 0
   subscriptionFee: 0
   spawnTree: 0
+  dotgu: 0
   description: 
   weight: 0

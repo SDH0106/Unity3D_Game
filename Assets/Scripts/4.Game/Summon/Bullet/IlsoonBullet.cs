@@ -7,7 +7,8 @@ public class IlsoonBullet : SummonsBullet
 {
     private void Start()
     {
-        damage = GameManager.Instance.longDamage * 2;
+        gameManager = GameManager.Instance;
+        damage = Mathf.Round(GameManager.Instance.longDamage * 2 * (1 + GameManager.Instance.summonPDmg) * 10) * 0.1f;
     }
     private void Update()
     {

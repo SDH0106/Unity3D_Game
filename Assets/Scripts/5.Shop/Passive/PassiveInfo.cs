@@ -36,8 +36,11 @@ public class PassiveInfo : ScriptableObject
     [SerializeField] float increaseExp;
     [SerializeField] float monsterSpeed;
     [SerializeField] float salePercent;
+    [SerializeField] float summonASpd;
+    [SerializeField] float summonPDmg;
     [SerializeField] int dashCount;
     [SerializeField] int buffNum;
+    [SerializeField] int exDmg;
     [SerializeField] bool luckCoin;
     [SerializeField] bool luckDamage;
     [SerializeField] bool luckCritical;
@@ -50,6 +53,7 @@ public class PassiveInfo : ScriptableObject
     [SerializeField] bool butterfly;
     [SerializeField] bool subscriptionFee;
     [SerializeField] bool spawnTree;
+    [SerializeField] bool dotgu;
     [SerializeField] string description;
 
     [HideInInspector] public float weight;
@@ -71,13 +75,16 @@ public class PassiveInfo : ScriptableObject
     public float RecoverHp => recoverHp;
     public float AttackSpeed => attackSpeed;
     public int ItemPrice => itemPrice;
-    public int BuffNum => buffNum;
     public float Critical => critical;
     public float MonsterSpeed => monsterSpeed;
     public float SalePercent => salePercent;
     public int DashCount => dashCount;
+    public int BuffNum => buffNum;
+    public int ExDmg => exDmg;
     public float CoinRange => coinRange;
     public float IncreaseExp => increaseExp;
+    public float SummonASpd => summonASpd;
+    public float SummonPDmg => summonPDmg;
     public bool LuckCoin => luckCoin;
     public bool LuckDamage => luckDamage;
     public bool LuckCritical => luckCritical;
@@ -90,6 +97,7 @@ public class PassiveInfo : ScriptableObject
     public bool Butterfly => butterfly;
     public bool SubscriptionFee => subscriptionFee;
     public bool SpawnTree => spawnTree;
+    public bool Dotgu => dotgu;
     public string Description => description;
     public float PercentDamage => percentDamage;
     public float Avoid => avoid;

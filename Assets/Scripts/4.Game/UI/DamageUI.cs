@@ -17,7 +17,7 @@ public class DamageUI : MonoBehaviour
     public float weaponDamage;
     public float realDamage;
 
-    public bool isMiss;
+    [HideInInspector] public bool isMiss;
 
     private void Start()
     {

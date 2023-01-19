@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1f4669ec3ffcb344a7356cc6d5d1c79, type: 3}
   m_Name: WooungChamma
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 21300000, guid: 0a63750f65c79ae42ba2962b1f495369, type: 3}
+  itemSprite: {fileID: 21300000, guid: 7b730f02d0260e44db4beb9ddb97a9d8, type: 3}
   itemGrade: 3
-  itemName: 
+  itemName: "\uC6B0\uC5C9\uCC38\uB9C8\uB3C4"
   itemPrice: 600
   maxCount: 1
   hp: 0

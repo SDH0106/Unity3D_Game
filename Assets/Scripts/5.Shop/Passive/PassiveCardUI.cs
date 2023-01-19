@@ -167,17 +167,20 @@ public class PassiveCardUI : MonoBehaviour
         statTypes[13] = "공격력 배율";
         statTypes[14] = "회피율";
 
-        passiveIntVariables = new int[2];
+        passiveIntVariables = new int[3];
         passiveIntVariables[0] = selectedPassive.DashCount;
         passiveIntVariables[1] = selectedPassive.BuffNum;
+        passiveIntVariables[2] = selectedPassive.ExDmg;
 
         passiveFloatVariables = new float[10];
         passiveFloatVariables[0] = selectedPassive.CoinRange;
         passiveFloatVariables[1] = selectedPassive.IncreaseExp;
         passiveFloatVariables[2] = selectedPassive.MonsterSpeed;
         passiveFloatVariables[3] = selectedPassive.SalePercent;
+        passiveFloatVariables[4] = selectedPassive.SummonASpd;
+        passiveFloatVariables[5] = selectedPassive.SummonPDmg;
 
-        passiveBoolVariables = new bool[12];
+        passiveBoolVariables = new bool[13];
         passiveBoolVariables[0] = selectedPassive.LuckCoin;
         passiveBoolVariables[1] = selectedPassive.LuckDamage;
         passiveBoolVariables[2] = selectedPassive.LuckCritical;
@@ -190,6 +193,7 @@ public class PassiveCardUI : MonoBehaviour
         passiveBoolVariables[9] = selectedPassive.Butterfly;
         passiveBoolVariables[10] = selectedPassive.SubscriptionFee;
         passiveBoolVariables[11] = selectedPassive.SpawnTree;
+        passiveBoolVariables[12] = selectedPassive.Dotgu;
     }
 
     void DescriptionInfo()
@@ -348,7 +352,6 @@ public class PassiveCardUI : MonoBehaviour
 
         else if (!isLock)
         {
-            Debug.Log("1");
             lockBackImage.color = LockImageColor;
             lockText.color = LockTextColor;
         }

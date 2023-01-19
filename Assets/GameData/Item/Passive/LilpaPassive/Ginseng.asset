@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 1c051592bc39a0f4ab28053cc6203f7c, type: 3}
   itemGrade: 1
-  itemName: "\uD584"
+  itemName: "\uD64D\uC0BC"
   itemPrice: 66
   maxCount: 100
   hp: 10

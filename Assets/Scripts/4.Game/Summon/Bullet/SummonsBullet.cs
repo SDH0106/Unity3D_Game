@@ -7,15 +7,18 @@ public class SummonsBullet : MonoBehaviour
     [SerializeField] protected float speed;
     [SerializeField] protected DamageUI damageUIPreFab;
 
-    protected float damage;
+    public float damage;
 
     protected Vector3 dir;
     protected float angle;
 
+    protected GameManager gameManager;
+
     private void Start()
     {
+        gameManager = GameManager.Instance;
         Invoke("DestroyBullet", 3);
-        damage = GameManager.Instance.round * 2;
+        damage = Mathf.Round(gameManager.round * 2 * (1 + gameManager.summonPDmg) * 10) * 0.1f;
     }
 
     private void Update()

@@ -154,7 +154,7 @@ MonoBehaviour:
   bulletTransform: {fileID: 2800680955765583488}
   speed: 4
   moveRange: 2
-  attackDelay: 2
+  attackDelay: 3
   chickenPrefab: {fileID: 3043387012776958546, guid: d2cdfacdd98590e438ac4ba20f008d38, type: 3}
 --- !u!1 &4465296593612323424
 GameObject:

@@ -67,9 +67,9 @@ public class Summons : MonoBehaviour
         randomPos = character.transform.position + randPoint;
     }
 
-    virtual protected IEnumerator IEAttackDelay()
+    protected IEnumerator IEAttackDelay()
     {
-        yield return new WaitForSeconds(attackDelay);
+        yield return new WaitForSeconds(attackDelay - gameManager.summonASpd);
 
         canAttack = true;
     }
