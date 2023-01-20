@@ -66,7 +66,10 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector] public bool subscriptionFee;
     [HideInInspector] public bool spawnTree;
     [HideInInspector] public bool dotgu;
-    /*[HideInInspector]*/ public bool isReflect;
+    [HideInInspector] public bool isReflect;
+    /*[HideInInspector]*/ public bool onePenetrate;
+    /*[HideInInspector]*/ public bool lowPenetrate;
+    /*[HideInInspector]*/ public bool penetrate;
 
     #endregion
 
@@ -166,7 +169,7 @@ public class GameManager : Singleton<GameManager>
         passiveFloatVariables[4] = summonASpd;
         passiveFloatVariables[5] = summonPDmg;
 
-        passiveBoolVariables = new bool[14];
+        passiveBoolVariables = new bool[17];
         passiveBoolVariables[0] = luckCoin;
         passiveBoolVariables[1] = luckDamage;
         passiveBoolVariables[2] = luckCritical;
@@ -181,6 +184,9 @@ public class GameManager : Singleton<GameManager>
         passiveBoolVariables[11] = spawnTree;
         passiveBoolVariables[12] = dotgu;
         passiveBoolVariables[13] = isReflect;
+        passiveBoolVariables[14] = onePenetrate;
+        passiveBoolVariables[15] = lowPenetrate;
+        passiveBoolVariables[16] = penetrate;
     }
 
     void StatArray()
@@ -237,6 +243,9 @@ public class GameManager : Singleton<GameManager>
         spawnTree = passiveBoolVariables[11];
         dotgu = passiveBoolVariables[12];
         isReflect = passiveBoolVariables[13];
+        onePenetrate = passiveBoolVariables[14];
+        lowPenetrate = passiveBoolVariables[15];
+        penetrate = passiveBoolVariables[16];
     }
 
     private void Update()

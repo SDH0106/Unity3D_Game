@@ -268,6 +268,7 @@ public class StaffControl : Weapon
 
                         DamageUI pool = Instantiate(damageUI, colliders[i].transform.position, Quaternion.Euler(90, 0, 0)).GetComponent<DamageUI>();
                         pool.gameObject.transform.SetParent(gameManager.damageStorage);
+
                         if (gameManager.absorbHp > 0)
                             Character.Instance.currentHp += gameManager.absorbHp;
 

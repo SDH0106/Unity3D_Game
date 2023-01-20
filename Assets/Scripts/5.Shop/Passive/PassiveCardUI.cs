@@ -180,7 +180,7 @@ public class PassiveCardUI : MonoBehaviour
         passiveFloatVariables[4] = selectedPassive.SummonASpd;
         passiveFloatVariables[5] = selectedPassive.SummonPDmg;
 
-        passiveBoolVariables = new bool[14];
+        passiveBoolVariables = new bool[17];
         passiveBoolVariables[0] = selectedPassive.LuckCoin;
         passiveBoolVariables[1] = selectedPassive.LuckDamage;
         passiveBoolVariables[2] = selectedPassive.LuckCritical;
@@ -195,6 +195,9 @@ public class PassiveCardUI : MonoBehaviour
         passiveBoolVariables[11] = selectedPassive.SpawnTree;
         passiveBoolVariables[12] = selectedPassive.Dotgu;
         passiveBoolVariables[13] = selectedPassive.IsReflect;
+        passiveBoolVariables[14] = selectedPassive.OnePenetrate;
+        passiveBoolVariables[15] = selectedPassive.LowPenetrate;
+        passiveBoolVariables[16] = selectedPassive.Penetrate;
     }
 
     void DescriptionInfo()
@@ -293,6 +296,14 @@ public class PassiveCardUI : MonoBehaviour
                 {
                     if (passiveBoolVariables[i] == true)
                     {
+                        if (i == 14 || i == 15 || i == 16)
+                        {
+                            if (gameManager.isReflect)
+                            {
+                                passiveBoolVariables[i] = false;
+                            }
+                        }
+
                         gameManager.passiveBoolVariables[i] = passiveBoolVariables[i];
 
                         if (i == 8)
@@ -305,6 +316,31 @@ public class PassiveCardUI : MonoBehaviour
                         {
                             Butterfly();
                             passiveBoolVariables[i] = false;
+                        }
+
+                        else if(i == 13)
+                        {
+                            gameManager.passiveBoolVariables[14] = false;
+                            gameManager.passiveBoolVariables[15] = false;
+                            gameManager.passiveBoolVariables[16] = false;
+                        }
+
+                        else if(i == 14)
+                        {
+                            gameManager.passiveBoolVariables[15] = false;
+                            gameManager.passiveBoolVariables[16] = false;
+                        }
+
+                        else if (i == 15)
+                        {
+                            gameManager.passiveBoolVariables[14] = false;
+                            gameManager.passiveBoolVariables[16] = false;
+                        }
+
+                        else if (i == 16)
+                        {
+                            gameManager.passiveBoolVariables[14] = false;
+                            gameManager.passiveBoolVariables[15] = false;
                         }
                     }
                 }

@@ -26,7 +26,25 @@ public class Ice : Bullet
         {
             Freezee();
 
-            collision.collider.GetComponent<Monster>().OnDamaged(damageUI.weaponDamage, isFreeze);
+            Instantiate(effectPrefab, transform.position, transform.rotation);
+
+            if (gameManager.absorbHp > 0)
+                Character.Instance.currentHp += gameManager.absorbHp;
+
+            if (gameManager.isReflect)
+                Reflect(collision);
+
+            else if (gameManager.onePenetrate)
+                OnePenetrate();
+
+            else if (gameManager.lowPenetrate)
+                LowPenetrate();
+
+            else if (!gameManager.isReflect && !gameManager.lowPenetrate && !gameManager.onePenetrate)
+            {
+                CancelInvoke("DestroyBullet");
+                DestroyBullet();
+            }
 
             if (damageUI.weaponDamage > collision.collider.GetComponent<Monster>().stat.monsterDefence * (1 + gameManager.round * 0.1f))
                 damageUI.isMiss = false;
@@ -36,15 +54,10 @@ public class Ice : Bullet
 
             damageUI.realDamage = damageUI.weaponDamage - collision.collider.GetComponent<Monster>().stat.monsterDefence * (1 + gameManager.round * 0.1f);
 
+            collision.collider.GetComponent<Monster>().OnDamaged(damageUI.weaponDamage, isFreeze);
+
             DamageUI pool = Instantiate(damageUI, transform.position, Quaternion.Euler(90, 0, 0)).GetComponent<DamageUI>();
             pool.gameObject.transform.SetParent(gameManager.damageStorage);
-
-            if (gameManager.absorbHp > 0)
-                Character.Instance.currentHp += gameManager.absorbHp;
-            DestroyBullet();
-            CancelInvoke("DestroyBullet");
-
-            Instantiate(effectPrefab, transform.position, transform.rotation);
         }
     }
 

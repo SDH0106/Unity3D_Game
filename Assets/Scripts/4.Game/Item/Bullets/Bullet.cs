@@ -17,6 +17,8 @@ public class Bullet : MonoBehaviour
 
     protected GameManager gameManager;
 
+    int penetrateNum;
+
     private void Start()
     {
         gameManager = GameManager.Instance;
@@ -46,7 +48,25 @@ public class Bullet : MonoBehaviour
     {
         if (collision.collider.CompareTag("Monster") && collision.collider.GetComponent<Monster>() != null)
         {
-            collision.collider.GetComponent<Monster>().OnDamaged(damageUI.weaponDamage);
+            Instantiate(effectPrefab, transform.position, transform.rotation);
+
+            if (gameManager.absorbHp > 0)
+                Character.Instance.currentHp += gameManager.absorbHp;
+
+            if (gameManager.isReflect)
+                Reflect(collision);
+
+            else if (gameManager.onePenetrate)
+                OnePenetrate();
+
+            else if (gameManager.lowPenetrate)
+                LowPenetrate();
+
+            else if (!gameManager.isReflect && !gameManager.lowPenetrate && !gameManager.onePenetrate &&  !gameManager.penetrate)
+            {
+                CancelInvoke("DestroyBullet");
+                DestroyBullet();
+            }
 
             if (damageUI.weaponDamage > collision.collider.GetComponent<Monster>().stat.monsterDefence * (1 + gameManager.round * 0.1f))
                 damageUI.isMiss = false;
@@ -56,22 +76,10 @@ public class Bullet : MonoBehaviour
 
             damageUI.realDamage = damageUI.weaponDamage - collision.collider.GetComponent<Monster>().stat.monsterDefence * (1 + gameManager.round * 0.1f);
 
+            collision.collider.GetComponent<Monster>().OnDamaged(damageUI.weaponDamage);
+
             DamageUI pool = Instantiate(damageUI, transform.position, Quaternion.Euler(90, 0, 0)).GetComponent<DamageUI>();
             pool.gameObject.transform.SetParent(gameManager.damageStorage);
-
-            if (gameManager.absorbHp > 0)
-                Character.Instance.currentHp += gameManager.absorbHp;
-
-            Instantiate(effectPrefab, transform.position, transform.rotation);
-
-            if (gameManager.isReflect)
-                Reflect(collision);
-
-            else if(!gameManager.isReflect)
-            {
-                CancelInvoke("DestroyBullet");
-                DestroyBullet();
-            }
         }
     }
 
@@ -82,6 +90,34 @@ public class Bullet : MonoBehaviour
         dir = Vector3.Reflect(dir, normalVector).normalized;
     }
 
+    public void OnePenetrate()
+    {
+        if (penetrateNum <= 0)
+        {
+            penetrateNum++;
+        }
+
+        else if (penetrateNum > 0)
+        {
+            CancelInvoke("DestroyBullet");
+            DestroyBullet();
+            penetrateNum = 0;
+        }
+    }
+
+    public void LowPenetrate()
+    {
+        if (penetrateNum <= 0)
+        {
+            penetrateNum++;
+        }
+
+        else if (penetrateNum > 0)
+        {
+            damageUI.weaponDamage = damageUI.weaponDamage/ 2;
+        }
+    }
+
     public void SetManagedPool(IObjectPool<Bullet> pool)
     {
         managedPool = pool;
@@ -90,5 +126,6 @@ public class Bullet : MonoBehaviour
     public virtual void DestroyBullet()
     {
         managedPool.Release(this);
+        penetrateNum = 0;
     }
 }

@@ -151,7 +151,7 @@ public class ChestPassiveCard : MonoBehaviour
         passiveFloatVariables[4] = selectedPassive.SummonASpd;
         passiveFloatVariables[5] = selectedPassive.SummonPDmg;
 
-        passiveBoolVariables = new bool[14];
+        passiveBoolVariables = new bool[17];
         passiveBoolVariables[0] = selectedPassive.LuckCoin;
         passiveBoolVariables[1] = selectedPassive.LuckDamage;
         passiveBoolVariables[2] = selectedPassive.LuckCritical;
@@ -166,6 +166,9 @@ public class ChestPassiveCard : MonoBehaviour
         passiveBoolVariables[11] = selectedPassive.SpawnTree;
         passiveBoolVariables[12] = selectedPassive.Dotgu;
         passiveBoolVariables[13] = selectedPassive.IsReflect;
+        passiveBoolVariables[14] = selectedPassive.OnePenetrate;
+        passiveBoolVariables[15] = selectedPassive.LowPenetrate;
+        passiveBoolVariables[16] = selectedPassive.Penetrate;
     }
 
     void DescriptionInfo()

@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c1f4669ec3ffcb344a7356cc6d5d1c79, type: 3}
-  m_Name: BallSegu
+  m_Name: AkzilGlass
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 21300000, guid: 6fe542eb784780b459a3f0a348b7aad0, type: 3}
+  itemSprite: {fileID: 21300000, guid: fa65dfb55f696c148b8705035e449501, type: 3}
   itemGrade: 0
-  itemName: "\uACF5\uC138\uAD6C"
-  itemPrice: 300
+  itemName: "\uC545\uC9C8 \uC548\uACBD"
+  itemPrice: 158
   maxCount: 1
   hp: 0
   recoverHp: 0
@@ -27,7 +27,7 @@ MonoBehaviour:
   longDamage: 0
   attackSpeed: 0
   speed: 0
-  range: -1.5
+  range: 0
   luck: 0
   critical: 0
   percentDamage: 0
@@ -54,7 +54,11 @@ MonoBehaviour:
   subscriptionFee: 0
   spawnTree: 0
   dotgu: 0
-  isReflect: 1
-  description: "\uD22C\uC0AC\uCCB4\uAC00 \uBAAC\uC2A4\uD130\uC5D0\uAC8C \uBD80\uB51B\uD788\uBA74
-    \uC0AC\uB77C\uC9C0\uC9C0 \uC54A \uD295\uACA8\uB098\uAC04\uB2E4."
-  weight: 200
+  isReflect: 0
+  onePenetrate: 1
+  lowPenetrate: 0
+  penetrate: 0
+  description: "\uD22C\uC0AC\uCCB4\uAC00 \uBAAC\uC2A4\uD130 \uD55C\uB9C8\uB9AC\uB97C
+    \uAD00\uD1B5\uD569\uB2C8\uB2E4. (\uB2E4\uB978 \uAD00\uD1B5\uC744 \uBAA8\uB450
+    \uB36E\uC5B4\uC501\uB2C8\uB2E4.)"
+  weight: 152

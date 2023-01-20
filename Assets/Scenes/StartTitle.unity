@@ -4375,10 +4375,10 @@ MonoBehaviour:
   aimCursor: {fileID: 2800000, guid: b8e78032f8af0954784d1fe9e5a09187, type: 3}
   bulletStorage: {fileID: 1005871281}
   damageStorage: {fileID: 1692643827}
-  gameTime: 1000
+  gameTime: 0
   money: 50000
   round: 1
-  maxHp: 100
+  maxHp: 1000
   percentDamage: 0
   physicDamage: 0
   magicDamage: 0
@@ -4418,7 +4418,10 @@ MonoBehaviour:
   subscriptionFee: 0
   spawnTree: 0
   dotgu: 0
-  isReflect: 1
+  isReflect: 0
+  onePenetrate: 0
+  lowPenetrate: 0
+  penetrate: 0
   currentGameTime: 0
   currentScene: 
   stats: []

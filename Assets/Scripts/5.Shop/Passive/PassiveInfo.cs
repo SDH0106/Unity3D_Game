@@ -55,6 +55,9 @@ public class PassiveInfo : ScriptableObject
     [SerializeField] bool spawnTree;
     [SerializeField] bool dotgu;
     [SerializeField] bool isReflect;
+    [SerializeField] bool onePenetrate;
+    [SerializeField] bool lowPenetrate;
+    [SerializeField] bool penetrate;
     [SerializeField] string description;
 
     [HideInInspector] public float weight;
@@ -100,6 +103,9 @@ public class PassiveInfo : ScriptableObject
     public bool SpawnTree => spawnTree;
     public bool Dotgu => dotgu;
     public bool IsReflect => isReflect;
+    public bool OnePenetrate => onePenetrate;
+    public bool LowPenetrate => lowPenetrate;
+    public bool Penetrate => penetrate;
     public string Description => description;
     public float PercentDamage => percentDamage;
     public float Avoid => avoid;

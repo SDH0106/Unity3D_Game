@@ -186,6 +186,7 @@ public class SwordControl : Weapon
 
             DamageUI pool = Instantiate(damageUI, transform.position, Quaternion.Euler(90, 0, 0)).GetComponent<DamageUI>();
             pool.gameObject.transform.SetParent(gameManager.damageStorage);
+
             if (gameManager.absorbHp > 0)
                 character.currentHp += gameManager.absorbHp;
         }
