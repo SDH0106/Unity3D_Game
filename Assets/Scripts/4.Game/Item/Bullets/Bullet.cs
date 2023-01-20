@@ -42,35 +42,44 @@ public class Bullet : MonoBehaviour
             Invoke("DestroyBullet", range + GameManager.Instance.range * 0.2f);
     }
 
-    protected virtual void OnTriggerEnter(Collider other)
+    protected virtual void OnCollisionEnter(Collision collision)
     {
-        if (other.tag == "Monster" && other.GetComponent<Monster>() != null)
+        if (collision.collider.CompareTag("Monster") && collision.collider.GetComponent<Monster>() != null)
         {
-            other.GetComponent<Monster>().OnDamaged(damageUI.weaponDamage);
+            collision.collider.GetComponent<Monster>().OnDamaged(damageUI.weaponDamage);
 
-            if (damageUI.weaponDamage > other.GetComponent<Monster>().stat.monsterDefence * (1 + gameManager.round * 0.1f))
+            if (damageUI.weaponDamage > collision.collider.GetComponent<Monster>().stat.monsterDefence * (1 + gameManager.round * 0.1f))
                 damageUI.isMiss = false;
 
-            else if (damageUI.weaponDamage <= other.GetComponent<Monster>().stat.monsterDefence * (1 + gameManager.round * 0.1f))
+            else if (damageUI.weaponDamage <= collision.collider.GetComponent<Monster>().stat.monsterDefence * (1 + gameManager.round * 0.1f))
                 damageUI.isMiss = true;
 
-            damageUI.realDamage = damageUI.weaponDamage - other.GetComponent<Monster>().stat.monsterDefence * (1 + gameManager.round * 0.1f);
+            damageUI.realDamage = damageUI.weaponDamage - collision.collider.GetComponent<Monster>().stat.monsterDefence * (1 + gameManager.round * 0.1f);
 
             DamageUI pool = Instantiate(damageUI, transform.position, Quaternion.Euler(90, 0, 0)).GetComponent<DamageUI>();
             pool.gameObject.transform.SetParent(gameManager.damageStorage);
+
             if (gameManager.absorbHp > 0)
                 Character.Instance.currentHp += gameManager.absorbHp;
-            DestroyBullet();
-            CancelInvoke("DestroyBullet");
 
             Instantiate(effectPrefab, transform.position, transform.rotation);
-        }
 
-        if(other.CompareTag("Tree"))
-        {
-            DestroyBullet();
-            CancelInvoke("DestroyBullet");
+            if (gameManager.isReflect)
+                Reflect(collision);
+
+            else if(!gameManager.isReflect)
+            {
+                CancelInvoke("DestroyBullet");
+                DestroyBullet();
+            }
         }
+    }
+
+    public void Reflect(Collision collision)
+    {
+        Vector3 normalVector = collision.contacts[0].normal;
+        normalVector = new Vector3(normalVector.x, 0, normalVector.y);
+        dir = Vector3.Reflect(dir, normalVector).normalized;
     }
 
     public void SetManagedPool(IObjectPool<Bullet> pool)

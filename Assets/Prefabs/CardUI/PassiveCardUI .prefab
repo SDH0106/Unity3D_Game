@@ -938,6 +938,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1ad15cfb209ad534ba768bb2dd29e70a, type: 2}
   - {fileID: 11400000, guid: efc895f5d92de7845a6eaa4a7ec3b89a, type: 2}
   - {fileID: 11400000, guid: 9f78f59819590844fb21f9a14c8baf0f, type: 2}
+  - {fileID: 11400000, guid: 502457543a4261846b266b2ddf760614, type: 2}
   lockBackImage: {fileID: 4778071493522451700}
   lockImage: {fileID: 8296031119694492482}
   lockText: {fileID: 4972568240297667687}

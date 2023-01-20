@@ -180,7 +180,7 @@ public class PassiveCardUI : MonoBehaviour
         passiveFloatVariables[4] = selectedPassive.SummonASpd;
         passiveFloatVariables[5] = selectedPassive.SummonPDmg;
 
-        passiveBoolVariables = new bool[13];
+        passiveBoolVariables = new bool[14];
         passiveBoolVariables[0] = selectedPassive.LuckCoin;
         passiveBoolVariables[1] = selectedPassive.LuckDamage;
         passiveBoolVariables[2] = selectedPassive.LuckCritical;
@@ -194,6 +194,7 @@ public class PassiveCardUI : MonoBehaviour
         passiveBoolVariables[10] = selectedPassive.SubscriptionFee;
         passiveBoolVariables[11] = selectedPassive.SpawnTree;
         passiveBoolVariables[12] = selectedPassive.Dotgu;
+        passiveBoolVariables[13] = selectedPassive.IsReflect;
     }
 
     void DescriptionInfo()

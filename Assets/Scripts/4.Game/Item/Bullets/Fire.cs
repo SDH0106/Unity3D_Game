@@ -22,37 +22,23 @@ public class Fire : Bullet
         transform.rotation = Quaternion.Euler(90, -angle, 0);
     }
 
-    protected override void OnTriggerEnter(Collider other)
+    protected override void OnCollisionEnter(Collision collision)
     {
-        if (other.tag == "Monster" && other.GetComponent<Monster>() != null)
+        if (collision.collider.CompareTag("Monster") && collision.collider.GetComponent<Monster>() != null)
         {
-            other.GetComponent<Monster>().OnDamaged(damageUI.weaponDamage);
+            Explosion();
+        }
 
-            if (damageUI.weaponDamage > other.GetComponent<Monster>().stat.monsterDefence * (1 + gameManager.round * 0.1f))
-                damageUI.isMiss = false;
+        base.OnCollisionEnter(collision);
+    }
 
-            else if (damageUI.weaponDamage <= other.GetComponent<Monster>().stat.monsterDefence * (1 + gameManager.round * 0.1f))
-                damageUI.isMiss = true;
-
-            damageUI.realDamage = damageUI.weaponDamage - other.GetComponent<Monster>().stat.monsterDefence * (1 + gameManager.round * 0.1f);
-
-            DamageUI pool = Instantiate(damageUI, transform.position, Quaternion.Euler(90, 0, 0)).GetComponent<DamageUI>();
-            pool.gameObject.transform.SetParent(gameManager.damageStorage);
-
-            int rand = Random.Range(0, 100);
-            if (rand <= 5 + gameManager.luck * 0.2)
-            {
-                GameObject ex = Instantiate(explosion, transform.position, transform.rotation);
-                ex.GetComponent<Explosion>().grade = grade;
-            }
-
-            if (gameManager.absorbHp > 0)
-                Character.Instance.currentHp += gameManager.absorbHp;
-
-            DestroyBullet();
-            CancelInvoke("DestroyBullet");
-
-            Instantiate(effectPrefab, transform.position, transform.rotation);
+    void Explosion()
+    {
+        int rand = Random.Range(0, 100);
+        if (rand <= 5 + gameManager.luck * 0.2)
+        {
+            GameObject ex = Instantiate(explosion, transform.position, transform.rotation);
+            ex.GetComponent<Explosion>().grade = grade;
         }
     }
 }

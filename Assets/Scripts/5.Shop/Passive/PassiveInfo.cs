@@ -54,6 +54,7 @@ public class PassiveInfo : ScriptableObject
     [SerializeField] bool subscriptionFee;
     [SerializeField] bool spawnTree;
     [SerializeField] bool dotgu;
+    [SerializeField] bool isReflect;
     [SerializeField] string description;
 
     [HideInInspector] public float weight;
@@ -98,6 +99,7 @@ public class PassiveInfo : ScriptableObject
     public bool SubscriptionFee => subscriptionFee;
     public bool SpawnTree => spawnTree;
     public bool Dotgu => dotgu;
+    public bool IsReflect => isReflect;
     public string Description => description;
     public float PercentDamage => percentDamage;
     public float Avoid => avoid;

@@ -96,7 +96,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8154831264171076226}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.1, y: 0.07, z: 0}
@@ -137,6 +137,7 @@ MonoBehaviour:
   effectPrefab: {fileID: 1712867322754860876, guid: 57e9917c903ac404e8ee0253dfa7ccf7, type: 3}
   damageUI: {fileID: 0}
   explosion: {fileID: 4783517211068358492, guid: 89e5eb48793f949419a92bcf3be36b34, type: 3}
+  grade: 0
 --- !u!54 &8135681907494017946
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -47,11 +47,11 @@ public class MonsterSpawn : MonoBehaviour
             totalWeight += weightValue[i];
         }
 
-        InvokeRepeating("RendSpawnImage", 1f, spawnDelay / ((gameManager.round + 4) / 5));
+        InvokeRepeating("RendSpawnImage", 0.5f, spawnDelay / ((gameManager.round + 4) / 5));
 
         if (gameManager.round > 1)
         {
-            InvokeRepeating("RendSpawnImage", 1.5f, spawnDelay / ((gameManager.round + 5) / 5));
+            InvokeRepeating("RendSpawnImage", 1f, spawnDelay / ((gameManager.round + 5) / 5));
 
             if(gameManager.round > 10)
                 InvokeRepeating("RendSpawnImage", 1.5f, spawnDelay / ((gameManager.round + 5) / 5));

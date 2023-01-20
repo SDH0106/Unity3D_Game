@@ -32,11 +32,7 @@ public class Lazor : Bullet
         Invoke("DestroyBullet", range);
     }
 
-    protected override void OnTriggerEnter(Collider other)
-    {
-    }
-
-    private void OnCollisionEnter(Collision collision)
+    protected override void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.tag == "Monster" && collision.collider.GetComponent<Monster>())
         {
@@ -52,6 +48,7 @@ public class Lazor : Bullet
 
             DamageUI pool = Instantiate(damageUI, collision.contacts[0].point, Quaternion.Euler(90, 0, 0)).GetComponent<DamageUI>();
             pool.transform.SetParent(gameManager.damageStorage);
+
             if (gameManager.absorbHp > 0)
                 Character.Instance.currentHp += gameManager.absorbHp;
 

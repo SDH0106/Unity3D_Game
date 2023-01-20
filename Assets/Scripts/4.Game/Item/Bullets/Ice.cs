@@ -20,25 +20,21 @@ public class Ice : Bullet
         transform.rotation = Quaternion.Euler(90, -angle, 0);
     }
 
-    protected override void OnTriggerEnter(Collider other)
+    protected override void OnCollisionEnter(Collision collision)
     {
-        if (other.tag == "Monster" && other.GetComponent<Monster>() != null)
+        if (collision.collider.CompareTag("Monster") && collision.collider.GetComponent<Monster>() != null)
         {
-            int rand = Random.Range(0, 100);
-            if (rand <= 5 + gameManager.luck * 0.2)
-                isFreeze = true;
-            else
-                isFreeze = false;
+            Freezee();
 
-            other.GetComponent<Monster>().OnDamaged(damageUI.weaponDamage, isFreeze);
+            collision.collider.GetComponent<Monster>().OnDamaged(damageUI.weaponDamage, isFreeze);
 
-            if (damageUI.weaponDamage > other.GetComponent<Monster>().stat.monsterDefence * (1 + gameManager.round * 0.1f))
+            if (damageUI.weaponDamage > collision.collider.GetComponent<Monster>().stat.monsterDefence * (1 + gameManager.round * 0.1f))
                 damageUI.isMiss = false;
 
-            else if (damageUI.weaponDamage <= other.GetComponent<Monster>().stat.monsterDefence * (1 + gameManager.round * 0.1f))
+            else if (damageUI.weaponDamage <= collision.collider.GetComponent<Monster>().stat.monsterDefence * (1 + gameManager.round * 0.1f))
                 damageUI.isMiss = true;
 
-            damageUI.realDamage = damageUI.weaponDamage - other.GetComponent<Monster>().stat.monsterDefence * (1 + gameManager.round * 0.1f);
+            damageUI.realDamage = damageUI.weaponDamage - collision.collider.GetComponent<Monster>().stat.monsterDefence * (1 + gameManager.round * 0.1f);
 
             DamageUI pool = Instantiate(damageUI, transform.position, Quaternion.Euler(90, 0, 0)).GetComponent<DamageUI>();
             pool.gameObject.transform.SetParent(gameManager.damageStorage);
@@ -50,5 +46,14 @@ public class Ice : Bullet
 
             Instantiate(effectPrefab, transform.position, transform.rotation);
         }
+    }
+
+    void Freezee()
+    {
+        int rand = Random.Range(0, 100);
+        if (rand <= 5 + gameManager.luck * 0.2)
+            isFreeze = true;
+        else
+            isFreeze = false;
     }
 }

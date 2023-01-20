@@ -66,6 +66,7 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector] public bool subscriptionFee;
     [HideInInspector] public bool spawnTree;
     [HideInInspector] public bool dotgu;
+    /*[HideInInspector]*/ public bool isReflect;
 
     #endregion
 
@@ -165,7 +166,7 @@ public class GameManager : Singleton<GameManager>
         passiveFloatVariables[4] = summonASpd;
         passiveFloatVariables[5] = summonPDmg;
 
-        passiveBoolVariables = new bool[13];
+        passiveBoolVariables = new bool[14];
         passiveBoolVariables[0] = luckCoin;
         passiveBoolVariables[1] = luckDamage;
         passiveBoolVariables[2] = luckCritical;
@@ -179,6 +180,7 @@ public class GameManager : Singleton<GameManager>
         passiveBoolVariables[10] = subscriptionFee;
         passiveBoolVariables[11] = spawnTree;
         passiveBoolVariables[12] = dotgu;
+        passiveBoolVariables[13] = isReflect;
     }
 
     void StatArray()
@@ -234,6 +236,7 @@ public class GameManager : Singleton<GameManager>
         subscriptionFee = passiveBoolVariables[10];
         spawnTree = passiveBoolVariables[11];
         dotgu = passiveBoolVariables[12];
+        isReflect = passiveBoolVariables[13];
     }
 
     private void Update()

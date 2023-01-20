@@ -132,11 +132,11 @@ public class ChestPassiveCard : MonoBehaviour
         statTypes[7] = "원거리 공격력";
         statTypes[8] = "공격 속도";
         statTypes[9] = "이동 속도";
-        statTypes[10] = "행운 (%)";
+        statTypes[10] = "행운";
         statTypes[11] = "사거리";
-        statTypes[12] = "크리티컬 (%)";
-        statTypes[13] = "공격력 배율 (배)";
-        statTypes[14] = "회피율 (%)";
+        statTypes[12] = "크리티컬";
+        statTypes[13] = "공격력 배율";
+        statTypes[14] = "회피율";
 
         passiveIntVariables = new int[3];
         passiveIntVariables[0] = selectedPassive.DashCount;
@@ -151,7 +151,7 @@ public class ChestPassiveCard : MonoBehaviour
         passiveFloatVariables[4] = selectedPassive.SummonASpd;
         passiveFloatVariables[5] = selectedPassive.SummonPDmg;
 
-        passiveBoolVariables = new bool[13];
+        passiveBoolVariables = new bool[14];
         passiveBoolVariables[0] = selectedPassive.LuckCoin;
         passiveBoolVariables[1] = selectedPassive.LuckDamage;
         passiveBoolVariables[2] = selectedPassive.LuckCritical;
@@ -165,6 +165,7 @@ public class ChestPassiveCard : MonoBehaviour
         passiveBoolVariables[10] = selectedPassive.SubscriptionFee;
         passiveBoolVariables[11] = selectedPassive.SpawnTree;
         passiveBoolVariables[12] = selectedPassive.Dotgu;
+        passiveBoolVariables[13] = selectedPassive.IsReflect;
     }
 
     void DescriptionInfo()
