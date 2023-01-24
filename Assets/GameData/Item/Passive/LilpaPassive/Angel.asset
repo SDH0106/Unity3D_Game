@@ -36,8 +36,12 @@ MonoBehaviour:
   increaseExp: 0
   monsterSpeed: 0
   salePercent: 0
+  summonASpd: 0
+  summonPDmg: 0
+  monsterDef: 0
   dashCount: 0
   buffNum: 0
+  exDmg: 0
   luckCoin: 0
   luckDamage: 0
   luckCritical: 0
@@ -50,6 +54,11 @@ MonoBehaviour:
   butterfly: 0
   subscriptionFee: 0
   spawnTree: 0
+  dotgu: 0
+  isReflect: 0
+  onePenetrate: 0
+  lowPenetrate: 0
+  penetrate: 0
   description: "\uCE90\uB9AD\uD130\uAC00 \uC0AC\uB9DD\uC2DC \uCD5C\uB300 \uCCB4\uB825\uC758
-    1/2\uB85C 1\uD68C \uBD80\uD65C \uC2DC\uCF1C\uC900\uB2E4."
+    1/2\uC758 \uCCB4\uB825\uC73C\uB85C 1\uD68C \uBD80\uD65C\uD569\uB2C8\uB2E4."
   weight: 0

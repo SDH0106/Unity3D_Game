@@ -59,6 +59,6 @@ MonoBehaviour:
   onePenetrate: 0
   lowPenetrate: 0
   penetrate: 0
-  description: "\uD604\uC7AC \uCD5C\uB300 \uCCB4\uB825\uC774 44\uC774\uD558\uC77C
-    \uACBD\uC6B0 \uCCB4\uB825\uC744 1\uB9CC \uB0A8\uAE34\uB2E4."
+  description: "\uB2E8, \uD604\uC7AC \uCD5C\uB300 \uCCB4\uB825\uC774 44\uC774\uD558\uC77C
+    \uACBD\uC6B0 \uCD5C\uB300 \uCCB4\uB825\uC744 1\uB9CC \uB0A8\uAE41\uB2C8\uB2E4."
   weight: 150

@@ -36,6 +36,9 @@ MonoBehaviour:
   increaseExp: 0
   monsterSpeed: 0
   salePercent: 0
+  summonASpd: 0
+  summonPDmg: 0
+  monsterDef: 0
   dashCount: 0
   buffNum: 0
   exDmg: 0
@@ -52,6 +55,10 @@ MonoBehaviour:
   subscriptionFee: 0
   spawnTree: 0
   dotgu: 1
+  isReflect: 0
+  onePenetrate: 0
+  lowPenetrate: 0
+  penetrate: 0
   description: "\uC0C1\uC810\uC758 \uCCAB \uBC88\uC9F8 \uCD08\uAE30\uD654 \uBE44\uC6A9\uC744
-    0\uC73C\uB85C \uB9CC\uB4E0\uB2E4."
+    0\uC73C\uB85C \uB9CC\uB4ED\uB2C8\uB2E4."
   weight: 188

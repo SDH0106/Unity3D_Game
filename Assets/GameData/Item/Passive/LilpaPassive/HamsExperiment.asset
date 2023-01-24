@@ -23,11 +23,11 @@ MonoBehaviour:
   defence: 0
   physicDamage: -0.3
   magicDamage: 0
-  shortDamage: 1.4
+  shortDamage: 0
   longDamage: 0
   attackSpeed: 0
   speed: 0
-  range: -1
+  range: 0
   luck: 2
   critical: 0
   percentDamage: 0

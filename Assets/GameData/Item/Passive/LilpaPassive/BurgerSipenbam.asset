@@ -28,10 +28,10 @@ MonoBehaviour:
   attackSpeed: 0
   speed: -0.5
   range: 0
-  luck: 0
+  luck: 5
   critical: 0
   percentDamage: 0
-  avoid: 5
+  avoid: 0
   coinRange: 0
   increaseExp: 0
   monsterSpeed: 0

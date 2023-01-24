@@ -23,5 +23,6 @@ MonoBehaviour:
   weaponRange: 1.1
   weaponPrice: 31
   description: "\uB0A0\uC544\uAC00\uB294 \uBC29\uD5A5\uC5D0 \uC788\uB294 \uC801\uC744
-    \uC790\uB3D9\uC73C\uB85C \uCD94\uC801\uD558\uB294 \uCD1D."
+    \uC790\uB3D9\uC73C\uB85C \uCD94\uC801\uD558\uB294 \uD22C\uC0AC\uCCB4\uB97C \uBC1C\uC0AC\uD558\uB294
+    \uCD1D."
   weaponSound: {fileID: 8300000, guid: f4482d2a369392142ab84b0be1285ae3, type: 3}
