@@ -38,6 +38,7 @@ public class PassiveInfo : ScriptableObject
     [SerializeField] float salePercent;
     [SerializeField] float summonASpd;
     [SerializeField] float summonPDmg;
+    [SerializeField] float monsterDef;
     [SerializeField] int dashCount;
     [SerializeField] int buffNum;
     [SerializeField] int exDmg;
@@ -89,6 +90,7 @@ public class PassiveInfo : ScriptableObject
     public float IncreaseExp => increaseExp;
     public float SummonASpd => summonASpd;
     public float SummonPDmg => summonPDmg;
+    public float MonsterDef => monsterDef;
     public bool LuckCoin => luckCoin;
     public bool LuckDamage => luckDamage;
     public bool LuckCritical => luckCritical;

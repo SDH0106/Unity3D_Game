@@ -150,6 +150,7 @@ public class ChestPassiveCard : MonoBehaviour
         passiveFloatVariables[3] = selectedPassive.SalePercent;
         passiveFloatVariables[4] = selectedPassive.SummonASpd;
         passiveFloatVariables[5] = selectedPassive.SummonPDmg;
+        passiveFloatVariables[6] = selectedPassive.MonsterDef;
 
         passiveBoolVariables = new bool[17];
         passiveBoolVariables[0] = selectedPassive.LuckCoin;

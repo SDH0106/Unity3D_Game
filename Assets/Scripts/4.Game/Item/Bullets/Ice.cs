@@ -46,13 +46,13 @@ public class Ice : Bullet
                 DestroyBullet();
             }
 
-            if (damageUI.weaponDamage > collision.collider.GetComponent<Monster>().stat.monsterDefence * (1 + gameManager.round * 0.1f))
+            if (damageUI.weaponDamage > collision.collider.GetComponent<Monster>().defence)
                 damageUI.isMiss = false;
 
-            else if (damageUI.weaponDamage <= collision.collider.GetComponent<Monster>().stat.monsterDefence * (1 + gameManager.round * 0.1f))
+            else if (damageUI.weaponDamage <= collision.collider.GetComponent<Monster>().defence)
                 damageUI.isMiss = true;
 
-            damageUI.realDamage = damageUI.weaponDamage - collision.collider.GetComponent<Monster>().stat.monsterDefence * (1 + gameManager.round * 0.1f);
+            damageUI.realDamage = damageUI.weaponDamage - collision.collider.GetComponent<Monster>().defence;
 
             collision.collider.GetComponent<Monster>().OnDamaged(damageUI.weaponDamage, isFreeze);
 

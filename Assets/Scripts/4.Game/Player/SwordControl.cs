@@ -124,11 +124,14 @@ public class SwordControl : Weapon
 
                 if (character.characterNum == (int)CHARACTER_NUM.Legendary)
                 {
-                    Bullet bullet = pool.Get();
-                    bullet.transform.position = new Vector3(firePos.position.x, 0f, firePos.position.z);
-                    bullet.Shoot(dir.normalized, 2f);
-                    bullet.damageUI = damageUI;
-                    bullet.speed = 6f;
+                    if (character.currentHp / character.maxHp > 0.7)
+                    {
+                        Bullet bullet = pool.Get();
+                        bullet.transform.position = new Vector3(firePos.position.x, 0f, firePos.position.z);
+                        bullet.Shoot(dir.normalized, 2f);
+                        bullet.damageUI = damageUI;
+                        bullet.speed = 6f;
+                    }
                 }
 
                 canAttack = false;
@@ -176,13 +179,13 @@ public class SwordControl : Weapon
 
             other.GetComponent<Monster>().OnDamaged(damageUI.weaponDamage);
 
-            if (damageUI.weaponDamage > other.GetComponent<Monster>().stat.monsterDefence * (1 + gameManager.round * 0.1f))
+            if (damageUI.weaponDamage > other.GetComponent<Monster>().defence)
                 damageUI.isMiss = false;
 
-            else if (damageUI.weaponDamage <= other.GetComponent<Monster>().stat.monsterDefence * (1 + gameManager.round * 0.1f))
+            else if (damageUI.weaponDamage <= other.GetComponent<Monster>().defence)
                 damageUI.isMiss = true;
 
-            damageUI.realDamage = damageUI.weaponDamage - other.GetComponent<Monster>().stat.monsterDefence * (1 + gameManager.round * 0.1f);
+            damageUI.realDamage = damageUI.weaponDamage - other.GetComponent<Monster>().defence;
 
             DamageUI pool = Instantiate(damageUI, transform.position, Quaternion.Euler(90, 0, 0)).GetComponent<DamageUI>();
             pool.gameObject.transform.SetParent(gameManager.damageStorage);

@@ -35,6 +35,8 @@ public class Monster : MonoBehaviour
 
     IEnumerator runningCoroutine;
 
+    public float defence;
+
     void Start()
     {
         InitSetting();
@@ -44,15 +46,18 @@ public class Monster : MonoBehaviour
     {
         gameManager = GameManager.Instance;
         character = Character.Instance;
+        rend = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();
+        coll = GetComponent<Collider>();
+
         hp = stat.monsterMaxHp * (1 + ((gameManager.round - 1) * 0.25f));
         maxHp = hp;
         initScale = transform.localScale;
         speed = stat.monsterSpeed * (1 - gameManager.monsterSlow * 0.01f);
         initSpeed = speed;
+        defence = stat.monsterDefence * (1 + gameManager.round * 0.1f) * gameManager.monsterDef;
         isWalk = true;
-        rend = GetComponent<SpriteRenderer>();
-        anim = GetComponent<Animator>();
-        coll = GetComponent<Collider>();
+
     }
 
     void Update()
@@ -162,9 +167,9 @@ public class Monster : MonoBehaviour
 
     public void OnDamaged(float damage)
     {
-        if (damage > (stat.monsterDefence * (1 + gameManager.round * 0.1f)))
+        if (damage > defence)
         {
-            hp -= (damage - (stat.monsterDefence * (1 + gameManager.round * 0.1f)));
+            hp -= (damage - defence);
 
             if (!isFreeze)
             {
@@ -182,9 +187,9 @@ public class Monster : MonoBehaviour
         if (!isFreeze)
             isFreeze = freeze;
 
-        if (damage > (stat.monsterDefence * (1 + gameManager.round * 0.1f)))
+        if (damage > defence)
         {
-            hp -= (damage - (stat.monsterDefence * (1 + gameManager.round * 0.1f)));
+            hp -= (damage - defence);
 
             if (isFreeze == true)
             {

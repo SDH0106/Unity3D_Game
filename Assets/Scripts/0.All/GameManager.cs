@@ -53,6 +53,7 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector] public float monsterSlow;
     [HideInInspector] public float summonASpd;
     [HideInInspector] public float summonPDmg;
+    [HideInInspector] public float monsterDef;
     [HideInInspector] public bool luckCoin;
     [HideInInspector] public bool luckDamage;
     [HideInInspector] public bool luckCritical;
@@ -168,6 +169,7 @@ public class GameManager : Singleton<GameManager>
         passiveFloatVariables[3] = salePercent;
         passiveFloatVariables[4] = summonASpd;
         passiveFloatVariables[5] = summonPDmg;
+        passiveFloatVariables[6] = monsterDef;
 
         passiveBoolVariables = new bool[17];
         passiveBoolVariables[0] = luckCoin;
@@ -225,6 +227,7 @@ public class GameManager : Singleton<GameManager>
         salePercent = passiveFloatVariables[3];
         summonASpd = passiveFloatVariables[4];
         summonPDmg = passiveFloatVariables[5];
+        monsterDef = passiveFloatVariables[6];
     }
 
     void BoolVariableArray()
