@@ -383,7 +383,7 @@ public class Character : Singleton<Character>
     {
         if (!isAttacked)
         {
-            avoidRand = Random.Range(0, 100);
+            avoidRand = Random.Range(1, 100);
 
             if (avoidRand > gameManager.avoid)
             {

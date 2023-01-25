@@ -167,12 +167,13 @@ public class PassiveCardUI : MonoBehaviour
         statTypes[13] = "공격력 배율";
         statTypes[14] = "회피율";
 
-        passiveIntVariables = new int[3];
+        passiveIntVariables = new int[4];
         passiveIntVariables[0] = selectedPassive.DashCount;
         passiveIntVariables[1] = selectedPassive.BuffNum;
         passiveIntVariables[2] = selectedPassive.ExDmg;
+        passiveIntVariables[3] = selectedPassive.IsedolCount;
 
-        passiveFloatVariables = new float[10];
+        passiveFloatVariables = new float[7];
         passiveFloatVariables[0] = selectedPassive.CoinRange;
         passiveFloatVariables[1] = selectedPassive.IncreaseExp;
         passiveFloatVariables[2] = selectedPassive.MonsterSpeed;

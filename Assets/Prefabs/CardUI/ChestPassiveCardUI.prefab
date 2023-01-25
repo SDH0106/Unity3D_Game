@@ -881,6 +881,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1ad15cfb209ad534ba768bb2dd29e70a, type: 2}
   - {fileID: 11400000, guid: efc895f5d92de7845a6eaa4a7ec3b89a, type: 2}
   - {fileID: 11400000, guid: 9f78f59819590844fb21f9a14c8baf0f, type: 2}
+  - {fileID: 11400000, guid: 5eebd6df770dac0478b0b8cd2cbc63a2, type: 2}
+  - {fileID: 11400000, guid: d1df62af144590b4fbb95d0bac8aa0ac, type: 2}
+  - {fileID: 11400000, guid: 3e58450ffcec20e4d83c608fa63eb5dd, type: 2}
+  - {fileID: 11400000, guid: 02956729cbd22174a83ed3a617dfeee6, type: 2}
+  - {fileID: 11400000, guid: c96e8d01f733d4741b544d051013aa6d, type: 2}
   descriptPrefabs:
   - {fileID: 520282873035567209}
   - {fileID: 6505978013957604809}

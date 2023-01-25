@@ -65,9 +65,13 @@ public class GameSceneUI : Singleton<GameSceneUI>
     [Header("Text")]
     [SerializeField] GameObject roundClearText;
     [SerializeField] GameObject gameOverUI;
-    [SerializeField] GameObject gameOverText;
+    [SerializeField] TypingText gameOverText;
+    [SerializeField] GameObject gameOverIsedolUI;
+    [SerializeField] TypingText gameOverIsedolText;
+    [SerializeField] Image IsedolImage;
+    [SerializeField] GameObject clickText;
     [SerializeField] GameObject gameClearUI;
-    [SerializeField] GameObject gameClearText;
+    [SerializeField] TypingText gameClearText;
     [SerializeField] GameObject statCardParent;
     [SerializeField] GameObject chestPassive;
 
@@ -77,20 +81,28 @@ public class GameSceneUI : Singleton<GameSceneUI>
 
     [HideInInspector] public int chestCount;
 
+    protected override void Awake()
+    {
+        base.Awake();
+        roundClearText.SetActive(false);
+        gameOverUI.SetActive(false);
+        gameOverIsedolUI.SetActive(false);
+        gameClearUI.SetActive(false);
+        statCardParent.SetActive(false);
+        dash.SetActive(false);
+        statWindow.SetActive(false);
+        chestPassive.SetActive(false);
+        subCam.gameObject.SetActive(false);
+        clickText.gameObject.SetActive(false);
+    }
+
     private void Start()
     {
         gameManager = GameManager.Instance;
         character = Character.Instance;
         soundManager = SoundManager.Instance;
         soundManager.PlayBGM(1);
-        roundClearText.SetActive(false);
-        gameOverUI.SetActive(false);
-        statCardParent.SetActive(false);
-        gameClearUI.SetActive(false);
-        dash.SetActive(false);
-        statWindow.SetActive(false);
-        chestPassive.SetActive(false);
-        subCam.gameObject.SetActive(false);
+
         chararcterImage.sprite = character.rend.sprite;
 
         if (gameManager.round == 1)
@@ -169,7 +181,7 @@ public class GameSceneUI : Singleton<GameSceneUI>
                 }
             }
 
-            else if(gameManager.round == 30)
+            else if (gameManager.round == 30)
             {
                 if (gameManager.isClear && gameManager.isBossDead)
                 {
@@ -182,21 +194,71 @@ public class GameSceneUI : Singleton<GameSceneUI>
                         PlayerPrefs.SetInt("BagicClear", 1);
                 }
 
-                if (gameClearText.GetComponent<TypingText>().isOver == true)
+                if (gameClearText.isOver == true)
                     SceneManager.LoadScene("End");
-            }    
+            }
         }
 
         else if (character.isDead)
         {
-            if (!gameOverUI.activeSelf)
+            if (!gameOverUI.activeSelf || !gameOverIsedolText)
                 gameManager.gameEndTime = Time.realtimeSinceStartup;
 
-            gameOverUI.SetActive(true);
+            if (gameManager.isedolCount != 5)
+            {
+                gameOverUI.SetActive(true);
 
-            if (gameOverText.GetComponent<TypingText>().isOver == true)
+                if (gameOverText.isOver == true)
+                    SceneManager.LoadScene("End");
+            }
+
+
+            else if (gameManager.isedolCount == 5)
+            {
+                if (!clickText.gameObject.activeSelf)
+                    gameOverIsedolUI.SetActive(true);
+
+                if (gameOverIsedolText.isOver == true)
+                {
+                    StartCoroutine(FadeIn());
+                    gameOverIsedolText.isOver = false;
+                }
+            }
+
+            if (clickText.gameObject.activeSelf)
+            {
+                if (Input.GetMouseButtonDown(0))
+                {
+                    IsedolImage.gameObject.SetActive(false);
+                    gameOverIsedolUI.SetActive(false);
+                    gameClearUI.SetActive(true);
+                }
+            }
+
+            if (gameClearText.isOver == true)
                 SceneManager.LoadScene("End");
         }
+    }
+
+    IEnumerator FadeIn()
+    {
+        float fadeTime = 0f;
+        Color imageColor = IsedolImage.color;
+        IsedolImage.gameObject.SetActive(true);
+
+        do
+        {
+            fadeTime = Mathf.Clamp(fadeTime + Time.deltaTime, 0f, 2f);
+            imageColor.a = fadeTime / 2f;
+            IsedolImage.color = imageColor;
+            yield return null;
+        }
+
+        while (fadeTime < 2f);
+
+        yield return new WaitForSeconds(5f);
+
+        clickText.SetActive(true);
     }
 
     void SettingStatText()

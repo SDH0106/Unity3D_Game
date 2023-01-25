@@ -42,6 +42,7 @@ public class PassiveInfo : ScriptableObject
     [SerializeField] int dashCount;
     [SerializeField] int buffNum;
     [SerializeField] int exDmg;
+    [SerializeField] int isedolCount;
     [SerializeField] bool luckCoin;
     [SerializeField] bool luckDamage;
     [SerializeField] bool luckCritical;
@@ -86,6 +87,7 @@ public class PassiveInfo : ScriptableObject
     public int DashCount => dashCount;
     public int BuffNum => buffNum;
     public int ExDmg => exDmg;
+    public int IsedolCount => isedolCount;
     public float CoinRange => coinRange;
     public float IncreaseExp => increaseExp;
     public float SummonASpd => summonASpd;

@@ -47,6 +47,7 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector] public int dashCount;
     [HideInInspector] public int buffNum;
     [HideInInspector] public int exDmg;
+    /*[HideInInspector]*/ public int isedolCount;
     [HideInInspector] public float salePercent;
     [HideInInspector] public float increaseExp;
     [HideInInspector] public float coinRange;
@@ -68,9 +69,9 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector] public bool spawnTree;
     [HideInInspector] public bool dotgu;
     [HideInInspector] public bool isReflect;
-    /*[HideInInspector]*/ public bool onePenetrate;
-    /*[HideInInspector]*/ public bool lowPenetrate;
-    /*[HideInInspector]*/ public bool penetrate;
+    [HideInInspector] public bool onePenetrate;
+    [HideInInspector] public bool lowPenetrate;
+    [HideInInspector] public bool penetrate;
 
     #endregion
 
@@ -122,20 +123,6 @@ public class GameManager : Singleton<GameManager>
         range = 0;
         luck = 0;
         critical = 5;
-        salePercent = 0;
-        dashCount = 0;
-        buffNum = 0;
-        increaseExp = 0;
-        monsterSlow = 0;
-        luckCoin = false;
-        luckDamage = false;
-        luckCritical = false;
-        doubleShot = false;
-        revive = false;
-        ggoGgoSummon = false;
-        ilsoonSummon = false;
-        wakgoodSummon = false;
-        subscriptionFee = false;
     }
 
     void InitArray()
@@ -157,22 +144,41 @@ public class GameManager : Singleton<GameManager>
         stats[13] = percentDamage;
         stats[14] = avoid;
 
-        passiveIntVariables = new int[3];
+        passiveIntVariables = new int[4];
+
+        /*for (int i = 0; i < passiveIntVariables.Length; i++)
+        {
+            passiveIntVariables[i] = 0;
+        }*/
+
         passiveIntVariables[0] = dashCount;
         passiveIntVariables[1] = buffNum;
         passiveIntVariables[2] = exDmg;
+        passiveIntVariables[3] = isedolCount;
 
-        passiveFloatVariables = new float[10];
-        passiveFloatVariables[0] = coinRange;
+        passiveFloatVariables = new float[7];
+
+        for(int i = 0; i < passiveFloatVariables.Length; i++)
+        {
+            passiveFloatVariables[i] = 0;
+        }
+
+        /*passiveFloatVariables[0] = coinRange;
         passiveFloatVariables[1] = increaseExp;
         passiveFloatVariables[2] = monsterSlow;
         passiveFloatVariables[3] = salePercent;
         passiveFloatVariables[4] = summonASpd;
         passiveFloatVariables[5] = summonPDmg;
-        passiveFloatVariables[6] = monsterDef;
+        passiveFloatVariables[6] = monsterDef;*/
 
         passiveBoolVariables = new bool[17];
-        passiveBoolVariables[0] = luckCoin;
+
+        for (int i = 0; i < passiveBoolVariables.Length; i++)
+        {
+            passiveBoolVariables[i] = false;
+        }
+
+        /*passiveBoolVariables[0] = luckCoin;
         passiveBoolVariables[1] = luckDamage;
         passiveBoolVariables[2] = luckCritical;
         passiveBoolVariables[3] = doubleShot;
@@ -188,7 +194,7 @@ public class GameManager : Singleton<GameManager>
         passiveBoolVariables[13] = isReflect;
         passiveBoolVariables[14] = onePenetrate;
         passiveBoolVariables[15] = lowPenetrate;
-        passiveBoolVariables[16] = penetrate;
+        passiveBoolVariables[16] = penetrate;*/
     }
 
     void StatArray()
@@ -217,6 +223,7 @@ public class GameManager : Singleton<GameManager>
         dashCount = passiveIntVariables[0];
         buffNum = passiveIntVariables[1];
         exDmg = passiveIntVariables[2];
+        isedolCount = passiveIntVariables[3];
     }
 
     void FloatVariableArray()
@@ -267,7 +274,7 @@ public class GameManager : Singleton<GameManager>
             IntVariableArray();
             FloatVariableArray();
             BoolVariableArray();
-
+            
             OnGameScene();
         }
     }
