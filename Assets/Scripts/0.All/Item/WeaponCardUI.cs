@@ -99,26 +99,26 @@ public class WeaponCardUI : MonoBehaviour
 
         else if(selectedWeapon.weaponGrade == Grade.Èñ±Í)
         {
-            cardBack.color = new Color(0, 0.77f, 1, 0.8235f);
+            cardBack.color = new Color(0f, 0.6f, 0.8f, 0.8235f);
             cardBackLine.color = Color.blue;
-            weaponName.color = Color.blue;
-            weaponGrade.color = Color.blue;
+            weaponName.color = new Color(0.5f, 0.8f, 1f, 1f);
+            weaponGrade.color = new Color(0.5f, 0.8f, 1f, 1f);
         }
 
         else if (selectedWeapon.weaponGrade == Grade.Àü¼³)
         {
             cardBack.color = new Color(0.5f, 0.2f, 0.4f, 0.8235f);
-            cardBackLine.color = new Color(0.5f, 0, 0.5f, 1);
-            weaponName.color = new Color(0.5f, 0, 0.5f, 1);
-            weaponGrade.color = new Color(0.5f, 0, 0.5f, 1);
+            cardBackLine.color = new Color(0.5f, 0f, 0.5f, 1f);
+            weaponName.color = new Color(0.8f, 0.4f, 1f, 1f);
+            weaponGrade.color = new Color(0.8f, 0.4f, 1f, 1f);
         }
 
         else if (selectedWeapon.weaponGrade == Grade.½ÅÈ­)
         {
-            cardBack.color = new Color(1, 0.31f, 0.31f, 0.8235f);
+            cardBack.color = new Color(0.7f, 0.1f, 0.1f, 0.8235f);
             cardBackLine.color = Color.red;
-            weaponName.color = Color.red;
-            weaponGrade.color = Color.red;
+            weaponName.color = new Color(1f, 0.45f, 0.45f, 1f);
+            weaponGrade.color = new Color(1f, 0.45f, 0.45f, 1f);
         }
     }
 

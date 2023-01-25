@@ -108,26 +108,26 @@ public class PassiveCardUI : MonoBehaviour
 
         else if (selectedPassive.ItemGrade == Grade.Èñ±Í)
         {
-            cardBack.color = new Color(0, 0.77f, 1, 0.8235f);
+            cardBack.color = new Color(0f, 0.6f, 0.8f, 0.8235f);
             cardBackLine.color = Color.blue;
-            itemName.color = Color.blue;
-            itemGrade.color = Color.blue;
+            itemName.color = new Color(0.5f, 0.8f, 1f, 1f);
+            itemGrade.color = new Color(0.5f, 0.8f, 1f, 1f);
         }
 
         else if (selectedPassive.ItemGrade == Grade.Àü¼³)
         {
             cardBack.color = new Color(0.5f, 0.2f, 0.4f, 0.8235f);
-            cardBackLine.color = new Color(0.5f, 0, 0.5f, 1);
-            itemName.color = new Color(0.5f, 0, 0.5f, 1);
-            itemGrade.color = new Color(0.5f, 0, 0.5f, 1);
+            cardBackLine.color = new Color(0.5f, 0f, 0.5f, 1f);
+            itemName.color = new Color(0.8f, 0.4f, 1f, 1f);
+            itemGrade.color = new Color(0.8f, 0.4f, 1f, 1f);
         }
 
         else if (selectedPassive.ItemGrade == Grade.½ÅÈ­)
         {
-            cardBack.color = new Color(1, 0.31f, 0.31f, 0.8235f);
+            cardBack.color = new Color(0.7f, 0.1f, 0.1f, 0.8235f);
             cardBackLine.color = Color.red;
-            itemName.color = Color.red;
-            itemGrade.color = Color.red;
+            itemName.color = new Color(1f, 0.45f, 0.45f, 1f);
+            itemGrade.color = new Color(1f, 0.45f, 0.45f, 1f);
         }
     }
 

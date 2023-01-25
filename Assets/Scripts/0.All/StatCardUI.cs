@@ -48,26 +48,26 @@ public class StatCardUI : StatCardInfo
 
         else if (cardGrade == Grade.Èñ±Í)
         {
-            cardBack.color = new Color(0, 0.77f, 1, 1f);
+            cardBack.color = new Color(0f, 0.6f, 0.8f, 1f);
             cardBackLine.color = Color.blue;
-            statName.color = Color.blue;
-            statGrade.color = Color.blue;
+            statName.color = new Color(0.5f, 0.8f, 1f, 1f);
+            statGrade.color = new Color(0.5f, 0.8f, 1f, 1f);
         }
 
         else if (cardGrade == Grade.Àü¼³)
         {
             cardBack.color = new Color(0.5f, 0.2f, 0.4f, 1f);
-            cardBackLine.color = new Color(0.5f, 0, 0.5f, 1);
-            statName.color = new Color(0.5f, 0, 0.5f, 1);
-            statGrade.color = new Color(0.5f, 0, 0.5f, 1);
+            cardBackLine.color = new Color(0.5f, 0f, 0.5f, 1f);
+            statName.color = new Color(0.8f, 0.4f, 1f, 1);
+            statGrade.color = new Color(0.8f, 0.4f, 1f, 1);
         }
 
         else if (cardGrade == Grade.½ÅÈ­)
         {
-            cardBack.color = new Color(1, 0.31f, 0.31f, 1f);
+            cardBack.color = new Color(0.7f, 0.1f, 0.1f, 1f);
             cardBackLine.color = Color.red;
-            statName.color = Color.red;
-            statGrade.color = Color.red;
+            statName.color = new Color(1f, 0.45f, 0.45f, 1f);
+            statGrade.color = new Color(1f, 0.45f, 0.45f, 1f);
         }
     }
 

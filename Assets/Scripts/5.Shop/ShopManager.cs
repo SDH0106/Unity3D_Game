@@ -285,7 +285,7 @@ public class ShopManager : Singleton<ShopManager>
             {
                 int rand = UnityEngine.Random.Range(0, 100);
 
-                if (rand >= 80)
+                if (rand >= 85)
                 {
                     GetRandomWeaponCard();
                     GameObject instant = Instantiate(weaponCardUI, cardsParent.GetChild(i).transform);
@@ -295,7 +295,7 @@ public class ShopManager : Singleton<ShopManager>
                     instant.transform.SetParent(cardsParent.GetChild(i));
                 }
 
-                else if (rand < 80)
+                else if (rand < 85)
                 {
                     GetRandomPassiveCard();
                     GameObject instant = Instantiate(passiveCardUI, cardsParent.GetChild(i).transform);
@@ -521,7 +521,7 @@ public class ShopManager : Singleton<ShopManager>
         weightPassiveValue[0] = 200 - (gameManager.round - 1) * 6;
         weightPassiveValue[1] = 10 * gameManager.round;
         weightPassiveValue[2] = (gameManager.round - 1) * (gameManager.round) * 0.1f;
-        weightPassiveValue[3] = (gameManager.round - 1) * (gameManager.round) * 0.02f;
+        weightPassiveValue[3] = (gameManager.round - 1) * (gameManager.round) * 0.02f * 1000;
 
         PassiveCardUI passiveCard = passiveCardUI.GetComponent<PassiveCardUI>();
 

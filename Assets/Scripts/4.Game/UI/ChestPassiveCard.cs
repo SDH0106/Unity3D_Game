@@ -71,7 +71,7 @@ public class ChestPassiveCard : MonoBehaviour
     {
         if (selectedPassive.ItemGrade == Grade.¿œπ›)
         {
-            cardBack.color = new Color(0.142f, 0.142f, 0.142f, 1);
+            cardBack.color = new Color(0.142f, 0.142f, 0.142f, 1f);
             cardBackLine.color = Color.black;
             itemName.color = Color.white;
             itemGrade.color = Color.white;
@@ -79,26 +79,26 @@ public class ChestPassiveCard : MonoBehaviour
 
         else if (selectedPassive.ItemGrade == Grade.»Ò±Õ)
         {
-            cardBack.color = new Color(0, 0.77f, 1, 1);
+            cardBack.color = new Color(0f, 0.6f, 0.8f, 1f);
             cardBackLine.color = Color.blue;
-            itemName.color = Color.blue;
-            itemGrade.color = Color.blue;
+            itemName.color = new Color(0.5f, 0.8f, 1f, 1f);
+            itemGrade.color = new Color(0.5f, 0.8f, 1f, 1f);
         }
 
         else if (selectedPassive.ItemGrade == Grade.¿¸º≥)
         {
-            cardBack.color = new Color(0.5f, 0.2f, 0.4f, 1);
-            cardBackLine.color = new Color(0.5f, 0, 0.5f, 1);
-            itemName.color = new Color(0.5f, 0, 0.5f, 1);
-            itemGrade.color = new Color(0.5f, 0, 0.5f, 1);
+            cardBack.color = new Color(0.5f, 0.2f, 0.4f, 1f);
+            cardBackLine.color = new Color(0.5f, 0f, 0.5f, 1f);
+            itemName.color = new Color(0.8f, 0.4f, 1f, 1f);
+            itemGrade.color = new Color(0.8f, 0.4f, 1f, 1f);
         }
 
         else if (selectedPassive.ItemGrade == Grade.Ω≈»≠)
         {
-            cardBack.color = new Color(1, 0.31f, 0.31f, 1);
+            cardBack.color = new Color(0.7f, 0.1f, 0.1f, 1f);
             cardBackLine.color = Color.red;
-            itemName.color = Color.red;
-            itemGrade.color = Color.red;
+            itemName.color = new Color(1f, 0.45f, 0.45f, 1f);
+            itemGrade.color = new Color(1f, 0.45f, 0.45f, 1f);
         }
     }
 
