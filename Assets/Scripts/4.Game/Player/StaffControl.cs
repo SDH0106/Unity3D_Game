@@ -256,7 +256,7 @@ public class StaffControl : Weapon
                     {
                         target = colliders[i].transform;
 
-                        colliders[i].GetComponent<Monster>().OnDamaged(damageUI.weaponDamage);
+                        colliders[i].GetComponent<Monster>().OnDamaged(damageUI.realDamage);
 
                         if (damageUI.weaponDamage > colliders[i].GetComponent<Monster>().defence)
                             damageUI.isMiss = false;

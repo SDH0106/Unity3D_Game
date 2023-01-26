@@ -42,6 +42,7 @@ MonoBehaviour:
   dashCount: 0
   buffNum: 0
   exDmg: 0
+  isedolCount: 0
   luckCoin: 0
   luckDamage: 0
   luckCritical: 0
@@ -59,8 +60,8 @@ MonoBehaviour:
   onePenetrate: 0
   lowPenetrate: 0
   penetrate: 0
-  description: "\uC77C\uC21C\uC774\uB97C \uC18C\uD658\uD569\uB2C8\uB2E4. \uCE90\uB9AD\uD130\uC758
-    \uC6D0\uAC70\uB9AC \uACF5\uACA9\uB825\uC758 2\uBC30\uC758 \uACF5\uACA9\uB825\uC744
-    \uAC00\uC9D1\uB2C8\uB2E4 (\uBC29\uC5B4\uB825 \uBB34\uC2DC). \uACF5\uACA9 \uC8FC\uAE30
-    1.5\uCD08. (\uC18C\uD658\uC218\uB294 \uCD1D \uCD5C\uB300 3\uB9C8\uB9AC)"
+  description: "\uC77C\uC21C\uC774\uB97C \uC18C\uD658\uD569\uB2C8\uB2E4. (\uCE90\uB9AD\uD130\uC758
+    \uC6D0\uAC70\uB9AC \uACF5\uACA9\uB825\uC758 2\uBC30, \uBAAC\uC2A4\uD130\uC758
+    \uBC29\uC5B4\uB825 \uBB34\uC2DC, \uC18C\uD658\uC218\uB294 \uCD1D \uCD5C\uB300
+    3\uB9C8\uB9AC)"
   weight: 0

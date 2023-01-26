@@ -42,6 +42,7 @@ MonoBehaviour:
   dashCount: 0
   buffNum: 1
   exDmg: 0
+  isedolCount: 0
   luckCoin: 0
   luckDamage: 0
   luckCritical: 0

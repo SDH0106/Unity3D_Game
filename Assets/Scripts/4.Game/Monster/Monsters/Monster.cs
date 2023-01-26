@@ -167,18 +167,15 @@ public class Monster : MonoBehaviour
 
     public void OnDamaged(float damage)
     {
-        if (damage > defence)
+        hp -= damage;
+
+        if (!isFreeze)
         {
-            hp -= (damage - defence);
+            if (runningCoroutine != null)
+                StopCoroutine(runningCoroutine);
 
-            if (!isFreeze)
-            {
-                if (runningCoroutine != null)
-                    StopCoroutine(runningCoroutine);
-
-                runningCoroutine = MonsterColorBlink();
-                StartCoroutine(runningCoroutine);
-            }
+            runningCoroutine = MonsterColorBlink();
+            StartCoroutine(runningCoroutine);
         }
     }
 
@@ -187,27 +184,25 @@ public class Monster : MonoBehaviour
         if (!isFreeze)
             isFreeze = freeze;
 
-        if (damage > defence)
+        hp -= damage;
+
+        if (isFreeze == true)
         {
-            hp -= (damage - defence);
+            isWalk = false;
 
-            if (isFreeze == true)
-            {
-                isWalk = false;
+            if (runningCoroutine != null)
+                StopCoroutine(runningCoroutine);
 
-                if (runningCoroutine != null)
-                    StopCoroutine(runningCoroutine);
-
-                runningCoroutine = MonsterFreeze();
-                StartCoroutine(runningCoroutine);
-            }
-
-            if (isFreeze == false)
-            {
-                runningCoroutine = MonsterColorBlink();
-                StartCoroutine(runningCoroutine);
-            }
+            runningCoroutine = MonsterFreeze();
+            StartCoroutine(runningCoroutine);
         }
+
+        if (isFreeze == false)
+        {
+            runningCoroutine = MonsterColorBlink();
+            StartCoroutine(runningCoroutine);
+        }
+
     }
 
     public void OnDead()

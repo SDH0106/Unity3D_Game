@@ -76,7 +76,7 @@ public class Bullet : MonoBehaviour
 
             damageUI.realDamage = damageUI.weaponDamage - collision.collider.GetComponent<Monster>().defence;
 
-            collision.collider.GetComponent<Monster>().OnDamaged(damageUI.weaponDamage);
+            collision.collider.GetComponent<Monster>().OnDamaged(damageUI.realDamage);
 
             DamageUI pool = Instantiate(damageUI, transform.position, Quaternion.Euler(90, 0, 0)).GetComponent<DamageUI>();
             pool.gameObject.transform.SetParent(gameManager.damageStorage);

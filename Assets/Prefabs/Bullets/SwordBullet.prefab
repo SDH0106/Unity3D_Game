@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 8154831264171076224}
   - component: {fileID: 8154831264171076225}
   - component: {fileID: 9078078465588959345}
-  - component: {fileID: -8557741743296975608}
   - component: {fileID: 4143293133346660603}
+  - component: {fileID: 2708561093839225538}
   m_Layer: 0
   m_Name: SwordBullet
   m_TagString: myBullet
@@ -100,21 +100,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.15, y: 0.18, z: 0}
   m_Center: {x: 0.125, y: 0, z: 0}
---- !u!114 &-8557741743296975608
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8154831264171076226}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5049efe9bf8845d498e2aa71d5937e86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 8
-  effectPrefab: {fileID: 8410533705926354888, guid: 5e46bb42b8d131540a84d834907b3bd5, type: 3}
-  damageUI: {fileID: 0}
 --- !u!54 &4143293133346660603
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -131,3 +116,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 1
+--- !u!114 &2708561093839225538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8154831264171076226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3174f23ee6bce4f987be7b5ae722f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 8
+  effectPrefab: {fileID: 8410533705926354888, guid: 5e46bb42b8d131540a84d834907b3bd5, type: 3}
+  damageUI: {fileID: 0}

@@ -38,9 +38,11 @@ MonoBehaviour:
   salePercent: 0
   summonASpd: 0
   summonPDmg: 0
+  monsterDef: 0
   dashCount: 0
   buffNum: 0
   exDmg: 0
+  isedolCount: 0
   luckCoin: 0
   luckDamage: 0
   luckCritical: 0
@@ -61,4 +63,4 @@ MonoBehaviour:
   description: "\uD22C\uC0AC\uCCB4\uAC00 \uBAA8\uB4E0 \uC801\uC744 \uAD00\uD1B5\uD569\uB2C8\uB2E4.
     \uAD00\uD1B5\uB41C \uD22C\uC0AC\uCCB4\uB294 \uC808\uBC18\uC758 \uACF5\uACA9\uB825\uC774
     \uB429\uB2C8\uB2E4. (\uB2E4\uB978 \uAD00\uD1B5\uC744 \uBAA8\uB450 \uB36E\uC5B4\uC501\uB2C8\uB2E4.)"
-  weight: 200
+  weight: 10

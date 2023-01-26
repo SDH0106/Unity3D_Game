@@ -52,7 +52,7 @@ public class Lazor : Bullet
             DamageUI pool = Instantiate(damageUI, collision.contacts[0].point, Quaternion.Euler(90, 0, 0)).GetComponent<DamageUI>();
             pool.transform.SetParent(gameManager.damageStorage);
 
-            collision.collider.GetComponent<Monster>().OnDamaged(damageUI.weaponDamage);
+            collision.collider.GetComponent<Monster>().OnDamaged(damageUI.realDamage);
         }
     }
 }

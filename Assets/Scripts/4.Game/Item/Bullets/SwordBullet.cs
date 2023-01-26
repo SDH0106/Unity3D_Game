@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ice : Bullet
+public class SwordBullet : Bullet
 {
-    bool isFreeze = false;
-
     private void Start()
     {
         gameManager = GameManager.Instance;
@@ -24,8 +22,6 @@ public class Ice : Bullet
     {
         if (collision.collider.CompareTag("Monster") && collision.collider.GetComponent<Monster>() != null)
         {
-            Freezee();
-
             Instantiate(effectPrefab, transform.position, transform.rotation);
 
             if (gameManager.absorbHp > 0)
@@ -40,33 +36,24 @@ public class Ice : Bullet
             else if (gameManager.lowPenetrate)
                 LowPenetrate();
 
-            else if (!gameManager.isReflect && !gameManager.lowPenetrate && !gameManager.onePenetrate)
+            else if (!gameManager.isReflect && !gameManager.lowPenetrate && !gameManager.onePenetrate && !gameManager.penetrate)
             {
                 CancelInvoke("DestroyBullet");
                 DestroyBullet();
             }
 
-            if (damageUI.weaponDamage > collision.collider.GetComponent<Monster>().defence)
+            if (damageUI.swordBulletDamage > collision.collider.GetComponent<Monster>().defence)
                 damageUI.isMiss = false;
 
-            else if (damageUI.weaponDamage <= collision.collider.GetComponent<Monster>().defence)
+            else if (damageUI.swordBulletDamage <= collision.collider.GetComponent<Monster>().defence)
                 damageUI.isMiss = true;
 
-            damageUI.realDamage = damageUI.weaponDamage - collision.collider.GetComponent<Monster>().defence;
+            damageUI.realDamage = damageUI.swordBulletDamage - collision.collider.GetComponent<Monster>().defence;
 
-            collision.collider.GetComponent<Monster>().OnDamaged(damageUI.realDamage, isFreeze);
+            collision.collider.GetComponent<Monster>().OnDamaged(damageUI.realDamage);
 
             DamageUI pool = Instantiate(damageUI, transform.position, Quaternion.Euler(90, 0, 0)).GetComponent<DamageUI>();
             pool.gameObject.transform.SetParent(gameManager.damageStorage);
         }
-    }
-
-    void Freezee()
-    {
-        int rand = Random.Range(0, 100);
-        if (rand <= 5 + gameManager.luck * 0.2)
-            isFreeze = true;
-        else
-            isFreeze = false;
     }
 }
