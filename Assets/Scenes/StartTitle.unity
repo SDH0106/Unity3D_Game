@@ -991,7 +991,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1437503401646794464, guid: fc584d329b77b9545b9c9c8bb829e553, type: 3}
+  m_Sprite: {fileID: -170991926, guid: 14263393cc892564795c18f310352663, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2517,7 +2517,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1437503401646794464, guid: fc584d329b77b9545b9c9c8bb829e553, type: 3}
+  m_Sprite: {fileID: -170991926, guid: 14263393cc892564795c18f310352663, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4347,12 +4347,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 936130855}
-  - component: {fileID: 936130854}
   - component: {fileID: 936130856}
-  - component: {fileID: 936130857}
+  - component: {fileID: 936130854}
+  - component: {fileID: 936130861}
   - component: {fileID: 936130859}
-  - component: {fileID: 936130858}
   - component: {fileID: 936130860}
+  - component: {fileID: 936130858}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -4457,71 +4457,6 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 936130853}
   m_Enabled: 1
---- !u!114 &936130857
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 936130853}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53ef701d7eb7b3a44bd5d656e90dd55d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  statInfos:
-  - statName: "\uC2EC\uC7A5"
-    statType: "\uCD5C\uB300 \uCCB4\uB825"
-    statSprite: Health
-    statValue: 5
-  - statName: "\uD398\uD65C\uB7C9"
-    statType: "\uCCB4\uB825 \uD68C\uBCF5"
-    statSprite: ReHealth
-    statValue: 0.1
-  - statName: "\uC774\uBE68"
-    statType: "\uCCB4\uB825 \uD761\uC218"
-    statSprite: AbHealth
-    statValue: 0.1
-  - statName: "\uAC15\uC778\uD568"
-    statType: "\uBC29\uC5B4\uB825"
-    statSprite: Defence
-    statValue: 0.1
-  - statName: "\uADFC\uB825"
-    statType: "\uBB3C\uB9AC \uACF5\uACA9\uB825"
-    statSprite: WDamage
-    statValue: 0.5
-  - statName: "\uB9C8\uB825 \uD3EC\uC158"
-    statType: "\uC6D0\uC18C \uACF5\uACA9\uB825"
-    statSprite: EDamage
-    statValue: 0.5
-  - statName: "\uBB34\uB825"
-    statType: "\uADFC\uAC70\uB9AC \uACF5\uACA9\uB825"
-    statSprite: SDamage
-    statValue: 0.5
-  - statName: "\uC9C0\uB825"
-    statType: "\uC6D0\uAC70\uB9AC \uACF5\uACA9\uB825"
-    statSprite: LDamage
-    statValue: 0.5
-  - statName: "\uB3C4\uD551"
-    statType: "\uACF5\uACA9 \uC18D\uB3C4"
-    statSprite: AtSpeed
-    statValue: 0.1
-  - statName: "\uC2E0\uBC1C"
-    statType: "\uC774\uB3D9 \uC18D\uB3C4"
-    statSprite: Speed
-    statValue: 0.1
-  - statName: "\uB124\uC78E\uD074\uB85C\uBC84"
-    statType: "\uD589\uC6B4"
-    statSprite: Luck
-    statValue: 2.5
-  - statName: "\uC2DC\uB825"
-    statType: "\uC0AC\uAC70\uB9AC"
-    statSprite: Range
-    statValue: 0.1
-  - statName: "\uAC15\uD0C0"
-    statType: "\uD06C\uB9AC\uD2F0\uCEEC"
-    statSprite: Critical
-    statValue: 2.5
 --- !u!114 &936130858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4603,6 +4538,71 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 23589428460927000, guid: 12f6e59d9af8090449131818b277bd10, type: 3}
   poolCount: 10
+--- !u!114 &936130861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 936130853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53ef701d7eb7b3a44bd5d656e90dd55d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statInfos:
+  - statName: "\uD558\uD22C"
+    statType: "\uCD5C\uB300 \uCCB4\uB825"
+    statSprite: Health
+    statValue: 5
+  - statName: "\uC790\uC591\uAC15\uC7A5\uC81C"
+    statType: "\uCCB4\uB825 \uD68C\uBCF5"
+    statSprite: ReHealth
+    statValue: 0.1
+  - statName: "\uC1A1\uACF3\uB2C8"
+    statType: "\uCCB4\uB825 \uD761\uC218"
+    statSprite: AbHealth
+    statValue: 0.1
+  - statName: "\uC274\uB4DC \uCE58\uAE30"
+    statType: "\uBC29\uC5B4\uB825"
+    statSprite: Defence
+    statValue: 0.1
+  - statName: "\uC644\uB825"
+    statType: "\uBB3C\uB9AC \uACF5\uACA9\uB825"
+    statSprite: WDamage
+    statValue: 0.5
+  - statName: "\uB9C8\uB825 \uD3EC\uC158"
+    statType: "\uB9C8\uBC95 \uACF5\uACA9\uB825"
+    statSprite: MDamage
+    statValue: 0.5
+  - statName: "\uC7AC\uB828"
+    statType: "\uADFC\uAC70\uB9AC \uACF5\uACA9\uB825"
+    statSprite: SDamage
+    statValue: 0.5
+  - statName: "\uB2A5\uC9C0"
+    statType: "\uC6D0\uAC70\uB9AC \uACF5\uACA9\uB825"
+    statSprite: LDamage
+    statValue: 0.5
+  - statName: "\uC289 \uC288\uC289"
+    statType: "\uACF5\uACA9 \uC18D\uB3C4"
+    statSprite: AtSpeed
+    statValue: 0.1
+  - statName: "\uC2E0\uBC1C"
+    statType: "\uC774\uB3D9 \uC18D\uB3C4"
+    statSprite: Speed
+    statValue: 0.2
+  - statName: "\uB124\uC78E\uD074\uB85C\uBC84"
+    statType: "\uD589\uC6B4"
+    statSprite: Luck
+    statValue: 2.5
+  - statName: "\uC0AC\uB95C\uC548"
+    statType: "\uC0AC\uAC70\uB9AC"
+    statSprite: Range
+    statValue: 0.2
+  - statName: "\uB300\uAC00\uB9AC"
+    statType: "\uD06C\uB9AC\uD2F0\uCEEC"
+    statSprite: Critical
+    statValue: 2.5
 --- !u!1 &994559795
 GameObject:
   m_ObjectHideFlags: 0
@@ -5754,7 +5754,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.2830189, g: 0.2830189, b: 0.2830189, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -6903,7 +6903,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1437503401646794464, guid: fc584d329b77b9545b9c9c8bb829e553, type: 3}
+  m_Sprite: {fileID: -170991926, guid: 14263393cc892564795c18f310352663, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

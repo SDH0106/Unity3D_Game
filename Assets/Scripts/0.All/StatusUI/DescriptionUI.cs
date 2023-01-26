@@ -86,7 +86,7 @@ public class DescriptionUI : MonoBehaviour
                 break;
 
             case 13:
-                descriptionText.text = "게임 진행중 보급 상자의 등장 확률, 스태프류의 특수 능력 발동, 특수 카드 아이템의 발동 조건과 관련된 능력치.";
+                descriptionText.text = "게임 진행중 보급 상자의 등장 확률, 스태프류의 특수 능력 발동, 특수 카드 아이템의 발동 조건등과 관련된 능력치.";
                 break;
 
             case 14:

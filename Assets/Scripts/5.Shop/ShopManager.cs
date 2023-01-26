@@ -17,7 +17,6 @@ public class ShopManager : Singleton<ShopManager>
     [SerializeField] public GameObject backgroundImage;
 
     [Header("Stat")]
-    [SerializeField] GameObject descripUI;
     [SerializeField] Text maxHp;
     [SerializeField] Text reHp;
     [SerializeField] Text apHp;
@@ -80,7 +79,6 @@ public class ShopManager : Singleton<ShopManager>
         character = Character.Instance;
 
         clickUI.gameObject.SetActive(false);
-        descripUI.SetActive(false);
 
         initPriceColor = rerollMoneyText.color;
 
@@ -143,17 +141,6 @@ public class ShopManager : Singleton<ShopManager>
         cri.text = gameManager.critical.ToString("0.#");
         percentDamage.text = gameManager.percentDamage.ToString("0.0#");
         avoid.text = gameManager.avoid.ToString("0.#");
-    }
-
-    public void ShowStatDescription(int num)
-    {
-        descripUI.SetActive(true);
-        descripUI.GetComponent<DescriptionUI>().SetTextInfo(num);
-    }
-
-    public void CloseStatDescription()
-    {
-        descripUI.SetActive(false);
     }
 
     public void ToGameScene()
