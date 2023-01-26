@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1f4669ec3ffcb344a7356cc6d5d1c79, type: 3}
   m_Name: Sunglass
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 21300000, guid: 42d8dc065bd494547807c3092b4881aa, type: 3}
+  itemSprite: {fileID: 2064621875, guid: 42d8dc065bd494547807c3092b4881aa, type: 3}
   itemGrade: 3
   itemName: "\uC36C\uAD6C\uB9AC"
   itemPrice: 789
@@ -42,6 +42,7 @@ MonoBehaviour:
   dashCount: 0
   buffNum: 0
   exDmg: 0
+  isedolCount: 0
   luckCoin: 0
   luckDamage: 0
   luckCritical: 0
@@ -62,4 +63,4 @@ MonoBehaviour:
   description: "\uD22C\uC0AC\uCCB4\uAC00 \uBAA8\uB4E0 \uC801\uC744 \uC644\uC804\uD788
     \uAD00\uD1B5\uD569\uB2C8\uB2E4. (\uB2E4\uB978 \uAD00\uD1B5\uC744 \uC804\uBD80
     \uB36E\uC5B4\uC501\uB2C8\uB2E4.)"
-  weight: 200
+  weight: 12

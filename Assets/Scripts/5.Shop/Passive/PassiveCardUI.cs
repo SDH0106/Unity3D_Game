@@ -131,7 +131,7 @@ public class PassiveCardUI : MonoBehaviour
         }
     }
 
-    void StatArray()
+    protected void StatArray()
     {
         stats = new float[15];
         stats[0] = selectedPassive.Hp;
@@ -202,7 +202,7 @@ public class PassiveCardUI : MonoBehaviour
         passiveBoolVariables[16] = selectedPassive.Penetrate;
     }
 
-    void DescriptionInfo()
+    protected void DescriptionInfo()
     {
         int max = descriptPrefabs.Length;
         int count = 0;
@@ -353,14 +353,14 @@ public class PassiveCardUI : MonoBehaviour
     void Ddilpa()
     {
         // 마뎀(5) > 물뎀(4)
-        gameManager.stats[4] += (gameManager.stats[5] / 2);
+        gameManager.stats[4] += Mathf.Round((gameManager.stats[5] / 2) * 10) * 0.1f;
         gameManager.stats[5] = 0;
     }
 
     void Butterfly()
     {
         // 물뎀(4) > 마뎀(5)
-        gameManager.stats[5] += (gameManager.stats[4] / 2);
+        gameManager.stats[5] += Mathf.Round((gameManager.stats[4] / 2) * 10) * 0.1f;
         gameManager.stats[4] = 0;
     }
 

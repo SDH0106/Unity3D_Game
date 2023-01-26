@@ -211,34 +211,125 @@ public class ChestPassiveCard : MonoBehaviour
     {
         SoundManager.Instance.PlayES("SelectButton");
 
-        itemManager.GetPassiveInfo(selectedPassive);
-        itemManager.passiveCounts[arrayCount]--;
-        GameSceneUI.Instance.chestCount--;
-        Destroy(gameObject);
-
-        for (int i = 0; i < stats.Length; i++)
+        if (gameManager.money >= selectedPassive.ItemPrice && itemManager.passiveCounts[arrayCount] > 0)
         {
-            gameManager.stats[i] = Mathf.Round((gameManager.stats[i] + stats[i]) * 10) * 0.1f;
-        }
+            if (selectedPassive.GgoGgo || selectedPassive.Ilsoon || selectedPassive.Wakgood)
+            {
+                if (Character.Instance.summonNum < 3)
+                {
+                    itemManager.GetPassiveInfo(selectedPassive);
+                    itemManager.passiveCounts[arrayCount]--;
+                    Destroy(gameObject);
 
-        for (int i = 0; i < passiveIntVariables.Length; i++)
-        {
-            gameManager.passiveIntVariables[i] += passiveIntVariables[i];
-        }
+                    for (int i = 0; i < passiveBoolVariables.Length; i++)
+                    {
+                        if (passiveBoolVariables[i] == true)
+                            gameManager.passiveBoolVariables[i] = passiveBoolVariables[i];
+                    }
+                }
+            }
 
-        for (int i = 0; i < passiveFloatVariables.Length; i++)
-        {
-            gameManager.passiveFloatVariables[i] = Mathf.Round((gameManager.passiveFloatVariables[i] + passiveFloatVariables[i]) * 10) * 0.1f;
-        }
+            else
+            {
+                itemManager.GetPassiveInfo(selectedPassive);
+                itemManager.passiveCounts[arrayCount]--;
+                Destroy(gameObject);
 
-        for (int i = 0; i < passiveBoolVariables.Length; i++)
-        {
-            if (passiveBoolVariables[i] == true)
-                gameManager.passiveBoolVariables[i] = passiveBoolVariables[i];
+                for (int i = 0; i < stats.Length; i++)
+                {
+                    gameManager.stats[i] = Mathf.Round((gameManager.stats[i] + stats[i]) * 10) * 0.1f;
+                }
+
+                for (int i = 0; i < passiveIntVariables.Length; i++)
+                {
+                    if (i == 1)
+                    {
+                        gameManager.passiveIntVariables[i] = passiveIntVariables[i];
+                    }
+
+                    else
+                    {
+                        gameManager.passiveIntVariables[i] += passiveIntVariables[i];
+                    }
+
+                }
+
+                for (int i = 0; i < passiveFloatVariables.Length; i++)
+                {
+                    gameManager.passiveFloatVariables[i] = Mathf.Round((gameManager.passiveFloatVariables[i] + passiveFloatVariables[i]) * 10) * 0.1f;
+                }
+
+                for (int i = 0; i < passiveBoolVariables.Length; i++)
+                {
+                    if (passiveBoolVariables[i] == true)
+                    {
+                        if (i == 14 || i == 15 || i == 16)
+                        {
+                            if (gameManager.isReflect)
+                            {
+                                passiveBoolVariables[i] = false;
+                            }
+                        }
+
+                        gameManager.passiveBoolVariables[i] = passiveBoolVariables[i];
+
+                        if (i == 8)
+                        {
+                            Ddilpa();
+                            passiveBoolVariables[i] = false;
+                        }
+
+                        else if (i == 9)
+                        {
+                            Butterfly();
+                            passiveBoolVariables[i] = false;
+                        }
+
+                        else if (i == 13)
+                        {
+                            gameManager.passiveBoolVariables[14] = false;
+                            gameManager.passiveBoolVariables[15] = false;
+                            gameManager.passiveBoolVariables[16] = false;
+                        }
+
+                        else if (i == 14)
+                        {
+                            gameManager.passiveBoolVariables[15] = false;
+                            gameManager.passiveBoolVariables[16] = false;
+                        }
+
+                        else if (i == 15)
+                        {
+                            gameManager.passiveBoolVariables[14] = false;
+                            gameManager.passiveBoolVariables[16] = false;
+                        }
+
+                        else if (i == 16)
+                        {
+                            gameManager.passiveBoolVariables[14] = false;
+                            gameManager.passiveBoolVariables[15] = false;
+                        }
+                    }
+                }
+            }
         }
 
         if (GameSceneUI.Instance.chestCount > 0)
             ShowPassive.Instance.ShowRandomPassiveCard();
+    }
+
+    void Ddilpa()
+    {
+        // 마뎀(5) > 물뎀(4)
+        gameManager.stats[4] += Mathf.Round((gameManager.stats[5] / 2) * 10) * 0.1f;
+        gameManager.stats[5] = 0;
+    }
+
+    void Butterfly()
+    {
+        // 물뎀(4) > 마뎀(5)
+        gameManager.stats[5] += Mathf.Round((gameManager.stats[4] / 2) * 10) * 0.1f;
+        gameManager.stats[4] = 0;
     }
 
     public void Sell()

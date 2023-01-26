@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1f4669ec3ffcb344a7356cc6d5d1c79, type: 3}
   m_Name: RRzBible
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 21300000, guid: ab441aab371e6a24f9eed75ed666b5fc, type: 3}
+  itemSprite: {fileID: 1954647229, guid: ab441aab371e6a24f9eed75ed666b5fc, type: 3}
   itemGrade: 1
   itemName: "\uB974\uB974\uC218\uB140\uC758 \uC131\uC11C"
   itemPrice: 58
@@ -36,8 +36,13 @@ MonoBehaviour:
   increaseExp: 0
   monsterSpeed: 0
   salePercent: 0
+  summonASpd: 0
+  summonPDmg: 0
+  monsterDef: 0
   dashCount: 0
   buffNum: 0
+  exDmg: 0
+  isedolCount: 0
   luckCoin: 0
   luckDamage: 0
   luckCritical: 0
@@ -50,5 +55,10 @@ MonoBehaviour:
   butterfly: 0
   subscriptionFee: 0
   spawnTree: 0
+  dotgu: 0
+  isReflect: 0
+  onePenetrate: 0
+  lowPenetrate: 0
+  penetrate: 0
   description: 
-  weight: 10
+  weight: 250
