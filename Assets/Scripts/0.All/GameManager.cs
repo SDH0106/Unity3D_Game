@@ -47,7 +47,7 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector] public int dashCount;
     [HideInInspector] public int buffNum;
     [HideInInspector] public int exDmg;
-    [HideInInspector] public int isedolCount;
+    /*[HideInInspector]*/ public int isedolCount;
     [HideInInspector] public float salePercent;
     [HideInInspector] public float increaseExp;
     [HideInInspector] public float coinRange;

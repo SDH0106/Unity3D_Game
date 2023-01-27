@@ -62,11 +62,11 @@ public class DescriptionUI : MonoBehaviour
                 break;
 
             case 7:
-                descriptionText.text = "스태프류 무기의 공격력와 관련된 능력치. 이 수치가 몬스터의 방어력 보다 낮으면 대미지가 들어가지 않습니다.";
+                descriptionText.text = "검기와 스태프류 무기의 공격력와 관련된 능력치. 이 수치가 몬스터의 방어력 보다 낮으면 대미지가 들어가지 않습니다.";
                 break;
 
             case 8:
-                descriptionText.text = "총, 스태프류 무기의 공격력와 관련된 능력치. 이 수치가 몬스터의 방어력 보다 낮으면 대미지가 들어가지 않습니다.";
+                descriptionText.text = "검기와 총, 스태프류 무기의 공격력와 관련된 능력치. 이 수치가 몬스터의 방어력 보다 낮으면 대미지가 들어가지 않습니다.";
                 break;
 
             case 9:
@@ -82,7 +82,7 @@ public class DescriptionUI : MonoBehaviour
                 break;
 
             case 12:
-                descriptionText.text = "공격시의 검류 무기의 휘두르기가 시전되는 거리, 총과 스태프류 무기의 투사체가 발사되고 사라지는 사거리와 관련된 능력치.";
+                descriptionText.text = "공격시 검류 무기의 휘두르기가 시전되는 거리, 투사체가 발사되고 사라지는 사거리와 관련된 능력치.";
                 break;
 
             case 13:

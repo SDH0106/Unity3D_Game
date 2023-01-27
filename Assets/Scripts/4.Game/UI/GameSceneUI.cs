@@ -68,7 +68,8 @@ public class GameSceneUI : Singleton<GameSceneUI>
     [SerializeField] TypingText gameOverText;
     [SerializeField] GameObject gameOverIsedolUI;
     [SerializeField] TypingText gameOverIsedolText;
-    [SerializeField] Image IsedolImage;
+    [SerializeField] Image clearImage;
+    [SerializeField] Sprite[] clearIllusts;
     [SerializeField] GameObject clickText;
     [SerializeField] GameObject gameClearUI;
     [SerializeField] TypingText gameClearText;
@@ -94,6 +95,7 @@ public class GameSceneUI : Singleton<GameSceneUI>
         chestPassive.SetActive(false);
         subCam.gameObject.SetActive(false);
         clickText.gameObject.SetActive(false);
+        clearImage.gameObject.SetActive(false);
     }
 
     private void Start()
@@ -190,12 +192,27 @@ public class GameSceneUI : Singleton<GameSceneUI>
 
                     gameClearUI.SetActive(true);
 
+                    clearImage.sprite = clearIllusts[0];
+
+                    if (gameClearText.isOver)
+                    {
+                        StartCoroutine(FadeIn());
+                        gameClearText.isOver = false;
+                    }
+
                     if (character.characterNum == (int)CHARACTER_NUM.Bagic)
                         PlayerPrefs.SetInt("BagicClear", 1);
                 }
 
-                if (gameClearText.isOver == true)
-                    SceneManager.LoadScene("End");
+                if (clickText.gameObject.activeSelf)
+                {
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        subCam.gameObject.SetActive(true);
+                        clearImage.gameObject.SetActive(false);
+                        SceneManager.LoadScene("End");
+                    }
+                }
             }
         }
 
@@ -220,16 +237,22 @@ public class GameSceneUI : Singleton<GameSceneUI>
 
                 if (gameOverIsedolText.isOver == true)
                 {
+                    clearImage.sprite = clearIllusts[1];
                     StartCoroutine(FadeIn());
                     gameOverIsedolText.isOver = false;
                 }
+
+                if (character.characterNum == (int)CHARACTER_NUM.Bagic)
+                    PlayerPrefs.SetInt("BagicClear", 1);
             }
 
             if (clickText.gameObject.activeSelf)
             {
                 if (Input.GetMouseButtonDown(0))
                 {
-                    IsedolImage.gameObject.SetActive(false);
+                    subCam.gameObject.SetActive(true);
+
+                    clearImage.gameObject.SetActive(false);
                     gameOverIsedolUI.SetActive(false);
                     gameClearUI.SetActive(true);
                 }
@@ -242,15 +265,17 @@ public class GameSceneUI : Singleton<GameSceneUI>
 
     IEnumerator FadeIn()
     {
+        yield return new WaitForSeconds(1f);
+
         float fadeTime = 0f;
-        Color imageColor = IsedolImage.color;
-        IsedolImage.gameObject.SetActive(true);
+        Color imageColor = clearImage.color;
+        clearImage.gameObject.SetActive(true);
 
         do
         {
             fadeTime = Mathf.Clamp(fadeTime + Time.deltaTime, 0f, 2f);
             imageColor.a = fadeTime / 2f;
-            IsedolImage.color = imageColor;
+            clearImage.color = imageColor;
             yield return null;
         }
 
