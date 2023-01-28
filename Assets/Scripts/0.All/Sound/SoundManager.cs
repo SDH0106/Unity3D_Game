@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.TextCore.Text;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -12,7 +13,7 @@ public class SoundManager : Singleton<SoundManager>
     [SerializeField] AudioClip[] bgms;
     [SerializeField] int poolCount = 10;
 
-    [HideInInspector] public AudioSource audioSource;
+    [HideInInspector] AudioSource audioSource;
     float AllSoundVolume;
     float bgmSoundVolume;
     float sfxSoundVolume;
@@ -45,10 +46,18 @@ public class SoundManager : Singleton<SoundManager>
         audioSource.mute = muteBgm;
     }
 
-    public void PlayBGM(int num)
+    public void PlayBGM(int num, bool isLoop)
     {
         audioSource.clip = bgms[num];
-        audioSource.Play();
+
+        if (isLoop)
+            audioSource.loop = true;
+
+        else if (!isLoop)
+            audioSource.loop = false;
+
+        if (!audioSource.isPlaying)
+            audioSource.Play();
     }
 
     public void WholeVolume(float num, bool isBgmMute, bool isSfxMute)

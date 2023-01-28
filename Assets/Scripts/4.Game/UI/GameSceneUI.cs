@@ -87,6 +87,8 @@ public class GameSceneUI : Singleton<GameSceneUI>
 
     [HideInInspector] public int chestCount;
 
+    bool bgmChange;
+
     protected override void Awake()
     {
         base.Awake();
@@ -109,7 +111,14 @@ public class GameSceneUI : Singleton<GameSceneUI>
         gameManager = GameManager.Instance;
         character = Character.Instance;
         soundManager = SoundManager.Instance;
-        soundManager.PlayBGM(1);
+
+        bgmChange = false;
+
+        if (gameManager.round == 10 || gameManager.round == 20 || gameManager.round == 30)
+            soundManager.PlayBGM(2, true);
+
+        else
+            soundManager.PlayBGM(1, true);
 
         chararcterImage.sprite = character.rend.sprite;
 
@@ -163,6 +172,11 @@ public class GameSceneUI : Singleton<GameSceneUI>
             {
                 if (gameManager.isClear && gameManager.isBossDead)
                 {
+                    if (!bgmChange)
+                    {
+                        SoundManager.Instance.PlayBGM(5, false);
+                        bgmChange = true;
+                    }
                     roundClearText.SetActive(true);
                 }
 

@@ -66,7 +66,7 @@ public class ShopManager : Singleton<ShopManager>
 
     private void Start()
     {
-        SoundManager.Instance.PlayBGM(2);
+        SoundManager.Instance.PlayBGM(3, true);
 
         weightWeaponValue = new float[4];
         weightPassiveValue = new float[4];

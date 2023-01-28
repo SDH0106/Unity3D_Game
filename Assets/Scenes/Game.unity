@@ -43281,7 +43281,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typingText: {fileID: 522779220}
   textMasage: "\uD558\uB8E8\uB97C \uBC84\uD17C\uB2E4!"
-  typingSpeed: 0.1
+  typingSpeed: 0.15
   isOver: 0
 --- !u!114 &522779223
 MonoBehaviour:
@@ -45829,7 +45829,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1070064765}
   - component: {fileID: 1070064766}
-  - component: {fileID: 1070064767}
   m_Layer: 0
   m_Name: MonsterStorage
   m_TagString: Untagged
@@ -45880,21 +45879,6 @@ MonoBehaviour:
   poolCount: 20
   spawnRange: 10
   spawnDelay: 3
-  spawnPos: {x: 0, y: 0, z: 0}
---- !u!114 &1070064767
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1070064764}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52699c1432d52294c927b1ab4c602742, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  chest: {fileID: 6930122694965717508, guid: cea950ff3b9b0804f967eaec919f19f7, type: 3}
-  spawnRange: 3
   spawnPos: {x: 0, y: 0, z: 0}
 --- !u!1 &1077363163
 GameObject:

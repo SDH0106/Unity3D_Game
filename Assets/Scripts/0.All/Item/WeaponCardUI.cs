@@ -144,7 +144,6 @@ public class WeaponCardUI : MonoBehaviour
                 {
                     if (itemManager.storedWeapon[i] != null && selectedWeapon.weaponGrade != Grade.신화)
                     {
-
                         if ((selectedWeapon.WeaponName == itemManager.storedWeapon[i].WeaponName) && (selectedWeapon.weaponGrade == itemManager.weaponGrade[i]))
                         {
                             SoundManager.Instance.PlayES("WeaponSelect");
@@ -160,6 +159,7 @@ public class WeaponCardUI : MonoBehaviour
             }
         }
 
+        // 검신캐릭터는 검외엔 끼지 못하게
         else if (selectedWeapon.Type != WEAPON_TYPE.검)
         {
             if (Character.Instance.characterNum != (int)CHARACTER_NUM.Legendary)
@@ -182,7 +182,6 @@ public class WeaponCardUI : MonoBehaviour
                     {
                         if (itemManager.storedWeapon[i] != null && selectedWeapon.weaponGrade != Grade.신화)
                         {
-
                             if ((selectedWeapon.WeaponName == itemManager.storedWeapon[i].WeaponName) && (selectedWeapon.weaponGrade == itemManager.weaponGrade[i]))
                             {
                                 SoundManager.Instance.PlayES("WeaponSelect");

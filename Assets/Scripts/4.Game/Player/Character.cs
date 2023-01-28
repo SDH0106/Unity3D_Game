@@ -387,6 +387,7 @@ public class Character : Singleton<Character>
 
             if (avoidRand > gameManager.avoid)
             {
+                SoundManager.Instance.PlayES("Hit");
                 currentHp -= Mathf.Round((damage - gameManager.defence) * 10) * 0.1f;
             }
 

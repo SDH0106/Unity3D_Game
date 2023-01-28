@@ -10,8 +10,7 @@ public class GameOverUI : MonoBehaviour
 
     private void Start()
     {
-        SoundManager.Instance.PlayBGM(3);
-        SoundManager.Instance.audioSource.loop = false;
+        SoundManager.Instance.PlayBGM(4, false);
         cam.transform.position = Camera.main.transform.position;
     }
 }

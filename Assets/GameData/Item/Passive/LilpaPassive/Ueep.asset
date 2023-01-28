@@ -60,6 +60,6 @@ MonoBehaviour:
   onePenetrate: 0
   lowPenetrate: 0
   penetrate: 0
-  description: "10\uCD08\uB9C8\uB2E4 \uC774\uD30C\uB9AC \uB098\uBB34\uB97C \uD558\uB098\uC529
-    \uC18C\uD658\uD569\uB2C8\uB2E4."
-  weight: 10
+  description: "<color=lime>10\uCD08</color>\uB9C8\uB2E4 <color=cyan>\uC774\uD30C\uB9AC
+    \uB098\uBB34</color>\uB97C \uD558\uB098\uC529 \uC18C\uD658\uD569\uB2C8\uB2E4."
+  weight: 290

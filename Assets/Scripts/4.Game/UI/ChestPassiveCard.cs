@@ -209,7 +209,7 @@ public class ChestPassiveCard : MonoBehaviour
 
     public void Select()
     {
-        SoundManager.Instance.PlayES("SelectButton");
+        SoundManager.Instance.PlayES("ChestSelect");
 
         if (gameManager.money >= selectedPassive.ItemPrice && itemManager.passiveCounts[arrayCount] > 0)
         {
@@ -334,7 +334,7 @@ public class ChestPassiveCard : MonoBehaviour
 
     public void Sell()
     {
-        SoundManager.Instance.PlayES("SelectButton");
+        SoundManager.Instance.PlayES("Coin");
 
         itemManager.passiveCounts[arrayCount]--;
         GameSceneUI.Instance.chestCount--;

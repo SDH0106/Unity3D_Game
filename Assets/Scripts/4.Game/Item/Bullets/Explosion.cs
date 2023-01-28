@@ -17,6 +17,7 @@ public class Explosion : MonoBehaviour
     {
         if (collision.collider.tag == "Monster")
         {
+            SoundManager.Instance.PlayES("Explosion");
             GameObject pool = Instantiate(damageUI, collision.contacts[0].point, Quaternion.Euler(90, 0, 0)).gameObject;
             pool.GetComponent<ExDamageUI>().damage = exDamage * grade;
             pool.transform.SetParent(GameManager.Instance.damageStorage);

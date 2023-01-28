@@ -20,6 +20,7 @@ public class CharacterSelect : MonoBehaviour
 
     public void SelectCharacter(int num)
     {
+        SoundManager.Instance.PlayES("SelectButton");
         GameObject character = Instantiate(characters[num], Vector3.zero, characters[num].transform.rotation);
         character.SetActive(false);
         character.GetComponent<Character>().characterNum = num;

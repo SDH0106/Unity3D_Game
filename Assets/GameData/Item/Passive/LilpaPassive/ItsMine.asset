@@ -42,6 +42,7 @@ MonoBehaviour:
   dashCount: 0
   buffNum: 0
   exDmg: 0
+  isedolCount: 0
   luckCoin: 0
   luckDamage: 0
   luckCritical: 0
@@ -59,5 +60,6 @@ MonoBehaviour:
   onePenetrate: 0
   lowPenetrate: 0
   penetrate: 0
-  description: "\uBC30\uD2B8\uCF54\uC778 \uD68D\uB4DD \uBC94\uC704\uB97C 10% \uC99D\uAC00\uC2DC\uD0B5\uB2C8\uB2E4."
-  weight: 200
+  description: "<color=cyan>\uBC30\uD2B8\uCF54\uC778 \uD68D\uB4DD \uBC94\uC704</color>\uB97C
+    <color=lime>10%</color> \uC99D\uAC00\uC2DC\uD0B5\uB2C8\uB2E4."
+  weight: 32

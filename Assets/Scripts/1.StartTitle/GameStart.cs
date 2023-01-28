@@ -11,12 +11,12 @@ public class GameStart : MonoBehaviour
     private void Start()
     {
         soundManager = SoundManager.Instance;
-        soundManager.PlayBGM(0);
+        soundManager.PlayBGM(0, true);
     }
 
     public void ClickStart(string scene)
     {
-        soundManager.PlayES("Start");
+        soundManager.PlayES("StartButton");
         SceneManager.LoadScene(scene);
     }
 

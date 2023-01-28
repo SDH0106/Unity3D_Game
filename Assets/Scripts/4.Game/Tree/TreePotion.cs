@@ -8,6 +8,7 @@ public class TreePotion : MonoBehaviour
     {
         if(other.CompareTag("Character"))
         {
+            SoundManager.Instance.PlayES("EatSound");
             Character.Instance.currentHp += 10;
 
             if (GameManager.Instance.buffNum != 0)

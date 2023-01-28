@@ -36,7 +36,7 @@ public class Tree : MonoBehaviour
 
             if (num < 3 + gameManager.luck * 0.4)
             {
-                SoundManager.Instance.PlayES("Chest");
+                SoundManager.Instance.PlayES("ItemGet");
                 GameSceneUI.Instance.chestCount++;
             }
 
