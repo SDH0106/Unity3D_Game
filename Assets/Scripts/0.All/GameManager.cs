@@ -22,14 +22,16 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] float gameTime;
     [SerializeField] public int money;
     [SerializeField] public int round;
+    [SerializeField] public int woodCount;
+    [SerializeField] public int woodMaxCount;
 
     [Header("StatData")]
     [SerializeField] public float maxHp;
     [HideInInspector] public float percentDamage;
-    [HideInInspector] public float physicDamage;
-    [HideInInspector] public float magicDamage;
-    /*[HideInInspector]*/ public float shortDamage;
-    /*[HideInInspector]*/ public float longDamage;
+    /*[HideInInspector]*/ public float physicDamage;
+    /*[HideInInspector]*/ public float magicDamage;
+    [HideInInspector] public float shortDamage;
+    [HideInInspector] public float longDamage;
     [SerializeField] public float recoverHp;
     [SerializeField] public float absorbHp;
     [SerializeField] public float defence;
@@ -47,7 +49,7 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector] public int dashCount;
     [HideInInspector] public int buffNum;
     [HideInInspector] public int exDmg;
-    /*[HideInInspector]*/ public int isedolCount;
+    [HideInInspector] public int isedolCount;
     [HideInInspector] public float salePercent;
     [HideInInspector] public float increaseExp;
     [HideInInspector] public float coinRange;
@@ -113,6 +115,8 @@ public class GameManager : Singleton<GameManager>
     {
         gameTime = 60;
         money = 0;
+        woodCount = 0;
+        woodMaxCount = 70;
         round = 1;
         maxHp = 0;
         recoverHp = 0;
@@ -146,11 +150,6 @@ public class GameManager : Singleton<GameManager>
 
         passiveIntVariables = new int[4];
 
-        /*for (int i = 0; i < passiveIntVariables.Length; i++)
-        {
-            passiveIntVariables[i] = 0;
-        }*/
-
         passiveIntVariables[0] = dashCount;
         passiveIntVariables[1] = buffNum;
         passiveIntVariables[2] = exDmg;
@@ -158,27 +157,17 @@ public class GameManager : Singleton<GameManager>
 
         passiveFloatVariables = new float[7];
 
-        for(int i = 0; i < passiveFloatVariables.Length; i++)
-        {
-            passiveFloatVariables[i] = 0;
-        }
-
-        /*passiveFloatVariables[0] = coinRange;
+        passiveFloatVariables[0] = coinRange;
         passiveFloatVariables[1] = increaseExp;
         passiveFloatVariables[2] = monsterSlow;
         passiveFloatVariables[3] = salePercent;
         passiveFloatVariables[4] = summonASpd;
         passiveFloatVariables[5] = summonPDmg;
-        passiveFloatVariables[6] = monsterDef;*/
+        passiveFloatVariables[6] = monsterDef;
 
         passiveBoolVariables = new bool[17];
 
-        for (int i = 0; i < passiveBoolVariables.Length; i++)
-        {
-            passiveBoolVariables[i] = false;
-        }
-
-        /*passiveBoolVariables[0] = luckCoin;
+        passiveBoolVariables[0] = luckCoin;
         passiveBoolVariables[1] = luckDamage;
         passiveBoolVariables[2] = luckCritical;
         passiveBoolVariables[3] = doubleShot;
@@ -194,7 +183,7 @@ public class GameManager : Singleton<GameManager>
         passiveBoolVariables[13] = isReflect;
         passiveBoolVariables[14] = onePenetrate;
         passiveBoolVariables[15] = lowPenetrate;
-        passiveBoolVariables[16] = penetrate;*/
+        passiveBoolVariables[16] = penetrate;
     }
 
     void StatArray()

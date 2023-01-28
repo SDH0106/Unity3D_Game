@@ -1185,7 +1185,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: STATUS
+  m_Text: "\uB2A5\uB825\uCE58"
 --- !u!222 &225864003
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7396,7 +7396,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Day
+  m_Text: "\uC77C\uCC28"
 --- !u!222 &1100103791
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11674,7 +11674,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: SHOP
+  m_Text: "\uC0C1\uC810"
 --- !u!222 &1888283230
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -12101,9 +12101,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'NEXT
-
-    ROUND'
+  m_Text: "\uB2E4\uC74C \uB0A0\n\uC9C4\uD589\uD558\uAE30"
 --- !u!222 &1927339866
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -579,7 +579,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Down
+  m_Text: "\uC544\uB798"
 --- !u!222 &183955320
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1280,7 +1280,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Up
+  m_Text: "\uC704"
 --- !u!222 &281921355
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1665,7 +1665,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Left
+  m_Text: "\uC67C\uCABD"
 --- !u!222 &356712802
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1821,7 +1821,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: EXIT
+  m_Text: "\uAC8C\uC784 \uC885\uB8CC"
 --- !u!222 &429595373
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3019,7 +3019,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: START
+  m_Text: "\uD0C8\uCD9C \uC2DC\uC791"
 --- !u!222 &773122410
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3842,12 +3842,14 @@ MonoBehaviour:
   aimCursor: {fileID: 2800000, guid: b8e78032f8af0954784d1fe9e5a09187, type: 3}
   bulletStorage: {fileID: 1005871281}
   damageStorage: {fileID: 1692643827}
-  gameTime: 1
+  gameTime: 15
   money: 500000
-  round: 30
-  maxHp: 0
+  round: 1
+  woodCount: 0
+  woodMaxCount: 70
+  maxHp: 10000
   percentDamage: 0
-  physicDamage: 0
+  physicDamage: 100000
   magicDamage: 0
   shortDamage: 0
   longDamage: 0
@@ -3866,7 +3868,7 @@ MonoBehaviour:
   dashCount: 0
   buffNum: 0
   exDmg: 0
-  isedolCount: 5
+  isedolCount: 0
   salePercent: 0
   increaseExp: 0
   coinRange: 0
@@ -5140,7 +5142,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Right
+  m_Text: "\uC624\uB978\uCABD"
 --- !u!222 &1459561537
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6967,7 +6969,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Dash
+  m_Text: "\uB300\uC26C"
 --- !u!222 &1945718239
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7296,7 +7298,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: OPTION
+  m_Text: "\uC124\uC815"
 --- !u!222 &2006231492
 CanvasRenderer:
   m_ObjectHideFlags: 0

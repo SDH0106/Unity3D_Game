@@ -62,10 +62,12 @@ public class Bullet : MonoBehaviour
             else if (gameManager.lowPenetrate)
                 LowPenetrate();
 
-            else if (!gameManager.isReflect && !gameManager.lowPenetrate && !gameManager.onePenetrate &&  !gameManager.penetrate)
+            else if (!gameManager.isReflect && !gameManager.lowPenetrate && !gameManager.onePenetrate && !gameManager.penetrate)
             {
                 CancelInvoke("DestroyBullet");
-                DestroyBullet();
+
+                if (gameObject.activeSelf)
+                    DestroyBullet();
             }
 
             if (damageUI.weaponDamage > collision.collider.GetComponent<Monster>().defence)
@@ -83,7 +85,7 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    public void Reflect(Collision collision)
+    virtual public void Reflect(Collision collision)
     {
         Vector3 normalVector = collision.contacts[0].normal;
         normalVector = new Vector3(normalVector.x, 0, normalVector.y);

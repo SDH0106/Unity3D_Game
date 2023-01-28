@@ -9,10 +9,13 @@ public class Tree : MonoBehaviour
     int potionsNum;
     SpriteRenderer rend;
 
+    GameManager gameManager;
+
     private void Start()
     {
         rend = GetComponent<SpriteRenderer>();
-        potionsNum = GameManager.Instance.buffNum;
+        gameManager = GameManager.Instance;
+        potionsNum = gameManager.buffNum;
     }
 
     private void Update()
@@ -27,6 +30,16 @@ public class Tree : MonoBehaviour
         { 
             GameObject potion = Instantiate(potionPrefab[potionsNum]);
             potion.transform.position = transform.position;
+            gameManager.woodCount++;
+
+            int num = Random.Range(0, 100);
+
+            if (num < 3 + gameManager.luck * 0.4)
+            {
+                SoundManager.Instance.PlayES("Chest");
+                GameSceneUI.Instance.chestCount++;
+            }
+
             Destroy(gameObject);
         }
 

@@ -97,7 +97,7 @@ public class Character : Singleton<Character>
         gameManager.stats[14] = avoid;
         maxExp = 10;
         level = 1;
-        levelUpCount = 1;
+        levelUpCount = 0;
         recoverTime = 2;
         dashCoolTime = 4;
         dashCount = gameManager.dashCount;

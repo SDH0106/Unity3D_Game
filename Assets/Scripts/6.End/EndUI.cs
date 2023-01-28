@@ -80,17 +80,36 @@ public class EndUI : Singleton<EndUI>
 
     void UISetting()
     {
-        if (character.currentHp == 0)
+        if (character.isDead)
         {
-            overUI.SetActive(true);
-            clearUI.SetActive(false);
-            round.text = gameManager.round.ToString();
+            if (gameManager.isedolCount != 5)
+            {
+                overUI.SetActive(true);
+                clearUI.SetActive(false);
+                round.text = gameManager.round.ToString();
+            }
+
+            else if(gameManager.isedolCount == 5)
+            {
+                overUI.SetActive(false);
+                clearUI.SetActive(true);
+            }
         }
 
-        else if (character.currentHp != 0)
+        else if (!character.isDead)
         {
-            overUI.SetActive(false);
-            clearUI.SetActive(true);
+            if (gameManager.woodCount >= gameManager.woodMaxCount)
+            {
+                overUI.SetActive(false);
+                clearUI.SetActive(true);
+            }
+
+            else
+            {
+                overUI.SetActive(true);
+                clearUI.SetActive(false);
+                round.text = gameManager.round.ToString();
+            }
         }
     }
 

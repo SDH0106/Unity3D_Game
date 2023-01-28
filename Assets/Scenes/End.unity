@@ -398,7 +398,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -50, y: 0}
   m_SizeDelta: {x: 218.68561, y: 156.34698}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &51822251
@@ -434,7 +434,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: WEAPON
+  m_Text: "\uBB34\uAE30"
 --- !u!222 &51822252
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -478,7 +478,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 441, y: 0}
+  m_AnchoredPosition: {x: 409, y: 0}
   m_SizeDelta: {x: 300, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &83435951
@@ -1465,8 +1465,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 69.60205, y: -50}
-  m_SizeDelta: {x: 139.203, y: 100}
+  m_AnchoredPosition: {x: 58.23468, y: -50}
+  m_SizeDelta: {x: 116.4683, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &357361168
 CanvasRenderer:
@@ -1581,7 +1581,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: GAME OVER (
+  m_Text: "\uD0C8\uCD9C \uC2E4\uD328 ("
 --- !u!222 &362547967
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1967,7 +1967,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 409.1652, y: 100}
+  m_SizeDelta: {x: 300.3631, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &467034417
 MonoBehaviour:
@@ -2002,7 +2002,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'END TIME : '
+  m_Text: "\uC9C4\uD589 \uC2DC\uAC04 : "
 --- !u!222 &467034418
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3427,7 +3427,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: STATUS
+  m_Text: "\uB2A5\uB825\uCE58"
 --- !u!222 &796639600
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3703,7 +3703,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: S
+  m_Text: "\uCD08"
 --- !u!222 &934934941
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3747,7 +3747,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 356, y: 0}
+  m_AnchoredPosition: {x: 185, y: 0}
   m_SizeDelta: {x: 300, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &937979893
@@ -4111,7 +4111,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: M
+  m_Text: "\uBD84"
 --- !u!222 &1169622520
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4865,7 +4865,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 236, y: 0}
+  m_AnchoredPosition: {x: 298, y: 0}
   m_SizeDelta: {x: 300, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1469021900
@@ -4901,7 +4901,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Day
+  m_Text: "\uC77C\uCC28"
 --- !u!222 &1469021901
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5693,7 +5693,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 68, y: 0}
+  m_AnchoredPosition: {x: 112, y: 0}
   m_SizeDelta: {x: 218.68561, y: 156.34698}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1760144891
@@ -5729,9 +5729,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'ITEM
-
-'
+  m_Text: "\uD328\uC2DC\uBE0C \uC544\uC774\uD15C"
 --- !u!222 &1760144892
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5930,7 +5928,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: GAME CLEAR!
+  m_Text: "\uD0C8\uCD9C \uC131\uACF5!"
 --- !u!222 &1819934620
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5976,7 +5974,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 191.7648, y: 100}
+  m_SizeDelta: {x: 206.3801, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1832967031
 MonoBehaviour:
@@ -6011,7 +6009,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: H
+  m_Text: "\uC2DC\uAC04"
 --- !u!222 &1832967032
 CanvasRenderer:
   m_ObjectHideFlags: 0

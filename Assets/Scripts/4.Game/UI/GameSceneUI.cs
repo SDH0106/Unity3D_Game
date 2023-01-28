@@ -29,6 +29,9 @@ public class GameSceneUI : Singleton<GameSceneUI>
     [Header("COIN")]
     [SerializeField] Text coinText;
 
+    [Header("Wood")]
+    [SerializeField] Text woodCount;
+
     [Header("Time")]
     [SerializeField] Text timeText;
 
@@ -66,6 +69,8 @@ public class GameSceneUI : Singleton<GameSceneUI>
     [SerializeField] GameObject roundClearText;
     [SerializeField] GameObject gameOverUI;
     [SerializeField] TypingText gameOverText;
+    [SerializeField] GameObject gameOverWoodUI;
+    [SerializeField] TypingText gameOverWoodText;
     [SerializeField] GameObject gameOverIsedolUI;
     [SerializeField] TypingText gameOverIsedolText;
     [SerializeField] Image clearImage;
@@ -87,6 +92,7 @@ public class GameSceneUI : Singleton<GameSceneUI>
         base.Awake();
         roundClearText.SetActive(false);
         gameOverUI.SetActive(false);
+        gameOverWoodUI.SetActive(false);
         gameOverIsedolUI.SetActive(false);
         gameClearUI.SetActive(false);
         statCardParent.SetActive(false);
@@ -145,6 +151,7 @@ public class GameSceneUI : Singleton<GameSceneUI>
         HpUI();
         ExpUI();
         CoinUI();
+        WoodUI();
         RoundUI();
         TimeUI();
         DashUI();
@@ -190,18 +197,29 @@ public class GameSceneUI : Singleton<GameSceneUI>
                     if (!gameClearUI.activeSelf)
                         gameManager.gameEndTime = Time.realtimeSinceStartup;
 
-                    gameClearUI.SetActive(true);
-
-                    clearImage.sprite = clearIllusts[0];
-
-                    if (gameClearText.isOver)
+                    if (gameManager.woodCount >= gameManager.woodMaxCount)
                     {
-                        StartCoroutine(FadeIn());
-                        gameClearText.isOver = false;
+                        gameClearUI.SetActive(true);
+
+                        clearImage.sprite = clearIllusts[0];
+
+                        if (gameClearText.isOver)
+                        {
+                            StartCoroutine(FadeIn());
+                            gameClearText.isOver = false;
+                        }
+
+                        if (character.characterNum == (int)CHARACTER_NUM.Bagic)
+                            PlayerPrefs.SetInt("BagicClear", 1);
                     }
 
-                    if (character.characterNum == (int)CHARACTER_NUM.Bagic)
-                        PlayerPrefs.SetInt("BagicClear", 1);
+                    else if (gameManager.woodCount < gameManager.woodMaxCount)
+                    {
+                        gameOverWoodUI.SetActive(true);
+
+                        if(gameOverWoodText.isOver)
+                            SceneManager.LoadScene("End");
+                    }
                 }
 
                 if (clickText.gameObject.activeSelf)
@@ -362,6 +380,11 @@ public class GameSceneUI : Singleton<GameSceneUI>
     void CoinUI()
     {
         coinText.text = gameManager.money.ToString();
+    }
+
+    void WoodUI()
+    {
+        woodCount.text = gameManager.woodCount.ToString();
     }
 
     void RoundUI()

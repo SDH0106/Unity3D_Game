@@ -16,10 +16,16 @@ public class SpawnChest : MonoBehaviour
     Character character;
     float distance;
 
+    Collider ground;
+
     private void Start()
     {
         gameManager = GameManager.Instance;
         character = Character.Instance;
+        ground = GameSceneUI.Instance.ground;
+        GameObject cchest = Instantiate(chest);
+        cchest.transform.position = new Vector3(2, 0, 2);
+        //Instantiate(chest, SpawnPosition(), chest.transform.rotation);
         Invoke("GetChest", 22);
     }
 
@@ -45,6 +51,7 @@ public class SpawnChest : MonoBehaviour
         randPoint = Random.onUnitSphere * spawnRange;
         randPoint.y = 0;
 
+        Debug.Log(transform.position);
         spawnPos = randPoint + transform.position;
 
         distance = Vector3.Magnitude(playerPos - spawnPos);
@@ -54,6 +61,6 @@ public class SpawnChest : MonoBehaviour
             SpawnPosition();
         }
 
-        return spawnPos;
+        return ground.bounds.ClosestPoint(spawnPos);
     }
 }

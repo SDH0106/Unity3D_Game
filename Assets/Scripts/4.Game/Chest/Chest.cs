@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class Chest : MonoBehaviour
 {
+    [SerializeField] GameObject showPosUI;
     Animator anim;
+
+    Vector3 dir;
 
     private void Start()
     {
@@ -35,5 +38,14 @@ public class Chest : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+    }
+
+    void ShowChestPos()
+    {
+        dir = transform.position - Character.Instance.transform.position;
+        Instantiate(showPosUI);
+        showPosUI.transform.position = Camera.main.WorldToViewportPoint(dir);
+        showPosUI.transform.rotation.SetLookRotation(dir);
+
     }
 }

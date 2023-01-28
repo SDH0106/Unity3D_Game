@@ -73,6 +73,13 @@ public class AutoTarget : Bullet
         }
     }
 
+    public override void Reflect(Collision collision)
+    {
+        base.Reflect(collision);
+        target = null;
+        isFind = false;
+    }
+
     public override void DestroyBullet()
     {
         base.DestroyBullet();
