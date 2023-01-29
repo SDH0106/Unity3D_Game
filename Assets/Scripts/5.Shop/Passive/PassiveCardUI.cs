@@ -238,10 +238,10 @@ public class PassiveCardUI : MonoBehaviour
 
     public void Click()
     {
-        SoundManager.Instance.PlayES("SelectButton");
-
         if (gameManager.money >= selectedPassive.ItemPrice && itemManager.passiveCounts[arrayCount] > 0)
         {
+            SoundManager.Instance.PlayES("SelectButton");
+
             if (selectedPassive.GgoGgo || selectedPassive.Ilsoon || selectedPassive.Wakgood)
             {
                 if (Character.Instance.summonNum < 3)
@@ -348,6 +348,9 @@ public class PassiveCardUI : MonoBehaviour
                 }
             }
         }
+
+        else
+            SoundManager.Instance.PlayES("CantBuy");
     }
 
     void Ddilpa()

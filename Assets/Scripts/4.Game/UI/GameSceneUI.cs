@@ -174,7 +174,7 @@ public class GameSceneUI : Singleton<GameSceneUI>
                 {
                     if (!bgmChange)
                     {
-                        SoundManager.Instance.PlayBGM(5, false);
+                        soundManager.PlayBGM(5, false);
                         bgmChange = true;
                     }
                     roundClearText.SetActive(true);
@@ -213,6 +213,12 @@ public class GameSceneUI : Singleton<GameSceneUI>
 
                     if (gameManager.woodCount >= gameManager.woodMaxCount)
                     {
+                        if (!bgmChange)
+                        {
+                            soundManager.PlayBGM(6, false);
+                            bgmChange = true;
+                        }
+
                         gameClearUI.SetActive(true);
 
                         clearImage.sprite = clearIllusts[0];
@@ -231,7 +237,7 @@ public class GameSceneUI : Singleton<GameSceneUI>
                     {
                         gameOverWoodUI.SetActive(true);
 
-                        if(gameOverWoodText.isOver)
+                        if (gameOverWoodText.isOver)
                             SceneManager.LoadScene("End");
                     }
                 }
@@ -284,14 +290,22 @@ public class GameSceneUI : Singleton<GameSceneUI>
                 {
                     subCam.gameObject.SetActive(true);
 
+                    if (!bgmChange)
+                    {
+                        soundManager.PlayBGM(6, false);
+                        bgmChange = true;
+                    }
+
                     clearImage.gameObject.SetActive(false);
                     gameOverIsedolUI.SetActive(false);
                     gameClearUI.SetActive(true);
                 }
             }
 
-            if (gameClearText.isOver == true)
+            if (gameClearText.isOver == true && !soundManager.isPlaying)
+            {
                 SceneManager.LoadScene("End");
+            }
         }
     }
 

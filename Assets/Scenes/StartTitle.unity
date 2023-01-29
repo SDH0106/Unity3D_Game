@@ -510,14 +510,18 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 7cf5c04ce90005446bd4d141c3e02a50, type: 3}
   - {fileID: 8300000, guid: 76a5bbb6f2765d846b7e6df3d9fb8dc6, type: 3}
   - {fileID: 8300000, guid: 2350a262027118a4992f9eddd5e2b8a9, type: 3}
+  - {fileID: 8300000, guid: a634f3ef94f7f194aa71fe02d5051dbd, type: 3}
   bgms:
   - {fileID: 8300000, guid: ac67960049b289e41baf56c1d476fb00, type: 3}
   - {fileID: 8300000, guid: e75df5cd9c1f944ce99e585d983fa119, type: 3}
   - {fileID: 8300000, guid: 6ca705dd8a2716d45a493414eef2e58c, type: 3}
   - {fileID: 8300000, guid: c72e1fc0e90cf814d83171c9ec4d5e98, type: 3}
-  - {fileID: 8300000, guid: 38ae0b40e1775404683a1c2aa7d9fd61, type: 3}
+  - {fileID: 8300000, guid: 6597463d1cc36304bb07a2736d010e8b, type: 3}
   - {fileID: 8300000, guid: c8abbbe4861a885479aa5730b88d20ad, type: 3}
+  - {fileID: 8300000, guid: f391b189c4069d14aa36dd50c61824a8, type: 3}
+  - {fileID: 8300000, guid: b580f9ca19782c8409333c924e9bf02a, type: 3}
   poolCount: 10
+  isPlaying: 0
 --- !u!1 &163501333
 GameObject:
   m_ObjectHideFlags: 0
@@ -4068,7 +4072,7 @@ MonoBehaviour:
   round: 29
   woodCount: 0
   woodMaxCount: 70
-  maxHp: 1000
+  maxHp: 0
   percentDamage: 0
   physicDamage: 100000
   magicDamage: 0
@@ -5972,11 +5976,14 @@ MonoBehaviour:
     \uB098\uBB34\uB97C \uC5BB\uC9C0 \uBABB\uD558\uBA74 \uD0C8\uCD9C\uC774 <color=red>\uC2E4\uD328</color>\uD569\uB2C8\uB2E4.\r\n\n\uBC8C\uBAA9\uC744
     \uD558\uBA70 \uBC15\uC950\uB97C \uC4F0\uB7EC\uD2B8\uB9AC\uACE0 30\uC77C\uC744
     \uBC84\uD168\uC11C \uBC15\uC950\uC12C\uC744 \uD0C8\uCD9C\uD558\uC138\uC694!\n\n<\uCD9C\uCC98>\n\uD3F0\uD2B8:
-    \uB358\uD30C \uBE44\uD2B8\uBE44\uD2B8\uCCB4\n\uC0AC\uC6B4\uB4DC: pixabay (https://pixabay.com/ko/sound-effects/)\n            
+    \uB358\uD30C \uBE44\uD2B8\uBE44\uD2B8\uCCB4\n\uC0AC\uC6B4\uB4DC: pixabay (https://pixabay.com/ko/sound-effects/)\n             
     https://www.youtube.com/watch?v=rsKa3oxTFAc\n             \uB9B4\uD30C\uB2D8
-    \uC720\uD29C\uBE0C\n\uC774\uBBF8\uC9C0: \uC5D4\uC824\uD2F0\uCF58, \uBBFC\uCE58\uD2F0\uCF58,
-    \uBBFC\uC218\uD2F0\uCF58, \uAD6C\uB3C5\uD2F0\uCF58 \uC774\uBBF8\uC9C0, Unity
-    AssetStore \uB4F1\n\n<\uC81C\uC791> \n\uCE74\uD398\uB2C9\uB124\uC784: \uCB48\uC03C\uCB48\uC03C"
+    \uC720\uD29C\uBE0C\n             LilBye(Gark\uB2D8 \uB9AC\uBBF9\uC2A4\uACE1,
+    https://cafe.naver.com/steamindiegame/8113843,\n                            
+    https://www.youtube.com/watch?v=B2yin5s7zNY)\n\uC774\uBBF8\uC9C0: \uC5D4\uC824\uD2F0\uCF58,
+    \uBBFC\uCE58\uD2F0\uCF58, \uBBFC\uC218\uD2F0\uCF58, \uAD6C\uB3C5\uD2F0\uCF58
+    \uC774\uBBF8\uC9C0, Unity AssetStore \uB4F1\n\n<\uC81C\uC791> \n\uCE74\uD398\uB2C9\uB124\uC784:
+    \uCB48\uC03C\uCB48\uC03C"
 --- !u!222 &1598506497
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -124,10 +124,13 @@ public class WeaponCardUI : MonoBehaviour
 
     public void Click()
     {
+        bool canSwordBuy = false;
+
         if (selectedWeapon.Type == WEAPON_TYPE.검)
         {
             if (itemManager.foolCount < 5 && gameManager.money >= (price * (int)(selectedWeapon.weaponGrade + 1)))
             {
+                canSwordBuy = true;
                 SoundManager.Instance.PlayES("WeaponSelect");
                 gameManager.money -= (price * (int)(selectedWeapon.weaponGrade + 1));
                 itemManager.foolCount++;
@@ -146,6 +149,7 @@ public class WeaponCardUI : MonoBehaviour
                     {
                         if ((selectedWeapon.WeaponName == itemManager.storedWeapon[i].WeaponName) && (selectedWeapon.weaponGrade == itemManager.weaponGrade[i]))
                         {
+                            canSwordBuy = true;
                             SoundManager.Instance.PlayES("WeaponSelect");
                             gameManager.money -= (int)(selectedWeapon.weaponGrade + 1) * 20;
                             gameManager.money -= (price * (int)(selectedWeapon.weaponGrade + 1));
@@ -157,15 +161,20 @@ public class WeaponCardUI : MonoBehaviour
                     }
                 }
             }
+
+            if(!canSwordBuy)
+                SoundManager.Instance.PlayES("CantBuy");
         }
 
         // 검신캐릭터는 검외엔 끼지 못하게
         else if (selectedWeapon.Type != WEAPON_TYPE.검)
         {
+            bool canBuy = false;
             if (Character.Instance.characterNum != (int)CHARACTER_NUM.Legendary)
             {
                 if (itemManager.foolCount < 5 && gameManager.money >= (price * (int)(selectedWeapon.weaponGrade + 1)))
                 {
+                    canBuy = true;
                     SoundManager.Instance.PlayES("WeaponSelect");
                     gameManager.money -= (price * (int)(selectedWeapon.weaponGrade + 1));
                     itemManager.foolCount++;
@@ -184,6 +193,7 @@ public class WeaponCardUI : MonoBehaviour
                         {
                             if ((selectedWeapon.WeaponName == itemManager.storedWeapon[i].WeaponName) && (selectedWeapon.weaponGrade == itemManager.weaponGrade[i]))
                             {
+                                canBuy = true;
                                 SoundManager.Instance.PlayES("WeaponSelect");
                                 gameManager.money -= (int)(selectedWeapon.weaponGrade + 1) * 20;
                                 gameManager.money -= (price * (int)(selectedWeapon.weaponGrade + 1));
@@ -195,7 +205,13 @@ public class WeaponCardUI : MonoBehaviour
                         }
                     }
                 }
+
+                if (!canBuy)
+                    SoundManager.Instance.PlayES("CantBuy");
             }
+
+            else if (Character.Instance.characterNum == (int)CHARACTER_NUM.Legendary)
+                SoundManager.Instance.PlayES("CantBuy");
         }
     }
 

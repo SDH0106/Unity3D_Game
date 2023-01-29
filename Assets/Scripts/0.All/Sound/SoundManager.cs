@@ -21,6 +21,8 @@ public class SoundManager : Singleton<SoundManager>
     bool muteBgm;
     bool muteSfx;
 
+    public bool isPlaying;
+
     private IObjectPool<EffectSound> objectPool;
 
     protected override void Awake()
@@ -44,6 +46,7 @@ public class SoundManager : Singleton<SoundManager>
     {
         audioSource.volume = AllSoundVolume * bgmSoundVolume;
         audioSource.mute = muteBgm;
+        isPlaying = audioSource.isPlaying;
     }
 
     public void PlayBGM(int num, bool isLoop)
@@ -57,7 +60,9 @@ public class SoundManager : Singleton<SoundManager>
             audioSource.loop = false;
 
         if (!audioSource.isPlaying)
+        {
             audioSource.Play();
+        }
     }
 
     public void WholeVolume(float num, bool isBgmMute, bool isSfxMute)

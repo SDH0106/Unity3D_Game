@@ -57,6 +57,7 @@ public class EndUI : Singleton<EndUI>
         gameManager = GameManager.Instance;
         character = Character.Instance;
         itemManager = ItemManager.Instance;
+        SoundManager.Instance.PlayBGM(7, false);
         weaponCount = new int[6];
         UISetting();
         SettingStatText();

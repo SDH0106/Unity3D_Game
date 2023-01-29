@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.Intrinsics;
 using UnityEngine;
 
 public class Chick : Summons
@@ -36,10 +37,10 @@ public class Chick : Summons
 
         anim.SetBool("isAttack", isAttack);
 
-        if (gameManager.round - summonRound == 1)
+        if (gameManager.round - summonRound == 15)
         {
-            GameObject summon = Instantiate(chickenPrefab, character.summonPos[summonPosNum].position, chickenPrefab.transform.rotation);
-            summon.transform.parent = gameManager.transform;
+            GameObject summon = Instantiate(chickenPrefab);
+            summon.transform.position = character.summonPos[summonPosNum].position;
 
             Destroy(gameObject);
         }

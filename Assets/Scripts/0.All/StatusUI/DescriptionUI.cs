@@ -38,7 +38,7 @@ public class DescriptionUI : MonoBehaviour
                 break;
 
             case 1:
-                descriptionText.text = "캐릭터가 2초당 자동으로 회복하는 체력 수치와 관련된 능력치.";
+                descriptionText.text = "캐릭터가 2초마다 자동으로 회복하는 체력 수치와 관련된 능력치.";
                 break;
 
             case 2:
@@ -58,19 +58,19 @@ public class DescriptionUI : MonoBehaviour
                 break;
 
             case 6:
-                descriptionText.text = "검, 총류 무기의 공격력와 관련된 능력치. 이 수치가 몬스터의 방어력 보다 낮으면 대미지가 들어가지 않습니다.";
+                descriptionText.text = "검, 총류 무기의 공격력와 관련된 능력치. 이 수치가 몬스터의 방어력 보다 낮으면 공격이 불가능합니다.";
                 break;
 
             case 7:
-                descriptionText.text = "검기와 스태프류 무기의 공격력와 관련된 능력치. 이 수치가 몬스터의 방어력 보다 낮으면 대미지가 들어가지 않습니다.";
+                descriptionText.text = "검기와 스태프류 무기의 공격력와 관련된 능력치. 이 수치가 몬스터의 방어력 보다 낮으면 공격이 불가능합니다.";
                 break;
 
             case 8:
-                descriptionText.text = "검기와 총, 스태프류 무기의 공격력와 관련된 능력치. 이 수치가 몬스터의 방어력 보다 낮으면 대미지가 들어가지 않습니다.";
+                descriptionText.text = "검기와 총, 스태프류 무기의 공격력와 관련된 능력치. 이 수치가 몬스터의 방어력 보다 낮으면 공격이 불가능합니다.";
                 break;
 
             case 9:
-                descriptionText.text = "검류 무기의 공격력와 관련된 능력치. 이 수치가 몬스터의 방어력 보다 낮으면 대미지가 들어가지 않습니다.";
+                descriptionText.text = "검류 무기의 공격력과 관련된 능력치. 이 수치가 몬스터의 방어력보다 낮으면 공격이 불가능합니다.";
                 break;
 
             case 10:
@@ -86,11 +86,11 @@ public class DescriptionUI : MonoBehaviour
                 break;
 
             case 13:
-                descriptionText.text = "게임 진행중 보급 상자의 등장 확률, 스태프류의 특수 능력 발동, 특수 카드 아이템의 발동 조건등과 관련된 능력치.";
+                descriptionText.text = "이파리나무에서 특별 아이템의 등장 확률, 스태프류의 특수 능력 발동, 특수 패시브 아이템의 발동 조건등과 관련된 능력치.";
                 break;
 
             case 14:
-                descriptionText.text = "검류 무기의 대미지가 1.5배로 더 강하게 적용되는 확률과 관련된 능력치.";
+                descriptionText.text = "검류 무기의 공격력이 1.5배로 더 강하게 적용되는 확률과 관련된 능력치.";
                 break;
         }
     }

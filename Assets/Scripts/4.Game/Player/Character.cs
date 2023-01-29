@@ -90,7 +90,8 @@ public class Character : Singleton<Character>
         gardianEffect.SetActive(false);
 
         characterHp = 10;
-        maxHp = characterHp + gameManager.maxHp;
+        gameManager.stats[0] = characterHp;
+        maxHp = gameManager.stats[0];
         currentHp = maxHp;
         speed = gameManager.speed + characterSpeed;
         gameManager.stats[13] = damageRatio;
@@ -106,6 +107,8 @@ public class Character : Singleton<Character>
 
     void Update()
     {
+        HpSetting();
+
         bool xInput = (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Left"))) || (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Right")));
         bool zInput = (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Up"))) || (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Down")));
 
@@ -136,8 +139,6 @@ public class Character : Singleton<Character>
         /*x = Input.GetAxisRaw("Horizontal");
         z = Input.GetAxisRaw("Vertical");*/
 
-        maxHp = characterHp + gameManager.maxHp;
-
         if (!isBuff)
             speed = gameManager.speed + characterSpeed;
 
@@ -162,13 +163,6 @@ public class Character : Singleton<Character>
             maxExp = 10 * level;
         }
 
-        if (currentHp > maxHp)
-        {
-            currentHp = maxHp;
-        }
-
-        playerHpBar.value = 1 - (currentHp / maxHp);
-
         if (gameManager.revive)
             gardianAngel.SetActive(true);
 
@@ -190,30 +184,40 @@ public class Character : Singleton<Character>
             SummonPet();
     }
 
+    void HpSetting()
+    {
+        if (currentHp > maxHp)
+        {
+            currentHp = maxHp;
+        }
+
+        playerHpBar.value = 1 - (currentHp / maxHp);
+    }
+
     void SummonPet()
     {
         if (summonNum < 3)
         {
             if (gameManager.ggoGgoSummon)
             {
-                GameObject Summon = Instantiate(ggoGgoPrefab);
-                Summon.transform.position = summonPos[summonNum].position;
+                GameObject summon = Instantiate(ggoGgoPrefab);
+                summon.transform.position = summonPos[summonNum].position;
                 summonNum++;
                 gameManager.passiveBoolVariables[5] = false;
             }
 
             else if (gameManager.ilsoonSummon)
             {
-                GameObject Summon = Instantiate(ilsoonPrefab);
-                Summon.transform.position = summonPos[summonNum].position;
+                GameObject summon = Instantiate(ilsoonPrefab);
+                summon.transform.position = summonPos[summonNum].position;
                 summonNum++;
                 gameManager.passiveBoolVariables[6] = false;
             }
 
             else if (gameManager.wakgoodSummon)
             {
-                GameObject Summon = Instantiate(wakgoodPrefab);
-                Summon.transform.position = summonPos[summonNum].position;
+                GameObject summon = Instantiate(wakgoodPrefab);
+                summon.transform.position = summonPos[summonNum].position;
                 summonNum++;
                 gameManager.passiveBoolVariables[7] = false;
             }
@@ -387,12 +391,14 @@ public class Character : Singleton<Character>
 
             if (avoidRand > gameManager.avoid)
             {
-                SoundManager.Instance.PlayES("Hit");
                 currentHp -= Mathf.Round((damage - gameManager.defence) * 10) * 0.1f;
             }
 
             if (currentHp > 0)
+            {
+                SoundManager.Instance.PlayES("Hit");
                 StartCoroutine(OnInvincible());
+            }
 
             else if (currentHp <= 0)
                 OnDead();

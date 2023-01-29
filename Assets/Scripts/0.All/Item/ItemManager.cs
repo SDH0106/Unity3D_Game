@@ -49,7 +49,7 @@ public class ItemManager : Singleton<ItemManager>
         weaponCount = 0;
         passiveItemCount = 0;
         storedWeapon = new WeaponInfo[6];
-        storedPassive = new PassiveInfo[40];
+        storedPassive = new PassiveInfo[90];
         storedPassiveCount = new int[storedPassive.Length];
         lockedPassCards = new PassiveInfo[4];
         lockedWeaCards = new WeaponInfo[4];
