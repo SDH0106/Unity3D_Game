@@ -91,10 +91,4 @@ public class Coin : Singleton<Coin>
         managedPool.Release(this);
         InitSetting();
     }
-
-    private void OnDrawGizmos()
-    {
-        Handles.color = Color.red;
-        Handles.DrawWireDisc(transform.position, Vector3.up, 2 * (1 + gameManager.coinRange * 0.1f));
-    }
 }

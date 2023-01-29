@@ -1,16 +1,7 @@
-using Newtonsoft.Json;
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.ConstrainedExecution;
-using System.Security.Cryptography;
-using System.Xml.Schema;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
-using UnityEditor.SearchService;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
-using UnityEngine.TextCore.Text;
-using UnityEngine.Windows.WebCam;
+using UnityEngine.UIElements;
+
 
 public class GameManager : Singleton<GameManager>       
 {
@@ -100,6 +91,7 @@ public class GameManager : Singleton<GameManager>
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
+
         InitSetting();
         InitArray();
         currentGameTime = gameTime;

@@ -4044,7 +4044,6 @@ GameObject:
   - component: {fileID: 936130861}
   - component: {fileID: 936130862}
   - component: {fileID: 936130860}
-  - component: {fileID: 936130858}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -4064,12 +4063,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4340bb7b85d03b74eb10bb9078c4e906, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aimCursor: {fileID: 2800000, guid: b8e78032f8af0954784d1fe9e5a09187, type: 3}
   bulletStorage: {fileID: 1005871281}
   damageStorage: {fileID: 1692643827}
-  gameTime: 5
+  gameTime: 0
   money: 500000
-  round: 1
+  round: 29
   woodCount: 0
   woodMaxCount: 70
   maxHp: 0
@@ -4151,18 +4149,6 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 936130853}
   m_Enabled: 1
---- !u!114 &936130858
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 936130853}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0e5a951dea014e4d891718c65e70039, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &936130860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4771,8 +4757,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 360}
-  m_SizeDelta: {x: 545.5575, y: 201.8376}
+  m_AnchoredPosition: {x: 8, y: 360}
+  m_SizeDelta: {x: 673.0406, y: 201.8376}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1032235393
 MonoBehaviour:
@@ -4808,7 +4794,8 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "(\uBC84\uD2BC\uC744 \uD074\uB9AD \uD6C4 \uC6D0\uD558\uB294 \uD0A4\uB97C
-    \uC785\uB825\uD558\uC138\uC694)"
+    \uC785\uB825\uD558\uC138\uC694)\n(\uB9CC\uC57D \uD0A4\uC785\uB825\uC774 \uC548\uB41C\uB2E4\uBA74
+    \uC7AC\uC124\uC815 \uD639\uC740 \uD55C\uC601\uD0A4\uB97C \uB20C\uB7EC\uBCF4\uC138\uC694)"
 --- !u!222 &1032235394
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6418,7 +6405,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 50, y: 420}
+  m_AnchoredPosition: {x: 50, y: 456}
   m_SizeDelta: {x: 458.0858, y: 201.8376}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1729933049
@@ -6954,7 +6941,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 420}
+  m_AnchoredPosition: {x: 0, y: 456}
   m_SizeDelta: {x: 458.0858, y: 201.8376}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1867071776

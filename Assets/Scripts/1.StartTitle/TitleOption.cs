@@ -50,6 +50,12 @@ public class TitleOption : MonoBehaviour
         bUnMark.SetActive(muteBgmVolume);
         sUnMark.SetActive(muteSfxVolume);
 
+        PlayerPrefs.SetInt("Key_Up", (int)KeyCode.W);
+        PlayerPrefs.SetInt("Key_Down", (int)KeyCode.S);
+        PlayerPrefs.SetInt("Key_Left", (int)KeyCode.A);
+        PlayerPrefs.SetInt("Key_Right", (int)KeyCode.D);
+        PlayerPrefs.SetInt("Key_Dash", (int)KeyCode.Space);
+
         defaultKeys = new int[] { PlayerPrefs.GetInt("Key_Up", (int)KeyCode.W),
                                     PlayerPrefs.GetInt("Key_Down", (int)KeyCode.S),
                                     PlayerPrefs.GetInt("Key_Left", (int)KeyCode.A),

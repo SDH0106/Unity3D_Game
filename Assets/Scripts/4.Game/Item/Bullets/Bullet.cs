@@ -1,6 +1,4 @@
-﻿using Unity.VisualScripting;
-using UnityEditor.Search;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Pool;
 
 public class Bullet : MonoBehaviour

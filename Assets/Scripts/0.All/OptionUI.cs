@@ -15,6 +15,7 @@ public class OptionUI : MonoBehaviour
     [SerializeField] GameObject wUnMark;
     [SerializeField] GameObject bUnMark;
     [SerializeField] GameObject sUnMark;
+    [SerializeField] GameObject CheckHomePanel;
 
     GameManager gameManager;
     SoundManager soundManager;
@@ -26,6 +27,7 @@ public class OptionUI : MonoBehaviour
     private void Start()
     {
         panel.SetActive(false);
+        CheckHomePanel.SetActive(false);
 
         gameManager = GameManager.Instance;
         soundManager = SoundManager.Instance;
@@ -168,6 +170,16 @@ public class OptionUI : MonoBehaviour
             gameManager.isPause = false;
             Time.timeScale = 1;
         }
+    }
+
+    public void OpenCheckHomePanel()
+    {
+        CheckHomePanel.SetActive(true);
+    }
+
+    public void CloseCheckHomePanel()
+    {
+        CheckHomePanel.SetActive(false);
     }
 
     public void TitleScene()

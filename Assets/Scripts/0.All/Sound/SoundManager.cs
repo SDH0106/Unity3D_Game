@@ -1,7 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.TextCore.Text;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -35,6 +32,9 @@ public class SoundManager : Singleton<SoundManager>
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        PlayerPrefs.SetFloat("Sound_All", 1);
+        PlayerPrefs.SetFloat("Sound_Bgm", 1);
+        PlayerPrefs.SetFloat("Sound_Sfx", 1);
         AllSoundVolume = PlayerPrefs.GetFloat("Sound_All", 1);
         bgmSoundVolume = PlayerPrefs.GetFloat("Sound_Bgm", 1);
         sfxSoundVolume = PlayerPrefs.GetFloat("Sound_Sfx", 1);
