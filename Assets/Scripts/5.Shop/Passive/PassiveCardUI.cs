@@ -212,9 +212,16 @@ public class PassiveCardUI : MonoBehaviour
             if (stats[i] != 0)
             {
                 descriptPrefabs[count].transform.GetChild(0).GetComponent<Text>().text = statTypes[i];
-                descriptPrefabs[count].transform.GetChild(2).GetComponent<Text>().text = stats[i].ToString();
                 if (stats[i] < 0)
+                {
                     descriptPrefabs[count].transform.GetChild(2).GetComponent<Text>().color = Color.red;
+                    descriptPrefabs[count].transform.GetChild(2).GetComponent<Text>().text = stats[i].ToString();
+                }
+
+                else if(stats[i] >= 0)
+                {
+                    descriptPrefabs[count].transform.GetChild(2).GetComponent<Text>().text = ($"+{stats[i]}");
+                }
                 descriptPrefabs[count].transform.GetChild(3).gameObject.SetActive(false);
                 count++;
             }
@@ -272,7 +279,11 @@ public class PassiveCardUI : MonoBehaviour
 
                 for (int i = 0; i < stats.Length; i++)
                 {
-                    gameManager.stats[i] = Mathf.Round((gameManager.stats[i] + stats[i]) * 10) * 0.1f;
+                    if (i == 13)
+                        gameManager.stats[i] = Mathf.Round((gameManager.stats[i] + stats[i]) * 100) * 0.01f;
+
+                    else
+                        gameManager.stats[i] = Mathf.Round((gameManager.stats[i] + stats[i]) * 10) * 0.1f;
                 }
 
                 for (int i = 0; i < passiveIntVariables.Length; i++)

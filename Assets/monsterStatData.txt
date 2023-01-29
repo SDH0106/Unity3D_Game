@@ -37,19 +37,19 @@
             "monsterCoin": 10.0
         },
         {
-            "monsterName": "고스트",
+            "monsterName": "황금 박쥐",
             "monsterMaxHp": 5000.0,
             "monsterDamage": 10.0,
-            "monsterSpeed": 3.0,
+            "monsterSpeed": 2.0,
             "monsterDefence": 10.0,
             "monsterExp": 0.0,
             "monsterCoin": 0.0
         },
         {
-            "monsterName": "해골",
+            "monsterName": "해골 박쥐",
             "monsterMaxHp": 5000.0,
             "monsterDamage": 10.0,
-            "monsterSpeed": 3.0,
+            "monsterSpeed": 2.3,
             "monsterDefence": 10.0,
             "monsterExp": 0.0,
             "monsterCoin": 0.0

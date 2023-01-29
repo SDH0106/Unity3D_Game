@@ -31,6 +31,7 @@ public class WeaponInfo : ScriptableObject
     [SerializeField] float bulletSpeed;
     [SerializeField] float weaponRange;
     [SerializeField] int weaponPrice;
+    [TextArea]
     [SerializeField] string description;
     [SerializeField] AudioClip weaponSound;
 

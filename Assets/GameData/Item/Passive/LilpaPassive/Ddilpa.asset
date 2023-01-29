@@ -62,6 +62,6 @@ MonoBehaviour:
   penetrate: 0
   description: "\uD604\uC7AC <color=cyan>\uB9C8\uBC95\uACF5\uACA9\uB825</color>\uC758
     <color=lime>\uC808\uBC18</color>\uC744 <color=cyan>\uBB3C\uB9AC \uACF5\uACA9\uB825</color>\uC73C\uB85C
-    \uC804\uD658\uD558\uACE0, \uB9C8\uBC95 \uACF5\uACA9\uB825\uC744 <color=red>0\uC73C\uB85C</color>
+    \uC804\uD658\uD558\uACE0,\n\uB9C8\uBC95 \uACF5\uACA9\uB825\uC744 <color=red>0\uC73C\uB85C</color>
     \uB9CC\uB4ED\uB2C8\uB2E4."
   weight: 81.200005

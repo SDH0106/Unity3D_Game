@@ -103,32 +103,12 @@ public class MonsterSpawn : MonoBehaviour
 
     void RendSpawnImage()
     {
-        //Vector3 pos = ground.ClosestPointOnBounds(SpawnPosition());
         Vector3 pos = ground.bounds.ClosestPoint(SpawnPosition());
         GameObject spawnMark = Instantiate(spawnImage, pos, spawnImage.transform.rotation);
         spawnMark.transform.SetParent(storageParent);
         Destroy(spawnMark, 1f);
         StartCoroutine(SpawnMonster(pos));
     }
-
-    /*IEnumerator RendSpawnImage()
-    {
-        while (gameManager.currentGameTime > 0)
-        {
-            yield return new WaitForSeconds(1);
-
-            Vector3 pos = SpawnPosition();
-            Debug.Log(pos);
-            GameObject spawnMark = Instantiate(spawnImage, pos, spawnImage.transform.rotation);
-            spawnMark.transform.SetParent(storageParent);
-
-            yield return new WaitForSeconds(1);
-            Destroy(spawnMark);
-
-            Monster monster = pool.Get();
-            monster.transform.position = pos;
-        }
-    }*/
 
     void RendBossSpawnImage(int round)
     {

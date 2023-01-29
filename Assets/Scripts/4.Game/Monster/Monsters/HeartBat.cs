@@ -12,12 +12,12 @@ public class HeartBat : Monster
 
     private void Start()
     {
-       InitSetting();
+       StartSetting();
     }
 
-    protected override void SetInitMonster()
+    protected override void InitMonsterSetting()
     {
-        base.SetInitMonster();
+        base.InitMonsterSetting();
         attackTime = 3;
     }
 

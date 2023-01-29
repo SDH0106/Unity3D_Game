@@ -151,7 +151,6 @@ public class ShowPassiveSlotCard : MonoBehaviour
         {
             if (i == count)
             {
-                Debug.Log(count);
                 descriptPrefabs[count].transform.GetChild(0).gameObject.SetActive(false);
                 descriptPrefabs[count].transform.GetChild(1).gameObject.SetActive(false);
                 descriptPrefabs[count].transform.GetChild(2).gameObject.SetActive(false);

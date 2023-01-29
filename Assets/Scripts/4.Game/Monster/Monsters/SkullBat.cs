@@ -13,12 +13,12 @@ public class SkullBat : Monster
 
     void Start()
     {
-        InitSetting();
+        StartSetting();
     }
 
-    protected override void SetInitMonster()
+    protected override void InitMonsterSetting()
     {
-        base.SetInitMonster();
+        base.InitMonsterSetting();
         attackTime = 5;
     }
 

@@ -16,12 +16,12 @@ public class HugBat : Monster
         rushTime = 2f;
         breakTime = 1f;
         attackCoolTime = 1f;
-        InitSetting();
+        StartSetting();
     }
 
-    protected override void SetInitMonster()
+    protected override void InitMonsterSetting()
     {
-        base.SetInitMonster();
+        base.InitMonsterSetting();
         isRush = false;
         rushTime = 2f;
         breakTime = 0f;

@@ -14,7 +14,7 @@ public class PaaBat : Monster
 
     void Start()
     {
-        InitSetting();
+        StartSetting();
     }
 
     private void Update()

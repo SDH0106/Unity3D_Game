@@ -4042,7 +4042,7 @@ GameObject:
   - component: {fileID: 936130856}
   - component: {fileID: 936130854}
   - component: {fileID: 936130861}
-  - component: {fileID: 936130859}
+  - component: {fileID: 936130862}
   - component: {fileID: 936130860}
   - component: {fileID: 936130858}
   m_Layer: 0
@@ -4067,14 +4067,14 @@ MonoBehaviour:
   aimCursor: {fileID: 2800000, guid: b8e78032f8af0954784d1fe9e5a09187, type: 3}
   bulletStorage: {fileID: 1005871281}
   damageStorage: {fileID: 1692643827}
-  gameTime: 0
+  gameTime: 5
   money: 500000
-  round: 29
+  round: 1
   woodCount: 0
   woodMaxCount: 70
   maxHp: 0
   percentDamage: 0
-  physicDamage: 100000
+  physicDamage: 0
   magicDamage: 0
   shortDamage: 0
   longDamage: 0
@@ -4163,61 +4163,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0e5a951dea014e4d891718c65e70039, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &936130859
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 936130853}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 114f76aa60398694990d8a63f2642863, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  monsterInfos:
-  - monsterName: "\uC560\uAE30 \uBC15\uC950"
-    monsterMaxHp: 10
-    monsterDamage: 2
-    monsterSpeed: 1
-    monsterDefence: 0
-    monsterExp: 1
-    monsterCoin: 5
-  - monsterName: "\uD30C\uC544\uC544\uC545\uC950"
-    monsterMaxHp: 30
-    monsterDamage: 3
-    monsterSpeed: 2
-    monsterDefence: 2
-    monsterExp: 2
-    monsterCoin: 7
-  - monsterName: "\uD558\uD2B8 \uBC15\uC950"
-    monsterMaxHp: 20
-    monsterDamage: 1
-    monsterSpeed: 0
-    monsterDefence: 0
-    monsterExp: 3
-    monsterCoin: 8
-  - monsterName: "\uC548\uC544\uC918\uC694 \uBC15\uC950"
-    monsterMaxHp: 50
-    monsterDamage: 5
-    monsterSpeed: 1.5
-    monsterDefence: 5
-    monsterExp: 5
-    monsterCoin: 10
-  - monsterName: "\uACE0\uC2A4\uD2B8"
-    monsterMaxHp: 5000
-    monsterDamage: 10
-    monsterSpeed: 3
-    monsterDefence: 10
-    monsterExp: 0
-    monsterCoin: 0
-  - monsterName: "\uD574\uACE8"
-    monsterMaxHp: 5000
-    monsterDamage: 10
-    monsterSpeed: 3
-    monsterDefence: 10
-    monsterExp: 0
-    monsterCoin: 0
 --- !u!114 &936130860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4297,6 +4242,61 @@ MonoBehaviour:
     statType: "\uD06C\uB9AC\uD2F0\uCEEC"
     statSprite: Critical
     statValue: 2.5
+--- !u!114 &936130862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 936130853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 114f76aa60398694990d8a63f2642863, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monsterInfos:
+  - monsterName: "\uC560\uAE30 \uBC15\uC950"
+    monsterMaxHp: 10
+    monsterDamage: 2
+    monsterSpeed: 1
+    monsterDefence: 0
+    monsterExp: 1
+    monsterCoin: 5
+  - monsterName: "\uD30C\uC544\uC544\uC545\uC950"
+    monsterMaxHp: 30
+    monsterDamage: 3
+    monsterSpeed: 2
+    monsterDefence: 2
+    monsterExp: 2
+    monsterCoin: 7
+  - monsterName: "\uD558\uD2B8 \uBC15\uC950"
+    monsterMaxHp: 20
+    monsterDamage: 1
+    monsterSpeed: 0
+    monsterDefence: 0
+    monsterExp: 3
+    monsterCoin: 8
+  - monsterName: "\uC548\uC544\uC918\uC694 \uBC15\uC950"
+    monsterMaxHp: 50
+    monsterDamage: 5
+    monsterSpeed: 1.5
+    monsterDefence: 5
+    monsterExp: 5
+    monsterCoin: 10
+  - monsterName: "\uD669\uAE08 \uBC15\uC950"
+    monsterMaxHp: 5000
+    monsterDamage: 10
+    monsterSpeed: 2
+    monsterDefence: 10
+    monsterExp: 0
+    monsterCoin: 0
+  - monsterName: "\uD574\uACE8 \uBC15\uC950"
+    monsterMaxHp: 5000
+    monsterDamage: 10
+    monsterSpeed: 2.3
+    monsterDefence: 10
+    monsterExp: 0
+    monsterCoin: 0
 --- !u!1 &994559795
 GameObject:
   m_ObjectHideFlags: 0
@@ -5922,10 +5922,10 @@ RectTransform:
   m_Father: {fileID: 1223543771}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 150, y: -40}
-  m_SizeDelta: {x: -300, y: -80}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 55, y: -25}
+  m_SizeDelta: {x: 1620, y: -50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1598506496
 MonoBehaviour:
@@ -5949,10 +5949,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 1bdabff7045937b429a45d087a646908, type: 3}
-    m_FontSize: 40
+    m_FontSize: 35
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 4
+    m_MinSize: 3
     m_MaxSize: 50
     m_Alignment: 0
     m_AlignByGeometry: 0
@@ -5960,29 +5960,45 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\n<color=red>30\uC77C</color>\uB3D9\uC548<color=navy> \uB1E8\uD30C</color>\uAC00
-    \uBC15\uC950\uC12C\uC5D0\uC11C \uC0B4\uC544\uB0A8\uC544 \uD0C8\uCD9C\uD558\uB294
-    \uAC8C\uC784\uC785\uB2C8\uB2E4.\n\n\uBC15\uC950\uB4E4\uC744 \uD1F4\uCE58\uD574
-    \uC5BB\uC740 <color=yellow>\uBC30\uD2B8\uCF54\uC778</color>\uC73C\uB85C \uC544\uC774\uD15C\uC744
-    \uAD6C\uB9E4\uD574 \uB1E8\uD30C\uB97C \uC131\uC7A5\uC2DC\uD0A4\uACE0,\n\uBC15\uC950\uC12C\uC744
+  m_Text: "<\uAC8C\uC784 \uC124\uBA85>\n<color=red>30\uC77C</color>\uB3D9\uC548<color=navy>
+    \uB1E8\uD30C</color>\uAC00 \uBC15\uC950\uC12C\uC5D0\uC11C \uC0B4\uC544\uB0A8\uC544
+    \uD0C8\uCD9C\uD558\uB294 \uAC8C\uC784\uC785\uB2C8\uB2E4.\n\uBC15\uC950\uB4E4\uC744
+    \uD1F4\uCE58\uD574 \uC5BB\uC740 <color=yellow>\uBC30\uD2B8\uCF54\uC778</color>\uC73C\uB85C
+    \uC544\uC774\uD15C\uC744 \uAD6C\uB9E4\uD574 \uB1E8\uD30C\uB97C \uC131\uC7A5\uC2DC\uD0A4\uACE0,\n\uBC15\uC950\uC12C\uC744
     \uD0C8\uCD9C\uD558\uB294 \uBC30\uB97C \uB9CC\uB4E4\uAE30 \uC704\uD574,\n\uAC8C\uC784
     \uB3C4\uC911 \uB098\uC624\uB294<color=lime> \uC774\uD30C\uB9AC \uB098\uBB34</color>\uB97C
     \uBC8C\uBAA9\uD574 \uB098\uBB34\uB97C <color=red>70\uAC1C</color> \uC774\uC0C1
-    \uC5BB\uC5B4\uC57C \uD569\uB2C8\uB2E4.\n\n<color=red>10,20,30</color> \uB77C\uC6B4\uB4DC\uB294
+    \uC5BB\uC5B4\uC57C \uD569\uB2C8\uB2E4.\n<color=red>10,20,30</color> \uB77C\uC6B4\uB4DC\uB294
     <color=red>\uBCF4\uC2A4\uB77C\uC6B4\uB4DC</color>\uC774\uBA70 \r\uC2DC\uAC04\uC774
     \uB2E4\uB418\uC5B4\uB3C4 \uBCF4\uC2A4\uB97C \uC7A1\uC9C0 \uBABB\uD558\uBA74 \uD558\uB8E8\uAC00
     <color=red>\uB05D\uB098\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4</color>.\r\n\uB610\uD55C,
-    30\uC77C\uC774 \uB05D\uB098\uAE30 \uC804\uAE4C\uC9C0 70\uAC1C \uC774\uC0C1\uC758
-    \uB098\uBB34\uB97C \uC5BB\uC9C0 \uBABB\uD558\uBA74 \uD0C8\uCD9C\uC774 <color=red>\uC2E4\uD328</color>\uD569\uB2C8\uB2E4.\r\n\n\uBC8C\uBAA9\uC744
-    \uD558\uBA70 \uBC15\uC950\uB97C \uC4F0\uB7EC\uD2B8\uB9AC\uACE0 30\uC77C\uC744
-    \uBC84\uD168\uC11C \uBC15\uC950\uC12C\uC744 \uD0C8\uCD9C\uD558\uC138\uC694!\n\n<\uCD9C\uCC98>\n\uD3F0\uD2B8:
-    \uB358\uD30C \uBE44\uD2B8\uBE44\uD2B8\uCCB4\n\uC0AC\uC6B4\uB4DC: pixabay (https://pixabay.com/ko/sound-effects/)\n             
-    https://www.youtube.com/watch?v=rsKa3oxTFAc\n             \uB9B4\uD30C\uB2D8
-    \uC720\uD29C\uBE0C\n             LilBye(Gark\uB2D8 \uB9AC\uBBF9\uC2A4\uACE1,
+    30\uC77C\uC774 \uB05D\uB098\uAE30 \uC804\uAE4C\uC9C0 <color=red>70\uAC1C</color>
+    \uC774\uC0C1\uC758 \uB098\uBB34\uB97C \uC5BB\uC9C0 \uBABB\uD558\uBA74 \uD0C8\uCD9C\uC774
+    <color=red>\uC2E4\uD328</color>\uD569\uB2C8\uB2E4.\r\n\uBC8C\uBAA9\uC744 \uD558\uBA70
+    \uBC15\uC950\uB97C \uC4F0\uB7EC\uD2B8\uB9AC\uACE0 30\uC77C\uC744 \uBC84\uD168\uC11C
+    \uBC15\uC950\uC12C\uC744 \uD0C8\uCD9C\uD558\uC138\uC694!\n\n<\uAC8C\uC784 \uC815\uBCF4>\n\uCE90\uB9AD\uD130
+    \uBC29\uD5A5\uC870\uC791\uC740 \uD0A4\uBCF4\uB4DC \uBB34\uAE30 \uC870\uC791\uC740
+    \uB9C8\uC6B0\uC2A4\uB85C \uAC00\uB2A5\uD569\uB2C8\uB2E4.\n<color=lime>\uC774\uD30C\uB9AC
+    \uB098\uBB34</color>\uB294 \uAC8C\uC784\uC2DC \uB9F5\uC5D0 \uB79C\uB364\uC73C\uB85C
+    \uC0DD\uC131\uB418\uB294 \uC624\uBE0C\uC81D\uD2B8\uB85C, \uACF5\uACA9\uC2DC \uD30C\uAD34\uB418\uBA70
+    <color=cyan>\uCCB4\uB825</color>\uC744 <color=red>10\uD68C\uBCF5</color>\uC2DC\uCF1C\uC8FC\uB294
+    \uBD95\uC5B4\uBE75\uC744 \uB5A8\uC5B4\uD2B8\uB9AC\uACE0, \n\uB0AE\uC740 \uD655\uB960(<color=cyan>\uD589\uC6B4</color>\uBE44\uB840)\uB85C
+    <color=lime>\uD328\uC2DC\uBE0C \uC544\uC774\uD15C</color>\uC744 \uD68D\uB4DD\uD560
+    \uC218 \uC788\uC2B5\uB2C8\uB2E4.\n\uBAAC\uC2A4\uD130\uB4E4\uC740 <color=red>5</color>\uB77C\uC6B4\uB4DC
+    \uB9C8\uB2E4 <color=cyan>\uCCB4\uB825</color>\uC774 \uC77C\uC815\uB7C9 <color=red>\uC0C1\uC2B9</color>\uD569\uB2C8\uB2E4.\n\uB610
+    \uBAAC\uC2A4\uD130\uB294 <color=cyan>\uBC29\uC5B4\uB825</color>\uC774 \uC874\uC7AC\uD574
+    \uB9CC\uC57D <color=cyan>\uACF5\uACA9\uB825</color>\uC774 <color=cyan>\uBC29\uC5B4\uB825</color>\uBCF4\uB2E4
+    <color=red>\uB0AE\uB2E4\uBA74</color> \uACF5\uACA9\uC774 <color=red>\uBD88\uAC00\uB2A5</color>\uD569\uB2C8\uB2E4.
+    <color=cyan>\uBC29\uC5B4\uB825</color>\uB610\uD55C <color=red>5</color>\uB77C\uC6B4\uB4DC\uB9C8\uB2E4
+    \uC18C\uB7C9 <color=red>\uC0C1\uC2B9</color>\uD569\uB2C8\uB2E4.\n\n<\uCD9C\uCC98>\n\uD3F0\uD2B8:
+    \uB358\uD30C \uBE44\uD2B8\uBE44\uD2B8\uCCB4 (https://df.nexon.com/df/data/font)\n\uC0AC\uC6B4\uB4DC:
+    pixabay (https://pixabay.com/ko/sound-effects/)\n              https://www.youtube.com/watch?v=rsKa3oxTFAc\n            
+    \uB9B4\uD30C\uB2D8 \uC720\uD29C\uBE0C\n             LilBye (Gark\uB2D8 \uB9AC\uBBF9\uC2A4\uACE1,
     https://cafe.naver.com/steamindiegame/8113843,\n                            
     https://www.youtube.com/watch?v=B2yin5s7zNY)\n\uC774\uBBF8\uC9C0: \uC5D4\uC824\uD2F0\uCF58,
     \uBBFC\uCE58\uD2F0\uCF58, \uBBFC\uC218\uD2F0\uCF58, \uAD6C\uB3C5\uD2F0\uCF58
-    \uC774\uBBF8\uC9C0, Unity AssetStore \uB4F1\n\n<\uC81C\uC791> \n\uCE74\uD398\uB2C9\uB124\uC784:
+    \uC774\uBBF8\uC9C0 \uCC38\uACE0, Unity AssetStore \uAD6C\uB9E4, \uC641\uBB3C\uC6D0
+    \uD32C\uC544\uD2B8 \uB4F1\n\n<\uC81C\uC791\uC790> \uCE74\uD398\uB2C9\uB124\uC784:
     \uCB48\uC03C\uCB48\uC03C"
 --- !u!222 &1598506497
 CanvasRenderer:

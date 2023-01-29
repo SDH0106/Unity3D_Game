@@ -19,13 +19,13 @@ public class GoldBat : Monster
 
     void Start()
     {
-        InitSetting();
+        StartSetting();
         ground = GameSceneUI.Instance.ground;
     }
 
-    protected override void SetInitMonster()
+    protected override void InitMonsterSetting()
     {
-        base.SetInitMonster();
+        base.InitMonsterSetting();
         state = 0;
         isRush = false;
         attackTime = 5;

@@ -60,6 +60,7 @@ public class PassiveInfo : ScriptableObject
     [SerializeField] bool onePenetrate;
     [SerializeField] bool lowPenetrate;
     [SerializeField] bool penetrate;
+    [TextArea]
     [SerializeField] string description;
 
     [HideInInspector] public float weight;

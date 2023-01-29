@@ -124,6 +124,7 @@ public class StaffControl : Weapon
 
                 else if (gameManager.attackSpeed < 0)
                 {
+                    // 공속이 음수인 경우이므로 음수를 빼 (+로 만들어) 딜레이를 늘린다.
                     if (delay >= (bulletDelay - (gameManager.attackSpeed * 0.1)))
                     {
                         canAttack = true;

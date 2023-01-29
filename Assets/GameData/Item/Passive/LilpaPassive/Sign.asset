@@ -23,14 +23,14 @@ MonoBehaviour:
   defence: 0
   physicDamage: 0
   magicDamage: 0
-  shortDamage: -2
-  longDamage: -2
+  shortDamage: -1
+  longDamage: -1
   attackSpeed: 0
   speed: 0
   range: 0
   luck: 0
   critical: 0
-  percentDamage: 0.2
+  percentDamage: 0.02
   avoid: 0
   coinRange: 0
   increaseExp: 0
@@ -42,6 +42,7 @@ MonoBehaviour:
   dashCount: 0
   buffNum: 0
   exDmg: 0
+  isedolCount: 0
   luckCoin: 0
   luckDamage: 0
   luckCritical: 0

@@ -39,10 +39,10 @@ public class Monster : MonoBehaviour
 
     void Start()
     {
-        InitSetting();
+        StartSetting();
     }
 
-    protected void InitSetting()
+    protected void StartSetting()
     {
         gameManager = GameManager.Instance;
         character = Character.Instance;
@@ -50,14 +50,17 @@ public class Monster : MonoBehaviour
         anim = GetComponent<Animator>();
         coll = GetComponent<Collider>();
 
-        hp = stat.monsterMaxHp * (1 + ((gameManager.round - 1) * 0.25f));
+        hp = stat.monsterMaxHp * (1 + (Mathf.Floor(gameManager.round / 5) * 0.25f));
         maxHp = hp;
         initScale = transform.localScale;
         speed = stat.monsterSpeed * (1 - gameManager.monsterSlow * 0.01f);
         initSpeed = speed;
-        defence = stat.monsterDefence * (1 + gameManager.round * 0.1f) * gameManager.monsterDef;
+        defence = stat.monsterDefence * (1 + Mathf.Floor(gameManager.round / 5) * 0.1f) * gameManager.monsterDef;
         isWalk = true;
-
+        isDead = false;
+        isAttacked = false;
+        isAttack = false;
+        coll.enabled = true;
     }
 
     void Update()
@@ -71,11 +74,12 @@ public class Monster : MonoBehaviour
         OnDead();
     }
 
-    protected virtual void SetInitMonster()
+    protected virtual void InitMonsterSetting()
     {
-        hp = stat.monsterMaxHp * (1 + ((gameManager.round - 1) * 0.25f));
+        hp = stat.monsterMaxHp * (1 + (Mathf.Floor(gameManager.round / 5) * 0.25f));
         maxHp = hp;
         speed = stat.monsterSpeed * (1 - gameManager.monsterSlow * 0.01f);
+        initSpeed = speed;
         isWalk = true;
         isDead = false;
         isAttacked = false;
@@ -209,12 +213,20 @@ public class Monster : MonoBehaviour
     {
         if (hp <= 0 || (gameManager.isClear && gameManager.isBossDead) || character.isDead)
         {
-            SubscriptionFee();
             isDead = true;
             rend.color = Color.white;
             isFreeze = false;
             StopCoroutine(MonsterFreeze());
             coll.enabled = false;
+
+            if (hp <= 0 && !isAttacked)
+            {
+                SubscriptionFee();
+                int coinValue = Random.Range(stat.monsterCoin - 3, stat.monsterCoin + 1);
+                DropCoin.Instance.Drop(transform.position, coinValue);
+                character.exp += stat.monsterExp * (1 + gameManager.increaseExp);
+            }
+
             isAttacked = true;
 
             anim.SetBool("isAttacked", isAttacked);
@@ -223,12 +235,6 @@ public class Monster : MonoBehaviour
             {
                 if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
                 {
-                    if (hp <= 0)
-                    {
-                        int coinValue = Random.Range(stat.monsterCoin - 5, stat.monsterCoin + 1);
-                        DropCoin.Instance.Drop(transform.position, coinValue);
-                        character.exp += stat.monsterExp * (1 + gameManager.increaseExp);
-                    }
                     DestroyMonster();
                 }
             }
@@ -243,6 +249,6 @@ public class Monster : MonoBehaviour
     public void DestroyMonster()
     {
         managedPool.Release(this);
-        SetInitMonster();
+        InitMonsterSetting();
     }
 }

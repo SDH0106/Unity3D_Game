@@ -14,7 +14,6 @@ using UnityEngine.Windows.WebCam;
 
 public class GameManager : Singleton<GameManager>       
 {
-    [SerializeField] Texture2D aimCursor;
     [SerializeField] public Transform bulletStorage;
     [SerializeField] public Transform damageStorage;
 
@@ -28,8 +27,8 @@ public class GameManager : Singleton<GameManager>
     [Header("StatData")]
     [SerializeField] public float maxHp;
     [HideInInspector] public float percentDamage;
-    /*[HideInInspector]*/ public float physicDamage;
-    /*[HideInInspector]*/ public float magicDamage;
+    [HideInInspector] public float physicDamage;
+    [HideInInspector] public float magicDamage;
     [HideInInspector] public float shortDamage;
     [HideInInspector] public float longDamage;
     [SerializeField] public float recoverHp;
@@ -49,7 +48,7 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector] public int dashCount;
     [HideInInspector] public int buffNum;
     [HideInInspector] public int exDmg;
-    /*[HideInInspector]*/ public int isedolCount;
+    [HideInInspector] public int isedolCount;
     [HideInInspector] public float salePercent;
     [HideInInspector] public float increaseExp;
     [HideInInspector] public float coinRange;
@@ -101,7 +100,7 @@ public class GameManager : Singleton<GameManager>
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
-        //InitSetting();
+        InitSetting();
         InitArray();
         currentGameTime = gameTime;
         isPause = false;
@@ -122,11 +121,46 @@ public class GameManager : Singleton<GameManager>
         recoverHp = 0;
         absorbHp = 0;
         defence = 0;
+        physicDamage = 0;
+        magicDamage = 0;
+        shortDamage = 0;
+        longDamage = 0;
         attackSpeed = 0;
         speed = 0;
         range = 0;
         luck = 0;
         critical = 5;
+
+        dashCount = 0;
+        buffNum = 0;
+        exDmg = 0;
+        isedolCount = 0;
+
+        salePercent = 0;
+        increaseExp = 0;
+        coinRange = 0;
+        monsterSlow = 0;
+        summonASpd = 0;
+        summonPDmg = 0;
+        monsterDef = 0;
+
+        luckCoin = false;
+        luckDamage = false;
+        luckCritical = false;
+        doubleShot = false;
+        revive = false;
+        ggoGgoSummon = false;
+        ilsoonSummon = false;
+        wakgoodSummon = false;
+        ddilpa = false;
+        butterfly = false;
+        subscriptionFee = false;
+        spawnTree = false;
+        dotgu = false;
+        isReflect = false;
+        onePenetrate = false;
+        lowPenetrate = false;
+        penetrate = false;
     }
 
     void InitArray()
@@ -284,8 +318,6 @@ public class GameManager : Singleton<GameManager>
 
             if (money <= 0)
                 money = 0;
-
-            //Cursor.SetCursor(aimCursor, new Vector2(aimCursor.width / 2, aimCursor.height / 2), CursorMode.Auto);
         }
     }
 

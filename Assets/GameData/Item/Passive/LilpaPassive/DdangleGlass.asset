@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: DdangleGlass
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 65d43b6a0bed65a418b5d5aea7cf1eb4, type: 3}
-  itemGrade: 1
+  itemGrade: 2
   itemName: "\uB561\uAE00\uC774 \uC548\uACBD"
-  itemPrice: 288
+  itemPrice: 310
   maxCount: 1
   hp: 0
   recoverHp: 0
@@ -61,7 +61,7 @@ MonoBehaviour:
   lowPenetrate: 1
   penetrate: 0
   description: "<color=cyan>\uD22C\uC0AC\uCCB4</color>\uAC00 <color=lime>\uBAA8\uB4E0
-    \uBAAC\uC2A4\uD130\uB97C \uAD00\uD1B5</color>\uD569\uB2C8\uB2E4. \uAD00\uD1B5\uB41C
+    \uBAAC\uC2A4\uD130\uB97C \uAD00\uD1B5</color>\uD569\uB2C8\uB2E4.\n\uAD00\uD1B5\uB41C
     \uD22C\uC0AC\uCCB4\uB294 <color=red>\uC808\uBC18\uC758 \uACF5\uACA9\uB825</color>\uC774
-    \uB429\uB2C8\uB2E4. (\uB2E4\uB978 \uAD00\uD1B5\uC744 \uBAA8\uB450 <color=red>\uB36E\uC5B4\uC501\uB2C8\uB2E4</color>.)"
+    \uB429\uB2C8\uB2E4. \n(\uB2E4\uB978 \uAD00\uD1B5\uC744 \uBAA8\uB450 <color=red>\uB36E\uC5B4\uC501\uB2C8\uB2E4</color>.)"
   weight: 290

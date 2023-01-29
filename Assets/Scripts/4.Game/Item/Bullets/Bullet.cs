@@ -37,10 +37,10 @@ public class Bullet : MonoBehaviour
     {
         this.dir = dir;
 
-        if (GameManager.Instance.range < 0)
+        if (GameManager.Instance.range <= 0)
             Invoke("DestroyBullet", range);
         
-        else if (GameManager.Instance.range >= 0)
+        else if (GameManager.Instance.range > 0)
             Invoke("DestroyBullet", range + GameManager.Instance.range * 0.2f);
     }
 

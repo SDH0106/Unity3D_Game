@@ -136,18 +136,21 @@ public class Character : Singleton<Character>
                 x = 1;
         }
 
-        /*x = Input.GetAxisRaw("Horizontal");
-        z = Input.GetAxisRaw("Vertical");*/
-
         if (!isBuff)
-            speed = gameManager.speed + characterSpeed;
+        {
+            if (gameManager.speed <= 0)
+                speed = characterSpeed;
+
+            else
+                speed = gameManager.speed + characterSpeed;
+        }
 
         else if (isBuff)
         {
             OnBuff();
             buffTime -= Time.deltaTime;
 
-            if(buffTime <= 0)
+            if (buffTime <= 0)
             {
                 isBuff = false;
                 buffTime = 8;
@@ -228,21 +231,36 @@ public class Character : Singleton<Character>
     {
         if (gameManager.buffNum == 1)
         {
-            speed = gameManager.speed + characterSpeed;
-            gameManager.attackSpeed = gameManager.stats[8] + 5;
+            if (gameManager.speed <= 0)
+                speed = characterSpeed;
+
+            else
+                speed = gameManager.speed + characterSpeed;
+
+            gameManager.attackSpeed = gameManager.stats[8] + 5f;
             gameManager.percentDamage = gameManager.stats[13];
         }
 
         else if (gameManager.buffNum == 2)
         {
-            speed = gameManager.speed + characterSpeed + 3f;
+            if (gameManager.speed <= 0)
+                speed = characterSpeed + 3f;
+
+            else
+                speed = gameManager.speed + characterSpeed + 3f;
+
             gameManager.attackSpeed = gameManager.stats[8];
             gameManager.percentDamage = gameManager.stats[13];
         }
 
         else if (gameManager.buffNum == 3)
         {
-            speed = gameManager.speed + characterSpeed;
+            if (gameManager.speed <= 0)
+                speed = characterSpeed;
+
+            else
+                speed = gameManager.speed + characterSpeed;
+
             gameManager.attackSpeed = gameManager.stats[8];
             gameManager.percentDamage = gameManager.stats[13] + 0.5f;
         }

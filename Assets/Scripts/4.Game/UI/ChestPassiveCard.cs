@@ -237,7 +237,11 @@ public class ChestPassiveCard : MonoBehaviour
 
                 for (int i = 0; i < stats.Length; i++)
                 {
-                    gameManager.stats[i] = Mathf.Round((gameManager.stats[i] + stats[i]) * 10) * 0.1f;
+                    if (i == 13)
+                        gameManager.stats[i] = Mathf.Round((gameManager.stats[i] + stats[i]) * 100) * 0.01f;
+
+                    else
+                        gameManager.stats[i] = Mathf.Round((gameManager.stats[i] + stats[i]) * 10) * 0.1f;
                 }
 
                 for (int i = 0; i < passiveIntVariables.Length; i++)
