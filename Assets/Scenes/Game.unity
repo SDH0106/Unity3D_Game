@@ -48735,7 +48735,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4902837314117181943, guid: 0d4c13e78a7917b499c9d320e83136c3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4902837314117181943, guid: 0d4c13e78a7917b499c9d320e83136c3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
@@ -48744,7 +48744,7 @@ PrefabInstance:
     - target: {fileID: 4902837314117181943, guid: 0d4c13e78a7917b499c9d320e83136c3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1660878382}
+      objectReference: {fileID: 1623322418}
     - target: {fileID: 4902837314117181943, guid: 0d4c13e78a7917b499c9d320e83136c3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -48755,11 +48755,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4902837314117181943, guid: 0d4c13e78a7917b499c9d320e83136c3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: TitleScene
+      value: OpenCheckHomePanel
       objectReference: {fileID: 0}
     - target: {fileID: 4902837314117181943, guid: 0d4c13e78a7917b499c9d320e83136c3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: GameSceneUI, Assembly-CSharp
+      value: OptionUI, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4902837314117181943, guid: 0d4c13e78a7917b499c9d320e83136c3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
