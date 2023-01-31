@@ -98,6 +98,8 @@ public class ShopManager : Singleton<ShopManager>
     {
         if (gameManager.currentScene == "Shop")
         {
+            backgroundImage.SetActive(clickUI.activeSelf);
+
             gameObject.SetActive(true);
             SettingStatText();
 
@@ -176,12 +178,6 @@ public class ShopManager : Singleton<ShopManager>
         text.color = textColor;
     }
 
-    public void CloseUI()
-    {
-        backgroundImage.SetActive(false);
-        clickUI.gameObject.SetActive(false);
-    }
-
     void Refill()
     {
         int refillNum = 0;
@@ -254,7 +250,8 @@ public class ShopManager : Singleton<ShopManager>
                     if (lockBools[i] == true)
                     {
                         itemManager.lockedWeaCards[i] = cards[i].GetComponent<WeaponCardUI>().selectedWeapon;
-                        itemManager.cardGrades[i] = cards[i].GetComponent<WeaponCardUI>().selectedWeapon.weaponGrade;
+                        Grade selectedGrade = cards[i].GetComponent<WeaponCardUI>().selectedWeapon.weaponGrade;
+                        itemManager.cardGrades[i] = selectedGrade;
                     }
                 }
 

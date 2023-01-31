@@ -89,7 +89,6 @@ public class Character : Singleton<Character>
         gardianAngel.SetActive(false);
         gardianEffect.SetActive(false);
 
-        characterHp = 10;
         gameManager.stats[0] = characterHp;
         maxHp = gameManager.stats[0];
         currentHp = maxHp;
@@ -205,6 +204,7 @@ public class Character : Singleton<Character>
             {
                 GameObject summon = Instantiate(ggoGgoPrefab);
                 summon.transform.position = summonPos[summonNum].position;
+                summon.transform.SetParent(gameManager.transform);
                 summonNum++;
                 gameManager.passiveBoolVariables[5] = false;
             }
@@ -213,6 +213,7 @@ public class Character : Singleton<Character>
             {
                 GameObject summon = Instantiate(ilsoonPrefab);
                 summon.transform.position = summonPos[summonNum].position;
+                summon.transform.SetParent(gameManager.transform);
                 summonNum++;
                 gameManager.passiveBoolVariables[6] = false;
             }
@@ -221,6 +222,7 @@ public class Character : Singleton<Character>
             {
                 GameObject summon = Instantiate(wakgoodPrefab);
                 summon.transform.position = summonPos[summonNum].position;
+                summon.transform.SetParent(gameManager.transform);
                 summonNum++;
                 gameManager.passiveBoolVariables[7] = false;
             }

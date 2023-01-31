@@ -46,7 +46,7 @@ public class DescriptionUI : MonoBehaviour
                 break;
 
             case 3:
-                descriptionText.text = "캐릭터가 몬스터에게 공격받을 경우 입는 피해를 감소시켜 주는 능력치. 0이하인 경우 적용되지 않습니다.";
+                descriptionText.text = "캐릭터가 몬스터에게 공격받을 경우 입는 피해를 감소시켜 주는 능력치. 0이하인 경우 대미지를 더 입습니다.";
                 break;
 
             case 4:

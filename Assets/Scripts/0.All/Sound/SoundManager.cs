@@ -32,12 +32,12 @@ public class SoundManager : Singleton<SoundManager>
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        PlayerPrefs.SetFloat("Sound_All", 1);
-        PlayerPrefs.SetFloat("Sound_Bgm", 1);
-        PlayerPrefs.SetFloat("Sound_Sfx", 1);
         AllSoundVolume = PlayerPrefs.GetFloat("Sound_All", 1);
         bgmSoundVolume = PlayerPrefs.GetFloat("Sound_Bgm", 1);
         sfxSoundVolume = PlayerPrefs.GetFloat("Sound_Sfx", 1);
+        PlayerPrefs.SetFloat("Sound_All", AllSoundVolume);
+        PlayerPrefs.SetFloat("Sound_Bgm", bgmSoundVolume);
+        PlayerPrefs.SetFloat("Sound_Sfx", sfxSoundVolume);
         muteBgm = Convert.ToBoolean(PlayerPrefs.GetInt("Mute_Bgm", 0));
         muteSfx = Convert.ToBoolean(PlayerPrefs.GetInt("Mute_Sfx", 0));
     }

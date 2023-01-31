@@ -64,16 +64,16 @@ public class WeaponCardUI : MonoBehaviour
     {
         lockImage.gameObject.SetActive(isLock);
 
-        if (gameManager.money < price * (int)(selectedWeapon.weaponGrade + 1))
+        if (gameManager.money < price)
             weaponPrice.color = Color.red;
 
-        else if (gameManager.money >= price * (int)(selectedWeapon.weaponGrade + 1))
+        else if (gameManager.money >= price)
             weaponPrice.color = initPriceColor;
     }
 
     void Setting()
     {
-        price = Mathf.CeilToInt(selectedWeapon.WeaponPrice * (1 - gameManager.salePercent));
+        price = Mathf.CeilToInt(selectedWeapon.WeaponPrice * ((int)(selectedWeapon.weaponGrade) * 2f + 1) * (1 - gameManager.salePercent));
         itemSprite.sprite = selectedWeapon.ItemSprite;
         weaponName.text = selectedWeapon.WeaponName.ToString();
         type.text = selectedWeapon.Type.ToString();
@@ -82,7 +82,7 @@ public class WeaponCardUI : MonoBehaviour
         attackDelay.text = selectedWeapon.AttackDelay.ToString();
         bulletSpeed.text = selectedWeapon.BulletSpeed.ToString();
         weaponRange.text = selectedWeapon.WeaponRange.ToString();
-        weaponPrice.text = (price * (int)(selectedWeapon.weaponGrade + 1)).ToString();
+        weaponPrice.text = price.ToString();
         weaponGrade.text = selectedWeapon.weaponGrade.ToString();
         description.text = selectedWeapon.Description.ToString();
     }
@@ -128,12 +128,12 @@ public class WeaponCardUI : MonoBehaviour
 
         if (selectedWeapon.Type == WEAPON_TYPE.°Ë)
         {
-            if (itemManager.foolCount < 5 && gameManager.money >= (price * (int)(selectedWeapon.weaponGrade + 1)))
+            if (itemManager.fullCount < 5 && gameManager.money >= price)
             {
                 canSwordBuy = true;
                 SoundManager.Instance.PlayES("WeaponSelect");
-                gameManager.money -= (price * (int)(selectedWeapon.weaponGrade + 1));
-                itemManager.foolCount++;
+                gameManager.money -= price;
+                itemManager.fullCount++;
                 itemManager.GetWeaponInfo(selectedWeapon);
                 itemManager.weaponGrade[itemManager.weaponCount] = selectedWeapon.weaponGrade;
                 Destroy(gameObject);
@@ -141,7 +141,7 @@ public class WeaponCardUI : MonoBehaviour
                 Character.Instance.Equip();
             }
 
-            else if (itemManager.foolCount >= 5 && gameManager.money >= (price * (int)(selectedWeapon.weaponGrade + 1)))
+            else if (itemManager.fullCount >= 5 && gameManager.money >= price)
             {
                 for (int i = 0; i < itemManager.storedWeapon.Length; i++)
                 {
@@ -152,7 +152,7 @@ public class WeaponCardUI : MonoBehaviour
                             canSwordBuy = true;
                             SoundManager.Instance.PlayES("WeaponSelect");
                             gameManager.money -= (int)(selectedWeapon.weaponGrade + 1) * 20;
-                            gameManager.money -= (price * (int)(selectedWeapon.weaponGrade + 1));
+                            gameManager.money -= price;
                             itemManager.weaponGrade[i]++;
                             Destroy(gameObject);
                             isLock = false;
@@ -172,12 +172,12 @@ public class WeaponCardUI : MonoBehaviour
             bool canBuy = false;
             if (Character.Instance.characterNum != (int)CHARACTER_NUM.Legendary)
             {
-                if (itemManager.foolCount < 5 && gameManager.money >= (price * (int)(selectedWeapon.weaponGrade + 1)))
+                if (itemManager.fullCount < 5 && gameManager.money >= price)
                 {
                     canBuy = true;
                     SoundManager.Instance.PlayES("WeaponSelect");
-                    gameManager.money -= (price * (int)(selectedWeapon.weaponGrade + 1));
-                    itemManager.foolCount++;
+                    gameManager.money -= price;
+                    itemManager.fullCount++;
                     itemManager.GetWeaponInfo(selectedWeapon);
                     itemManager.weaponGrade[itemManager.weaponCount] = selectedWeapon.weaponGrade;
                     Destroy(gameObject);
@@ -185,7 +185,7 @@ public class WeaponCardUI : MonoBehaviour
                     Character.Instance.Equip();
                 }
 
-                else if (itemManager.foolCount >= 5 && gameManager.money >= (price * (int)(selectedWeapon.weaponGrade + 1)))
+                else if (itemManager.fullCount >= 5 && gameManager.money >= price)
                 {
                     for (int i = 0; i < itemManager.storedWeapon.Length; i++)
                     {
@@ -196,7 +196,7 @@ public class WeaponCardUI : MonoBehaviour
                                 canBuy = true;
                                 SoundManager.Instance.PlayES("WeaponSelect");
                                 gameManager.money -= (int)(selectedWeapon.weaponGrade + 1) * 20;
-                                gameManager.money -= (price * (int)(selectedWeapon.weaponGrade + 1));
+                                gameManager.money -= price;
                                 itemManager.weaponGrade[i]++;
                                 Destroy(gameObject);
                                 isLock = false;

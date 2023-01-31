@@ -15,7 +15,7 @@ MonoBehaviour:
   itemSprite: {fileID: 21300000, guid: b1bb28923677987418060c321a042b5e, type: 3}
   itemGrade: 0
   itemName: "\uB9C8\uC778\uD06C\uB798\uD504\uD2B8"
-  itemPrice: 25
+  itemPrice: 13
   maxCount: 100
   hp: 0
   recoverHp: -0.2
@@ -42,6 +42,7 @@ MonoBehaviour:
   dashCount: 0
   buffNum: 0
   exDmg: 0
+  isedolCount: 0
   luckCoin: 0
   luckDamage: 0
   luckCritical: 0
@@ -60,4 +61,4 @@ MonoBehaviour:
   lowPenetrate: 0
   penetrate: 0
   description: 
-  weight: 0
+  weight: 152

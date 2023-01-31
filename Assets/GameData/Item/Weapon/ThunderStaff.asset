@@ -21,7 +21,7 @@ MonoBehaviour:
   attackDelay: 6
   bulletSpeed: 0
   weaponRange: 3
-  weaponPrice: 43
+  weaponPrice: 21
   description: "<color=cyan>\uC77C\uC815 \uC8FC\uAE30</color>\uB9C8\uB2E4 \uC790\uB3D9\uC73C\uB85C
     <color=cyan>\uBAAC\uC2A4\uD130\uB9CC</color>\uC744 \uACF5\uACA9\uD558\uB294 <color=cyan>\uBC88\uAC1C</color>\uB97C
     \uB0B4\uB9AC\uB294 \uC2A4\uD0DC\uD504."

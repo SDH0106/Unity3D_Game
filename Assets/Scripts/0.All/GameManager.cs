@@ -40,7 +40,7 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector] public int buffNum;
     [HideInInspector] public int exDmg;
     [HideInInspector] public int isedolCount;
-    [HideInInspector] public float salePercent;
+    /*[HideInInspector]*/ public float salePercent;
     [HideInInspector] public float increaseExp;
     [HideInInspector] public float coinRange;
     [HideInInspector] public float monsterSlow;
@@ -64,7 +64,6 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector] public bool onePenetrate;
     [HideInInspector] public bool lowPenetrate;
     [HideInInspector] public bool penetrate;
-
     #endregion
 
     [HideInInspector] public float currentGameTime;
@@ -275,6 +274,10 @@ public class GameManager : Singleton<GameManager>
 
     private void Update()
     {
+        /*Debug.Log(recoverHp);
+        Debug.Log(stats[1]);
+        Debug.Log(absorbHp);
+        Debug.Log(stats[2]);*/
         scene = SceneManager.GetActiveScene();
         currentScene = scene.name;
 

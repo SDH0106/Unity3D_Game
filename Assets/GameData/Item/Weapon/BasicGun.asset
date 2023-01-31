@@ -21,7 +21,7 @@ MonoBehaviour:
   attackDelay: 1
   bulletSpeed: 7
   weaponRange: 1
-  weaponPrice: 23
+  weaponPrice: 12
   description: "\uBAA8\uB4E0 \uBB34\uAE30\uC911 \uAC00\uC7A5 <color=cyan>\uAE30\uBCF8\uC801\uC778</color>
     \uCD1D."
   weaponSound: {fileID: 8300000, guid: f4482d2a369392142ab84b0be1285ae3, type: 3}

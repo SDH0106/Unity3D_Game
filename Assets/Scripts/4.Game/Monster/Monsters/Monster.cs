@@ -133,6 +133,7 @@ public class Monster : MonoBehaviour
         speed = initSpeed;
         rend.color = Color.white;
     }
+        
 
     protected virtual void OnTriggerStay(Collider other)
     {
@@ -161,8 +162,11 @@ public class Monster : MonoBehaviour
         if (runningCoroutine != null)
             StopCoroutine(runningCoroutine);
 
-        runningCoroutine = MonsterColorBlink();
-        StartCoroutine(runningCoroutine);
+        if (runningCoroutine != MonsterFreeze())
+        {
+            runningCoroutine = MonsterColorBlink();
+            StartCoroutine(runningCoroutine);
+        }
     }
 
     public void OnDamaged(float damage)
@@ -199,8 +203,11 @@ public class Monster : MonoBehaviour
 
         if (isFreeze == false)
         {
-            runningCoroutine = MonsterColorBlink();
-            StartCoroutine(runningCoroutine);
+            if (runningCoroutine != MonsterFreeze())
+            {
+                runningCoroutine = MonsterColorBlink();
+                StartCoroutine(runningCoroutine);
+            }
         }
 
     }
@@ -218,7 +225,7 @@ public class Monster : MonoBehaviour
             if (hp <= 0 && !isAttacked)
             {
                 SubscriptionFee();
-                int coinValue = Random.Range(stat.monsterCoin - 3, stat.monsterCoin + 1);
+                int coinValue = Random.Range(stat.monsterCoin - 2, stat.monsterCoin);
                 DropCoin.Instance.Drop(transform.position, coinValue);
                 character.exp += stat.monsterExp * (1 + gameManager.increaseExp);
             }

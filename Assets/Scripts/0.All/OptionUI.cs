@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
 using Unity.VisualScripting;
+using UnityEngine.Events;
 
 public class OptionUI : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class OptionUI : MonoBehaviour
     [SerializeField] GameObject bUnMark;
     [SerializeField] GameObject sUnMark;
     [SerializeField] GameObject CheckHomePanel;
+    [SerializeField] GameObject statPanel;
 
     GameManager gameManager;
     SoundManager soundManager;
@@ -156,6 +158,9 @@ public class OptionUI : MonoBehaviour
     {
         if (!gameManager.isPause)
         {
+            if(statPanel != null)
+                statPanel.SetActive(true);
+
             panel.SetActive(true);
             gameManager.isPause = true;
             Time.timeScale = 0;
@@ -166,6 +171,9 @@ public class OptionUI : MonoBehaviour
     {
         if (gameManager.isPause)
         {
+            if (statPanel != null)
+                statPanel.SetActive(false);
+
             panel.SetActive(false);
             gameManager.isPause = false;
             Time.timeScale = 1;
@@ -184,11 +192,15 @@ public class OptionUI : MonoBehaviour
 
     public void TitleScene()
     {
-        if(SceneManager.GetActiveScene().buildIndex > 1)
-            Destroy(Character.Instance.gameObject);
-
-        else if (SceneManager.GetActiveScene().buildIndex > 2)
+        if (SceneManager.GetActiveScene().buildIndex > 2)
+        {
             Destroy(ItemManager.Instance.gameObject);
+        }
+
+        if (SceneManager.GetActiveScene().buildIndex > 1)
+        {
+            Destroy(Character.Instance.gameObject);
+        }
 
         if (SoundManager.Instance.gameObject != null)
             Destroy(SoundManager.Instance.gameObject);

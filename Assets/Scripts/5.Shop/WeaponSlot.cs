@@ -47,7 +47,6 @@ public class WeaponSlot : MonoBehaviour
     {
         if (ItemManager.Instance.storedWeapon[slotNum] != null)
         {
-            ShopManager.Instance.backgroundImage.SetActive(true);
             sellUI.gameObject.SetActive(true);
             sellUI.transform.position = Input.mousePosition;
             sellUI.GetComponent<CardClick>().Setting(slotNum);

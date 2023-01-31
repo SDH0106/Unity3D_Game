@@ -12,6 +12,11 @@ public class Lazor : Bullet
         initScale = transform.localScale;
     }
 
+    private void OnEnable()
+    {
+        Debug.Log(dir);
+    }
+
     private void Update()
     {
         // ÃÑ¾Ë °¢µµ
@@ -28,7 +33,6 @@ public class Lazor : Bullet
     public override void Shoot(Vector3 dir, float range)
     {
         this.dir = dir;
-
         Invoke("DestroyBullet", range);
     }
 
@@ -54,5 +58,11 @@ public class Lazor : Bullet
 
             collision.collider.GetComponent<Monster>().OnDamaged(damageUI.realDamage);
         }
+    }
+
+    public override void DestroyBullet()
+    {
+        //base.DestroyBullet();
+        Destroy(gameObject);
     }
 }

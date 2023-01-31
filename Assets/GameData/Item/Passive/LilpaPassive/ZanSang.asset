@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ZanSang
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: ef340287c008c8142ab9b2b0d5c2e388, type: 3}
-  itemGrade: 0
+  itemGrade: 1
   itemName: "\uC794\uC0C1\uC785\uB2C8\uB2E4\uB9CC?"
   itemPrice: 53
   maxCount: 100
@@ -38,9 +38,11 @@ MonoBehaviour:
   salePercent: 0
   summonASpd: 0
   summonPDmg: 0
+  monsterDef: 0
   dashCount: 0
   buffNum: 0
   exDmg: 0
+  isedolCount: 0
   luckCoin: 0
   luckDamage: 0
   luckCritical: 0
@@ -54,5 +56,9 @@ MonoBehaviour:
   subscriptionFee: 0
   spawnTree: 0
   dotgu: 0
+  isReflect: 0
+  onePenetrate: 0
+  lowPenetrate: 0
+  penetrate: 0
   description: 
-  weight: 32
+  weight: 152

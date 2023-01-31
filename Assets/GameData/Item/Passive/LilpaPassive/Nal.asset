@@ -15,7 +15,7 @@ MonoBehaviour:
   itemSprite: {fileID: -766536504, guid: 1f28c2382a9fe83408a383515dd433e8, type: 3}
   itemGrade: 0
   itemName: "\uB0A0..."
-  itemPrice: 33
+  itemPrice: 16
   maxCount: 100
   hp: 0
   recoverHp: 0
@@ -61,4 +61,4 @@ MonoBehaviour:
   lowPenetrate: 0
   penetrate: 0
   description: 
-  weight: 56
+  weight: 152

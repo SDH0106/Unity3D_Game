@@ -67,7 +67,7 @@ public class SkullBat : Monster
                 {
                     if (hp <= 0)
                     {
-                        gameManager.money += 500;
+                        gameManager.money += 800;
                         SoundManager.Instance.PlayES("LevelUp");
                         character.level++;
                     }

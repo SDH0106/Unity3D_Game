@@ -41,6 +41,7 @@ public class Chick : Summons
         {
             GameObject summon = Instantiate(chickenPrefab);
             summon.transform.position = character.summonPos[summonPosNum].position;
+            summon.transform.SetParent(gameManager.transform);
 
             Destroy(gameObject);
         }

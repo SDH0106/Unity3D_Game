@@ -64,8 +64,10 @@ public class Ice : Bullet
     void Freezee()
     {
         int rand = Random.Range(0, 100);
+
         if (rand <= 5 + gameManager.luck * 0.2)
             isFreeze = true;
+
         else
             isFreeze = false;
     }

@@ -15,8 +15,8 @@ public class ItemManager : Singleton<ItemManager>
     [HideInInspector] public int weaponCount;
     int passiveItemCount;
 
-    [HideInInspector] public bool isFool;
-    [HideInInspector] public int foolCount;
+    [HideInInspector] public bool isFull;
+    [HideInInspector] public int fullCount;
 
     [HideInInspector] public Grade[] weaponGrade;
 
@@ -38,8 +38,8 @@ public class ItemManager : Singleton<ItemManager>
         {
             passiveCounts[i] = passiveCard.passiveInfo[i].MaxCount;
         }
-        isFool = false;
-        foolCount = 0;
+        isFull = false;
+        fullCount = 0;
         weaponCount = 0;
         passiveItemCount = 0;
         storedWeapon = new WeaponInfo[6];
@@ -53,15 +53,15 @@ public class ItemManager : Singleton<ItemManager>
 
     public void GetWeaponInfo(WeaponInfo weaponInfo)
     {
-        if (foolCount > 5)
+        if (fullCount > 5)
         {
-            isFool = true;
+            isFull = true;
         }
 
-        else if (foolCount <= 5)
-            isFool = false;
+        else if (fullCount <= 5)
+            isFull = false;
 
-        if (isFool == false)
+        if (isFull == false)
         {
             for (int i = 0; i < storedWeapon.Length; i++)
             {

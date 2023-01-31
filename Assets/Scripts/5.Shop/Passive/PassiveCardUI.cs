@@ -79,10 +79,10 @@ public class PassiveCardUI : MonoBehaviour
     {
         lockImage.gameObject.SetActive(isLock);
 
-        if (gameManager.money < selectedPassive.ItemPrice)
+        if (gameManager.money < price)
             itemPrice.color = Color.red;
 
-        else if (gameManager.money >= selectedPassive.ItemPrice)
+        else if (gameManager.money >= price)
             itemPrice.color = initPriceColor;
     }
 
@@ -245,7 +245,7 @@ public class PassiveCardUI : MonoBehaviour
 
     public void Click()
     {
-        if (gameManager.money >= selectedPassive.ItemPrice && itemManager.passiveCounts[arrayCount] > 0)
+        if (gameManager.money >= price && itemManager.passiveCounts[arrayCount] > 0)
         {
             SoundManager.Instance.PlayES("SelectButton");
 

@@ -29,6 +29,8 @@ public class SwordControl : Weapon
 
     float addRange;
 
+    bool isSwing = false;
+
     private void Awake()
     {
         pool = new ObjectPool<Bullet>(CreateBullet, OnGetBullet, OnReleaseBullet, OnDestroyBullet, maxSize: poolCount);
@@ -105,6 +107,7 @@ public class SwordControl : Weapon
             if (Input.GetMouseButton(0) && (!gameManager.isClear || !gameManager.isBossDead))
             {
                 criRand = UnityEngine.Random.Range(1, 101);
+                isSwing = true;
 
                 if (dir.x > 0)
                 {
@@ -142,6 +145,7 @@ public class SwordControl : Weapon
         {
             if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
             {
+                isSwing = false;
                 transform.position = Vector3.MoveTowards(transform.position, character.weaponPoses[count].position, 5);
                 WeaponRotate();
             }
@@ -190,7 +194,7 @@ public class SwordControl : Weapon
             DamageUI pool = Instantiate(damageUI, transform.position, Quaternion.Euler(90, 0, 0)).GetComponent<DamageUI>();
             pool.gameObject.transform.SetParent(gameManager.damageStorage);
 
-            if (gameManager.absorbHp > 0)
+            if (gameManager.absorbHp > 0 && isSwing)
                 character.currentHp += gameManager.absorbHp;
         }
     }

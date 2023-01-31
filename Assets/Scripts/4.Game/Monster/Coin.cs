@@ -23,15 +23,14 @@ public class Coin : Singleton<Coin>
 
     private void Update()
     {
-        MoveCoin();
-
-        if (gameManager.isClear)
-            DestroyPool();
+        if (gameManager.currentScene == "Game")
+            MoveCoin();
     }
 
     public void MoveCoin()
     {
-        characterPos = Character.Instance.transform.position;
+        if (Character.Instance.gameObject != null)
+            characterPos = Character.Instance.transform.position;
 
         float distance = Vector3.Distance(characterPos, transform.position);
 

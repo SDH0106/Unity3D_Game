@@ -311,7 +311,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8537364599957581123
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1808,6 +1808,7 @@ MonoBehaviour:
   bUnMark: {fileID: 4902837314588719645}
   sUnMark: {fileID: 4902837314217705876}
   CheckHomePanel: {fileID: 3718611483969657763}
+  statPanel: {fileID: 0}
 --- !u!1 &4902837314648039076
 GameObject:
   m_ObjectHideFlags: 0

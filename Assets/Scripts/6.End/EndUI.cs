@@ -40,6 +40,7 @@ public class EndUI : Singleton<EndUI>
     [SerializeField] Text spd;
     [SerializeField] Text ran;
     [SerializeField] Text luk;
+    [SerializeField] Text cri;
 
     GameManager gameManager;
     Character character;
@@ -158,6 +159,7 @@ public class EndUI : Singleton<EndUI>
         spd.text = character.speed.ToString("0.#");
         ran.text = gameManager.range.ToString("0.#");
         luk.text = gameManager.luck.ToString("0.#");
+        cri.text = gameManager.critical.ToString("0.#");
     }
 
     public void ToTitle()

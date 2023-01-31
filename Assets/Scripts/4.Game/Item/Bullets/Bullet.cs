@@ -6,16 +6,18 @@ public class Bullet : MonoBehaviour
     public float speed;
     public GameObject effectPrefab;
 
-    private IObjectPool<Bullet> managedPool;
+    protected IObjectPool<Bullet> managedPool;
 
     protected float angle;
-    protected Vector3 dir;
+    public Vector3 dir;
 
     [HideInInspector] public DamageUI damageUI;
 
     protected GameManager gameManager;
 
     int penetrateNum;
+
+    bool isDestroyed = false;
 
     private void Start()
     {
@@ -33,6 +35,8 @@ public class Bullet : MonoBehaviour
 
     public virtual void Shoot(Vector3 dir, float range)
     {
+        isDestroyed = false;
+
         this.dir = dir;
 
         if (GameManager.Instance.range <= 0)
@@ -49,7 +53,10 @@ public class Bullet : MonoBehaviour
             Instantiate(effectPrefab, transform.position, transform.rotation);
 
             if (gameManager.absorbHp > 0)
+            {
+                Debug.Log("1");
                 Character.Instance.currentHp += gameManager.absorbHp;
+            }
 
             if (gameManager.isReflect)
                 Reflect(collision);
@@ -64,7 +71,7 @@ public class Bullet : MonoBehaviour
             {
                 CancelInvoke("DestroyBullet");
 
-                if (gameObject.activeSelf)
+                if (!isDestroyed)
                     DestroyBullet();
             }
 
@@ -125,6 +132,7 @@ public class Bullet : MonoBehaviour
 
     public virtual void DestroyBullet()
     {
+        isDestroyed = true;
         managedPool.Release(this);
         penetrateNum = 0;
     }

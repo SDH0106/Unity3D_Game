@@ -318,6 +318,8 @@ public class ChestPassiveCard : MonoBehaviour
             }
         }
 
+        GameSceneUI.Instance.chestCount--;
+
         if (GameSceneUI.Instance.chestCount > 0)
             ShowPassive.Instance.ShowRandomPassiveCard();
     }

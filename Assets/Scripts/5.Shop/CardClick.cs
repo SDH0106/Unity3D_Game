@@ -18,15 +18,30 @@ public class CardClick : MonoBehaviour
     [SerializeField] Text weaponRange;
     [SerializeField] Text weaponPrice;
     [SerializeField] Text weaponGrade;
+    [SerializeField] Text sellPrice;
+
+    [Header("Panel")]
+    [SerializeField] GameObject sellCheckPanel;
+    [SerializeField] GameObject combineCheckPanel;
+    [SerializeField] GameObject cantSellPanel;
+    [SerializeField] GameObject cantCombinePanel;
 
     [HideInInspector] public WeaponInfo selectedWeapon;
 
     int selectedNum;
 
+    private void Start()
+    {
+        sellCheckPanel.SetActive(false);
+        combineCheckPanel.SetActive(false);
+        cantSellPanel.SetActive(false);
+        cantCombinePanel.SetActive(false);
+    }
+
     public void Setting(int num)
     {
         selectedNum = num;
-        selectedWeapon = ItemManager.Instance.storedWeapon[num];
+        selectedWeapon = ItemManager.Instance.storedWeapon[selectedNum];
 
         itemSprite.sprite = selectedWeapon.ItemSprite;
         weaponName.text = selectedWeapon.WeaponName.ToString();
@@ -37,13 +52,14 @@ public class CardClick : MonoBehaviour
         bulletSpeed.text = selectedWeapon.BulletSpeed.ToString();
         weaponRange.text = selectedWeapon.WeaponRange.ToString();
         weaponPrice.text = (selectedWeapon.WeaponPrice * (int)(ItemManager.Instance.weaponGrade[num] + 1)).ToString();
-        weaponGrade.text = selectedWeapon.weaponGrade.ToString();
+        weaponGrade.text = ItemManager.Instance.weaponGrade[num].ToString();
+        sellPrice.text = (selectedWeapon.WeaponPrice * (int)(ItemManager.Instance.weaponGrade[selectedNum] + 1)).ToString();
     }
 
     public void CardImage(int num)
     {
         selectedNum = num;
-        selectedWeapon = ItemManager.Instance.storedWeapon[num];
+        selectedWeapon = ItemManager.Instance.storedWeapon[selectedNum];
 
         if (ItemManager.Instance.weaponGrade[num] == Grade.일반)
         {
@@ -80,19 +96,29 @@ public class CardClick : MonoBehaviour
 
     public void SellWeapon()
     {
-        if (ItemManager.Instance.foolCount > 0)
+        if (ItemManager.Instance.fullCount > 0)
         {
             selectedWeapon = ItemManager.Instance.storedWeapon[selectedNum];
             GameManager.Instance.money += (selectedWeapon.WeaponPrice * (int)(ItemManager.Instance.weaponGrade[selectedNum] + 1));
             ItemManager.Instance.storedWeapon[selectedNum] = null;
             ItemManager.Instance.weaponGrade[selectedNum] = Grade.일반;
-            ItemManager.Instance.foolCount--;
+            ItemManager.Instance.fullCount--;
             Character.Instance.ReleaseEquip(selectedNum);
+            ShopManager.Instance.backgroundImage.SetActive(true);
+            gameObject.SetActive(false);
+        }
+
+        else
+        {
+            SoundManager.Instance.PlayES("CantBuy");
+            cantSellPanel.SetActive(true);
         }
     }
 
     public void CombineWeapon()
     {
+        bool canCombine = false;
+
         for (int i = 0; i < ItemManager.Instance.storedWeapon.Length; i++)
         {
             if (ItemManager.Instance.storedWeapon[i] != null)
@@ -101,16 +127,29 @@ public class CardClick : MonoBehaviour
                 {
                     if ((selectedWeapon.WeaponName == ItemManager.Instance.storedWeapon[i].WeaponName) && (ItemManager.Instance.weaponGrade[selectedNum] == ItemManager.Instance.weaponGrade[i]))
                     {
+                        canCombine = true;
                         GameManager.Instance.money -= (int)(ItemManager.Instance.weaponGrade[selectedNum] + 1) * 20;
                         ItemManager.Instance.weaponGrade[selectedNum]++;
                         ItemManager.Instance.storedWeapon[i] = null;
                         ItemManager.Instance.weaponGrade[i] = Grade.일반;
-                        ItemManager.Instance.foolCount--;
+                        ItemManager.Instance.fullCount--;
                         Character.Instance.ReleaseEquip(i);
                         break;
                     }
                 }
             }
+        }
+
+        if (canCombine)
+        {
+            gameObject.SetActive(false);
+            ShopManager.Instance.backgroundImage.SetActive(true);
+        }
+
+        else if (!canCombine)
+        {
+            SoundManager.Instance.PlayES("CantBuy");
+            cantCombinePanel.SetActive(true);
         }
     }
 }

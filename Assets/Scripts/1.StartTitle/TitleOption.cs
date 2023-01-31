@@ -50,18 +50,18 @@ public class TitleOption : MonoBehaviour
         bUnMark.SetActive(muteBgmVolume);
         sUnMark.SetActive(muteSfxVolume);
 
-        PlayerPrefs.SetInt("Key_Up", (int)KeyCode.W);
-        PlayerPrefs.SetInt("Key_Down", (int)KeyCode.S);
-        PlayerPrefs.SetInt("Key_Left", (int)KeyCode.A);
-        PlayerPrefs.SetInt("Key_Right", (int)KeyCode.D);
-        PlayerPrefs.SetInt("Key_Dash", (int)KeyCode.Space);
-
         defaultKeys = new int[] { PlayerPrefs.GetInt("Key_Up", (int)KeyCode.W),
                                     PlayerPrefs.GetInt("Key_Down", (int)KeyCode.S),
                                     PlayerPrefs.GetInt("Key_Left", (int)KeyCode.A),
                                     PlayerPrefs.GetInt("Key_Right", (int)KeyCode.D),
                                     PlayerPrefs.GetInt("Key_Dash", (int)KeyCode.Space)};
-        
+
+        PlayerPrefs.SetInt("Key_Up", defaultKeys[0]);
+        PlayerPrefs.SetInt("Key_Down", defaultKeys[1]);
+        PlayerPrefs.SetInt("Key_Left", defaultKeys[2]);
+        PlayerPrefs.SetInt("Key_Right", defaultKeys[3]);
+        PlayerPrefs.SetInt("Key_Dash", defaultKeys[4]);
+
         for (int i = 0; i < (int)KeyAction.COUNT; i++)
         {
             if (!KeySetting.keys.ContainsKey((KeyAction)i))                 // Dictionary keys에 값이 없다면

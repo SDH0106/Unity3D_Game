@@ -85,6 +85,7 @@ public class GameSceneUI : Singleton<GameSceneUI>
     protected override void Awake()
     {
         base.Awake();
+        //Screen.SetResolution(Screen.width, (Screen.width * 1920) / 1080, true);
         roundClearText.SetActive(false);
         gameOverUI.SetActive(false);
         gameOverWoodUI.SetActive(false);
@@ -121,6 +122,8 @@ public class GameSceneUI : Singleton<GameSceneUI>
         SpawnTree();
         if (gameManager.spawnTree)
             Invoke("SpawnOneTree", 10f);
+
+        chestCount = 0;
     }
 
     void SpawnTree()
@@ -423,6 +426,11 @@ public class GameSceneUI : Singleton<GameSceneUI>
             timeText.color = Color.red;
             timeText.text = (gameManager.currentGameTime).ToString("F2");
         }
+    }
+
+    public void OnOffStatWindow()
+    {
+        statWindow.gameObject.SetActive(!statWindow.gameObject.activeSelf);
     }
 
     public void TitleScene()
