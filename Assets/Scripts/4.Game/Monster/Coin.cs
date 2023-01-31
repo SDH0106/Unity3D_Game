@@ -15,32 +15,37 @@ public class Coin : Singleton<Coin>
     Vector3 characterPos;
 
     GameManager gameManager;
+    Character character;
 
     private void Start()
     {
         gameManager = GameManager.Instance;
+        character = Character.Instance;
     }
 
     private void Update()
     {
         if (gameManager.currentScene == "Game")
             MoveCoin();
+
+        if (character.isDead || gameManager.isClear && gameManager.isBossDead)
+            DestroyPool();
     }
 
     public void MoveCoin()
     {
-        if (Character.Instance.gameObject != null)
+        if (character.gameObject != null)
             characterPos = Character.Instance.transform.position;
 
         float distance = Vector3.Distance(characterPos, transform.position);
 
         if (distance <= 2 * (1 + gameManager.coinRange))
         {
-            if(Character.Instance.speed <= 1)
+            if(character.speed <= 1)
                 speed = 2;
 
-            else if (Character.Instance.speed > 1)
-                speed = Character.Instance.speed + 2;
+            else if (character.speed > 1)
+                speed = character.speed + 2;
         }
 
         else

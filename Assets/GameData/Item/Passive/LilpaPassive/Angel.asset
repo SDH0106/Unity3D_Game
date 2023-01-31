@@ -19,7 +19,7 @@ MonoBehaviour:
   maxCount: 1
   hp: 0
   recoverHp: 0
-  absorbHp: -3
+  absorbHp: 0
   defence: 0
   physicDamage: 0
   magicDamage: 0
@@ -63,4 +63,4 @@ MonoBehaviour:
   description: "\uCE90\uB9AD\uD130\uAC00 <color=red>\uC0AC\uB9DD\uC2DC</color> <color=cyan>\uCD5C\uB300
     \uCCB4\uB825</color>\uC758 <color=lime>1/2\uC758 \uCCB4\uB825</color>\uC73C\uB85C
     1\uD68C <color=cyan>\uBD80\uD65C</color>\uD569\uB2C8\uB2E4."
-  weight: 16.24
+  weight: 8.4

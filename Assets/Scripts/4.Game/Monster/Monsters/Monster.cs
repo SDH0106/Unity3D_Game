@@ -4,21 +4,21 @@ using UnityEngine.Pool;
 
 public class Monster : MonoBehaviour
 {
-    [HideInInspector] public SpriteRenderer rend;
-    [HideInInspector] public Animator anim;
-    [HideInInspector] public Collider coll;
+    [HideInInspector] protected SpriteRenderer rend;
+    [HideInInspector] protected Animator anim;
+    [HideInInspector] protected Collider coll;
 
     [HideInInspector] public bool isWalk, isDead, isAttacked, isAttack = false;
 
     public float hp;
-    public float maxHp;
+    protected float maxHp;
 
-    [HideInInspector] public Vector3 initScale;
+    [HideInInspector] protected Vector3 initScale;
     [HideInInspector] public MonsterStat stat;
 
     private IObjectPool<Monster> managedPool;
 
-    public float speed;
+    protected float speed;
 
     [HideInInspector] public Vector3 dir;
 
@@ -86,6 +86,7 @@ public class Monster : MonoBehaviour
         isAttacked = false;
         isAttack = false;
         coll.enabled = true;
+        anim.speed = 1f;
         transform.localScale = initScale;
         initScale = transform.localScale;
         rend.color = Color.white;
@@ -199,7 +200,7 @@ public class Monster : MonoBehaviour
 
         if (isFreeze == true)
         {
-            isWalk = false;
+            //isWalk = false;
 
             if (runningCoroutine != null)
                 StopCoroutine(runningCoroutine);
@@ -223,6 +224,7 @@ public class Monster : MonoBehaviour
     {
         if (hp <= 0 || (gameManager.isClear && gameManager.isBossDead) || character.isDead)
         {
+            anim.speed = 1f;
             isDead = true;
             rend.color = Color.white;
             isFreeze = false;

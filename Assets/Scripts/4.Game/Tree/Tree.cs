@@ -18,12 +18,6 @@ public class Tree : MonoBehaviour
         potionsNum = gameManager.buffNum;
     }
 
-    private void Update()
-    {
-        potionsNum = GameManager.Instance.buffNum;
-
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("myBullet") || other.CompareTag("Sword"))

@@ -9,15 +9,18 @@ public class PassiveSlot : MonoBehaviour
 
     RectTransform rectTransform;
 
+    ItemManager itemManager;
+
     void Start()
     {
         slotNum = transform.GetSiblingIndex();
         rectTransform = GetComponent<RectTransform>();
+        itemManager = ItemManager.Instance;
     }
 
     public void OnInfoUI()
     {
-        if (ItemManager.Instance.storedPassive[slotNum] != null)
+        if (itemManager.storedPassive[slotNum] != null)
         {
             infoUIPrefab.selectedNum = slotNum;
             infoUIPrefab.rect.position = rectTransform.position;
@@ -28,7 +31,7 @@ public class PassiveSlot : MonoBehaviour
 
     public void OffInfoUI()
     {
-        if (ItemManager.Instance.storedPassive[slotNum] != null)
+        if (itemManager.storedPassive[slotNum] != null)
         {
             infoUIPrefab.gameObject.SetActive(false);
         }

@@ -27,6 +27,8 @@ public class ItemManager : Singleton<ItemManager>
 
     [HideInInspector] public int[] passiveCounts;
 
+    public Grade[] selectedGrades;
+
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
@@ -47,6 +49,7 @@ public class ItemManager : Singleton<ItemManager>
         storedPassiveCount = new int[storedPassive.Length];
         lockedPassCards = new PassiveInfo[4];
         lockedWeaCards = new WeaponInfo[4];
+        selectedGrades = new Grade[4];
         cardLocks = new bool[4] { false, false, false, false };
         cardGrades = new Grade[4];
     }

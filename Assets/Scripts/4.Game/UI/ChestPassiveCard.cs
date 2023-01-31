@@ -246,9 +246,9 @@ public class ChestPassiveCard : MonoBehaviour
 
                 for (int i = 0; i < passiveIntVariables.Length; i++)
                 {
-                    if (i == 1)
+                    if (i == 1) // 버프 포션
                     {
-                        gameManager.passiveIntVariables[i] = passiveIntVariables[i];
+                        gameManager.passiveIntVariables[i] = passiveIntVariables[i];    
                     }
 
                     else

@@ -209,10 +209,10 @@ public class ShopManager : Singleton<ShopManager>
                 lockCount++;
         }
 
-        SoundManager.Instance.PlayES("SelectButton");
-
         if (lockCount != 4)
         {
+            SoundManager.Instance.PlayES("SelectButton");
+
             if (gameManager.money >= -rerollMoney)
             {
                 for (int i = 0; i < cardsParent.childCount; i++)
@@ -235,6 +235,11 @@ public class ShopManager : Singleton<ShopManager>
                 CardSlot();
             }
         }
+
+        else
+        {
+            SoundManager.Instance.PlayES("CantBuy");
+        }
     }
 
     void CheckLock()
@@ -247,11 +252,15 @@ public class ShopManager : Singleton<ShopManager>
                 {
                     lockBools[i] = cards[i].GetComponent<WeaponCardUI>().isLock;
 
+                    if (lockBools[i] == false)
+                    {
+                        itemManager.selectedGrades[i] = cards[i].GetComponent<WeaponCardUI>().selectedWeapon.weaponGrade;
+                    }
+
                     if (lockBools[i] == true)
                     {
                         itemManager.lockedWeaCards[i] = cards[i].GetComponent<WeaponCardUI>().selectedWeapon;
-                        Grade selectedGrade = cards[i].GetComponent<WeaponCardUI>().selectedWeapon.weaponGrade;
-                        itemManager.cardGrades[i] = selectedGrade;
+                        itemManager.cardGrades[i] = itemManager.selectedGrades[i];
                     }
                 }
 

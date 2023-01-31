@@ -35,15 +35,17 @@ public class Bullet : MonoBehaviour
 
     public virtual void Shoot(Vector3 dir, float range)
     {
+        gameManager = GameManager.Instance;
+
         isDestroyed = false;
 
         this.dir = dir;
 
-        if (GameManager.Instance.range <= 0)
+        if (gameManager.range <= 0)
             Invoke("DestroyBullet", range);
         
-        else if (GameManager.Instance.range > 0)
-            Invoke("DestroyBullet", range + GameManager.Instance.range * 0.2f);
+        else if (gameManager.range > 0)
+            Invoke("DestroyBullet", range + gameManager.range * 0.2f);
     }
 
     protected virtual void OnCollisionEnter(Collision collision)
@@ -54,7 +56,6 @@ public class Bullet : MonoBehaviour
 
             if (gameManager.absorbHp > 0)
             {
-                Debug.Log("1");
                 Character.Instance.currentHp += gameManager.absorbHp;
             }
 

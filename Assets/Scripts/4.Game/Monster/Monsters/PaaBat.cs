@@ -23,6 +23,7 @@ public class PaaBat : Monster
         {
             if (!isAttack)
                 Move();
+
             anim.SetBool("isWalk", isWalk);
 
             if (!isFreeze)

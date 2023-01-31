@@ -58,6 +58,7 @@ public class SkullBat : Monster
     {
         if (hp <= 0 || character.isDead)
         {
+            anim.speed = 1f;
             rend.color = Color.white;
             isFreeze = false;
             coll.enabled = false;

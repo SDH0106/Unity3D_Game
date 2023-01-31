@@ -12,12 +12,7 @@ public class Lazor : Bullet
         initScale = transform.localScale;
     }
 
-    private void OnEnable()
-    {
-        Debug.Log(dir);
-    }
-
-    private void Update()
+   /* private void Update()
     {
         // ÃÑ¾Ë °¢µµ
         angle = Mathf.Atan2(dir.z, dir.x) * Mathf.Rad2Deg;
@@ -28,12 +23,24 @@ public class Lazor : Bullet
 
         else if (gameManager.range > 0)
             transform.localScale = new Vector3(initScale.x * (1 + gameManager.range * 0.05f), initScale.y, initScale.z);
-    }
+    }*/
 
     public override void Shoot(Vector3 dir, float range)
     {
         this.dir = dir;
+        gameManager = GameManager.Instance;
+        initScale = transform.localScale;
+
         Invoke("DestroyBullet", range);
+
+        angle = Mathf.Atan2(dir.z, dir.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(90, -angle, 0);
+
+        if (gameManager.range <= 0)
+            transform.localScale = new Vector3(initScale.x, initScale.y, initScale.z);
+
+        else if (gameManager.range > 0)
+            transform.localScale = new Vector3(initScale.x * (1 + gameManager.range * 0.05f), initScale.y, initScale.z);
     }
 
     protected override void OnCollisionEnter(Collision collision)
@@ -63,6 +70,7 @@ public class Lazor : Bullet
     public override void DestroyBullet()
     {
         //base.DestroyBullet();
+        dir = Vector3.zero;
         Destroy(gameObject);
     }
 }

@@ -17,6 +17,7 @@ public class StatCardUI : StatCardInfo
     [HideInInspector] public Stat selectedCard;
 
     GameManager gameManager;
+    ShowStatCard showStatCard;
 
     [HideInInspector] public Grade cardGrade;
 
@@ -73,13 +74,15 @@ public class StatCardUI : StatCardInfo
 
     public void SelectCard()
     {
+        showStatCard = ShowStatCard.Instance;
+
         SoundManager.Instance.PlayES("StatUp");
-        ShowStatCard.Instance.isSelected = true;
-        ShowStatCard.Instance.rerollMoney = -gameManager.round;
+        showStatCard.isSelected = true;
+        showStatCard.rerollMoney = -gameManager.round;
 
         Character.Instance.levelUpCount--;
 
-        for (int i = 0; i < 11; i++)
+        for (int i = 0; i < 13; i++)
         {
             if (selectedCard.statName == gameManager.gameObject.GetComponent<StatCardInfo>().statInfos[i].statName)
             {
@@ -89,6 +92,6 @@ public class StatCardUI : StatCardInfo
         }
 
         if (Character.Instance.levelUpCount > 0)
-            ShowStatCard.Instance.ShowRandomCards();
+            showStatCard.ShowRandomCards();
     }
 }

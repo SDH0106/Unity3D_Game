@@ -139,7 +139,6 @@ public class GameSceneUI : Singleton<GameSceneUI>
         while (fadeTime > 0f)
         {
             fadeTime = Mathf.Clamp(fadeTime - Time.deltaTime, 0f, 0.5f);
-            Debug.Log(fadeTime);
             color.a = fadeTime + 0.5f;
             bossSceneText.color = color;
             yield return null;
@@ -148,7 +147,6 @@ public class GameSceneUI : Singleton<GameSceneUI>
         while (fadeTime < 0.5f)
         {
             fadeTime = Mathf.Clamp(fadeTime + Time.deltaTime, 0f, 0.5f);
-            Debug.Log(fadeTime);
             color.a = fadeTime + 0.5f;
             bossSceneText.color = color;
             yield return null;
@@ -157,7 +155,6 @@ public class GameSceneUI : Singleton<GameSceneUI>
         while (fadeTime > 0f)
         {
             fadeTime = Mathf.Clamp(fadeTime - Time.deltaTime, 0f, 0.5f);
-            Debug.Log(fadeTime);
             color.a = fadeTime + 0.5f;
             bossSceneText.color = color;
             yield return null;
@@ -370,6 +367,15 @@ public class GameSceneUI : Singleton<GameSceneUI>
 
     void SettingStatText()
     {
+        if (gameManager.maxHp != character.maxHp)
+        {
+            if (gameManager.maxHp < 1)
+                character.maxHp = 1;
+
+            else if (gameManager.maxHp >= 1)
+                character.maxHp = gameManager.maxHp;
+        }
+
         maxHp.text = character.maxHp.ToString();
         reHp.text = gameManager.recoverHp.ToString("0.#");
         apHp.text = gameManager.absorbHp.ToString("0.#");

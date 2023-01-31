@@ -36,6 +36,7 @@ public class GoldBat : Monster
         if (!isDead && !isFreeze)
         {
             anim.speed = 1f;
+
             if (!isAttack && state == 0)
             {
                 Move();
@@ -79,6 +80,7 @@ public class GoldBat : Monster
     {
         if (hp <= 0 || character.isDead)
         {
+            anim.speed = 1f;
             rend.color = Color.white;
             isFreeze = false;
             coll.enabled = false;

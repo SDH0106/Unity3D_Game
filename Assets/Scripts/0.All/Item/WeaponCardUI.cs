@@ -94,6 +94,7 @@ public class WeaponCardUI : MonoBehaviour
         weaponPrice.text = price.ToString();
         weaponGrade.text = selectedWeapon.weaponGrade.ToString();
         description.text = selectedWeapon.Description.ToString();
+        combineMoney.text = ((int)(selectedWeapon.weaponGrade + 1) * 20).ToString();
 
         if (selectedWeapon.Type == WEAPON_TYPE.검)
             attackTypes.text = "(물리/근거리)";
@@ -209,7 +210,6 @@ public class WeaponCardUI : MonoBehaviour
                             {
                                 canBuy = true;
                                 combineNum = i;
-                                combineMoney.text = ((int)(selectedWeapon.weaponGrade + 1) * 20).ToString();
                                 combineCheckPanel.SetActive(true);
                                 break;
                             }

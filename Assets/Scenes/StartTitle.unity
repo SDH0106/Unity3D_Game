@@ -3974,13 +3974,13 @@ MonoBehaviour:
   damageStorage: {fileID: 1692643827}
   gameTime: 0
   money: 500000
-  round: 30
+  round: 29
   woodCount: 0
   woodMaxCount: 70
   maxHp: 0
   percentDamage: 0
-  physicDamage: 0
-  magicDamage: 0
+  physicDamage: 10000
+  magicDamage: 1000
   shortDamage: 0
   longDamage: 0
   recoverHp: 0

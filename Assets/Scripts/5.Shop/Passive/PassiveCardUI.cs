@@ -288,7 +288,7 @@ public class PassiveCardUI : MonoBehaviour
 
                 for (int i = 0; i < passiveIntVariables.Length; i++)
                 {
-                    if (i == 1)
+                    if (i == 1 && passiveIntVariables[i] != 0) // 버프 포션
                     {
                         gameManager.passiveIntVariables[i] = passiveIntVariables[i];
                     }
@@ -333,9 +333,9 @@ public class PassiveCardUI : MonoBehaviour
 
                         else if(i == 13)
                         {
-                            gameManager.passiveBoolVariables[14] = false;
-                            gameManager.passiveBoolVariables[15] = false;
-                            gameManager.passiveBoolVariables[16] = false;
+                            gameManager.passiveBoolVariables[14] = false;   // 하나 관통
+                            gameManager.passiveBoolVariables[15] = false;   // 뎀감 관통
+                            gameManager.passiveBoolVariables[16] = false;   //  풀관통
                         }
 
                         else if(i == 14)

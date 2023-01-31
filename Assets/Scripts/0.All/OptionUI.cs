@@ -202,8 +202,8 @@ public class OptionUI : MonoBehaviour
             Destroy(Character.Instance.gameObject);
         }
 
-        if (SoundManager.Instance.gameObject != null)
-            Destroy(SoundManager.Instance.gameObject);
+        if (soundManager.gameObject != null)
+            Destroy(soundManager.gameObject);
 
         if (gameManager.gameObject != null)
             Destroy(gameManager.gameObject);

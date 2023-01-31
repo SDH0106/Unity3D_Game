@@ -5106,10 +5106,10 @@ MonoBehaviour:
   playerHpBar: {fileID: 289213144616889224}
   characterNum: 0
   level: 0
-  characterHp: 20
+  characterHp: 200000
   maxExp: 0
   damageRatio: 1
-  characterSpeed: 2
+  characterSpeed: 3
   avoid: 0
   invincibleTime: 1
   dashCoolTime: 2

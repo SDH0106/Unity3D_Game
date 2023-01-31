@@ -24,6 +24,16 @@ public class Chick : Summons
 
     private void Update()
     {
+        if (gameManager.round - summonRound == 15)
+        {
+            GameObject summon = Instantiate(chickenPrefab);
+            summon.transform.position = character.summonPos[summonPosNum].position;
+            summon.transform.SetParent(gameManager.transform);
+            summonRound = gameManager.round;
+
+            Destroy(gameObject);
+        }
+
         if (!isAttack)
         {
             CheckDistance();
@@ -36,14 +46,5 @@ public class Chick : Summons
         }
 
         anim.SetBool("isAttack", isAttack);
-
-        if (gameManager.round - summonRound == 15)
-        {
-            GameObject summon = Instantiate(chickenPrefab);
-            summon.transform.position = character.summonPos[summonPosNum].position;
-            summon.transform.SetParent(gameManager.transform);
-
-            Destroy(gameObject);
-        }
     }
 }

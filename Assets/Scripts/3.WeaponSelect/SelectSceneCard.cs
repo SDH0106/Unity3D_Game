@@ -28,6 +28,8 @@ public class SelectSceneCard : MonoBehaviour
 
     int count;
 
+    ItemManager itemManager;
+
     private void Start()
     {
         count = 0;
@@ -79,10 +81,12 @@ public class SelectSceneCard : MonoBehaviour
 
     public void MoveScene(string sceneName)
     {
+        itemManager = ItemManager.Instance;
+
         if (selectedWeapon.Type == WeaponInfo.WEAPON_TYPE.°Ë)
         {
-            ItemManager.Instance.GetWeaponInfo(selectedWeapon);
-            ItemManager.Instance.weaponGrade[ItemManager.Instance.weaponCount] = selectedWeapon.weaponGrade;
+            itemManager.GetWeaponInfo(selectedWeapon);
+            itemManager.weaponGrade[itemManager.weaponCount] = selectedWeapon.weaponGrade;
             count++;
             SceneManager.LoadScene(sceneName);
             Character.Instance.Equip();
@@ -93,8 +97,8 @@ public class SelectSceneCard : MonoBehaviour
         {
             if (Character.Instance.characterNum != (int)CHARACTER_NUM.Legendary)
             {
-                ItemManager.Instance.GetWeaponInfo(selectedWeapon);
-                ItemManager.Instance.weaponGrade[ItemManager.Instance.weaponCount] = selectedWeapon.weaponGrade;
+                itemManager.GetWeaponInfo(selectedWeapon);
+                itemManager.weaponGrade[itemManager.weaponCount] = selectedWeapon.weaponGrade;
                 count++;
                 SceneManager.LoadScene(sceneName);
                 Character.Instance.Equip();
