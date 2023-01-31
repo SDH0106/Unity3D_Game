@@ -3972,15 +3972,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletStorage: {fileID: 1005871281}
   damageStorage: {fileID: 1692643827}
-  gameTime: 0
+  gameTime: 1000
   money: 500000
-  round: 29
+  round: 5
   woodCount: 0
   woodMaxCount: 70
   maxHp: 0
   percentDamage: 0
-  physicDamage: 10000
-  magicDamage: 1000
+  physicDamage: 0
+  magicDamage: 0
   shortDamage: 0
   longDamage: 0
   recoverHp: 0
@@ -4149,7 +4149,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monsterInfos:
   - monsterName: "\uC560\uAE30 \uBC15\uC950"
-    monsterMaxHp: 10
+    monsterMaxHp: 8
     monsterDamage: 2
     monsterSpeed: 1
     monsterDefence: 0
@@ -4177,7 +4177,7 @@ MonoBehaviour:
     monsterExp: 5
     monsterCoin: 8
   - monsterName: "\uD669\uAE08 \uBC15\uC950"
-    monsterMaxHp: 5000
+    monsterMaxHp: 4000
     monsterDamage: 10
     monsterSpeed: 2
     monsterDefence: 10
@@ -4185,7 +4185,7 @@ MonoBehaviour:
     monsterCoin: 0
   - monsterName: "\uD574\uACE8 \uBC15\uC950"
     monsterMaxHp: 5000
-    monsterDamage: 10
+    monsterDamage: 20
     monsterSpeed: 2.3
     monsterDefence: 10
     monsterExp: 0

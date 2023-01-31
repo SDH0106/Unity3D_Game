@@ -91,7 +91,7 @@ public class GameManager : Singleton<GameManager>
     {
         DontDestroyOnLoad(gameObject);
 
-        //InitSetting();
+        InitSetting();
         InitArray();
         currentGameTime = gameTime;
         isPause = false;

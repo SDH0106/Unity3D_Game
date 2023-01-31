@@ -49,9 +49,8 @@ public class WeaponControl : Weapon
 
             LookMousePosition();
             FireBullet();
+            WeaponSetting();
         }
-
-        WeaponSetting();
     }
 
     void LookMousePosition()

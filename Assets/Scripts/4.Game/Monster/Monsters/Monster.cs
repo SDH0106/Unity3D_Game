@@ -33,6 +33,8 @@ public class Monster : MonoBehaviour
 
     public float defence;
 
+    float damage;
+
     void Start()
     {
         StartSetting();
@@ -47,6 +49,7 @@ public class Monster : MonoBehaviour
         coll = GetComponent<Collider>();
 
         hp = stat.monsterMaxHp * (1 + (Mathf.Floor(gameManager.round / 5) * 0.25f));
+        damage = stat.monsterDamage + Mathf.Floor(gameManager.round / 5) * 2f;
         maxHp = hp;
         initScale = transform.localScale;
         speed = stat.monsterSpeed * (1 - gameManager.monsterSlow * 0.01f);
@@ -78,6 +81,7 @@ public class Monster : MonoBehaviour
     protected virtual void InitMonsterSetting()
     {
         hp = stat.monsterMaxHp * (1 + (Mathf.Floor(gameManager.round / 5) * 0.25f));
+        damage = stat.monsterDamage + Mathf.Floor(gameManager.round / 5) * 2f;
         maxHp = hp;
         speed = stat.monsterSpeed * (1 - gameManager.monsterSlow * 0.01f);
         initSpeed = speed;
@@ -147,7 +151,7 @@ public class Monster : MonoBehaviour
     {
         if (other.CompareTag("Character"))
         {
-            character.OnDamaged(coll, stat.monsterDamage);
+            character.OnDamaged(coll, damage);
         }
     }
 

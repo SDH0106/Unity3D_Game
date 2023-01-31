@@ -5109,7 +5109,7 @@ MonoBehaviour:
   characterHp: 30
   maxExp: 0
   damageRatio: 1.3
-  characterSpeed: 4
+  characterSpeed: 3
   avoid: 20
   invincibleTime: 1
   dashCoolTime: 2

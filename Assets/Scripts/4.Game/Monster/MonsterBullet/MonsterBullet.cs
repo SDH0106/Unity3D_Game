@@ -23,6 +23,7 @@ public class MonsterBullet : MonoBehaviour
         Invoke("DestroyBullet", 3f);
         ShootDir();
         speed = (randNum == 0) ? 6 : 4;
+        bulletDamage = bulletDamage + Mathf.Floor(GameManager.Instance.round / 5) * 2;
     }
 
     void Update()

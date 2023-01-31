@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 6
-  bulletDamage: 15
+  bulletDamage: 0
   randNum: 0
   monsPos: {x: 0, y: 0, z: 0}
 --- !u!65 &7944966357216279975

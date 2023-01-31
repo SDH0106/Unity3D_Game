@@ -29,6 +29,8 @@ public class SwordControl : Weapon
 
     float addRange;
 
+    float angle;
+
     bool isSwing = false;
 
     private void Awake()
@@ -47,7 +49,8 @@ public class SwordControl : Weapon
         swordDelay = weaponInfo.AttackDelay;
         attackRange = weaponInfo.WeaponRange;
         canAttack = true;
-        WeaponRotate();
+        anim.enabled = false;
+        //WeaponRotate();
     }
 
     void Update()
@@ -60,10 +63,20 @@ public class SwordControl : Weapon
             mouse.y = transform.position.y;
 
             dir = mouse - transform.position;
+
+            if (!isSwing)
+                LookMousePosition();
             WeaponSetting();
             Attack();
         }
 
+    }
+
+    void LookMousePosition()
+    {
+        anim.enabled = false;
+        angle = Mathf.Atan2(dir.z, dir.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(90, -angle, -90);
     }
 
     void WeaponRotate()
@@ -106,8 +119,9 @@ public class SwordControl : Weapon
         {
             if (Input.GetMouseButton(0) && (!gameManager.isClear || !gameManager.isBossDead))
             {
-                criRand = UnityEngine.Random.Range(1, 101);
                 isSwing = true;
+                anim.enabled = true;
+                criRand = UnityEngine.Random.Range(1, 101);
 
                 if (dir.x > 0)
                 {
@@ -116,12 +130,12 @@ public class SwordControl : Weapon
 
                 else
                 {
-                    transform.parent.localRotation = Quaternion.Euler(0, 180, 0);
+                    transform.parent.localRotation = Quaternion.Euler(0, -180, 0);
                 }
 
-                transform.position = Vector3.MoveTowards(transform.position, character.transform.position + range, 2);
-
                 anim.SetTrigger("RightAttack");
+
+                transform.position = Vector3.MoveTowards(transform.position, character.transform.position + range, 2);
 
                 SoundManager.Instance.PlayES(weaponInfo.WeaponSound);
 
@@ -138,16 +152,6 @@ public class SwordControl : Weapon
                 }
 
                 canAttack = false;
-            }
-        }
-
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("RightAttack") || anim.GetCurrentAnimatorStateInfo(0).IsName("LeftAttack"))
-        {
-            if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
-            {
-                isSwing = false;
-                transform.position = Vector3.MoveTowards(transform.position, character.weaponPoses[count].position, 5);
-                WeaponRotate();
             }
         }
 
@@ -173,6 +177,13 @@ public class SwordControl : Weapon
                 }
             }
         }
+    }
+
+    public void EndSwing()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, character.weaponPoses[count].position, 5);
+        //WeaponRotate();
+        isSwing = false;
     }
 
     private void OnTriggerEnter(Collider other)

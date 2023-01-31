@@ -5,7 +5,7 @@ using UnityEngine.TextCore.Text;
 
 public class PaaLazor : MonoBehaviour
 {
-    [SerializeField] Monster mainBody;
+    [SerializeField] float damage;
 
     Character character;
     Collider coll;
@@ -20,6 +20,8 @@ public class PaaLazor : MonoBehaviour
         coll = GetComponent<Collider>();
         rend = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
+
+        damage = damage + Mathf.Floor(GameManager.Instance.round / 5) * 2f;
 
         if (isFlip)
             rend.flipX = true;
@@ -45,7 +47,7 @@ public class PaaLazor : MonoBehaviour
     {
         if (other.CompareTag("Character"))
         {
-            character.OnDamaged(coll, mainBody.stat.monsterDamage);
+            character.OnDamaged(coll, damage);
         }
     }
 }

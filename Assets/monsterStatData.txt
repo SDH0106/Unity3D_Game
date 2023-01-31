@@ -2,7 +2,7 @@
     "stats": [
         {
             "monsterName": "애기 박쥐",
-            "monsterMaxHp": 10.0,
+            "monsterMaxHp": 8.0,
             "monsterDamage": 2.0,
             "monsterSpeed": 1.0,
             "monsterDefence": 0.0,
@@ -38,8 +38,8 @@
         },
         {
             "monsterName": "황금 박쥐",
-            "monsterMaxHp": 5000.0,
-            "monsterDamage": 10.0,
+            "monsterMaxHp": 4000.0,
+            "monsterDamage": 5.0,
             "monsterSpeed": 2.0,
             "monsterDefence": 10.0,
             "monsterExp": 0.0,

@@ -217,16 +217,16 @@ public class StaffControl : Weapon
                 delay += Time.deltaTime;
                 if (gameManager.attackSpeed >= 0)
                 {
-                    if (delay >= (bulletDelay / (1 + gameManager.attackSpeed * 0.1)))
+                    if (delay >= (bulletDelay / (1 + (gameManager.attackSpeed * 0.05f))))
                     {
                         canAttack = true;
                         delay = 0;
                     }
                 }
 
-                else  if (gameManager.attackSpeed < 0)
+                else if (gameManager.attackSpeed < 0)
                 {
-                    if (delay >= (bulletDelay - gameManager.attackSpeed * 0.1))
+                    if (delay >= (bulletDelay - gameManager.attackSpeed * 0.2f))
                     {
                         canAttack = true;
                         delay = 0;

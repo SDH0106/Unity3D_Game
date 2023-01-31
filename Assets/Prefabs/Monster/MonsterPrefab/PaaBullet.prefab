@@ -132,5 +132,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a9debe19836d4f4a8a27bd07bb249c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainBody: {fileID: 1736014795705108098, guid: 3c5408d2c66f1b04b8c642f84ffbb2c4, type: 3}
+  damage: 3
   isFlip: 0

@@ -51,6 +51,7 @@ MonoBehaviour:
   weaponInfo: {fileID: 11400000, guid: 6f446d46d65248142aa5b7d0c0311df9, type: 2}
   damageUI: {fileID: 0}
   damage: 0
+  swordBulletDamage: 0
   count: 0
   grade: 0
   swordBullet: {fileID: 8154831264171076226, guid: 660605739bea43341abd21c5c7dcf4b9, type: 3}
