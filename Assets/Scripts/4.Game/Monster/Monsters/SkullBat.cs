@@ -41,6 +41,11 @@ public class SkullBat : Monster
                     Attack();
                 }
             }
+
+            if (isFreeze)
+            {
+                anim.speed = 0f;
+            }
         }
 
         anim.SetBool("isWalk", isWalk);

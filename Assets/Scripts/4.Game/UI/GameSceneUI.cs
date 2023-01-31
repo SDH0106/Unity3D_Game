@@ -60,6 +60,7 @@ public class GameSceneUI : Singleton<GameSceneUI>
 
     [Header("Text")]
     [SerializeField] GameObject roundClearText;
+    [SerializeField] Text bossSceneText;
     [SerializeField] GameObject gameOverUI;
     [SerializeField] TypingText gameOverText;
     [SerializeField] GameObject gameOverWoodUI;
@@ -85,8 +86,8 @@ public class GameSceneUI : Singleton<GameSceneUI>
     protected override void Awake()
     {
         base.Awake();
-        //Screen.SetResolution(Screen.width, (Screen.width * 1920) / 1080, true);
         roundClearText.SetActive(false);
+        bossSceneText.gameObject.SetActive(false);
         gameOverUI.SetActive(false);
         gameOverWoodUI.SetActive(false);
         gameOverIsedolUI.SetActive(false);
@@ -109,7 +110,11 @@ public class GameSceneUI : Singleton<GameSceneUI>
         bgmChange = false;
 
         if (gameManager.round == 10 || gameManager.round == 20 || gameManager.round == 30)
+        {
             soundManager.PlayBGM(2, true);
+            bossSceneText.gameObject.SetActive(true);
+            StartCoroutine(BlinkBossSceneText());
+        }
 
         else
             soundManager.PlayBGM(1, true);
@@ -124,6 +129,41 @@ public class GameSceneUI : Singleton<GameSceneUI>
             Invoke("SpawnOneTree", 10f);
 
         chestCount = 0;
+    }
+
+    IEnumerator BlinkBossSceneText()
+    {
+        float fadeTime = 0.5f;
+        Color color = bossSceneText.color;
+
+        while (fadeTime > 0f)
+        {
+            fadeTime = Mathf.Clamp(fadeTime - Time.deltaTime, 0f, 0.5f);
+            Debug.Log(fadeTime);
+            color.a = fadeTime + 0.5f;
+            bossSceneText.color = color;
+            yield return null;
+        }
+
+        while (fadeTime < 0.5f)
+        {
+            fadeTime = Mathf.Clamp(fadeTime + Time.deltaTime, 0f, 0.5f);
+            Debug.Log(fadeTime);
+            color.a = fadeTime + 0.5f;
+            bossSceneText.color = color;
+            yield return null;
+        }
+
+        while (fadeTime > 0f)
+        {
+            fadeTime = Mathf.Clamp(fadeTime - Time.deltaTime, 0f, 0.5f);
+            Debug.Log(fadeTime);
+            color.a = fadeTime + 0.5f;
+            bossSceneText.color = color;
+            yield return null;
+        }
+
+        bossSceneText.gameObject.SetActive(false);
     }
 
     void SpawnTree()
@@ -323,7 +363,7 @@ public class GameSceneUI : Singleton<GameSceneUI>
 
         while (fadeTime < 2f);
 
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(3.5f);
 
         clickText.SetActive(true);
     }

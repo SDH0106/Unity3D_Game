@@ -67,6 +67,11 @@ public class Monster : MonoBehaviour
             anim.SetBool("isWalk", isWalk);
         }
 
+        if (isFreeze)
+        {
+            anim.speed = 0f;
+        }
+
         OnDead();
     }
 
@@ -90,6 +95,8 @@ public class Monster : MonoBehaviour
     {
         if (!isFreeze)
         {
+            anim.speed = 1f;
+
             Vector3 characterPos = character.transform.position;
             dir = characterPos - transform.position;
 
@@ -127,7 +134,7 @@ public class Monster : MonoBehaviour
     protected IEnumerator MonsterFreeze()
     {
         rend.color = Color.cyan;
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1.5f);
 
         isFreeze = false;
         speed = initSpeed;

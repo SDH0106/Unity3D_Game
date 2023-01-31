@@ -27,6 +27,11 @@ public class PaaBat : Monster
 
             if (!isFreeze)
                 Attack();
+
+            if (isFreeze)
+            {
+                anim.speed = 0f;
+            }
         }
 
         OnDead();

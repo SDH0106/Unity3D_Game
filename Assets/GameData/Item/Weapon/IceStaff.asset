@@ -22,7 +22,7 @@ MonoBehaviour:
   bulletSpeed: 5
   weaponRange: 1
   weaponPrice: 23
-  description: "\uC77C\uC815 \uD655\uB960(<color=cyan>\uD589\uC6B4</color> \uBE44\uB840)\uB85C
+  description: "\uC77C\uC815 \uD655\uB960(<color=lime>\uD589\uC6B4</color> \uBE44\uB840)\uB85C
     \uC801\uC744 <color=cyan>\uC5BC\uB9AC\uB294</color> \uD22C\uC0AC\uCCB4\uB97C
     \uBC1C\uC0AC\uD558\uB294 \uC2A4\uD0DC\uD504."
   weaponSound: {fileID: 8300000, guid: 0241bfc3127aac144b93a08bf787b64c, type: 3}

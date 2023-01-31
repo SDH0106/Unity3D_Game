@@ -35,7 +35,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 55, y: -5}
+  m_AnchoredPosition: {x: 55, y: -226}
   m_SizeDelta: {x: 1620, y: -50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7797320160199572134
@@ -112,16 +112,7 @@ MonoBehaviour:
     \uB9CC\uC57D <color=cyan>\uACF5\uACA9\uB825</color>\uC774 <color=cyan>\uBC29\uC5B4\uB825</color>\uBCF4\uB2E4
     <color=red>\uB0AE\uB2E4\uBA74</color> \uACF5\uACA9\uC774 <color=red>\uBD88\uAC00\uB2A5</color>\uD569\uB2C8\uB2E4.
     <color=cyan>\uBC29\uC5B4\uB825</color>\uB610\uD55C <color=red>5</color>\uB77C\uC6B4\uB4DC\uB9C8\uB2E4
-    \uC18C\uB7C9 <color=red>\uC0C1\uC2B9</color>\uD569\uB2C8\uB2E4.\n\n<\uCD9C\uCC98>\n\uD3F0\uD2B8:
-    \uB358\uD30C \uBE44\uD2B8\uBE44\uD2B8\uCCB4 (https://df.nexon.com/df/data/font)\n\uC0AC\uC6B4\uB4DC:
-    pixabay (https://pixabay.com/ko/sound-effects/)\n              https://www.youtube.com/watch?v=rsKa3oxTFAc\n            
-    \uB9B4\uD30C\uB2D8 \uC720\uD29C\uBE0C\n             LilBye (Gark\uB2D8 \uB9AC\uBBF9\uC2A4\uACE1,
-    https://cafe.naver.com/steamindiegame/8113843,\n                            
-    https://www.youtube.com/watch?v=B2yin5s7zNY)\n\uC774\uBBF8\uC9C0: \uC5D4\uC824\uD2F0\uCF58,
-    \uBBFC\uCE58\uD2F0\uCF58, \uBBFC\uC218\uD2F0\uCF58, \uAD6C\uB3C5\uD2F0\uCF58
-    \uC774\uBBF8\uC9C0 \uCC38\uACE0, Unity AssetStore \uAD6C\uB9E4, \uC641\uBB3C\uC6D0
-    \uD32C\uC544\uD2B8 \uB4F1\n\n<\uC81C\uC791\uC790> \uCE74\uD398\uB2C9\uB124\uC784:
-    \uCB48\uC03C\uCB48\uC03C"
+    \uC18C\uB7C9 <color=red>\uC0C1\uC2B9</color>\uD569\uB2C8\uB2E4."
 --- !u!1 &7797320160440055677
 GameObject:
   m_ObjectHideFlags: 0
@@ -139,7 +130,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7797320160440055676
 RectTransform:
   m_ObjectHideFlags: 0

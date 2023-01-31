@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static WeaponInfo;
 
 public class CardClick : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class CardClick : MonoBehaviour
     [SerializeField] Image itemSprite;
     [SerializeField] Text weaponName;
     [SerializeField] Text type;
+    [SerializeField] Text attackTypes;
     [SerializeField] Text weaponDamage;
     [SerializeField] Text magicDamage;
     [SerializeField] Text attackDelay;
@@ -19,6 +21,9 @@ public class CardClick : MonoBehaviour
     [SerializeField] Text weaponPrice;
     [SerializeField] Text weaponGrade;
     [SerializeField] Text sellPrice;
+    [SerializeField] Image descriptBack;
+    [SerializeField] Image descriptBackLine;
+    [SerializeField] Text description;
 
     [Header("Panel")]
     [SerializeField] GameObject sellCheckPanel;
@@ -54,6 +59,16 @@ public class CardClick : MonoBehaviour
         weaponPrice.text = (selectedWeapon.WeaponPrice * (int)(ItemManager.Instance.weaponGrade[num] + 1)).ToString();
         weaponGrade.text = ItemManager.Instance.weaponGrade[num].ToString();
         sellPrice.text = (selectedWeapon.WeaponPrice * (int)(ItemManager.Instance.weaponGrade[selectedNum] + 1)).ToString();
+        description.text = selectedWeapon.Description.ToString();
+
+        if (selectedWeapon.Type == WEAPON_TYPE.검)
+            attackTypes.text = "(물리/근거리)";
+
+        else if (selectedWeapon.Type == WEAPON_TYPE.총)
+            attackTypes.text = "(물리/원거리)";
+
+        else if (selectedWeapon.Type == WEAPON_TYPE.스태프)
+            attackTypes.text = "(마법/원거리)";
     }
 
     public void CardImage(int num)
@@ -64,7 +79,9 @@ public class CardClick : MonoBehaviour
         if (ItemManager.Instance.weaponGrade[num] == Grade.일반)
         {
             cardBack.color = new Color(0.142f, 0.142f, 0.142f, 1f);
+            descriptBack.color = new Color(0.142f, 0.142f, 0.142f, 1f);
             cardBackLine.color = Color.black;
+            descriptBackLine.color = Color.black;
             weaponName.color = Color.white;
             weaponGrade.color = Color.white;
         }
@@ -72,7 +89,9 @@ public class CardClick : MonoBehaviour
         else if (ItemManager.Instance.weaponGrade[num] == Grade.희귀)
         {
             cardBack.color = new Color(0f, 0.6f, 0.8f, 1f);
+            descriptBack.color = new Color(0f, 0.6f, 0.8f, 1f);
             cardBackLine.color = Color.blue;
+            descriptBackLine.color = Color.blue;
             weaponName.color = new Color(0.5f, 0.8f, 1f, 1f);
             weaponGrade.color = new Color(0.5f, 0.8f, 1f, 1f);
         }
@@ -80,7 +99,9 @@ public class CardClick : MonoBehaviour
         else if (ItemManager.Instance.weaponGrade[num] == Grade.전설)
         {
             cardBack.color = new Color(0.5f, 0.2f, 0.4f, 1f);
+            descriptBack.color = new Color(0.5f, 0.2f, 0.4f, 1f);
             cardBackLine.color = new Color(0.5f, 0f, 0.5f, 1f);
+            descriptBackLine.color = new Color(0.5f, 0f, 0.5f, 1f);
             weaponName.color = new Color(0.8f, 0.4f, 1f, 1f);
             weaponGrade.color = new Color(0.8f, 0.4f, 1f, 1f);
         }
@@ -88,7 +109,9 @@ public class CardClick : MonoBehaviour
         else if (ItemManager.Instance.weaponGrade[num] == Grade.신화)
         {
             cardBack.color = new Color(0.7f, 0.1f, 0.1f, 1f);
+            descriptBack.color = new Color(0.7f, 0.1f, 0.1f, 1f);
             cardBackLine.color = Color.red;
+            descriptBackLine.color = Color.red;
             weaponName.color = new Color(1f, 0.45f, 0.45f, 1f);
             weaponGrade.color = new Color(1f, 0.45f, 0.45f, 1f);
         }

@@ -35,6 +35,7 @@ public class GoldBat : Monster
 
         if (!isDead && !isFreeze)
         {
+            anim.speed = 1f;
             if (!isAttack && state == 0)
             {
                 Move();
@@ -63,6 +64,12 @@ public class GoldBat : Monster
             anim.SetInteger("state", state);
             anim.SetBool("isWalk", isWalk);
             anim.SetBool("isAttack", isAttack);
+            
+        }
+
+        if(isFreeze)
+        {
+            anim.speed = 0f;
         }
 
         BossDead();

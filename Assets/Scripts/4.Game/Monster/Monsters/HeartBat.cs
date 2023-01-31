@@ -23,7 +23,7 @@ public class HeartBat : Monster
 
     private void Update()
     {
-        if (isDead == false)
+        if (!isDead)
         {
             Move();
 
@@ -36,6 +36,11 @@ public class HeartBat : Monster
                     attackTime = 3;
                     Attack();
                 }
+            }
+
+            if (isFreeze)
+            {
+                anim.speed = 0f;
             }
         }
 

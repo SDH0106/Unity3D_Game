@@ -35,7 +35,7 @@ public class Fire : Bullet
     void Explosion()
     {
         int rand = Random.Range(0, 100);
-        if (rand <= 5 + gameManager.luck * 0.2)
+        if (rand <= 10 + gameManager.luck * 0.3f)
         {
             GameObject ex = Instantiate(explosion, transform.position, transform.rotation);
             ex.GetComponent<Explosion>().grade = grade;
