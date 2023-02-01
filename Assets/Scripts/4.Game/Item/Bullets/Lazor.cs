@@ -12,26 +12,18 @@ public class Lazor : Bullet
         initScale = transform.localScale;
     }
 
-   /* private void Update()
+    private void Update()
     {
-        // ÃÑ¾Ë °¢µµ
-        angle = Mathf.Atan2(dir.z, dir.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(90, -angle, 0);
+        
+    }
 
-        if (gameManager.range <= 0)
-            transform.localScale = new Vector3(initScale.x, initScale.y, initScale.z);
-
-        else if (gameManager.range > 0)
-            transform.localScale = new Vector3(initScale.x * (1 + gameManager.range * 0.05f), initScale.y, initScale.z);
-    }*/
-
-    public override void Shoot(Vector3 dir, float range)
+    public override void Shoot(Vector3 dir, Vector3 initPos, float range)
     {
         this.dir = dir;
         gameManager = GameManager.Instance;
         initScale = transform.localScale;
 
-        Invoke("DestroyBullet", range);
+        Invoke("DestroyBullet",0.3f);
 
         angle = Mathf.Atan2(dir.z, dir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(90, -angle, 0);
@@ -47,9 +39,6 @@ public class Lazor : Bullet
     {
         if (collision.collider.tag == "Monster" && collision.collider.GetComponent<Monster>())
         {
-            if (gameManager.absorbHp > 0)
-                Character.Instance.currentHp += gameManager.absorbHp;
-
             Instantiate(effectPrefab, collision.contacts[0].point, transform.rotation);
 
             if (damageUI.weaponDamage > collision.collider.GetComponent<Monster>().defence)
@@ -57,6 +46,9 @@ public class Lazor : Bullet
 
             else if (damageUI.weaponDamage <= collision.collider.GetComponent<Monster>().defence)
                 damageUI.isMiss = true;
+
+            if (gameManager.absorbHp > 0 && !damageUI.isMiss)
+                Character.Instance.currentHp += gameManager.absorbHp;
 
             damageUI.realDamage = damageUI.weaponDamage - collision.collider.GetComponent<Monster>().defence;
 

@@ -3972,9 +3972,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletStorage: {fileID: 1005871281}
   damageStorage: {fileID: 1692643827}
-  gameTime: 2000
+  gameTime: 100000
   money: 500000
-  round: 19
+  round: 1
   woodCount: 0
   woodMaxCount: 70
   maxHp: 0
@@ -3987,8 +3987,8 @@ MonoBehaviour:
   absorbHp: 1
   defence: 0
   attackSpeed: 10
-  speed: 2
-  range: 2.8
+  speed: 0.5
+  range: 0
   luck: 50
   critical: 10
   avoid: 0
@@ -8264,13 +8264,13 @@ PrefabInstance:
         \uD30C\uAD34\uB418\uBA70 <color=cyan>\uCCB4\uB825</color>\uC744 <color=red>10\uD68C\uBCF5</color>\uC2DC\uCF1C\uC8FC\uB294
         \uBD95\uC5B4\uBE75\uC744 \uB5A8\uC5B4\uD2B8\uB9AC\uACE0, \n\uB0AE\uC740 \uD655\uB960(<color=cyan>\uD589\uC6B4</color>\uBE44\uB840)\uB85C
         <color=lime>\uD328\uC2DC\uBE0C \uC544\uC774\uD15C</color>\uC744 \uD68D\uB4DD\uD560
-        \uC218 \uC788\uC2B5\uB2C8\uB2E4.\n\uBAAC\uC2A4\uD130\uB4E4\uC740 <color=red>5</color>\uB77C\uC6B4\uB4DC
-        \uB9C8\uB2E4 <color=cyan>\uCCB4\uB825</color>\uC774 \uC77C\uC815\uB7C9 <color=red>\uC0C1\uC2B9</color>\uD569\uB2C8\uB2E4.\n\uB610
-        \uBAAC\uC2A4\uD130\uB294 <color=cyan>\uBC29\uC5B4\uB825</color>\uC774 \uC874\uC7AC\uD574
-        \uB9CC\uC57D <color=cyan>\uACF5\uACA9\uB825</color>\uC774 <color=cyan>\uBC29\uC5B4\uB825</color>\uBCF4\uB2E4
-        <color=red>\uB0AE\uB2E4\uBA74</color> \uACF5\uACA9\uC774 <color=red>\uBD88\uAC00\uB2A5</color>\uD569\uB2C8\uB2E4.
-        <color=cyan>\uBC29\uC5B4\uB825</color>\uB610\uD55C <color=red>5</color>\uB77C\uC6B4\uB4DC\uB9C8\uB2E4
-        \uC18C\uB7C9 <color=red>\uC0C1\uC2B9</color>\uD569\uB2C8\uB2E4.\n\n"
+        \uC218 \uC788\uC2B5\uB2C8\uB2E4.\n\uD2B9\uC815 \uBAAC\uC2A4\uD130\uB4E4\uC740
+        <color=cyan>\uBC29\uC5B4\uB825</color>\uC774 \uC874\uC7AC\uD574 \uB9CC\uC57D
+        <color=cyan>\uACF5\uACA9\uB825</color>\uC774 <color=cyan>\uBC29\uC5B4\uB825</color>\uBCF4\uB2E4
+        <color=red>\uB0AE\uB2E4\uBA74</color> \uACF5\uACA9\uC774 <color=red>\uBD88\uAC00\uB2A5</color>\uD569\uB2C8\uB2E4.\n\uBAAC\uC2A4\uD130\uB4E4\uC740
+        <color=red>5</color>\uB77C\uC6B4\uB4DC \uB9C8\uB2E4 <color=cyan>\uCCB4\uB825</color>, 
+        <color=cyan>\uBC29\uC5B4\uB825</color>,  <color=cyan>\uACF5\uACA9\uB825</color>\uC774 
+        \uC77C\uC815\uB7C9 <color=red>\uC0C1\uC2B9</color>\uD569\uB2C8\uB2E4."
       objectReference: {fileID: 0}
     - target: {fileID: 7797320160440055676, guid: 4731e979287291241a7d3699992038c8, type: 3}
       propertyPath: m_Pivot.x

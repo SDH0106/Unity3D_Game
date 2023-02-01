@@ -70,11 +70,6 @@ public class ShopManager : Singleton<ShopManager>
 
         weightWeaponValue = new float[4];
         weightPassiveValue = new float[4];
-        /*lockBools = new bool[4];
-        for (int i = 0; i < lockBools.Length; i++)
-        {
-            lockBools[i] = false;
-        }*/
         wpCheck = new int[4];
         cards = new GameObject[4];
         
@@ -243,43 +238,6 @@ public class ShopManager : Singleton<ShopManager>
         }
     }
 
-    /*void CheckLock()
-    {
-        for (int i = 0; i < cardsParent.childCount; i++)
-        {
-            if (cards[i] != null)
-            {
-                if (wpCheck[i] == 0)
-                {
-                    lockBools[i] = cards[i].GetComponent<WeaponCardUI>().isLock;
-
-                    if (lockBools[i] == false)
-                    {
-                        itemManager.selectedGrades[i] = cards[i].GetComponent<WeaponCardUI>().selectedWeapon.weaponGrade;
-                        Debug.Log($"{i}: {itemManager.selectedGrades[i]}");
-                    }
-
-                    if (lockBools[i] == true)
-                    {
-                        itemManager.lockedWeaCards[i] = cards[i].GetComponent<WeaponCardUI>().selectedWeapon;
-                        itemManager.cardGrades[i] = itemManager.selectedGrades[i];
-                        Debug.Log($"sm {i}:{itemManager.cardGrades[i]}");
-                    }
-                }
-
-                else if (wpCheck[i] == 1)
-                {
-                    lockBools[i] = cards[i].GetComponent<PassiveCardUI>().isLock;
-
-                    if (lockBools[i] == true)
-                        itemManager.lockedPassCards[i] = cards[i].GetComponent<PassiveCardUI>().selectedPassive;
-                }
-
-                itemManager.cardLocks[i] = lockBools[i];
-            }
-        }
-    }*/
-
     void CardSlot()
     {
         for (int i = 0; i < 4; i++)
@@ -318,7 +276,6 @@ public class ShopManager : Singleton<ShopManager>
             if (itemManager.cardLocks[i] == false)
             {
                 int rand = UnityEngine.Random.Range(0, 100);
-                Debug.Log(i);
                 if (rand >= 80)
                 {
                     GetRandomWeaponCard();
@@ -340,13 +297,10 @@ public class ShopManager : Singleton<ShopManager>
 
             else if (itemManager.cardLocks[i] == true)
             {
-                Debug.Log(i);
                 if (itemManager.lockedWeaCards[i] != null)
                 {
                     GameObject instant = Instantiate(weaponCardUI, cardsParent.GetChild(i).transform);
                     cards[i] = instant;
-                    //cards[i].GetComponent<WeaponCardUI>().selectedWeapon = itemManager.lockedWeaCards[i];
-                    //cards[i].GetComponent<WeaponCardUI>().selectedWeapon.weaponGrade = itemManager.cardGrades[i];
                     wpCheck[i] = 0;
                     instant.transform.SetParent(cardsParent.GetChild(i));
                 }
@@ -355,7 +309,6 @@ public class ShopManager : Singleton<ShopManager>
                 {
                     GameObject instant = Instantiate(passiveCardUI, cardsParent.GetChild(i).transform);
                     cards[i] = instant;
-                    //cards[i].GetComponent<PassiveCardUI>().selectedPassive = itemManager.lockedPassCards[i];
                     wpCheck[i] = 1;
                     instant.transform.SetParent(cardsParent.GetChild(i));
                 }

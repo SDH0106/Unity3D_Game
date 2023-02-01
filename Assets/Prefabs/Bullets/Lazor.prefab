@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4452457012071333138}
   - component: {fileID: 8154831264171076231}
   - component: {fileID: 9078078465588959345}
-  - component: {fileID: 6988479444479180741}
+  - component: {fileID: 598165323539694268}
   m_Layer: 0
   m_Name: Lazor
   m_TagString: myBullet
@@ -137,7 +137,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.6, y: 0.1, z: 0}
   m_Center: {x: 0.55, y: -0.02, z: 0}
---- !u!114 &6988479444479180741
+--- !u!114 &598165323539694268
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -150,6 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
-  effectPrefab: {fileID: 3107154487039013155, guid: 15ee057397a04534080349a91f7e3add, type: 3}
+  effectPrefab: {fileID: 8154831264171076226}
+  dir: {x: 0, y: 0, z: 0}
   damageUI: {fileID: 0}
-  lazorColl: {fileID: 9078078465588959345}
+  initPos: {x: 0, y: 0, z: 0}

@@ -17,7 +17,7 @@ MonoBehaviour:
   itemName: "\uB3C8\uAE4C\uC2A4"
   itemPrice: 45
   maxCount: 100
-  hp: 8
+  hp: 4
   recoverHp: 0
   absorbHp: 0
   defence: 0
@@ -42,6 +42,7 @@ MonoBehaviour:
   dashCount: 0
   buffNum: 0
   exDmg: 0
+  isedolCount: 0
   luckCoin: 0
   luckDamage: 0
   luckCritical: 0

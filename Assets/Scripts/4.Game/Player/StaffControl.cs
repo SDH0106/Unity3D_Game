@@ -85,7 +85,7 @@ public class StaffControl : Weapon
                     {
                         Bullet bullet = pool.Get();
                         bullet.transform.position = normalFirePos.position;
-                        bullet.Shoot(dir.normalized, weaponInfo.WeaponRange);
+                        bullet.Shoot(dir.normalized,normalFirePos.position, weaponInfo.WeaponRange);
                         bullet.damageUI = damageUI;
                         bullet.speed = weaponInfo.BulletSpeed;
                     }
@@ -96,8 +96,8 @@ public class StaffControl : Weapon
                         Bullet bullet2 = pool.Get();
                         bullet1.transform.position = doubleFirePos1.position;
                         bullet2.transform.position = doubleFirePos2.position;
-                        bullet1.Shoot(dir.normalized, weaponInfo.WeaponRange);
-                        bullet2.Shoot(dir.normalized, weaponInfo.WeaponRange);
+                        bullet1.Shoot(dir.normalized,doubleFirePos1.position, weaponInfo.WeaponRange);
+                        bullet2.Shoot(dir.normalized,doubleFirePos2.position, weaponInfo.WeaponRange);
                         bullet1.damageUI = damageUI;
                         bullet2.damageUI = damageUI;
                         bullet1.speed = weaponInfo.BulletSpeed;
@@ -143,7 +143,7 @@ public class StaffControl : Weapon
                     {
                         Bullet bullet = pool.Get();
                         bullet.transform.position = normalFirePos.position;
-                        bullet.Shoot(dir.normalized, weaponInfo.WeaponRange);
+                        bullet.Shoot(dir.normalized,normalFirePos.position, weaponInfo.WeaponRange);
                         bullet.damageUI = damageUI;
                         bullet.speed = weaponInfo.BulletSpeed;
                         bullet.GetComponent<Fire>().grade = grade;
@@ -155,8 +155,8 @@ public class StaffControl : Weapon
                         Bullet bullet2 = pool.Get();
                         bullet1.transform.position = doubleFirePos1.position;
                         bullet2.transform.position = doubleFirePos2.position;
-                        bullet1.Shoot(dir.normalized, weaponInfo.WeaponRange);
-                        bullet2.Shoot(dir.normalized, weaponInfo.WeaponRange);
+                        bullet1.Shoot(dir.normalized,doubleFirePos1.position, weaponInfo.WeaponRange);
+                        bullet2.Shoot(dir.normalized,doubleFirePos2.position, weaponInfo.WeaponRange);
                         bullet1.damageUI = damageUI;
                         bullet2.damageUI = damageUI;
                         bullet1.speed = weaponInfo.BulletSpeed;
@@ -302,11 +302,5 @@ public class StaffControl : Weapon
     private void OnDestroyBullet(Bullet bullet)
     {
         Destroy(bullet.gameObject);
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position, mouse);
     }
 }

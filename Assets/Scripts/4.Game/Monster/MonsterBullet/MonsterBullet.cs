@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
+using UnityEngine.SocialPlatforms;
 using UnityEngine.SpatialTracking;
 
 public class MonsterBullet : MonoBehaviour
@@ -22,17 +23,22 @@ public class MonsterBullet : MonoBehaviour
         coll = GetComponent<Collider>();
         Invoke("DestroyBullet", 3f);
         ShootDir();
-        speed = (randNum == 0) ? 6 : 4;
-        bulletDamage = bulletDamage + Mathf.Floor(GameManager.Instance.round / 5) * 2;
+        speed = (randNum == 0) ? 6f : 3f;
+        bulletDamage = bulletDamage + Mathf.Floor(GameManager.Instance.round / 5f) * 2f;  // 트리거에도 있음
+        transform.position = new Vector3(transform.position.x, 0f, transform.position.z);
     }
 
     void Update()
     {
-        transform.Translate(new Vector3(dir.x, dir.z, 0) * speed * Time.deltaTime);
+        //transform.Translate(new Vector3(dir.x, dir.z, 0) * speed * Time.deltaTime);
+        if (randNum == 0)
+            transform.position += dir * speed * Time.deltaTime;
 
-        if(randNum == 1)
+        else if(randNum == 1)
         {
-            transform.RotateAround(monsPos, Vector3.up, 120 * Time.deltaTime);
+            //transform.Translate(new Vector3(dir.x, 0f, dir.z) * speed * Time.deltaTime, Space.Self);
+            transform.position += dir * speed * Time.deltaTime;
+            transform.RotateAround(monsPos, Vector3.up, 120f * Time.deltaTime);
         }
     }
 
@@ -41,11 +47,13 @@ public class MonsterBullet : MonoBehaviour
         if (randNum == 0)
         {
             dir = (Character.Instance.transform.position - transform.position).normalized;
+            dir = new Vector3(dir.x, 0f, dir.z);
         }
 
         else if (randNum == 1)
         {
             dir = (transform.position - monsPos).normalized;
+            dir = new Vector3(dir.x, 0f, dir.z);
         }
     }
 
@@ -53,6 +61,7 @@ public class MonsterBullet : MonoBehaviour
     {
         if (other.tag == "Character")
         {
+            bulletDamage = bulletDamage + Mathf.Floor(GameManager.Instance.round / 5) * 2;
             other.GetComponent<Character>().OnDamaged(coll, bulletDamage);
             DestroyBullet();
             CancelInvoke("DestroyBullet");

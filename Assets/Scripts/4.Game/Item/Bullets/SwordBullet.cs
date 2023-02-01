@@ -11,6 +11,11 @@ public class SwordBullet : Bullet
 
     void Update()
     {
+        if (Vector3.Distance(transform.position, initPos) > range)
+        {
+            DestroyBullet();
+        }
+
         transform.position += new Vector3(dir.x, 0, dir.z) * speed * Time.deltaTime;
 
         // ÃÑ¾Ë °¢µµ
@@ -24,9 +29,6 @@ public class SwordBullet : Bullet
         {
             Instantiate(effectPrefab, transform.position, transform.rotation);
 
-            if (gameManager.absorbHp > 0)
-                Character.Instance.currentHp += gameManager.absorbHp;
-
             if (gameManager.isReflect)
                 Reflect(collision);
 
@@ -38,7 +40,6 @@ public class SwordBullet : Bullet
 
             else if (!gameManager.isReflect && !gameManager.lowPenetrate && !gameManager.onePenetrate && !gameManager.penetrate)
             {
-                CancelInvoke("DestroyBullet");
                 DestroyBullet();
             }
 
@@ -47,6 +48,12 @@ public class SwordBullet : Bullet
 
             else if (damageUI.swordBulletDamage <= collision.collider.GetComponent<Monster>().defence)
                 damageUI.isMiss = true;
+
+            if (gameManager.absorbHp > 0 && !damageUI.isMiss)
+                Character.Instance.currentHp += gameManager.absorbHp;
+
+            if (gameManager.absorbHp > 0)
+                Character.Instance.currentHp += gameManager.absorbHp;
 
             damageUI.realDamage = damageUI.swordBulletDamage - collision.collider.GetComponent<Monster>().defence;
 

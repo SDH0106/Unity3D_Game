@@ -56,7 +56,6 @@ public class WeaponCardUI : MonoBehaviour
 
     int num;
 
-
     private void Start()
     {
         gameManager = GameManager.Instance;
@@ -69,7 +68,6 @@ public class WeaponCardUI : MonoBehaviour
         LockImageColor = new Color(0.17f, 0.17f, 0.17f);
         LockTextColor = Color.white;
 
-        //Debug.Log(transform.parent.GetSiblingIndex());
         num = transform.parent.GetSiblingIndex();
 
         Setting();

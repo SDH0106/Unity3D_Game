@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Pool;
 using UnityEngine.UIElements;
@@ -145,7 +146,7 @@ public class SwordControl : Weapon
                     {
                         Bullet bullet = pool.Get();
                         bullet.transform.position = new Vector3(firePos.position.x, 0f, firePos.position.z);
-                        bullet.Shoot(dir.normalized, 2f);
+                        bullet.Shoot(dir.normalized, firePos.position, 5f);
                         bullet.damageUI = damageUI;
                         bullet.speed = 6f;
                     }
@@ -231,11 +232,5 @@ public class SwordControl : Weapon
     private void OnDestroyBullet(Bullet bullet)
     {
         Destroy(bullet.gameObject);
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position, mouse);
     }
 }

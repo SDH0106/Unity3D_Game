@@ -13,6 +13,11 @@ public class Ice : Bullet
 
     void Update()
     {
+        if (Vector3.Distance(transform.position, initPos) > range)
+        {
+            DestroyBullet();
+        }
+
         transform.position += new Vector3(dir.x, 0, dir.z) * speed * Time.deltaTime;
 
         // ÃÑ¾Ë °¢µµ
@@ -28,9 +33,6 @@ public class Ice : Bullet
 
             Instantiate(effectPrefab, transform.position, transform.rotation);
 
-            if (gameManager.absorbHp > 0)
-                Character.Instance.currentHp += gameManager.absorbHp;
-
             if (gameManager.isReflect)
                 Reflect(collision);
 
@@ -42,8 +44,8 @@ public class Ice : Bullet
 
             else if (!gameManager.isReflect && !gameManager.lowPenetrate && !gameManager.onePenetrate)
             {
-                CancelInvoke("DestroyBullet");
-                DestroyBullet();
+                if (isDestroyed)
+                    DestroyBullet();
             }
 
             if (damageUI.weaponDamage > collision.collider.GetComponent<Monster>().defence)
@@ -51,6 +53,9 @@ public class Ice : Bullet
 
             else if (damageUI.weaponDamage <= collision.collider.GetComponent<Monster>().defence)
                 damageUI.isMiss = true;
+
+            if (gameManager.absorbHp > 0 && !damageUI.isMiss)
+                Character.Instance.currentHp += gameManager.absorbHp;
 
             damageUI.realDamage = damageUI.weaponDamage - collision.collider.GetComponent<Monster>().defence;
 

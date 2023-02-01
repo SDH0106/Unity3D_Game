@@ -298,6 +298,7 @@ public class PassiveCardUI : MonoBehaviour
                     if (i == 1 && passiveIntVariables[i] != 0) // 버프 포션
                     {
                         gameManager.passiveIntVariables[i] = passiveIntVariables[i];
+                        Debug.Log(passiveIntVariables[i]);
                     }
 
                     else

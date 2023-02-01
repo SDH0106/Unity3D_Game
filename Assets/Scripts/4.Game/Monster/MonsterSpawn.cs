@@ -66,7 +66,7 @@ public class MonsterSpawn : MonoBehaviour
 
     private void Update()
     {
-        if ((gameManager.isClear && gameManager.isBossDead) || character.isDead)
+        if (gameManager.currentGameTime <= 0 || character.isDead)
         {
             CancelInvoke("RendSpawnImage");
         }

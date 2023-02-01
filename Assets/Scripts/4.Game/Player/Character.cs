@@ -386,21 +386,6 @@ public class Character : Singleton<Character>
             isRun = false;
     }
 
-    private IEnumerator PlayerColorBlink()
-    {
-        Color red = new Color(1, 0, 0, 0.5f);
-        Color white = new Color(1, 1, 1, 0.5f);
-
-        for (int i = 0; i < 3; i++)
-        {
-            rend.color = red;
-            yield return new WaitForSeconds(0.1f);
-
-            rend.color = white;
-            yield return new WaitForSeconds(0.1f);
-        }
-    }
-
     int avoidRand;
 
     public void OnDamaged(Collider other, float damage)
@@ -462,6 +447,24 @@ public class Character : Singleton<Character>
         yield return new WaitForSeconds(invincibleTime);
         rend.color = Color.white;
         isAttacked = false;
+    }
+
+    private IEnumerator PlayerColorBlink()
+    {
+        Color red = new Color(1, 0, 0, 0.5f);
+        Color white = new Color(1, 1, 1, 0.5f);
+
+        rend.color = red;
+        yield return new WaitForSeconds(0.1f);
+
+        rend.color = white;
+        yield return new WaitForSeconds(0.1f);
+
+        rend.color = red;
+        yield return new WaitForSeconds(0.1f);
+
+        rend.color = white;
+        yield return new WaitForSeconds(invincibleTime - 0.3f);
     }
 
     IEnumerator OnRevive()

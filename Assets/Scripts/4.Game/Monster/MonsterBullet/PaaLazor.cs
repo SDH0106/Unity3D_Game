@@ -21,7 +21,7 @@ public class PaaLazor : MonoBehaviour
         rend = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
 
-        damage = damage + Mathf.Floor(GameManager.Instance.round / 5) * 2f;
+        damage = damage + Mathf.Floor(GameManager.Instance.round / 5) * 2f; // 트리거에도 있음
 
         if (isFlip)
             rend.flipX = true;
@@ -47,6 +47,7 @@ public class PaaLazor : MonoBehaviour
     {
         if (other.CompareTag("Character"))
         {
+            damage = damage + Mathf.Floor(GameManager.Instance.round / 5) * 2f;
             character.OnDamaged(coll, damage);
         }
     }

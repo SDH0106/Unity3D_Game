@@ -95,7 +95,7 @@ public class GoldBat : Monster
                 {
                     if (hp <= 0)
                     {
-                        gameManager.money += 500;
+                        gameManager.money += 300;
                         SoundManager.Instance.PlayES("LevelUp");
                         character.level++;
                     }

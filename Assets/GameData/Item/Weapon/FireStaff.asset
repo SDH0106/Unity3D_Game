@@ -20,7 +20,7 @@ MonoBehaviour:
   magicDamage: 4
   attackDelay: 1.5
   bulletSpeed: 5
-  weaponRange: 1
+  weaponRange: 6
   weaponPrice: 23
   description: "\uC77C\uC815 \uD655\uB960(<color=lime>\uD589\uC6B4</color> \uBE44\uB840)\uB85C
     <color=cyan>\uD3ED\uBC1C</color>\uD558\uB294 \uD0C4\uC744 \uBC1C\uC0AC\uD558\uB294

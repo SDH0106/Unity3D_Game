@@ -125,6 +125,7 @@ public class GameSceneUI : Singleton<GameSceneUI>
             gameManager.gameStartTime = Time.realtimeSinceStartup;
 
         SpawnTree();
+
         if (gameManager.spawnTree)
             Invoke("SpawnOneTree", 10f);
 
@@ -167,25 +168,34 @@ public class GameSceneUI : Singleton<GameSceneUI>
     {
         for (int i = 0; i < 5; i++)
         {
-            GameObject tree = Instantiate(treePrefab);
-            float groundX = ground.bounds.size.x;
-            float groundZ = ground.bounds.size.z;
-            groundX = UnityEngine.Random.Range((groundX / 2) * -1 + ground.bounds.center.x, groundX / 2 + ground.bounds.center.x);
-            groundZ = UnityEngine.Random.Range((groundZ / 2) * -1 + ground.bounds.center.z, groundZ / 2 + ground.bounds.center.z);
-
-            tree.transform.position = new Vector3(groundX, 0, groundZ);
+            SpawnOneTree();
         }
     }
 
     void SpawnOneTree()
     {
         GameObject tree = Instantiate(treePrefab);
+        tree.transform.position = TreePos();
+    }
+
+    Vector3 TreePos()
+    {
         float groundX = ground.bounds.size.x;
         float groundZ = ground.bounds.size.z;
-        groundX = UnityEngine.Random.Range((groundX / 2) * -1 + ground.bounds.center.x, groundX / 2 + ground.bounds.center.x);
-        groundZ = UnityEngine.Random.Range((groundZ / 2) * -1 + ground.bounds.center.z, groundZ / 2 + ground.bounds.center.z);
+        groundX = Random.Range((groundX / 2f) * -1f + ground.bounds.center.x, (groundX / 2f) + ground.bounds.center.x);
+        groundZ = Random.Range((groundX / 2f) * -1f + ground.bounds.center.z, (groundX / 2f) + ground.bounds.center.z);
 
-        tree.transform.position = new Vector3(groundX, 0, groundZ);
+        if(Mathf.Abs(groundX) < 2f)
+        {
+            groundX = groundX < 0f ? groundX - 2f : groundX + 2f;
+        }
+
+        if (Mathf.Abs(groundZ) < 2f)
+        {
+            groundZ = groundZ < 0f ? groundZ - 2f : groundZ + 2f;
+        }
+
+        return new Vector3(groundX, 0, groundZ);
     }
 
     private void Update()

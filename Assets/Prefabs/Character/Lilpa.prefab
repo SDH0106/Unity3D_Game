@@ -5085,7 +5085,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.16, y: 0.27, z: 0}
+  m_Size: {x: 0.13, y: 0.24, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &289213144344291184
 MonoBehaviour:
@@ -5106,12 +5106,12 @@ MonoBehaviour:
   playerHpBar: {fileID: 289213144616889224}
   characterNum: 0
   level: 0
-  characterHp: 200000
+  characterHp: 20
   maxExp: 0
   damageRatio: 1
-  characterSpeed: 2.5
+  characterSpeed: 3
   avoid: 0
-  invincibleTime: 1
+  invincibleTime: 0.7
   dashCoolTime: 2
   initDashCoolTime: 0
   dashCount: 2

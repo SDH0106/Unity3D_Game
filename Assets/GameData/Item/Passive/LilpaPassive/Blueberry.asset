@@ -17,7 +17,7 @@ MonoBehaviour:
   itemName: "\uBE14\uB8E8\uBCA0\uB9AC"
   itemPrice: 5
   maxCount: 100
-  hp: 5
+  hp: 3
   recoverHp: 0
   absorbHp: 0
   defence: 0

@@ -19,7 +19,7 @@ MonoBehaviour:
   maxCount: 100
   hp: 0
   recoverHp: 0
-  absorbHp: 0.2
+  absorbHp: 0.1
   defence: 0
   physicDamage: 0
   magicDamage: 0
@@ -61,4 +61,4 @@ MonoBehaviour:
   lowPenetrate: 0
   penetrate: 0
   description: 
-  weight: 152
+  weight: 194

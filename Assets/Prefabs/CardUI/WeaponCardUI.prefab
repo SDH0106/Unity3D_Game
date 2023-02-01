@@ -741,7 +741,7 @@ RectTransform:
   m_GameObject: {fileID: 1186690457274101241}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.92592597, y: 0.83333325, z: 0.83333325}
+  m_LocalScale: {x: 1, y: 1, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1862051178809054002}
@@ -750,8 +750,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -20.128628, y: -79.4}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 17.28, y: -85}
+  m_SizeDelta: {x: 287.1, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1259079020853452214
 GameObject:
@@ -2706,8 +2706,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 36.63, y: 6}
-  m_SizeDelta: {x: 199.87, y: 0}
+  m_AnchoredPosition: {x: 0, y: 11}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6867679918461756463
 CanvasRenderer:
@@ -2739,7 +2739,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 1bdabff7045937b429a45d087a646908, type: 3}
-    m_FontSize: 20
+    m_FontSize: 18
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -2750,7 +2750,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uC544\uC774\uD15C\uC124\uBA85\uC544\uC774\uD15C\uC124\uBA85\uC544\uC774\uD15C\uC124\uBA85\uC544\uC774\uD15C\uC124\uBA85\uC544\uC774\uD15C\uC124\uBA85\uC544\uC774\uD15C\uC124\uBA85\uC544\uC774\uD15C\uC124\uBA85\uC544\uC774\uD15C\uC124\uBA85"
+  m_Text: "\uC544\uC774\uD15C\uC124\uBA85\uC544\uC774\uD15C\uC124\uBA85\uC544\uC774\uD15C\uC124\uBA85\uC544\uC774\uD15C\uC124\uBA85\uC544\uC774\uD15C\uC124\uBA85\uC544\uC774\uD15C\uC124\uBA85\uC544\uC774\uD15C\uC124\uBA85\uC544\uC774\uD15C\uC124\uBA85\uC544\uC774\uD15C\uC124\uBA85\uC544\uC774\uD15C\uC124\uBA85\uC544\uC774\uD15C\uC124\uBA85\uC544\uC774\uD15C\uC124\uBA85\uC544\uC774\uD15C\uC124\uBA85\uC544\uC774\uD15C\uC124\uBA85\uC544\uC774\uD15C\uC124\uBA85\uC544\uC774\uD15C\uC124\uBA85"
 --- !u!114 &7801951110107197316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2852,6 +2852,7 @@ MonoBehaviour:
   cantCombinePanel: {fileID: 4272010422536255656}
   selectedWeapon: {fileID: 11400000, guid: 1f39dc14ed7e6ff48972eb1676b9eeb2, type: 2}
   isLock: 0
+  cardNum: 0
 --- !u!1 &4449315566054889974
 GameObject:
   m_ObjectHideFlags: 0
@@ -4216,7 +4217,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -19, y: -20}
+  m_AnchoredPosition: {x: -19, y: -14}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6784190197016955943

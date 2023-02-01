@@ -46,7 +46,8 @@ public class Weapon : MonoBehaviour
             else if (gameManager.doubleShot)
                 damage = (weaponInfo.WeaponDamage * grade + gameManager.physicDamage + gameManager.longDamage) * 0.7f;
 
-            damageUI.damageText.color = new Color(1, 0.4871f, 0);
+            //damageUI.damageText.color = new Color(1, 0.4871f, 0);
+            damageUI.damageText.color = Color.green;
         }
 
         else if (weaponInfo.Type == WEAPON_TYPE.°Ë)

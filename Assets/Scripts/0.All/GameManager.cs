@@ -91,7 +91,7 @@ public class GameManager : Singleton<GameManager>
     {
         DontDestroyOnLoad(gameObject);
 
-        //InitSetting();
+        InitSetting();
         InitArray();
         currentGameTime = gameTime;
         isPause = false;
@@ -274,10 +274,6 @@ public class GameManager : Singleton<GameManager>
 
     private void Update()
     {
-        /*Debug.Log(recoverHp);
-        Debug.Log(stats[1]);
-        Debug.Log(absorbHp);
-        Debug.Log(stats[2]);*/
         scene = SceneManager.GetActiveScene();
         currentScene = scene.name;
 

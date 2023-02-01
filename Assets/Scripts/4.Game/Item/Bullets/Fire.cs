@@ -15,6 +15,11 @@ public class Fire : Bullet
 
     void Update()
     {
+        if (Vector3.Distance(transform.position, initPos) > range)
+        {
+            DestroyBullet();
+        }
+
         transform.position += new Vector3(dir.x, 0, dir.z) * speed * Time.deltaTime;
 
         // ÃÑ¾Ë °¢µµ
