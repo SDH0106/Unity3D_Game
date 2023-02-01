@@ -3972,14 +3972,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletStorage: {fileID: 1005871281}
   damageStorage: {fileID: 1692643827}
-  gameTime: 1000
+  gameTime: 2000
   money: 500000
-  round: 5
+  round: 19
   woodCount: 0
   woodMaxCount: 70
   maxHp: 0
   percentDamage: 0
-  physicDamage: 0
+  physicDamage: 100000
   magicDamage: 0
   shortDamage: 0
   longDamage: 0

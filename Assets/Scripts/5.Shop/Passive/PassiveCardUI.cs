@@ -50,6 +50,8 @@ public class PassiveCardUI : MonoBehaviour
     int arrayCount;
     int price;
 
+    int num;
+
     private void Start()
     {
         gameManager = GameManager.Instance;
@@ -58,6 +60,8 @@ public class PassiveCardUI : MonoBehaviour
 
         LockImageColor = new Color(0.17f, 0.17f, 0.17f);
         LockTextColor = Color.white;
+
+        num = transform.parent.GetSiblingIndex();
 
         Setting();
         CardImage();
@@ -88,6 +92,9 @@ public class PassiveCardUI : MonoBehaviour
 
     void Setting()
     {
+        if (isLock)
+            selectedPassive = itemManager.lockedPassCards[num];
+
         price = Mathf.CeilToInt(selectedPassive.ItemPrice * (1 - gameManager.salePercent));
         itemSprite.sprite = selectedPassive.ItemSprite;
         itemName.text = selectedPassive.ItemName;
@@ -384,6 +391,7 @@ public class PassiveCardUI : MonoBehaviour
         {
             lockBackImage.color = Color.white;
             lockText.color = Color.black;
+            itemManager.lockedPassCards[num] = selectedPassive;
             isLock = true;
         }
 
@@ -391,8 +399,11 @@ public class PassiveCardUI : MonoBehaviour
         {
             lockBackImage.color = LockImageColor;
             lockText.color = LockTextColor;
+            itemManager.lockedPassCards[num] = null;
             isLock = false;
         }
+
+        itemManager.cardLocks[num] = isLock;
     }
 
     void StartLockColor()

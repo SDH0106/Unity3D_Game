@@ -5,15 +5,14 @@ using UnityEngine;
 public class Tree : MonoBehaviour
 {
     [SerializeField] GameObject[] potionPrefab;
+    [SerializeField] SpriteRenderer rend;
 
     int potionsNum;
-    SpriteRenderer rend;
 
     GameManager gameManager;
 
     private void Start()
     {
-        rend = GetComponent<SpriteRenderer>();
         gameManager = GameManager.Instance;
         potionsNum = gameManager.buffNum;
     }

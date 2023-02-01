@@ -50,7 +50,12 @@ public class WeaponCardUI : MonoBehaviour
 
     int price;
 
+    public int cardNum;
+
     int combineNum;
+
+    int num;
+
 
     private void Start()
     {
@@ -63,6 +68,9 @@ public class WeaponCardUI : MonoBehaviour
         initPriceColor = weaponPrice.color;
         LockImageColor = new Color(0.17f, 0.17f, 0.17f);
         LockTextColor = Color.white;
+
+        //Debug.Log(transform.parent.GetSiblingIndex());
+        num = transform.parent.GetSiblingIndex();
 
         Setting();
         CardColor();
@@ -82,6 +90,12 @@ public class WeaponCardUI : MonoBehaviour
 
     void Setting()
     {
+        if (isLock)
+        {
+            selectedWeapon = itemManager.lockedWeaCards[num];
+            selectedWeapon.weaponGrade = itemManager.selectedGrades[num];
+        }
+
         price = Mathf.CeilToInt(selectedWeapon.WeaponPrice * ((int)(selectedWeapon.weaponGrade) * 2f + 1) * (1 - gameManager.salePercent));
         itemSprite.sprite = selectedWeapon.ItemSprite;
         weaponName.text = selectedWeapon.WeaponName.ToString();
@@ -251,6 +265,8 @@ public class WeaponCardUI : MonoBehaviour
         {
             lockBackImage.color = Color.white;
             lockText.color = Color.black;
+            itemManager.lockedWeaCards[num] = selectedWeapon;
+            itemManager.selectedGrades[num] = selectedWeapon.weaponGrade;
             isLock = true;
         }
 
@@ -258,8 +274,11 @@ public class WeaponCardUI : MonoBehaviour
         {
             lockBackImage.color = LockImageColor;
             lockText.color = LockTextColor;
+            itemManager.lockedWeaCards[num] = null;
             isLock = false;
         }
+
+        itemManager.cardLocks[num] = isLock;
     }
 
     void StartLockColor()

@@ -47,7 +47,7 @@ public class ShopManager : Singleton<ShopManager>
     GameObject[] cards;
     int[] wpCheck;      // 무기(0)인지 패시브(1)인지 확인
 
-    bool[] lockBools;
+    //public bool[] lockBools;
 
     int rerollMoney;
 
@@ -70,7 +70,11 @@ public class ShopManager : Singleton<ShopManager>
 
         weightWeaponValue = new float[4];
         weightPassiveValue = new float[4];
-        lockBools = new bool[4];
+        /*lockBools = new bool[4];
+        for (int i = 0; i < lockBools.Length; i++)
+        {
+            lockBools[i] = false;
+        }*/
         wpCheck = new int[4];
         cards = new GameObject[4];
         
@@ -103,7 +107,7 @@ public class ShopManager : Singleton<ShopManager>
             gameObject.SetActive(true);
             SettingStatText();
 
-            CheckLock();
+            //CheckLock();
             WeaponSlot();
             PassiveSlot();
             Refill();
@@ -198,14 +202,11 @@ public class ShopManager : Singleton<ShopManager>
 
     public void Reroll()
     {
-        bool allLock = false;
         int lockCount = 0;
 
-        for (int i = 0; i < lockBools.Length; i++)
+        for (int i = 0; i < itemManager.cardLocks.Length; i++)
         {
-            allLock = lockBools[i];
-
-            if (allLock == true)
+            if (itemManager.cardLocks[i] == true)
                 lockCount++;
         }
 
@@ -219,7 +220,7 @@ public class ShopManager : Singleton<ShopManager>
                 {
                     if (cards[i] != null)
                     {
-                        if (lockBools[i] == false)
+                        if (itemManager.cardLocks[i] == false)
                             Destroy(cardsParent.GetChild(i).GetChild(0).gameObject);
                     }
                 }
@@ -242,7 +243,7 @@ public class ShopManager : Singleton<ShopManager>
         }
     }
 
-    void CheckLock()
+    /*void CheckLock()
     {
         for (int i = 0; i < cardsParent.childCount; i++)
         {
@@ -255,12 +256,14 @@ public class ShopManager : Singleton<ShopManager>
                     if (lockBools[i] == false)
                     {
                         itemManager.selectedGrades[i] = cards[i].GetComponent<WeaponCardUI>().selectedWeapon.weaponGrade;
+                        Debug.Log($"{i}: {itemManager.selectedGrades[i]}");
                     }
 
                     if (lockBools[i] == true)
                     {
                         itemManager.lockedWeaCards[i] = cards[i].GetComponent<WeaponCardUI>().selectedWeapon;
                         itemManager.cardGrades[i] = itemManager.selectedGrades[i];
+                        Debug.Log($"sm {i}:{itemManager.cardGrades[i]}");
                     }
                 }
 
@@ -275,7 +278,7 @@ public class ShopManager : Singleton<ShopManager>
                 itemManager.cardLocks[i] = lockBools[i];
             }
         }
-    }
+    }*/
 
     void CardSlot()
     {
@@ -315,7 +318,7 @@ public class ShopManager : Singleton<ShopManager>
             if (itemManager.cardLocks[i] == false)
             {
                 int rand = UnityEngine.Random.Range(0, 100);
-
+                Debug.Log(i);
                 if (rand >= 80)
                 {
                     GetRandomWeaponCard();
@@ -337,12 +340,13 @@ public class ShopManager : Singleton<ShopManager>
 
             else if (itemManager.cardLocks[i] == true)
             {
+                Debug.Log(i);
                 if (itemManager.lockedWeaCards[i] != null)
                 {
                     GameObject instant = Instantiate(weaponCardUI, cardsParent.GetChild(i).transform);
                     cards[i] = instant;
-                    cards[i].GetComponent<WeaponCardUI>().selectedWeapon = itemManager.lockedWeaCards[i];
-                    cards[i].GetComponent<WeaponCardUI>().selectedWeapon.weaponGrade = itemManager.cardGrades[i];
+                    //cards[i].GetComponent<WeaponCardUI>().selectedWeapon = itemManager.lockedWeaCards[i];
+                    //cards[i].GetComponent<WeaponCardUI>().selectedWeapon.weaponGrade = itemManager.cardGrades[i];
                     wpCheck[i] = 0;
                     instant.transform.SetParent(cardsParent.GetChild(i));
                 }
@@ -351,7 +355,7 @@ public class ShopManager : Singleton<ShopManager>
                 {
                     GameObject instant = Instantiate(passiveCardUI, cardsParent.GetChild(i).transform);
                     cards[i] = instant;
-                    cards[i].GetComponent<PassiveCardUI>().selectedPassive = itemManager.lockedPassCards[i];
+                    //cards[i].GetComponent<PassiveCardUI>().selectedPassive = itemManager.lockedPassCards[i];
                     wpCheck[i] = 1;
                     instant.transform.SetParent(cardsParent.GetChild(i));
                 }
