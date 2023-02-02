@@ -3972,9 +3972,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletStorage: {fileID: 1005871281}
   damageStorage: {fileID: 1692643827}
-  gameTime: 100000
+  gameTime: 0
   money: 500000
-  round: 1
+  round: 10
   woodCount: 0
   woodMaxCount: 70
   maxHp: 0
@@ -3989,7 +3989,7 @@ MonoBehaviour:
   attackSpeed: 10
   speed: 0.5
   range: 0
-  luck: 50
+  luck: 10
   critical: 10
   avoid: 0
   passiveIntVariables: 

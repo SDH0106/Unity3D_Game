@@ -143,6 +143,8 @@ public class Bullet : MonoBehaviour
         isDestroyed = true;
         penetrateNum = 0;
         if (gameObject.activeSelf)
+        {
             managedPool.Release(this);
+        }
     }
 }

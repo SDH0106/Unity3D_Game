@@ -11,6 +11,7 @@ TagManager:
   - Sword
   - Character
   - Tree
+  - Thunder
   layers:
   - Default
   - TransparentFX

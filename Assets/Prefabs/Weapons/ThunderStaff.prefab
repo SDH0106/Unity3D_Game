@@ -126,9 +126,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6404975560185138364}
   - component: {fileID: 2141230375127661007}
+  - component: {fileID: 1649496651434208273}
   m_Layer: 0
   m_Name: ThunderStaff
-  m_TagString: Untagged
+  m_TagString: Thunder
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -164,6 +165,7 @@ MonoBehaviour:
   weaponInfo: {fileID: 11400000, guid: 519753e1b91c22646a192fbed597512e, type: 2}
   damageUI: {fileID: 0}
   damage: 0
+  swordBulletDamage: 0
   count: 0
   grade: 0
   bulletPrefab: {fileID: 8154831264171076226, guid: ea79e40c2000630439fac9af9f709bff, type: 3}
@@ -171,3 +173,16 @@ MonoBehaviour:
   doubleFirePos1: {fileID: 5760361066306355968}
   doubleFirePos2: {fileID: 5760361066306355968}
   poolCount: 10
+--- !u!65 &1649496651434208273
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9074234498593581902}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.3, y: 0.7, z: 0}
+  m_Center: {x: 0, y: 0.1, z: 0}

@@ -35,9 +35,12 @@ public class Monster : MonoBehaviour
 
     float damage;
 
+    bool beforeFreeze;
+
     void Start()
     {
         StartSetting();
+        beforeFreeze = true;
     }
 
     protected void StartSetting()
@@ -142,6 +145,7 @@ public class Monster : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
 
         isFreeze = false;
+        beforeFreeze = isFreeze;
         speed = initSpeed;
         rend.color = Color.white;
     }
@@ -197,15 +201,13 @@ public class Monster : MonoBehaviour
 
     public void OnDamaged(float damage, bool freeze)
     {
-        if (!isFreeze)
+        if (freeze || !beforeFreeze)
             isFreeze = freeze;
 
         hp -= damage;
 
         if (isFreeze == true)
         {
-            //isWalk = false;
-
             if (runningCoroutine != null)
                 StopCoroutine(runningCoroutine);
 

@@ -167,9 +167,9 @@ public class WeaponCardUI : MonoBehaviour
                 itemManager.fullCount++;
                 itemManager.GetWeaponInfo(selectedWeapon);
                 itemManager.weaponGrade[itemManager.weaponCount] = selectedWeapon.weaponGrade;
-                Destroy(gameObject);
                 isLock = false;
                 Character.Instance.Equip();
+                Destroy(gameObject);
             }
 
             else if (itemManager.fullCount >= 5 && gameManager.money >= price)
@@ -292,5 +292,10 @@ public class WeaponCardUI : MonoBehaviour
             lockBackImage.color = LockImageColor;
             lockText.color = LockTextColor;
         }
+    }
+
+    private void OnDestroy()
+    {
+        itemManager.cardLocks[num] = isLock;
     }
 }

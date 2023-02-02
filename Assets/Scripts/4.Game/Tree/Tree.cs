@@ -19,7 +19,7 @@ public class Tree : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("myBullet") || other.CompareTag("Sword"))
+        if (other.CompareTag("myBullet") || other.CompareTag("Sword") || other.CompareTag("Thunder"))
         { 
             GameObject potion = Instantiate(potionPrefab[potionsNum]);
             potion.transform.position = transform.position;

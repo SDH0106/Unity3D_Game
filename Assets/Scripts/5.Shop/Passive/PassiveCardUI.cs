@@ -421,4 +421,9 @@ public class PassiveCardUI : MonoBehaviour
             lockText.color = LockTextColor;
         }
     }
+
+    private void OnDestroy()
+    {
+        itemManager.cardLocks[num] = isLock;
+    }
 }

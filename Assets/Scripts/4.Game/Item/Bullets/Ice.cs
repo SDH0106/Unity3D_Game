@@ -29,7 +29,7 @@ public class Ice : Bullet
     {
         if (collision.collider.CompareTag("Monster") && collision.collider.GetComponent<Monster>() != null)
         {
-            Freezee();
+            Freeze();
 
             Instantiate(effectPrefab, transform.position, transform.rotation);
 
@@ -44,7 +44,7 @@ public class Ice : Bullet
 
             else if (!gameManager.isReflect && !gameManager.lowPenetrate && !gameManager.onePenetrate)
             {
-                if (isDestroyed)
+                if (!isDestroyed)
                     DestroyBullet();
             }
 
@@ -59,6 +59,7 @@ public class Ice : Bullet
 
             damageUI.realDamage = damageUI.weaponDamage - collision.collider.GetComponent<Monster>().defence;
 
+            Debug.Log(isFreeze);
             collision.collider.GetComponent<Monster>().OnDamaged(damageUI.realDamage, isFreeze);
 
             DamageUI pool = Instantiate(damageUI, transform.position, Quaternion.Euler(90, 0, 0)).GetComponent<DamageUI>();
@@ -66,7 +67,7 @@ public class Ice : Bullet
         }
     }
 
-    void Freezee()
+    void Freeze()
     {
         int rand = Random.Range(0, 100);
 
