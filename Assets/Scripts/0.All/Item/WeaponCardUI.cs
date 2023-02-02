@@ -47,6 +47,7 @@ public class WeaponCardUI : MonoBehaviour
 
     GameManager gameManager;
     ItemManager itemManager;
+    Character character;
 
     int price;
 
@@ -88,6 +89,8 @@ public class WeaponCardUI : MonoBehaviour
 
     void Setting()
     {
+        character = Character.Instance;
+
         if (isLock)
         {
             selectedWeapon = itemManager.lockedWeaCards[num];
@@ -168,7 +171,7 @@ public class WeaponCardUI : MonoBehaviour
                 itemManager.GetWeaponInfo(selectedWeapon);
                 itemManager.weaponGrade[itemManager.weaponCount] = selectedWeapon.weaponGrade;
                 isLock = false;
-                Character.Instance.Equip();
+                character.Equip();
                 Destroy(gameObject);
             }
 
@@ -197,7 +200,7 @@ public class WeaponCardUI : MonoBehaviour
         else if (selectedWeapon.Type != WEAPON_TYPE.검)
         {
             bool canBuy = false;
-            if (Character.Instance.characterNum != (int)CHARACTER_NUM.Legendary)
+            if (character.characterNum != (int)CHARACTER_NUM.Legendary)
             {
                 if (itemManager.fullCount < 5 && gameManager.money >= price)
                 {
@@ -207,9 +210,18 @@ public class WeaponCardUI : MonoBehaviour
                     itemManager.fullCount++;
                     itemManager.GetWeaponInfo(selectedWeapon);
                     itemManager.weaponGrade[itemManager.weaponCount] = selectedWeapon.weaponGrade;
-                    Destroy(gameObject);
+                    if (selectedWeapon.WeaponName == "번개 스태프")
+                    {
+                        if(character.thunderCount == 0)
+                        {
+                            character.thunderMark.SetActive(true);
+                        }
+
+                        character.thunderCount++;
+                    }
                     isLock = false;
-                    Character.Instance.Equip();
+                    character.Equip();
+                    Destroy(gameObject);
                 }
 
                 else if (itemManager.fullCount >= 5 && gameManager.money >= price)
@@ -233,7 +245,7 @@ public class WeaponCardUI : MonoBehaviour
                     SoundManager.Instance.PlayES("CantBuy");
             }
 
-            else if (Character.Instance.characterNum == (int)CHARACTER_NUM.Legendary)
+            else if (character.characterNum == (int)CHARACTER_NUM.Legendary)
                 SoundManager.Instance.PlayES("CantBuy");
         }
     }
@@ -246,8 +258,15 @@ public class WeaponCardUI : MonoBehaviour
             gameManager.money -= (int)(selectedWeapon.weaponGrade + 1) * 20;
             gameManager.money -= price;
             itemManager.weaponGrade[combineNum]++;
-            Destroy(gameObject);
             isLock = false;
+            if (selectedWeapon.WeaponName == "번개 스태프")
+            {
+                if (character.thunderCount == 0)
+                {
+                    character.thunderMark.SetActive(false);
+                }
+            }
+            Destroy(gameObject);
         }
 
         else

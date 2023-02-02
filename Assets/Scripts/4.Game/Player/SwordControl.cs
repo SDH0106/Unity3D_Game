@@ -34,6 +34,12 @@ public class SwordControl : Weapon
 
     bool isSwing = false;
 
+    int x, z;
+    bool xInput;
+    bool zInput;
+
+    Vector3 beforeDir;
+
     private void Awake()
     {
         pool = new ObjectPool<Bullet>(CreateBullet, OnGetBullet, OnReleaseBullet, OnDestroyBullet, maxSize: poolCount);
@@ -66,7 +72,10 @@ public class SwordControl : Weapon
             dir = mouse - transform.position;
 
             if (!isSwing)
-                LookMousePosition();
+            {
+                //LookMousePosition();
+                LookKeyBoardPos();
+            }
             WeaponSetting();
             Attack();
         }
@@ -77,6 +86,50 @@ public class SwordControl : Weapon
     {
         anim.enabled = false;
         angle = Mathf.Atan2(dir.z, dir.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(90, -angle, -90);
+    }
+
+    void LookKeyBoardPos()
+    {
+        xInput = (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Left"))) || (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Right")));
+        zInput = (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Up"))) || (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Down")));
+
+        if (!xInput)
+            x = 0;
+
+        if (!zInput)
+            z = 0;
+
+        if (zInput)
+        {
+            if (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Up")))
+                z = 1;
+
+            else if (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Down")))
+                z = -1;
+        }
+
+        if (xInput)
+        {
+            if (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Left")))
+                x = -1;
+
+            else if (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Right")))
+                x = 1;
+        }
+
+        if (xInput || zInput)
+        {
+            dir = (Vector3.right * x + Vector3.forward * z).normalized;
+            beforeDir = dir;
+            angle = Mathf.Atan2(dir.z, dir.x) * Mathf.Rad2Deg;
+        }
+
+        else if (!xInput && !zInput)
+        {
+            angle = Mathf.Atan2(beforeDir.z, beforeDir.x) * Mathf.Rad2Deg;
+        }
+
         transform.rotation = Quaternion.Euler(90, -angle, -90);
     }
 

@@ -164,4 +164,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   exDamage: 5
   damageUI: {fileID: -5576913372046765546, guid: c0773f636ba599f438ceb51024c2731d, type: 3}
+  coll: {fileID: 7408420816333605495}
   grade: 1

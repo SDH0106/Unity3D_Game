@@ -36,6 +36,7 @@ public class CardClick : MonoBehaviour
     int selectedNum;
 
     ItemManager itemManager;
+    Character character;
 
     private void Start()
     {
@@ -125,6 +126,7 @@ public class CardClick : MonoBehaviour
     public void SellWeapon()
     {
         itemManager = ItemManager.Instance;
+        character = Character.Instance;
 
         if (itemManager.fullCount > 0)
         {
@@ -133,7 +135,16 @@ public class CardClick : MonoBehaviour
             itemManager.storedWeapon[selectedNum] = null;
             itemManager.weaponGrade[selectedNum] = Grade.일반;
             itemManager.fullCount--;
-            Character.Instance.ReleaseEquip(selectedNum);
+            character.ReleaseEquip(selectedNum);
+            if (selectedWeapon.WeaponName == "번개 스태프")
+            {
+                character.thunderCount--;
+
+                if (character.thunderCount == 0)
+                {
+                    character.thunderMark.SetActive(false);
+                }
+            }
             ShopManager.Instance.backgroundImage.SetActive(true);
             gameObject.SetActive(false);
         }
@@ -173,8 +184,17 @@ public class CardClick : MonoBehaviour
 
         if (canCombine)
         {
-            gameObject.SetActive(false);
+            if (selectedWeapon.WeaponName == "번개 스태프")
+            {
+                character.thunderCount--;
+
+                if (character.thunderCount == 0)
+                {
+                    character.thunderMark.SetActive(false);
+                }
+            }
             ShopManager.Instance.backgroundImage.SetActive(true);
+            gameObject.SetActive(false);
         }
 
         else if (!canCombine)

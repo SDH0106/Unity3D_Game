@@ -114,7 +114,7 @@ public class MonsterSpawn : MonoBehaviour
     {
         if (round != 30)
         {
-            GameObject spawnMark = Instantiate(bossSpawnImage, new Vector3(3, 0, 3), bossSpawnImage.transform.rotation);
+            GameObject spawnMark = Instantiate(bossSpawnImage, new Vector3(3, 0, -37), bossSpawnImage.transform.rotation);
             Destroy(spawnMark, 2.1f);
             spawnMark.transform.SetParent(bosssParent);
             StartCoroutine(CreateBossMonster(round));
@@ -122,10 +122,10 @@ public class MonsterSpawn : MonoBehaviour
 
         else if (round == 30)
         {
-            GameObject spawnMark = Instantiate(bossSpawnImage, new Vector3(3, 0, 3), bossSpawnImage.transform.rotation);
+            GameObject spawnMark = Instantiate(bossSpawnImage, new Vector3(3, 0, -37), bossSpawnImage.transform.rotation);
             Destroy(spawnMark, 2.1f);
             spawnMark.transform.SetParent(bosssParent);
-            GameObject spawnMark2 = Instantiate(bossSpawnImage, new Vector3(-3, 0, 3), bossSpawnImage.transform.rotation);
+            GameObject spawnMark2 = Instantiate(bossSpawnImage, new Vector3(-3, 0, -37), bossSpawnImage.transform.rotation);
             Destroy(spawnMark2, 2.1f);
             spawnMark2.transform.SetParent(bosssParent);
             StartCoroutine(CreateBossMonster(round));
@@ -152,7 +152,7 @@ public class MonsterSpawn : MonoBehaviour
             GameObject inst = Instantiate(bossMonsterPrefab[(round / 10) - 1]);
             Monster monster = inst.GetComponent<Monster>();
             monster.stat = MonsterInfo.Instance.monsterInfos[normalMonsterPrefab.Length + ((round / 10) - 1)];
-            monster.transform.position = new Vector3(3, 0, 3);
+            monster.transform.position = new Vector3(3, 0, -37);
             monster.transform.SetParent(bosssParent);
         }
 
@@ -163,9 +163,9 @@ public class MonsterSpawn : MonoBehaviour
             Monster monster1 = inst1.GetComponent<Monster>();
             Monster monster2 = inst2.GetComponent<Monster>();
             monster1.stat = MonsterInfo.Instance.monsterInfos[normalMonsterPrefab.Length];
-            monster1.transform.position = new Vector3(3, 0, 3);
+            monster1.transform.position = new Vector3(3, 0, -37);
             monster2.stat = MonsterInfo.Instance.monsterInfos[normalMonsterPrefab.Length + 1];
-            monster2.transform.position = new Vector3(-3, 0, 3);
+            monster2.transform.position = new Vector3(-3, 0, -37);
             monster2.transform.SetParent(bosssParent);
             monster1.transform.SetParent(bosssParent);
         }

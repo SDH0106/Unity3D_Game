@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Pool;
+using System.Linq;
 
 public class StaffControl : Weapon
 {
@@ -25,7 +26,11 @@ public class StaffControl : Weapon
     bool canAttack;
     bool isTargetFind;
 
-    Transform target;
+    Transform[] targets;
+
+    int monsterCount;
+
+    Character character;
 
     private void Awake()
     {
@@ -35,8 +40,11 @@ public class StaffControl : Weapon
     private void Start()
     {
         gameManager = GameManager.Instance;
+        character = Character.Instance;
         count = ItemManager.Instance.weaponCount;
         damageUI = ItemManager.Instance.damageUI[count];
+
+        targets = new Transform[3];
 
         delay = 0;
         bulletDelay = weaponInfo.AttackDelay;
@@ -199,14 +207,22 @@ public class StaffControl : Weapon
             if (canAttack == true)
             {
                 if (!isTargetFind)
+                {
                     FindTarget();
+                }
 
                 else if (isTargetFind)
                 {
-                    Bullet bullet = pool.Get();
-                    bullet.transform.position = new Vector3(target.transform.position.x, 0, target.transform.position.z + 3);
-                    bullet.damageUI = damageUI;
-                    SoundManager.Instance.PlayES(weaponInfo.WeaponSound);
+                    if (monsterCount > 0)
+                        SoundManager.Instance.PlayES(weaponInfo.WeaponSound);
+
+                    for (int i = 0; i < monsterCount; i++)
+                    {
+                        Bullet bullet = pool.Get();
+                        bullet.transform.position = new Vector3(targets[i].transform.position.x, 0, targets[i].transform.position.z + 3);
+                        bullet.damageUI = damageUI;
+                    }
+
                     canAttack = false;
                     isTargetFind = false;
                 }
@@ -238,45 +254,66 @@ public class StaffControl : Weapon
 
     void FindTarget()
     {
-        detectRange = attackRange + (gameManager.range * 0.1f);
+        monsterCount = 0;
 
-        if (detectRange < 1)
-            detectRange = 1;
+        detectRange = Mathf.Clamp(attackRange + gameManager.range, 1f, 12f);
 
-        Collider[] colliders = Physics.OverlapSphere(Character.Instance.transform.position, detectRange);
+        Collider[] colliders = Physics.OverlapSphere(character.transform.position, detectRange);
 
         if (colliders.Length > 0)
         {
-            int rand = Random.Range(0, colliders.Length);
+            var find = from target in colliders
+                       orderby Vector3.Distance(character.transform.position, target.transform.position)
+                       where target.gameObject.CompareTag("Monster") && target.GetComponent<Monster>() != null
+                       select target.gameObject;
 
-            for (int i = 0; i < colliders.Length; i++)
+            int rand = Random.Range(0, (find.Count() / 3) + (monsterCount + 1));
+
+            int num = 0;
+
+            foreach(var target in find)
             {
-                if (colliders[i].tag == "Monster" && colliders[i].GetComponent<Monster>() != null)
+                if (num == rand)
                 {
-                    if (i == rand)
+                    targets[monsterCount] = target.transform;
+
+                    if (damageUI.weaponDamage > target.GetComponent<Monster>().defence)
+                        damageUI.isMiss = false;
+
+                    else if (damageUI.weaponDamage <= target.GetComponent<Monster>().defence)
+                        damageUI.isMiss = true;
+
+                    damageUI.realDamage = damageUI.weaponDamage - target.GetComponent<Monster>().defence;
+
+                    target.GetComponent<Monster>().OnDamaged(damageUI.realDamage);
+
+                    DamageUI pool = Instantiate(damageUI, targets[monsterCount].transform.position, Quaternion.Euler(90, 0, 0)).GetComponent<DamageUI>();
+                    pool.gameObject.transform.SetParent(gameManager.damageStorage);
+
+                    if (gameManager.absorbHp > 0)
+                        character.currentHp += gameManager.absorbHp;
+
+                    monsterCount++;
+
+                    if (monsterCount == 1)
+                        rand = Random.Range(rand, (find.Count() / 3) * 2 + (monsterCount + 1));
+
+                    else
+                        rand = Random.Range(rand, find.Count());
+
+                    if (monsterCount >= 3)
                     {
-                        target = colliders[i].transform;
-
-                        colliders[i].GetComponent<Monster>().OnDamaged(damageUI.realDamage);
-
-                        if (damageUI.weaponDamage > colliders[i].GetComponent<Monster>().defence)
-                            damageUI.isMiss = false;
-
-                        else if (damageUI.weaponDamage <= colliders[i].GetComponent<Monster>().defence)
-                            damageUI.isMiss = true;
-
-                        damageUI.realDamage = damageUI.weaponDamage - colliders[i].GetComponent<Monster>().defence;
-
-                        DamageUI pool = Instantiate(damageUI, colliders[i].transform.position, Quaternion.Euler(90, 0, 0)).GetComponent<DamageUI>();
-                        pool.gameObject.transform.SetParent(gameManager.damageStorage);
-
-                        if (gameManager.absorbHp > 0)
-                            Character.Instance.currentHp += gameManager.absorbHp;
-
                         isTargetFind = true;
                         break;
                     }
                 }
+
+                num++;
+            }
+
+            if(find.Count() < 3 && find.Count() > 0)
+            {
+                isTargetFind = true;
             }
         }
     }
@@ -302,5 +339,11 @@ public class StaffControl : Weapon
     private void OnDestroyBullet(Bullet bullet)
     {
         Destroy(bullet.gameObject);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(Character.Instance.transform.position, 4f);
     }
 }

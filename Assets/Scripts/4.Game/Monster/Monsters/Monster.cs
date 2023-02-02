@@ -33,14 +33,13 @@ public class Monster : MonoBehaviour
 
     public float defence;
 
-    float damage;
+    protected float damage;
 
     bool beforeFreeze;
 
     void Start()
     {
         StartSetting();
-        beforeFreeze = true;
     }
 
     protected void StartSetting()
@@ -63,6 +62,7 @@ public class Monster : MonoBehaviour
         isAttacked = false;
         isAttack = false;
         coll.enabled = true;
+        beforeFreeze = false;
     }
 
     void Update()
@@ -93,6 +93,7 @@ public class Monster : MonoBehaviour
         isAttacked = false;
         isAttack = false;
         coll.enabled = true;
+        beforeFreeze = false;
         anim.speed = 1f;
         transform.localScale = initScale;
         initScale = transform.localScale;
@@ -137,19 +138,7 @@ public class Monster : MonoBehaviour
         }
 
         rend.color = Color.white;
-    }
-
-    protected IEnumerator MonsterFreeze()
-    {
-        rend.color = Color.cyan;
-        yield return new WaitForSeconds(1.5f);
-
-        isFreeze = false;
-        beforeFreeze = isFreeze;
-        speed = initSpeed;
-        rend.color = Color.white;
-    }
-        
+    }   
 
     protected virtual void OnTriggerStay(Collider other)
     {
@@ -173,6 +162,7 @@ public class Monster : MonoBehaviour
     // 방어력 없이 바로 깎이는 대미지
     public void PureOnDamaged(float damage)
     {
+
         hp -= damage;
 
         if (runningCoroutine != null)
@@ -183,6 +173,7 @@ public class Monster : MonoBehaviour
             runningCoroutine = MonsterColorBlink();
             StartCoroutine(runningCoroutine);
         }
+
     }
 
     public void OnDamaged(float damage)
@@ -201,13 +192,13 @@ public class Monster : MonoBehaviour
 
     public void OnDamaged(float damage, bool freeze)
     {
-        if (freeze || !beforeFreeze)
-            isFreeze = freeze;
-
         hp -= damage;
 
-        if (isFreeze == true)
+        if (freeze && !beforeFreeze)
         {
+            isFreeze = freeze;
+            beforeFreeze = isFreeze;
+
             if (runningCoroutine != null)
                 StopCoroutine(runningCoroutine);
 
@@ -223,7 +214,17 @@ public class Monster : MonoBehaviour
                 StartCoroutine(runningCoroutine);
             }
         }
+    }
 
+    protected IEnumerator MonsterFreeze()
+    {
+        rend.color = Color.cyan;
+        yield return new WaitForSeconds(1.5f);
+
+        isFreeze = false;
+        beforeFreeze = isFreeze;
+        speed = initSpeed;
+        rend.color = Color.white;
     }
 
     public void OnDead()

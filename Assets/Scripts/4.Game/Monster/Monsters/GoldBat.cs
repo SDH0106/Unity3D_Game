@@ -31,8 +31,6 @@ public class GoldBat : Monster
 
     void Update()
     {
-        Debug.Log($"Mons:{isFreeze}");
-
         monsterHpBar.value = 1 - (hp / maxHp);
 
         if (!isDead && !isFreeze)

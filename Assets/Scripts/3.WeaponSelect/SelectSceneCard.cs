@@ -29,19 +29,21 @@ public class SelectSceneCard : MonoBehaviour
     int count;
 
     ItemManager itemManager;
+    Character character;
 
     private void Start()
     {
+        character = Character.Instance;
         count = 0;
         Setting();
         CardImage();
 
-        if (Character.Instance.characterNum == 0)
+        if (character.characterNum == 0)
         {
             lockPanel.SetActive(false);
         }
 
-        if (Character.Instance.characterNum == 1)
+        if (character.characterNum == 1)
         {
             if (selectedWeapon.Type == WeaponInfo.WEAPON_TYPE.검)
                 lockPanel.SetActive(false);
@@ -81,6 +83,7 @@ public class SelectSceneCard : MonoBehaviour
 
     public void MoveScene(string sceneName)
     {
+        character = Character.Instance;
         itemManager = ItemManager.Instance;
 
         if (selectedWeapon.Type == WeaponInfo.WEAPON_TYPE.검)
@@ -89,20 +92,29 @@ public class SelectSceneCard : MonoBehaviour
             itemManager.weaponGrade[itemManager.weaponCount] = selectedWeapon.weaponGrade;
             count++;
             SceneManager.LoadScene(sceneName);
-            Character.Instance.Equip();
+            character.Equip();
             SoundManager.Instance.PlayES("WeaponSelect");
         }
 
         else
         {
-            if (Character.Instance.characterNum != (int)CHARACTER_NUM.Legendary)
+            if (character.characterNum != (int)CHARACTER_NUM.Legendary)
             {
                 itemManager.GetWeaponInfo(selectedWeapon);
                 itemManager.weaponGrade[itemManager.weaponCount] = selectedWeapon.weaponGrade;
                 count++;
-                SceneManager.LoadScene(sceneName);
-                Character.Instance.Equip();
+                character.Equip();
+                if (selectedWeapon.WeaponName == "번개 스태프")
+                {
+                    if (character.thunderCount == 0)
+                    {
+                        character.thunderMark.SetActive(true);
+                    }
+
+                    character.thunderCount++;
+                }
                 SoundManager.Instance.PlayES("WeaponSelect");
+                SceneManager.LoadScene(sceneName);
             }
         }
     }

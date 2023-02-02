@@ -18,8 +18,11 @@ public class MonsterBullet : MonoBehaviour
     [HideInInspector] public int randNum;
     [HideInInspector] public Vector3 monsPos;
 
+    GameManager gameManager;
+
     private void Start()
     {
+        gameManager = GameManager.Instance;
         coll = GetComponent<Collider>();
         Invoke("DestroyBullet", 3f);
         ShootDir();
@@ -39,6 +42,12 @@ public class MonsterBullet : MonoBehaviour
             //transform.Translate(new Vector3(dir.x, 0f, dir.z) * speed * Time.deltaTime, Space.Self);
             transform.position += dir * speed * Time.deltaTime;
             transform.RotateAround(monsPos, Vector3.up, 120f * Time.deltaTime);
+        }
+
+        if(gameManager.currentGameTime <=0)
+        {
+            CancelInvoke("DestroyBullet");
+            DestroyBullet();
         }
     }
 

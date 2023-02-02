@@ -29,7 +29,7 @@ MonoBehaviour:
   speed: 0
   range: 0
   luck: 0
-  critical: -0.5
+  critical: -1
   percentDamage: 0
   avoid: 0
   coinRange: 0
@@ -61,4 +61,4 @@ MonoBehaviour:
   lowPenetrate: 0
   penetrate: 0
   description: 
-  weight: 0
+  weight: 90

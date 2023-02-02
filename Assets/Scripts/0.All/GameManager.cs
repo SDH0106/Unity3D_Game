@@ -40,7 +40,7 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector] public int buffNum;
     [HideInInspector] public int exDmg;
     [HideInInspector] public int isedolCount;
-    /*[HideInInspector]*/ public float salePercent;
+    [HideInInspector] public float salePercent;
     [HideInInspector] public float increaseExp;
     [HideInInspector] public float coinRange;
     [HideInInspector] public float monsterSlow;
@@ -315,7 +315,7 @@ public class GameManager : Singleton<GameManager>
     public void ToShopScene()
     {
         Character.Instance.gameObject.SetActive(true);
-        Character.Instance.transform.position = Vector3.zero;
+        Character.Instance.transform.position = new Vector3(0f, 0f, -40f);
         currentScene = "Shop";
         SceneManager.LoadScene(currentScene);
         currentGameTime = gameTime;

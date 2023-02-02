@@ -21,6 +21,11 @@ public class AutoTarget : Bullet
         FindTarget();
         transform.position += new Vector3(dir.x, 0, dir.z) * speed * Time.deltaTime;
 
+        if (Vector3.Distance(transform.position, initPos) > range)
+        {
+            DestroyBullet();
+        }
+
         // ÃÑ¾Ë °¢µµ
         angle = Mathf.Atan2(dir.z, dir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(90, -angle, 0);

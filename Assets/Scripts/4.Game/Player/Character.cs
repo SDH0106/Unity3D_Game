@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Threading;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
 
 public enum CHARACTER_NUM
@@ -39,6 +40,7 @@ public class Character : Singleton<Character>
     [Header("Weapon")]
     [SerializeField] public GameObject[] weapons;
     [SerializeField] public Transform[] weaponPoses;
+    [SerializeField] public GameObject thunderMark;
 
     [HideInInspector] public float exp;
     [HideInInspector] public float maxHp;
@@ -61,6 +63,7 @@ public class Character : Singleton<Character>
     GameManager gameManager;
 
     Vector3 dir;
+    public Vector3 charDir => dir;
     [HideInInspector] public float x;
     [HideInInspector] public float z;
 
@@ -71,6 +74,8 @@ public class Character : Singleton<Character>
     [HideInInspector] public bool isBuff = false;
     [HideInInspector] public float charBuffDmg = 0;
     [HideInInspector] public float buffTime = 8;
+
+    public int thunderCount;
 
     protected override void Awake()
     {
@@ -84,8 +89,9 @@ public class Character : Singleton<Character>
         particle.GetComponentInChildren<Renderer>().enabled = false;
 
         gameManager = GameManager.Instance;
-        transform.position = Vector3.zero;
+        transform.position = new Vector3(0f, 0f, -40f);
 
+        thunderMark.transform.localScale = new Vector3(Mathf.Clamp(4 + gameManager.range, 1, 12), Mathf.Clamp(4 + gameManager.range, 1, 12), 0);
         gardianAngel.SetActive(false);
         gardianEffect.SetActive(false);
 
@@ -108,54 +114,6 @@ public class Character : Singleton<Character>
     {
         HpSetting();
 
-        bool xInput = (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Left"))) || (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Right")));
-        bool zInput = (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Up"))) || (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Down")));
-
-        if (!xInput)
-            x = 0;
-
-        if (!zInput)
-            z = 0;
-
-        if (zInput)
-        {
-            if (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Up")))
-                z = 1;
-
-            else if (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Down")))
-                z = -1;
-        }
-
-        if (xInput)
-        {
-            if (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Left")))
-                x = -1;
-
-            else if (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Right")))
-                x = 1;
-        }
-
-        if (!isBuff)
-        {
-            if (gameManager.speed <= 0)
-                speed = characterSpeed;
-
-            else
-                speed = gameManager.speed + characterSpeed;
-        }
-
-        else if (isBuff)
-        {
-            OnBuff();
-            buffTime -= Time.deltaTime;
-
-            if (buffTime <= 0)
-            {
-                isBuff = false;
-                buffTime = 8;
-            }
-        }
-
         if (exp >= maxExp)
         {
             SoundManager.Instance.PlayES("LevelUp");
@@ -170,7 +128,7 @@ public class Character : Singleton<Character>
 
         if (gameManager.currentScene == "Game")
         {
-            isRun = false;
+            //isRun = false;
 
             if (currentHp > 0 && (!gameManager.isClear || !gameManager.isBossDead))
             {
@@ -181,6 +139,7 @@ public class Character : Singleton<Character>
 
             anim.SetBool("isRun", isRun);
         }
+
 
         if (summonNum < 3)
             SummonPet();
@@ -355,6 +314,54 @@ public class Character : Singleton<Character>
 
     void Move()
     {
+        bool xInput = (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Left"))) || (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Right")));
+        bool zInput = (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Up"))) || (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Down")));
+
+        if (!xInput)
+            x = 0;
+
+        if (!zInput)
+            z = 0;
+
+        if (zInput)
+        {
+            if (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Up")))
+                z = 1;
+
+            else if (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Down")))
+                z = -1;
+        }
+
+        if (xInput)
+        {
+            if (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Left")))
+                x = -1;
+
+            else if (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Right")))
+                x = 1;
+        }
+
+        if (!isBuff)
+        {
+            if (gameManager.speed <= 0)
+                speed = characterSpeed;
+
+            else
+                speed = gameManager.speed + characterSpeed;
+        }
+
+        else if (isBuff)
+        {
+            OnBuff();
+            buffTime -= Time.deltaTime;
+
+            if (buffTime <= 0)
+            {
+                isBuff = false;
+                buffTime = 8;
+            }
+        }
+
         if (ground == null)
             ground = GameSceneUI.Instance.ground;
 
@@ -371,18 +378,18 @@ public class Character : Singleton<Character>
         if (dir != Vector3.zero)
         {
             isRun = true;
-            if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Left")))
+            if (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Left")))
             {
                 rend.flipX = true;
             }
 
-            else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Right")))
+            else if (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Right")))
             {
                 rend.flipX = false;
             }
         }
 
-        else if(dir == Vector3.zero)
+        else if (dir == Vector3.zero || (gameManager.isClear && gameManager.isBossDead))
             isRun = false;
     }
 

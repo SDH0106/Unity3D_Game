@@ -59,7 +59,6 @@ public class Ice : Bullet
 
             damageUI.realDamage = damageUI.weaponDamage - collision.collider.GetComponent<Monster>().defence;
 
-            Debug.Log(isFreeze);
             collision.collider.GetComponent<Monster>().OnDamaged(damageUI.realDamage, isFreeze);
 
             DamageUI pool = Instantiate(damageUI, transform.position, Quaternion.Euler(90, 0, 0)).GetComponent<DamageUI>();

@@ -58,19 +58,19 @@ public class DescriptionUI : MonoBehaviour
                 break;
 
             case 6:
-                descriptionText.text = "검, 총류 무기의 공격력와 관련된 능력치.\n이 수치가 몬스터의 방어력보다 낮으면 공격이 불가능합니다.";
+                descriptionText.text = "검/총류 무기의 공격력와 관련된 능력치.\n이 수치가 몬스터의 방어력보다 낮으면 공격이 불가능합니다.";
                 break;
 
             case 7:
-                descriptionText.text = "검기와 스태프류 무기의 공격력와 관련된 능력치.\n이 수치가 몬스터의 방어력보다 낮으면 공격이 불가능합니다.";
+                descriptionText.text = "스태프류 무기의 공격력, 검신 뇨파의 검기와 관련된 능력치.\n이 수치가 몬스터의 방어력보다 낮으면 공격이 불가능합니다.";
                 break;
 
             case 8:
-                descriptionText.text = "검기와 총, 스태프류 무기의 공격력와 관련된 능력치.\n이 수치가 몬스터의 방어력보다 낮으면 공격이 불가능합니다.";
+                descriptionText.text = "검류 무기의 공격력과 관련된 능력치.\n이 수치가 몬스터의 방어력보다 낮으면 공격이 불가능합니다.";
                 break;
 
             case 9:
-                descriptionText.text = "검류 무기의 공격력과 관련된 능력치.\n이 수치가 몬스터의 방어력보다 낮으면 공격이 불가능합니다.";
+                descriptionText.text = "총/스태프류 무기의 공격력, 검신 뇨파의 검기와 관련된 능력치.\n이 수치가 몬스터의 방어력보다 낮으면 공격이 불가능합니다.";
                 break;
 
             case 10:

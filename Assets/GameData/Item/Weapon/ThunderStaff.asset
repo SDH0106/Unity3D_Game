@@ -17,14 +17,14 @@ MonoBehaviour:
   weaponName: "\uBC88\uAC1C \uC2A4\uD0DC\uD504"
   type: 1
   weaponDamage: 0
-  magicDamage: 8
+  magicDamage: 4
   attackDelay: 4
   bulletSpeed: 0
-  weaponRange: 3
+  weaponRange: 4
   weaponPrice: 21
-  description: "<color=cyan>\uC77C\uC815 \uC8FC\uAE30</color>\uB9C8\uB2E4 <color=cyan>\uC77C\uC815
-    \uBC94\uC704</color> \uB0B4\uC758  <color=cyan>\uBAAC\uC2A4\uD130\uB9CC</color>\uC744
-    \uACF5\uACA9\uD558\uB294 <color=cyan>\uBC88\uAC1C</color>\uB97C \uB0B4\uB9AC\uB294
+  description: "<color=cyan>\uC77C\uC815 \uC8FC\uAE30</color>\uB9C8\uB2E4 <color=cyan>\uBC94\uC704</color>
+    \uB0B4 \uB79C\uB364\uD55C <color=red>3\uB9C8\uB9AC</color>\uC758 <color=cyan>\uBAAC\uC2A4\uD130</color>
+    \uB97C \uACF5\uACA9\uD558\uB294 <color=cyan>\uBC88\uAC1C</color>\uB97C \uB0B4\uB9AC\uB294
     \uC2A4\uD0DC\uD504.\n<color=cyan>\uC774\uD30C\uB9AC \uB098\uBB34</color>\uB294
     \uAC00\uAE4C\uC774\uAC00\uBA74 <color=red>\uD30C\uAD34</color>.\n(\uACF5\uACA9\uC8FC\uAE30\uB294
     <color=lime>\uACF5\uACA9\uC18D\uB3C4</color>, \uBC94\uC704\uB294 <color=lime>\uC0AC\uAC70\uB9AC</color>\uB97C

@@ -147,9 +147,10 @@ public class ShopManager : Singleton<ShopManager>
     public void ToGameScene()
     {
         gameManager.currentScene = "Game";
-        character.transform.position = Vector3.zero;
+        character.transform.position = new Vector3(0f, 0f, -40f);
         gameManager.round++;
         rerollMoney = -gameManager.round;
+        character.thunderMark.transform.localScale = new Vector3(Mathf.Clamp(4 + gameManager.range, 1, 12), Mathf.Clamp(4 + gameManager.range, 1, 12), 0);
 
         if (gameManager.maxHp < 1)
             character.maxHp = 1;

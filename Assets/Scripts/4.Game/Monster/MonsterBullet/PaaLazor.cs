@@ -14,12 +14,20 @@ public class PaaLazor : MonoBehaviour
 
     public bool isFlip;
 
+    GameManager gameManager;
+
+    bool isAttack;
+
     private void Start()
     {
+        gameManager = GameManager.Instance;
+
         character = Character.Instance;
         coll = GetComponent<Collider>();
         rend = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
+
+        isAttack = false;
 
         damage = damage + Mathf.Floor(GameManager.Instance.round / 5) * 2f; // 트리거에도 있음
 
@@ -32,7 +40,7 @@ public class PaaLazor : MonoBehaviour
         anim.SetBool("isFlip", isFlip);
     }
 
-        private void Update()
+    private void Update()
     {
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("RightPaaLazor") || anim.GetCurrentAnimatorStateInfo(0).IsName("LeftPaaLazor"))
         {
@@ -41,14 +49,25 @@ public class PaaLazor : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+
+        if (gameManager.currentGameTime <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     protected virtual void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Character"))
+        if (other.CompareTag("Character") && !isAttack)
         {
             damage = damage + Mathf.Floor(GameManager.Instance.round / 5) * 2f;
             character.OnDamaged(coll, damage);
+            isAttack = false;
         }
+    }
+
+    IEnumerator IEInvincible()
+    {
+        yield return new WaitForSeconds(1f);
     }
 }
