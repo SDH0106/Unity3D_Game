@@ -18,7 +18,7 @@ MonoBehaviour:
   itemPrice: 8
   maxCount: 100
   hp: 0
-  recoverHp: 0
+  recoverHp: -1
   absorbHp: 0
   defence: 0
   physicDamage: 0.2
@@ -61,4 +61,4 @@ MonoBehaviour:
   lowPenetrate: 0
   penetrate: 0
   description: 
-  weight: 152
+  weight: 32

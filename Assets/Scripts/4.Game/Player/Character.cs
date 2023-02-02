@@ -128,7 +128,7 @@ public class Character : Singleton<Character>
 
         if (gameManager.currentScene == "Game")
         {
-            //isRun = false;
+            isRun = false;
 
             if (currentHp > 0 && (!gameManager.isClear || !gameManager.isBossDead))
             {
@@ -389,7 +389,7 @@ public class Character : Singleton<Character>
             }
         }
 
-        else if (dir == Vector3.zero || (gameManager.isClear && gameManager.isBossDead))
+        else if (dir == Vector3.zero)
             isRun = false;
     }
 

@@ -67,9 +67,9 @@ public class PassiveCardUI : MonoBehaviour
         CardImage();
         StatArray();
         DescriptionInfo();
-        StartLockColor();   
+        StartLockColor();
 
-        for(int i=0;i<passiveInfo.Length;i++)
+        for (int i = 0; i < passiveInfo.Length; i++)
         {
             if (passiveInfo[i].ItemName == selectedPassive.ItemName)
             {
@@ -265,6 +265,8 @@ public class PassiveCardUI : MonoBehaviour
                     Destroy(gameObject);
 
                     isLock = false;
+                    itemManager.cardLocks[num] = isLock;
+                    itemManager.lockedPassCards[num] = null;
                     gameManager.money -= price;
 
                     for (int i = 0; i < passiveBoolVariables.Length; i++)
@@ -282,6 +284,8 @@ public class PassiveCardUI : MonoBehaviour
                 Destroy(gameObject);
 
                 isLock = false;
+                itemManager.cardLocks[num] = isLock;
+                itemManager.lockedPassCards[num] = null;
                 gameManager.money -= price;
 
                 for (int i = 0; i < stats.Length; i++)
@@ -419,10 +423,5 @@ public class PassiveCardUI : MonoBehaviour
             lockBackImage.color = LockImageColor;
             lockText.color = LockTextColor;
         }
-    }
-
-    private void OnDestroy()
-    {
-        itemManager.cardLocks[num] = isLock;
     }
 }

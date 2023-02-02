@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2649575304376388810}
   - component: {fileID: 2172099254666696342}
-  - component: {fileID: 8165507316978310547}
   - component: {fileID: 7944966357216279975}
   - component: {fileID: 8940337164351884006}
+  - component: {fileID: -1709604854644372288}
   m_Layer: 0
   m_Name: SkullBullet
   m_TagString: monsterBullet
@@ -87,22 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8165507316978310547
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3635945385681008673}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 041824b5bb86ced47b7709b1985998ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 6
-  bulletDamage: 0
-  randNum: 0
-  monsPos: {x: 0, y: 0, z: 0}
 --- !u!65 &7944966357216279975
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -136,3 +120,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-1709604854644372288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3635945385681008673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b8ac38973447fd4095bf64fc926a276, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0
+  bulletDamage: 10
+  randNum: 0
+  monsPos: {x: 0, y: 0, z: 0}

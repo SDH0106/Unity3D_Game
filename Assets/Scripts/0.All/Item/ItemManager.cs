@@ -25,7 +25,7 @@ public class ItemManager : Singleton<ItemManager>
     [HideInInspector] public bool[] cardLocks;
     [HideInInspector] public Grade[] cardGrades;
 
-    [HideInInspector] public int[] passiveCounts;
+    [HideInInspector] public int[] passiveCounts;       // 패시브 템 최대갯수
 
     public Grade[] selectedGrades;
 

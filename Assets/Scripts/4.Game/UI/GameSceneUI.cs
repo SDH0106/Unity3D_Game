@@ -112,6 +112,7 @@ public class GameSceneUI : Singleton<GameSceneUI>
         if (gameManager.round == 10 || gameManager.round == 20 || gameManager.round == 30)
         {
             soundManager.PlayBGM(2, true);
+            soundManager.PlayES("Alert");
             bossSceneText.gameObject.SetActive(true);
             StartCoroutine(BlinkBossSceneText());
         }

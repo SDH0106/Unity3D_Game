@@ -511,6 +511,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 76a5bbb6f2765d846b7e6df3d9fb8dc6, type: 3}
   - {fileID: 8300000, guid: 2350a262027118a4992f9eddd5e2b8a9, type: 3}
   - {fileID: 8300000, guid: a634f3ef94f7f194aa71fe02d5051dbd, type: 3}
+  - {fileID: 8300000, guid: 0a67108ee1516b84bb658f3af8c4327c, type: 3}
   bgms:
   - {fileID: 8300000, guid: ac67960049b289e41baf56c1d476fb00, type: 3}
   - {fileID: 8300000, guid: e75df5cd9c1f944ce99e585d983fa119, type: 3}
@@ -3972,9 +3973,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletStorage: {fileID: 1005871281}
   damageStorage: {fileID: 1692643827}
-  gameTime: 1000
+  gameTime: 0
   money: 500000
-  round: 9
+  round: 1
   woodCount: 0
   woodMaxCount: 70
   maxHp: 0

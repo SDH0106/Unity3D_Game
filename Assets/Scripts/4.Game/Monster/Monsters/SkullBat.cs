@@ -30,10 +30,12 @@ public class SkullBat : Monster
         {
             if (!isFreeze)
             {
-                Move();
 
                 if (isWalk)
+                {
+                    Move();
                     attackTime -= Time.deltaTime;
+                }
 
                 if (attackTime <= 0)
                 {
@@ -106,8 +108,7 @@ public class SkullBat : Monster
 
     IEnumerator AttackDelay()
     {
-        yield return new WaitForSeconds(2f);
-
+        yield return new WaitForSeconds(2.5f);
         isWalk = true;
     }
 

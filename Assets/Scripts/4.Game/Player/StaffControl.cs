@@ -216,8 +216,10 @@ public class StaffControl : Weapon
                     if (monsterCount > 0)
                         SoundManager.Instance.PlayES(weaponInfo.WeaponSound);
 
+                    Debug.Log(monsterCount);
                     for (int i = 0; i < monsterCount; i++)
                     {
+                        Debug.Log("1");
                         Bullet bullet = pool.Get();
                         bullet.transform.position = new Vector3(targets[i].transform.position.x, 0, targets[i].transform.position.z + 3);
                         bullet.damageUI = damageUI;
@@ -271,49 +273,60 @@ public class StaffControl : Weapon
 
             int num = 0;
 
-            foreach(var target in find)
+            if (find.Count() > 0)
             {
-                if (num == rand)
+                foreach (var target in find)
                 {
-                    targets[monsterCount] = target.transform;
-
-                    if (damageUI.weaponDamage > target.GetComponent<Monster>().defence)
-                        damageUI.isMiss = false;
-
-                    else if (damageUI.weaponDamage <= target.GetComponent<Monster>().defence)
-                        damageUI.isMiss = true;
-
-                    damageUI.realDamage = damageUI.weaponDamage - target.GetComponent<Monster>().defence;
-
-                    target.GetComponent<Monster>().OnDamaged(damageUI.realDamage);
-
-                    DamageUI pool = Instantiate(damageUI, targets[monsterCount].transform.position, Quaternion.Euler(90, 0, 0)).GetComponent<DamageUI>();
-                    pool.gameObject.transform.SetParent(gameManager.damageStorage);
-
-                    if (gameManager.absorbHp > 0)
-                        character.currentHp += gameManager.absorbHp;
-
-                    monsterCount++;
-
-                    if (monsterCount == 1)
-                        rand = Random.Range(rand, (find.Count() / 3) * 2 + (monsterCount + 1));
-
-                    else
-                        rand = Random.Range(rand, find.Count());
-
-                    if (monsterCount >= 3)
+                    if (num == rand)
                     {
-                        isTargetFind = true;
-                        break;
+                        targets[monsterCount] = target.transform;
+
+                        if (damageUI.weaponDamage > target.GetComponent<Monster>().defence)
+                            damageUI.isMiss = false;
+
+                        else if (damageUI.weaponDamage <= target.GetComponent<Monster>().defence)
+                            damageUI.isMiss = true;
+
+                        damageUI.realDamage = damageUI.weaponDamage - target.GetComponent<Monster>().defence;
+
+                        target.GetComponent<Monster>().OnDamaged(damageUI.realDamage);
+
+                        DamageUI pool = Instantiate(damageUI, targets[monsterCount].transform.position, Quaternion.Euler(90, 0, 0)).GetComponent<DamageUI>();
+                        pool.gameObject.transform.SetParent(gameManager.damageStorage);
+
+                        if (gameManager.absorbHp > 0)
+                            character.currentHp += gameManager.absorbHp;
+
+                        if (monsterCount == 0)
+                        {
+                            if (find.Count() < 3)
+                                rand = 1;
+
+                            else
+                                rand = Random.Range(rand + 1, (find.Count() / 3) * 2);
+                        }
+
+                        else if (monsterCount == 1)
+                        {
+                            rand = Random.Range(rand + 1, find.Count());
+                        }
+
+                        monsterCount++;
+
+                        if (monsterCount >= 3)
+                        {
+                            isTargetFind = true;
+                            break;
+                        }
                     }
+
+                    num++;
                 }
 
-                num++;
-            }
-
-            if(find.Count() < 3 && find.Count() > 0)
-            {
-                isTargetFind = true;
+                if (find.Count() < 3)
+                {
+                    isTargetFind = true;
+                }
             }
         }
     }

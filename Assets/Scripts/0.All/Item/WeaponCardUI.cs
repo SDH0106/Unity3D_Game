@@ -171,6 +171,8 @@ public class WeaponCardUI : MonoBehaviour
                 itemManager.GetWeaponInfo(selectedWeapon);
                 itemManager.weaponGrade[itemManager.weaponCount] = selectedWeapon.weaponGrade;
                 isLock = false;
+                itemManager.cardLocks[num] = isLock;
+                itemManager.lockedWeaCards[num] = null;
                 character.Equip();
                 Destroy(gameObject);
             }
@@ -220,6 +222,8 @@ public class WeaponCardUI : MonoBehaviour
                         character.thunderCount++;
                     }
                     isLock = false;
+                    itemManager.cardLocks[num] = isLock;
+                    itemManager.lockedWeaCards[num] = null;
                     character.Equip();
                     Destroy(gameObject);
                 }
@@ -259,6 +263,8 @@ public class WeaponCardUI : MonoBehaviour
             gameManager.money -= price;
             itemManager.weaponGrade[combineNum]++;
             isLock = false;
+            itemManager.cardLocks[num] = isLock;
+            itemManager.lockedWeaCards[num] = null;
             if (selectedWeapon.WeaponName == "번개 스태프")
             {
                 if (character.thunderCount == 0)
@@ -311,10 +317,5 @@ public class WeaponCardUI : MonoBehaviour
             lockBackImage.color = LockImageColor;
             lockText.color = LockTextColor;
         }
-    }
-
-    private void OnDestroy()
-    {
-        itemManager.cardLocks[num] = isLock;
     }
 }
