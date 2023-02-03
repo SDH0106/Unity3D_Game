@@ -71,6 +71,8 @@ public class WeaponCardUI : MonoBehaviour
 
         num = transform.parent.GetSiblingIndex();
 
+        isLock = itemManager.cardLocks[num];
+
         Setting();
         CardColor();
         StartLockColor();

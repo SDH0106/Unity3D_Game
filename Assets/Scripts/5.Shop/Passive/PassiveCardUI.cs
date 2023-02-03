@@ -63,6 +63,8 @@ public class PassiveCardUI : MonoBehaviour
 
         num = transform.parent.GetSiblingIndex();
 
+        isLock = itemManager.cardLocks[num];
+
         Setting();
         CardImage();
         StatArray();

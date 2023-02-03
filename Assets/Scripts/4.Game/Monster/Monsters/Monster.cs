@@ -241,7 +241,7 @@ public class Monster : MonoBehaviour
             if (hp <= 0 && !isAttacked)
             {
                 SubscriptionFee();
-                if (gameManager.currentGameTime <= 0)
+                if (gameManager.currentGameTime > 0)
                 {
                     int coinValue = Random.Range(stat.monsterCoin - 2, stat.monsterCoin + 1);
                     DropCoin.Instance.Drop(transform.position, coinValue);

@@ -3949,9 +3949,9 @@ GameObject:
   - component: {fileID: 936130855}
   - component: {fileID: 936130856}
   - component: {fileID: 936130854}
-  - component: {fileID: 936130862}
   - component: {fileID: 936130861}
   - component: {fileID: 936130860}
+  - component: {fileID: 936130862}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -3973,14 +3973,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletStorage: {fileID: 1005871281}
   damageStorage: {fileID: 1692643827}
-  gameTime: 0
-  money: 500000
-  round: 1
+  gameTime: 10
+  money: 0
+  round: 10
   woodCount: 0
   woodMaxCount: 70
   maxHp: 0
   percentDamage: 0
-  physicDamage: 0
+  physicDamage: 100
   magicDamage: 0
   shortDamage: 0
   longDamage: 0
@@ -4160,35 +4160,35 @@ MonoBehaviour:
     monsterMaxHp: 30
     monsterDamage: 3
     monsterSpeed: 2
-    monsterDefence: 2
+    monsterDefence: 1
     monsterExp: 2
-    monsterCoin: 5
+    monsterCoin: 4
   - monsterName: "\uD558\uD2B8 \uBC15\uC950"
     monsterMaxHp: 20
     monsterDamage: 1
     monsterSpeed: 0
     monsterDefence: 0
     monsterExp: 3
-    monsterCoin: 6
+    monsterCoin: 5
   - monsterName: "\uC548\uC544\uC918\uC694 \uBC15\uC950"
     monsterMaxHp: 50
     monsterDamage: 5
     monsterSpeed: 1.5
-    monsterDefence: 5
+    monsterDefence: 3
     monsterExp: 5
-    monsterCoin: 8
+    monsterCoin: 6
   - monsterName: "\uD669\uAE08 \uBC15\uC950"
-    monsterMaxHp: 3000
+    monsterMaxHp: 600
     monsterDamage: 5
     monsterSpeed: 2
     monsterDefence: 5
     monsterExp: 0
     monsterCoin: 0
   - monsterName: "\uD574\uACE8 \uBC15\uC950"
-    monsterMaxHp: 5000
+    monsterMaxHp: 1000
     monsterDamage: 10
     monsterSpeed: 2.3
-    monsterDefence: 10
+    monsterDefence: 5
     monsterExp: 0
     monsterCoin: 0
 --- !u!1 &994559795

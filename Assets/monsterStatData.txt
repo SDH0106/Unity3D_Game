@@ -38,7 +38,7 @@
         },
         {
             "monsterName": "황금 박쥐",
-            "monsterMaxHp": 1000.0,
+            "monsterMaxHp": 600.0,
             "monsterDamage": 5.0,
             "monsterSpeed": 2.0,
             "monsterDefence": 5.0,
@@ -47,7 +47,7 @@
         },
         {
             "monsterName": "해골 박쥐",
-            "monsterMaxHp": 5000.0,
+            "monsterMaxHp": 1000.0,
             "monsterDamage": 10.0,
             "monsterSpeed": 2.3,
             "monsterDefence": 5.0,

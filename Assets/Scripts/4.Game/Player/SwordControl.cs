@@ -57,7 +57,6 @@ public class SwordControl : Weapon
         attackRange = weaponInfo.WeaponRange;
         canAttack = true;
         anim.enabled = false;
-        //WeaponRotate();
     }
 
     void Update()
@@ -69,24 +68,15 @@ public class SwordControl : Weapon
             mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mouse.y = transform.position.y;
 
-            dir = mouse - transform.position;
-
             if (!isSwing)
             {
-                //LookMousePosition();
                 LookKeyBoardPos();
+                Attack();
             }
+
             WeaponSetting();
-            Attack();
         }
 
-    }
-
-    void LookMousePosition()
-    {
-        anim.enabled = false;
-        angle = Mathf.Atan2(dir.z, dir.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(90, -angle, -90);
     }
 
     void LookKeyBoardPos()
@@ -118,48 +108,28 @@ public class SwordControl : Weapon
                 x = 1;
         }
 
+        //Debug.Log($"x: {xInput}, z:{zInput}");
+
         if (xInput || zInput)
         {
             dir = (Vector3.right * x + Vector3.forward * z).normalized;
             beforeDir = dir;
-            angle = Mathf.Atan2(dir.z, dir.x) * Mathf.Rad2Deg;
         }
 
         else if (!xInput && !zInput)
         {
-            angle = Mathf.Atan2(beforeDir.z, beforeDir.x) * Mathf.Rad2Deg;
+            dir = beforeDir;
         }
 
+        angle = Mathf.Atan2(dir.z, dir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(90, -angle, -90);
-    }
-
-    void WeaponRotate()
-    {
-        if (transform.parent.transform.localPosition.x < 0)
-        {
-            transform.parent.localRotation = Quaternion.Euler(0, 180, 0);
-
-            if (transform.parent.transform.localPosition.y > 0)
-                transform.parent.localRotation *= Quaternion.Euler(0, 0, 45);
-
-            else if (transform.parent.transform.localPosition.y < 0)
-                transform.parent.localRotation *= Quaternion.Euler(0, 0, -45);
-        }
-
-        else if (transform.parent.transform.localPosition.x > 0)
-        {
-            transform.parent.localRotation = Quaternion.Euler(0, 0, 0);
-
-            if (transform.parent.transform.localPosition.y > 0)
-                transform.parent.localRotation *= Quaternion.Euler(0, 0, 45);
-
-            else if (transform.parent.transform.localPosition.y < 0)
-                transform.parent.localRotation *= Quaternion.Euler(0, 0, -45);
-        }
+        Debug.Log(transform.rotation.eulerAngles);
     }
 
     void Attack()
     {
+        Debug.Log(transform.rotation.eulerAngles);
+
         if (gameManager.range > 0)
             addRange = (attackRange + gameManager.range * 0.05f);
 
@@ -177,12 +147,12 @@ public class SwordControl : Weapon
                 anim.enabled = true;
                 criRand = UnityEngine.Random.Range(1, 101);
 
-                if (dir.x > 0)
+                if ((mouse.x - transform.position.x) > 0)
                 {
                     transform.parent.localRotation = Quaternion.Euler(0, 0, 0);
                 }
 
-                else
+                else if ((mouse.x - transform.position.x) <= 0)
                 {
                     transform.parent.localRotation = Quaternion.Euler(0, -180, 0);
                 }
@@ -236,8 +206,9 @@ public class SwordControl : Weapon
     public void EndSwing()
     {
         transform.position = Vector3.MoveTowards(transform.position, character.weaponPoses[count].position, 5);
-        //WeaponRotate();
+        transform.parent.localRotation = Quaternion.Euler(0, 0, 0);
         isSwing = false;
+        anim.enabled = false;
     }
 
     private void OnTriggerEnter(Collider other)

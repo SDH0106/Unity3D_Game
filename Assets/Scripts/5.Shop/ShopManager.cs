@@ -90,7 +90,6 @@ public class ShopManager : Singleton<ShopManager>
             rerollMoney = 0;
 
         StartCardSlot();
-        StartCheckLock();
     }
 
     private void Update()
@@ -312,25 +311,6 @@ public class ShopManager : Singleton<ShopManager>
                     cards[i] = instant;
                     wpCheck[i] = 1;
                     instant.transform.SetParent(cardsParent.GetChild(i));
-                }
-            }
-        }
-    }
-
-    void StartCheckLock()
-    {
-        for (int i = 0; i < cardsParent.childCount; i++)
-        {
-            if (cards[i] != null)
-            {
-                if (wpCheck[i] == 0)
-                {
-                    cards[i].GetComponent<WeaponCardUI>().isLock = itemManager.cardLocks[i];
-                }
-
-                else if (wpCheck[i] == 1)
-                {
-                    cards[i].GetComponent<PassiveCardUI>().isLock = itemManager.cardLocks[i];
                 }
             }
         }
