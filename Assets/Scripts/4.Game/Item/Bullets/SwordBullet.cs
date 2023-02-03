@@ -7,6 +7,7 @@ public class SwordBullet : Bullet
     private void Start()
     {
         gameManager = GameManager.Instance;
+        isAttack = false;
     }
 
     void Update()
@@ -49,11 +50,11 @@ public class SwordBullet : Bullet
             else if (damageUI.swordBulletDamage <= collision.collider.GetComponent<Monster>().defence)
                 damageUI.isMiss = true;
 
-            if (gameManager.absorbHp > 0 && !damageUI.isMiss)
+            if (gameManager.absorbHp > 0 && !damageUI.isMiss && !isAttack)
+            {
                 Character.Instance.currentHp += gameManager.absorbHp;
-
-            if (gameManager.absorbHp > 0)
-                Character.Instance.currentHp += gameManager.absorbHp;
+                isAttack = true;
+            }
 
             damageUI.realDamage = damageUI.swordBulletDamage - collision.collider.GetComponent<Monster>().defence;
 

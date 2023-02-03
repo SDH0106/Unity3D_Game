@@ -18,6 +18,8 @@ public class PaaLazor : MonoBehaviour
 
     bool isAttack;
 
+    float realDamage;
+
     private void Start()
     {
         gameManager = GameManager.Instance;
@@ -29,7 +31,7 @@ public class PaaLazor : MonoBehaviour
 
         isAttack = false;
 
-        damage = damage + Mathf.Floor(GameManager.Instance.round / 5) * 2f; // 트리거에도 있음
+        realDamage = damage * (1 + Mathf.Floor(gameManager.round / 30)) + Mathf.Floor(gameManager.round / 5) * 2f;  // 트리거에도 있음
 
         if (isFlip)
             rend.flipX = true;
@@ -60,14 +62,16 @@ public class PaaLazor : MonoBehaviour
     {
         if (other.CompareTag("Character") && !isAttack)
         {
-            damage = damage + Mathf.Floor(GameManager.Instance.round / 5) * 2f;
-            character.OnDamaged(coll, damage);
-            isAttack = false;
+            realDamage = damage * (1 + Mathf.Floor(gameManager.round / 30)) + Mathf.Floor(gameManager.round / 5) * 2f;  // 트리거에도 있음
+            character.OnDamaged(coll, realDamage);
+            isAttack = true;
+            StartCoroutine(IEInvincible());
         }
     }
 
     IEnumerator IEInvincible()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.6f);
+        isAttack = false;
     }
 }

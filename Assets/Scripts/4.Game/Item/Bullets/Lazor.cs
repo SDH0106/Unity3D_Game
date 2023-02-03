@@ -46,8 +46,11 @@ public class Lazor : Bullet
             else if (damageUI.weaponDamage <= collision.collider.GetComponent<Monster>().defence)
                 damageUI.isMiss = true;
 
-            if (gameManager.absorbHp > 0 && !damageUI.isMiss)
+            if (gameManager.absorbHp > 0 && !damageUI.isMiss && !isAttack)
+            {
                 Character.Instance.currentHp += gameManager.absorbHp;
+                isAttack = true;
+            }
 
             damageUI.realDamage = damageUI.weaponDamage - collision.collider.GetComponent<Monster>().defence;
 

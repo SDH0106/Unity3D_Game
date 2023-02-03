@@ -174,9 +174,9 @@ public class MonsterSpawn : MonoBehaviour
     int RandomMonster()
     {
         weightValue[0] = 100 - (gameManager.round * 3f);
-        weightValue[1] = ((gameManager.round - 4) * 3f) * 0.3f;
-        weightValue[2] = ((gameManager.round - 10) * 3f) * 0.3f;
-        weightValue[3] = ((gameManager.round - 15) * 3f) * 0.5f;
+        weightValue[1] = ((gameManager.round - 6) * 3f) * 0.3f;
+        weightValue[2] = ((gameManager.round - 13) * 3f) * 0.3f;
+        weightValue[3] = ((gameManager.round - 20) * 3f) * 0.5f;
 
         float rand = Random.Range(0, totalWeight);
         int spawnNum = 0;

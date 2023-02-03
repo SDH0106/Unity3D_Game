@@ -17,9 +17,9 @@ MonoBehaviour:
   weaponName: "\uC5BC\uC74C \uC2A4\uD0DC\uD504"
   type: 1
   weaponDamage: 0
-  magicDamage: 0
+  magicDamage: 6
   attackDelay: 1.5
-  bulletSpeed: 5
+  bulletSpeed: 7
   weaponRange: 6
   weaponPrice: 23
   description: "\uC77C\uC815 \uD655\uB960(<color=lime>\uD589\uC6B4</color> \uBE44\uB840)\uB85C

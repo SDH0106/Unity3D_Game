@@ -216,10 +216,8 @@ public class StaffControl : Weapon
                     if (monsterCount > 0)
                         SoundManager.Instance.PlayES(weaponInfo.WeaponSound);
 
-                    Debug.Log(monsterCount);
                     for (int i = 0; i < monsterCount; i++)
                     {
-                        Debug.Log("1");
                         Bullet bullet = pool.Get();
                         bullet.transform.position = new Vector3(targets[i].transform.position.x, 0, targets[i].transform.position.z + 3);
                         bullet.damageUI = damageUI;
@@ -294,7 +292,7 @@ public class StaffControl : Weapon
                         DamageUI pool = Instantiate(damageUI, targets[monsterCount].transform.position, Quaternion.Euler(90, 0, 0)).GetComponent<DamageUI>();
                         pool.gameObject.transform.SetParent(gameManager.damageStorage);
 
-                        if (gameManager.absorbHp > 0)
+                        if (gameManager.absorbHp > 0 && !damageUI.isMiss && monsterCount == 0)
                             character.currentHp += gameManager.absorbHp;
 
                         if (monsterCount == 0)
@@ -354,9 +352,11 @@ public class StaffControl : Weapon
         Destroy(bullet.gameObject);
     }
 
+#if UNITY_EDITOR
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(Character.Instance.transform.position, 4f);
     }
+#endif
 }

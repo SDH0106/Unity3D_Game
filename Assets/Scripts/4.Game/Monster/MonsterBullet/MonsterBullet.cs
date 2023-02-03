@@ -25,9 +25,9 @@ public class MonsterBullet : MonoBehaviour
     {
         gameManager = GameManager.Instance;
         coll = GetComponent<Collider>();
-        Invoke("DestroyBullet", 3f);
+        Invoke("DestroyBullet", 2f);
         ShootDir();
-        realDamage = bulletDamage + Mathf.Floor(GameManager.Instance.round / 5f) * 2f;  // 트리거에도 있음
+        realDamage = bulletDamage * (1 + Mathf.Floor(gameManager.round / 30)) + Mathf.Floor(gameManager.round / 5) * 2f;  // 트리거에도 있음
         transform.position = new Vector3(transform.position.x, 0f, transform.position.z);
     }
 
@@ -52,7 +52,7 @@ public class MonsterBullet : MonoBehaviour
     {
         if (other.tag == "Character")
         {
-            realDamage = bulletDamage + Mathf.Floor(GameManager.Instance.round / 5f) * 2f;  // 트리거에도 있음
+            realDamage = bulletDamage * (1 + Mathf.Floor(gameManager.round / 30)) + Mathf.Floor(gameManager.round / 5) * 2f;
             other.GetComponent<Character>().OnDamaged(coll, realDamage);
             DestroyBullet();
             CancelInvoke("DestroyBullet");

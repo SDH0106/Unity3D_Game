@@ -23,8 +23,8 @@ MonoBehaviour:
   defence: 0
   physicDamage: 0
   magicDamage: 0
-  shortDamage: -1
-  longDamage: -1
+  shortDamage: -0.5
+  longDamage: -0.5
   attackSpeed: 0
   speed: 0
   range: 0
@@ -61,4 +61,4 @@ MonoBehaviour:
   lowPenetrate: 0
   penetrate: 0
   description: 
-  weight: 0
+  weight: 90

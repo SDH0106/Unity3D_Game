@@ -11,7 +11,7 @@ public class SkullBullet : MonsterBullet
         Invoke("DestroyBullet", 3f);
         ShootDir();
         speed = (randNum == 0) ? 6f : 3f;
-        realDamage = bulletDamage + Mathf.Floor(GameManager.Instance.round / 5f) * 2f;  // 트리거에도 있음
+        realDamage = bulletDamage * (1 + Mathf.Floor(gameManager.round / 30)) + Mathf.Floor(gameManager.round / 5) * 2f;  // 트리거에도 있음
         transform.position = new Vector3(transform.position.x, 0f, transform.position.z);
     }
 

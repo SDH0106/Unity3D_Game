@@ -50,8 +50,8 @@ public class Monster : MonoBehaviour
         anim = GetComponent<Animator>();
         coll = GetComponent<Collider>();
 
-        hp = stat.monsterMaxHp * (1 + Mathf.Floor(gameManager.round / 5) * Mathf.Floor(gameManager.round / 5));
-        damage = stat.monsterDamage + Mathf.Floor(gameManager.round / 5) * 2f;
+        hp = stat.monsterMaxHp * (2 + Mathf.Floor(gameManager.round / 5) * Mathf.Floor(gameManager.round / 5)) * 0.5f;
+        damage = stat.monsterDamage * (1 + Mathf.Floor(gameManager.round / 30)) + Mathf.Floor(gameManager.round / 5) * 2f;
         maxHp = hp;
         initScale = transform.localScale;
         speed = stat.monsterSpeed * (1 - gameManager.monsterSlow * 0.01f);
@@ -83,8 +83,8 @@ public class Monster : MonoBehaviour
 
     protected virtual void InitMonsterSetting()
     {
-        hp = stat.monsterMaxHp * (1 + Mathf.Floor(gameManager.round / 5) * Mathf.Floor(gameManager.round / 5));
-        damage = stat.monsterDamage + Mathf.Floor(gameManager.round / 5) * 2f;
+        hp = stat.monsterMaxHp * (2 + Mathf.Floor(gameManager.round / 5) * Mathf.Floor(gameManager.round / 5)) * 0.5f;
+        damage = stat.monsterDamage * (1 + Mathf.Floor(gameManager.round / 30)) + Mathf.Floor(gameManager.round / 5) * 2f;
         maxHp = hp;
         speed = stat.monsterSpeed * (1 - gameManager.monsterSlow * 0.01f);
         initSpeed = speed;
@@ -162,18 +162,17 @@ public class Monster : MonoBehaviour
     // 방어력 없이 바로 깎이는 대미지
     public void PureOnDamaged(float damage)
     {
-
         hp -= damage;
 
-        if (runningCoroutine != null)
-            StopCoroutine(runningCoroutine);
-
-        if (runningCoroutine != MonsterFreeze())
+        if (!isFreeze)
         {
+            if (runningCoroutine == MonsterColorBlink())
+            {
+                StopCoroutine(runningCoroutine);
+            }
             runningCoroutine = MonsterColorBlink();
             StartCoroutine(runningCoroutine);
         }
-
     }
 
     public void OnDamaged(float damage)
@@ -182,9 +181,10 @@ public class Monster : MonoBehaviour
 
         if (!isFreeze)
         {
-            if (runningCoroutine != null)
+            if (runningCoroutine == MonsterColorBlink())
+            {
                 StopCoroutine(runningCoroutine);
-
+            }
             runningCoroutine = MonsterColorBlink();
             StartCoroutine(runningCoroutine);
         }
@@ -196,11 +196,13 @@ public class Monster : MonoBehaviour
 
         if (freeze && !beforeFreeze)
         {
+            beforeFreeze = freeze;
             isFreeze = freeze;
-            beforeFreeze = isFreeze;
 
-            if (runningCoroutine != null)
+            if (runningCoroutine == MonsterColorBlink())
+            {
                 StopCoroutine(runningCoroutine);
+            }
 
             runningCoroutine = MonsterFreeze();
             StartCoroutine(runningCoroutine);
@@ -220,7 +222,6 @@ public class Monster : MonoBehaviour
     {
         rend.color = Color.cyan;
         yield return new WaitForSeconds(1.5f);
-
         isFreeze = false;
         beforeFreeze = isFreeze;
         speed = initSpeed;

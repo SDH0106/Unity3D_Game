@@ -4270,9 +4270,9 @@ MonoBehaviour:
   attackDelay: {fileID: 2752347234564760401}
   bulletSpeed: {fileID: 6008203887394794818}
   weaponRange: {fileID: 7528869600883561391}
-  weaponPrice: {fileID: 5467205176813401816}
+  sellPrice: {fileID: 5467205176813401816}
   weaponGrade: {fileID: 5967116522273165920}
-  sellPrice: {fileID: 1951171489077940904}
+  combinePrice: {fileID: 1951171489077940904}
   descriptBack: {fileID: 3962659762807131564}
   descriptBackLine: {fileID: 665651352425055984}
   description: {fileID: 7043070894437726223}

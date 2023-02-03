@@ -18,9 +18,9 @@ public class CardClick : MonoBehaviour
     [SerializeField] Text attackDelay;
     [SerializeField] Text bulletSpeed;
     [SerializeField] Text weaponRange;
-    [SerializeField] Text weaponPrice;
-    [SerializeField] Text weaponGrade;
     [SerializeField] Text sellPrice;
+    [SerializeField] Text weaponGrade;
+    [SerializeField] Text combinePrice;
     [SerializeField] Image descriptBack;
     [SerializeField] Image descriptBackLine;
     [SerializeField] Text description;
@@ -34,6 +34,8 @@ public class CardClick : MonoBehaviour
     [HideInInspector] public WeaponInfo selectedWeapon;
 
     int selectedNum;
+
+    int price;
 
     ItemManager itemManager;
     Character character;
@@ -54,6 +56,7 @@ public class CardClick : MonoBehaviour
         selectedNum = num;
         selectedWeapon = itemManager.storedWeapon[selectedNum];
 
+        price = Mathf.CeilToInt(selectedWeapon.WeaponPrice * ((int)(selectedWeapon.weaponGrade) * 2f + 1) * (1 - GameManager.Instance.salePercent));
         itemSprite.sprite = selectedWeapon.ItemSprite;
         weaponName.text = selectedWeapon.WeaponName.ToString();
         type.text = selectedWeapon.Type.ToString();
@@ -62,9 +65,9 @@ public class CardClick : MonoBehaviour
         attackDelay.text = selectedWeapon.AttackDelay.ToString();
         bulletSpeed.text = selectedWeapon.BulletSpeed.ToString();
         weaponRange.text = selectedWeapon.WeaponRange.ToString();
-        weaponPrice.text = (selectedWeapon.WeaponPrice * (int)(itemManager.weaponGrade[num] + 1)).ToString();
+        sellPrice.text = Mathf.CeilToInt(price * 0.7f).ToString();
         weaponGrade.text = itemManager.weaponGrade[num].ToString();
-        sellPrice.text = (selectedWeapon.WeaponPrice * (int)(itemManager.weaponGrade[selectedNum] + 1)).ToString();
+        combinePrice.text = Mathf.CeilToInt(price * 0.5f).ToString();
         description.text = selectedWeapon.Description.ToString();
 
         if (selectedWeapon.Type == WEAPON_TYPE.검)
@@ -131,7 +134,7 @@ public class CardClick : MonoBehaviour
         if (itemManager.fullCount > 0)
         {
             selectedWeapon = itemManager.storedWeapon[selectedNum];
-            GameManager.Instance.money += (selectedWeapon.WeaponPrice * (int)(itemManager.weaponGrade[selectedNum] + 1));
+            GameManager.Instance.money += Mathf.CeilToInt(price * 0.7f);
             itemManager.storedWeapon[selectedNum] = null;
             itemManager.weaponGrade[selectedNum] = Grade.일반;
             itemManager.fullCount--;
@@ -170,7 +173,7 @@ public class CardClick : MonoBehaviour
                     if ((selectedWeapon.WeaponName == itemManager.storedWeapon[i].WeaponName) && (itemManager.weaponGrade[selectedNum] == itemManager.weaponGrade[i]))
                     {
                         canCombine = true;
-                        GameManager.Instance.money -= (int)(itemManager.weaponGrade[selectedNum] + 1) * 20;
+                        GameManager.Instance.money -= Mathf.CeilToInt(price * 0.5f);
                         itemManager.weaponGrade[selectedNum]++;
                         itemManager.storedWeapon[i] = null;
                         itemManager.weaponGrade[i] = Grade.일반;

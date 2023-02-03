@@ -61,6 +61,7 @@ public class WeaponCardUI : MonoBehaviour
     {
         gameManager = GameManager.Instance;
         itemManager = ItemManager.Instance;
+        character = Character.Instance;
 
         combineCheckPanel.SetActive(false);
         cantCombinePanel.SetActive(false);
@@ -91,8 +92,6 @@ public class WeaponCardUI : MonoBehaviour
 
     void Setting()
     {
-        character = Character.Instance;
-
         if (isLock)
         {
             selectedWeapon = itemManager.lockedWeaCards[num];
@@ -111,7 +110,7 @@ public class WeaponCardUI : MonoBehaviour
         weaponPrice.text = price.ToString();
         weaponGrade.text = selectedWeapon.weaponGrade.ToString();
         description.text = selectedWeapon.Description.ToString();
-        combineMoney.text = ((int)(selectedWeapon.weaponGrade + 1) * 20).ToString();
+        combineMoney.text = Mathf.CeilToInt(price * 0.5f).ToString();
 
         if (selectedWeapon.Type == WEAPON_TYPE.검)
             attackTypes.text = "(물리/근거리)";
@@ -261,7 +260,7 @@ public class WeaponCardUI : MonoBehaviour
         if (gameManager.money - price >= (int)(selectedWeapon.weaponGrade + 1) * 20)
         {
             SoundManager.Instance.PlayES("WeaponSelect");
-            gameManager.money -= (int)(selectedWeapon.weaponGrade + 1) * 20;
+            gameManager.money -= Mathf.CeilToInt(price * 0.5f);
             gameManager.money -= price;
             itemManager.weaponGrade[combineNum]++;
             isLock = false;

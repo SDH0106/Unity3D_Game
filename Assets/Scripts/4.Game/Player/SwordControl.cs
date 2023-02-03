@@ -40,6 +40,8 @@ public class SwordControl : Weapon
 
     Vector3 beforeDir;
 
+    bool isAttack;
+
     private void Awake()
     {
         pool = new ObjectPool<Bullet>(CreateBullet, OnGetBullet, OnReleaseBullet, OnDestroyBullet, maxSize: poolCount);
@@ -57,6 +59,7 @@ public class SwordControl : Weapon
         attackRange = weaponInfo.WeaponRange;
         canAttack = true;
         anim.enabled = false;
+        isAttack = false;
     }
 
     void Update()
@@ -108,8 +111,6 @@ public class SwordControl : Weapon
                 x = 1;
         }
 
-        //Debug.Log($"x: {xInput}, z:{zInput}");
-
         if (xInput || zInput)
         {
             dir = (Vector3.right * x + Vector3.forward * z).normalized;
@@ -123,13 +124,10 @@ public class SwordControl : Weapon
 
         angle = Mathf.Atan2(dir.z, dir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(90, -angle, -90);
-        Debug.Log(transform.rotation.eulerAngles);
     }
 
     void Attack()
     {
-        Debug.Log(transform.rotation.eulerAngles);
-
         if (gameManager.range > 0)
             addRange = (attackRange + gameManager.range * 0.05f);
 
@@ -209,6 +207,7 @@ public class SwordControl : Weapon
         transform.parent.localRotation = Quaternion.Euler(0, 0, 0);
         isSwing = false;
         anim.enabled = false;
+        isAttack = false;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -230,8 +229,11 @@ public class SwordControl : Weapon
             DamageUI pool = Instantiate(damageUI, transform.position, Quaternion.Euler(90, 0, 0)).GetComponent<DamageUI>();
             pool.gameObject.transform.SetParent(gameManager.damageStorage);
 
-            if (gameManager.absorbHp > 0 && isSwing)
+            if (gameManager.absorbHp > 0 && !damageUI.isMiss && !isAttack && isSwing)
+            {
                 character.currentHp += gameManager.absorbHp;
+                isAttack = true;
+            }
         }
     }
 

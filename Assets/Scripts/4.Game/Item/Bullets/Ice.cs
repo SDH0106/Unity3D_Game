@@ -9,6 +9,7 @@ public class Ice : Bullet
     private void Start()
     {
         gameManager = GameManager.Instance;
+        isAttack = false;
     }
 
     void Update()
@@ -54,8 +55,11 @@ public class Ice : Bullet
             else if (damageUI.weaponDamage <= collision.collider.GetComponent<Monster>().defence)
                 damageUI.isMiss = true;
 
-            if (gameManager.absorbHp > 0 && !damageUI.isMiss)
+            if (gameManager.absorbHp > 0 && !damageUI.isMiss && !isAttack)
+            {
                 Character.Instance.currentHp += gameManager.absorbHp;
+                isAttack = true;
+            }
 
             damageUI.realDamage = damageUI.weaponDamage - collision.collider.GetComponent<Monster>().defence;
 

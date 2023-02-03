@@ -11,7 +11,7 @@
         },
         {
             "monsterName": "파아아악쥐",
-            "monsterMaxHp": 30.0,
+            "monsterMaxHp": 15.0,
             "monsterDamage": 3.0,
             "monsterSpeed": 2.0,
             "monsterDefence": 1.0,
@@ -20,7 +20,7 @@
         },
         {
             "monsterName": "하트 박쥐",
-            "monsterMaxHp": 20.0,
+            "monsterMaxHp": 10.0,
             "monsterDamage": 1.0,
             "monsterSpeed": 0.0,
             "monsterDefence": 0.0,
@@ -29,8 +29,8 @@
         },
         {
             "monsterName": "안아줘요 박쥐",
-            "monsterMaxHp": 50.0,
-            "monsterDamage": 5.0,
+            "monsterMaxHp": 25.0,
+            "monsterDamage": 4.0,
             "monsterSpeed": 1.5,
             "monsterDefence": 3.0,
             "monsterExp": 5.0,
@@ -39,7 +39,7 @@
         {
             "monsterName": "황금 박쥐",
             "monsterMaxHp": 600.0,
-            "monsterDamage": 5.0,
+            "monsterDamage": 10.0,
             "monsterSpeed": 2.0,
             "monsterDefence": 5.0,
             "monsterExp": 0.0,
@@ -48,7 +48,7 @@
         {
             "monsterName": "해골 박쥐",
             "monsterMaxHp": 1000.0,
-            "monsterDamage": 10.0,
+            "monsterDamage": 6.0,
             "monsterSpeed": 2.3,
             "monsterDefence": 5.0,
             "monsterExp": 0.0,

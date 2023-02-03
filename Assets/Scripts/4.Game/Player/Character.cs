@@ -119,6 +119,8 @@ public class Character : Singleton<Character>
             SoundManager.Instance.PlayES("LevelUp");
             level++;
             levelUpCount++;
+            gameManager.stats[0] += 5;
+            maxHp = gameManager.maxHp;
             exp = exp - maxExp;
             maxExp = 10 * level;
         }
@@ -135,6 +137,12 @@ public class Character : Singleton<Character>
                 Move();
                 Dash();
                 AutoRecoverHp();
+            }
+
+            else if ((gameManager.isClear && gameManager.isBossDead))
+            {
+                isBuff = false;
+                buffTime = 8;
             }
 
             anim.SetBool("isRun", isRun);
