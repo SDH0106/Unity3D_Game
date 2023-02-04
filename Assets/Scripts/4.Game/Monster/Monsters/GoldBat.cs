@@ -132,7 +132,7 @@ public class GoldBat : Monster
 
     IEnumerator CoolTime()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.3f);
 
         coll.enabled = true;
         isAttack = false;

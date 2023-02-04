@@ -310,7 +310,6 @@ public class PassiveCardUI : MonoBehaviour
                     {
                         gameManager.passiveIntVariables[i] += passiveIntVariables[i];
                     }
-
                 }
 
                 for (int i = 0; i < passiveFloatVariables.Length; i++)

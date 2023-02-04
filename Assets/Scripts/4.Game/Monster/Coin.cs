@@ -41,11 +41,11 @@ public class Coin : Singleton<Coin>
 
         if (distance <= 2 * (1 + gameManager.coinRange))
         {
-            if(character.speed <= 1)
+            if(gameManager.speed < 1)
                 speed = 2;
 
-            else if (character.speed > 1)
-                speed = character.speed + 2;
+            else if (gameManager.speed >= 1)
+                speed = gameManager.speed + 2;
         }
 
         else

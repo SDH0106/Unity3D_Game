@@ -17,7 +17,7 @@ MonoBehaviour:
   itemName: "\uBC40\uD30C\uC774\uC5B4 \uC5EC\uC655"
   itemPrice: 799
   maxCount: 10
-  hp: 0
+  hp: -20
   recoverHp: 0
   absorbHp: 4.4
   defence: -4
@@ -28,7 +28,7 @@ MonoBehaviour:
   attackSpeed: 0
   speed: 0
   range: 0
-  luck: -14
+  luck: 0
   critical: 0
   percentDamage: 0
   avoid: 0
@@ -42,6 +42,7 @@ MonoBehaviour:
   dashCount: 0
   buffNum: 0
   exDmg: 0
+  isedolCount: 0
   luckCoin: 0
   luckDamage: 0
   luckCritical: 0

@@ -73,7 +73,7 @@ public class Character : Singleton<Character>
 
     [HideInInspector] public bool isBuff = false;
     [HideInInspector] public float charBuffDmg = 0;
-    [HideInInspector] public float buffTime = 8;
+    [HideInInspector] public float buffTime = 5;
 
     public int thunderCount;
 
@@ -91,14 +91,14 @@ public class Character : Singleton<Character>
         gameManager = GameManager.Instance;
         transform.position = new Vector3(0f, 0f, -40f);
 
-        thunderMark.transform.localScale = new Vector3(Mathf.Clamp(4 + gameManager.range, 1, 12), Mathf.Clamp(4 + gameManager.range, 1, 12), 0);
+        thunderMark.transform.localScale = new Vector3(Mathf.Clamp(4f + gameManager.range * 0.5f, 1, 12), Mathf.Clamp(4f + gameManager.range * 0.5f, 1, 12), 0);
         gardianAngel.SetActive(false);
         gardianEffect.SetActive(false);
 
         gameManager.stats[0] = characterHp;
         maxHp = gameManager.stats[0];
         currentHp = maxHp;
-        speed = gameManager.speed + characterSpeed;
+        gameManager.stats[9] = characterSpeed;
         gameManager.stats[13] = damageRatio;
         gameManager.stats[14] = avoid;
         maxExp = 10;
@@ -119,7 +119,7 @@ public class Character : Singleton<Character>
             SoundManager.Instance.PlayES("LevelUp");
             level++;
             levelUpCount++;
-            gameManager.stats[0] += 5;
+            gameManager.stats[0] += 2;
             maxHp = gameManager.maxHp;
             exp = exp - maxExp;
             maxExp = 10 * level;
@@ -142,7 +142,7 @@ public class Character : Singleton<Character>
             else if ((gameManager.isClear && gameManager.isBossDead))
             {
                 isBuff = false;
-                buffTime = 8;
+                buffTime = 5;
             }
 
             anim.SetBool("isRun", isRun);
@@ -200,11 +200,11 @@ public class Character : Singleton<Character>
     {
         if (gameManager.buffNum == 1)
         {
-            if (gameManager.speed <= 0)
-                speed = characterSpeed;
+            if (gameManager.speed <= 1f)
+                speed = 1f;
 
             else
-                speed = gameManager.speed + characterSpeed;
+                speed = gameManager.speed;
 
             gameManager.attackSpeed = gameManager.stats[8] + 5f;
             gameManager.percentDamage = gameManager.stats[13];
@@ -212,11 +212,11 @@ public class Character : Singleton<Character>
 
         else if (gameManager.buffNum == 2)
         {
-            if (gameManager.speed <= 0)
-                speed = characterSpeed + 3f;
+            if (gameManager.speed <= 1f)
+                speed = 1f + 2f;
 
             else
-                speed = gameManager.speed + characterSpeed + 3f;
+                speed = gameManager.speed + 2f;
 
             gameManager.attackSpeed = gameManager.stats[8];
             gameManager.percentDamage = gameManager.stats[13];
@@ -224,11 +224,11 @@ public class Character : Singleton<Character>
 
         else if (gameManager.buffNum == 3)
         {
-            if (gameManager.speed <= 0)
-                speed = characterSpeed;
+            if (gameManager.speed <= 1f)
+                speed = 1f;
 
             else
-                speed = gameManager.speed + characterSpeed;
+                speed = gameManager.speed;
 
             gameManager.attackSpeed = gameManager.stats[8];
             gameManager.percentDamage = gameManager.stats[13] + 0.5f;
@@ -351,11 +351,11 @@ public class Character : Singleton<Character>
 
         if (!isBuff)
         {
-            if (gameManager.speed <= 0)
-                speed = characterSpeed;
+            if (gameManager.speed <= 1)
+                speed = 1;
 
             else
-                speed = gameManager.speed + characterSpeed;
+                speed = gameManager.speed;
         }
 
         else if (isBuff)
@@ -366,7 +366,7 @@ public class Character : Singleton<Character>
             if (buffTime <= 0)
             {
                 isBuff = false;
-                buffTime = 8;
+                buffTime = 5;
             }
         }
 
@@ -375,11 +375,7 @@ public class Character : Singleton<Character>
 
         dir = (Vector3.right * x + Vector3.forward * z).normalized;
 
-        if (speed <= 1)
-            transform.position += dir * Time.deltaTime;
-
-        else if (speed > 1)
-            transform.position += dir * speed * Time.deltaTime;
+        transform.position += dir * speed * Time.deltaTime;
 
         transform.position = ground.bounds.ClosestPoint(transform.position);
 

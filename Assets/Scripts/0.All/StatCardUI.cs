@@ -86,7 +86,7 @@ public class StatCardUI : StatCardInfo
         {
             if (selectedCard.statName == gameManager.gameObject.GetComponent<StatCardInfo>().statInfos[i].statName)
             {
-                gameManager.stats[i] += (gameManager.gameObject.GetComponent<StatCardInfo>().statInfos[i].statValue * (int)(cardGrade + 1));
+                gameManager.stats[i] += (gameManager.gameObject.GetComponent<StatCardInfo>().statInfos[i].statValue * ((int)cardGrade * 2f + 1));
                 gameManager.stats[i] = Mathf.Round(gameManager.stats[i] * 10) * 0.1f;
             }
         }

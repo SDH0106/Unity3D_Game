@@ -24,7 +24,7 @@ public class Chicken : Summons
             if (isNear)
                 transform.position = Vector3.MoveTowards(transform.position, randomPos, speed * Time.deltaTime);
             else if (!isNear)
-                transform.position = Vector3.MoveTowards(transform.position, character.transform.position, character.speed * 2 * Time.deltaTime);
+                transform.position = Vector3.MoveTowards(transform.position, character.transform.position, gameManager.speed * 2 * Time.deltaTime);
         }
 
         anim.SetBool("isAttack", isAttack);

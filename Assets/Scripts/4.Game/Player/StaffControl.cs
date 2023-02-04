@@ -256,7 +256,7 @@ public class StaffControl : Weapon
     {
         monsterCount = 0;
 
-        detectRange = Mathf.Clamp(attackRange + gameManager.range, 1f, 12f);
+        detectRange = Mathf.Clamp(attackRange + gameManager.range * 0.5f, 1f, 12f);
 
         Collider[] colliders = Physics.OverlapSphere(character.transform.position, detectRange);
 

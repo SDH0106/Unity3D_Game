@@ -3973,9 +3973,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletStorage: {fileID: 1005871281}
   damageStorage: {fileID: 1692643827}
-  gameTime: 1000
+  gameTime: 0
   money: 1000000
-  round: 3
+  round: 9
   woodCount: 0
   woodMaxCount: 70
   maxHp: 0
@@ -3989,7 +3989,7 @@ MonoBehaviour:
   defence: 0
   attackSpeed: 0
   speed: 0
-  range: 0
+  range: 3
   luck: 0
   critical: 10
   avoid: 0
@@ -4087,7 +4087,7 @@ MonoBehaviour:
   - statName: "\uD558\uD22C"
     statType: "\uCD5C\uB300 \uCCB4\uB825"
     statSprite: Health
-    statValue: 5
+    statValue: 3
   - statName: "\uC790\uC591\uAC15\uC7A5\uC81C"
     statType: "\uCCB4\uB825 \uD68C\uBCF5"
     statSprite: ReHealth
@@ -4099,7 +4099,7 @@ MonoBehaviour:
   - statName: "\uC274\uB4DC \uCE58\uAE30"
     statType: "\uBC29\uC5B4\uB825"
     statSprite: Defence
-    statValue: 0.1
+    statValue: 0.2
   - statName: "\uC644\uB825"
     statType: "\uBB3C\uB9AC \uACF5\uACA9\uB825"
     statSprite: WDamage
@@ -4123,7 +4123,7 @@ MonoBehaviour:
   - statName: "\uC2E0\uBC1C"
     statType: "\uC774\uB3D9 \uC18D\uB3C4"
     statSprite: Speed
-    statValue: 0.2
+    statValue: 0.3
   - statName: "\uB124\uC78E\uD074\uB85C\uBC84"
     statType: "\uD589\uC6B4"
     statSprite: Luck
@@ -4131,11 +4131,11 @@ MonoBehaviour:
   - statName: "\uC0AC\uB95C\uC548"
     statType: "\uC0AC\uAC70\uB9AC"
     statSprite: Range
-    statValue: 0.2
+    statValue: 0.3
   - statName: "\uB300\uAC00\uB9AC"
     statType: "\uD06C\uB9AC\uD2F0\uCEEC"
     statSprite: Critical
-    statValue: 2.5
+    statValue: 5
 --- !u!114 &936130862
 MonoBehaviour:
   m_ObjectHideFlags: 0

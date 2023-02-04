@@ -135,7 +135,7 @@ public class ShopManager : Singleton<ShopManager>
         sAtk.text = gameManager.shortDamage.ToString("0.#");
         lAtk.text = gameManager.longDamage.ToString("0.#");
         aSpd.text = gameManager.attackSpeed.ToString("0.#");
-        spd.text = character.speed.ToString("0.#");
+        spd.text = gameManager.speed.ToString("0.#");
         ran.text = gameManager.range.ToString("0.#");
         luk.text = gameManager.luck.ToString("0.#");
         cri.text = gameManager.critical.ToString("0.#");
@@ -149,7 +149,7 @@ public class ShopManager : Singleton<ShopManager>
         character.transform.position = new Vector3(0f, 0f, -40f);
         gameManager.round++;
         rerollMoney = -gameManager.round;
-        character.thunderMark.transform.localScale = new Vector3(Mathf.Clamp(4 + gameManager.range, 1, 12), Mathf.Clamp(4 + gameManager.range, 1, 12), 0);
+        character.thunderMark.transform.localScale = new Vector3(Mathf.Clamp(4f + gameManager.range * 0.5f, 1, 12), Mathf.Clamp(4f + gameManager.range * 0.5f, 1, 12), 0);
 
         if (gameManager.maxHp < 1)
             character.maxHp = 1;

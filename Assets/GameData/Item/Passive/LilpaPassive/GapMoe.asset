@@ -17,9 +17,9 @@ MonoBehaviour:
   itemName: "\uAC2D\uBAA8\uC5D0"
   itemPrice: 555
   maxCount: 1
-  hp: -44
-  recoverHp: -5
-  absorbHp: -5
+  hp: -33
+  recoverHp: -3
+  absorbHp: -3
   defence: 0
   physicDamage: 0
   magicDamage: 0
@@ -30,7 +30,7 @@ MonoBehaviour:
   range: 0
   luck: 0
   critical: 0
-  percentDamage: 0.5
+  percentDamage: 1
   avoid: 0
   coinRange: 0
   increaseExp: 0
@@ -61,6 +61,6 @@ MonoBehaviour:
   lowPenetrate: 0
   penetrate: 0
   description: "\uB2E8, \uD604\uC7AC <color=cyan>\uCD5C\uB300 \uCCB4\uB825</color>\uC774
-    <color=red>44\uC774\uD558</color>\uC77C \uACBD\uC6B0 \uCD5C\uB300 \uCCB4\uB825\uC774
+    <color=red>33\uC774\uD558</color>\uC77C \uACBD\uC6B0 \uCD5C\uB300 \uCCB4\uB825\uC774
     <color=red>1</color>\uC774 \uB429\uB2C8\uB2E4."
   weight: 81.200005

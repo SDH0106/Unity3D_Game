@@ -78,7 +78,7 @@ public class DescriptionUI : MonoBehaviour
                 break;
 
             case 11:
-                descriptionText.text = "캐릭터가 이동하는 속도와 관련된 능력치.\n0이하인 경우 캐릭터의 기본 이동 속도로 이동합니다.";
+                descriptionText.text = "캐릭터가 이동하는 속도와 관련된 능력치.\n1이하로 떨어지면 캐릭터의 이동속도는 1로 적용됩니다.";
                 break;
 
             case 12:

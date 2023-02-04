@@ -26,7 +26,7 @@ MonoBehaviour:
   shortDamage: -1
   longDamage: 0
   attackSpeed: 0
-  speed: -0.5
+  speed: -0.2
   range: 0
   luck: 0
   critical: 0
@@ -42,6 +42,7 @@ MonoBehaviour:
   dashCount: 0
   buffNum: 0
   exDmg: 0
+  isedolCount: 0
   luckCoin: 0
   luckDamage: 0
   luckCritical: 0
@@ -60,4 +61,4 @@ MonoBehaviour:
   lowPenetrate: 0
   penetrate: 0
   description: 
-  weight: 200
+  weight: 90
