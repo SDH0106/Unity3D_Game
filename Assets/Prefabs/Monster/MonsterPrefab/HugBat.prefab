@@ -118,7 +118,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.2, y: 0.15, z: 0}
+  m_Size: {x: 0.22, y: 0.18, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8525879957220706751
 MonoBehaviour:
@@ -132,16 +132,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 922e09f6559a10f4490747d163b1e141, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rend: {fileID: 0}
-  anim: {fileID: 0}
-  coll: {fileID: 0}
   isWalk: 0
   isDead: 0
   isAttacked: 0
   isAttack: 0
   hp: 0
-  maxHp: 0
-  initScale: {x: 0, y: 0, z: 0}
   stat:
     monsterName: 
     monsterMaxHp: 0
@@ -150,5 +145,5 @@ MonoBehaviour:
     monsterDefence: 0
     monsterExp: 0
     monsterCoin: 0
-  speed: 0
   dir: {x: 0, y: 0, z: 0}
+  defence: 0

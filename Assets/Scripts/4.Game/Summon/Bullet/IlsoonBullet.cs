@@ -8,7 +8,8 @@ public class IlsoonBullet : SummonsBullet
     private void Start()
     {
         gameManager = GameManager.Instance;
-        damage = Mathf.Round(GameManager.Instance.longDamage * 2 * (1 + GameManager.Instance.summonPDmg) * 10) * 0.1f;
+        if (GameManager.Instance.longDamage > 0)
+            damage = Mathf.Round(GameManager.Instance.longDamage * 2 * (1 + GameManager.Instance.summonPDmg) * 10) * 0.1f;
     }
     private void Update()
     {

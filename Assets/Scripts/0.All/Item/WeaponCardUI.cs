@@ -57,11 +57,15 @@ public class WeaponCardUI : MonoBehaviour
 
     int num;
 
+    bool isOver = false;
+
     private void Start()
     {
         gameManager = GameManager.Instance;
         itemManager = ItemManager.Instance;
         character = Character.Instance;
+
+        isOver = false;
 
         combineCheckPanel.SetActive(false);
         cantCombinePanel.SetActive(false);
@@ -81,7 +85,16 @@ public class WeaponCardUI : MonoBehaviour
 
     private void Update()
     {
-        lockImage.gameObject.SetActive(isLock);
+        if (!isOver)
+        {
+            if (Input.GetMouseButton(0))
+            {
+                combineCheckPanel.SetActive(false);
+                cantCombinePanel.SetActive(false);
+            }
+        }
+
+                lockImage.gameObject.SetActive(isLock);
 
         if (gameManager.money < price)
             weaponPrice.color = Color.red;
@@ -318,5 +331,15 @@ public class WeaponCardUI : MonoBehaviour
             lockBackImage.color = LockImageColor;
             lockText.color = LockTextColor;
         }
+    }
+
+    public void PointerEnter()
+    {
+        isOver = true;
+    }
+
+    public void PointerExit()
+    {
+        isOver = false;
     }
 }

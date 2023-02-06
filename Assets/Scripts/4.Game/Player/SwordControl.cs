@@ -39,6 +39,7 @@ public class SwordControl : Weapon
     bool zInput;
 
     Vector3 beforeDir;
+    Vector3 bulletDir;
 
     bool isAttack;
 
@@ -158,6 +159,8 @@ public class SwordControl : Weapon
                 anim.SetTrigger("RightAttack");
 
                 transform.position = Vector3.MoveTowards(transform.position, character.transform.position + range, 2);
+                bulletDir = transform.position - character.transform.position + range;
+                bulletDir.y = 0;
 
                 SoundManager.Instance.PlayES(weaponInfo.WeaponSound);
 
@@ -167,7 +170,7 @@ public class SwordControl : Weapon
                     {
                         Bullet bullet = pool.Get();
                         bullet.transform.position = new Vector3(firePos.position.x, 0f, firePos.position.z);
-                        bullet.Shoot(dir.normalized, firePos.position, 5f);
+                        bullet.Shoot(bulletDir.normalized, firePos.position, 5f);
                         bullet.damageUI = damageUI;
                         bullet.speed = 6f;
                     }

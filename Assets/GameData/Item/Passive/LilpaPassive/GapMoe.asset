@@ -60,7 +60,6 @@ MonoBehaviour:
   onePenetrate: 0
   lowPenetrate: 0
   penetrate: 0
-  description: "\uB2E8, \uD604\uC7AC <color=cyan>\uCD5C\uB300 \uCCB4\uB825</color>\uC774
-    <color=red>33\uC774\uD558</color>\uC77C \uACBD\uC6B0 \uCD5C\uB300 \uCCB4\uB825\uC774
-    <color=red>1</color>\uC774 \uB429\uB2C8\uB2E4."
-  weight: 81.200005
+  description: "\uB2E8, \uD604\uC7AC \uCD5C\uB300 \uCCB4\uB825\uC774 33\uC774\uD558\uC77C
+    \uACBD\uC6B0 \uCD5C\uB300 \uCCB4\uB825\uC774 <color=red>1</color>\uC774 \uB429\uB2C8\uB2E4."
+  weight: 812000

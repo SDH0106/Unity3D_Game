@@ -20,7 +20,7 @@ public class TreePotion : MonoBehaviour
 
             if (GameManager.Instance.buffNum != 0)
             {
-                character.buffTime = 8;
+                character.buffTime = 5;
                 character.isBuff = true;
             }
             Destroy(gameObject);

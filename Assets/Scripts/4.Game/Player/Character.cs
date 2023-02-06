@@ -145,6 +145,7 @@ public class Character : Singleton<Character>
                 buffTime = 5;
             }
 
+            anim.SetFloat("moveSpeed", 1 + (speed * 0.1f));
             anim.SetBool("isRun", isRun);
         }
 

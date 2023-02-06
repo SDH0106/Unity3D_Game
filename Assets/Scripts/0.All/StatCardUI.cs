@@ -32,7 +32,7 @@ public class StatCardUI : StatCardInfo
     {
         itemSprite.sprite = Resources.Load<Sprite>(selectedCard.statSprite);
         statName.text = selectedCard.statName;
-        statValue.text = (selectedCard.statValue * (int)(cardGrade + 1)).ToString();
+        statValue.text = (selectedCard.statValue * ((int)cardGrade * 2f + 1)).ToString();
         statType.text = selectedCard.statType;
         statGrade.text = cardGrade.ToString();
     }

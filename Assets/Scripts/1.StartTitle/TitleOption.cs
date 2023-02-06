@@ -273,4 +273,9 @@ public class TitleOption : MonoBehaviour
         PlayerPrefs.SetInt("Mute_Sfx", Convert.ToInt32(muteSfxVolume));
         panel.SetActive(false);
     }
+
+    public void TextFx()
+    {
+        soundManager.PlayES("SelectButton");
+    }
 }

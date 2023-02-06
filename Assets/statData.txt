@@ -28,25 +28,25 @@
             "statName": "완력",
             "statType": "물리 공격력",
             "statSprite": "WDamage",
-            "statValue": 0.5
+            "statValue": 0.3
         },
         {
             "statName": "마력 포션",
             "statType": "마법 공격력",
             "statSprite": "MDamage",
-            "statValue": 0.5
+            "statValue": 0.3
         },
         {
             "statName": "재련",
             "statType": "근거리 공격력",
             "statSprite": "SDamage",
-            "statValue": 0.5
+            "statValue": 0.3
         },
         {
             "statName": "능지",
             "statType": "원거리 공격력",
             "statSprite": "LDamage",
-            "statValue": 0.5
+            "statValue": 0.3
         },
         {
             "statName": "슉 슈슉",

@@ -87,6 +87,7 @@ public class Monster : MonoBehaviour
         damage = stat.monsterDamage * (1 + Mathf.Floor(gameManager.round / 30)) + Mathf.Floor(gameManager.round / 5) * 2f;
         maxHp = hp;
         speed = stat.monsterSpeed * (1 - gameManager.monsterSlow * 0.01f);
+        defence = stat.monsterDefence * (1 + Mathf.Floor(gameManager.round / 5) * 0.5f) * gameManager.monsterDef;
         initSpeed = speed;
         isWalk = true;
         isDead = false;

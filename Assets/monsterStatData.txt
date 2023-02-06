@@ -2,7 +2,7 @@
     "stats": [
         {
             "monsterName": "애기 박쥐",
-            "monsterMaxHp": 8.0,
+            "monsterMaxHp": 6.0,
             "monsterDamage": 2.0,
             "monsterSpeed": 1.0,
             "monsterDefence": 0.0,

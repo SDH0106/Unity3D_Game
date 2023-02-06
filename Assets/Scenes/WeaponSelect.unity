@@ -372,6 +372,7 @@ MonoBehaviour:
   cardLocks: 
   cardGrades: 
   passiveCounts: 
+  selectedGrades: 
 --- !u!1 &213118685
 GameObject:
   m_ObjectHideFlags: 0

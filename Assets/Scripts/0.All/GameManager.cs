@@ -9,6 +9,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] public Transform damageStorage;
 
     [Header("GameData")]
+    [SerializeField] float initGameTime;
     [SerializeField] float gameTime;
     [SerializeField] public int money;
     [SerializeField] public int round;
@@ -89,9 +90,8 @@ public class GameManager : Singleton<GameManager>
 
     private void Start()
     {
-        DontDestroyOnLoad(gameObject);
-
-        InitSetting();
+        gameTime = Mathf.Clamp(initGameTime + (round - 1) * 5f, initGameTime, 60f);
+        //InitSetting();
         InitArray();
         currentGameTime = gameTime;
         isPause = false;
@@ -103,7 +103,8 @@ public class GameManager : Singleton<GameManager>
 
     void InitSetting()
     {
-        gameTime = 60;
+        initGameTime = 20;
+        gameTime = initGameTime;
         money = 0;
         woodCount = 0;
         woodMaxCount = 70;
@@ -318,6 +319,7 @@ public class GameManager : Singleton<GameManager>
         Character.Instance.transform.position = new Vector3(0f, 0f, -40f);
         currentScene = "Shop";
         SceneManager.LoadScene(currentScene);
+        gameTime = Mathf.Clamp(initGameTime + (round - 1) * 5f, initGameTime, 60f);
         currentGameTime = gameTime;
         isClear = false;
     }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using static WeaponInfo;
 
@@ -40,6 +41,8 @@ public class CardClick : MonoBehaviour
     ItemManager itemManager;
     Character character;
 
+    bool isOver;
+
     private void Start()
     {
         itemManager = ItemManager.Instance;
@@ -48,6 +51,22 @@ public class CardClick : MonoBehaviour
         combineCheckPanel.SetActive(false);
         cantSellPanel.SetActive(false);
         cantCombinePanel.SetActive(false);
+        isOver = false;
+    }
+
+    private void Update()
+    {
+        if(!isOver)
+        {
+            if (Input.GetMouseButton(0))
+            {
+                sellCheckPanel.SetActive(false);
+                cantSellPanel.SetActive(false);
+                combineCheckPanel.SetActive(false);
+                cantCombinePanel.SetActive(false);
+                gameObject.SetActive(false);
+            }
+        }
     }
 
     public void Setting(int num)
@@ -125,6 +144,17 @@ public class CardClick : MonoBehaviour
             weaponGrade.color = new Color(1f, 0.45f, 0.45f, 1f);
         }
     }
+
+    public void PointerEnter()
+    {
+        isOver = true;
+    }
+
+    public void PointerExit()
+    {
+        isOver = false;
+    }
+
 
     public void SellWeapon()
     {

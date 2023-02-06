@@ -16,12 +16,12 @@ MonoBehaviour:
   itemSprite: {fileID: 21300000, guid: 6b2fd537acb4dc14eb556b3b3234e036, type: 3}
   weaponName: "\uAD8C\uCD1D"
   type: 0
-  weaponDamage: 3
+  weaponDamage: 6
   magicDamage: 0
   attackDelay: 1
   bulletSpeed: 12
   weaponRange: 8
-  weaponPrice: 9
-  description: "\uBAA8\uB4E0 \uBB34\uAE30\uC911 \uAC00\uC7A5 <color=cyan>\uAE30\uBCF8\uC801\uC778</color>
+  weaponPrice: 14
+  description: "\uBAA8\uB4E0 \uBB34\uAE30\uC911 \uAC00\uC7A5 \uAE30\uBCF8\uC801\uC778
     \uCD1D."
   weaponSound: {fileID: 8300000, guid: f4482d2a369392142ab84b0be1285ae3, type: 3}

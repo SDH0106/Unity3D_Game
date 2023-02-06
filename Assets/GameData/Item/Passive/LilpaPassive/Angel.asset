@@ -26,7 +26,7 @@ MonoBehaviour:
   shortDamage: 0
   longDamage: 0
   attackSpeed: 0
-  speed: 0
+  speed: 1
   range: 0
   luck: 0
   critical: 0
@@ -60,7 +60,6 @@ MonoBehaviour:
   onePenetrate: 0
   lowPenetrate: 0
   penetrate: 0
-  description: "\uCE90\uB9AD\uD130\uAC00 <color=red>\uC0AC\uB9DD\uC2DC</color> <color=cyan>\uCD5C\uB300
-    \uCCB4\uB825</color>\uC758 <color=lime>1/2\uC758 \uCCB4\uB825</color>\uC73C\uB85C
-    1\uD68C <color=cyan>\uBD80\uD65C</color>\uD569\uB2C8\uB2E4."
-  weight: 8.4
+  description: "\uCE90\uB9AD\uD130\uAC00 \uC0AC\uB9DD\uC2DC \uCD5C\uB300 \uCCB4\uB825\uC758\n<color=lime>1/2\uC758
+    \uCCB4\uB825</color>\uC73C\uB85C 1\uD68C <color=cyan>\uBD80\uD65C</color>\uD569\uB2C8\uB2E4."
+  weight: 16.24

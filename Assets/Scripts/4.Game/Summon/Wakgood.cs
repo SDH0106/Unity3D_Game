@@ -18,7 +18,8 @@ public class Wakgood : Summons
     void Start()
     {
         InitSetting();
-        damage = Mathf.Round(gameManager.shortDamage * 5 * (1 + gameManager.summonPDmg) * 10) * 0.1f;
+        if (gameManager.shortDamage > 0)
+            damage = Mathf.Round(gameManager.shortDamage * 5 * (1 + gameManager.summonPDmg) * 10) * 0.1f;
     }
 
     private void Update()

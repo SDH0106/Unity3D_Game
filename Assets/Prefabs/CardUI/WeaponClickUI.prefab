@@ -328,7 +328,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 4}
+  m_AnchoredPosition: {x: 0, y: 4.000122}
   m_SizeDelta: {x: 364.13, y: 495}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1541423104072343462
@@ -4211,6 +4211,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7416537652616297275}
   - component: {fileID: 263857445992097350}
+  - component: {fileID: 727931678748143998}
+  - component: {fileID: 1101839060768410384}
   m_Layer: 5
   m_Name: WeaponClickUI
   m_TagString: Untagged
@@ -4244,8 +4246,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 182, y: -226}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 668, y: -1012}
+  m_SizeDelta: {x: 362.1272, y: 527.8702}
   m_Pivot: {x: 2.32, y: -1.76}
 --- !u!114 &263857445992097350
 MonoBehaviour:
@@ -4281,6 +4283,63 @@ MonoBehaviour:
   cantSellPanel: {fileID: 9087953607592992061}
   cantCombinePanel: {fileID: 5910225383521290555}
   selectedWeapon: {fileID: 0}
+--- !u!114 &727931678748143998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6248587123694518275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 263857445992097350}
+          m_TargetAssemblyTypeName: CardClick, Assembly-CSharp
+          m_MethodName: PointerExit
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 263857445992097350}
+          m_TargetAssemblyTypeName: CardClick, Assembly-CSharp
+          m_MethodName: PointerEnter
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!225 &1101839060768410384
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6248587123694518275}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &6610214698686995456
 GameObject:
   m_ObjectHideFlags: 0

@@ -28,7 +28,7 @@ MonoBehaviour:
   attackSpeed: 0
   speed: 0
   range: 0
-  luck: 34
+  luck: 50
   critical: -5
   percentDamage: 0
   avoid: 0
@@ -61,4 +61,4 @@ MonoBehaviour:
   lowPenetrate: 0
   penetrate: 0
   description: 
-  weight: 0.04
+  weight: 16.24

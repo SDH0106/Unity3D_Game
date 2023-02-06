@@ -60,9 +60,8 @@ MonoBehaviour:
   onePenetrate: 0
   lowPenetrate: 0
   penetrate: 0
-  description: "<color=cyan>\uC774\uD30C\uB9AC \uB098\uBB34</color>\uC5D0\uC11C \uB5A8\uC5B4\uC9C0\uB294
-    \uC74C\uC2DD\uC744 <color=cyan>\uD06C\uB9BC\uBE75</color>\uC73C\uB85C \uAD50\uCCB4\uD569\uB2C8\uB2E4.\n\uD06C\uB9BC\uBE75\uC740
-    <color=cyan>\uCCB4\uB825</color>\uC744 <color=lime>10\uD68C\uBCF5</color>\uD558\uACE0
-    <color=lime>5\uCD08\uAC04</color> <color=cyan>\uC774\uB3D9\uC18D\uB3C4</color>\uB97C
-    <color=lime>2\uB9CC\uD07C</color> \uC0C1\uC2B9\uC2DC\uD0B5\uB2C8\uB2E4."
-  weight: 152
+  description: "\uC774\uD30C\uB9AC \uB098\uBB34\uC5D0\uC11C \uB5A8\uC5B4\uC9C0\uB294
+    \uC74C\uC2DD\uC744 \uD06C\uB9BC\uBE75\uC73C\uB85C \uAD50\uCCB4\uD569\uB2C8\uB2E4.\n\uD06C\uB9BC\uBE75\uC740
+    \uCCB4\uB825\uC744 <color=lime>10\uD68C\uBCF5</color>\uD558\uACE0\n<color=cyan>5\uCD08\uAC04</color>
+    \uC774\uB3D9\uC18D\uB3C4\uB97C <color=lime>2</color> \uCD94\uAC00 \uC0C1\uC2B9\uC2DC\uD0B5\uB2C8\uB2E4."
+  weight: 32
