@@ -4283,6 +4283,7 @@ MonoBehaviour:
   cantSellPanel: {fileID: 9087953607592992061}
   cantCombinePanel: {fileID: 5910225383521290555}
   selectedWeapon: {fileID: 0}
+  showPos: {x: 0, y: 0, z: 0}
 --- !u!114 &727931678748143998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4337,7 +4338,7 @@ CanvasGroup:
   m_GameObject: {fileID: 6248587123694518275}
   m_Enabled: 1
   m_Alpha: 1
-  m_Interactable: 1
+  m_Interactable: 0
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
 --- !u!1 &6610214698686995456

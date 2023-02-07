@@ -51,7 +51,7 @@ public class WeaponSlot : MonoBehaviour
         if (ItemManager.Instance.storedWeapon[slotNum] != null)
         {
             sellUI.gameObject.SetActive(true);
-            sellUI.transform.position = Input.mousePosition;
+            sellUI.GetComponent<CardClick>().ShowPos();
             sellUI.GetComponent<CardClick>().Setting(slotNum);
             sellUI.GetComponent<CardClick>().CardImage(slotNum);
         }

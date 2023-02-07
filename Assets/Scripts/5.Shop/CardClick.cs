@@ -43,6 +43,10 @@ public class CardClick : MonoBehaviour
 
     bool isOver;
 
+    public Vector3 showPos;
+
+    RectTransform rect;
+
     private void Start()
     {
         itemManager = ItemManager.Instance;
@@ -67,6 +71,13 @@ public class CardClick : MonoBehaviour
                 gameObject.SetActive(false);
             }
         }
+    }
+
+    public void ShowPos()
+    {
+        rect = GetComponent<RectTransform>();
+        RectTransformUtility.ScreenPointToWorldPointInRectangle(rect, Input.mousePosition, Camera.main, out showPos);
+        transform.position = showPos;
     }
 
     public void Setting(int num)

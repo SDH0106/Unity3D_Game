@@ -159,6 +159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   descriptionText: {fileID: 5788271246065159636}
+  rect: {fileID: 5788271245355704992}
 --- !u!225 &5788271245355704999
 CanvasGroup:
   m_ObjectHideFlags: 0

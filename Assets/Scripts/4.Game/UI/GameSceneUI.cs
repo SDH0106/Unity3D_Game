@@ -96,7 +96,7 @@ public class GameSceneUI : Singleton<GameSceneUI>
         dash.SetActive(false);
         statWindow.SetActive(false);
         chestPassive.SetActive(false);
-        subCam.gameObject.SetActive(false);
+        //subCam.gameObject.SetActive(false);
         clickText.gameObject.SetActive(false);
         clearImage.gameObject.SetActive(false);
     }
@@ -492,8 +492,8 @@ public class GameSceneUI : Singleton<GameSceneUI>
 
     public void TitleScene()
     {
-        subCam.transform.position = Camera.main.transform.position;
+        /*subCam.transform.position = Camera.main.transform.position;
         subCam.transform.rotation = Camera.main.transform.rotation;
-        subCam.gameObject.SetActive(true);
+        subCam.gameObject.SetActive(true);*/
     }
 }

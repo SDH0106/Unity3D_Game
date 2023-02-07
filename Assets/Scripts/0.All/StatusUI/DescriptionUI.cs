@@ -25,11 +25,14 @@ enum StatText
 public class DescriptionUI : MonoBehaviour
 {
     [SerializeField] Text descriptionText;
+    [SerializeField] RectTransform rect;
 
+    Vector3 screenPoint;
 
     public void SetTextInfo(int num)
     {
-        transform.position = Input.mousePosition;
+        RectTransformUtility.ScreenPointToWorldPointInRectangle(rect, Input.mousePosition, Camera.main, out screenPoint);
+        transform.position = screenPoint;
 
         switch(num)
         {
