@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Soil 7
   m_EditorClassIdentifier: 
   m_Sprite: {fileID: 8933607801220796041, guid: dc747d0a3cdf6594f9f275fdd2a48b4b, type: 3}
-  m_Color: {r: 0.9, g: 0.9, b: 0.9, a: 1}
+  m_Color: {r: 0.85, g: 0.85, b: 0.85, a: 1}
   m_Transform:
     e00: 1
     e01: 0

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,7 +8,8 @@ public class GameSceneUI : Singleton<GameSceneUI>
 {
     [SerializeField] public Collider ground;
     [SerializeField] GameObject treePrefab;
-    [SerializeField] Camera subCam;
+    [SerializeField] public GameObject monsterSpawn;
+    [SerializeField] GameObject tutoPanel;
 
     [Header("HP")]
     [SerializeField] Image chararcterImage;
@@ -96,14 +98,33 @@ public class GameSceneUI : Singleton<GameSceneUI>
         dash.SetActive(false);
         statWindow.SetActive(false);
         chestPassive.SetActive(false);
-        //subCam.gameObject.SetActive(false);
         clickText.gameObject.SetActive(false);
         clearImage.gameObject.SetActive(false);
+        tutoPanel.SetActive(false);
+
+        gameManager = GameManager.Instance;
+
+        if (gameManager.round == 1)
+        {
+            if (Convert.ToBoolean(PlayerPrefs.GetInt("GameTuto", 1)))
+            {
+                monsterSpawn.SetActive(!Convert.ToBoolean(PlayerPrefs.GetInt("GameTuto", 1)));
+                tutoPanel.SetActive(Convert.ToBoolean(PlayerPrefs.GetInt("GameTuto", 1)));
+            }
+        }
+
+        else if(gameManager.round == 10)
+        {
+            if (Convert.ToBoolean(PlayerPrefs.GetInt("BossTuto", 1)))
+            {
+                monsterSpawn.SetActive(!Convert.ToBoolean(PlayerPrefs.GetInt("BossTuto", 1)));
+                tutoPanel.SetActive(Convert.ToBoolean(PlayerPrefs.GetInt("BossTuto", 1)));
+            }
+        }
     }
 
     private void Start()
     {
-        gameManager = GameManager.Instance;
         character = Character.Instance;
         soundManager = SoundManager.Instance;
 
@@ -183,8 +204,8 @@ public class GameSceneUI : Singleton<GameSceneUI>
     {
         float groundX = ground.bounds.size.x;
         float groundZ = ground.bounds.size.z;
-        groundX = Random.Range((groundX / 2f) * -1f + ground.bounds.center.x, (groundX / 2f) + ground.bounds.center.x);
-        groundZ = Random.Range((groundX / 2f) * -1f + ground.bounds.center.z, (groundX / 2f) + ground.bounds.center.z);
+        groundX = UnityEngine.Random.Range((groundX / 2f) * -1f + ground.bounds.center.x, (groundX / 2f) + ground.bounds.center.x);
+        groundZ = UnityEngine.Random.Range((groundX / 2f) * -1f + ground.bounds.center.z, (groundX / 2f) + ground.bounds.center.z);
 
         if(Mathf.Abs(groundX) < 2f)
         {
@@ -290,7 +311,6 @@ public class GameSceneUI : Singleton<GameSceneUI>
                 {
                     if (Input.GetMouseButtonDown(0))
                     {
-                        subCam.gameObject.SetActive(true);
                         clearImage.gameObject.SetActive(false);
                         SceneManager.LoadScene("End");
                     }
@@ -332,8 +352,6 @@ public class GameSceneUI : Singleton<GameSceneUI>
             {
                 if (Input.GetMouseButtonDown(0))
                 {
-                    subCam.gameObject.SetActive(true);
-
                     if (!bgmChange)
                     {
                         soundManager.PlayBGM(6, false);
@@ -488,12 +506,5 @@ public class GameSceneUI : Singleton<GameSceneUI>
     public void OnOffStatWindow()
     {
         statWindow.gameObject.SetActive(!statWindow.gameObject.activeSelf);
-    }
-
-    public void TitleScene()
-    {
-        /*subCam.transform.position = Camera.main.transform.position;
-        subCam.transform.rotation = Camera.main.transform.rotation;
-        subCam.gameObject.SetActive(true);*/
     }
 }

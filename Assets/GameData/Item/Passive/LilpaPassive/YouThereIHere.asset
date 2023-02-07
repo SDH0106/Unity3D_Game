@@ -61,5 +61,6 @@ MonoBehaviour:
   lowPenetrate: 0
   penetrate: 0
   description: "<color=cyan>\uB300\uC26C \uC2A4\uD0AC</color>\uC744 <color=lime>1\uAC1C</color>
-    \uCD94\uAC00\uD569\uB2C8\uB2E4. "
+    \uCD94\uAC00\uD569\uB2C8\uB2E4. \n\uB300\uC26C\uD6C4 \uC7A0\uC2DC\uB3D9\uC548
+    <color=lime>\uBB34\uC801\uC0C1\uD0DC</color>\uAC00 \uB429\uB2C8\uB2E4."
   weight: 81.200005

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -90,8 +91,10 @@ public class GameManager : Singleton<GameManager>
 
     private void Start()
     {
+        /*PlayerPrefs.SetInt("GameTuto", 1);
+        PlayerPrefs.SetInt("BossTuto", 1);*/
         gameTime = Mathf.Clamp(initGameTime + (round - 1) * 5f, initGameTime, 60f);
-        //InitSetting();
+        InitSetting();
         InitArray();
         currentGameTime = gameTime;
         isPause = false;

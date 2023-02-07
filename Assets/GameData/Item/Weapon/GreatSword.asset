@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b702467f022889c4a8cc17c04fb53eb2, type: 3}
   m_Name: GreatSword
   m_EditorClassIdentifier: 
-  weaponGrade: 1
+  weaponGrade: 0
   itemSprite: {fileID: 21300000, guid: b58f02bb4dc948746aeb4c220999473a, type: 3}
   weaponName: "\uC131\uAC80"
   type: 2
   weaponDamage: 10
   magicDamage: 0
-  attackDelay: 2.3
+  attackDelay: 2.1
   bulletSpeed: 0
   weaponRange: 1
   weaponPrice: 30

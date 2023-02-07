@@ -19,7 +19,7 @@ public class Lazor : Bullet
 
         else if (gameManager.range > 0)
         {
-            transform.localScale = new Vector3(initScale.x * (1 + gameManager.range * 0.05f), initScale.y, initScale.z);
+            transform.localScale = new Vector3(initScale.x * (1 + gameManager.range * 0.3f), initScale.y, initScale.z);
         }
     }
 

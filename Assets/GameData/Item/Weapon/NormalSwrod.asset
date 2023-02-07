@@ -18,7 +18,7 @@ MonoBehaviour:
   type: 2
   weaponDamage: 6
   magicDamage: 0
-  attackDelay: 1.8
+  attackDelay: 1.5
   bulletSpeed: 0
   weaponRange: 0.8
   weaponPrice: 12

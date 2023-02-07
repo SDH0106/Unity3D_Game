@@ -282,6 +282,7 @@ public class Character : Singleton<Character>
                     transform.position = Vector3.Lerp(beforePos, afterPos, 1);
                     dashCount--;
                     Invoke("ParticleOff", 0.4f);
+                    StartCoroutine(IEDashInvincible());
                 }
             }
 
@@ -458,6 +459,20 @@ public class Character : Singleton<Character>
 
         yield return new WaitForSeconds(invincibleTime);
         rend.color = Color.white;
+        isAttacked = false;
+    }
+
+    public IEnumerator IEDashInvincible()
+    {
+        Color color = rend.color;
+
+        isAttacked = true;
+        color.a = 0.5f;
+        rend.color = color;
+
+        yield return new WaitForSeconds(invincibleTime);
+        color.a = 1f;
+        rend.color = color;
         isAttacked = false;
     }
 
