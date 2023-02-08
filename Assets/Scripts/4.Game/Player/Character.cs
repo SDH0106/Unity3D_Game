@@ -401,7 +401,7 @@ public class Character : Singleton<Character>
 
     int avoidRand;
 
-    public void OnDamaged(Collider other, float damage)
+    public void OnDamaged(float damage)
     {
         if (!isAttacked)
         {

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 using UnityEngine.UI;
 
 public class SkullBat : Monster
@@ -10,6 +11,13 @@ public class SkullBat : Monster
     [SerializeField] Slider monsterHpBar;
 
     float attackTime = 5;
+
+    private IObjectPool<MonsterBullet> pool;
+
+    private void Awake()
+    {
+        pool = new ObjectPool<MonsterBullet>(CreateBullet, OnGetBullet, OnReleaseBullet, OnDestroyBullet, maxSize: 6);
+    }
 
     void Start()
     {
@@ -30,12 +38,12 @@ public class SkullBat : Monster
         {
             if (!isFreeze)
             {
-
                 if (isWalk)
                 {
                     Move();
-                    attackTime -= Time.deltaTime;
                 }
+
+                attackTime -= Time.deltaTime;
 
                 if (attackTime <= 0)
                 {
@@ -120,9 +128,39 @@ public class SkullBat : Monster
 
         for (int i = 0; i < bulletPoses.Length; i++)
         {
-            MonsterBullet bullet = Instantiate(skullBullet, bulletPoses[i].position, skullBullet.transform.rotation).GetComponent<MonsterBullet>();
+            MonsterBullet bullet = pool.Get();
+            bullet.transform.position = new Vector3(bulletPoses[i].position.x, 0, bulletPoses[i].position.z);
             bullet.monsPos = transform.position;
             bullet.randNum = rand;
+            bullet.GetComponent<SkullBullet>().ShootDir();
+            bullet.GetComponent<SkullBullet>().AutoDestroyBullet();
         }
+    }
+
+    private MonsterBullet CreateBullet()
+    {
+        MonsterBullet bullet = Instantiate(skullBullet, bulletPoses[0].position, transform.rotation).GetComponent<MonsterBullet>();
+        bullet.SetManagedPool(pool);
+        return bullet;
+    }
+
+    private void OnGetBullet(MonsterBullet bullet)
+    {
+        bullet.gameObject.SetActive(true);
+    }
+
+    private void OnReleaseBullet(MonsterBullet bullet)
+    {
+        bullet.gameObject.SetActive(false);
+    }
+
+    private void OnDestroyBullet(MonsterBullet bullet)
+    {
+        Destroy(bullet.gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        pool.Clear();
     }
 }

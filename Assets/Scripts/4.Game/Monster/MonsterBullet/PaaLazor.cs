@@ -3,67 +3,56 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
 
-public class PaaLazor : MonoBehaviour
+public class PaaLazor : MonsterBullet
 {
-    [SerializeField] float damage;
-
     Character character;
-    Collider coll;
-    SpriteRenderer rend;
+    public SpriteRenderer rend;
     Animator anim;
 
-    public bool isFlip;
-
-    GameManager gameManager;
+    [HideInInspector] public bool isFlip;
 
     bool isAttack;
-
-    float realDamage;
 
     private void Start()
     {
         gameManager = GameManager.Instance;
 
         character = Character.Instance;
-        coll = GetComponent<Collider>();
-        rend = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
 
-        isAttack = false;
-
-        realDamage = damage * (1 + Mathf.Floor(gameManager.round / 30)) + Mathf.Floor(gameManager.round / 5) * 2f;  // 트리거에도 있음
-
-        if (isFlip)
-            rend.flipX = true;
-
-        else
-            rend.flipX = false;
-
-        anim.SetBool("isFlip", isFlip);
+        realDamage = bulletDamage * (1 + Mathf.Floor(gameManager.round / 30)) + Mathf.Floor(gameManager.round / 5) * 2f;  // 트리거에도 있음
     }
 
     private void Update()
     {
+        anim.SetBool("isFlip", isFlip);
+        rend.flipX = isFlip;
+
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("RightPaaLazor") || anim.GetCurrentAnimatorStateInfo(0).IsName("LeftPaaLazor"))
         {
             if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
             {
-                Destroy(gameObject);
+                DestroyBullet();
             }
         }
 
-        if (gameManager.currentGameTime <= 0)
+        if (gameManager.isClear && gameManager.isBossDead)
         {
-            Destroy(gameObject);
+            DestroyBullet();
         }
     }
 
-    protected virtual void OnTriggerStay(Collider other)
+    protected override void OnTriggerEnter(Collider other)
+    {
+        
+    }
+
+    void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Character") && !isAttack)
         {
-            realDamage = damage * (1 + Mathf.Floor(gameManager.round / 30)) + Mathf.Floor(gameManager.round / 5) * 2f;  // 트리거에도 있음
-            character.OnDamaged(coll, realDamage);
+            realDamage = bulletDamage * (1 + Mathf.Floor(gameManager.round / 30)) + Mathf.Floor(gameManager.round / 5) * 2f;  // 트리거에도 있음
+            character.OnDamaged(realDamage);
             isAttack = true;
             StartCoroutine(IEInvincible());
         }
@@ -72,6 +61,12 @@ public class PaaLazor : MonoBehaviour
     IEnumerator IEInvincible()
     {
         yield return new WaitForSeconds(0.6f);
+        isAttack = false;
+    }
+
+    public override void DestroyBullet()
+    {
+        base.DestroyBullet();
         isAttack = false;
     }
 }

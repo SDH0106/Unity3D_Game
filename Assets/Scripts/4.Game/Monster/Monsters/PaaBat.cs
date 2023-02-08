@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class PaaBat : Monster
 {
@@ -9,8 +10,15 @@ public class PaaBat : Monster
     [SerializeField] Transform rightBulletPos;
     [SerializeField] Transform leftBulletPos;
 
+    private IObjectPool<MonsterBullet> pool;
+
     float xDistance;
     float zDistance;
+
+    private void Awake()
+    {
+        pool = new ObjectPool<MonsterBullet>(CreateBullet, OnGetBullet, OnReleaseBullet, OnDestroyBullet, maxSize: 5);
+    }
 
     void Start()
     {
@@ -62,9 +70,38 @@ public class PaaBat : Monster
 
     public void InstantLazor()
     {
+        MonsterBullet lazor = pool.Get();
         Transform bulletPos = rend.flipX ? leftBulletPos : rightBulletPos;
+        lazor.transform.position = new Vector3(bulletPos.position.x, 0, bulletPos.position.z);
+        lazor.GetComponent<PaaLazor>().isFlip = rend.flipX;
+        lazor.transform.SetParent(bulletPos);
+    }
 
-        PaaLazor lazor = Instantiate(batLazor, bulletPos).GetComponent<PaaLazor>();
-        lazor.isFlip = rend.flipX;
+    private MonsterBullet CreateBullet()
+    {
+        Transform bulletPos = rend.flipX ? leftBulletPos : rightBulletPos;
+        MonsterBullet bullet = Instantiate(batLazor, bulletPos).GetComponent<MonsterBullet>();
+        bullet.SetManagedPool(pool);
+        return bullet;
+    }
+
+    private void OnGetBullet(MonsterBullet bullet)
+    {
+        bullet.gameObject.SetActive(true);
+    }
+
+    private void OnReleaseBullet(MonsterBullet bullet)
+    {
+        bullet.gameObject.SetActive(false);
+    }
+
+    private void OnDestroyBullet(MonsterBullet bullet)
+    {
+        Destroy(bullet.gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        pool.Clear();
     }
 }

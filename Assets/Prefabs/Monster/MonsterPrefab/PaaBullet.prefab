@@ -132,5 +132,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a9debe19836d4f4a8a27bd07bb249c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 3
+  speed: 0
+  bulletDamage: 3
+  randNum: 0
+  monsPos: {x: 0, y: 0, z: 0}
+  rend: {fileID: 3658012667562279667}
   isFlip: 0

@@ -4576,10 +4576,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletStorage: {fileID: 1005871281}
   damageStorage: {fileID: 1692643827}
-  initGameTime: 5
+  initGameTime: 20
   gameTime: 0
   money: 1000000
-  round: 1
+  round: 15
   woodCount: 0
   woodMaxCount: 70
   maxHp: 0
@@ -8495,7 +8495,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 100, y: -239}
+  m_AnchoredPosition: {x: 100, y: -239.00002}
   m_SizeDelta: {x: 1620, y: -50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1335804717026733844

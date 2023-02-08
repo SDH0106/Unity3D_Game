@@ -8,9 +8,9 @@ using UnityEngine.SpatialTracking;
 public class MonsterBullet : MonoBehaviour
 {
     [SerializeField] protected float speed;
-    [SerializeField] public float bulletDamage;
-    
-    protected Collider coll;
+    [SerializeField] protected float bulletDamage;
+
+    protected IObjectPool<MonsterBullet> managedPool;
 
     protected Vector3 dir;
 
@@ -24,43 +24,52 @@ public class MonsterBullet : MonoBehaviour
     private void Start()
     {
         gameManager = GameManager.Instance;
-        coll = GetComponent<Collider>();
-        Invoke("DestroyBullet", 2f);
-        ShootDir();
         realDamage = bulletDamage * (1 + Mathf.Floor(gameManager.round / 30)) + Mathf.Floor(gameManager.round / 5) * 2f;  // 트리거에도 있음
-        transform.position = new Vector3(transform.position.x, 0f, transform.position.z);
     }
 
     void Update()
     {
         transform.position += dir * speed * Time.deltaTime;
 
-        if (gameManager.currentGameTime <= 0)
+        if (gameManager.isClear && gameManager.isBossDead)
         {
             CancelInvoke("DestroyBullet");
             DestroyBullet();
         }
     }
 
-    void ShootDir()
+    public virtual void ShootDir()
     {
         dir = (Character.Instance.transform.position - transform.position).normalized;
         dir = new Vector3(dir.x, 0f, dir.z);
     }
 
-    protected void OnTriggerEnter(Collider other)
+    public virtual void AutoDestroyBullet()
+    {
+        Invoke("DestroyBullet", 2f);
+    }
+
+    protected virtual void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Character")
         {
             realDamage = bulletDamage * (1 + Mathf.Floor(gameManager.round / 30)) + Mathf.Floor(gameManager.round / 5) * 2f;
-            other.GetComponent<Character>().OnDamaged(coll, realDamage);
+            other.GetComponent<Character>().OnDamaged(realDamage);
             DestroyBullet();
             CancelInvoke("DestroyBullet");
         }
     }
 
-    protected void DestroyBullet()
+    public void SetManagedPool(IObjectPool<MonsterBullet> pool)
     {
-        Destroy(gameObject);
+        managedPool = pool;
+    }
+
+    public virtual void DestroyBullet()
+    {
+        if (gameObject.activeSelf)
+        {
+            managedPool.Release(this);
+        }
     }
 }
