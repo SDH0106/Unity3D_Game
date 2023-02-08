@@ -76,6 +76,7 @@ public class WeaponControl : Weapon
                 {
                     Bullet bullet = pool.Get();
                     bullet.transform.position = new Vector3(normalFirePos.position.x, 0f, normalFirePos.position.z);
+                    bullet.bulletDamage = weaponDamage;
                     bullet.Shoot(dir.normalized,normalFirePos.position, weaponInfo.WeaponRange);
                     bullet.damageUI = damageUI;
                     bullet.speed = weaponInfo.BulletSpeed;
@@ -87,6 +88,8 @@ public class WeaponControl : Weapon
                     Bullet bullet2 = pool.Get();
                     bullet1.transform.position = new Vector3(doubleFirePos1.position.x, 0, doubleFirePos1.position.z);
                     bullet2.transform.position = new Vector3(doubleFirePos2.position.x, 0, doubleFirePos2.position.z);
+                    bullet1.bulletDamage = weaponDamage;
+                    bullet2.bulletDamage = weaponDamage;
                     bullet1.Shoot(dir.normalized,doubleFirePos1.position, weaponInfo.WeaponRange);
                     bullet2.Shoot(dir.normalized,doubleFirePos2.position, weaponInfo.WeaponRange);
                     bullet1.damageUI = damageUI;
@@ -145,5 +148,10 @@ public class WeaponControl : Weapon
     private void OnDestroyBullet(Bullet bullet)
     {
         Destroy(bullet.gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        pool.Clear();
     }
 }

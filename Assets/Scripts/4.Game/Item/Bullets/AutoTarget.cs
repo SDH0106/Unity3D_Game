@@ -67,7 +67,6 @@ public class AutoTarget : Bullet
                 }
             }
 
-
             if (target != null && target.GetComponent<Monster>().hp > 0)
             {
                 if (!isFind)

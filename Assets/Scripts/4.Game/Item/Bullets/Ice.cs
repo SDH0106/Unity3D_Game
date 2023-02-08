@@ -33,6 +33,24 @@ public class Ice : Bullet
             Freeze();
 
             Instantiate(effectPrefab, transform.position, transform.rotation);
+            
+            DamageUI damage = pool.Get();
+            if (bulletDamage > collision.collider.GetComponent<Monster>().defence)
+                damage.isMiss = false;
+            else if (bulletDamage <= collision.collider.GetComponent<Monster>().defence)
+                damage.isMiss = true;
+            damage.realDamage = Mathf.Clamp(bulletDamage - collision.collider.GetComponent<Monster>().defence, 0, bulletDamage - collision.collider.GetComponent<Monster>().defence);
+            damage.UISetting();
+            damage.transform.position = transform.position;
+            damage.gameObject.transform.SetParent(gameManager.damageStorage);
+
+            collision.collider.GetComponent<Monster>().OnDamaged(damage.realDamage, isFreeze);
+
+            if (gameManager.absorbHp > 0 && !damage.isMiss && !isAttack)
+            {
+                Character.Instance.currentHp += gameManager.absorbHp;
+                isAttack = true;
+            }
 
             if (gameManager.isReflect)
                 Reflect(collision);
@@ -41,32 +59,13 @@ public class Ice : Bullet
                 OnePenetrate();
 
             else if (gameManager.lowPenetrate)
-                LowPenetrate();
+                LowPenetrate(damage);
 
             else if (!gameManager.isReflect && !gameManager.lowPenetrate && !gameManager.onePenetrate)
             {
                 if (!isDestroyed)
                     DestroyBullet();
             }
-
-            if (damageUI.weaponDamage > collision.collider.GetComponent<Monster>().defence)
-                damageUI.isMiss = false;
-
-            else if (damageUI.weaponDamage <= collision.collider.GetComponent<Monster>().defence)
-                damageUI.isMiss = true;
-
-            if (gameManager.absorbHp > 0 && !damageUI.isMiss && !isAttack)
-            {
-                Character.Instance.currentHp += gameManager.absorbHp;
-                isAttack = true;
-            }
-
-            damageUI.realDamage = damageUI.weaponDamage - collision.collider.GetComponent<Monster>().defence;
-
-            collision.collider.GetComponent<Monster>().OnDamaged(damageUI.realDamage, isFreeze);
-
-            DamageUI pool = Instantiate(damageUI, transform.position, Quaternion.Euler(90, 0, 0)).GetComponent<DamageUI>();
-            pool.gameObject.transform.SetParent(gameManager.damageStorage);
         }
     }
 

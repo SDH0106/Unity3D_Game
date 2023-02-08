@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
+using UnityEngine.Pool;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 using static WeaponInfo;
@@ -20,9 +21,15 @@ public class DamageUI : MonoBehaviour
 
     [HideInInspector] public bool isMiss;
 
+    protected IObjectPool<DamageUI> managedPool;
+
     private void Start()
     {
-        damageText.fontSize = 50;
+        UISetting();
+    }
+
+    public void UISetting()
+    {
         printTime = 1f;
         initPrintTime = printTime;
 
@@ -49,11 +56,26 @@ public class DamageUI : MonoBehaviour
 
         printTime -= Time.deltaTime;
 
+        ChangeAlpha(printTime / initPrintTime);
+
         if (printTime <= 0)
         {
-            Destroy(gameObject);
+            DestroyUI();
         }
+    }
 
-        ChangeAlpha(printTime / initPrintTime);
+    public void SetManagedPool(IObjectPool<DamageUI> pool)
+    {
+        managedPool = pool;
+    }
+
+    public virtual void DestroyUI()
+    {
+        damageText.fontSize = 50;
+
+        if (gameObject.activeSelf)
+        {
+            managedPool.Release(this);
+        }
     }
 }

@@ -1,12 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class Fire : Bullet
 {
     [SerializeField] public GameObject explosion;
 
+    protected IObjectPool<Explosion> exPool;
+
     public int grade;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        exPool = new ObjectPool<Explosion>(CreateEx, OnGetEx, OnReleaseEx, OnDestroyEx, maxSize: 10);
+    }
 
     private void Start()
     {
@@ -42,8 +51,38 @@ public class Fire : Bullet
         int rand = Random.Range(0, 100);
         if (rand <= 10 + gameManager.luck * 0.3f)
         {
-            GameObject ex = Instantiate(explosion, transform.position, transform.rotation);
-            ex.GetComponent<Explosion>().grade = grade;
+            Explosion ex = exPool.Get();
+            ex.grade = grade;
+            ex.Setting();
         }
+    }
+
+    private Explosion CreateEx()
+    {
+        Explosion explosionPool = Instantiate(explosion, transform.position, transform.rotation).GetComponent<Explosion>();
+        explosionPool.SetManagedPool(exPool);
+        explosionPool.transform.SetParent(gameManager.bulletStorage);
+        return explosionPool;
+    }
+
+    private void OnGetEx(Explosion exPool)
+    {
+        exPool.gameObject.SetActive(true);
+    }
+
+    private void OnReleaseEx(Explosion exPool)
+    {
+        exPool.gameObject.SetActive(false);
+    }
+
+    private void OnDestroyEx(Explosion exPool)
+    {
+        Destroy(exPool.gameObject);
+    }
+
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+        exPool.Clear();
     }
 }

@@ -14,6 +14,7 @@ public class StaffControl : Weapon
     [SerializeField] int poolCount;
 
     private IObjectPool<Bullet> pool;
+    protected IObjectPool<DamageUI> damagePool;
 
     Vector3 dir, mouse;
 
@@ -35,6 +36,7 @@ public class StaffControl : Weapon
     private void Awake()
     {
         pool = new ObjectPool<Bullet>(CreateBullet, OnGetBullet, OnReleaseBullet, OnDestroyBullet, maxSize: poolCount);
+        damagePool = new ObjectPool<DamageUI>(CreateDamageUI, OnGetDamageUI, OnReleaseDamageUI, OnDestroyDamageUI, maxSize: poolCount);
     }
 
     private void Start()
@@ -68,8 +70,6 @@ public class StaffControl : Weapon
             LookMousePosition();
             FireBullet();
         }
-
-        WeaponSetting();
     }
 
     void LookMousePosition()
@@ -89,13 +89,16 @@ public class StaffControl : Weapon
             {
                 if (Input.GetMouseButton(0) && (!gameManager.isClear || !gameManager.isBossDead))
                 {
+                    WeaponSetting();
+
                     if (!gameManager.doubleShot)
                     {
                         Bullet bullet = pool.Get();
                         bullet.transform.position = normalFirePos.position;
-                        bullet.Shoot(dir.normalized,normalFirePos.position, weaponInfo.WeaponRange);
+                        bullet.bulletDamage = weaponDamage;
                         bullet.damageUI = damageUI;
                         bullet.speed = weaponInfo.BulletSpeed;
+                        bullet.Shoot(dir.normalized,normalFirePos.position, weaponInfo.WeaponRange);
                     }
 
                     if (gameManager.doubleShot)
@@ -104,12 +107,14 @@ public class StaffControl : Weapon
                         Bullet bullet2 = pool.Get();
                         bullet1.transform.position = doubleFirePos1.position;
                         bullet2.transform.position = doubleFirePos2.position;
-                        bullet1.Shoot(dir.normalized,doubleFirePos1.position, weaponInfo.WeaponRange);
-                        bullet2.Shoot(dir.normalized,doubleFirePos2.position, weaponInfo.WeaponRange);
+                        bullet1.bulletDamage = weaponDamage;
+                        bullet2.bulletDamage = weaponDamage;
                         bullet1.damageUI = damageUI;
                         bullet2.damageUI = damageUI;
                         bullet1.speed = weaponInfo.BulletSpeed;
                         bullet2.speed = weaponInfo.BulletSpeed;
+                        bullet1.Shoot(dir.normalized,doubleFirePos1.position, weaponInfo.WeaponRange);
+                        bullet2.Shoot(dir.normalized,doubleFirePos2.position, weaponInfo.WeaponRange);
                     }
 
                     SoundManager.Instance.PlayES(weaponInfo.WeaponSound);
@@ -147,13 +152,16 @@ public class StaffControl : Weapon
             {
                 if (Input.GetMouseButton(0) && (!gameManager.isClear || !gameManager.isBossDead))
                 {
+                    WeaponSetting();
+
                     if (!gameManager.doubleShot)
                     {
                         Bullet bullet = pool.Get();
                         bullet.transform.position = normalFirePos.position;
-                        bullet.Shoot(dir.normalized,normalFirePos.position, weaponInfo.WeaponRange);
+                        bullet.bulletDamage = weaponDamage;
                         bullet.damageUI = damageUI;
                         bullet.speed = weaponInfo.BulletSpeed;
+                        bullet.Shoot(dir.normalized,normalFirePos.position, weaponInfo.WeaponRange);
                         bullet.GetComponent<Fire>().grade = grade;
                     }
 
@@ -163,14 +171,14 @@ public class StaffControl : Weapon
                         Bullet bullet2 = pool.Get();
                         bullet1.transform.position = doubleFirePos1.position;
                         bullet2.transform.position = doubleFirePos2.position;
-                        bullet1.Shoot(dir.normalized,doubleFirePos1.position, weaponInfo.WeaponRange);
-                        bullet2.Shoot(dir.normalized,doubleFirePos2.position, weaponInfo.WeaponRange);
                         bullet1.damageUI = damageUI;
                         bullet2.damageUI = damageUI;
                         bullet1.speed = weaponInfo.BulletSpeed;
                         bullet2.speed = weaponInfo.BulletSpeed;
                         bullet1.GetComponent<Fire>().grade = grade;
                         bullet2.GetComponent<Fire>().grade = grade;
+                        bullet1.Shoot(dir.normalized,doubleFirePos1.position, weaponInfo.WeaponRange);
+                        bullet2.Shoot(dir.normalized,doubleFirePos2.position, weaponInfo.WeaponRange);
                     }
 
                     SoundManager.Instance.PlayES(weaponInfo.WeaponSound);
@@ -273,26 +281,27 @@ public class StaffControl : Weapon
 
             if (find.Count() > 0)
             {
+                WeaponSetting();
+
                 foreach (var target in find)
                 {
                     if (num == rand)
                     {
                         targets[monsterCount] = target.transform;
 
-                        if (damageUI.weaponDamage > target.GetComponent<Monster>().defence)
-                            damageUI.isMiss = false;
+                        DamageUI damage = damagePool.Get();
+                        if (weaponDamage > target.GetComponent<Monster>().defence)
+                            damage.isMiss = false;
+                        else if (weaponDamage <= target.GetComponent<Monster>().defence)
+                            damage.isMiss = true;
+                        damage.realDamage = Mathf.Clamp(weaponDamage - target.GetComponent<Monster>().defence, 0, weaponDamage - target.GetComponent<Monster>().defence);
+                        damage.UISetting();
+                        damage.transform.position = target.transform.position;
+                        damage.gameObject.transform.SetParent(gameManager.damageStorage);
 
-                        else if (damageUI.weaponDamage <= target.GetComponent<Monster>().defence)
-                            damageUI.isMiss = true;
+                        target.GetComponent<Monster>().OnDamaged(damage.realDamage);
 
-                        damageUI.realDamage = damageUI.weaponDamage - target.GetComponent<Monster>().defence;
-
-                        target.GetComponent<Monster>().OnDamaged(damageUI.realDamage);
-
-                        DamageUI pool = Instantiate(damageUI, targets[monsterCount].transform.position, Quaternion.Euler(90, 0, 0)).GetComponent<DamageUI>();
-                        pool.gameObject.transform.SetParent(gameManager.damageStorage);
-
-                        if (gameManager.absorbHp > 0 && !damageUI.isMiss && monsterCount == 0)
+                        if (gameManager.absorbHp > 0 && !damage.isMiss && monsterCount == 0)
                             character.currentHp += gameManager.absorbHp;
 
                         if (monsterCount == 0)
@@ -352,11 +361,32 @@ public class StaffControl : Weapon
         Destroy(bullet.gameObject);
     }
 
-#if UNITY_EDITOR
-    private void OnDrawGizmos()
+    private DamageUI CreateDamageUI()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(Character.Instance.transform.position, 4f);
+        DamageUI damageUIPool = Instantiate(damageUI, transform.position, Quaternion.Euler(90, 0, 0)).GetComponent<DamageUI>();
+        damageUIPool.SetManagedPool(damagePool);
+        damageUIPool.transform.SetParent(gameManager.bulletStorage);
+        return damageUIPool;
     }
-#endif
+
+    private void OnGetDamageUI(DamageUI damageUIPool)
+    {
+        damageUIPool.gameObject.SetActive(true);
+    }
+
+    private void OnReleaseDamageUI(DamageUI damageUIPool)
+    {
+        damageUIPool.gameObject.SetActive(false);
+    }
+
+    private void OnDestroyDamageUI(DamageUI damageUIPool)
+    {
+        Destroy(damageUIPool.gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        pool.Clear();
+        damagePool.Clear();
+    }
 }

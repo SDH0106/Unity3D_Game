@@ -39,25 +39,24 @@ public class Lazor : Bullet
         if (collision.collider.tag == "Monster" && collision.collider.GetComponent<Monster>())
         {
             Instantiate(effectPrefab, collision.contacts[0].point, transform.rotation);
+                        
+            DamageUI damage = pool.Get();
+            if (bulletDamage > collision.collider.GetComponent<Monster>().defence)
+                damage.isMiss = false;
+            else if (bulletDamage <= collision.collider.GetComponent<Monster>().defence)
+                damage.isMiss = true;
+            damage.realDamage = Mathf.Clamp(bulletDamage - collision.collider.GetComponent<Monster>().defence, 0, bulletDamage - collision.collider.GetComponent<Monster>().defence);
+            damage.UISetting();
+            damage.transform.position = collision.contacts[0].point;
+            damage.gameObject.transform.SetParent(gameManager.damageStorage);
 
-            if (damageUI.weaponDamage > collision.collider.GetComponent<Monster>().defence)
-                damageUI.isMiss = false;
+            collision.collider.GetComponent<Monster>().OnDamaged(damage.realDamage);
 
-            else if (damageUI.weaponDamage <= collision.collider.GetComponent<Monster>().defence)
-                damageUI.isMiss = true;
-
-            if (gameManager.absorbHp > 0 && !damageUI.isMiss && !isAttack)
+            if (gameManager.absorbHp > 0 && !damage.isMiss && !isAttack)
             {
                 Character.Instance.currentHp += gameManager.absorbHp;
                 isAttack = true;
             }
-
-            damageUI.realDamage = damageUI.weaponDamage - collision.collider.GetComponent<Monster>().defence;
-
-            DamageUI pool = Instantiate(damageUI, collision.contacts[0].point, Quaternion.Euler(90, 0, 0)).GetComponent<DamageUI>();
-            pool.transform.SetParent(gameManager.damageStorage);
-
-            collision.collider.GetComponent<Monster>().OnDamaged(damageUI.realDamage);
         }
     }
 

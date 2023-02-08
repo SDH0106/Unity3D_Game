@@ -16,7 +16,7 @@ public class EndPassSlot : MonoBehaviour
     void Start()
     {
         itemManager = ItemManager.Instance;
-        slotNum = transform.GetSiblingIndex();
+        slotNum = transform.parent.GetSiblingIndex();
 
         itemImage.sprite = itemManager.storedPassive[slotNum].ItemSprite;
         itemCount.text = itemManager.storedPassiveCount[slotNum].ToString();

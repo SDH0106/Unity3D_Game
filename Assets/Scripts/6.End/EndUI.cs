@@ -17,11 +17,11 @@ public class EndUI : Singleton<EndUI>
     [SerializeField] Text sTimeText;
 
     [Header("WeaponSlot")]
-    [SerializeField] Transform weaponSlotParent;
+    [SerializeField] Transform[] weaponSlotParents;
     [SerializeField] GameObject weaponSlotPrefab;
 
     [Header("PassSlot")]
-    [SerializeField] Transform passSlotParent;
+    [SerializeField] Transform[] passSlotParents;
     [SerializeField] GameObject passSlotPrefab;
 
     [Header("Stat")]
@@ -122,8 +122,8 @@ public class EndUI : Singleton<EndUI>
         {
             if (itemManager.storedWeapon[i] != null)
             {
-                GameObject slot = Instantiate(weaponSlotPrefab);
-                slot.transform.SetParent(weaponSlotParent);
+                GameObject slot = Instantiate(weaponSlotPrefab, weaponSlotParents[count]);
+                slot.transform.SetParent(weaponSlotParents[count]);
                 weaponCount[count] = i;
                 count++;
             }
@@ -136,8 +136,8 @@ public class EndUI : Singleton<EndUI>
         {
             if (itemManager.storedPassive[i] != null)
             {
-                GameObject slot = Instantiate(passSlotPrefab);
-                slot.transform.SetParent(passSlotParent);
+                GameObject slot = Instantiate(passSlotPrefab, passSlotParents[i]);
+                slot.transform.SetParent(passSlotParents[i]);
             }
         }
     }

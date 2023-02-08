@@ -51,7 +51,7 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector] public float monsterDef;
     [HideInInspector] public bool luckCoin;
     [HideInInspector] public bool luckDamage;
-    [HideInInspector] public bool luckCritical;
+    /*[HideInInspector]*/ public bool luckCritical;
     [HideInInspector] public bool doubleShot;
     [HideInInspector] public bool revive;
     [HideInInspector] public bool ggoGgoSummon;
@@ -93,8 +93,8 @@ public class GameManager : Singleton<GameManager>
     {
         /*PlayerPrefs.SetInt("GameTuto", 1);
         PlayerPrefs.SetInt("BossTuto", 1);*/
-        //gameTime = Mathf.Clamp(initGameTime + (round - 1) * 5f, initGameTime, 60f);
-        gameTime = 0;
+        gameTime = Mathf.Clamp(initGameTime + (round - 1) * 5f, initGameTime, 60f);
+        //gameTime = 0;
         //InitSetting();
         InitArray();
         currentGameTime = gameTime;
@@ -323,8 +323,8 @@ public class GameManager : Singleton<GameManager>
         Character.Instance.transform.position = new Vector3(0f, 0f, -40f);
         currentScene = "Shop";
         SceneManager.LoadScene(currentScene);
-        //gameTime = Mathf.Clamp(initGameTime + (round - 1) * 5f, initGameTime, 60f);
-        gameTime = 0.1f;
+        gameTime = Mathf.Clamp(initGameTime + (round - 1) * 5f, initGameTime, 60f);
+        //gameTime = 0.1f;
         currentGameTime = gameTime;
         isClear = false;
     }

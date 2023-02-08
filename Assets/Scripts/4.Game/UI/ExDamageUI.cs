@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 using UnityEngine.UI;
 
 public class ExDamageUI : MonoBehaviour
@@ -12,7 +13,14 @@ public class ExDamageUI : MonoBehaviour
 
     float printTime, initPrintTime;
 
+    protected IObjectPool<ExDamageUI> managedPool;
+
     private void Start()
+    {
+        damageSetting();
+    }
+
+    public void damageSetting()
     {
         printTime = 1f;
         initPrintTime = printTime;
@@ -34,9 +42,22 @@ public class ExDamageUI : MonoBehaviour
 
         if (printTime <= 0)
         {
-            Destroy(gameObject);
+            DestroyUI();
         }
 
         ChangeAlpha(printTime / initPrintTime);
+    }
+
+    public void SetManagedPool(IObjectPool<ExDamageUI> pool)
+    {
+        managedPool = pool;
+    }
+
+    public virtual void DestroyUI()
+    {
+        if (gameObject.activeSelf)
+        {
+            managedPool.Release(this);
+        }
     }
 }

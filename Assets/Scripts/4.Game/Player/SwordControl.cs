@@ -15,6 +15,7 @@ public class SwordControl : Weapon
     [SerializeField] int poolCount;
 
     private IObjectPool<Bullet> pool;
+    protected IObjectPool<DamageUI> damagePool;
 
     Animator anim;
 
@@ -46,6 +47,7 @@ public class SwordControl : Weapon
     private void Awake()
     {
         pool = new ObjectPool<Bullet>(CreateBullet, OnGetBullet, OnReleaseBullet, OnDestroyBullet, maxSize: poolCount);
+        damagePool = new ObjectPool<DamageUI>(CreateDamageUI, OnGetDamageUI, OnReleaseDamageUI, OnDestroyDamageUI, maxSize: poolCount);
     }
 
     private void Start()
@@ -77,8 +79,6 @@ public class SwordControl : Weapon
                 LookKeyBoardPos();
                 Attack();
             }
-
-            WeaponSetting();
         }
 
     }
@@ -168,11 +168,17 @@ public class SwordControl : Weapon
                 {
                     if (character.currentHp / character.maxHp > 0.7)
                     {
+                        criRand = UnityEngine.Random.Range(1, 101);
+                        int bulletCri = criRand;
+                        Debug.Log(criRand);
+                        WeaponSetting();
                         Bullet bullet = pool.Get();
                         bullet.transform.position = new Vector3(firePos.position.x, 0f, firePos.position.z);
-                        bullet.Shoot(bulletDir.normalized, firePos.position, 5f);
+                        bullet.bulletDamage = swordBulletDamage;
+                        bullet.GetComponent<SwordBullet>().criRand = bulletCri;
                         bullet.damageUI = damageUI;
                         bullet.speed = 6f;
+                        bullet.Shoot(bulletDir.normalized, firePos.position, 5f);
                     }
                 }
 
@@ -219,20 +225,34 @@ public class SwordControl : Weapon
         {
             criRand = UnityEngine.Random.Range(1, 101);
 
-            if (damageUI.weaponDamage > other.GetComponent<Monster>().defence)
-                damageUI.isMiss = false;
+            WeaponSetting();
 
-            else if (damageUI.weaponDamage <= other.GetComponent<Monster>().defence)
-                damageUI.isMiss = true;
+            DamageUI damage = damagePool.Get();
+            if (weaponDamage > other.GetComponent<Monster>().defence)
+                damage.isMiss = false;
+            else if (weaponDamage <= other.GetComponent<Monster>().defence)
+                damage.isMiss = true;
+            damage.realDamage = Mathf.Clamp(weaponDamage - other.GetComponent<Monster>().defence, 0, weaponDamage - other.GetComponent<Monster>().defence);
 
-            damageUI.realDamage = damageUI.weaponDamage - other.GetComponent<Monster>().defence;
+            if (criRand <= gameManager.critical || gameManager.critical >= 100)
+            {
+                damage.damageText.color = new Color(0.9f, 0, 0.7f, 1);
+                damage.damageText.fontSize = 65;
+            }
 
-            other.GetComponent<Monster>().OnDamaged(damageUI.realDamage);
+            else if (criRand > gameManager.critical)
+            {
+                damage.damageText.color = new Color(1, 0.4871f, 0);
+                damage.damageText.fontSize = 50;
+            }
 
-            DamageUI pool = Instantiate(damageUI, transform.position, Quaternion.Euler(90, 0, 0)).GetComponent<DamageUI>();
-            pool.gameObject.transform.SetParent(gameManager.damageStorage);
+            damage.UISetting();
+            damage.transform.position = transform.position;
+            damage.gameObject.transform.SetParent(gameManager.damageStorage);
 
-            if (gameManager.absorbHp > 0 && !damageUI.isMiss && !isAttack && isSwing)
+            other.GetComponent<Monster>().OnDamaged(damage.realDamage);
+
+            if (gameManager.absorbHp > 0 && !damage.isMiss && !isAttack && isSwing)
             {
                 character.currentHp += gameManager.absorbHp;
                 isAttack = true;
@@ -261,5 +281,34 @@ public class SwordControl : Weapon
     private void OnDestroyBullet(Bullet bullet)
     {
         Destroy(bullet.gameObject);
+    }
+
+    private DamageUI CreateDamageUI()
+    {
+        DamageUI damageUIPool = Instantiate(damageUI, transform.position, Quaternion.Euler(90, 0, 0)).GetComponent<DamageUI>();
+        damageUIPool.SetManagedPool(damagePool);
+        damageUIPool.transform.SetParent(gameManager.bulletStorage);
+        return damageUIPool;
+    }
+
+    private void OnGetDamageUI(DamageUI damageUIPool)
+    {
+        damageUIPool.gameObject.SetActive(true);
+    }
+
+    private void OnReleaseDamageUI(DamageUI damageUIPool)
+    {
+        damageUIPool.gameObject.SetActive(false);
+    }
+
+    private void OnDestroyDamageUI(DamageUI damageUIPool)
+    {
+        Destroy(damageUIPool.gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        pool.Clear();
+        damagePool.Clear();
     }
 }

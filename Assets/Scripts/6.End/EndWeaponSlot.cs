@@ -17,7 +17,7 @@ public class EndWeaponSlot : MonoBehaviour
     {
         itemManager = ItemManager.Instance;
         endUI = EndUI.Instance;
-        slotNum = transform.GetSiblingIndex();
+        slotNum = transform.parent.GetSiblingIndex();
 
         itemImage.sprite = itemManager.storedWeapon[endUI.weaponCount[slotNum]].ItemSprite;
         SlotColor();

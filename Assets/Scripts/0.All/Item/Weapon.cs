@@ -10,7 +10,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] public WeaponInfo weaponInfo;
 
     [HideInInspector] public DamageUI damageUI;
-    [HideInInspector] public float damage;
+    [HideInInspector] public float weaponDamage;
     [HideInInspector] public float swordBulletDamage;
     [HideInInspector] public int count;
 
@@ -25,28 +25,28 @@ public class Weapon : MonoBehaviour
         if (weaponInfo.Type == WEAPON_TYPE.스태프)
         {
             if (!gameManager.doubleShot)
-                damage = weaponInfo.MagicDamage * grade + gameManager.magicDamage + gameManager.longDamage;
+                weaponDamage = weaponInfo.MagicDamage * grade + gameManager.magicDamage + gameManager.longDamage;
 
             else if (gameManager.doubleShot)
             {
                 if (weaponInfo.WeaponName == "번개 스태프")
-                    damage = weaponInfo.MagicDamage * grade + gameManager.magicDamage + gameManager.longDamage;
+                    weaponDamage = weaponInfo.MagicDamage * grade + gameManager.magicDamage + gameManager.longDamage;
 
                 if (weaponInfo.WeaponName != "번개 스태프")
-                    damage = (weaponInfo.MagicDamage * grade + gameManager.magicDamage + gameManager.longDamage) * 0.7f;
+                    weaponDamage = (weaponInfo.MagicDamage * grade + gameManager.magicDamage + gameManager.longDamage) * 0.7f;
             }
+
             damageUI.damageText.color = Color.cyan;
         }
 
         else if (weaponInfo.Type == WEAPON_TYPE.총)
         {
             if (!gameManager.doubleShot)
-                damage = weaponInfo.WeaponDamage * grade + gameManager.physicDamage + gameManager.longDamage;
+                weaponDamage = weaponInfo.WeaponDamage * grade + gameManager.physicDamage + gameManager.longDamage;
 
             else if (gameManager.doubleShot)
-                damage = (weaponInfo.WeaponDamage * grade + gameManager.physicDamage + gameManager.longDamage) * 0.7f;
+                weaponDamage = (weaponInfo.WeaponDamage * grade + gameManager.physicDamage + gameManager.longDamage) * 0.7f;
 
-            //damageUI.damageText.color = new Color(1, 0.4871f, 0);
             damageUI.damageText.color = Color.green;
         }
 
@@ -56,7 +56,7 @@ public class Weapon : MonoBehaviour
             {
                 if (!gameManager.luckCritical)
                 {
-                    damage = (weaponInfo.WeaponDamage * grade + gameManager.physicDamage + gameManager.shortDamage) * 1.5f;
+                    weaponDamage = (weaponInfo.WeaponDamage * grade + gameManager.physicDamage + gameManager.shortDamage) * 1.5f;
                     swordBulletDamage = (weaponInfo.WeaponDamage * grade + gameManager.magicDamage + gameManager.longDamage) * 1.5f;
                 }
 
@@ -66,58 +66,42 @@ public class Weapon : MonoBehaviour
 
                     if (rand <= gameManager.luck || gameManager.luck >= 100)
                     {
-                        damage = (weaponInfo.WeaponDamage * grade + gameManager.physicDamage + gameManager.shortDamage) * 2f;
+                        weaponDamage = (weaponInfo.WeaponDamage * grade + gameManager.physicDamage + gameManager.shortDamage) * 2f;
                         swordBulletDamage = (weaponInfo.WeaponDamage * grade + gameManager.magicDamage + gameManager.longDamage) * 2f;
                     }
 
                     else if (rand > gameManager.luck)
                     {
-                        damage = (weaponInfo.WeaponDamage * grade + gameManager.physicDamage + gameManager.shortDamage) * 1.5f;
+                        weaponDamage = (weaponInfo.WeaponDamage * grade + gameManager.physicDamage + gameManager.shortDamage) * 1.5f;
                         swordBulletDamage = (weaponInfo.WeaponDamage * grade + gameManager.magicDamage + gameManager.longDamage) * 1.5f;
                     }
                 }
-
-                damageUI.damageText.color = new Color(0.9f, 0, 0.7f, 1);
-                damageUI.damageText.fontSize = 65;
             }
 
             else if (criRand > gameManager.critical)
             {
-                damage = (weaponInfo.WeaponDamage * grade + gameManager.physicDamage + gameManager.shortDamage);
+                weaponDamage = (weaponInfo.WeaponDamage * grade + gameManager.physicDamage + gameManager.shortDamage);
                 swordBulletDamage = (weaponInfo.WeaponDamage * grade + gameManager.magicDamage + gameManager.longDamage);
-                damageUI.damageText.color = new Color(1, 0.4871f, 0);
             }
         }
 
-        damage = Mathf.Round(damage * gameManager.percentDamage * 10) * 0.1f;
+        weaponDamage = Mathf.Round(weaponDamage * gameManager.percentDamage * 10) * 0.1f;
         swordBulletDamage = Mathf.Round(swordBulletDamage * gameManager.percentDamage * 10) * 0.1f;
 
-        if (damage < 0)
+        if (weaponDamage < 0)
         {
-            damage = 0;
+            weaponDamage = 0;
             swordBulletDamage = 0;
         }
 
-        if (!gameManager.luckDamage)
-        {
-            damageUI.weaponDamage = damage;
-            damageUI.swordBulletDamage = swordBulletDamage;
-        }
-
-        else if (gameManager.luckDamage)
+        if (gameManager.luckDamage)
         {
             int rand = Random.Range(1, 101);
 
             if (rand <= gameManager.luck || gameManager.luck >= 100)
             {
-                damageUI.weaponDamage = damage * 2f;
-                damageUI.swordBulletDamage = swordBulletDamage * 2f;
-            }
-
-            else if (rand > gameManager.luck)
-            {
-                damageUI.weaponDamage = damage;
-                damageUI.swordBulletDamage = swordBulletDamage;
+                weaponDamage = weaponDamage * 2f;
+                swordBulletDamage = swordBulletDamage * 2f;
             }
         }
     }
