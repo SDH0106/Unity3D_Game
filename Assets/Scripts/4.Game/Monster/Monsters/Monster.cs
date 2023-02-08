@@ -29,7 +29,7 @@ public class Monster : MonoBehaviour
     protected GameManager gameManager;
     protected Character character;
 
-    IEnumerator runningCoroutine;
+    protected IEnumerator runningCoroutine;
 
     public float defence;
 
@@ -167,12 +167,14 @@ public class Monster : MonoBehaviour
 
         if (!isFreeze)
         {
-            if (runningCoroutine == MonsterColorBlink())
-            {
+            if (runningCoroutine != null)
                 StopCoroutine(runningCoroutine);
+
+            if (runningCoroutine != MonsterFreeze())
+            {
+                runningCoroutine = MonsterColorBlink();
+                StartCoroutine(runningCoroutine);
             }
-            runningCoroutine = MonsterColorBlink();
-            StartCoroutine(runningCoroutine);
         }
     }
 
@@ -182,12 +184,14 @@ public class Monster : MonoBehaviour
 
         if (!isFreeze)
         {
-            if (runningCoroutine == MonsterColorBlink())
-            {
+            if (runningCoroutine != null)
                 StopCoroutine(runningCoroutine);
+
+            if (runningCoroutine != MonsterFreeze())
+            {
+                runningCoroutine = MonsterColorBlink();
+                StartCoroutine(runningCoroutine);
             }
-            runningCoroutine = MonsterColorBlink();
-            StartCoroutine(runningCoroutine);
         }
     }
 
@@ -200,17 +204,18 @@ public class Monster : MonoBehaviour
             beforeFreeze = freeze;
             isFreeze = freeze;
 
-            if (runningCoroutine == MonsterColorBlink())
-            {
+            if (runningCoroutine != null)
                 StopCoroutine(runningCoroutine);
-            }
 
             runningCoroutine = MonsterFreeze();
             StartCoroutine(runningCoroutine);
         }
 
-        if (isFreeze == false)
+        if (!isFreeze)
         {
+            if (runningCoroutine != null)
+                StopCoroutine(runningCoroutine);
+
             if (runningCoroutine != MonsterFreeze())
             {
                 runningCoroutine = MonsterColorBlink();
@@ -223,6 +228,7 @@ public class Monster : MonoBehaviour
     {
         rend.color = Color.cyan;
         yield return new WaitForSeconds(1.5f);
+
         isFreeze = false;
         beforeFreeze = isFreeze;
         speed = initSpeed;

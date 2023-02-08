@@ -93,8 +93,9 @@ public class GameManager : Singleton<GameManager>
     {
         /*PlayerPrefs.SetInt("GameTuto", 1);
         PlayerPrefs.SetInt("BossTuto", 1);*/
-        gameTime = Mathf.Clamp(initGameTime + (round - 1) * 5f, initGameTime, 60f);
-        InitSetting();
+        //gameTime = Mathf.Clamp(initGameTime + (round - 1) * 5f, initGameTime, 60f);
+        gameTime = 0;
+        //InitSetting();
         InitArray();
         currentGameTime = gameTime;
         isPause = false;
@@ -322,7 +323,8 @@ public class GameManager : Singleton<GameManager>
         Character.Instance.transform.position = new Vector3(0f, 0f, -40f);
         currentScene = "Shop";
         SceneManager.LoadScene(currentScene);
-        gameTime = Mathf.Clamp(initGameTime + (round - 1) * 5f, initGameTime, 60f);
+        //gameTime = Mathf.Clamp(initGameTime + (round - 1) * 5f, initGameTime, 60f);
+        gameTime = 0.1f;
         currentGameTime = gameTime;
         isClear = false;
     }
