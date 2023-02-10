@@ -411,7 +411,7 @@ public class Character : Singleton<Character>
 
             if (avoidRand > gameManager.avoid)
             {
-                currentHp -= Mathf.Round((damage - gameManager.defence) * 10) * 0.1f;
+                currentHp -= Mathf.Round((damage *(1- gameManager.defence)) * 10) * 0.1f;
             }
 
             if (currentHp > 0)

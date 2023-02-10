@@ -4627,7 +4627,7 @@ MonoBehaviour:
   damageStorage: {fileID: 1692643827}
   initGameTime: 1000
   gameTime: 0
-  money: 500000
+  money: 1000
   round: 1
   woodCount: 0
   woodMaxCount: 70

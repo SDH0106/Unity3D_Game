@@ -5107,7 +5107,7 @@ MonoBehaviour:
   playerHpBar: {fileID: 289213144616889224}
   characterNum: 0
   level: 0
-  characterHp: 150000
+  characterHp: 15
   maxExp: 0
   damageRatio: 1
   characterSpeed: 3

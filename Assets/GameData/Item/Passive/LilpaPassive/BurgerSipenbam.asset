@@ -17,7 +17,7 @@ MonoBehaviour:
   itemName: "\uBC84\uAC70 \uC2F6\uC740 \uBC24"
   itemPrice: 86
   maxCount: 100
-  hp: 15
+  hp: 8
   recoverHp: 0.4
   absorbHp: 0
   defence: 0
@@ -61,4 +61,4 @@ MonoBehaviour:
   lowPenetrate: 0
   penetrate: 0
   description: 
-  weight: 7.2000003
+  weight: 50.600002

@@ -17,10 +17,10 @@ MonoBehaviour:
   itemName: "VR \uAE30\uAE30"
   itemPrice: 88
   maxCount: 100
-  hp: 15
+  hp: 10
   recoverHp: 0
   absorbHp: 0
-  defence: 2
+  defence: 5
   physicDamage: 0
   magicDamage: 0
   shortDamage: 0
@@ -61,4 +61,4 @@ MonoBehaviour:
   lowPenetrate: 0
   penetrate: 0
   description: 
-  weight: 0
+  weight: 50.600002

@@ -17,8 +17,8 @@ MonoBehaviour:
   weaponName: "\uBC88\uAC1C \uC2A4\uD0DC\uD504"
   type: 1
   weaponDamage: 0
-  magicDamage: 4
-  attackDelay: 2
+  magicDamage: 6
+  attackDelay: 4
   bulletSpeed: 0
   weaponRange: 4
   weaponPrice: 23
