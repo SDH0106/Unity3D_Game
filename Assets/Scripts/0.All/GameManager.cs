@@ -1,11 +1,11 @@
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
 
 
 public class GameManager : Singleton<GameManager>       
 {
+    [SerializeField] Texture2D cursor;
     [SerializeField] public Transform bulletStorage;
     [SerializeField] public Transform damageStorage;
 
@@ -51,7 +51,7 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector] public float monsterDef;
     [HideInInspector] public bool luckCoin;
     [HideInInspector] public bool luckDamage;
-    /*[HideInInspector]*/ public bool luckCritical;
+    [HideInInspector] public bool luckCritical;
     [HideInInspector] public bool doubleShot;
     [HideInInspector] public bool revive;
     [HideInInspector] public bool ggoGgoSummon;
@@ -83,6 +83,8 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector] public float gameStartTime;
     [HideInInspector] public float gameEndTime;
 
+    Vector3 cursorHotSpot;
+
     protected override void Awake()
     {
         base.Awake();
@@ -91,11 +93,14 @@ public class GameManager : Singleton<GameManager>
 
     private void Start()
     {
+        Vector2 cursorHotSpot = new Vector3(cursor.width * 0.5f, cursor.height * 0.5f);
+        Cursor.SetCursor(cursor, cursorHotSpot, CursorMode.ForceSoftware);
         /*PlayerPrefs.SetInt("GameTuto", 1);
         PlayerPrefs.SetInt("BossTuto", 1);*/
-        gameTime = Mathf.Clamp(initGameTime + (round - 1) * 5f, initGameTime, 60f);
+
+        gameTime = Mathf.Clamp(initGameTime + (round - 1) * 3f, initGameTime, 60f);
         //gameTime = 0;
-        //InitSetting();
+        InitSetting();
         InitArray();
         currentGameTime = gameTime;
         isPause = false;
@@ -323,8 +328,7 @@ public class GameManager : Singleton<GameManager>
         Character.Instance.transform.position = new Vector3(0f, 0f, -40f);
         currentScene = "Shop";
         SceneManager.LoadScene(currentScene);
-        gameTime = Mathf.Clamp(initGameTime + (round - 1) * 5f, initGameTime, 60f);
-        //gameTime = 0.1f;
+        gameTime = Mathf.Clamp(initGameTime + (round - 1) * 3f, initGameTime, 60f);
         currentGameTime = gameTime;
         isClear = false;
     }

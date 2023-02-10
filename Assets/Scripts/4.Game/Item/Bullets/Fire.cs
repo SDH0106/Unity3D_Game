@@ -83,6 +83,7 @@ public class Fire : Bullet
     protected override void OnDestroy()
     {
         base.OnDestroy();
-        exPool.Clear();
+        if (exPool != null)
+            exPool.Clear();
     }
 }

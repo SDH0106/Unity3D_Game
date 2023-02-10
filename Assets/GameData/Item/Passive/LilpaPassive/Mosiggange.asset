@@ -15,7 +15,7 @@ MonoBehaviour:
   itemSprite: {fileID: -870356681, guid: e01ad414fa90a1d4292252f99c8a43a1, type: 3}
   itemGrade: 0
   itemName: "\uBAA8\uC2DC\uAE7D\uC774"
-  itemPrice: 18
+  itemPrice: 25
   maxCount: 100
   hp: 0
   recoverHp: 0
@@ -25,7 +25,7 @@ MonoBehaviour:
   magicDamage: 0
   shortDamage: 0
   longDamage: 0
-  attackSpeed: 0.2
+  attackSpeed: 0
   speed: -0.1
   range: 0
   luck: 0

@@ -187,6 +187,7 @@ public class Bullet : MonoBehaviour
 
     protected virtual void OnDestroy()
     {
-        pool.Clear();
+        if (pool != null)
+            pool.Clear();
     }
 }

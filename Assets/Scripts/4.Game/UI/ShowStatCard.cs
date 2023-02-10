@@ -120,9 +120,9 @@ public class ShowStatCard : Singleton<ShowStatCard>
         float totalWeight = 0;
 
         weightValue[0] = 150 - (gameManager.round - 1) * 5;
-        weightValue[1] = (gameManager.round - 1) * (10 + gameManager.round);
-        weightValue[2] = (gameManager.round - 1) * 0.5f;
-        weightValue[3] = (gameManager.round - 1) * 0.25f;
+        weightValue[1] = (gameManager.round - 4) * gameManager.round;
+        weightValue[2] = (gameManager.round - 9) * 2f;
+        weightValue[3] = (gameManager.round - 14);
 
         for (int i = 0; i < weightValue.Length; i++)
         {

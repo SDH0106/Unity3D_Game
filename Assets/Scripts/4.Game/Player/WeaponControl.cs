@@ -152,6 +152,9 @@ public class WeaponControl : Weapon
 
     private void OnDestroy()
     {
-        pool.Clear();
+        if (pool != null)
+        {
+            pool.Clear();
+        }
     }
 }

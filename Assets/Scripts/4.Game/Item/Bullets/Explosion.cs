@@ -81,6 +81,7 @@ public class Explosion : MonoBehaviour
 
     private void OnDestroy()
     {
-        pool.Clear();
+        if (pool != null)
+            pool.Clear();
     }
 }

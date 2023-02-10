@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class GameSceneUI : Singleton<GameSceneUI>
 {
+    [SerializeField] Texture2D cursorAttack;
+    [SerializeField] Texture2D cursorNormal;
     [SerializeField] public Collider ground;
     [SerializeField] GameObject treePrefab;
     [SerializeField] public GameObject monsterSpawn;
@@ -128,6 +130,9 @@ public class GameSceneUI : Singleton<GameSceneUI>
         character = Character.Instance;
         soundManager = SoundManager.Instance;
 
+        Vector2 cursorHotSpot = new Vector3(cursorAttack.width * 0.5f, cursorAttack.height * 0.5f);
+        Cursor.SetCursor(cursorAttack, cursorHotSpot, CursorMode.ForceSoftware);
+
         bgmChange = false;
 
         if (gameManager.round == 10 || gameManager.round == 20 || gameManager.round == 30)
@@ -239,6 +244,9 @@ public class GameSceneUI : Singleton<GameSceneUI>
                 {
                     if (!bgmChange)
                     {
+                        Vector2 cursorHotSpot = new Vector3(cursorNormal.width * 0.5f, cursorNormal.height * 0.5f);
+                        Cursor.SetCursor(cursorNormal, cursorHotSpot, CursorMode.ForceSoftware);
+
                         soundManager.PlayBGM(5, false);
                         bgmChange = true;
                     }
@@ -280,6 +288,9 @@ public class GameSceneUI : Singleton<GameSceneUI>
                     {
                         if (!bgmChange)
                         {
+                            Vector2 cursorHotSpot = new Vector3(cursorNormal.width * 0.5f, cursorNormal.height * 0.5f);
+                            Cursor.SetCursor(cursorNormal, cursorHotSpot, CursorMode.ForceSoftware);
+
                             soundManager.PlayBGM(6, false);
                             bgmChange = true;
                         }

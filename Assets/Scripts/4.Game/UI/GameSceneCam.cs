@@ -11,9 +11,11 @@ public class GameSceneCam : MonoBehaviour
         character = Character.Instance;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        transform.position = new Vector3(character.transform.position.x, transform.position.y, character.transform.position.z);
+        if (!character.isDead)
+        {
+            transform.position = new Vector3(character.transform.position.x, transform.position.y, character.transform.position.z);
+        }
     }
 }

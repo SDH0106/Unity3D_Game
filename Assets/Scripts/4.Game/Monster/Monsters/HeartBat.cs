@@ -97,6 +97,7 @@ public class HeartBat : Monster
 
     private void OnDestroy()
     {
-        pool.Clear();
+        if (pool != null)
+            pool.Clear();
     }
 }

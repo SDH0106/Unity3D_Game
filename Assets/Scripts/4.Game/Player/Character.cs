@@ -119,7 +119,7 @@ public class Character : Singleton<Character>
             SoundManager.Instance.PlayES("LevelUp");
             level++;
             levelUpCount++;
-            gameManager.stats[0] += 2;
+            gameManager.stats[0] += 1;
             maxHp = gameManager.maxHp;
             exp = exp - maxExp;
             maxExp = 10 * level;

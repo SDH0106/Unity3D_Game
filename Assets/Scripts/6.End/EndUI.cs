@@ -164,10 +164,10 @@ public class EndUI : Singleton<EndUI>
 
     public void ToTitle()
     {
-        Destroy(GameManager.Instance.gameObject);
-        Destroy(Character.Instance.gameObject);
         Destroy(ItemManager.Instance.gameObject);
+        Destroy(Character.Instance.gameObject);
         Destroy(SoundManager.Instance.gameObject);
+        Destroy(GameManager.Instance.gameObject);
         SceneManager.LoadScene("StartTitle");
     }
 }

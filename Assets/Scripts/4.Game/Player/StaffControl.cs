@@ -386,7 +386,9 @@ public class StaffControl : Weapon
 
     private void OnDestroy()
     {
-        pool.Clear();
-        damagePool.Clear();
+        if (pool != null)
+            pool.Clear();
+        if (damagePool != null)
+            damagePool.Clear();
     }
 }
