@@ -128,7 +128,7 @@ public class Character : Singleton<Character>
         if (gameManager.revive)
             gardianAngel.SetActive(true);
 
-        if (gameManager.currentScene == "Game")
+        if (gameManager.currentScene == "Game" && !gameManager.isPause)
         {
             isRun = false;
 
@@ -275,7 +275,9 @@ public class Character : Singleton<Character>
                     beforePos = transform.position;
 
                     if (x == 0 && z == 0)
-                        afterPos = new Vector3(transform.position.x + 2, 0, 0);
+                    {
+                        afterPos = new Vector3(transform.position.x + 2, 0, transform.position.z);
+                    }
                     else
                         afterPos = transform.position + new Vector3(x, 0, z) * 4;
 

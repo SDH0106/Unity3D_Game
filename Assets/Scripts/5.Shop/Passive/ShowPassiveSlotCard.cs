@@ -25,11 +25,6 @@ public class ShowPassiveSlotCard : MonoBehaviour
     [HideInInspector] public int selectedNum;
     [HideInInspector] public bool infoChange;
 
-    private void Start()
-    {
-        gameObject.SetActive(false);
-    }
-
     private void Update()
     {
         if(infoChange)

@@ -38,7 +38,7 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector] public int[] passiveIntVariables;
     [HideInInspector] public float[] passiveFloatVariables;
     [HideInInspector] public bool[] passiveBoolVariables;
-    [HideInInspector] public int dashCount;
+    /*[HideInInspector]*/ public int dashCount;
     [HideInInspector] public int buffNum;
     [HideInInspector] public int exDmg;
     [HideInInspector] public int isedolCount;
@@ -98,9 +98,10 @@ public class GameManager : Singleton<GameManager>
         /*PlayerPrefs.SetInt("GameTuto", 1);
         PlayerPrefs.SetInt("BossTuto", 1);*/
 
-        gameTime = Mathf.Clamp(initGameTime + (round - 1) * 3f, initGameTime, 60f);
-        //gameTime = 0;
-        InitSetting();
+        //gameTime = Mathf.Clamp(initGameTime + (round - 1) * 3f, initGameTime, 60f);
+        //gameTime = Mathf.Clamp(initGameTime + (round - 1) * 3f, initGameTime, 10000f);
+        gameTime = 0;
+        //InitSetting();
         InitArray();
         currentGameTime = gameTime;
         isPause = false;
@@ -328,7 +329,8 @@ public class GameManager : Singleton<GameManager>
         Character.Instance.transform.position = new Vector3(0f, 0f, -40f);
         currentScene = "Shop";
         SceneManager.LoadScene(currentScene);
-        gameTime = Mathf.Clamp(initGameTime + (round - 1) * 3f, initGameTime, 60f);
+        //gameTime = Mathf.Clamp(initGameTime + (round - 1) * 3f, initGameTime, 60f);
+        gameTime = 0;
         currentGameTime = gameTime;
         isClear = false;
     }

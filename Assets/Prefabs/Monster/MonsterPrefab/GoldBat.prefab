@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1319553693232403380}
   - component: {fileID: 8864195796923052525}
   - component: {fileID: 5668371426687618666}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GoldBat
   m_TagString: Monster
   m_Icon: {fileID: 0}
@@ -133,16 +133,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ebe751754061e84e9e0ae457c74d451, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rend: {fileID: 0}
-  anim: {fileID: 0}
-  coll: {fileID: 0}
   isWalk: 0
   isDead: 0
   isAttacked: 0
   isAttack: 0
   hp: 0
-  maxHp: 0
-  initScale: {x: 0, y: 0, z: 0}
   stat:
     monsterName: 
     monsterMaxHp: 0
@@ -151,8 +146,8 @@ MonoBehaviour:
     monsterDefence: 0
     monsterExp: 0
     monsterCoin: 0
-  speed: 0
   dir: {x: 0, y: 0, z: 0}
+  defence: 0
   monsterHpBar: {fileID: 4493516168114463674}
 --- !u!1 &2519411617934167644
 GameObject:
@@ -163,7 +158,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6741373196530698794}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: hp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -203,7 +198,7 @@ GameObject:
   - component: {fileID: 7295354759232654870}
   - component: {fileID: 5678114067121696243}
   - component: {fileID: 7724507478110777838}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: MonsterHpBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -301,7 +296,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6526024403517401091}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -341,7 +336,7 @@ GameObject:
   - component: {fileID: 479226747047996016}
   - component: {fileID: 644618429488668416}
   - component: {fileID: 7724418777621444623}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -432,7 +427,7 @@ GameObject:
   - component: {fileID: 4112701204563769253}
   - component: {fileID: 7599996198440433046}
   - component: {fileID: 472897987671619678}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -507,7 +502,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5001148141758872352}
   - component: {fileID: 4493516168114463674}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: hpBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}

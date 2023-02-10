@@ -595,7 +595,7 @@ GameObject:
   - component: {fileID: -5614428550350841335}
   - component: {fileID: 7840185363196023606}
   - component: {fileID: 1459598561334725252}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SkullBat
   m_TagString: Monster
   m_Icon: {fileID: 0}

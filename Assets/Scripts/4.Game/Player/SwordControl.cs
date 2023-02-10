@@ -262,7 +262,7 @@ public class SwordControl : Weapon
 
     private Bullet CreateBullet()
     {
-        Bullet bullet = Instantiate(swordBullet, firePos.position, transform.rotation).GetComponent<Bullet>();
+        Bullet bullet = Instantiate(swordBullet, firePos.position, swordBullet.transform.rotation).GetComponent<Bullet>();
         bullet.SetManagedPool(pool);
         bullet.transform.SetParent(gameManager.bulletStorage);
         return bullet;

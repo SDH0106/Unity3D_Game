@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Purchasing.MiniJSON;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -448,7 +449,7 @@ public class ShopManager : Singleton<ShopManager>
     {
         WeaponCardUI weaponCard = weaponCardUI.GetComponent<WeaponCardUI>();
         int rand = UnityEngine.Random.Range(0, weaponCardUI.GetComponent<WeaponCardUI>().weaponInfo.Length);
-        weaponCard.selectedWeapon.weaponGrade = RandomWeaponGrade();
+        weaponCard.selectGrade = RandomWeaponGrade();
         weaponCard.selectedWeapon = weaponCard.weaponInfo[rand];
     }
 

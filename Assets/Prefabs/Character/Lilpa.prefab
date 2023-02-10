@@ -5107,7 +5107,7 @@ MonoBehaviour:
   playerHpBar: {fileID: 289213144616889224}
   characterNum: 0
   level: 0
-  characterHp: 15
+  characterHp: 150000
   maxExp: 0
   damageRatio: 1
   characterSpeed: 3
@@ -10852,7 +10852,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 672bb63d63bcb194dba29b5b1f7d3cb1, type: 3}
-  m_Color: {r: 0.2701521, g: 0, b: 1, a: 0.2}
+  m_Color: {r: 0.2701521, g: 0, b: 1, a: 0.101960786}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

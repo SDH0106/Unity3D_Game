@@ -129,7 +129,7 @@ public class WeaponControl : Weapon
 
     private Bullet CreateBullet()
     {
-        Bullet bullet = Instantiate(bulletPrefab, normalFirePos.position, transform.rotation).GetComponent<Bullet>();
+        Bullet bullet = Instantiate(bulletPrefab, normalFirePos.position, bulletPrefab.transform.rotation).GetComponent<Bullet>();
         bullet.SetManagedPool(pool);
         bullet.transform.SetParent(gameManager.bulletStorage);
         return bullet;

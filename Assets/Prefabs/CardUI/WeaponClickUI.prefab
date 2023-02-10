@@ -401,10 +401,10 @@ RectTransform:
   m_Father: {fileID: 6440513771162789530}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000027656555, y: -0.000022888184}
-  m_SizeDelta: {x: 455.7666, y: 170.3727}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &604243748112595596
 CanvasRenderer:
@@ -1008,8 +1008,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 8.3306, y: 15.1735}
-  m_SizeDelta: {x: 455.7666, y: 170.4027}
+  m_AnchoredPosition: {x: 8.3306, y: 31.4245}
+  m_SizeDelta: {x: 455.7666, y: 202.9048}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7348078908796554754
 CanvasRenderer:
@@ -1514,7 +1514,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "\uB3D9\uC77C\uD55C \uBB34\uAE30\uB97C \uC18C\uC9C0\uD558\uACE0 \uC788\uC9C0
-    \uC54A\uC2B5\uB2C8\uB2E4."
+    \uC54A\uAC70\uB098,\n\uD569\uC131 \uAE08\uC561\uC774 \uBD80\uC871\uD569\uB2C8\uB2E4."
 --- !u!1 &3137212880412979479
 GameObject:
   m_ObjectHideFlags: 0
@@ -4072,7 +4072,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uBB3C\uB9AC\uACF5\uACA9\uB825"
+  m_Text: "\uBB3C\uB9AC \uACF5\uACA9\uB825"
 --- !u!114 &108971292913993897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4421,7 +4421,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uC6D0\uC18C\uACF5\uACA9\uB825"
+  m_Text: "\uB9C8\uBC95 \uACF5\uACA9\uB825"
 --- !u!114 &3968273820316657903
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5438,7 +5438,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -27}
+  m_AnchoredPosition: {x: 0, y: -47}
   m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2500481317497492090

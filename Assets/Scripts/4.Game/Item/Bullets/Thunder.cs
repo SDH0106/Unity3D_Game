@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Thunder : Bullet
 {
+    [SerializeField] Transform effectPos;
     Animator anim;
 
     private void Start()
@@ -20,5 +21,10 @@ public class Thunder : Bullet
                 DestroyBullet();
             }
         }
+    }
+
+    public void AttackEffect()
+    {
+        Instantiate(effectPrefab, effectPos.position, effectPrefab.transform.rotation);
     }
 }

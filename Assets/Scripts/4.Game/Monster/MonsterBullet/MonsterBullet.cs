@@ -29,13 +29,13 @@ public class MonsterBullet : MonoBehaviour
 
     void Update()
     {
-        transform.position += dir * speed * Time.deltaTime;
-
         if (gameManager.isClear && gameManager.isBossDead)
         {
             CancelInvoke("DestroyBullet");
             DestroyBullet();
         }
+
+        transform.position += dir * speed * Time.deltaTime;
     }
 
     public virtual void ShootDir()

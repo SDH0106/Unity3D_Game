@@ -12,6 +12,7 @@ public class StaffControl : Weapon
     [SerializeField] Transform doubleFirePos1;
     [SerializeField] Transform doubleFirePos2;
     [SerializeField] int poolCount;
+    [SerializeField] LayerMask monsterLayer;
 
     private IObjectPool<Bullet> pool;
     protected IObjectPool<DamageUI> damagePool;
@@ -266,13 +267,13 @@ public class StaffControl : Weapon
 
         detectRange = Mathf.Clamp(attackRange + gameManager.range * 0.5f, 1f, 12f);
 
-        Collider[] colliders = Physics.OverlapSphere(character.transform.position, detectRange);
+        Collider[] colliders = Physics.OverlapSphere(character.transform.position, detectRange, monsterLayer);
 
         if (colliders.Length > 0)
         {
             var find = from target in colliders
-                       orderby Vector3.Distance(character.transform.position, target.transform.position)
                        where target.gameObject.CompareTag("Monster") && target.GetComponent<Monster>() != null
+                       orderby Vector3.Distance(character.transform.position, target.transform.position)
                        select target.gameObject;
 
             int rand = Random.Range(0, (find.Count() / 3) + (monsterCount + 1));
@@ -340,7 +341,7 @@ public class StaffControl : Weapon
 
     private Bullet CreateBullet()
     {
-        Bullet bullet = Instantiate(bulletPrefab, normalFirePos.position, transform.rotation).GetComponent<Bullet>();
+        Bullet bullet = Instantiate(bulletPrefab, normalFirePos.position, bulletPrefab.transform.rotation).GetComponent<Bullet>();
         bullet.SetManagedPool(pool);
         bullet.transform.SetParent(gameManager.bulletStorage);
         return bullet;

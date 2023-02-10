@@ -9,6 +9,8 @@ using UnityEngine.Events;
 
 public class OptionUI : MonoBehaviour
 {
+    [SerializeField] Texture2D cursorNormal;
+    [SerializeField] Texture2D cursorAttack;
     [SerializeField] GameObject panel;
     [SerializeField] Slider AllSound;
     [SerializeField] Slider bgmSound;
@@ -158,6 +160,12 @@ public class OptionUI : MonoBehaviour
     {
         if (!gameManager.isPause)
         {
+            if(gameManager.currentScene == "Game")
+            {
+                Vector2 cursorHotSpot = new Vector3(cursorNormal.width * 0.5f, cursorNormal.height * 0.5f);
+                Cursor.SetCursor(cursorNormal, cursorHotSpot, CursorMode.ForceSoftware);
+            }
+
             if(statPanel != null)
                 statPanel.SetActive(true);
 
@@ -171,6 +179,12 @@ public class OptionUI : MonoBehaviour
     {
         if (gameManager.isPause)
         {
+            if (gameManager.currentScene == "Game")
+            {
+                Vector2 cursorHotSpot = new Vector3(cursorAttack.width * 0.5f, cursorAttack.height * 0.5f);
+                Cursor.SetCursor(cursorAttack, cursorHotSpot, CursorMode.ForceSoftware);
+            }
+
             if (statPanel != null)
                 statPanel.SetActive(false);
 

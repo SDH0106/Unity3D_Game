@@ -40,6 +40,7 @@ public class CardClick : MonoBehaviour
 
     ItemManager itemManager;
     Character character;
+    GameManager gameManager;
 
     bool isOver;
 
@@ -86,7 +87,7 @@ public class CardClick : MonoBehaviour
         selectedNum = num;
         selectedWeapon = itemManager.storedWeapon[selectedNum];
 
-        price = Mathf.CeilToInt(selectedWeapon.WeaponPrice * ((int)(selectedWeapon.weaponGrade) * 2f + 1) * (1 - GameManager.Instance.salePercent));
+        price = Mathf.CeilToInt(selectedWeapon.WeaponPrice * ((int)(itemManager.weaponGrade[selectedNum]) * 2f + 1) * (1 - GameManager.Instance.salePercent));
         itemSprite.sprite = selectedWeapon.ItemSprite;
         weaponName.text = selectedWeapon.WeaponName.ToString();
         type.text = selectedWeapon.Type.ToString();
@@ -203,6 +204,7 @@ public class CardClick : MonoBehaviour
     public void CombineWeapon()
     {
         itemManager = ItemManager.Instance;
+        gameManager = GameManager.Instance;
         bool canCombine = false;
 
         for (int i = 0; i < itemManager.storedWeapon.Length; i++)
@@ -213,14 +215,17 @@ public class CardClick : MonoBehaviour
                 {
                     if ((selectedWeapon.WeaponName == itemManager.storedWeapon[i].WeaponName) && (itemManager.weaponGrade[selectedNum] == itemManager.weaponGrade[i]))
                     {
-                        canCombine = true;
-                        GameManager.Instance.money -= Mathf.CeilToInt(price * 0.5f);
-                        itemManager.weaponGrade[selectedNum]++;
-                        itemManager.storedWeapon[i] = null;
-                        itemManager.weaponGrade[i] = Grade.일반;
-                        itemManager.fullCount--;
-                        Character.Instance.ReleaseEquip(i);
-                        break;
+                        if (gameManager.money >= Mathf.CeilToInt(price * 0.5f))
+                        {
+                            canCombine = true;
+                            gameManager.money -= Mathf.CeilToInt(price * 0.5f);
+                            itemManager.weaponGrade[selectedNum]++;
+                            itemManager.storedWeapon[i] = null;
+                            itemManager.weaponGrade[i] = Grade.일반;
+                            itemManager.fullCount--;
+                            Character.Instance.ReleaseEquip(i);
+                            break;
+                        }
                     }
                 }
             }

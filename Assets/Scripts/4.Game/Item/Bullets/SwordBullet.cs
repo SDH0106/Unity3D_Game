@@ -42,13 +42,11 @@ public class SwordBullet : Bullet
             {
                 damage.damageText.color = new Color(0.9f, 0, 0.7f, 1);
                 damage.damageText.fontSize = 65;
-                Debug.Log("cri");
             }
             else if (criRand > gameManager.critical)
             {
                 damage.damageText.color = Color.cyan;
                 damage.damageText.fontSize = 50;
-                Debug.Log("noCri");
             }
             damage.UISetting();
             damage.transform.position = transform.position;

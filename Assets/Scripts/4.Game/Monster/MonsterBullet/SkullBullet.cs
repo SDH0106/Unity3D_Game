@@ -13,6 +13,12 @@ public class SkullBullet : MonsterBullet
     // Update is called once per frame
     void Update()
     {
+        if (gameManager.isClear && gameManager.isBossDead)
+        {
+            CancelInvoke("DestroyBullet");
+            DestroyBullet();
+        }
+
         if (randNum == 0)
             transform.position += dir * speed * Time.deltaTime;
 
@@ -37,7 +43,6 @@ public class SkullBullet : MonsterBullet
         else if (randNum == 1)
         {
             dir = (transform.position - monsPos).normalized;
-            //dir = transform.up;
             dir = new Vector3(dir.x, 0f, dir.z);
         }
     }

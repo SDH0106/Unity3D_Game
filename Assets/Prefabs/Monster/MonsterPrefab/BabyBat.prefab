@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 81727465642485590}
   - component: {fileID: 2100492170074265801}
   - component: {fileID: 405998318861722249}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BabyBat
   m_TagString: Monster
   m_Icon: {fileID: 0}
@@ -132,16 +132,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27cbc2faeb2722444acf9eb84865c70d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rend: {fileID: 2830613899386497867}
-  anim: {fileID: 81727465642485590}
-  coll: {fileID: 2100492170074265801}
   isWalk: 0
   isDead: 0
   isAttacked: 0
   isAttack: 0
   hp: 0
-  maxHp: 0
-  initScale: {x: 0, y: 0, z: 0}
   stat:
     monsterName: 
     monsterMaxHp: 0
@@ -150,5 +145,5 @@ MonoBehaviour:
     monsterDefence: 0
     monsterExp: 0
     monsterCoin: 0
-  speed: 0
   dir: {x: 0, y: 0, z: 0}
+  defence: 0

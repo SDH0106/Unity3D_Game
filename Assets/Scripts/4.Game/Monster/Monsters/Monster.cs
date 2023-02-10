@@ -96,6 +96,7 @@ public class Monster : MonoBehaviour
         coll.enabled = true;
         beforeFreeze = false;
         anim.speed = 1f;
+        transform.position = Vector3.zero;
         transform.localScale = initScale;
         initScale = transform.localScale;
         rend.color = Color.white;

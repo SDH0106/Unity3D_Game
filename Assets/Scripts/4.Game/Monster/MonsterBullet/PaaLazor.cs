@@ -25,6 +25,12 @@ public class PaaLazor : MonsterBullet
 
     private void Update()
     {
+
+        if (gameManager.isClear && gameManager.isBossDead)
+        {
+            DestroyBullet();
+        }
+
         anim.SetBool("isFlip", isFlip);
         rend.flipX = isFlip;
 
@@ -34,11 +40,6 @@ public class PaaLazor : MonsterBullet
             {
                 DestroyBullet();
             }
-        }
-
-        if (gameManager.isClear && gameManager.isBossDead)
-        {
-            DestroyBullet();
         }
     }
 

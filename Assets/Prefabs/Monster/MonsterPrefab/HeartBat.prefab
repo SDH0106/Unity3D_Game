@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 3269895952046774670}
   - component: {fileID: -1978511027347272037}
   - component: {fileID: -6914624546246345199}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: HeartBat
   m_TagString: Monster
   m_Icon: {fileID: 0}
@@ -164,16 +164,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8835db95f480c0947b5516d084ab81ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rend: {fileID: 0}
-  anim: {fileID: 0}
-  coll: {fileID: 0}
   isWalk: 0
   isDead: 0
   isAttacked: 0
   isAttack: 0
   hp: 0
-  maxHp: 0
-  initScale: {x: 0, y: 0, z: 0}
   stat:
     monsterName: 
     monsterMaxHp: 0
@@ -182,7 +177,7 @@ MonoBehaviour:
     monsterDefence: 0
     monsterExp: 0
     monsterCoin: 0
-  speed: 0
   dir: {x: 0, y: 0, z: 0}
+  defence: 0
   plantBullet: {fileID: 3246047406680868606, guid: 77bebbe613ed30b4da97b8d171642276, type: 3}
   bulletPos: {fileID: 4486898294191438690}

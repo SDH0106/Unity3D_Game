@@ -59,6 +59,8 @@ public class WeaponCardUI : MonoBehaviour
 
     bool isOver = false;
 
+    public Grade selectGrade;
+
     private void Start()
     {
         gameManager = GameManager.Instance;
@@ -94,7 +96,7 @@ public class WeaponCardUI : MonoBehaviour
             }
         }
 
-                lockImage.gameObject.SetActive(isLock);
+        lockImage.gameObject.SetActive(isLock);
 
         if (gameManager.money < price)
             weaponPrice.color = Color.red;
@@ -108,20 +110,20 @@ public class WeaponCardUI : MonoBehaviour
         if (isLock)
         {
             selectedWeapon = itemManager.lockedWeaCards[num];
-            selectedWeapon.weaponGrade = itemManager.selectedGrades[num];
+            selectGrade = itemManager.selectedGrades[num];
         }
 
-        price = Mathf.CeilToInt(selectedWeapon.WeaponPrice * ((int)(selectedWeapon.weaponGrade) * 2f + 1) * (1 - gameManager.salePercent));
+        price = Mathf.CeilToInt(selectedWeapon.WeaponPrice * ((int)selectGrade * 2f + 1) * (1 - gameManager.salePercent));
         itemSprite.sprite = selectedWeapon.ItemSprite;
         weaponName.text = selectedWeapon.WeaponName.ToString();
         type.text = selectedWeapon.Type.ToString();
-        weaponDamage.text = (selectedWeapon.WeaponDamage * (int)(selectedWeapon.weaponGrade + 1)).ToString();
-        magicDamage.text = (selectedWeapon.MagicDamage * (int)(selectedWeapon.weaponGrade + 1)).ToString();
+        weaponDamage.text = (selectedWeapon.WeaponDamage * (int)(selectGrade + 1)).ToString();
+        magicDamage.text = (selectedWeapon.MagicDamage * (int)(selectGrade + 1)).ToString();
         attackDelay.text = selectedWeapon.AttackDelay.ToString();
         bulletSpeed.text = selectedWeapon.BulletSpeed.ToString();
         weaponRange.text = selectedWeapon.WeaponRange.ToString();
         weaponPrice.text = price.ToString();
-        weaponGrade.text = selectedWeapon.weaponGrade.ToString();
+        weaponGrade.text = selectGrade.ToString();
         description.text = selectedWeapon.Description.ToString();
         combineMoney.text = Mathf.CeilToInt(price * 0.5f).ToString();
 
@@ -137,7 +139,7 @@ public class WeaponCardUI : MonoBehaviour
 
     void CardColor()
     {
-        if (selectedWeapon.weaponGrade == Grade.일반)
+        if (selectGrade == Grade.일반)
         {
             cardBack.color = new Color(0.142f, 0.142f, 0.142f, 0.8235f);
             cardBackLine.color = Color.black;
@@ -145,7 +147,7 @@ public class WeaponCardUI : MonoBehaviour
             weaponGrade.color = Color.white;
         }
 
-        else if(selectedWeapon.weaponGrade == Grade.희귀)
+        else if(selectGrade == Grade.희귀)
         {
             cardBack.color = new Color(0f, 0.6f, 0.8f, 0.8235f);
             cardBackLine.color = Color.blue;
@@ -153,7 +155,7 @@ public class WeaponCardUI : MonoBehaviour
             weaponGrade.color = new Color(0.5f, 0.8f, 1f, 1f);
         }
 
-        else if (selectedWeapon.weaponGrade == Grade.전설)
+        else if (selectGrade == Grade.전설)
         {
             cardBack.color = new Color(0.5f, 0.2f, 0.4f, 0.8235f);
             cardBackLine.color = new Color(0.5f, 0f, 0.5f, 1f);
@@ -161,7 +163,7 @@ public class WeaponCardUI : MonoBehaviour
             weaponGrade.color = new Color(0.8f, 0.4f, 1f, 1f);
         }
 
-        else if (selectedWeapon.weaponGrade == Grade.신화)
+        else if (selectGrade == Grade.신화)
         {
             cardBack.color = new Color(0.7f, 0.1f, 0.1f, 0.8235f);
             cardBackLine.color = Color.red;
@@ -183,7 +185,7 @@ public class WeaponCardUI : MonoBehaviour
                 gameManager.money -= price;
                 itemManager.fullCount++;
                 itemManager.GetWeaponInfo(selectedWeapon);
-                itemManager.weaponGrade[itemManager.weaponCount] = selectedWeapon.weaponGrade;
+                itemManager.weaponGrade[itemManager.weaponCount] = selectGrade;
                 isLock = false;
                 itemManager.cardLocks[num] = isLock;
                 itemManager.lockedWeaCards[num] = null;
@@ -195,9 +197,9 @@ public class WeaponCardUI : MonoBehaviour
             {
                 for (int i = 0; i < itemManager.storedWeapon.Length; i++)
                 {
-                    if (itemManager.storedWeapon[i] != null && selectedWeapon.weaponGrade != Grade.신화)
+                    if (itemManager.storedWeapon[i] != null && selectGrade != Grade.신화)
                     {
-                        if ((selectedWeapon.WeaponName == itemManager.storedWeapon[i].WeaponName) && (selectedWeapon.weaponGrade == itemManager.weaponGrade[i]))
+                        if ((selectedWeapon.WeaponName == itemManager.storedWeapon[i].WeaponName) && (selectGrade == itemManager.weaponGrade[i]))
                         {
                             canSwordBuy = true;
                             combineNum = i;
@@ -225,7 +227,7 @@ public class WeaponCardUI : MonoBehaviour
                     gameManager.money -= price;
                     itemManager.fullCount++;
                     itemManager.GetWeaponInfo(selectedWeapon);
-                    itemManager.weaponGrade[itemManager.weaponCount] = selectedWeapon.weaponGrade;
+                    itemManager.weaponGrade[itemManager.weaponCount] = selectGrade;
                     if (selectedWeapon.WeaponName == "번개 스태프")
                     {
                         if(character.thunderCount == 0)
@@ -246,9 +248,9 @@ public class WeaponCardUI : MonoBehaviour
                 {
                     for (int i = 0; i < itemManager.storedWeapon.Length; i++)
                     {
-                        if (itemManager.storedWeapon[i] != null && selectedWeapon.weaponGrade != Grade.신화)
+                        if (itemManager.storedWeapon[i] != null && selectGrade != Grade.신화)
                         {
-                            if ((selectedWeapon.WeaponName == itemManager.storedWeapon[i].WeaponName) && (selectedWeapon.weaponGrade == itemManager.weaponGrade[i]))
+                            if ((selectedWeapon.WeaponName == itemManager.storedWeapon[i].WeaponName) && (selectGrade == itemManager.weaponGrade[i]))
                             {
                                 canBuy = true;
                                 combineNum = i;
@@ -270,7 +272,7 @@ public class WeaponCardUI : MonoBehaviour
 
     public void Combine()
     {
-        if (gameManager.money - price >= (int)(selectedWeapon.weaponGrade + 1) * 20)
+        if (gameManager.money - price >= Mathf.CeilToInt(price * 0.5f))
         {
             SoundManager.Instance.PlayES("WeaponSelect");
             gameManager.money -= Mathf.CeilToInt(price * 0.5f);
@@ -303,7 +305,7 @@ public class WeaponCardUI : MonoBehaviour
             lockBackImage.color = Color.white;
             lockText.color = Color.black;
             itemManager.lockedWeaCards[num] = selectedWeapon;
-            itemManager.selectedGrades[num] = selectedWeapon.weaponGrade;
+            itemManager.selectedGrades[num] = selectGrade;
             isLock = true;
         }
 

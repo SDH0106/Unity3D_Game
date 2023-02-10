@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 9201349320051477365}
   - component: {fileID: 8108201137629928350}
   - component: {fileID: 1736014795705108098}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PaaBat
   m_TagString: Monster
   m_Icon: {fileID: 0}
