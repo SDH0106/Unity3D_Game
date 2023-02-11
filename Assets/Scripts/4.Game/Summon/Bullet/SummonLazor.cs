@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class SummonLazor : MonoBehaviour
 {
@@ -11,7 +12,14 @@ public class SummonLazor : MonoBehaviour
     Vector3 dir;
     float angle;
 
+    protected IObjectPool<DamageUI> pool;
+
     protected GameManager gameManager;
+
+    protected virtual void Awake()
+    {
+        pool = new ObjectPool<DamageUI>(CreateDamageUI, OnGetDamageUI, OnReleaseDamageUI, OnDestroyDamageUI, maxSize: 10);
+    }
 
     private void Start()
     {
@@ -35,11 +43,40 @@ public class SummonLazor : MonoBehaviour
     {
         if (collision.collider.CompareTag("Monster") && collision.collider.GetComponent<Monster>())
         {
-            collision.collider.GetComponent<Monster>().PureOnDamaged(damage);
+            damage = Mathf.Round(GameManager.Instance.round * 5 * (1 + GameManager.Instance.summonPDmg) * 10) * 0.1f;
 
-            DamageUI damageUI = Instantiate(damageUIPreFab, collision.contacts[0].point, damageUIPreFab.transform.rotation);
+            DamageUI damageUI = pool.Get();
             damageUI.realDamage = damage;
+            damageUI.isMiss = false;
+            damageUI.UISetting();
+            damageUI.transform.position = collision.collider.transform.position;
+            damageUI.gameObject.transform.SetParent(gameManager.damageStorage);
+
+            collision.collider.GetComponent<Monster>().PureOnDamaged(damage);
         }
+    }
+
+    private DamageUI CreateDamageUI()
+    {
+        DamageUI damageUIPool = Instantiate(damageUIPreFab, transform.position, damageUIPreFab.transform.rotation).GetComponent<DamageUI>();
+        damageUIPool.SetManagedPool(pool);
+        damageUIPool.transform.SetParent(gameManager.bulletStorage);
+        return damageUIPool;
+    }
+
+    private void OnGetDamageUI(DamageUI damageUIPool)
+    {
+        damageUIPool.gameObject.SetActive(true);
+    }
+
+    private void OnReleaseDamageUI(DamageUI damageUIPool)
+    {
+        damageUIPool.gameObject.SetActive(false);
+    }
+
+    private void OnDestroyDamageUI(DamageUI damageUIPool)
+    {
+        Destroy(damageUIPool.gameObject);
     }
 
     public void BulletDestroy()

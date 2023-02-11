@@ -11,8 +11,11 @@ public class SkullBat : Monster
     [SerializeField] Slider monsterHpBar;
 
     float attackTime = 5;
+    float initAttackTime = 5;
 
     private IObjectPool<MonsterBullet> pool;
+
+    bool isBerserk;
 
     private void Awake()
     {
@@ -22,39 +25,48 @@ public class SkullBat : Monster
     void Start()
     {
         StartSetting();
+        attackTime = 5;
+        initAttackTime = 5;
+        isBerserk = false;
     }
 
     protected override void InitMonsterSetting()
     {
         base.InitMonsterSetting();
         attackTime = 5;
+        initAttackTime = 5;
+        isBerserk = false;
     }
 
     void Update()
     {
         monsterHpBar.value = 1 - (hp / maxHp);
 
+        if(gameManager.currentGameTime <= 0 && !isBerserk)
+        {
+            isBerserk = true;
+            initcolor = new Color(1f, 0.5f, 0.5f, 1f);
+            damage = (stat.monsterDamage * (1 + Mathf.Floor(gameManager.round / 30)) + Mathf.Floor(gameManager.round / 5) * 2f) * 2f;
+            speed = (stat.monsterSpeed * (1 - gameManager.monsterSlow * 0.01f) * 1.5f);
+            initSpeed = speed;
+            initAttackTime = 2.5f;
+            rend.color = initcolor;
+        }
+
         if (isDead == false && !isAttack)
         {
             if (!isFreeze)
             {
-                if (isWalk)
-                {
-                    Move();
-                }
+                Move();
 
-                attackTime -= Time.deltaTime;
+                if (isWalk)
+                    attackTime -= Time.deltaTime;
 
                 if (attackTime <= 0)
                 {
-                    attackTime = 5;
+                    attackTime = initAttackTime;
                     Attack();
                 }
-            }
-
-            if (isFreeze)
-            {
-                anim.speed = 0f;
             }
         }
 
@@ -95,6 +107,8 @@ public class SkullBat : Monster
 
     void Attack()
     {
+        rand = Random.Range(0, 2);
+
         isWalk = false;
         isAttack = true;
     }
@@ -123,9 +137,7 @@ public class SkullBat : Monster
     int rand;
 
     public void Shoot()
-    {
-        rand = Random.Range(0, 2);
-
+    {           
         for (int i = 0; i < bulletPoses.Length; i++)
         {
             MonsterBullet bullet = pool.Get();
@@ -157,11 +169,5 @@ public class SkullBat : Monster
     private void OnDestroyBullet(MonsterBullet bullet)
     {
         Destroy(bullet.gameObject);
-    }
-
-    private void OnDestroy()
-    {
-        if (pool != null)
-            pool.Clear();
     }
 }

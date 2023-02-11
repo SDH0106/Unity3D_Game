@@ -157,7 +157,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 15
   m_TargetDisplay: 0
 --- !u!114 &7694887781048525291
 MonoBehaviour:
@@ -181,7 +181,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &7694887781048525288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,3 +229,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageText: {fileID: 7694887780445064421}
   weaponDamage: 0
+  realDamage: 0
+  swordBulletDamage: 0
+  isMiss: 0

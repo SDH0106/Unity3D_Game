@@ -19,6 +19,7 @@ public class Weapon : MonoBehaviour
     protected int criRand;
 
     protected GameManager gameManager;
+    protected ItemManager itemManager;
 
     public void WeaponSetting()
     {
@@ -83,6 +84,9 @@ public class Weapon : MonoBehaviour
                 weaponDamage = (weaponInfo.WeaponDamage * grade + gameManager.physicDamage + gameManager.shortDamage);
                 swordBulletDamage = (weaponInfo.WeaponDamage * grade + gameManager.magicDamage + gameManager.longDamage);
             }
+
+            if (gameManager.doubleShot)
+                swordBulletDamage = swordBulletDamage * 0.7f;
         }
 
         weaponDamage = Mathf.Round(weaponDamage * gameManager.percentDamage * 10) * 0.1f;

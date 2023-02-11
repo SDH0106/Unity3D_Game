@@ -7,7 +7,6 @@ using UnityEngine.PlayerLoop;
 using UnityEngine.Pool;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
-using static WeaponInfo;
 
 public class DamageUI : MonoBehaviour
 {
@@ -38,7 +37,7 @@ public class DamageUI : MonoBehaviour
 
         else if (isMiss)
         {
-            damageText.color = Color.red;
+            damageText.color = Color.white;
             damageText.text = "Miss";
         }
     }

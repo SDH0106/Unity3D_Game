@@ -37,7 +37,7 @@ public class DescriptionUI : MonoBehaviour
         switch(num)
         {
             case 0:
-                descriptionText.text = "캐릭터의 최대 체력과 관련된 능력치.\n1이하로 떨어지지 않습니다.";
+                descriptionText.text = "캐릭터의 최대 체력과 관련된 능력치.\n1이하로 떨어져도 캐릭터의 최대 체력은 1로 적용됩니다..";
                 break;
 
             case 1:

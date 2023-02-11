@@ -47,14 +47,14 @@ public class MonsterSpawn : MonoBehaviour
             totalWeight += weightValue[i];
         }
 
-        InvokeRepeating("RendSpawnImage", 0.1f, (spawnDelay / (gameManager.round + 14)) * 5);
+        InvokeRepeating("RendSpawnImage", 0.1f, Mathf.Clamp(spawnDelay / (1 + (gameManager.round - 1) * 0.1f), 0.5f, 1));
 
-        if (gameManager.round > 5)
+        if (gameManager.round > 10)
         {
-            InvokeRepeating("RendSpawnImage", 1f, (spawnDelay / (gameManager.round + 5)) * 10);
+            InvokeRepeating("RendSpawnImage", 0.5f, Mathf.Clamp(spawnDelay * 2f / (1 + (gameManager.round - 11) * 0.1f), 1, 2));
 
-            if (gameManager.round > 10)
-                InvokeRepeating("RendSpawnImage", 1.5f, (spawnDelay / (gameManager.round + 5)) * 20);
+            if (gameManager.round > 20)
+                InvokeRepeating("RendSpawnImage", 1f, Mathf.Clamp(spawnDelay * 3f / (1 + (gameManager.round - 21) * 0.1f), 1.5f, 3));
         }
 
         if (gameManager.round % 10 == 0)
@@ -173,10 +173,10 @@ public class MonsterSpawn : MonoBehaviour
 
     int RandomMonster()
     {
-        weightValue[0] = 100 - (gameManager.round * 3f);
-        weightValue[1] = ((gameManager.round - 6) * 3f) * 0.3f;
-        weightValue[2] = ((gameManager.round - 13) * 3f) * 0.3f;
-        weightValue[3] = ((gameManager.round - 20) * 3f) * 0.5f;
+        weightValue[0] = Mathf.Clamp(100 - (gameManager.round * 4f), 10, 100);
+        weightValue[1] = ((gameManager.round - 6) * 5f) * 0.3f;
+        weightValue[2] = ((gameManager.round - 13) * 5f) * 0.3f;
+        weightValue[3] = ((gameManager.round - 20) * 10f) * 0.5f;
 
         float rand = Random.Range(0, totalWeight);
         int spawnNum = 0;

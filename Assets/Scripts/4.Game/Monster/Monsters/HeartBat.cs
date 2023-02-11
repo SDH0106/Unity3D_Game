@@ -94,10 +94,4 @@ public class HeartBat : Monster
     {
         Destroy(bullet.gameObject);
     }
-
-    private void OnDestroy()
-    {
-        if (pool != null)
-            pool.Clear();
-    }
 }

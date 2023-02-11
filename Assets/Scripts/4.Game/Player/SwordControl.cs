@@ -12,6 +12,8 @@ public class SwordControl : Weapon
 {
     [SerializeField] GameObject swordBullet;
     [SerializeField] Transform firePos;
+    [SerializeField] Transform doubleFirePos1;
+    [SerializeField] Transform doubleFirePos2;
     [SerializeField] int poolCount;
 
     private IObjectPool<Bullet> pool;
@@ -55,8 +57,9 @@ public class SwordControl : Weapon
         anim = GetComponent<Animator>();
         gameManager = GameManager.Instance;
         character = Character.Instance;
-        count = ItemManager.Instance.weaponCount;
-        damageUI = ItemManager.Instance.damageUI[count];
+        itemManager = ItemManager.Instance;
+        count = itemManager.weaponCount;
+        damageUI = itemManager.damageUI[count];
         delay = 0;
         swordDelay = weaponInfo.AttackDelay;
         attackRange = weaponInfo.WeaponRange;
@@ -67,7 +70,7 @@ public class SwordControl : Weapon
 
     void Update()
     {
-        grade = (int)(ItemManager.Instance.weaponGrade[count] + 1);
+        grade = (int)(itemManager.weaponGrade[count] + 1);
 
         if (gameManager.currentScene == "Game" && !gameManager.isPause)
         {
@@ -168,17 +171,44 @@ public class SwordControl : Weapon
                 {
                     if (character.currentHp / character.maxHp > 0.7)
                     {
-                        criRand = UnityEngine.Random.Range(1, 101);
-                        int bulletCri = criRand;
-                        Debug.Log(criRand);
-                        WeaponSetting();
-                        Bullet bullet = pool.Get();
-                        bullet.transform.position = new Vector3(firePos.position.x, 0f, firePos.position.z);
-                        bullet.bulletDamage = swordBulletDamage;
-                        bullet.GetComponent<SwordBullet>().criRand = bulletCri;
-                        bullet.damageUI = damageUI;
-                        bullet.speed = 6f;
-                        bullet.Shoot(bulletDir.normalized, firePos.position, 5f);
+                        if (!gameManager.doubleShot)
+                        {
+                            criRand = UnityEngine.Random.Range(1, 101);
+                            int bulletCri = criRand;
+                            WeaponSetting();
+                            Bullet bullet = pool.Get();
+                            bullet.transform.position = new Vector3(firePos.position.x, 0f, firePos.position.z);
+                            bullet.bulletDamage = swordBulletDamage;
+                            bullet.GetComponent<SwordBullet>().criRand = bulletCri;
+                            bullet.damageUI = damageUI;
+                            bullet.speed = 6f;
+                            bullet.Shoot(bulletDir.normalized, firePos.position, 5f);
+                        }
+
+                        else if(gameManager.doubleShot)
+                        {
+                            criRand = UnityEngine.Random.Range(1, 101);
+                            int bulletCri = criRand;
+                            WeaponSetting();
+                            Bullet bullet = pool.Get();
+                            bullet.transform.position = new Vector3(doubleFirePos1.position.x, 0f, doubleFirePos1.position.z);
+                            bullet.bulletDamage = swordBulletDamage;
+                            bullet.GetComponent<SwordBullet>().criRand = bulletCri;
+                            bullet.damageUI = damageUI;
+                            bullet.speed = 6f;
+                            bullet.Shoot(bulletDir.normalized, doubleFirePos1.position, 5f);
+
+                            criRand = UnityEngine.Random.Range(1, 101);
+                            bulletCri = criRand;
+                            WeaponSetting();
+                            Bullet bullet2 = pool.Get();
+                            bullet2.transform.position = new Vector3(doubleFirePos2.position.x, 0f, doubleFirePos2.position.z);
+                            bullet2.bulletDamage = swordBulletDamage;
+                            bullet2.GetComponent<SwordBullet>().criRand = bulletCri;
+                            bullet2.damageUI = damageUI;
+                            bullet2.speed = 6f;
+                            bullet2.Shoot(bulletDir.normalized, doubleFirePos2.position, 5f);
+                        }
                     }
                 }
 

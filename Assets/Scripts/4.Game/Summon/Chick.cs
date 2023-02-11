@@ -2,13 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Burst.Intrinsics;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class Chick : Summons
 {
     [SerializeField] GameObject chickenPrefab;
 
+    protected IObjectPool<DamageUI> pool;
+
     int summonRound;
-    int summonPosNum;
+    public int summonPosNum;
 
     private void Awake()
     {
@@ -19,13 +22,13 @@ public class Chick : Summons
     {
         InitSetting();
         summonRound = gameManager.round;
-        summonPosNum = character.summonNum;
     }
 
     private void Update()
     {
-        if (gameManager.round - summonRound == 15)
+        if (gameManager.round - summonRound == 1)
         {
+
             GameObject summon = Instantiate(chickenPrefab);
             summon.transform.position = character.summonPos[summonPosNum].position;
             summon.transform.SetParent(gameManager.transform);

@@ -154,7 +154,7 @@ public class GameSceneUI : Singleton<GameSceneUI>
         SpawnTree();
 
         if (gameManager.spawnTree)
-            Invoke("SpawnOneTree", 10f);
+            InvokeRepeating("SpawnOneTree", 10f, 10f);
 
         chestCount = 0;
     }
@@ -407,16 +407,7 @@ public class GameSceneUI : Singleton<GameSceneUI>
 
     void SettingStatText()
     {
-        if (gameManager.maxHp != character.maxHp)
-        {
-            if (gameManager.maxHp < 1)
-                character.maxHp = 1;
-
-            else if (gameManager.maxHp >= 1)
-                character.maxHp = gameManager.maxHp;
-        }
-
-        maxHp.text = character.maxHp.ToString();
+        maxHp.text = gameManager.maxHp.ToString();
         reHp.text = gameManager.recoverHp.ToString("0.#");
         apHp.text = gameManager.absorbHp.ToString("0.#");
         def.text = gameManager.defence.ToString("0.#");
@@ -504,7 +495,7 @@ public class GameSceneUI : Singleton<GameSceneUI>
 
     void TimeUI()
     {
-        if (gameManager.currentGameTime >= 1)
+        if (gameManager.currentGameTime >= 5)
             timeText.text = ((int)gameManager.currentGameTime).ToString();
 
         else

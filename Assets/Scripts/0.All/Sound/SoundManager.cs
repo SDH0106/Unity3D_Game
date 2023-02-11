@@ -15,6 +15,7 @@ public class SoundManager : Singleton<SoundManager>
     float bgmSoundVolume;
     float sfxSoundVolume;
 
+
     bool muteBgm;
     bool muteSfx;
 
@@ -32,9 +33,9 @@ public class SoundManager : Singleton<SoundManager>
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        AllSoundVolume = PlayerPrefs.GetFloat("Sound_All", 1);
-        bgmSoundVolume = PlayerPrefs.GetFloat("Sound_Bgm", 1);
-        sfxSoundVolume = PlayerPrefs.GetFloat("Sound_Sfx", 1);
+        AllSoundVolume = PlayerPrefs.GetFloat("Sound_All", 0.5f);
+        bgmSoundVolume = PlayerPrefs.GetFloat("Sound_Bgm", 0.5f);
+        sfxSoundVolume = PlayerPrefs.GetFloat("Sound_Sfx", 0.5f);
         PlayerPrefs.SetFloat("Sound_All", AllSoundVolume);
         PlayerPrefs.SetFloat("Sound_Bgm", bgmSoundVolume);
         PlayerPrefs.SetFloat("Sound_Sfx", sfxSoundVolume);

@@ -9,16 +9,24 @@ public class GoldBat : Monster
     int state = 0;
 
     float attackTime = 5;
+    float initAttackTime = 5;
     bool isRush;
 
     Vector3 rushDir;
 
     Collider ground;
 
+    bool isBerserk;
+    int dashSpeed;
+
     void Start()
     {
         StartSetting();
         ground = GameSceneUI.Instance.ground;
+        attackTime = 5;
+        initAttackTime = 5;
+        dashSpeed = 8;
+        isBerserk = false;
     }
 
     protected override void InitMonsterSetting()
@@ -26,17 +34,31 @@ public class GoldBat : Monster
         base.InitMonsterSetting();
         state = 0;
         isRush = false;
+        isBerserk = false;
         attackTime = 5;
+        initAttackTime = 5;
+        dashSpeed = 8;
+        anim.speed = 1f;
     }
 
     void Update()
     {
         monsterHpBar.value = 1 - (hp / maxHp);
 
+        if (gameManager.currentGameTime <= 0 && !isBerserk)
+        {
+            isBerserk = true;
+            initcolor = new Color(1f, 0.5f, 0.5f, 1f);
+            damage = stat.monsterDamage * (1 + Mathf.Floor(gameManager.round / 30)) + Mathf.Floor(gameManager.round / 5) * 2f * 2f;
+            speed = stat.monsterSpeed * (1 - gameManager.monsterSlow * 0.01f) * 1.5f;
+            initSpeed = speed;
+            initAttackTime = 2.5f;
+            dashSpeed = 12;
+            rend.color = initcolor;
+        }
+
         if (!isDead && !isFreeze)
         {
-            anim.speed = 1f;
-
             if (!isAttack && state == 0)
             {
                 Move();
@@ -45,7 +67,7 @@ public class GoldBat : Monster
 
             if (isRush)
             {
-                transform.position += rushDir * 8 * Time.deltaTime;
+                transform.position += rushDir * dashSpeed * Time.deltaTime;
                 transform.position = ground.ClosestPoint(transform.position);
             }
 
@@ -59,18 +81,13 @@ public class GoldBat : Monster
                 else if (rand == 1)
                     Disappear();
 
-                attackTime = 5;
+                attackTime = initAttackTime;
             }
 
             anim.SetInteger("state", state);
             anim.SetBool("isWalk", isWalk);
             anim.SetBool("isAttack", isAttack);
             
-        }
-
-        if(isFreeze)
-        {
-            anim.speed = 0f;
         }
 
         BossDead();
@@ -107,6 +124,10 @@ public class GoldBat : Monster
 
     void Disappear()
     {
+        if (isBerserk)
+        {
+            anim.speed = 2f;
+        }
         state = 1;
         isWalk = false;
         coll.enabled = false;
@@ -127,6 +148,7 @@ public class GoldBat : Monster
     public void EndAppear()
     {
         state = 0;
+        anim.speed = 1f;
         StartCoroutine(CoolTime());
     }
 
@@ -143,6 +165,7 @@ public class GoldBat : Monster
     {
         speed = 0;
         rushDir = (character.transform.position - transform.position).normalized;
+        rushDir.y = 0;
         isAttack = true;
     }
 
@@ -159,7 +182,12 @@ public class GoldBat : Monster
 
     public void EndAttack()
     {
-        speed = stat.monsterSpeed * (1 - gameManager.monsterSlow * 0.01f);
+        if (!isBerserk)
+            speed = stat.monsterSpeed * (1 - gameManager.monsterSlow * 0.01f);
+
+        else
+            speed = stat.monsterSpeed * (1 - gameManager.monsterSlow * 0.01f) * 2f;
+
         isAttack = false;
     }
 }

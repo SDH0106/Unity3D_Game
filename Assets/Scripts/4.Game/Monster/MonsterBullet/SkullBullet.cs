@@ -24,15 +24,34 @@ public class SkullBullet : MonsterBullet
 
         else if (randNum == 1)
         {
-            transform.RotateAround(monsPos, Vector3.up, 120f * Time.deltaTime);
+            transform.RotateAround(monsPos, Vector3.up, speed * 60f * Time.deltaTime);
             transform.position += dir * speed * Time.deltaTime;
             dir = (transform.position - monsPos).normalized;
+        }
+    }
+
+    protected override void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Character")
+        {
+            if (gameManager.currentGameTime > 0)
+                realDamage = bulletDamage * (1 + Mathf.Floor(gameManager.round / 30)) + Mathf.Floor(gameManager.round / 5) * 2f;
+
+            else if (gameManager.currentGameTime <= 0)
+                realDamage = (bulletDamage * (1 + Mathf.Floor(gameManager.round / 30)) + Mathf.Floor(gameManager.round / 5) * 2f) * 2f;
+
+            other.GetComponent<Character>().OnDamaged(realDamage);
+            DestroyBullet();
+            CancelInvoke("DestroyBullet");
         }
     }
 
     public override void ShootDir()
     {
         speed = (randNum == 0) ? 6f : 2f;
+
+        if (GameManager.Instance.currentGameTime <= 0)
+            speed = speed * 1.5f;
 
         if (randNum == 0)
         {

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
@@ -8,8 +9,10 @@ public class IlsoonBullet : SummonsBullet
     private void Start()
     {
         gameManager = GameManager.Instance;
-        if (GameManager.Instance.longDamage > 0)
-            damage = Mathf.Round(GameManager.Instance.longDamage * 2 * (1 + GameManager.Instance.summonPDmg) * 10) * 0.1f;
+        if (gameManager.longDamage > 0)
+            damage = Mathf.Round(gameManager.longDamage * 5 * (1 + gameManager.summonPDmg) * 10) * 0.1f;
+        else
+            damage = 0;
     }
     private void Update()
     {
@@ -24,8 +27,22 @@ public class IlsoonBullet : SummonsBullet
     {
         if (other.CompareTag("Monster"))
         {
-            DamageUI damageUI = Instantiate(damageUIPreFab, transform.position, damageUIPreFab.transform.rotation);
+            gameManager = GameManager.Instance;
+
+            if (gameManager.longDamage > 0)
+                damage = Mathf.Round(gameManager.longDamage * 5 * (1 + gameManager.summonPDmg) * 10) * 0.1f;
+            else
+                damage = 0;
+
+            DamageUI damageUI = pool.Get();
             damageUI.realDamage = damage;
+            if (damage > 0)
+                damageUI.isMiss = false;
+            else if (damage <= 0)
+                damageUI.isMiss = true;
+            damageUI.UISetting();
+            damageUI.transform.position = transform.position;
+            damageUI.gameObject.transform.SetParent(gameManager.damageStorage);
             other.GetComponent<Monster>().PureOnDamaged(damage);
         }
     }

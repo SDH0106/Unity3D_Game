@@ -43,9 +43,10 @@ public class StaffControl : Weapon
     private void Start()
     {
         gameManager = GameManager.Instance;
+        itemManager = ItemManager.Instance;
         character = Character.Instance;
-        count = ItemManager.Instance.weaponCount;
-        damageUI = ItemManager.Instance.damageUI[count];
+        count = itemManager.weaponCount;
+        damageUI = itemManager.damageUI[count];
 
         targets = new Transform[3];
 
@@ -59,7 +60,7 @@ public class StaffControl : Weapon
 
     void Update()
     {
-        grade = (int)(ItemManager.Instance.weaponGrade[count] + 1);
+        grade = (int)(itemManager.weaponGrade[count] + 1);
 
         if (gameManager.currentScene == "Game" && !gameManager.isPause)
         {
@@ -102,7 +103,7 @@ public class StaffControl : Weapon
                         bullet.Shoot(dir.normalized,normalFirePos.position, weaponInfo.WeaponRange);
                     }
 
-                    if (gameManager.doubleShot)
+                    else if (gameManager.doubleShot)
                     {
                         Bullet bullet1 = pool.Get();
                         Bullet bullet2 = pool.Get();
@@ -276,9 +277,9 @@ public class StaffControl : Weapon
                        orderby Vector3.Distance(character.transform.position, target.transform.position)
                        select target.gameObject;
 
-            int rand = Random.Range(0, (find.Count() / 3) + (monsterCount + 1));
+            //int rand = Random.Range(0, (find.Count() / 3) + (monsterCount + 1));
 
-            int num = 0;
+            //int num = 0;
 
             if (find.Count() > 0)
             {
@@ -286,7 +287,8 @@ public class StaffControl : Weapon
 
                 foreach (var target in find)
                 {
-                    if (num == rand)
+                    //if (num == rand)
+                    if(monsterCount < 3)
                     {
                         targets[monsterCount] = target.transform;
 
@@ -305,7 +307,7 @@ public class StaffControl : Weapon
                         if (gameManager.absorbHp > 0 && !damage.isMiss && monsterCount == 0)
                             character.currentHp += gameManager.absorbHp;
 
-                        if (monsterCount == 0)
+                        /*if (monsterCount == 0)
                         {
                             if (find.Count() < 3)
                                 rand = 1;
@@ -317,7 +319,7 @@ public class StaffControl : Weapon
                         else if (monsterCount == 1)
                         {
                             rand = Random.Range(rand + 1, find.Count());
-                        }
+                        }*/
 
                         monsterCount++;
 
@@ -327,8 +329,7 @@ public class StaffControl : Weapon
                             break;
                         }
                     }
-
-                    num++;
+                    //num++;
                 }
 
                 if (find.Count() < 3)

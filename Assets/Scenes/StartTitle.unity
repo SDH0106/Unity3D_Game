@@ -1259,6 +1259,7 @@ RectTransform:
   - {fileID: 1223543771}
   - {fileID: 1593211269334126093}
   - {fileID: 1335804717166617295}
+  - {fileID: 1661411449}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4625,31 +4626,31 @@ MonoBehaviour:
   cursor: {fileID: 2800000, guid: 7bcdc14cd46afc14182f93427b10cc84, type: 3}
   bulletStorage: {fileID: 1005871281}
   damageStorage: {fileID: 1692643827}
-  initGameTime: 1000
+  initGameTime: 20
   gameTime: 0
-  money: 1000
-  round: 1
+  money: 10000000
+  round: 25
   woodCount: 0
   woodMaxCount: 70
   maxHp: 0
   percentDamage: 0
-  physicDamage: 100000
+  physicDamage: 60
   magicDamage: 0
   shortDamage: 0
   longDamage: 0
   recoverHp: 0
   absorbHp: 0
-  defence: 0
-  attackSpeed: 0
+  defence: 50
+  attackSpeed: 5
   speed: 0
-  range: 0
+  range: 5
   luck: 0
   critical: 50
   avoid: 0
   passiveIntVariables: 
   passiveFloatVariables: []
   passiveBoolVariables: 
-  dashCount: 2
+  dashCount: 0
   buffNum: 0
   exDmg: 0
   isedolCount: 0
@@ -4685,6 +4686,7 @@ MonoBehaviour:
   isBossDead: 0
   gameStartTime: 0
   gameEndTime: 0
+  feeMoney: 0
 --- !u!4 &936130855
 Transform:
   m_ObjectHideFlags: 0
@@ -4776,7 +4778,7 @@ MonoBehaviour:
   - statName: "\uC2E0\uBC1C"
     statType: "\uC774\uB3D9 \uC18D\uB3C4"
     statSprite: Speed
-    statValue: 0.3
+    statValue: 0.2
   - statName: "\uB124\uC78E\uD074\uB85C\uBC84"
     statType: "\uD589\uC6B4"
     statSprite: Luck
@@ -4788,7 +4790,7 @@ MonoBehaviour:
   - statName: "\uB300\uAC00\uB9AC"
     statType: "\uD06C\uB9AC\uD2F0\uCEEC"
     statSprite: Critical
-    statValue: 5
+    statValue: 2
 --- !u!114 &936130862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4826,7 +4828,7 @@ MonoBehaviour:
   - monsterName: "\uC548\uC544\uC918\uC694 \uBC15\uC950"
     monsterMaxHp: 25
     monsterDamage: 4
-    monsterSpeed: 1.5
+    monsterSpeed: 3
     monsterDefence: 3
     monsterExp: 5
     monsterCoin: 6
@@ -4840,7 +4842,7 @@ MonoBehaviour:
   - monsterName: "\uD574\uACE8 \uBC15\uC950"
     monsterMaxHp: 1000
     monsterDamage: 6
-    monsterSpeed: 2.3
+    monsterSpeed: 3
     monsterDefence: 5
     monsterExp: 0
     monsterCoin: 0
@@ -6669,6 +6671,86 @@ RectTransform:
   m_AnchoredPosition: {x: 72, y: -290}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1661411448
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1661411449}
+  - component: {fileID: 1661411451}
+  - component: {fileID: 1661411450}
+  m_Layer: 5
+  m_Name: Text (Legacy)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1661411449
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1661411448}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 252911335}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 864, y: -477}
+  m_SizeDelta: {x: 160, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1661411450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1661411448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 40
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 3
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: version 2.2
+--- !u!222 &1661411451
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1661411448}
+  m_CullTransparentMesh: 1
 --- !u!1 &1692643826
 GameObject:
   m_ObjectHideFlags: 0

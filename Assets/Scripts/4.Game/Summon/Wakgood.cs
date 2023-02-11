@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class Wakgood : Summons
 {
@@ -10,9 +11,13 @@ public class Wakgood : Summons
 
     Collider monster;
 
+    protected IObjectPool<DamageUI> pool;
+
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
+        pool = new ObjectPool<DamageUI>(CreateDamageUI, OnGetDamageUI, OnReleaseDamageUI, OnDestroyDamageUI, maxSize: 10);
+
     }
 
     void Start()
@@ -20,6 +25,9 @@ public class Wakgood : Summons
         InitSetting();
         if (gameManager.shortDamage > 0)
             damage = Mathf.Round(gameManager.shortDamage * 5 * (1 + gameManager.summonPDmg) * 10) * 0.1f;
+
+        else
+            damage = 0;
     }
 
     private void Update()
@@ -65,8 +73,47 @@ public class Wakgood : Summons
     public override void EndAttack()
     {
         base.EndAttack();
-        DamageUI damageUI = Instantiate(damageUIPreFab, monster.transform.position, damageUIPreFab.transform.rotation);
+
+        if (gameManager.shortDamage > 0)
+            damage = Mathf.Round(gameManager.shortDamage * 5 * (1 + gameManager.summonPDmg) * 10) * 0.1f;
+
+        else
+            damage = 0;
+
+        DamageUI damageUI = pool.Get();
+
         damageUI.realDamage = damage;
+        if (damage > 0)
+            damageUI.isMiss = false;
+        else if (damage <= 0)
+            damageUI.isMiss = true;
+        damageUI.UISetting();
+        damageUI.transform.position = transform.position;
+        damageUI.gameObject.transform.SetParent(gameManager.damageStorage);
+
         monster.GetComponent<Monster>().PureOnDamaged(damage);
+    }
+
+    private DamageUI CreateDamageUI()
+    {
+        DamageUI damageUIPool = Instantiate(damageUIPreFab, transform.position, damageUIPreFab.transform.rotation).GetComponent<DamageUI>();
+        damageUIPool.SetManagedPool(pool);
+        damageUIPool.transform.SetParent(gameManager.bulletStorage);
+        return damageUIPool;
+    }
+
+    private void OnGetDamageUI(DamageUI damageUIPool)
+    {
+        damageUIPool.gameObject.SetActive(true);
+    }
+
+    private void OnReleaseDamageUI(DamageUI damageUIPool)
+    {
+        damageUIPool.gameObject.SetActive(false);
+    }
+
+    private void OnDestroyDamageUI(DamageUI damageUIPool)
+    {
+        Destroy(damageUIPool.gameObject);
     }
 }

@@ -65,6 +65,8 @@ public class ShopManager : Singleton<ShopManager>
 
     int clickCount;
 
+    int passivePercent;
+
     private void Start()
     {
         SoundManager.Instance.PlayBGM(3, true);
@@ -272,12 +274,19 @@ public class ShopManager : Singleton<ShopManager>
 
     void StartCardSlot()
     {
+        if (gameManager.round < 10)
+            passivePercent = 60;
+
+        else
+            passivePercent = 80;
+
         for (int i = 0; i < 4; i++)
         {
             if (itemManager.cardLocks[i] == false)
             {
                 int rand = UnityEngine.Random.Range(0, 100);
-                if (rand >= 80)
+
+                if (rand >= passivePercent)
                 {
                     GetRandomWeaponCard();
                     GameObject instant = Instantiate(weaponCardUI, cardsParent.GetChild(i).transform);
@@ -286,7 +295,7 @@ public class ShopManager : Singleton<ShopManager>
                     instant.transform.SetParent(cardsParent.GetChild(i));
                 }
 
-                else if (rand < 80)
+                else if (rand < passivePercent)
                 {
                     GetRandomPassiveCard();
                     GameObject instant = Instantiate(passiveCardUI, cardsParent.GetChild(i).transform);
@@ -387,6 +396,12 @@ public class ShopManager : Singleton<ShopManager>
                 {
                     TextAlphaChange(i, 0, countText);
                     TextAlphaChange(i, 0, x);
+                }
+
+                if (itemManager.storedPassive[i].ItemName == "시청료")
+                {
+                    passiveSlots[i].transform.GetChild(5).GetComponent<Text>().text = $"{gameManager.feeMoney} 코인";
+                    passiveSlots[i].transform.GetChild(5).gameObject.SetActive(true);
                 }
             }
 

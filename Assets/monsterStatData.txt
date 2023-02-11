@@ -31,7 +31,7 @@
             "monsterName": "안아줘요 박쥐",
             "monsterMaxHp": 25.0,
             "monsterDamage": 4.0,
-            "monsterSpeed": 1.5,
+            "monsterSpeed": 3.0,
             "monsterDefence": 3.0,
             "monsterExp": 5.0,
             "monsterCoin": 6.0
@@ -40,7 +40,7 @@
             "monsterName": "황금 박쥐",
             "monsterMaxHp": 600.0,
             "monsterDamage": 10.0,
-            "monsterSpeed": 2.0,
+            "monsterSpeed": 2,
             "monsterDefence": 5.0,
             "monsterExp": 0.0,
             "monsterCoin": 0.0
@@ -49,7 +49,7 @@
             "monsterName": "해골 박쥐",
             "monsterMaxHp": 1000.0,
             "monsterDamage": 6.0,
-            "monsterSpeed": 2.3,
+            "monsterSpeed": 3,
             "monsterDefence": 5.0,
             "monsterExp": 0.0,
             "monsterCoin": 0.0

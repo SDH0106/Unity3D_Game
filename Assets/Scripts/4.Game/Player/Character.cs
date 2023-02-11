@@ -77,6 +77,8 @@ public class Character : Singleton<Character>
 
     public int thunderCount;
 
+    Coroutine currentCoroutine;
+
     protected override void Awake()
     {
         base.Awake();
@@ -120,7 +122,11 @@ public class Character : Singleton<Character>
             level++;
             levelUpCount++;
             gameManager.stats[0] += 1;
-            maxHp = gameManager.maxHp;
+            if (gameManager.maxHp > 1)
+                maxHp = gameManager.maxHp;
+
+            else
+                maxHp = 1f;
             exp = exp - maxExp;
             maxExp = 10 * level;
         }
@@ -149,9 +155,7 @@ public class Character : Singleton<Character>
             anim.SetBool("isRun", isRun);
         }
 
-
-        if (summonNum < 3)
-            SummonPet();
+        SummonPet();
     }
 
     void HpSetting()
@@ -166,35 +170,37 @@ public class Character : Singleton<Character>
 
     void SummonPet()
     {
-        if (summonNum < 3)
+        if (gameManager.ggoGgoSummon)
         {
-            if (gameManager.ggoGgoSummon)
-            {
-                GameObject summon = Instantiate(ggoGgoPrefab);
-                summon.transform.position = summonPos[summonNum].position;
-                summon.transform.SetParent(gameManager.transform);
-                summonNum++;
-                gameManager.passiveBoolVariables[5] = false;
-            }
-
-            else if (gameManager.ilsoonSummon)
-            {
-                GameObject summon = Instantiate(ilsoonPrefab);
-                summon.transform.position = summonPos[summonNum].position;
-                summon.transform.SetParent(gameManager.transform);
-                summonNum++;
-                gameManager.passiveBoolVariables[6] = false;
-            }
-
-            else if (gameManager.wakgoodSummon)
-            {
-                GameObject summon = Instantiate(wakgoodPrefab);
-                summon.transform.position = summonPos[summonNum].position;
-                summon.transform.SetParent(gameManager.transform);
-                summonNum++;
-                gameManager.passiveBoolVariables[7] = false;
-            }
+            GameObject summon = Instantiate(ggoGgoPrefab);
+            summon.transform.position = summonPos[summonNum].position;
+            summon.GetComponent<Chick>().summonPosNum = summonNum;
+            summon.transform.SetParent(gameManager.transform);
+            summonNum++;
+            gameManager.passiveBoolVariables[5] = false;
         }
+
+        else if (gameManager.ilsoonSummon)
+        {
+            GameObject summon = Instantiate(ilsoonPrefab);
+            summon.transform.position = summonPos[summonNum].position;
+            summon.transform.SetParent(gameManager.transform);
+            summonNum++;
+            gameManager.passiveBoolVariables[6] = false;
+        }
+
+        else if (gameManager.wakgoodSummon)
+        {
+            GameObject summon = Instantiate(wakgoodPrefab);
+            summon.transform.position = summonPos[summonNum].position;
+            summon.transform.SetParent(gameManager.transform);
+            summonNum++;
+            gameManager.passiveBoolVariables[7] = false;
+        }
+
+        if (summonNum >= 3)
+            summonNum = 0;
+
     }
 
     void OnBuff()
@@ -284,7 +290,11 @@ public class Character : Singleton<Character>
                     transform.position = Vector3.Lerp(beforePos, afterPos, 1);
                     dashCount--;
                     Invoke("ParticleOff", 0.4f);
-                    StartCoroutine(IEDashInvincible());
+
+                    if (currentCoroutine != null)
+                        StopCoroutine(currentCoroutine);
+
+                    currentCoroutine = StartCoroutine(IEDashInvincible());
                 }
             }
 
@@ -411,13 +421,17 @@ public class Character : Singleton<Character>
 
             if (avoidRand > gameManager.avoid)
             {
-                currentHp -= Mathf.Round((damage *(1- gameManager.defence)) * 10) * 0.1f;
+                currentHp -= Mathf.Round((damage * ((100 - gameManager.defence) / 100)) * 10) * 0.1f;
             }
 
             if (currentHp > 0)
             {
                 SoundManager.Instance.PlayES("Hit");
-                StartCoroutine(OnInvincible());
+
+                if (currentCoroutine != null)
+                    StopCoroutine(currentCoroutine);
+
+                currentCoroutine = StartCoroutine(OnInvincible());
             }
 
             else if (currentHp <= 0)
@@ -448,7 +462,11 @@ public class Character : Singleton<Character>
         {
             isAttacked = true;
             isRun = false;
-            StartCoroutine(OnRevive());
+
+            if (currentCoroutine != null)
+                StopCoroutine(currentCoroutine);
+
+            currentCoroutine = StartCoroutine(OnRevive());
         }
     }
 
@@ -457,7 +475,12 @@ public class Character : Singleton<Character>
         anim.SetTrigger("isAttacked");
         isAttacked = true;
         if (currentHp > 0 && avoidRand > gameManager.avoid)
-            StartCoroutine(PlayerColorBlink());
+        {
+            if (currentCoroutine != null)
+                StopCoroutine(currentCoroutine);
+
+            currentCoroutine = StartCoroutine(PlayerColorBlink());
+        }
 
         yield return new WaitForSeconds(invincibleTime);
         rend.color = Color.white;
@@ -466,7 +489,7 @@ public class Character : Singleton<Character>
 
     public IEnumerator IEDashInvincible()
     {
-        Color color = rend.color;
+        Color color = Color.white;
 
         isAttacked = true;
         color.a = 0.5f;
@@ -475,6 +498,7 @@ public class Character : Singleton<Character>
         yield return new WaitForSeconds(invincibleTime);
         color.a = 1f;
         rend.color = color;
+        rend.color = Color.white;
         isAttacked = false;
     }
 

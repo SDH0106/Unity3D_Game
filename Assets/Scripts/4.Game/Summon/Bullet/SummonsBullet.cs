@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class SummonsBullet : MonoBehaviour
 {
@@ -13,6 +14,13 @@ public class SummonsBullet : MonoBehaviour
     protected float angle;
 
     protected GameManager gameManager;
+
+    protected IObjectPool<DamageUI> pool;
+
+    protected virtual void Awake()
+    {
+        pool = new ObjectPool<DamageUI>(CreateDamageUI, OnGetDamageUI, OnReleaseDamageUI, OnDestroyDamageUI, maxSize: 10);
+    }
 
     private void Start()
     {
@@ -39,15 +47,43 @@ public class SummonsBullet : MonoBehaviour
     {
         if(other.CompareTag("Monster"))
         {
+            damage = Mathf.Round(gameManager.round * 2 * (1 + gameManager.summonPDmg) * 10) * 0.1f;
             CancelInvoke("DestroyBullet");
-            DamageUI damageUI = Instantiate(damageUIPreFab, transform.position, damageUIPreFab.transform.rotation);
+            DamageUI damageUI = pool.Get();
             damageUI.realDamage = damage;
+            damageUI.isMiss = false;
+            damageUI.UISetting();
+            damageUI.transform.position = transform.position;
+            damageUI.gameObject.transform.SetParent(gameManager.damageStorage);
             other.GetComponent<Monster>().PureOnDamaged(damage);
             Destroy(gameObject);
         }
     }
 
-    protected void DestroyBullet()
+    private DamageUI CreateDamageUI()
+    {
+        DamageUI damageUIPool = Instantiate(damageUIPreFab, transform.position, damageUIPreFab.transform.rotation).GetComponent<DamageUI>();
+        damageUIPool.SetManagedPool(pool);
+        damageUIPool.transform.SetParent(gameManager.bulletStorage);
+        return damageUIPool;
+    }
+
+    private void OnGetDamageUI(DamageUI damageUIPool)
+    {
+        damageUIPool.gameObject.SetActive(true);
+    }
+
+    private void OnReleaseDamageUI(DamageUI damageUIPool)
+    {
+        damageUIPool.gameObject.SetActive(false);
+    }
+
+    private void OnDestroyDamageUI(DamageUI damageUIPool)
+    {
+        Destroy(damageUIPool.gameObject);
+    }
+
+    public void BulletDestroy()
     {
         Destroy(gameObject);
     }

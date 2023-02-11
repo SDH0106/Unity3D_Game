@@ -58,7 +58,7 @@
             "statName": "신발",
             "statType": "이동 속도",
             "statSprite": "Speed",
-            "statValue": 0.3
+            "statValue": 0.2
         },
         {
             "statName": "네잎클로버",
@@ -76,7 +76,7 @@
             "statName": "대가리",
             "statType": "크리티컬",
             "statSprite": "Critical",
-            "statValue": 5
+            "statValue": 2
         }
     ]
 }

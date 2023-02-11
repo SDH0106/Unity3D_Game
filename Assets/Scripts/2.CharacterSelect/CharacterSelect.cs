@@ -14,7 +14,7 @@ public class CharacterSelect : MonoBehaviour
     private void Start()
     {
         characterClear = new bool[(int)CHARACTER_NUM.Count];
-        characterClear[(int)CHARACTER_NUM.Bagic] = Convert.ToBoolean(PlayerPrefs.GetInt("BagicClear", 0));
+        characterClear[(int)CHARACTER_NUM.Bagic] = Convert.ToBoolean(PlayerPrefs.GetInt("BagicClear", 1));
         LockImage.SetActive(!characterClear[(int)CHARACTER_NUM.Bagic]);
     }
 

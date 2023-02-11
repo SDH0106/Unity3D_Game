@@ -30,7 +30,8 @@ public class WeaponControl : Weapon
     private void Start()
     {
         gameManager = GameManager.Instance;
-        count = ItemManager.Instance.weaponCount;
+        itemManager = ItemManager.Instance;
+        count = itemManager.weaponCount;
         damageUI = ItemManager.Instance.damageUI[count];
         delay = 0;
         bulletDelay = weaponInfo.AttackDelay;
@@ -39,7 +40,7 @@ public class WeaponControl : Weapon
 
     void Update()
     {
-        grade = (int)(ItemManager.Instance.weaponGrade[count] + 1);
+        grade = (int)(itemManager.weaponGrade[count] + 1);
 
         if (gameManager.currentScene == "Game" && !gameManager.isPause)
         {
@@ -50,7 +51,6 @@ public class WeaponControl : Weapon
 
             LookMousePosition();
             FireBullet();
-            WeaponSetting();
         }
     }
 
@@ -72,6 +72,8 @@ public class WeaponControl : Weapon
         {
             if (Input.GetMouseButton(0) && (!gameManager.isClear || !gameManager.isBossDead))
             {
+                WeaponSetting();
+
                 if (!gameManager.doubleShot)
                 {
                     Bullet bullet = pool.Get();
@@ -82,7 +84,7 @@ public class WeaponControl : Weapon
                     bullet.speed = weaponInfo.BulletSpeed;
                 }
 
-                if (gameManager.doubleShot)
+                else if (gameManager.doubleShot)
                 {
                     Bullet bullet1 = pool.Get();
                     Bullet bullet2 = pool.Get();

@@ -30,21 +30,23 @@ public class Ice : Bullet
     {
         if (collision.collider.CompareTag("Monster") && collision.collider.GetComponent<Monster>() != null)
         {
+            Monster monster = collision.collider.GetComponent<Monster>();
+
             Freeze();
 
             Instantiate(effectPrefab, transform.position, transform.rotation);
             
             DamageUI damage = pool.Get();
-            if (bulletDamage > collision.collider.GetComponent<Monster>().defence)
+            if (bulletDamage > monster.defence)
                 damage.isMiss = false;
-            else if (bulletDamage <= collision.collider.GetComponent<Monster>().defence)
+            else if (bulletDamage <= monster.defence)
                 damage.isMiss = true;
-            damage.realDamage = Mathf.Clamp(bulletDamage - collision.collider.GetComponent<Monster>().defence, 0, bulletDamage - collision.collider.GetComponent<Monster>().defence);
+            damage.realDamage = Mathf.Clamp(bulletDamage - monster.defence, 0, bulletDamage - monster.defence);
             damage.UISetting();
             damage.transform.position = transform.position;
             damage.gameObject.transform.SetParent(gameManager.damageStorage);
 
-            collision.collider.GetComponent<Monster>().OnDamaged(damage.realDamage, isFreeze);
+            monster.OnDamaged(damage.realDamage, isFreeze);
 
             if (gameManager.absorbHp > 0 && !damage.isMiss && !isAttack)
             {
@@ -61,7 +63,7 @@ public class Ice : Bullet
             else if (gameManager.lowPenetrate)
                 LowPenetrate(damage);
 
-            else if (!gameManager.isReflect && !gameManager.lowPenetrate && !gameManager.onePenetrate)
+            else if (!gameManager.isReflect && !gameManager.lowPenetrate && !gameManager.onePenetrate && !gameManager.penetrate)
             {
                 if (!isDestroyed)
                     DestroyBullet();

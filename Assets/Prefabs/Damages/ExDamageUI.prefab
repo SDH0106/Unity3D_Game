@@ -157,7 +157,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 15
   m_TargetDisplay: 0
 --- !u!114 &7694887781048525291
 MonoBehaviour:
@@ -181,7 +181,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &7694887781048525288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,3 +229,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageText: {fileID: 7694887780445064421}
   explosion: {fileID: 4783517211068358492, guid: 89e5eb48793f949419a92bcf3be36b34, type: 3}
+  damage: 0
