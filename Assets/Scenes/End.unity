@@ -2910,6 +2910,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9c7d6570a42de0499e0b41acc6e2839, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cursorNormal: {fileID: 2800000, guid: 7bcdc14cd46afc14182f93427b10cc84, type: 3}
   overUI: {fileID: 669209907}
   clearUI: {fileID: 705758741}
   round: {fileID: 937979893}

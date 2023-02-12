@@ -22,8 +22,8 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector] public float percentDamage;
     /*[HideInInspector]*/ public float physicDamage;
     /*[HideInInspector]*/ public float magicDamage;
-    [HideInInspector] public float shortDamage;
-    [HideInInspector] public float longDamage;
+    /*[HideInInspector]*/ public float shortDamage;
+    /*[HideInInspector]*/ public float longDamage;
     [SerializeField] public float recoverHp;
     [SerializeField] public float absorbHp;
     [SerializeField] public float defence;
@@ -63,9 +63,9 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector] public bool spawnTree;
     [HideInInspector] public bool dotgu;
     [HideInInspector] public bool isReflect;
-    [HideInInspector] public bool onePenetrate;
-    [HideInInspector] public bool lowPenetrate;
-    [HideInInspector] public bool penetrate;
+    /*[HideInInspector]*/ public bool onePenetrate;
+    /*[HideInInspector]*/ public bool lowPenetrate;
+    /*[HideInInspector]*/ public bool penetrate;
     #endregion
 
     [HideInInspector] public float currentGameTime;
@@ -83,7 +83,7 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector] public float gameStartTime;
     [HideInInspector] public float gameEndTime;
 
-    public int feeMoney = 0;
+    [HideInInspector] public int feeMoney = 0;
 
     protected override void Awake()
     {
@@ -97,6 +97,7 @@ public class GameManager : Singleton<GameManager>
         Cursor.SetCursor(cursor, cursorHotSpot, CursorMode.ForceSoftware);
         /*PlayerPrefs.SetInt("GameTuto", 1);
         PlayerPrefs.SetInt("BossTuto", 1);*/
+        //PlayerPrefs.SetInt("BagicClear", 1);
 
         gameTime = Mathf.Clamp(initGameTime + (round - 1) * 3f, initGameTime, 60f);
         //gameTime = Mathf.Clamp(initGameTime + (round - 1) * 3f, 0, 10000f);
@@ -329,9 +330,12 @@ public class GameManager : Singleton<GameManager>
         Character.Instance.transform.position = new Vector3(0f, 0f, -40f);
         currentScene = "Shop";
         SceneManager.LoadScene(currentScene);
+
         gameTime = Mathf.Clamp(initGameTime + (round - 1) * 3f, initGameTime, 60f);
         //gameTime = 0;
+
         currentGameTime = gameTime;
+
         isClear = false;
     }
 }

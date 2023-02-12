@@ -50,7 +50,7 @@ public class SkullBullet : MonsterBullet
     {
         speed = (randNum == 0) ? 6f : 2f;
 
-        if (GameManager.Instance.currentGameTime <= 0)
+        if (GameManager.Instance.currentGameTime <= 0 && GameManager.Instance.round == 30)
             speed = speed * 1.5f;
 
         if (randNum == 0)

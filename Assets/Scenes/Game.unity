@@ -51768,6 +51768,7 @@ MonoBehaviour:
   lvText: {fileID: 1860386575}
   expBar: {fileID: 866213868}
   coinText: {fileID: 584163688}
+  coinTextPos: {fileID: 584163687}
   woodCount: {fileID: 1095052840}
   timeText: {fileID: 804445170}
   roundText: {fileID: 1116290218}

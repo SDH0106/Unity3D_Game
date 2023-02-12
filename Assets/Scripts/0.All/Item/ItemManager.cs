@@ -29,6 +29,9 @@ public class ItemManager : Singleton<ItemManager>
 
     public Grade[] selectedGrades;
 
+    public int thunderCount;
+    public bool[] isThunderCountChange = new bool[6];
+
     private void Start()
     {
         DontDestroyOnLoad(gameObject);

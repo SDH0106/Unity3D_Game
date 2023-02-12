@@ -34,6 +34,8 @@ public class StaffControl : Weapon
 
     Character character;
 
+    public int thunderCount;
+
     private void Awake()
     {
         pool = new ObjectPool<Bullet>(CreateBullet, OnGetBullet, OnReleaseBullet, OnDestroyBullet, maxSize: poolCount);
@@ -56,10 +58,18 @@ public class StaffControl : Weapon
 
         canAttack = true;
         isTargetFind = false;
+        thunderCount = character.thunderCount - 1;
+        itemManager.isThunderCountChange[thunderCount] = false;
     }
 
     void Update()
     {
+        if (thunderCount > itemManager.thunderCount && itemManager.isThunderCountChange[thunderCount])
+        {
+            itemManager.isThunderCountChange[thunderCount] = false;
+            thunderCount--;
+        }
+
         grade = (int)(itemManager.weaponGrade[count] + 1);
 
         if (gameManager.currentScene == "Game" && !gameManager.isPause)
@@ -277,9 +287,7 @@ public class StaffControl : Weapon
                        orderby Vector3.Distance(character.transform.position, target.transform.position)
                        select target.gameObject;
 
-            //int rand = Random.Range(0, (find.Count() / 3) + (monsterCount + 1));
-
-            //int num = 0;
+            int num = 0;
 
             if (find.Count() > 0)
             {
@@ -287,39 +295,26 @@ public class StaffControl : Weapon
 
                 foreach (var target in find)
                 {
-                    //if (num == rand)
-                    if(monsterCount < 3)
+                    Monster monster = target.GetComponent<Monster>();
+
+                    if (find.Count() <= 3)
                     {
                         targets[monsterCount] = target.transform;
 
                         DamageUI damage = damagePool.Get();
-                        if (weaponDamage > target.GetComponent<Monster>().defence)
+                        if (weaponDamage > monster.defence)
                             damage.isMiss = false;
-                        else if (weaponDamage <= target.GetComponent<Monster>().defence)
+                        else if (weaponDamage <= monster.defence)
                             damage.isMiss = true;
-                        damage.realDamage = Mathf.Clamp(weaponDamage - target.GetComponent<Monster>().defence, 0, weaponDamage - target.GetComponent<Monster>().defence);
+                        damage.realDamage = Mathf.Clamp(weaponDamage - monster.defence, 0, weaponDamage - monster.defence);
                         damage.UISetting();
                         damage.transform.position = target.transform.position;
                         damage.gameObject.transform.SetParent(gameManager.damageStorage);
 
-                        target.GetComponent<Monster>().OnDamaged(damage.realDamage);
+                        monster.OnDamaged(damage.realDamage);
 
                         if (gameManager.absorbHp > 0 && !damage.isMiss && monsterCount == 0)
                             character.currentHp += gameManager.absorbHp;
-
-                        /*if (monsterCount == 0)
-                        {
-                            if (find.Count() < 3)
-                                rand = 1;
-
-                            else
-                                rand = Random.Range(rand + 1, (find.Count() / 3) * 2);
-                        }
-
-                        else if (monsterCount == 1)
-                        {
-                            rand = Random.Range(rand + 1, find.Count());
-                        }*/
 
                         monsterCount++;
 
@@ -329,7 +324,75 @@ public class StaffControl : Weapon
                             break;
                         }
                     }
-                    //num++;
+
+                    else if (find.Count() > 3)
+                    {
+                        if (find.Count() >= character.thunderCount * 3)
+                        {
+                            if (num >= thunderCount * 3 && num < thunderCount * 3 + 3)
+                            {
+                                targets[monsterCount] = target.transform;
+
+                                DamageUI damage = damagePool.Get();
+                                if (weaponDamage > monster.defence)
+                                    damage.isMiss = false;
+                                else if (weaponDamage <= monster.defence)
+                                    damage.isMiss = true;
+                                damage.realDamage = Mathf.Clamp(weaponDamage - monster.defence, 0, weaponDamage - monster.defence);
+                                damage.UISetting();
+                                damage.transform.position = target.transform.position;
+                                damage.gameObject.transform.SetParent(gameManager.damageStorage);
+
+                                monster.OnDamaged(damage.realDamage);
+
+                                if (gameManager.absorbHp > 0 && !damage.isMiss && monsterCount == 0)
+                                    character.currentHp += gameManager.absorbHp;
+
+                                monsterCount++;
+
+                                if (monsterCount >= 3)
+                                {
+                                    isTargetFind = true;
+                                    break;
+                                }
+                            }
+                        }
+
+                        else
+                        {
+                            int count = Mathf.Clamp(find.Count() - (thunderCount + 1) * 3, 0, find.Count() - 3);
+
+                            if (num >= count && num < count + 3)
+                            {
+                                targets[monsterCount] = target.transform;
+
+                                DamageUI damage = damagePool.Get();
+                                if (weaponDamage > monster.defence)
+                                    damage.isMiss = false;
+                                else if (weaponDamage <= monster.defence)
+                                    damage.isMiss = true;
+                                damage.realDamage = Mathf.Clamp(weaponDamage - monster.defence, 0, weaponDamage - monster.defence);
+                                damage.UISetting();
+                                damage.transform.position = target.transform.position;
+                                damage.gameObject.transform.SetParent(gameManager.damageStorage);
+
+                                monster.OnDamaged(damage.realDamage);
+
+                                if (gameManager.absorbHp > 0 && !damage.isMiss && monsterCount == 0)
+                                    character.currentHp += gameManager.absorbHp;
+
+                                monsterCount++;
+
+                                if (monsterCount >= 3)
+                                {
+                                    isTargetFind = true;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                    num++;
                 }
 
                 if (find.Count() < 3)

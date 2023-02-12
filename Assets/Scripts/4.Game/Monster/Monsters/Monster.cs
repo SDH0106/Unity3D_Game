@@ -248,7 +248,8 @@ public class Monster : MonoBehaviour
             isDead = true;
             rend.color = Color.white;
             isFreeze = false;
-            StopCoroutine(MonsterFreeze());
+            if (runningCoroutine != null)
+                StopCoroutine(runningCoroutine);
             coll.enabled = false;
 
             if (hp <= 0 && !isAttacked)

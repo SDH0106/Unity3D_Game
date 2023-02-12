@@ -26,7 +26,7 @@ MonoBehaviour:
   shortDamage: 0
   longDamage: 0
   attackSpeed: 0
-  speed: 1.2
+  speed: 0.6
   range: 0.9
   luck: 0
   critical: -5
@@ -42,6 +42,7 @@ MonoBehaviour:
   dashCount: 0
   buffNum: 0
   exDmg: 0
+  isedolCount: 0
   luckCoin: 0
   luckDamage: 0
   luckCritical: 0

@@ -281,13 +281,6 @@ public class WeaponCardUI : MonoBehaviour
             isLock = false;
             itemManager.cardLocks[num] = isLock;
             itemManager.lockedWeaCards[num] = null;
-            if (selectedWeapon.WeaponName == "번개 스태프")
-            {
-                if (character.thunderCount == 0)
-                {
-                    character.thunderMark.SetActive(false);
-                }
-            }
             Destroy(gameObject);
         }
 

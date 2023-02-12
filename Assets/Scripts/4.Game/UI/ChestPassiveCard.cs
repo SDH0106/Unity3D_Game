@@ -213,29 +213,13 @@ public class ChestPassiveCard : MonoBehaviour
 
         if (gameManager.money >= selectedPassive.ItemPrice && itemManager.passiveCounts[arrayCount] > 0)
         {
-            /*            if (selectedPassive.GgoGgo || selectedPassive.Ilsoon || selectedPassive.Wakgood)
-                        {
-                            if (Character.Instance.summonNum < 3)
-                            {
-                                itemManager.GetPassiveInfo(selectedPassive);
-                                itemManager.passiveCounts[arrayCount]--;
-                                Destroy(gameObject);
-
-                                for (int i = 0; i < passiveBoolVariables.Length; i++)
-                                {
-                                    if (passiveBoolVariables[i] == true)
-                                        gameManager.passiveBoolVariables[i] = passiveBoolVariables[i];
-                                }
-                            }
-                        }*/
-
             itemManager.GetPassiveInfo(selectedPassive);
             itemManager.passiveCounts[arrayCount]--;
             Destroy(gameObject);
 
             for (int i = 0; i < stats.Length; i++)
             {
-                if (i == 13)
+                if (i == 13 || i == 9)
                     gameManager.stats[i] = Mathf.Round((gameManager.stats[i] + stats[i]) * 100) * 0.01f;
 
                 else

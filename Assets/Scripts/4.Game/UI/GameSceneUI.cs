@@ -25,6 +25,7 @@ public class GameSceneUI : Singleton<GameSceneUI>
 
     [Header("COIN")]
     [SerializeField] Text coinText;
+    [SerializeField] public Transform coinTextPos;
 
     [Header("Wood")]
     [SerializeField] Text woodCount;

@@ -181,8 +181,17 @@ public class OptionUI : MonoBehaviour
         {
             if (gameManager.currentScene == "Game")
             {
-                Vector2 cursorHotSpot = new Vector3(cursorAttack.width * 0.5f, cursorAttack.height * 0.5f);
-                Cursor.SetCursor(cursorAttack, cursorHotSpot, CursorMode.ForceSoftware);
+                if (gameManager.isBossDead && gameManager.isClear)
+                {
+                    Vector2 cursorHotSpot = new Vector3(cursorNormal.width * 0.5f, cursorNormal.height * 0.5f);
+                    Cursor.SetCursor(cursorNormal, cursorHotSpot, CursorMode.ForceSoftware);
+                }
+                
+                else
+                {
+                    Vector2 cursorHotSpot = new Vector3(cursorAttack.width * 0.5f, cursorAttack.height * 0.5f);
+                    Cursor.SetCursor(cursorAttack, cursorHotSpot, CursorMode.ForceSoftware);
+                }
             }
 
             if (statPanel != null)

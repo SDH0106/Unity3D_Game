@@ -5,25 +5,56 @@ using UnityEngine;
 public class TreePotion : MonoBehaviour
 {
     Character character;
+    Transform characterPos;
+
+    float speed;
+
 
     private void Start()
     {
         character = Character.Instance;
+        characterPos = Character.Instance.transform;
+    }
+
+    private void Update()
+    {
+        if(character.currentHp != character.maxHp)
+        {
+            MovePotion();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Character"))
         {
-            SoundManager.Instance.PlayES("EatSound");
-            character.currentHp += 10;
-
-            if (GameManager.Instance.buffNum != 0)
+            character = Character.Instance;
+            if (character.currentHp != character.maxHp)
             {
-                character.buffTime = 5;
-                character.isBuff = true;
+                SoundManager.Instance.PlayES("EatSound");
+                character.currentHp += 10;
+
+                if (GameManager.Instance.buffNum != 0)
+                {
+                    character.buffTime = 5;
+                    character.isBuff = true;
+                }
+
+                Destroy(gameObject);
             }
-            Destroy(gameObject);
         }
+    }
+
+    public void MovePotion()
+    {
+        float distance = Vector3.Distance(characterPos.position, transform.position);
+
+        if (distance <= 1.5f)
+            speed = 2f;
+
+        else
+            speed = 0f;
+
+        transform.position = Vector3.MoveTowards(transform.position, characterPos.position, speed * Time.deltaTime);
     }
 }

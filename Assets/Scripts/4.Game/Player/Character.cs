@@ -200,7 +200,6 @@ public class Character : Singleton<Character>
 
         if (summonNum >= 3)
             summonNum = 0;
-
     }
 
     void OnBuff()

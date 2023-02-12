@@ -89,7 +89,7 @@ public class DescriptionUI : MonoBehaviour
                 break;
 
             case 13:
-                descriptionText.text = "이파리나무에서 특별 아이템의 등장 확률,\n스태프류의 특수 능력 발동,\n특수 패시브 아이템의 발동 조건등과 관련된 능력치.\n0이하인 경우 적용되지 않습니다.";
+                descriptionText.text = "이파리나무에서 특별 아이템의 등장 확률,\n스태프류의 특수 능력 발동,\n특수 패시브 아이템의 발동 조건,\n상점 아이템 등급 확률등과 관련된 능력치.\n0이하인 경우 적용되지 않습니다.";
                 break;
 
             case 14:

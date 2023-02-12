@@ -79,23 +79,7 @@ public class Bullet : MonoBehaviour
             
             DamageUI damage = pool.Get();
 
-            if (bulletDamage > monster.defence)
-                damage.isMiss = false;
-            else if (bulletDamage <= monster.defence)
-                damage.isMiss = true;
-
-            damage.realDamage = Mathf.Clamp(bulletDamage - monster.defence, 0, bulletDamage - monster.defence);
-            damage.UISetting();
-            damage.transform.position = transform.position;
-            damage.gameObject.transform.SetParent(gameManager.damageStorage);
-
-            monster.OnDamaged(damage.realDamage);
-            
-            if (gameManager.absorbHp > 0 && !damage.isMiss && !isAttack)
-            {
-                Character.Instance.currentHp += gameManager.absorbHp;
-                isAttack = true;
-            }
+            damage.weaponDamage = bulletDamage;
 
             if (gameManager.isReflect)
                 Reflect(collision);
@@ -106,7 +90,29 @@ public class Bullet : MonoBehaviour
             else if (gameManager.lowPenetrate)
                 LowPenetrate(damage);
 
-            else if (!gameManager.isReflect && !gameManager.lowPenetrate && !gameManager.onePenetrate && !gameManager.penetrate)
+            if (damage.weaponDamage > monster.defence)
+            {
+                damage.isMiss = false;
+            }
+            else if (damage.weaponDamage <= monster.defence)
+            {
+                damage.isMiss = true;
+            }
+
+            damage.realDamage = Mathf.Clamp(damage.weaponDamage - monster.defence, 0, damage.weaponDamage - monster.defence);
+            damage.UISetting();
+            damage.transform.position = transform.position;
+            damage.gameObject.transform.SetParent(gameManager.damageStorage);
+            
+            if (gameManager.absorbHp > 0 && !damage.isMiss && !isAttack)
+            {
+                Character.Instance.currentHp += gameManager.absorbHp;
+                isAttack = true;
+            }
+
+            monster.OnDamaged(damage.realDamage);
+
+            if (!gameManager.isReflect && !gameManager.lowPenetrate && !gameManager.onePenetrate && !gameManager.penetrate)
             {
                 if (!isDestroyed)
                     DestroyBullet();

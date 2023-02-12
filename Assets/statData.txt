@@ -58,7 +58,7 @@
             "statName": "신발",
             "statType": "이동 속도",
             "statSprite": "Speed",
-            "statValue": 0.2
+            "statValue": 0.1
         },
         {
             "statName": "네잎클로버",

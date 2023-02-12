@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Subscribe
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 5cf53f812a6ba1042bd5b265338acffe, type: 3}
-  itemGrade: 3
+  itemGrade: 2
   itemName: "3\uAC1C\uC6D4 \uAD6C\uB3C5\uAD8C"
-  itemPrice: 777
+  itemPrice: 500
   maxCount: 1
   hp: 0
-  recoverHp: -3
+  recoverHp: 0
   absorbHp: 0
   defence: 0
   physicDamage: 0
@@ -28,7 +28,7 @@ MonoBehaviour:
   attackSpeed: 0
   speed: 0
   range: 0
-  luck: 20
+  luck: 10
   critical: 0
   percentDamage: 0
   avoid: 0
@@ -62,4 +62,4 @@ MonoBehaviour:
   penetrate: 0
   description: "\uD589\uC6B4 \uC218\uCE58\uC5D0 \uB530\uB77C \uC77C\uC815 \uD655\uB960\uB85C\n<color=cyan>\uBC30\uD2B8\uCF54\uC778</color>
     \uD68D\uB4DD\uB7C9\uC774 <color=lime>2\uBC30</color>\uAC00 \uB429\uB2C8\uB2E4."
-  weight: 16.24
+  weight: 0

@@ -6,6 +6,8 @@ using UnityEngine.Pool;
 
 public class Coin : Singleton<Coin>
 {
+    [SerializeField] Collider coll;
+
     private IObjectPool<Coin> managedPool;
 
     float speed;
@@ -25,11 +27,38 @@ public class Coin : Singleton<Coin>
 
     private void Update()
     {
-        if (gameManager.currentScene == "Game")
-            MoveCoin();
-
-        if (character.isDead || gameManager.isClear && gameManager.isBossDead)
+        if (character.isDead)
             DestroyPool();
+
+        if (gameManager.currentScene == "Game")
+        {
+            if (gameManager.isClear && gameManager.isBossDead)
+            {
+                EndGameCoinMove();
+            }
+
+            else
+                MoveCoin();
+        }
+
+    }
+
+    public void EndGameCoinMove()
+    {
+        if (GameSceneUI.Instance.gameObject != null)
+        {
+            coll.enabled = false;
+            Vector3 endPos = GameSceneUI.Instance.coinTextPos.position;
+            endPos.y = 0;
+
+            transform.position = Vector3.MoveTowards(transform.position, endPos, 40f * Time.deltaTime);
+
+            if (transform.position == endPos)
+            {
+                gameManager.money += 1;
+                DestroyPool();
+            }
+        }
     }
 
     public void MoveCoin()
@@ -83,6 +112,7 @@ public class Coin : Singleton<Coin>
     void InitSetting()
     {
         speed = 0;
+        coll.enabled = true;
     }
 
     public void SetManagedPool(IObjectPool<Coin> pool)

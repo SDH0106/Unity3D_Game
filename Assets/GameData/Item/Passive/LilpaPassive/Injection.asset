@@ -26,7 +26,7 @@ MonoBehaviour:
   shortDamage: 2.4
   longDamage: 0
   attackSpeed: 1
-  speed: 0.5
+  speed: 0.25
   range: 0
   luck: 0
   critical: 0
@@ -36,8 +36,13 @@ MonoBehaviour:
   increaseExp: 0
   monsterSpeed: 0
   salePercent: 0
+  summonASpd: 0
+  summonPDmg: 0
+  monsterDef: 0
   dashCount: 0
   buffNum: 0
+  exDmg: 0
+  isedolCount: 0
   luckCoin: 0
   luckDamage: 0
   luckCritical: 0
@@ -50,5 +55,10 @@ MonoBehaviour:
   butterfly: 0
   subscriptionFee: 0
   spawnTree: 0
+  dotgu: 0
+  isReflect: 0
+  onePenetrate: 0
+  lowPenetrate: 0
+  penetrate: 0
   description: 
   weight: 0

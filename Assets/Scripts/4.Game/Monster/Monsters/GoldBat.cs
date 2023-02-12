@@ -17,6 +17,8 @@ public class GoldBat : Monster
     Collider ground;
 
     bool isBerserk;
+    //bool isBerserKTime;
+    //float berserkTime;
     int dashSpeed;
 
     void Start()
@@ -27,6 +29,8 @@ public class GoldBat : Monster
         initAttackTime = 5;
         dashSpeed = 8;
         isBerserk = false;
+        //isBerserKTime = false;
+        //berserkTime = 60f;
     }
 
     protected override void InitMonsterSetting()
@@ -35,6 +39,7 @@ public class GoldBat : Monster
         state = 0;
         isRush = false;
         isBerserk = false;
+        //isBerserKTime = false;
         attackTime = 5;
         initAttackTime = 5;
         dashSpeed = 8;
@@ -45,7 +50,17 @@ public class GoldBat : Monster
     {
         monsterHpBar.value = 1 - (hp / maxHp);
 
-        if (gameManager.currentGameTime <= 0 && !isBerserk)
+/*        if(gameManager.currentGameTime <= 0 && !isBerserKTime)
+        {
+            gameManager.currentGameTime = berserkTime;
+        }
+
+        if(isBerserKTime)
+        {
+            berserkTime = Mathf.Clamp(berserkTime - Time.deltaTime, 0, berserkTime);
+        }*/
+
+        if (gameManager.currentGameTime <= 0 && gameManager.round == 30 && !isBerserk)
         {
             isBerserk = true;
             initcolor = new Color(1f, 0.5f, 0.5f, 1f);
@@ -182,11 +197,7 @@ public class GoldBat : Monster
 
     public void EndAttack()
     {
-        if (!isBerserk)
-            speed = stat.monsterSpeed * (1 - gameManager.monsterSlow * 0.01f);
-
-        else
-            speed = stat.monsterSpeed * (1 - gameManager.monsterSlow * 0.01f) * 2f;
+        speed = initSpeed;
 
         isAttack = false;
     }

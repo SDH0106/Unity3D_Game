@@ -42,7 +42,7 @@ public class SkullBat : Monster
     {
         monsterHpBar.value = 1 - (hp / maxHp);
 
-        if(gameManager.currentGameTime <= 0 && !isBerserk)
+        if(gameManager.currentGameTime <= 0 && gameManager.round == 30 && !isBerserk)
         {
             isBerserk = true;
             initcolor = new Color(1f, 0.5f, 0.5f, 1f);

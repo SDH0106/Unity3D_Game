@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class EndUI : Singleton<EndUI>
 {
+    [SerializeField] Texture2D cursorNormal;
+
     [Header("UI")]
     [SerializeField] GameObject overUI;
     [SerializeField] GameObject clearUI;
@@ -55,6 +57,9 @@ public class EndUI : Singleton<EndUI>
 
     private void Start()
     {
+        Vector2 cursorHotSpot = new Vector3(cursorNormal.width * 0.5f, cursorNormal.height * 0.5f);
+        Cursor.SetCursor(cursorNormal, cursorHotSpot, CursorMode.ForceSoftware);
+
         gameManager = GameManager.Instance;
         character = Character.Instance;
         itemManager = ItemManager.Instance;

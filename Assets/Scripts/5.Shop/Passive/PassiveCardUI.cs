@@ -257,116 +257,91 @@ public class PassiveCardUI : MonoBehaviour
         if (gameManager.money >= price && itemManager.passiveCounts[arrayCount] > 0)
         {
             SoundManager.Instance.PlayES("SelectButton");
+            itemManager.GetPassiveInfo(selectedPassive);
+            itemManager.passiveCounts[arrayCount]--;
+            Destroy(gameObject);
 
-            if (selectedPassive.GgoGgo || selectedPassive.Ilsoon || selectedPassive.Wakgood)
+            isLock = false;
+            itemManager.cardLocks[num] = isLock;
+            itemManager.lockedPassCards[num] = null;
+            gameManager.money -= price;
+
+            for (int i = 0; i < stats.Length; i++)
             {
-                if (Character.Instance.summonNum < 3)
+                if (i == 13 || i == 9)
+                    gameManager.stats[i] = Mathf.Round((gameManager.stats[i] + stats[i]) * 100) * 0.01f;
+
+                else
+                    gameManager.stats[i] = Mathf.Round((gameManager.stats[i] + stats[i]) * 10) * 0.1f;
+            }
+
+            for (int i = 0; i < passiveIntVariables.Length; i++)
+            {
+                if (i == 1 && passiveIntVariables[i] != 0) // 버프 포션
                 {
-                    itemManager.GetPassiveInfo(selectedPassive);
-                    itemManager.passiveCounts[arrayCount]--;
-                    Destroy(gameObject);
+                    gameManager.passiveIntVariables[i] = passiveIntVariables[i];
+                }
 
-                    isLock = false;
-                    itemManager.cardLocks[num] = isLock;
-                    itemManager.lockedPassCards[num] = null;
-                    gameManager.money -= price;
-
-                    for (int i = 0; i < passiveBoolVariables.Length; i++)
-                    {
-                        if (passiveBoolVariables[i] == true)
-                            gameManager.passiveBoolVariables[i] = passiveBoolVariables[i];
-                    }
+                else
+                {
+                    gameManager.passiveIntVariables[i] += passiveIntVariables[i];
                 }
             }
 
-            else
+            for (int i = 0; i < passiveFloatVariables.Length; i++)
             {
-                itemManager.GetPassiveInfo(selectedPassive);
-                itemManager.passiveCounts[arrayCount]--;
-                Destroy(gameObject);
+                gameManager.passiveFloatVariables[i] = Mathf.Round((gameManager.passiveFloatVariables[i] + passiveFloatVariables[i]) * 10) * 0.1f;
+            }
 
-                isLock = false;
-                itemManager.cardLocks[num] = isLock;
-                itemManager.lockedPassCards[num] = null;
-                gameManager.money -= price;
-
-                for (int i = 0; i < stats.Length; i++)
+            for (int i = 0; i < passiveBoolVariables.Length; i++)
+            {
+                if (passiveBoolVariables[i] == true)
                 {
-                    if (i == 13)
-                        gameManager.stats[i] = Mathf.Round((gameManager.stats[i] + stats[i]) * 100) * 0.01f;
-
-                    else
-                        gameManager.stats[i] = Mathf.Round((gameManager.stats[i] + stats[i]) * 10) * 0.1f;
-                }
-
-                for (int i = 0; i < passiveIntVariables.Length; i++)
-                {
-                    if (i == 1 && passiveIntVariables[i] != 0) // 버프 포션
+                    if (i == 14 || i == 15 || i == 16)
                     {
-                        gameManager.passiveIntVariables[i] = passiveIntVariables[i];
-                    }
-
-                    else
-                    {
-                        gameManager.passiveIntVariables[i] += passiveIntVariables[i];
-                    }
-                }
-
-                for (int i = 0; i < passiveFloatVariables.Length; i++)
-                {
-                    gameManager.passiveFloatVariables[i] = Mathf.Round((gameManager.passiveFloatVariables[i] + passiveFloatVariables[i]) * 10) * 0.1f;
-                }
-
-                for (int i = 0; i < passiveBoolVariables.Length; i++)
-                {
-                    if (passiveBoolVariables[i] == true)
-                    {
-                        if (i == 14 || i == 15 || i == 16)
+                        if (gameManager.isReflect)
                         {
-                            if (gameManager.isReflect)
-                            {
-                                passiveBoolVariables[i] = false;
-                            }
-                        }
-
-                        gameManager.passiveBoolVariables[i] = passiveBoolVariables[i];
-
-                        if (i == 8)
-                        {
-                            Ddilpa();
                             passiveBoolVariables[i] = false;
                         }
+                    }
 
-                        else if (i == 9)
-                        {
-                            Butterfly();
-                            passiveBoolVariables[i] = false;
-                        }
+                    gameManager.passiveBoolVariables[i] = passiveBoolVariables[i];
 
-                        else if(i == 13)
-                        {
-                            gameManager.passiveBoolVariables[14] = false;   // 하나 관통
-                            gameManager.passiveBoolVariables[15] = false;   // 뎀감 관통
-                            gameManager.passiveBoolVariables[16] = false;   //  풀관통
-                        }
+                    if (i == 8)
+                    {
+                        Ddilpa();
+                        passiveBoolVariables[i] = false;
+                    }
 
-                        else if(i == 14)
-                        {
-                            gameManager.passiveBoolVariables[15] = false;
-                            gameManager.passiveBoolVariables[16] = false;
-                        }
+                    else if (i == 9)
+                    {
+                        Butterfly();
+                        passiveBoolVariables[i] = false;
+                    }
 
-                        else if (i == 15)
-                        {
-                            gameManager.passiveBoolVariables[14] = false;
-                            gameManager.passiveBoolVariables[16] = false;
-                        }
+                    else if (i == 13)
+                    {
+                        gameManager.passiveBoolVariables[14] = false;   // 하나 관통
+                        gameManager.passiveBoolVariables[15] = false;   // 뎀감 관통
+                        gameManager.passiveBoolVariables[16] = false;   //  풀관통
+                    }
 
-                        else if (i == 16)
-                        {
-                            gameManager.passiveBoolVariables[14] = false;
-                            gameManager.passiveBoolVariables[15] = false;
-                        }
+                    else if (i == 14)
+                    {
+                        gameManager.passiveBoolVariables[15] = false;
+                        gameManager.passiveBoolVariables[16] = false;
+                    }
+
+                    else if (i == 15)
+                    {
+                        gameManager.passiveBoolVariables[14] = false;
+                        gameManager.passiveBoolVariables[16] = false;
+                    }
+
+                    else if (i == 16)
+                    {
+                        gameManager.passiveBoolVariables[14] = false;
+                        gameManager.passiveBoolVariables[15] = false;
                     }
                 }
             }
