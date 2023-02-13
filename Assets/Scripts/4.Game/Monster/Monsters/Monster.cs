@@ -4,6 +4,7 @@ using UnityEngine.Pool;
 
 public class Monster : MonoBehaviour
 {
+    [SerializeField] protected GameObject freezeEffect;
     [HideInInspector] protected SpriteRenderer rend;
     [HideInInspector] protected Animator anim;
     [HideInInspector] protected Collider coll;
@@ -11,7 +12,7 @@ public class Monster : MonoBehaviour
     [HideInInspector] public bool isWalk, isDead, isAttacked, isAttack = false;
 
     public float hp;
-    protected float maxHp;
+    public float maxHp;
 
     [HideInInspector] protected Vector3 initScale;
     [HideInInspector] public MonsterStat stat;
@@ -70,6 +71,8 @@ public class Monster : MonoBehaviour
 
     void Update()
     {
+        freezeEffect.SetActive(isFreeze);
+
         if (isDead == false)
         {
             Move();

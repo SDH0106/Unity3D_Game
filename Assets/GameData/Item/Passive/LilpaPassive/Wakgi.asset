@@ -19,7 +19,7 @@ MonoBehaviour:
   maxCount: 100
   hp: 5
   recoverHp: 0
-  absorbHp: 0.3
+  absorbHp: 0.2
   defence: 0
   physicDamage: 0
   magicDamage: 0

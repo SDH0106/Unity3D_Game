@@ -35,6 +35,13 @@ public class StaffControl : Weapon
     Character character;
 
     public int thunderCount;
+    float luckThunderDmg;
+
+    bool isLuck = false;
+
+    Vector3 initBulletScale;
+
+    Color initBulletColor;
 
     private void Awake()
     {
@@ -56,10 +63,15 @@ public class StaffControl : Weapon
         bulletDelay = weaponInfo.AttackDelay;
         attackRange = weaponInfo.WeaponRange;
 
+        initBulletScale = bulletPrefab.transform.localScale;
+
+        initBulletColor = bulletPrefab.GetComponent<SpriteRenderer>().color;
+
         canAttack = true;
         isTargetFind = false;
         thunderCount = character.thunderCount - 1;
-        itemManager.isThunderCountChange[thunderCount] = false;
+        if (thunderCount > 0)
+            itemManager.isThunderCountChange[thunderCount] = false;
     }
 
     void Update()
@@ -240,6 +252,17 @@ public class StaffControl : Weapon
                     {
                         Bullet bullet = pool.Get();
                         bullet.transform.position = new Vector3(targets[i].transform.position.x, 0, targets[i].transform.position.z + 3);
+                        if (isLuck)
+                        {
+                            bullet.transform.localScale = new Vector3(initBulletScale.x * 2f, initBulletScale.y, initBulletScale.z);
+                            bullet.GetComponent<SpriteRenderer>().color = new Color(1, 0, 0);
+                        }
+
+                        else
+                        {
+                            bullet.transform.localScale = initBulletScale;
+                            bullet.GetComponent<SpriteRenderer>().color = initBulletColor;
+                        }
                         bullet.damageUI = damageUI;
                     }
 
@@ -292,10 +315,22 @@ public class StaffControl : Weapon
             if (find.Count() > 0)
             {
                 WeaponSetting();
+                isLuck = false;
+
+                int rand = Random.Range(0, 100);
 
                 foreach (var target in find)
                 {
                     Monster monster = target.GetComponent<Monster>();
+
+                    if (rand <= 5 + Mathf.Clamp(gameManager.luck, 0, 100) * 0.1)
+                    {
+                        luckThunderDmg = monster.maxHp * 0.05f;
+                        isLuck = true;
+                    }
+
+                    else
+                        luckThunderDmg = 0;
 
                     if (find.Count() <= 3)
                     {
@@ -306,7 +341,7 @@ public class StaffControl : Weapon
                             damage.isMiss = false;
                         else if (weaponDamage <= monster.defence)
                             damage.isMiss = true;
-                        damage.realDamage = Mathf.Clamp(weaponDamage - monster.defence, 0, weaponDamage - monster.defence);
+                        damage.realDamage = Mathf.Clamp(weaponDamage - monster.defence + luckThunderDmg, 0, weaponDamage - monster.defence + luckThunderDmg);
                         damage.UISetting();
                         damage.transform.position = target.transform.position;
                         damage.gameObject.transform.SetParent(gameManager.damageStorage);
@@ -338,7 +373,7 @@ public class StaffControl : Weapon
                                     damage.isMiss = false;
                                 else if (weaponDamage <= monster.defence)
                                     damage.isMiss = true;
-                                damage.realDamage = Mathf.Clamp(weaponDamage - monster.defence, 0, weaponDamage - monster.defence);
+                                damage.realDamage = Mathf.Clamp(weaponDamage - monster.defence + luckThunderDmg, 0, weaponDamage - monster.defence + luckThunderDmg);
                                 damage.UISetting();
                                 damage.transform.position = target.transform.position;
                                 damage.gameObject.transform.SetParent(gameManager.damageStorage);
@@ -371,7 +406,7 @@ public class StaffControl : Weapon
                                     damage.isMiss = false;
                                 else if (weaponDamage <= monster.defence)
                                     damage.isMiss = true;
-                                damage.realDamage = Mathf.Clamp(weaponDamage - monster.defence, 0, weaponDamage - monster.defence);
+                                damage.realDamage = Mathf.Clamp(weaponDamage - monster.defence + luckThunderDmg, 0, weaponDamage - monster.defence + luckThunderDmg);
                                 damage.UISetting();
                                 damage.transform.position = target.transform.position;
                                 damage.gameObject.transform.SetParent(gameManager.damageStorage);

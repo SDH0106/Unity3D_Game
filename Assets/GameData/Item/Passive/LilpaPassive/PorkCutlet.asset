@@ -17,9 +17,9 @@ MonoBehaviour:
   itemName: "\uB3C8\uAE4C\uC2A4"
   itemPrice: 45
   maxCount: 100
-  hp: 2
+  hp: 0
   recoverHp: 0
-  absorbHp: 0
+  absorbHp: 0.1
   defence: 0
   physicDamage: 0.8
   magicDamage: 0
@@ -29,7 +29,7 @@ MonoBehaviour:
   speed: 0
   range: 0
   luck: 0
-  critical: -1
+  critical: -4
   percentDamage: 0
   avoid: 0
   coinRange: 0

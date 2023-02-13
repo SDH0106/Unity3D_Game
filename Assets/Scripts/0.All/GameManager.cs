@@ -84,6 +84,7 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector] public float gameEndTime;
 
     [HideInInspector] public int feeMoney = 0;
+    [HideInInspector] public int subMoney = 0;
 
     protected override void Awake()
     {
@@ -96,6 +97,7 @@ public class GameManager : Singleton<GameManager>
         Vector2 cursorHotSpot = new Vector3(cursor.width * 0.5f, cursor.height * 0.5f);
         Cursor.SetCursor(cursor, cursorHotSpot, CursorMode.ForceSoftware);
         /*PlayerPrefs.SetInt("GameTuto", 1);
+        PlayerPrefs.SetInt("ShopTuto", 1);
         PlayerPrefs.SetInt("BossTuto", 1);*/
         //PlayerPrefs.SetInt("BagicClear", 1);
 

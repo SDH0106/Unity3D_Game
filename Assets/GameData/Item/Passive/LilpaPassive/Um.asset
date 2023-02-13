@@ -22,7 +22,7 @@ MonoBehaviour:
   absorbHp: 0.1
   defence: 0
   physicDamage: 0
-  magicDamage: 0
+  magicDamage: 0.6
   shortDamage: 0
   longDamage: 0
   attackSpeed: -0.1

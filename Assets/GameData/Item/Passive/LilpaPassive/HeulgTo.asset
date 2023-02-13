@@ -18,7 +18,7 @@ MonoBehaviour:
   itemPrice: 54
   maxCount: 100
   hp: 0
-  recoverHp: 0.3
+  recoverHp: 0.2
   absorbHp: 0
   defence: 0
   physicDamage: 0
@@ -42,6 +42,7 @@ MonoBehaviour:
   dashCount: 0
   buffNum: 0
   exDmg: 0
+  isedolCount: 0
   luckCoin: 0
   luckDamage: 0
   luckCritical: 0
@@ -60,4 +61,4 @@ MonoBehaviour:
   lowPenetrate: 0
   penetrate: 0
   description: 
-  weight: 0
+  weight: 20

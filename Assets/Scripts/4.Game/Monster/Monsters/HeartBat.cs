@@ -32,6 +32,8 @@ public class HeartBat : Monster
 
     private void Update()
     {
+        freezeEffect.SetActive(isFreeze);
+
         if (!isDead)
         {
             Move();

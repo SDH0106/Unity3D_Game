@@ -58,6 +58,7 @@ public class Character : Singleton<Character>
     Collider ground;
 
     bool isRun, isAttacked = false;
+    bool isAvoid = false;
     [HideInInspector] public bool isDead = false;
 
     GameManager gameManager;
@@ -78,6 +79,8 @@ public class Character : Singleton<Character>
     public int thunderCount;
 
     Coroutine currentCoroutine;
+
+    public float shield = 0;
 
     protected override void Awake()
     {
@@ -102,11 +105,12 @@ public class Character : Singleton<Character>
         currentHp = maxHp;
         gameManager.stats[9] = characterSpeed;
         gameManager.stats[13] = damageRatio;
+        avoid = 0;
         gameManager.stats[14] = avoid;
         maxExp = 10;
         level = 1;
         levelUpCount = 0;
-        recoverTime = 2;
+        recoverTime = 1;
         dashCoolTime = 4;
         dashCount = gameManager.dashCount;
         initDashCoolTime = dashCoolTime;
@@ -248,7 +252,7 @@ public class Character : Singleton<Character>
             recoverTime -= Time.deltaTime;
             if (recoverTime <= 0)
             {
-                recoverTime = 2;
+                recoverTime = 1;
                 currentHp += gameManager.recoverHp;
             }
         }
@@ -414,18 +418,31 @@ public class Character : Singleton<Character>
 
     public void OnDamaged(float damage)
     {
+        Debug.Log(damage);
         if (!isAttacked)
         {
             avoidRand = Random.Range(1, 100);
 
-            if (avoidRand > gameManager.avoid)
-            {
-                currentHp -= Mathf.Round((damage * ((100 - gameManager.defence) / 100)) * 10) * 0.1f;
-            }
+            if (avoidRand <= gameManager.avoid)
+                isAvoid = true;
+
+            else
+                isAvoid = false;
 
             if (currentHp > 0)
             {
-                SoundManager.Instance.PlayES("Hit");
+                if (!isAvoid)
+                {
+                    SoundManager.Instance.PlayES("Hit");
+                    if (shield > 0)
+                    {
+                        currentHp -= (Mathf.Round(((damage - shield) * ((100 - gameManager.defence) / 100)) * 10) * 0.1f);
+                        shield -= damage;
+                    }
+
+                    else
+                        currentHp -= Mathf.Round((damage * ((100 - gameManager.defence) / 100)) * 10) * 0.1f;
+                }
 
                 if (currentCoroutine != null)
                     StopCoroutine(currentCoroutine);
@@ -471,14 +488,24 @@ public class Character : Singleton<Character>
 
     public IEnumerator OnInvincible()
     {
-        anim.SetTrigger("isAttacked");
         isAttacked = true;
-        if (currentHp > 0 && avoidRand > gameManager.avoid)
+
+        if (currentHp > 0 && !isAvoid)
         {
+            anim.SetTrigger("isAttacked");
+
             if (currentCoroutine != null)
                 StopCoroutine(currentCoroutine);
 
             currentCoroutine = StartCoroutine(PlayerColorBlink());
+        }
+
+        if(currentHp > 0 && isAvoid)
+        {
+            if (currentCoroutine != null)
+                StopCoroutine(currentCoroutine);
+
+            currentCoroutine = StartCoroutine(PlayerColorInvincible());
         }
 
         yield return new WaitForSeconds(invincibleTime);
@@ -499,6 +526,15 @@ public class Character : Singleton<Character>
         rend.color = color;
         rend.color = Color.white;
         isAttacked = false;
+    }
+
+    private IEnumerator PlayerColorInvincible()
+    {
+        Color white = new Color(1, 1, 1, 0.5f);
+
+        rend.color = white;
+
+        yield return new WaitForSeconds(invincibleTime - 0.3f);
     }
 
     private IEnumerator PlayerColorBlink()

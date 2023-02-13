@@ -37,7 +37,7 @@ public class DescriptionUI : MonoBehaviour
         switch(num)
         {
             case 0:
-                descriptionText.text = "캐릭터의 최대 체력과 관련된 능력치.\n1이하로 떨어져도 캐릭터의 최대 체력은 1로 적용됩니다..";
+                descriptionText.text = "캐릭터의 최대 체력과 관련된 능력치.\n1이하로 떨어져도 캐릭터의 최대 체력은 1로 적용됩니다.";
                 break;
 
             case 1:
@@ -45,7 +45,7 @@ public class DescriptionUI : MonoBehaviour
                 break;
 
             case 2:
-                descriptionText.text = "캐릭터가 몬스터를 공격했을 경우 회복하는 체력 수치와 관련된 능력치.\n0이하인 경우 적용되지 않습니다.\n폭발 공격에는 적용되지 않습니다.\n검은 휘두르기에만 적용됩니다.";
+                descriptionText.text = "캐릭터가 몬스터를 공격했을 경우 회복하는 체력 수치와 관련된 능력치.\n0이하인 경우 적용되지 않고 최대 적용치는 1입니다.\n폭발 공격에는 적용되지 않습니다.\n검은 휘두르기에만 적용됩니다.";
                 break;
 
             case 3:
@@ -89,7 +89,7 @@ public class DescriptionUI : MonoBehaviour
                 break;
 
             case 13:
-                descriptionText.text = "이파리나무에서 특별 아이템의 등장 확률,\n스태프류의 특수 능력 발동,\n특수 패시브 아이템의 발동 조건,\n상점 아이템 등급 확률등과 관련된 능력치.\n0이하인 경우 적용되지 않습니다.";
+                descriptionText.text = "이파리나무에서 특별 아이템의 등장 확률,\n스태프류의 특수 능력 발동,\n특수 패시브 아이템의 발동 조건,\n상점 아이템 등급 확률등과 관련된 능력치.\n0이하인 경우 적용되지 않고, 최대 적용치는 100입니다.";
                 break;
 
             case 14:

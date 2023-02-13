@@ -17,6 +17,7 @@ public class GameSceneUI : Singleton<GameSceneUI>
     [SerializeField] Image chararcterImage;
     [SerializeField] Text hpText;
     [SerializeField] Text maxHpText;
+    [SerializeField] Text SheildText;
     [SerializeField] Slider hpBar;
 
     [Header("EXP")]
@@ -466,6 +467,13 @@ public class GameSceneUI : Singleton<GameSceneUI>
         {
             maxHpText.text = character.maxHp.ToString();
             hpText.text = character.currentHp.ToString("0.#");
+            if (character.shield > 0)
+            {
+                SheildText.gameObject.SetActive(true);
+                SheildText.text = $"+ {character.shield.ToString("0.#")}";
+            }
+            else
+                SheildText.gameObject.SetActive(false);
             hpBar.value = 1 - (character.currentHp / character.maxHp);
         }
     }

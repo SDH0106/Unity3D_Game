@@ -32,11 +32,25 @@ public class TreePotion : MonoBehaviour
             if (character.currentHp != character.maxHp)
             {
                 SoundManager.Instance.PlayES("EatSound");
-                character.currentHp += 10;
+                character.currentHp += 10f;
 
                 if (GameManager.Instance.buffNum != 0)
                 {
-                    character.buffTime = 5;
+                    character.buffTime = 5f;
+                    character.isBuff = true;
+                }
+
+                Destroy(gameObject);
+            }
+
+            else if(character.currentHp == character.maxHp)
+            {
+                SoundManager.Instance.PlayES("EatSound");
+                character.shield = Mathf.Clamp(character.shield + 5f, 0f, 10f);
+
+                if (GameManager.Instance.buffNum != 0)
+                {
+                    character.buffTime = 5f;
                     character.isBuff = true;
                 }
 

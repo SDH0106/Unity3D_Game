@@ -27,7 +27,7 @@ MonoBehaviour:
   longDamage: 0
   attackSpeed: 0
   speed: 0
-  range: 1
+  range: -1
   luck: 0
   critical: 0
   percentDamage: 0

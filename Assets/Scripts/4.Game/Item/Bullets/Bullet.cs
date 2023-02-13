@@ -27,7 +27,7 @@ public class Bullet : MonoBehaviour
 
     public Vector3 initPos;
 
-    protected bool isAttack;
+    protected bool isAbsorb;
 
     protected virtual void Awake()
     {
@@ -37,9 +37,9 @@ public class Bullet : MonoBehaviour
     private void Start()
     {
         gameManager = GameManager.Instance;
-        isAttack = false;
-    }
+        isAbsorb = false;
 
+    }
     private void Update()
     {
         if(Vector3.Distance(transform.position, initPos) > range)
@@ -75,7 +75,6 @@ public class Bullet : MonoBehaviour
         if (collision.collider.CompareTag("Monster") && collision.collider.GetComponent<Monster>() != null)
         {
             Monster monster = collision.collider.GetComponent<Monster>();
-            Instantiate(effectPrefab, transform.position, transform.rotation);
             
             DamageUI damage = pool.Get();
 
@@ -104,10 +103,10 @@ public class Bullet : MonoBehaviour
             damage.transform.position = transform.position;
             damage.gameObject.transform.SetParent(gameManager.damageStorage);
             
-            if (gameManager.absorbHp > 0 && !damage.isMiss && !isAttack)
+            if (gameManager.absorbHp > 0 && !damage.isMiss && !isAbsorb)
             {
                 Character.Instance.currentHp += gameManager.absorbHp;
-                isAttack = true;
+                isAbsorb = true;
             }
 
             monster.OnDamaged(damage.realDamage);
@@ -115,7 +114,10 @@ public class Bullet : MonoBehaviour
             if (!gameManager.isReflect && !gameManager.lowPenetrate && !gameManager.onePenetrate && !gameManager.penetrate)
             {
                 if (!isDestroyed)
+                {
+                    Instantiate(effectPrefab, transform.position, transform.rotation);
                     DestroyBullet();
+                }
             }
         }
     }
@@ -127,7 +129,7 @@ public class Bullet : MonoBehaviour
         dir = Vector3.Reflect(dir, normalVector).normalized;
     }
 
-    public void OnePenetrate()
+    public virtual void OnePenetrate()
     {
         if (penetrateNum <= 0)
         {
@@ -142,7 +144,7 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    public void LowPenetrate(DamageUI damage)
+    public virtual void LowPenetrate(DamageUI damage)
     {
         if (penetrateNum <= 0)
         {
@@ -162,11 +164,12 @@ public class Bullet : MonoBehaviour
 
     public virtual void DestroyBullet()
     {
-        isAttack = false;
+        isAbsorb = false;
         isDestroyed = true;
         penetrateNum = 0;
         if (gameObject.activeSelf)
         {
+            isDestroyed = false;
             managedPool.Release(this);
         }
     }

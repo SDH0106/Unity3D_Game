@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 12
   m_Sprite: {fileID: 21300000, guid: 749c50af488417a4e821d0151b214880, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.29803923}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -164,5 +164,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   exDamage: 5
   damageUI: {fileID: -5576913372046765546, guid: c0773f636ba599f438ceb51024c2731d, type: 3}
-  coll: {fileID: 7408420816333605495}
   grade: 1

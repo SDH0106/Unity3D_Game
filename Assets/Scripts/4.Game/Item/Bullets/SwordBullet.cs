@@ -9,7 +9,7 @@ public class SwordBullet : Bullet
     private void Start()
     {
         gameManager = GameManager.Instance;
-        isAttack = false;
+        isAbsorb = false;
     }
 
     void Update()
@@ -71,10 +71,10 @@ public class SwordBullet : Bullet
 
             monster.OnDamaged(damage.realDamage);
 
-            if (gameManager.absorbHp > 0 && !damage.isMiss && !isAttack)
+            if (gameManager.absorbHp > 0 && !damage.isMiss && !isAbsorb)
             {
                 Character.Instance.currentHp += gameManager.absorbHp;
-                isAttack = true;
+                isAbsorb = true;
             }
 
             if (!gameManager.isReflect && !gameManager.lowPenetrate && !gameManager.onePenetrate && !gameManager.penetrate)

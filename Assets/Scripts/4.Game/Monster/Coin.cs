@@ -55,6 +55,7 @@ public class Coin : Singleton<Coin>
 
             if (transform.position == endPos)
             {
+                SoundManager.Instance.PlayES("Coin");
                 gameManager.money += 1;
                 DestroyPool();
             }
@@ -99,9 +100,12 @@ public class Coin : Singleton<Coin>
                 int rand = Random.Range(1, 101);
 
                 if (rand <= gameManager.luck || gameManager.luck >= 100)
+                {
+                    gameManager.subMoney += coinValue;
                     gameManager.money += coinValue * 2;
+                }
 
-                else if(rand > gameManager.luck)
+                else if (rand > gameManager.luck)
                     gameManager.money += coinValue;
             }
 

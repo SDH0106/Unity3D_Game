@@ -33,6 +33,8 @@ public class CardClick : MonoBehaviour
     [SerializeField] GameObject combineCheckPanel;
     [SerializeField] GameObject cantSellPanel;
     [SerializeField] GameObject cantCombinePanel;
+    [SerializeField] GameObject cantMoneyText;
+    [SerializeField] GameObject cantGradeText;
 
     [HideInInspector] public WeaponInfo selectedWeapon;
 
@@ -212,6 +214,7 @@ public class CardClick : MonoBehaviour
     {
         itemManager = ItemManager.Instance;
         gameManager = GameManager.Instance;
+        character = Character.Instance;
         bool canCombine = false;
 
         for (int i = 0; i < itemManager.storedWeapon.Length; i++)
@@ -233,6 +236,7 @@ public class CardClick : MonoBehaviour
 
                             if (selectedWeapon.WeaponName == "번개 스태프")
                             {
+
                                 StaffControl selectedThunderStaff = character.weaponPoses[selectedNum].GetChild(0).gameObject.GetComponent<StaffControl>();
                                 StaffControl combindedThunderStaff = character.weaponPoses[i].GetChild(0).gameObject.GetComponent<StaffControl>();
                                 if(selectedThunderStaff.thunderCount > combindedThunderStaff.thunderCount)
@@ -274,6 +278,16 @@ public class CardClick : MonoBehaviour
         else if (!canCombine)
         {
             SoundManager.Instance.PlayES("CantBuy");
+            if (itemManager.weaponGrade[selectedNum] == Grade.신화)
+            {
+                cantMoneyText.SetActive(false);
+                cantGradeText.SetActive(true);
+            }
+            else
+            {
+                cantMoneyText.SetActive(true);
+                cantGradeText.SetActive(false);
+            }
             cantCombinePanel.SetActive(true);
         }
     }

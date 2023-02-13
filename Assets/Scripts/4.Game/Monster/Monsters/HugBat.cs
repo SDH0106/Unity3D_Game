@@ -30,6 +30,8 @@ public class HugBat : Monster
 
     private void Update()
     {
+        freezeEffect.SetActive(isFreeze);
+
         if (isDead == false)
         {
             Move();

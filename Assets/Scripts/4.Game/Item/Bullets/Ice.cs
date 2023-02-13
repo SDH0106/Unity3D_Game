@@ -9,7 +9,7 @@ public class Ice : Bullet
     private void Start()
     {
         gameManager = GameManager.Instance;
-        isAttack = false;
+        isAbsorb = false;
     }
 
     void Update()
@@ -62,10 +62,10 @@ public class Ice : Bullet
 
             monster.OnDamaged(damage.realDamage, isFreeze);
 
-            if (gameManager.absorbHp > 0 && !damage.isMiss && !isAttack)
+            if (gameManager.absorbHp > 0 && !damage.isMiss && !isAbsorb)
             {
                 Character.Instance.currentHp += gameManager.absorbHp;
-                isAttack = true;
+                isAbsorb = true;
             }
 
             if (!gameManager.isReflect && !gameManager.lowPenetrate && !gameManager.onePenetrate && !gameManager.penetrate)
@@ -80,7 +80,7 @@ public class Ice : Bullet
     {
         int rand = Random.Range(0, 100);
 
-        if (rand <= 5 + gameManager.luck * 0.2)
+        if (rand <= 5 + Mathf.Clamp(gameManager.luck, 0, 100) * 0.2)
             isFreeze = true;
 
         else

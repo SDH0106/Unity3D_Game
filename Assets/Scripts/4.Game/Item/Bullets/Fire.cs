@@ -11,6 +11,10 @@ public class Fire : Bullet
 
     public int grade;
 
+    bool isInstEx = false;
+    Vector3 exInitScale;
+    int exCount = 0;
+
     protected override void Awake()
     {
         base.Awake();
@@ -20,6 +24,7 @@ public class Fire : Bullet
     private void Start()
     {
         gameManager = GameManager.Instance;
+        exInitScale = explosion.transform.localScale;
     }
 
     void Update()
@@ -40,7 +45,16 @@ public class Fire : Bullet
     {
         if (collision.collider.CompareTag("Monster") && collision.collider.GetComponent<Monster>() != null)
         {
-            Explosion();
+            if (!isInstEx)
+            {
+                Explosion();
+                isInstEx = true;
+            }
+
+            if (gameManager.isReflect || gameManager.lowPenetrate || gameManager.onePenetrate || gameManager.penetrate)
+            {
+                isInstEx = false;
+            }
         }
 
         base.OnCollisionEnter(collision);
@@ -49,11 +63,13 @@ public class Fire : Bullet
     void Explosion()
     {
         int rand = Random.Range(0, 100);
-        if (rand <= 10 + gameManager.luck * 0.3f)
+        if (rand <= 10 + Mathf.Clamp(gameManager.luck, 0, 100) * 0.3f)
         {
             Explosion ex = exPool.Get();
             ex.grade = grade;
+            ex.transform.localScale = exInitScale * Mathf.Clamp(100 - exCount * 20, 20, 100) * 0.01f;
             ex.Setting();
+            exCount++;
         }
     }
 
@@ -80,8 +96,16 @@ public class Fire : Bullet
         Destroy(exPool.gameObject);
     }
 
+    public override void DestroyBullet()
+    {
+        exCount = 0;
+        isInstEx = false;
+        base.DestroyBullet();
+    }
+
     protected override void OnDestroy()
     {
+        isInstEx = false;
         base.OnDestroy();
         if (exPool != null)
             exPool.Clear();

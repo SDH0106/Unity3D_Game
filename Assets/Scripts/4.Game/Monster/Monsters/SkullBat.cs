@@ -16,6 +16,7 @@ public class SkullBat : Monster
     private IObjectPool<MonsterBullet> pool;
 
     bool isBerserk;
+    bool isPatern;
 
     private void Awake()
     {
@@ -25,9 +26,16 @@ public class SkullBat : Monster
     void Start()
     {
         StartSetting();
+        if (gameManager.round == 20)
+            hp = 8500;
+
+        else if (gameManager.round == 30)
+            hp = 55000;
+        maxHp = hp;
         attackTime = 5;
         initAttackTime = 5;
         isBerserk = false;
+        isPatern = false;
     }
 
     protected override void InitMonsterSetting()
@@ -42,14 +50,19 @@ public class SkullBat : Monster
     {
         monsterHpBar.value = 1 - (hp / maxHp);
 
-        if(gameManager.currentGameTime <= 0 && gameManager.round == 30 && !isBerserk)
+        freezeEffect.SetActive(isFreeze);
+
+        if (gameManager.currentGameTime <= 0 && !isBerserk)
         {
+            int round = gameManager.round;
             isBerserk = true;
             initcolor = new Color(1f, 0.5f, 0.5f, 1f);
-            damage = (stat.monsterDamage * (1 + Mathf.Floor(gameManager.round / 30)) + Mathf.Floor(gameManager.round / 5) * 2f) * 2f;
-            speed = (stat.monsterSpeed * (1 - gameManager.monsterSlow * 0.01f) * 1.5f);
+            float berserkDam = (round == 20) ? 1.5f : 2f;
+            damage = stat.monsterDamage * (1 + Mathf.Floor(gameManager.round / 30)) + Mathf.Floor(gameManager.round / 5) * 2f * berserkDam;
+            float berserkSpd = (round == 20) ? 1.2f : 1.5f;
+            speed = stat.monsterSpeed * (1 - gameManager.monsterSlow * 0.01f) * berserkSpd;
             initSpeed = speed;
-            initAttackTime = 2.5f;
+            initAttackTime = (round == 20) ? 3.5f : 2.5f;
             rend.color = initcolor;
         }
 
@@ -59,7 +72,7 @@ public class SkullBat : Monster
             {
                 Move();
 
-                if (isWalk)
+                if (!isPatern)
                     attackTime -= Time.deltaTime;
 
                 if (attackTime <= 0)
@@ -111,6 +124,7 @@ public class SkullBat : Monster
 
         isWalk = false;
         isAttack = true;
+        isPatern = true;
     }
 
     public void EndAttack()
@@ -119,6 +133,7 @@ public class SkullBat : Monster
         {
             isAttack = false;
             isWalk = true;
+            isPatern = false;
         }
 
         else if(rand == 1)
@@ -132,6 +147,7 @@ public class SkullBat : Monster
     {
         yield return new WaitForSeconds(2.5f);
         isWalk = true;
+        isPatern = false;
     }
 
     int rand;

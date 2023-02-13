@@ -14,7 +14,7 @@ public class AutoTarget : Bullet
     {
         gameManager = GameManager.Instance;
         isFind = false;
-        isAttack = false;
+        isAbsorb = false;
     }
 
     void Update()

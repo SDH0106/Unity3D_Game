@@ -17,20 +17,22 @@ public class GoldBat : Monster
     Collider ground;
 
     bool isBerserk;
-    //bool isBerserKTime;
-    //float berserkTime;
     int dashSpeed;
 
     void Start()
     {
         StartSetting();
+        if (gameManager.round == 10)
+            hp = 1000;
+        else if (gameManager.round == 30)
+            hp = 55000;
+
+        maxHp = hp;
         ground = GameSceneUI.Instance.ground;
         attackTime = 5;
         initAttackTime = 5;
         dashSpeed = 8;
         isBerserk = false;
-        //isBerserKTime = false;
-        //berserkTime = 60f;
     }
 
     protected override void InitMonsterSetting()
@@ -39,7 +41,6 @@ public class GoldBat : Monster
         state = 0;
         isRush = false;
         isBerserk = false;
-        //isBerserKTime = false;
         attackTime = 5;
         initAttackTime = 5;
         dashSpeed = 8;
@@ -50,25 +51,20 @@ public class GoldBat : Monster
     {
         monsterHpBar.value = 1 - (hp / maxHp);
 
-/*        if(gameManager.currentGameTime <= 0 && !isBerserKTime)
-        {
-            gameManager.currentGameTime = berserkTime;
-        }
+        freezeEffect.SetActive(isFreeze);
 
-        if(isBerserKTime)
+        if (gameManager.currentGameTime <= 0 && !isBerserk)
         {
-            berserkTime = Mathf.Clamp(berserkTime - Time.deltaTime, 0, berserkTime);
-        }*/
-
-        if (gameManager.currentGameTime <= 0 && gameManager.round == 30 && !isBerserk)
-        {
+            int round = gameManager.round;
             isBerserk = true;
             initcolor = new Color(1f, 0.5f, 0.5f, 1f);
-            damage = stat.monsterDamage * (1 + Mathf.Floor(gameManager.round / 30)) + Mathf.Floor(gameManager.round / 5) * 2f * 2f;
-            speed = stat.monsterSpeed * (1 - gameManager.monsterSlow * 0.01f) * 1.5f;
+            float berserkDam = (round == 10) ? 1.5f : 2f;
+            damage = stat.monsterDamage * (1 + Mathf.Floor(gameManager.round / 30)) + Mathf.Floor(gameManager.round / 5) * 2f * berserkDam;
+            float berserkSpd = (round == 10) ? 1.2f : 1.5f;
+            speed = stat.monsterSpeed * (1 - gameManager.monsterSlow * 0.01f) * berserkSpd;
             initSpeed = speed;
-            initAttackTime = 2.5f;
-            dashSpeed = 12;
+            initAttackTime = (round == 10) ? 3.5f : 2.5f;
+            dashSpeed = (round == 10) ? 10 : 12;
             rend.color = initcolor;
         }
 
@@ -141,7 +137,7 @@ public class GoldBat : Monster
     {
         if (isBerserk)
         {
-            anim.speed = 2f;
+            anim.speed = (gameManager.round == 10) ? 1.5f : 2f;
         }
         state = 1;
         isWalk = false;

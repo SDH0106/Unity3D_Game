@@ -27,7 +27,7 @@ public class Tree : MonoBehaviour
 
             int num = Random.Range(0, 100);
 
-            if (num < 3 + gameManager.luck * 0.4)
+            if (num < 3 + Mathf.Clamp(gameManager.luck, 0, 100) * 0.4)
             {
                 SoundManager.Instance.PlayES("ItemGet");
                 GameSceneUI.Instance.chestCount++;

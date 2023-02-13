@@ -27,6 +27,8 @@ public class PaaBat : Monster
 
     private void Update()
     {
+        freezeEffect.SetActive(isFreeze);
+
         if (isDead == false)
         {
             if (!isAttack)

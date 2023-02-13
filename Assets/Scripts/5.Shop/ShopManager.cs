@@ -12,6 +12,7 @@ using UnityEngine.UI;
 public class ShopManager : Singleton<ShopManager>
 {
     [SerializeField] Texture2D cursorNormal;
+    [SerializeField] GameObject tutoPanel;
 
     [Header("UI")]
     [SerializeField] Text round;
@@ -98,6 +99,16 @@ public class ShopManager : Singleton<ShopManager>
             rerollMoney = 0;
 
         StartCardSlot();
+
+        tutoPanel.SetActive(false);
+
+        if (gameManager.round == 1)
+        {
+            if (Convert.ToBoolean(PlayerPrefs.GetInt("ShopTuto", 1)))
+            {
+                tutoPanel.SetActive(Convert.ToBoolean(PlayerPrefs.GetInt("ShopTuto", 1)));
+            }
+        }
     }
 
     private void Update()
@@ -406,6 +417,12 @@ public class ShopManager : Singleton<ShopManager>
                 if (itemManager.storedPassive[i].ItemName == "시청료")
                 {
                     passiveSlots[i].transform.GetChild(5).GetComponent<Text>().text = $"{gameManager.feeMoney} 코인";
+                    passiveSlots[i].transform.GetChild(5).gameObject.SetActive(true);
+                }
+
+                else if(itemManager.storedPassive[i].ItemName == "3개월 구독권")
+                {
+                    passiveSlots[i].transform.GetChild(5).GetComponent<Text>().text = $"{gameManager.subMoney} 코인";
                     passiveSlots[i].transform.GetChild(5).gameObject.SetActive(true);
                 }
             }

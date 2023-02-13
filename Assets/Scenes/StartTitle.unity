@@ -4628,8 +4628,8 @@ MonoBehaviour:
   damageStorage: {fileID: 1692643827}
   initGameTime: 20
   gameTime: 0
-  money: 100000
-  round: 4
+  money: 10000000
+  round: 1
   woodCount: 0
   woodMaxCount: 70
   maxHp: 0
@@ -4637,16 +4637,16 @@ MonoBehaviour:
   physicDamage: 0
   magicDamage: 0
   shortDamage: 0
-  longDamage: 0
+  longDamage: -5
   recoverHp: 0
   absorbHp: 0
   defence: 50
   attackSpeed: 5
   speed: 10
-  range: 2
-  luck: 0
+  range: 0
+  luck: 100
   critical: 50
-  avoid: 0
+  avoid: 50
   passiveIntVariables: 
   passiveFloatVariables: []
   passiveBoolVariables: 
@@ -4677,7 +4677,7 @@ MonoBehaviour:
   isReflect: 0
   onePenetrate: 0
   lowPenetrate: 0
-  penetrate: 0
+  penetrate: 1
   currentGameTime: 0
   currentScene: 
   stats: []
@@ -4687,6 +4687,7 @@ MonoBehaviour:
   gameStartTime: 0
   gameEndTime: 0
   feeMoney: 0
+  subMoney: 0
 --- !u!4 &936130855
 Transform:
   m_ObjectHideFlags: 0
@@ -6742,7 +6743,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: version 2.3
+  m_Text: version 2.4
 --- !u!222 &1661411451
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9157,7 +9158,7 @@ MonoBehaviour:
     <color=red>\uBD88\uAC00\uB2A5</color>\uD569\uB2C8\uB2E4.\n\uBAAC\uC2A4\uD130\uB4E4\uC740
     \uC77C\uC815 \uB77C\uC6B4\uB4DC\uB9C8\uB2E4 <color=cyan>\uCCB4\uB825</color>, 
     <color=cyan>\uBC29\uC5B4\uB825</color>,  <color=cyan>\uACF5\uACA9\uB825</color>\uC774 
-    <color=red>\uC0C1\uC2B9</color>\uD569\uB2C8\uB2E4.\n<color=lime>30\uB77C\uC6B4\uB4DC</color>\uC5D0
+    <color=red>\uC0C1\uC2B9</color>\uD569\uB2C8\uB2E4.\n\n<color=lime>30\uC77C</color>\uC5D0\uB294
     \uC81C\uD55C\uC2DC\uAC04\uC774 \uB05D\uB098\uBA74 \uBCF4\uC2A4 \uBAAC\uC2A4\uD130\uB4E4\uC774
     <color=red>\uAD11\uD3ED\uD654</color>\uB429\uB2C8\uB2E4.\n\uAD11\uD3ED\uD654\uB41C
     \uBCF4\uC2A4\uBAAC\uC2A4\uD130\uB294 <color=cyan>\uACF5\uACA9\uB825, \uC774\uB3D9\uC18D\uB3C4</color>\uAC00
