@@ -17,7 +17,7 @@ MonoBehaviour:
   itemName: "\uBC84\uAC70 \uC2F6\uC740 \uBC24"
   itemPrice: 86
   maxCount: 100
-  hp: 8
+  hp: -5
   recoverHp: 0.3
   absorbHp: 0
   defence: 0
@@ -26,7 +26,7 @@ MonoBehaviour:
   shortDamage: 0
   longDamage: 0
   attackSpeed: 0
-  speed: -0.25
+  speed: 0
   range: 0
   luck: 5
   critical: 0

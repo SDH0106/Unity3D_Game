@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEditor;
@@ -253,16 +254,23 @@ public class SwordControl : Weapon
     {
         if(other.CompareTag("Monster") && other.GetComponent<Monster>() != null)
         {
+            Monster monster = other.GetComponent<Monster>();
+
             criRand = UnityEngine.Random.Range(1, 101);
 
             WeaponSetting();
 
             DamageUI damage = damagePool.Get();
-            if (weaponDamage > other.GetComponent<Monster>().defence)
+            damage.weaponDamage = weaponDamage;
+
+            if (damage.weaponDamage > 0)
                 damage.isMiss = false;
-            else if (weaponDamage <= other.GetComponent<Monster>().defence)
+
+            else if (damage.weaponDamage <= 0)
                 damage.isMiss = true;
-            damage.realDamage = Mathf.Clamp(weaponDamage - other.GetComponent<Monster>().defence, 0, weaponDamage - other.GetComponent<Monster>().defence);
+
+            float mDef = monster.defence;
+            damage.realDamage = Mathf.Clamp(damage.weaponDamage * (1 - (mDef / (20 + mDef))), 0, damage.weaponDamage * (1 - (mDef / (20 + mDef))));
 
             if (criRand <= gameManager.critical || gameManager.critical >= 100)
             {

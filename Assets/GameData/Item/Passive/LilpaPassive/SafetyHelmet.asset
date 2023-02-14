@@ -26,12 +26,12 @@ MonoBehaviour:
   shortDamage: 0
   longDamage: 0
   attackSpeed: 0
-  speed: 0
+  speed: 0.02
   range: 0
   luck: 0
   critical: 0
   percentDamage: 0
-  avoid: 1
+  avoid: 0
   coinRange: 0
   increaseExp: 0
   monsterSpeed: 0

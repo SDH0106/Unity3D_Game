@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8404765568145024352}
   - component: {fileID: 3658012667562279667}
+  - component: {fileID: 1045499569601304392}
   - component: {fileID: 6071570632418900616}
   - component: {fileID: -222202106925327735}
   m_Layer: 0
@@ -28,8 +29,8 @@ Transform:
   m_GameObject: {fileID: 3246047406680868606}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 3.5, y: 3.5, z: 3.5}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -75,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 4
-  m_Sprite: {fileID: 21300000, guid: bd7423a4709a38a43bb845025d03634b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 66fd1b0574f154e418a583603d2edcf5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -86,6 +87,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1045499569601304392
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3246047406680868606}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5652a2c0e697fb84180c60301528eeaf, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!65 &6071570632418900616
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -97,8 +118,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.07, y: 0.06, z: 0}
-  m_Center: {x: -0.015, y: 0.005, z: 0}
+  m_Size: {x: 0.05, y: 0.05, z: 0}
+  m_Center: {x: 0, y: 0.005, z: 0}
 --- !u!114 &-222202106925327735
 MonoBehaviour:
   m_ObjectHideFlags: 0

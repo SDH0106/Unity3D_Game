@@ -17,7 +17,7 @@ MonoBehaviour:
   itemName: "VR \uAE30\uAE30"
   itemPrice: 88
   maxCount: 100
-  hp: 10
+  hp: 5
   recoverHp: 0
   absorbHp: 0
   defence: 5

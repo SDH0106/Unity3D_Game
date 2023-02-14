@@ -20,10 +20,10 @@ MonoBehaviour:
   hp: 0
   recoverHp: 0
   absorbHp: 0
-  defence: 2
+  defence: 3.5
   physicDamage: 0
   magicDamage: 0
-  shortDamage: -1
+  shortDamage: 0
   longDamage: 0
   attackSpeed: 0
   speed: -0.1
@@ -31,7 +31,7 @@ MonoBehaviour:
   luck: 0
   critical: 0
   percentDamage: 0
-  avoid: 3
+  avoid: 0
   coinRange: 0
   increaseExp: 0
   monsterSpeed: 0

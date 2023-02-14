@@ -28,7 +28,7 @@ MonoBehaviour:
   attackSpeed: 0
   speed: 0
   range: 1.3
-  luck: -4
+  luck: -8
   critical: 0
   percentDamage: 0
   avoid: 0

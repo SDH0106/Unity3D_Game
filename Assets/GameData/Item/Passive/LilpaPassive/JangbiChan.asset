@@ -18,9 +18,9 @@ MonoBehaviour:
   itemPrice: 47
   maxCount: 100
   hp: 0
-  recoverHp: 0
+  recoverHp: -0.1
   absorbHp: 0
-  defence: 0.6
+  defence: 1
   physicDamage: 0
   magicDamage: 0
   shortDamage: 1.4

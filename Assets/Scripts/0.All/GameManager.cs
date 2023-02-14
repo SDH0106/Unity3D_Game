@@ -1,6 +1,3 @@
-using System;
-using System.Diagnostics.Contracts;
-using UnityEditor.ShaderGraph.Drawing;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -55,7 +52,7 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector] public bool luckCoin;
     [HideInInspector] public bool luckDamage;
     [HideInInspector] public bool luckCritical;
-    /*[HideInInspector]*/ public bool doubleShot;
+    [HideInInspector] public bool doubleShot;
     [HideInInspector] public bool revive;
     [HideInInspector] public bool ggoGgoSummon;
     [HideInInspector] public bool ilsoonSummon;
@@ -66,9 +63,9 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector] public bool spawnTree;
     [HideInInspector] public bool dotgu;
     [HideInInspector] public bool isReflect;
-    /*[HideInInspector]*/ public bool onePenetrate;
-    /*[HideInInspector]*/ public bool lowPenetrate;
-    /*[HideInInspector]*/ public bool penetrate;
+    [HideInInspector] public bool onePenetrate;
+    [HideInInspector] public bool lowPenetrate;
+    [HideInInspector] public bool penetrate;
     #endregion
 
     [HideInInspector] public float currentGameTime;
@@ -89,10 +86,10 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector] public int feeMoney = 0;
     [HideInInspector] public int subMoney = 0;
 
-    public Texture2D useCursorNormal;
-    public Texture2D useCursorAttack;
+    [HideInInspector] public Texture2D useCursorNormal;
+    [HideInInspector] public Texture2D useCursorAttack;
 
-    public int cursorSize;
+    [HideInInspector] public int cursorSize;
 
     protected override void Awake()
     {
@@ -116,7 +113,7 @@ public class GameManager : Singleton<GameManager>
         gameTime = Mathf.Clamp(initGameTime + (round - 1) * 3f, initGameTime, 60f);
         //gameTime = Mathf.Clamp(initGameTime + (round - 1) * 3f, 0, 10000f);
         //gameTime = 0;
-        //InitSetting();
+        InitSetting();
         InitArray();
         currentGameTime = gameTime;
         isPause = false;
@@ -300,7 +297,6 @@ public class GameManager : Singleton<GameManager>
 
     private void Update()
     {
-        //Debug.Log(PlayerPrefs.GetInt("CursorSize", 0));
         scene = SceneManager.GetActiveScene();
         currentScene = scene.name;
 

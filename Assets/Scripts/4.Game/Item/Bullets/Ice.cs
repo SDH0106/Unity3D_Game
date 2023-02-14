@@ -49,13 +49,14 @@ public class Ice : Bullet
             else if (gameManager.lowPenetrate)
                 LowPenetrate(damage);
 
-            if (damage.weaponDamage > monster.defence)
+            if (damage.weaponDamage > 0)
                 damage.isMiss = false;
 
-            else if (damage.weaponDamage <= monster.defence)
+            else if (damage.weaponDamage <= 0)
                 damage.isMiss = true;
 
-            damage.realDamage = Mathf.Clamp(damage.weaponDamage - monster.defence, 0, damage.weaponDamage - monster.defence);
+            float mDef = monster.defence;
+            damage.realDamage = Mathf.Clamp(damage.weaponDamage * (1 - (mDef / (20 + mDef))), 0, damage.weaponDamage * (1 - (mDef / (20 + mDef))));
             damage.UISetting();
             damage.transform.position = transform.position;
             damage.gameObject.transform.SetParent(gameManager.damageStorage);

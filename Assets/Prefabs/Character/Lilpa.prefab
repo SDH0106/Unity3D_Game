@@ -5108,7 +5108,7 @@ MonoBehaviour:
   shielBar: {fileID: 6462630388083919554}
   characterNum: 0
   level: 0
-  characterHp: 15000
+  characterHp: 15
   maxExp: 0
   damageRatio: 1
   characterSpeed: 3
@@ -10946,12 +10946,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: 50c6e155605c90240b08b59e7db72daa, type: 3}
-  m_Color: {r: 0.2701521, g: 0, b: 1, a: 0.101960786}
+  m_Sprite: {fileID: 21300000, guid: 80f1915dd80be1540a61c82d36333350, type: 3}
+  m_Color: {r: 0.3, g: 0, b: 1, a: 0.101960786}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.64, y: 0.64}
+  m_Size: {x: 1.28, y: 1.28}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

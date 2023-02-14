@@ -72,6 +72,11 @@ public class ShopManager : Singleton<ShopManager>
 
     private void Start()
     {
+        gameManager = GameManager.Instance;
+        itemManager = ItemManager.Instance;
+        character = Character.Instance;
+
+        cursorNormal = gameManager.useCursorNormal;
         Vector2 cursorHotSpot = new Vector3(cursorNormal.width * 0.5f, cursorNormal.height * 0.5f);
         Cursor.SetCursor(cursorNormal, cursorHotSpot, CursorMode.ForceSoftware);
 
@@ -81,10 +86,6 @@ public class ShopManager : Singleton<ShopManager>
         weightPassiveValue = new float[4];
         wpCheck = new int[4];
         cards = new GameObject[4];
-        
-        gameManager = GameManager.Instance;
-        itemManager = ItemManager.Instance;
-        character = Character.Instance;
 
         cursorNormal = gameManager.useCursorNormal;
 

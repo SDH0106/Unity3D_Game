@@ -339,11 +339,15 @@ public class StaffControl : Weapon
                         targets[monsterCount] = target.transform;
 
                         DamageUI damage = damagePool.Get();
-                        if (weaponDamage > monster.defence)
+                        damage.weaponDamage = weaponDamage;
+                        if (damage.weaponDamage > 0)
                             damage.isMiss = false;
-                        else if (weaponDamage <= monster.defence)
+
+                        else if (damage.weaponDamage <= 0)
                             damage.isMiss = true;
-                        damage.realDamage = Mathf.Clamp(weaponDamage - monster.defence + luckThunderDmg, 0, weaponDamage - monster.defence + luckThunderDmg);
+
+                        float mDef = monster.defence;
+                        damage.realDamage = Mathf.Clamp(damage.weaponDamage * (1 - (mDef / (20 + mDef))), 0, damage.weaponDamage * (1 - (mDef / (20 + mDef))));
                         damage.UISetting();
                         damage.transform.position = target.transform.position;
                         damage.gameObject.transform.SetParent(gameManager.damageStorage);
@@ -371,11 +375,16 @@ public class StaffControl : Weapon
                                 targets[monsterCount] = target.transform;
 
                                 DamageUI damage = damagePool.Get();
-                                if (weaponDamage > monster.defence)
+                                damage.weaponDamage = weaponDamage;
+
+                                if (damage.weaponDamage > 0)
                                     damage.isMiss = false;
-                                else if (weaponDamage <= monster.defence)
+
+                                else if (damage.weaponDamage <= 0)
                                     damage.isMiss = true;
-                                damage.realDamage = Mathf.Clamp(weaponDamage - monster.defence + luckThunderDmg, 0, weaponDamage - monster.defence + luckThunderDmg);
+
+                                float mDef = monster.defence;
+                                damage.realDamage = Mathf.Clamp(damage.weaponDamage * (1 - (mDef / (20 + mDef))), 0, damage.weaponDamage * (1 - (mDef / (20 + mDef))));
                                 damage.UISetting();
                                 damage.transform.position = target.transform.position;
                                 damage.gameObject.transform.SetParent(gameManager.damageStorage);
@@ -404,11 +413,16 @@ public class StaffControl : Weapon
                                 targets[monsterCount] = target.transform;
 
                                 DamageUI damage = damagePool.Get();
-                                if (weaponDamage > monster.defence)
+                                damage.weaponDamage = weaponDamage;
+
+                                if (damage.weaponDamage > 0)
                                     damage.isMiss = false;
-                                else if (weaponDamage <= monster.defence)
+
+                                else if (damage.weaponDamage <= 0)
                                     damage.isMiss = true;
-                                damage.realDamage = Mathf.Clamp(weaponDamage - monster.defence + luckThunderDmg, 0, weaponDamage - monster.defence + luckThunderDmg);
+
+                                float mDef = monster.defence;
+                                damage.realDamage = Mathf.Clamp(damage.weaponDamage * (1 - (mDef / (20 + mDef))), 0, damage.weaponDamage * (1 - (mDef / (20 + mDef))));
                                 damage.UISetting();
                                 damage.transform.position = target.transform.position;
                                 damage.gameObject.transform.SetParent(gameManager.damageStorage);

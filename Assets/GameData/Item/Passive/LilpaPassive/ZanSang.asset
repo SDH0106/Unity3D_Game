@@ -17,21 +17,21 @@ MonoBehaviour:
   itemName: "\uC794\uC0C1\uC785\uB2C8\uB2E4\uB9CC?"
   itemPrice: 53
   maxCount: 100
-  hp: 0
+  hp: -3
   recoverHp: 0
-  absorbHp: 0
+  absorbHp: -0.1
   defence: 0
   physicDamage: 0
   magicDamage: 0
-  shortDamage: -1
-  longDamage: -2
+  shortDamage: 0
+  longDamage: 0
   attackSpeed: 0
   speed: 0.1
   range: 0
   luck: 0
   critical: 0
   percentDamage: 0
-  avoid: 3
+  avoid: 4
   coinRange: 0
   increaseExp: 0
   monsterSpeed: 0

@@ -43,11 +43,17 @@ public class Lazor : Bullet
             Instantiate(effectPrefab, collision.contacts[0].point, transform.rotation);
                         
             DamageUI damage = pool.Get();
-            if (bulletDamage > monster.defence)
+
+            damage.weaponDamage = bulletDamage;
+
+            if (damage.weaponDamage > 0)
                 damage.isMiss = false;
-            else if (bulletDamage <= monster.defence)
+
+            else if (damage.weaponDamage <= 0)
                 damage.isMiss = true;
-            damage.realDamage = Mathf.Clamp(bulletDamage - monster.defence, 0, bulletDamage - monster.defence);
+
+            float mDef = monster.defence;
+            damage.realDamage = Mathf.Clamp(damage.weaponDamage * (1 - (mDef / (20 + mDef))), 0, damage.weaponDamage * (1 - (mDef / (20 + mDef))));
             damage.UISetting();
             damage.transform.position = collision.contacts[0].point;
             damage.gameObject.transform.SetParent(gameManager.damageStorage);
