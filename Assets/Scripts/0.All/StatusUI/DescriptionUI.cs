@@ -41,7 +41,7 @@ public class DescriptionUI : MonoBehaviour
                 break;
 
             case 1:
-                descriptionText.text = "캐릭터가 2초마다 자동으로 회복하는 체력 수치와 관련된 능력치.\n0이하인 경우 적용되지 않습니다.";
+                descriptionText.text = "캐릭터가 1초마다 자동으로 회복하는 체력 수치와 관련된 능력치.\n0이하인 경우 적용되지 않습니다.";
                 break;
 
             case 2:

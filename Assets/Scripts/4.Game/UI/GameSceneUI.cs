@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class GameSceneUI : Singleton<GameSceneUI>
 {
-    [SerializeField] Texture2D cursorAttack;
-    [SerializeField] Texture2D cursorNormal;
+    Texture2D cursorAttack;
+    Texture2D cursorNormal;
     [SerializeField] public Collider ground;
     [SerializeField] GameObject treePrefab;
     [SerializeField] public GameObject monsterSpawn;
@@ -19,6 +19,7 @@ public class GameSceneUI : Singleton<GameSceneUI>
     [SerializeField] Text maxHpText;
     [SerializeField] Text SheildText;
     [SerializeField] Slider hpBar;
+    [SerializeField] Slider sheildBar;
 
     [Header("EXP")]
     [SerializeField] Text lvText;
@@ -132,6 +133,8 @@ public class GameSceneUI : Singleton<GameSceneUI>
         character = Character.Instance;
         soundManager = SoundManager.Instance;
 
+        cursorNormal = gameManager.useCursorNormal;
+        cursorAttack = gameManager.useCursorAttack;
         Vector2 cursorHotSpot = new Vector3(cursorAttack.width * 0.5f, cursorAttack.height * 0.5f);
         Cursor.SetCursor(cursorAttack, cursorHotSpot, CursorMode.ForceSoftware);
 
@@ -281,8 +284,9 @@ public class GameSceneUI : Singleton<GameSceneUI>
 
             else if (gameManager.round == 30)
             {
-                if (gameManager.isClear && gameManager.isBossDead)
+                if (gameManager.isBossDead)
                 {
+                    gameManager.isClear = true;
                     if (!gameClearUI.activeSelf)
                         gameManager.gameEndTime = Time.realtimeSinceStartup;
 
@@ -474,7 +478,9 @@ public class GameSceneUI : Singleton<GameSceneUI>
             }
             else
                 SheildText.gameObject.SetActive(false);
+
             hpBar.value = 1 - (character.currentHp / character.maxHp);
+            sheildBar.value = (character.shield / 10f);
         }
     }
 

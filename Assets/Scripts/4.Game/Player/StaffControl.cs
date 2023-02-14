@@ -195,6 +195,8 @@ public class StaffControl : Weapon
                         Bullet bullet2 = pool.Get();
                         bullet1.transform.position = doubleFirePos1.position;
                         bullet2.transform.position = doubleFirePos2.position;
+                        bullet1.bulletDamage = weaponDamage;
+                        bullet2.bulletDamage = weaponDamage;
                         bullet1.damageUI = damageUI;
                         bullet2.damageUI = damageUI;
                         bullet1.speed = weaponInfo.BulletSpeed;
@@ -349,7 +351,7 @@ public class StaffControl : Weapon
                         monster.OnDamaged(damage.realDamage);
 
                         if (gameManager.absorbHp > 0 && !damage.isMiss && monsterCount == 0)
-                            character.currentHp += gameManager.absorbHp;
+                            character.currentHp += Mathf.Clamp(gameManager.absorbHp, 0f, 1f);
 
                         monsterCount++;
 
@@ -381,7 +383,7 @@ public class StaffControl : Weapon
                                 monster.OnDamaged(damage.realDamage);
 
                                 if (gameManager.absorbHp > 0 && !damage.isMiss && monsterCount == 0)
-                                    character.currentHp += gameManager.absorbHp;
+                                    character.currentHp += Mathf.Clamp(gameManager.absorbHp, 0f, 1f);
 
                                 monsterCount++;
 
@@ -414,7 +416,7 @@ public class StaffControl : Weapon
                                 monster.OnDamaged(damage.realDamage);
 
                                 if (gameManager.absorbHp > 0 && !damage.isMiss && monsterCount == 0)
-                                    character.currentHp += gameManager.absorbHp;
+                                    character.currentHp += Mathf.Clamp(gameManager.absorbHp, 0f, 1f);
 
                                 monsterCount++;
 

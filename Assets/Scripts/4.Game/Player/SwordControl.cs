@@ -284,7 +284,7 @@ public class SwordControl : Weapon
 
             if (gameManager.absorbHp > 0 && !damage.isMiss && !isAttack && isSwing)
             {
-                character.currentHp += gameManager.absorbHp;
+                character.currentHp += Mathf.Clamp(gameManager.absorbHp, 0f, 1f);
                 isAttack = true;
             }
         }

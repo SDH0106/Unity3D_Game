@@ -19,8 +19,11 @@ public class TitleOption : MonoBehaviour
     [SerializeField] GameObject wUnMark;
     [SerializeField] GameObject bUnMark;
     [SerializeField] GameObject sUnMark;
+    [SerializeField] GameObject normalToggle;
+    [SerializeField] GameObject doubleToggle;
 
     SoundManager soundManager;
+    GameManager gameManager;
 
     bool muteAllVolume;
     bool muteBgmVolume;
@@ -37,6 +40,10 @@ public class TitleOption : MonoBehaviour
         panel.SetActive(false);
 
         soundManager = SoundManager.Instance;
+        gameManager = GameManager.Instance;
+
+        normalToggle.SetActive(!Convert.ToBoolean(PlayerPrefs.GetInt("CursorSize", 0)));
+        doubleToggle.SetActive(!normalToggle.activeSelf);
 
         AllSound.value = 1 - PlayerPrefs.GetFloat("Sound_All");
         bgmSound.value = 1 - PlayerPrefs.GetFloat("Sound_Bgm");
@@ -86,6 +93,19 @@ public class TitleOption : MonoBehaviour
         {
             keyTexts[i].text = KeySetting.keys[(KeyAction)i].ToString();
         }
+    }
+
+    public void CursorSizeSetting(int num)
+    {
+        PlayerPrefs.SetInt("CursorSize", num);
+        normalToggle.SetActive(!Convert.ToBoolean(PlayerPrefs.GetInt("CursorSize", 0)));
+        doubleToggle.SetActive(!normalToggle.activeSelf);
+        gameManager.cursorSize = num;
+        gameManager.useCursorNormal = gameManager.cursorNormal[num];
+        gameManager.useCursorAttack = gameManager.cursorAttack[num];
+        Texture2D useCursorNormal = gameManager.useCursorNormal;
+        Vector2 cursorHotSpot = new Vector3(useCursorNormal.width * 0.5f, useCursorNormal.height * 0.5f);
+        Cursor.SetCursor(useCursorNormal, cursorHotSpot, CursorMode.ForceSoftware);
     }
 
     private void OnGUI()

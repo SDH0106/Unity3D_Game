@@ -22,6 +22,7 @@ public class Character : Singleton<Character>
     [SerializeField] GameObject gardianEffect;
 
     [SerializeField] Slider playerHpBar;
+    [SerializeField] Slider shielBar;
 
     [Header("Stat")]
     [SerializeField] public float characterNum;
@@ -170,6 +171,7 @@ public class Character : Singleton<Character>
         }
 
         playerHpBar.value = 1 - (currentHp / maxHp);
+        shielBar.value = (shield / 10f);
     }
 
     void SummonPet()
@@ -418,7 +420,6 @@ public class Character : Singleton<Character>
 
     public void OnDamaged(float damage)
     {
-        Debug.Log(damage);
         if (!isAttacked)
         {
             avoidRand = Random.Range(1, 100);
@@ -437,10 +438,10 @@ public class Character : Singleton<Character>
                     if (shield > 0)
                     {
                         currentHp -= (Mathf.Round(((damage - shield) * ((100 - gameManager.defence) / 100)) * 10) * 0.1f);
-                        shield -= damage;
+                        shield = Mathf.Clamp(shield - damage, 0, shield - damage);
                     }
 
-                    else
+                    else if (shield <= 0)
                         currentHp -= Mathf.Round((damage * ((100 - gameManager.defence) / 100)) * 10) * 0.1f;
                 }
 
@@ -450,8 +451,10 @@ public class Character : Singleton<Character>
                 currentCoroutine = StartCoroutine(OnInvincible());
             }
 
-            else if (currentHp <= 0)
+            if (currentHp <= 0)
+            {
                 OnDead();
+            }
         }
     }
 

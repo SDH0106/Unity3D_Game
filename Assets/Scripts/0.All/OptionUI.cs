@@ -9,8 +9,8 @@ using UnityEngine.Events;
 
 public class OptionUI : MonoBehaviour
 {
-    [SerializeField] Texture2D cursorNormal;
-    [SerializeField] Texture2D cursorAttack;
+    Texture2D cursorNormal;
+    Texture2D cursorAttack;
     [SerializeField] GameObject panel;
     [SerializeField] Slider AllSound;
     [SerializeField] Slider bgmSound;
@@ -20,6 +20,8 @@ public class OptionUI : MonoBehaviour
     [SerializeField] GameObject sUnMark;
     [SerializeField] GameObject CheckHomePanel;
     [SerializeField] GameObject statPanel;
+    [SerializeField] GameObject normalToggle;
+    [SerializeField] GameObject doubleToggle;
 
     GameManager gameManager;
     SoundManager soundManager;
@@ -36,6 +38,9 @@ public class OptionUI : MonoBehaviour
         gameManager = GameManager.Instance;
         soundManager = SoundManager.Instance;
 
+        cursorNormal = gameManager.useCursorNormal;
+        cursorAttack = gameManager.useCursorAttack;
+
         AllSound.value = 1 - PlayerPrefs.GetFloat("Sound_All");
         bgmSound.value = 1 - PlayerPrefs.GetFloat("Sound_Bgm");
         sfxSound.value = 1 - PlayerPrefs.GetFloat("Sound_Sfx");
@@ -47,6 +52,9 @@ public class OptionUI : MonoBehaviour
         wUnMark.SetActive(muteAllVolume);
         bUnMark.SetActive(muteBgmVolume);
         sUnMark.SetActive(muteSfxVolume);
+
+        normalToggle.SetActive(!Convert.ToBoolean(PlayerPrefs.GetInt("CursorSize", 0)));
+        doubleToggle.SetActive(!normalToggle.activeSelf);
     }
 
     private void Update()
@@ -60,6 +68,21 @@ public class OptionUI : MonoBehaviour
 
         else if (Input.GetKeyDown(KeyCode.Escape) && gameManager.isPause)
             ReturnToGame();
+    }
+
+    public void CursorSizeSetting(int num)
+    {
+        PlayerPrefs.SetInt("CursorSize", num);
+        normalToggle.SetActive(!Convert.ToBoolean(PlayerPrefs.GetInt("CursorSize", 0)));
+        doubleToggle.SetActive(!normalToggle.activeSelf);
+        gameManager.cursorSize = num;
+        gameManager.useCursorNormal = gameManager.cursorNormal[num];
+        gameManager.useCursorAttack = gameManager.cursorAttack[num];
+        cursorNormal = gameManager.useCursorNormal;
+        cursorAttack = gameManager.useCursorAttack;
+        Texture2D useCursorNormal = gameManager.useCursorNormal;
+        Vector2 cursorHotSpot = new Vector3(useCursorNormal.width * 0.5f, useCursorNormal.height * 0.5f);
+        Cursor.SetCursor(useCursorNormal, cursorHotSpot, CursorMode.ForceSoftware);
     }
 
     public void ChangeWholeVolume()

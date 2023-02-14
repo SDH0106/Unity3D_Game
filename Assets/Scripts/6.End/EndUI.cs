@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class EndUI : Singleton<EndUI>
 {
-    [SerializeField] Texture2D cursorNormal;
+    Texture2D cursorNormal;
 
     [Header("UI")]
     [SerializeField] GameObject overUI;
@@ -57,12 +57,14 @@ public class EndUI : Singleton<EndUI>
 
     private void Start()
     {
-        Vector2 cursorHotSpot = new Vector3(cursorNormal.width * 0.5f, cursorNormal.height * 0.5f);
-        Cursor.SetCursor(cursorNormal, cursorHotSpot, CursorMode.ForceSoftware);
-
         gameManager = GameManager.Instance;
         character = Character.Instance;
         itemManager = ItemManager.Instance;
+
+        cursorNormal = gameManager.useCursorNormal;
+        Vector2 cursorHotSpot = new Vector3(cursorNormal.width * 0.5f, cursorNormal.height * 0.5f);
+        Cursor.SetCursor(cursorNormal, cursorHotSpot, CursorMode.ForceSoftware);
+
         SoundManager.Instance.PlayBGM(7, false);
         weaponCount = new int[6];
         UISetting();

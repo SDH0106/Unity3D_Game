@@ -11,7 +11,7 @@ using UnityEngine.UI;
 
 public class ShopManager : Singleton<ShopManager>
 {
-    [SerializeField] Texture2D cursorNormal;
+    Texture2D cursorNormal;
     [SerializeField] GameObject tutoPanel;
 
     [Header("UI")]
@@ -85,6 +85,10 @@ public class ShopManager : Singleton<ShopManager>
         gameManager = GameManager.Instance;
         itemManager = ItemManager.Instance;
         character = Character.Instance;
+
+        cursorNormal = gameManager.useCursorNormal;
+
+        character.shield = 0f;
 
         clickUI.gameObject.SetActive(false);
 
@@ -420,7 +424,7 @@ public class ShopManager : Singleton<ShopManager>
                     passiveSlots[i].transform.GetChild(5).gameObject.SetActive(true);
                 }
 
-                else if(itemManager.storedPassive[i].ItemName == "3개월 구독권")
+                else if(itemManager.storedPassive[i].ItemName == "3티어 구독권")
                 {
                     passiveSlots[i].transform.GetChild(5).GetComponent<Text>().text = $"{gameManager.subMoney} 코인";
                     passiveSlots[i].transform.GetChild(5).gameObject.SetActive(true);

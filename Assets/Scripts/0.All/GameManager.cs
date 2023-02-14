@@ -1,11 +1,14 @@
 using System;
+using System.Diagnostics.Contracts;
+using UnityEditor.ShaderGraph.Drawing;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
 public class GameManager : Singleton<GameManager>       
 {
-    [SerializeField] Texture2D cursor;
+    [SerializeField] public Texture2D[] cursorNormal;
+    [SerializeField] public Texture2D[] cursorAttack;
     [SerializeField] public Transform bulletStorage;
     [SerializeField] public Transform damageStorage;
 
@@ -52,7 +55,7 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector] public bool luckCoin;
     [HideInInspector] public bool luckDamage;
     [HideInInspector] public bool luckCritical;
-    [HideInInspector] public bool doubleShot;
+    /*[HideInInspector]*/ public bool doubleShot;
     [HideInInspector] public bool revive;
     [HideInInspector] public bool ggoGgoSummon;
     [HideInInspector] public bool ilsoonSummon;
@@ -86,6 +89,11 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector] public int feeMoney = 0;
     [HideInInspector] public int subMoney = 0;
 
+    public Texture2D useCursorNormal;
+    public Texture2D useCursorAttack;
+
+    public int cursorSize;
+
     protected override void Awake()
     {
         base.Awake();
@@ -94,8 +102,12 @@ public class GameManager : Singleton<GameManager>
 
     private void Start()
     {
-        Vector2 cursorHotSpot = new Vector3(cursor.width * 0.5f, cursor.height * 0.5f);
-        Cursor.SetCursor(cursor, cursorHotSpot, CursorMode.ForceSoftware);
+        cursorSize = PlayerPrefs.GetInt("CursorSize", 0);
+        useCursorNormal = cursorNormal[cursorSize];
+        useCursorAttack = cursorAttack[cursorSize];
+
+        Vector2 cursorHotSpot = new Vector3(useCursorNormal.width * 0.5f, useCursorNormal.height * 0.5f);
+        Cursor.SetCursor(useCursorNormal, cursorHotSpot, CursorMode.ForceSoftware);
         /*PlayerPrefs.SetInt("GameTuto", 1);
         PlayerPrefs.SetInt("ShopTuto", 1);
         PlayerPrefs.SetInt("BossTuto", 1);*/
@@ -104,7 +116,7 @@ public class GameManager : Singleton<GameManager>
         gameTime = Mathf.Clamp(initGameTime + (round - 1) * 3f, initGameTime, 60f);
         //gameTime = Mathf.Clamp(initGameTime + (round - 1) * 3f, 0, 10000f);
         //gameTime = 0;
-        InitSetting();
+        //InitSetting();
         InitArray();
         currentGameTime = gameTime;
         isPause = false;
@@ -288,6 +300,7 @@ public class GameManager : Singleton<GameManager>
 
     private void Update()
     {
+        //Debug.Log(PlayerPrefs.GetInt("CursorSize", 0));
         scene = SceneManager.GetActiveScene();
         currentScene = scene.name;
 

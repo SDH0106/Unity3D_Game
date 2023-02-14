@@ -73,7 +73,7 @@ public class SwordBullet : Bullet
 
             if (gameManager.absorbHp > 0 && !damage.isMiss && !isAbsorb)
             {
-                Character.Instance.currentHp += gameManager.absorbHp;
+                Character.Instance.currentHp += Mathf.Clamp(gameManager.absorbHp, 0f, 1f);
                 isAbsorb = true;
             }
 
