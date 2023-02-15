@@ -50,10 +50,10 @@ public class WeaponSlot : MonoBehaviour
     {
         if (ItemManager.Instance.storedWeapon[slotNum] != null)
         {
-            sellUI.gameObject.SetActive(true);
             sellUI.GetComponent<CardClick>().ShowPos();
             sellUI.GetComponent<CardClick>().Setting(slotNum);
             sellUI.GetComponent<CardClick>().CardImage(slotNum);
+            sellUI.gameObject.SetActive(true);
         }
     }
 }

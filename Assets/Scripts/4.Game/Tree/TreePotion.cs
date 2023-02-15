@@ -9,7 +9,6 @@ public class TreePotion : MonoBehaviour
 
     float speed;
 
-
     private void Start()
     {
         character = Character.Instance;
@@ -32,7 +31,8 @@ public class TreePotion : MonoBehaviour
             if (character.currentHp != character.maxHp)
             {
                 SoundManager.Instance.PlayES("EatSound");
-                character.currentHp += 10f;
+                if (!character.isDead)
+                    character.currentHp += 10f;
 
                 if (GameManager.Instance.buffNum != 0)
                 {
@@ -46,6 +46,7 @@ public class TreePotion : MonoBehaviour
             else if(character.currentHp == character.maxHp)
             {
                 SoundManager.Instance.PlayES("EatSound");
+
                 character.shield = Mathf.Clamp(character.shield + 5f, 0f, 10f);
 
                 if (GameManager.Instance.buffNum != 0)

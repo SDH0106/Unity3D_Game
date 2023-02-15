@@ -23,7 +23,7 @@ public class HugBat : Monster
     {
         base.InitMonsterSetting();
         isRush = false;
-        rushTime = 2f;
+        rushTime = 1.5f;
         breakTime = 0f;
         attackCoolTime = 1f;
     }

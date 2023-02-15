@@ -29,10 +29,10 @@
         },
         {
             "monsterName": "안아줘요 박쥐",
-            "monsterMaxHp": 25.0,
+            "monsterMaxHp": 20.0,
             "monsterDamage": 4.0,
-            "monsterSpeed": 2.5,
-            "monsterDefence": 3.0,
+            "monsterSpeed": 2.2,
+            "monsterDefence": 2.0,
             "monsterExp": 5.0,
             "monsterCoin": 6.0
         },

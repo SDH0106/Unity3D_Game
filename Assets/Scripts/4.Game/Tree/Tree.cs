@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.UI;
 
 public class Tree : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class Tree : MonoBehaviour
 
     GameManager gameManager;
 
+    bool isAttaked = false;
+
     private void Start()
     {
         gameManager = GameManager.Instance;
@@ -20,20 +23,24 @@ public class Tree : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("myBullet") || other.CompareTag("Sword") || other.CompareTag("Thunder"))
-        { 
-            GameObject potion = Instantiate(potionPrefab[potionsNum]);
-            potion.transform.position = transform.position;
-            gameManager.woodCount++;
-
-            int num = Random.Range(0, 100);
-
-            if (num < 3 + Mathf.Clamp(gameManager.luck, 0, 100) * 0.4)
+        {
+            if (!isAttaked)
             {
-                SoundManager.Instance.PlayES("ItemGet");
-                GameSceneUI.Instance.chestCount++;
-            }
+                isAttaked = true;
+                GameObject potion = Instantiate(potionPrefab[potionsNum]);
+                potion.transform.position = transform.position;
+                gameManager.woodCount++;
 
-            Destroy(gameObject);
+                int num = Random.Range(0, 100);
+
+                if (num < 3 + Mathf.Clamp(gameManager.luck, 0, 100) * 0.4)
+                {
+                    SoundManager.Instance.PlayES("ItemGet");
+                    GameSceneUI.Instance.chestCount++;
+                }
+
+                Destroy(gameObject);
+            }
         }
 
         else if (other.CompareTag("Character"))

@@ -1,13 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
-using Unity.Mathematics;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Pool;
-using UnityEngine.UIElements;
 
 public class SwordControl : Weapon
 {
@@ -92,33 +84,9 @@ public class SwordControl : Weapon
         xInput = (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Left"))) || (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Right")));
         zInput = (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Up"))) || (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Down")));
 
-        if (!xInput)
-            x = 0;
-
-        if (!zInput)
-            z = 0;
-
-        if (zInput)
-        {
-            if (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Up")))
-                z = 1;
-
-            else if (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Down")))
-                z = -1;
-        }
-
-        if (xInput)
-        {
-            if (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Left")))
-                x = -1;
-
-            else if (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Right")))
-                x = 1;
-        }
-
         if (xInput || zInput)
         {
-            dir = (Vector3.right * x + Vector3.forward * z).normalized;
+            dir = character.dir;
             beforeDir = dir;
         }
 
@@ -139,7 +107,7 @@ public class SwordControl : Weapon
         else if (gameManager.range <= 0)
             addRange = attackRange;
 
-        Vector3 range = (mouse - character.transform.position).normalized * addRange;
+        Vector3 range = (mouse - transform.position).normalized * addRange;
         range.y = 0;
 
         if (canAttack == true)
@@ -162,8 +130,9 @@ public class SwordControl : Weapon
 
                 anim.SetTrigger("RightAttack");
 
-                transform.position = Vector3.MoveTowards(transform.position, character.transform.position + range, 2);
-                bulletDir = transform.position - character.transform.position + range;
+                transform.position = Vector3.MoveTowards(transform.position, transform.position + range, 2);
+                //bulletDir = transform.position - character.transform.position + range;
+                bulletDir = mouse - transform.position;
                 bulletDir.y = 0;
 
                 SoundManager.Instance.PlayES(weaponInfo.WeaponSound);
@@ -179,6 +148,8 @@ public class SwordControl : Weapon
                             WeaponSetting();
                             Bullet bullet = pool.Get();
                             bullet.transform.position = new Vector3(firePos.position.x, 0f, firePos.position.z);
+                            bulletDir = mouse - bullet.transform.position;
+                            bulletDir.y = 0;
                             bullet.bulletDamage = swordBulletDamage;
                             bullet.GetComponent<SwordBullet>().criRand = bulletCri;
                             bullet.damageUI = damageUI;
@@ -193,6 +164,8 @@ public class SwordControl : Weapon
                             WeaponSetting();
                             Bullet bullet = pool.Get();
                             bullet.transform.position = new Vector3(doubleFirePos1.position.x, 0f, doubleFirePos1.position.z);
+                            bulletDir = mouse - bullet.transform.position;
+                            bulletDir.y = 0;
                             bullet.bulletDamage = swordBulletDamage;
                             bullet.GetComponent<SwordBullet>().criRand = bulletCri;
                             bullet.damageUI = damageUI;
@@ -204,6 +177,8 @@ public class SwordControl : Weapon
                             WeaponSetting();
                             Bullet bullet2 = pool.Get();
                             bullet2.transform.position = new Vector3(doubleFirePos2.position.x, 0f, doubleFirePos2.position.z);
+                            bulletDir = mouse - bullet2.transform.position;
+                            bulletDir.y = 0;
                             bullet2.bulletDamage = swordBulletDamage;
                             bullet2.GetComponent<SwordBullet>().criRand = bulletCri;
                             bullet2.damageUI = damageUI;
@@ -292,7 +267,7 @@ public class SwordControl : Weapon
 
             if (gameManager.absorbHp > 0 && !damage.isMiss && !isAttack && isSwing)
             {
-                character.currentHp += Mathf.Clamp(gameManager.absorbHp, 0f, 1f);
+                character.currentHp += Mathf.Clamp(gameManager.absorbHp, 0f, gameManager.maxAbs);
                 isAttack = true;
             }
         }

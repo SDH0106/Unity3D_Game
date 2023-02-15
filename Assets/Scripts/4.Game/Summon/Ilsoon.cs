@@ -37,6 +37,7 @@ public class Ilsoon : Summons
         {
             if (other.CompareTag("Monster"))
             {
+                SoundManager.Instance.PlayES("Ilsoon");
                 isAttack = true;
                 Vector3 dir = other.gameObject.transform.position - transform.position;
 

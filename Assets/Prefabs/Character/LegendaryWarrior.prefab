@@ -5149,6 +5149,7 @@ MonoBehaviour:
   - {fileID: 3705948357334330449}
   summonNum: 0
   isDead: 0
+  dir: {x: 0, y: 0, z: 0}
   x: 0
   z: 0
   levelUpCount: 0

@@ -125,7 +125,6 @@ public class ShopManager : Singleton<ShopManager>
             gameObject.SetActive(true);
             SettingStatText();
 
-            //CheckLock();
             WeaponSlot();
             PassiveSlot();
             Refill();
@@ -502,7 +501,7 @@ public class ShopManager : Singleton<ShopManager>
         weightPassiveValue[0] = 200 - (gameManager.round - 1) * 6;
         weightPassiveValue[1] = 10 * gameManager.round;
         weightPassiveValue[2] = (gameManager.round - 1) * (gameManager.round) * 0.1f * (1 + Mathf.Clamp(gameManager.luck, 0, 100) * 0.01f);
-        weightPassiveValue[3] = (gameManager.round - 1) * (gameManager.round) * 0.02f * (1 + Mathf.Clamp(gameManager.luck, 0, 100) * 0.01f);
+        weightPassiveValue[3] = (gameManager.round - 1) * (gameManager.round) * 0.02f * (1 + Mathf.Clamp(gameManager.luck, 0, 100) * 0.01f) * 10f;
 
         PassiveCardUI passiveCard = passiveCardUI.GetComponent<PassiveCardUI>();
 

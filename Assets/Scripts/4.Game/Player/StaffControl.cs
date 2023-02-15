@@ -355,7 +355,7 @@ public class StaffControl : Weapon
                         monster.OnDamaged(damage.realDamage);
 
                         if (gameManager.absorbHp > 0 && !damage.isMiss && monsterCount == 0)
-                            character.currentHp += Mathf.Clamp(gameManager.absorbHp, 0f, 1f);
+                            character.currentHp += Mathf.Clamp(gameManager.absorbHp, 0f, gameManager.maxAbs);
 
                         monsterCount++;
 
@@ -392,7 +392,7 @@ public class StaffControl : Weapon
                                 monster.OnDamaged(damage.realDamage);
 
                                 if (gameManager.absorbHp > 0 && !damage.isMiss && monsterCount == 0)
-                                    character.currentHp += Mathf.Clamp(gameManager.absorbHp, 0f, 1f);
+                                    character.currentHp += Mathf.Clamp(gameManager.absorbHp, 0f, gameManager.maxAbs);
 
                                 monsterCount++;
 
@@ -430,7 +430,7 @@ public class StaffControl : Weapon
                                 monster.OnDamaged(damage.realDamage);
 
                                 if (gameManager.absorbHp > 0 && !damage.isMiss && monsterCount == 0)
-                                    character.currentHp += Mathf.Clamp(gameManager.absorbHp, 0f, 1f);
+                                    character.currentHp += Mathf.Clamp(gameManager.absorbHp, 0f, gameManager.maxAbs);
 
                                 monsterCount++;
 

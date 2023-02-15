@@ -41,24 +41,25 @@ public class Coin : Singleton<Coin>
                 MoveCoin();
         }
 
+        else if(gameManager.currentScene == "Shop")
+        {
+            DestroyPool();
+        }
     }
 
     public void EndGameCoinMove()
     {
-        if (GameSceneUI.Instance.gameObject != null)
+        coll.enabled = false;
+        Vector3 endPos = character.transform.position;
+        endPos.y = 0;
+
+        transform.position = Vector3.MoveTowards(transform.position, endPos, 30f * Time.deltaTime);
+
+        if (transform.position == endPos)
         {
-            coll.enabled = false;
-            Vector3 endPos = GameSceneUI.Instance.coinTextPos.position;
-            endPos.y = 0;
-
-            transform.position = Vector3.MoveTowards(transform.position, endPos, 40f * Time.deltaTime);
-
-            if (transform.position == endPos)
-            {
-                SoundManager.Instance.PlayES("Coin");
-                gameManager.money += 1;
-                DestroyPool();
-            }
+            SoundManager.Instance.PlayES("Coin");
+            gameManager.money += 1;
+            DestroyPool();
         }
     }
 

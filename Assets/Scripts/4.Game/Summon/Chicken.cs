@@ -36,6 +36,7 @@ public class Chicken : Summons
         {
             if (other.CompareTag("Monster"))
             {
+                SoundManager.Instance.PlayES("Chicken");
                 isAttack = true;
                 Vector3 dir = other.gameObject.transform.position - transform.position;
                 Vector3 firePos = bulletTransform.localPosition;

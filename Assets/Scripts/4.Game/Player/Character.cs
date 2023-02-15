@@ -64,7 +64,7 @@ public class Character : Singleton<Character>
 
     GameManager gameManager;
 
-    Vector3 dir;
+    public Vector3 dir;
     public Vector3 charDir => dir;
     [HideInInspector] public float x;
     [HideInInspector] public float z;
@@ -339,10 +339,14 @@ public class Character : Singleton<Character>
         Destroy(weaponPoses[num].GetChild(0).gameObject);
     }
 
+    bool isDownUp = false;
+    bool isLeftRight = false;
+
     void Move()
     {
         bool xInput = (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Left"))) || (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Right")));
         bool zInput = (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Up"))) || (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Down")));
+
 
         if (!xInput)
             x = 0;
@@ -353,19 +357,46 @@ public class Character : Singleton<Character>
         if (zInput)
         {
             if (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Up")))
+            {
                 z = 1;
 
+                if (!isDownUp && Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Down")))
+                    z = -1;
+            }
+
             else if (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Down")))
+            {
                 z = -1;
+                isDownUp = true;
+            }
+
+            if (Input.GetKeyUp((KeyCode)PlayerPrefs.GetInt("Key_Down")))
+                isDownUp = false;
         }
 
         if (xInput)
         {
             if (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Left")))
+            {
                 x = -1;
+                rend.flipX = true;
+
+                if (!isLeftRight && Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Right")))
+                {
+                    x = 1;
+                    rend.flipX = false;
+                }
+            }
 
             else if (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Right")))
+            {
                 x = 1;
+                rend.flipX = false;
+                isLeftRight = true;
+            }
+
+            if (Input.GetKeyUp((KeyCode)PlayerPrefs.GetInt("Key_Right")))
+                isLeftRight = false;
         }
 
         if (!isBuff)
@@ -399,18 +430,7 @@ public class Character : Singleton<Character>
         transform.position = ground.bounds.ClosestPoint(transform.position);
 
         if (dir != Vector3.zero)
-        {
             isRun = true;
-            if (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Left")))
-            {
-                rend.flipX = true;
-            }
-
-            else if (Input.GetKey((KeyCode)PlayerPrefs.GetInt("Key_Right")))
-            {
-                rend.flipX = false;
-            }
-        }
 
         else if (dir == Vector3.zero)
             isRun = false;
@@ -438,7 +458,7 @@ public class Character : Singleton<Character>
                     if (shield > 0)
                     {
                         currentHp -= (Mathf.Round(((damage - shield) * ((100 - gameManager.defence) / 100)) * 10) * 0.1f);
-                        shield = Mathf.Clamp(shield - damage, 0, shield - damage);
+                        shield = Mathf.Clamp(shield - damage, 0f, 10f);
                     }
 
                     else if (shield <= 0)
@@ -505,6 +525,7 @@ public class Character : Singleton<Character>
 
         if(currentHp > 0 && isAvoid)
         {
+            SoundManager.Instance.PlayES("Avoid");
             if (currentCoroutine != null)
                 StopCoroutine(currentCoroutine);
 

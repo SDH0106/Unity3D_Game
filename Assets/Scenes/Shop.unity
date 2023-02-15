@@ -8424,7 +8424,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f613043eec8d9434d9b90bf93acda4c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cursorNormal: {fileID: 2800000, guid: 7bcdc14cd46afc14182f93427b10cc84, type: 3}
   tutoPanel: {fileID: 2129600467}
   round: {fileID: 705943162}
   money: {fileID: 1404256251}

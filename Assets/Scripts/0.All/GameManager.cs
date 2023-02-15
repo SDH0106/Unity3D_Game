@@ -66,6 +66,7 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector] public bool onePenetrate;
     [HideInInspector] public bool lowPenetrate;
     [HideInInspector] public bool penetrate;
+    [HideInInspector] public bool vamAbsorb;
     #endregion
 
     [HideInInspector] public float currentGameTime;
@@ -90,6 +91,8 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector] public Texture2D useCursorAttack;
 
     [HideInInspector] public int cursorSize;
+
+    [HideInInspector] public float maxAbs;
 
     protected override void Awake()
     {
@@ -213,7 +216,7 @@ public class GameManager : Singleton<GameManager>
         passiveFloatVariables[5] = summonPDmg;
         passiveFloatVariables[6] = monsterDef;
 
-        passiveBoolVariables = new bool[17];
+        passiveBoolVariables = new bool[18];
 
         passiveBoolVariables[0] = luckCoin;
         passiveBoolVariables[1] = luckDamage;
@@ -232,6 +235,7 @@ public class GameManager : Singleton<GameManager>
         passiveBoolVariables[14] = onePenetrate;
         passiveBoolVariables[15] = lowPenetrate;
         passiveBoolVariables[16] = penetrate;
+        passiveBoolVariables[17] = vamAbsorb;
     }
 
     void StatArray()
@@ -293,6 +297,7 @@ public class GameManager : Singleton<GameManager>
         onePenetrate = passiveBoolVariables[14];
         lowPenetrate = passiveBoolVariables[15];
         penetrate = passiveBoolVariables[16];
+        vamAbsorb = passiveBoolVariables[17];
     }
 
     private void Update()
@@ -314,6 +319,12 @@ public class GameManager : Singleton<GameManager>
             
             OnGameScene();
         }
+
+        if (vamAbsorb)
+            maxAbs = 2f;
+
+        else if(!vamAbsorb)
+            maxAbs = 1f;
     }
 
     void OnGameScene()

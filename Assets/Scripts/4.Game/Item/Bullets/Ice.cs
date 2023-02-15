@@ -65,7 +65,7 @@ public class Ice : Bullet
 
             if (gameManager.absorbHp > 0 && !damage.isMiss && !isAbsorb)
             {
-                Character.Instance.currentHp += Mathf.Clamp(gameManager.absorbHp, 0f, 1f);
+                Character.Instance.currentHp += Mathf.Clamp(gameManager.absorbHp, 0f, gameManager.maxAbs);
                 isAbsorb = true;
             }
 

@@ -82,7 +82,7 @@ public class CardClick : MonoBehaviour
     {
         rect = GetComponent<RectTransform>();
         RectTransformUtility.ScreenPointToWorldPointInRectangle(rect, Input.mousePosition, Camera.main, out showPos);
-        transform.position = showPos;
+        rect.transform.position = showPos;
     }
 
     public void Setting(int num)

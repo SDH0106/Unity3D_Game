@@ -98,8 +98,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.15, y: 0.18, z: 0}
-  m_Center: {x: 0.125, y: 0, z: 0}
+  m_Size: {x: 1, y: 0.4, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &4143293133346660603
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -130,4 +130,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 8
   effectPrefab: {fileID: 8410533705926354888, guid: 5e46bb42b8d131540a84d834907b3bd5, type: 3}
+  dir: {x: 0, y: 0, z: 0}
+  bulletDamage: 0
   damageUI: {fileID: 0}
+  initPos: {x: 0, y: 0, z: 0}
+  criRand: 0

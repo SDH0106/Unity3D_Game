@@ -154,7 +154,7 @@ MonoBehaviour:
   bulletTransform: {fileID: 9213996098930630869}
   speed: 3
   moveRange: 3
-  attackDelay: 3
+  attackDelay: 2
 --- !u!1 &6621380418065264301
 GameObject:
   m_ObjectHideFlags: 0

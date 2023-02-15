@@ -1,5 +1,4 @@
-﻿using System.Security.Cryptography;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Pool;
 
 public class Bullet : MonoBehaviour
@@ -112,7 +111,7 @@ public class Bullet : MonoBehaviour
             
             if (gameManager.absorbHp > 0 && !damage.isMiss && !isAbsorb)
             {
-                Character.Instance.currentHp += Mathf.Clamp(gameManager.absorbHp, 0f, 1f);
+                Character.Instance.currentHp += Mathf.Clamp(gameManager.absorbHp, 0f, gameManager.maxAbs);
                 isAbsorb = true;
             }
 

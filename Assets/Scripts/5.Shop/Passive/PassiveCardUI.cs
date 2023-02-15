@@ -191,7 +191,7 @@ public class PassiveCardUI : MonoBehaviour
         passiveFloatVariables[5] = selectedPassive.SummonPDmg;
         passiveFloatVariables[6] = selectedPassive.MonsterDef;
 
-        passiveBoolVariables = new bool[17];
+        passiveBoolVariables = new bool[18];
         passiveBoolVariables[0] = selectedPassive.LuckCoin;
         passiveBoolVariables[1] = selectedPassive.LuckDamage;
         passiveBoolVariables[2] = selectedPassive.LuckCritical;
@@ -209,6 +209,7 @@ public class PassiveCardUI : MonoBehaviour
         passiveBoolVariables[14] = selectedPassive.OnePenetrate;
         passiveBoolVariables[15] = selectedPassive.LowPenetrate;
         passiveBoolVariables[16] = selectedPassive.Penetrate;
+        passiveBoolVariables[17] = selectedPassive.Vamabsorb;
     }
 
     protected void DescriptionInfo()
@@ -259,7 +260,6 @@ public class PassiveCardUI : MonoBehaviour
             SoundManager.Instance.PlayES("SelectButton");
             itemManager.GetPassiveInfo(selectedPassive);
             itemManager.passiveCounts[arrayCount]--;
-            Destroy(gameObject);
 
             isLock = false;
             itemManager.cardLocks[num] = isLock;
@@ -345,6 +345,8 @@ public class PassiveCardUI : MonoBehaviour
                     }
                 }
             }
+
+            Destroy(gameObject);
         }
 
         else

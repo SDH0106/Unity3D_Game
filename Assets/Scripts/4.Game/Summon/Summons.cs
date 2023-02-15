@@ -88,6 +88,7 @@ public class Summons : MonoBehaviour
         {
             if (other.CompareTag("Monster"))
             {
+                SoundManager.Instance.PlayES("Chick");
                 isAttack = true;
                 Vector3 dir = other.gameObject.transform.position - transform.position;
                 Vector3 firePos = bulletTransform.localPosition;

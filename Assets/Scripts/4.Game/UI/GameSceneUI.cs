@@ -27,7 +27,6 @@ public class GameSceneUI : Singleton<GameSceneUI>
 
     [Header("COIN")]
     [SerializeField] Text coinText;
-    [SerializeField] public Transform coinTextPos;
 
     [Header("Wood")]
     [SerializeField] Text woodCount;
@@ -215,7 +214,7 @@ public class GameSceneUI : Singleton<GameSceneUI>
         float groundX = ground.bounds.size.x;
         float groundZ = ground.bounds.size.z;
         groundX = UnityEngine.Random.Range((groundX / 2f) * -1f + ground.bounds.center.x, (groundX / 2f) + ground.bounds.center.x);
-        groundZ = UnityEngine.Random.Range((groundX / 2f) * -1f + ground.bounds.center.z, (groundX / 2f) + ground.bounds.center.z);
+        groundZ = UnityEngine.Random.Range((groundZ / 2f) * -1f + ground.bounds.center.z, (groundZ / 2f) + ground.bounds.center.z);
 
         if(Mathf.Abs(groundX) < 2f)
         {

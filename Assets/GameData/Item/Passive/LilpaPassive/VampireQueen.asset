@@ -21,9 +21,9 @@ MonoBehaviour:
   recoverHp: 0
   absorbHp: 4.4
   defence: -8
-  physicDamage: 4
+  physicDamage: 0
   magicDamage: 0
-  shortDamage: 4
+  shortDamage: 2
   longDamage: 0
   attackSpeed: 0
   speed: 0
@@ -60,5 +60,7 @@ MonoBehaviour:
   onePenetrate: 0
   lowPenetrate: 0
   penetrate: 0
-  description: 
+  vamAbsorb: 1
+  description: "\uCE90\uB9AD \uCCB4\uB825 \uD761\uC218\uC758 \uCD5C\uB300 \uC81C\uD55C\uC774
+    2\uB85C \uBC14\uB01D\uB2C8\uB2E4."
   weight: 10.12

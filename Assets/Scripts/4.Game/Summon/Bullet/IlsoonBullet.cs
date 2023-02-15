@@ -10,7 +10,7 @@ public class IlsoonBullet : SummonsBullet
     {
         gameManager = GameManager.Instance;
         if (gameManager.longDamage > 0)
-            damage = Mathf.Round(gameManager.longDamage * 5 * (1 + gameManager.summonPDmg) * 10) * 0.1f;
+            damage = Mathf.Round(gameManager.longDamage * 10f * (1f + gameManager.summonPDmg) * 10f) * 0.1f;
         else
             damage = 0;
     }
@@ -30,7 +30,7 @@ public class IlsoonBullet : SummonsBullet
             gameManager = GameManager.Instance;
 
             if (gameManager.longDamage > 0)
-                damage = Mathf.Round(gameManager.longDamage * 5 * (1 + gameManager.summonPDmg) * 10) * 0.1f;
+                damage = Mathf.Round(gameManager.longDamage * 10f * (1f + gameManager.summonPDmg) * 10f) * 0.1f;
             else
                 damage = 0;
 

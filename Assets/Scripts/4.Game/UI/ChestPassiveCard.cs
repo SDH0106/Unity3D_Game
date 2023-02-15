@@ -153,7 +153,7 @@ public class ChestPassiveCard : MonoBehaviour
         passiveFloatVariables[5] = selectedPassive.SummonPDmg;
         passiveFloatVariables[6] = selectedPassive.MonsterDef;
 
-        passiveBoolVariables = new bool[17];
+        passiveBoolVariables = new bool[18];
         passiveBoolVariables[0] = selectedPassive.LuckCoin;
         passiveBoolVariables[1] = selectedPassive.LuckDamage;
         passiveBoolVariables[2] = selectedPassive.LuckCritical;
@@ -171,6 +171,7 @@ public class ChestPassiveCard : MonoBehaviour
         passiveBoolVariables[14] = selectedPassive.OnePenetrate;
         passiveBoolVariables[15] = selectedPassive.LowPenetrate;
         passiveBoolVariables[16] = selectedPassive.Penetrate;
+        passiveBoolVariables[17] = selectedPassive.Vamabsorb;
     }
 
     void DescriptionInfo()
@@ -215,7 +216,6 @@ public class ChestPassiveCard : MonoBehaviour
         {
             itemManager.GetPassiveInfo(selectedPassive);
             itemManager.passiveCounts[arrayCount]--;
-            Destroy(gameObject);
 
             for (int i = 0; i < stats.Length; i++)
             {
@@ -303,6 +303,8 @@ public class ChestPassiveCard : MonoBehaviour
 
         if (GameSceneUI.Instance.chestCount > 0)
             ShowPassive.Instance.ShowRandomPassiveCard();
+
+        Destroy(gameObject);
     }
 
     void Ddilpa()

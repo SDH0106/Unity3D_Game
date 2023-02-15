@@ -60,6 +60,7 @@ public class PassiveInfo : ScriptableObject
     [SerializeField] bool onePenetrate;
     [SerializeField] bool lowPenetrate;
     [SerializeField] bool penetrate;
+    [SerializeField] bool vamAbsorb;
     [TextArea]
     [SerializeField] string description;
 
@@ -111,6 +112,7 @@ public class PassiveInfo : ScriptableObject
     public bool OnePenetrate => onePenetrate;
     public bool LowPenetrate => lowPenetrate;
     public bool Penetrate => penetrate;
+    public bool Vamabsorb => vamAbsorb;
     public string Description => description;
     public float PercentDamage => percentDamage;
     public float Avoid => avoid;

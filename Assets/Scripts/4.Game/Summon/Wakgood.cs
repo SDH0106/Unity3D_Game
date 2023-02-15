@@ -9,7 +9,7 @@ public class Wakgood : Summons
 
     float damage;
 
-    Collider monster;
+    Monster monster;
 
     protected IObjectPool<DamageUI> pool;
 
@@ -24,7 +24,7 @@ public class Wakgood : Summons
     {
         InitSetting();
         if (gameManager.shortDamage > 0)
-            damage = Mathf.Round(gameManager.shortDamage * 5 * (1 + gameManager.summonPDmg) * 10) * 0.1f;
+            damage = Mathf.Round(gameManager.shortDamage * 7f * (1f + gameManager.summonPDmg) * 10f) * 0.1f;
 
         else
             damage = 0;
@@ -52,7 +52,9 @@ public class Wakgood : Summons
         {
             if (other.CompareTag("Monster"))
             {
-                monster = other;
+                SoundManager.Instance.PlayES("Wakgood");
+                if (other.GetComponent<Monster>() != null)
+                    monster = other.GetComponent<Monster>();
                 isAttack = true;
                 Vector3 dir = other.gameObject.transform.position - transform.position;
 
@@ -75,7 +77,7 @@ public class Wakgood : Summons
         base.EndAttack();
 
         if (gameManager.shortDamage > 0)
-            damage = Mathf.Round(gameManager.shortDamage * 5 * (1 + gameManager.summonPDmg) * 10) * 0.1f;
+            damage = Mathf.Round(gameManager.shortDamage * 7f * (1f + gameManager.summonPDmg) * 10f) * 0.1f;
 
         else
             damage = 0;
@@ -91,7 +93,8 @@ public class Wakgood : Summons
         damageUI.transform.position = transform.position;
         damageUI.gameObject.transform.SetParent(gameManager.damageStorage);
 
-        monster.GetComponent<Monster>().PureOnDamaged(damage);
+        if (monster != null)
+            monster.PureOnDamaged(damage);
     }
 
     private DamageUI CreateDamageUI()
