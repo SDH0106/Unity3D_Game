@@ -27,7 +27,7 @@ MonoBehaviour:
   longDamage: 0
   attackSpeed: 0
   speed: 0
-  range: -1
+  range: 0
   luck: 0
   critical: 0
   percentDamage: 0
@@ -60,7 +60,8 @@ MonoBehaviour:
   onePenetrate: 0
   lowPenetrate: 0
   penetrate: 0
+  vamAbsorb: 0
   description: "\uD22C\uC0AC\uCCB4\uAC00 \uBAAC\uC2A4\uD130\uC5D0\uAC8C \uBD80\uB51B\uD788\uBA74\n\uC0AC\uB77C\uC9C0\uC9C0
     \uC54A\uACE0 <color=lime>\uD295\uACA8 \uB098\uAC11\uB2C8\uB2E4</color>.\n(\uAD00\uD1B5
     \uC544\uC774\uD15C\uC758 \uC0AC\uC6A9\uC774 \uBD88\uAC00\uB2A5\uD574\uC9D1\uB2C8\uB2E4.)"
-  weight: 812000
+  weight: 151.2

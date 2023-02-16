@@ -216,14 +216,14 @@ public class GameSceneUI : Singleton<GameSceneUI>
         groundX = UnityEngine.Random.Range((groundX / 2f) * -1f + ground.bounds.center.x, (groundX / 2f) + ground.bounds.center.x);
         groundZ = UnityEngine.Random.Range((groundZ / 2f) * -1f + ground.bounds.center.z, (groundZ / 2f) + ground.bounds.center.z);
 
-        if(Mathf.Abs(groundX) < 2f)
+        if(Mathf.Abs(groundX) < 3f)
         {
-            groundX = groundX < 0f ? groundX - 2f : groundX + 2f;
+            groundX = groundX < 0f ? groundX - 3f : groundX + 3f;
         }
 
-        if (Mathf.Abs(groundZ) < 2f)
+        if (Mathf.Abs(groundZ) < 3f)
         {
-            groundZ = groundZ < 0f ? groundZ - 2f : groundZ + 2f;
+            groundZ = groundZ < 0f ? groundZ - 3f : groundZ + 3f;
         }
 
         return new Vector3(groundX, 0, groundZ);

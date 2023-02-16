@@ -19,7 +19,7 @@ public class Ice : Bullet
             DestroyBullet();
         }
 
-        transform.position += new Vector3(dir.x, 0, dir.z) * speed * Time.deltaTime;
+        transform.position += dir * speed * Time.deltaTime;
 
         // ÃÑ¾Ë °¢µµ
         angle = Mathf.Atan2(dir.z, dir.x) * Mathf.Rad2Deg;
@@ -79,9 +79,9 @@ public class Ice : Bullet
 
     void Freeze()
     {
-        int rand = Random.Range(0, 100);
+        float rand = Random.Range(0f, 100f);
 
-        if (rand <= 5 + Mathf.Clamp(gameManager.luck, 0, 100) * 0.2)
+        if (rand <= 5f + Mathf.Clamp(gameManager.luck, 0f, 100f) * 0.2f)
             isFreeze = true;
 
         else

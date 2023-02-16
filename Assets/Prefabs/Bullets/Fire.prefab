@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 8154831264171076226}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_LocalScale: {x: 6, y: 6, z: 6}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -100,7 +100,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.1, y: 0.07, z: 0}
-  m_Center: {x: -0.03, y: 0.005, z: 0}
+  m_Center: {x: 0.03, y: 0.005, z: 0}
 --- !u!95 &8154831264171076231
 Animator:
   serializedVersion: 4
@@ -135,7 +135,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   effectPrefab: {fileID: 1712867322754860876, guid: 57e9917c903ac404e8ee0253dfa7ccf7, type: 3}
+  dir: {x: 0, y: 0, z: 0}
+  bulletDamage: 0
   damageUI: {fileID: 0}
+  initPos: {x: 0, y: 0, z: 0}
   explosion: {fileID: 4783517211068358492, guid: 89e5eb48793f949419a92bcf3be36b34, type: 3}
   grade: 0
 --- !u!54 &8135681907494017946
@@ -153,4 +156,4 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 116
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0

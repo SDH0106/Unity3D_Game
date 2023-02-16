@@ -25,10 +25,10 @@ public class ShowPassive : Singleton<ShowPassive>
     {
         float totalWeight = 0;
 
-        weightPassiveValue[0] = 200 - (gameManager.round - 1) * 6;
-        weightPassiveValue[1] = 10 * gameManager.round;
-        weightPassiveValue[2] = (gameManager.round - 1) * (gameManager.round) * 0.2f * (1 + Mathf.Clamp(gameManager.luck, 0, 100) * 0.01f);
-        weightPassiveValue[3] = (gameManager.round - 1) * (gameManager.round) * 0.04f * (1 + Mathf.Clamp(gameManager.luck, 0, 100) * 0.01f);
+        weightPassiveValue[0] = 200f - (gameManager.round - 1f) * 6f;
+        weightPassiveValue[1] = 10f * gameManager.round;
+        weightPassiveValue[2] = (gameManager.round - 1f) * (gameManager.round) * 0.2f * (1f + Mathf.Clamp(gameManager.luck, 0f, 100f) * 0.01f);
+        weightPassiveValue[3] = (gameManager.round - 1f) * (gameManager.round) * 0.04f * (1f + Mathf.Clamp(gameManager.luck, 0f, 100f) * 0.01f);
 
         ChestPassiveCard passiveCard = passiveCardUI.GetComponent<ChestPassiveCard>();
 

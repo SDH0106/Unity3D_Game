@@ -65,7 +65,7 @@ public class TreePotion : MonoBehaviour
         float distance = Vector3.Distance(characterPos.position, transform.position);
 
         if (distance <= 1.5f)
-            speed = 2f;
+            speed = character.speed + 1f;
 
         else
             speed = 0f;

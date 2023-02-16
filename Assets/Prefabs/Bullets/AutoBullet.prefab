@@ -30,8 +30,8 @@ Transform:
   m_GameObject: {fileID: 8154831264171076226}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -115,8 +115,8 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
-  m_CollisionDetection: 1
+  m_Constraints: 116
+  m_CollisionDetection: 0
 --- !u!95 &8154831264171076231
 Animator:
   serializedVersion: 4
@@ -151,4 +151,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 8
   effectPrefab: {fileID: 8410533705926354888, guid: 5e46bb42b8d131540a84d834907b3bd5, type: 3}
+  dir: {x: 0, y: 0, z: 0}
+  bulletDamage: 0
   damageUI: {fileID: 0}
+  initPos: {x: 0, y: 0, z: 0}
+  monsterLayer:
+    serializedVersion: 2
+    m_Bits: 128

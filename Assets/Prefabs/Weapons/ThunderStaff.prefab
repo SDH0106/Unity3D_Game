@@ -172,7 +172,7 @@ MonoBehaviour:
   normalFirePos: {fileID: 5760361066306355968}
   doubleFirePos1: {fileID: 5760361066306355968}
   doubleFirePos2: {fileID: 5760361066306355968}
-  poolCount: 10
+  poolCount: 20
   monsterLayer:
     serializedVersion: 2
     m_Bits: 128

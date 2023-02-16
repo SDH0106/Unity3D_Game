@@ -3,7 +3,7 @@ using UnityEngine.Pool;
 
 public class Bullet : MonoBehaviour
 {
-    public float speed;
+    [HideInInspector] public float speed;
     public GameObject effectPrefab;
 
     protected IObjectPool<Bullet> managedPool;
@@ -18,7 +18,7 @@ public class Bullet : MonoBehaviour
 
     protected GameManager gameManager;
 
-    int penetrateNum;
+    protected int penetrateNum;
 
     protected bool isDestroyed = false;
 
@@ -37,8 +37,8 @@ public class Bullet : MonoBehaviour
     {
         gameManager = GameManager.Instance;
         isAbsorb = false;
-
     }
+
     private void Update()
     {
         if(Vector3.Distance(transform.position, initPos) > range)
@@ -46,7 +46,7 @@ public class Bullet : MonoBehaviour
             DestroyBullet();
         }
 
-        transform.position += new Vector3(dir.x, 0, dir.z) * speed * Time.deltaTime;
+        transform.position += dir * speed * Time.deltaTime;
 
         // 총알 각도
         angle = Mathf.Atan2(dir.z, dir.x) * Mathf.Rad2Deg;
@@ -59,6 +59,7 @@ public class Bullet : MonoBehaviour
 
         isDestroyed = false;
 
+        dir.y = 0;
         this.dir = dir;
         this.initPos = initPos;
         this.range = range + gameManager.range;
@@ -87,15 +88,6 @@ public class Bullet : MonoBehaviour
 
             else if (gameManager.lowPenetrate)
                 LowPenetrate(damage);
-
-            /* if (damage.weaponDamage > monster.defence)
-             {
-                 damage.isMiss = false;
-             }
-             else if (damage.weaponDamage <= monster.defence)
-             {
-                 damage.isMiss = true;
-             }*/
 
             if (damage.weaponDamage > 0)
                 damage.isMiss = false;
@@ -133,6 +125,7 @@ public class Bullet : MonoBehaviour
         Vector3 normalVector = collision.contacts[0].normal;
         normalVector = new Vector3(normalVector.x, 0, normalVector.y);
         dir = Vector3.Reflect(dir, normalVector).normalized;
+        dir.y = 0;
     }
 
     public virtual void OnePenetrate()
@@ -152,15 +145,12 @@ public class Bullet : MonoBehaviour
 
     public virtual void LowPenetrate(DamageUI damage)
     {
-        if (penetrateNum <= 0)
+        if (penetrateNum > 0)
         {
-            penetrateNum++;
+            damage.weaponDamage = damage.weaponDamage * Mathf.Clamp(0.5f - ((penetrateNum - 1) / 10f), 0.1f, 0.5f);
         }
 
-        else if (penetrateNum > 0)
-        {
-            damage.weaponDamage = damage.weaponDamage/ 2;
-        }
+        penetrateNum++;
     }
 
     public void SetManagedPool(IObjectPool<Bullet> pool)

@@ -26,7 +26,7 @@ public class Chick : Summons
 
     private void Update()
     {
-        if (gameManager.round - summonRound == 15)
+        if (gameManager.round - summonRound == 10)
         {
 
             GameObject summon = Instantiate(chickenPrefab);

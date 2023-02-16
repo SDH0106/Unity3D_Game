@@ -30,6 +30,8 @@ public class HugBat : Monster
 
     private void Update()
     {
+        rigid.velocity = Vector3.zero;
+
         freezeEffect.SetActive(isFreeze);
 
         if (isDead == false)

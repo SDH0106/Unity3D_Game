@@ -25,6 +25,7 @@ public class Lazor : Bullet
 
     public override void Shoot(Vector3 dir, Vector3 initPos, float range)
     {
+        dir.y = 0;
         this.dir = dir;
         gameManager = GameManager.Instance;
 

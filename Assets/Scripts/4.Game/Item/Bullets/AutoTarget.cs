@@ -1,18 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Pool;
 using UnityEngine.Rendering.UI;
+using UnityEngine.TextCore.Text;
 
 public class AutoTarget : Bullet
 {
-    Transform target;
+    [SerializeField] LayerMask monsterLayer;
+    Monster targetMonster;
+
     bool isFind;
+
+    Monster beforeTarget;
+
+    float moveDistance = 0;
+    float afterRange;
 
     private void Start()
     {
         gameManager = GameManager.Instance;
+        afterRange = range;
         isFind = false;
         isAbsorb = false;
     }
@@ -20,9 +30,9 @@ public class AutoTarget : Bullet
     void Update()
     {
         FindTarget();
-        transform.position += new Vector3(dir.x, 0, dir.z) * speed * Time.deltaTime;
+        transform.position += dir * speed * Time.deltaTime;
 
-        if (Vector3.Distance(transform.position, initPos) > range)
+        if (Vector3.Distance(transform.position, initPos) > afterRange)
         {
             DestroyBullet();
         }
@@ -34,44 +44,56 @@ public class AutoTarget : Bullet
 
     void FindTarget()
     {
-        if (target != null && target.GetComponent<Monster>().hp <= 0)
+        if (targetMonster != null && targetMonster.GetComponent<Monster>().hp <= 0)
         {
-            target = null;
+            targetMonster = null;
             isFind = false;
         }
 
-        Collider[] colliders = Physics.OverlapSphere(transform.position, 2f);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 1.5f, monsterLayer);
         float[] distances = new float[colliders.Length];
 
         if (colliders.Length > 0 && !isFind)
         {
-            for (int i = 0; i < colliders.Length; i++)
+            var find = from target in colliders
+                       where target.gameObject.CompareTag("Monster") && target.GetComponent<Monster>() != null
+                       orderby Vector3.Distance(transform.position, target.transform.position)
+                       select target.gameObject;
+
+            if (find.Count() > 0)
             {
-                if (colliders[i].tag == "Monster")
+                foreach (var target in find)
                 {
-                    if (colliders[i].GetComponent<Monster>().hp > 0)
+                    Monster monster = target.GetComponent<Monster>();
+
+                    if (beforeTarget != null)
                     {
-                        distances[i] = Vector3.Magnitude(colliders[i].transform.position - transform.position);
-                        if (i == 0)
-                            target = colliders[i].transform;
-
-                        else if (i > 0)
+                        if (monster != beforeTarget)
                         {
-                            if (distances[i] > distances[i - 1])
-                                target = colliders[i].transform;
+                            targetMonster = monster;
+                            moveDistance = Vector3.Distance(targetMonster.transform.position, beforeTarget.transform.position);
+                            afterRange = afterRange - moveDistance;
+                            beforeTarget = targetMonster;
 
-                            else if (distances[i] <= distances[i - 1])
-                                target = colliders[i].transform;
+                            break;
                         }
+                    }
+
+                    if (beforeTarget == null)
+                    {
+                        targetMonster = monster;
+                        beforeTarget = targetMonster;
                     }
                 }
             }
 
-            if (target != null && target.GetComponent<Monster>().hp > 0)
+
+            if (targetMonster != null && targetMonster.hp > 0)
             {
                 if (!isFind)
                 {
-                    dir = (target.transform.position - transform.position).normalized;
+                    dir = (targetMonster.gameObject.transform.position - transform.position).normalized;
+                    dir.y = 0;
                     isFind = true;
                 }
             }
@@ -81,14 +103,30 @@ public class AutoTarget : Bullet
     public override void Reflect(Collision collision)
     {
         base.Reflect(collision);
-        target = null;
+        targetMonster = null;
+        isFind = false;
+    }
+
+    public override void OnePenetrate()
+    {
+        base.OnePenetrate();
+        targetMonster = null;
+        isFind = false;
+    }
+
+    public override void LowPenetrate(DamageUI damage)
+    {
+        base.LowPenetrate(damage);
+        targetMonster = null;
         isFind = false;
     }
 
     public override void DestroyBullet()
     {
-        base.DestroyBullet();
-        target = null;
+        targetMonster = null;
+        beforeTarget = null;
         isFind = false;
+        afterRange = range;
+        base.DestroyBullet();
     }
 }

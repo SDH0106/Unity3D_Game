@@ -12,6 +12,7 @@ TagManager:
   - Character
   - Tree
   - Thunder
+  - CamBound
   layers:
   - Default
   - TransparentFX
@@ -24,8 +25,8 @@ TagManager:
   - Bullet
   - Coin
   - Ground
-  - 
-  - 
+  - MonsterOverlap
+  - CamBound
   - 
   - 
   - 

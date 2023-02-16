@@ -227,11 +227,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponInfo: {fileID: 11400000, guid: a7e88bf1966034444ac1b821061e8a2f, type: 2}
   damageUI: {fileID: 0}
-  damage: 0
+  weaponDamage: 0
+  swordBulletDamage: 0
   count: 0
   grade: 0
   bulletPrefab: {fileID: 8154831264171076226, guid: b2c98c5989d2dd845bdc90e4ccd45070, type: 3}
   normalFirePos: {fileID: 95083074413199260}
   doubleFirePos1: {fileID: 1185596853712436993}
   doubleFirePos2: {fileID: 1403637071586184003}
-  poolCount: 10
+  poolCount: 20

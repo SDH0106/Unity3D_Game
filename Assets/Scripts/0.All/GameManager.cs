@@ -62,9 +62,9 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector] public bool subscriptionFee;
     [HideInInspector] public bool spawnTree;
     [HideInInspector] public bool dotgu;
-    [HideInInspector] public bool isReflect;
-    [HideInInspector] public bool onePenetrate;
-    [HideInInspector] public bool lowPenetrate;
+    /*[HideInInspector]*/ public bool isReflect;
+    /*[HideInInspector]*/ public bool onePenetrate;
+    /*[HideInInspector]*/ public bool lowPenetrate;
     [HideInInspector] public bool penetrate;
     [HideInInspector] public bool vamAbsorb;
     #endregion
@@ -108,7 +108,7 @@ public class GameManager : Singleton<GameManager>
 
         Vector2 cursorHotSpot = new Vector3(useCursorNormal.width * 0.5f, useCursorNormal.height * 0.5f);
         Cursor.SetCursor(useCursorNormal, cursorHotSpot, CursorMode.ForceSoftware);
-        /*PlayerPrefs.SetInt("GameTuto", 1);
+/*        PlayerPrefs.SetInt("GameTuto", 1);
         PlayerPrefs.SetInt("ShopTuto", 1);
         PlayerPrefs.SetInt("BossTuto", 1);*/
         //PlayerPrefs.SetInt("BagicClear", 1);
@@ -354,6 +354,7 @@ public class GameManager : Singleton<GameManager>
         SceneManager.LoadScene(currentScene);
 
         gameTime = Mathf.Clamp(initGameTime + (round - 1) * 3f, initGameTime, 60f);
+        //gameTime = Mathf.Clamp(initGameTime + (round - 1) * 3f, 0, 10000f);
         //gameTime = 0;
 
         currentGameTime = gameTime;

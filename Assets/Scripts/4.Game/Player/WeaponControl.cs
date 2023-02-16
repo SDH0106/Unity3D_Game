@@ -22,6 +22,10 @@ public class WeaponControl : Weapon
 
     bool canAttack;
 
+    Vector3 bulletPos;
+    Vector3 bulletPos1;
+    Vector3 bulletPos2;
+
     private void Awake()
     {
         pool = new ObjectPool<Bullet>(CreateBullet, OnGetBullet, OnReleaseBullet, OnDestroyBullet, maxSize: poolCount);
@@ -45,9 +49,10 @@ public class WeaponControl : Weapon
         if (gameManager.currentScene == "Game" && !gameManager.isPause)
         {
             mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            mouse.y = transform.position.y;
+            mouse.y = 0;
 
             dir = mouse - transform.position;
+            //dir.y = 0;
 
             LookMousePosition();
             FireBullet();
@@ -77,9 +82,10 @@ public class WeaponControl : Weapon
                 if (!gameManager.doubleShot)
                 {
                     Bullet bullet = pool.Get();
-                    bullet.transform.position = new Vector3(normalFirePos.position.x, 0f, normalFirePos.position.z);
+                    bulletPos = new Vector3(normalFirePos.position.x, 0f, normalFirePos.position.z);
+                    bullet.transform.position = bulletPos;
                     bullet.bulletDamage = weaponDamage;
-                    bullet.Shoot(dir.normalized,normalFirePos.position, weaponInfo.WeaponRange);
+                    bullet.Shoot(dir.normalized, bulletPos, weaponInfo.WeaponRange);
                     bullet.damageUI = damageUI;
                     bullet.speed = weaponInfo.BulletSpeed;
                 }
@@ -88,12 +94,14 @@ public class WeaponControl : Weapon
                 {
                     Bullet bullet1 = pool.Get();
                     Bullet bullet2 = pool.Get();
-                    bullet1.transform.position = new Vector3(doubleFirePos1.position.x, 0, doubleFirePos1.position.z);
-                    bullet2.transform.position = new Vector3(doubleFirePos2.position.x, 0, doubleFirePos2.position.z);
+                    bulletPos1 = new Vector3(doubleFirePos1.position.x, 0, doubleFirePos1.position.z);
+                    bulletPos2 = new Vector3(doubleFirePos2.position.x, 0, doubleFirePos2.position.z);
+                    bullet1.transform.position = bulletPos1;
+                    bullet2.transform.position = bulletPos2;
                     bullet1.bulletDamage = weaponDamage;
                     bullet2.bulletDamage = weaponDamage;
-                    bullet1.Shoot(dir.normalized,doubleFirePos1.position, weaponInfo.WeaponRange);
-                    bullet2.Shoot(dir.normalized,doubleFirePos2.position, weaponInfo.WeaponRange);
+                    bullet1.Shoot(dir.normalized, bulletPos1, weaponInfo.WeaponRange);
+                    bullet2.Shoot(dir.normalized, bulletPos2, weaponInfo.WeaponRange);
                     bullet1.damageUI = damageUI;
                     bullet2.damageUI = damageUI;
                     bullet1.speed = weaponInfo.BulletSpeed;
@@ -109,21 +117,21 @@ public class WeaponControl : Weapon
         {
             delay += Time.deltaTime;
 
-            if (gameManager.attackSpeed >= 0)
+            if (gameManager.attackSpeed >= 0f)
             {
-                if (delay >= (bulletDelay / (1 + gameManager.attackSpeed * 0.1)))
+                if (delay >= (bulletDelay / (1f + gameManager.attackSpeed * 0.1f)))
                 {
                     canAttack = true;
-                    delay = 0;
+                    delay = 0f;
                 }
             }
 
-            else if (gameManager.attackSpeed < 0)
+            else if (gameManager.attackSpeed < 0f)
             {
-                if (delay >= (bulletDelay - gameManager.attackSpeed * 0.1))
+                if (delay >= (bulletDelay - gameManager.attackSpeed * 0.1f))
                 {
                     canAttack = true;
-                    delay = 0;
+                    delay = 0f;
                 }
             }
         }

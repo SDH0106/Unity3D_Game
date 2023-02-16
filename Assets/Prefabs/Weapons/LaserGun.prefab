@@ -227,7 +227,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponInfo: {fileID: 11400000, guid: 3e8eb4cadad836446952f74df251533c, type: 2}
   damageUI: {fileID: 0}
-  damage: 0
+  weaponDamage: 0
   swordBulletDamage: 0
   count: 0
   grade: 0
@@ -235,4 +235,4 @@ MonoBehaviour:
   normalFirePos: {fileID: 4531590233068351126}
   doubleFirePos1: {fileID: 3211398108362573809}
   doubleFirePos2: {fileID: 4869847671253889933}
-  poolCount: 10
+  poolCount: 20

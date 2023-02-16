@@ -19,7 +19,7 @@ MonoBehaviour:
   weaponDamage: 6
   magicDamage: 0
   attackDelay: 1.2
-  bulletSpeed: 12
+  bulletSpeed: 20
   weaponRange: 8
   weaponPrice: 14
   description: "\uBAA8\uB4E0 \uBB34\uAE30\uC911 \uAC00\uC7A5 \uAE30\uBCF8\uC801\uC778

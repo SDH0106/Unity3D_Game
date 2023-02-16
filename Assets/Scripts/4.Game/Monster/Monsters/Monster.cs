@@ -5,6 +5,7 @@ using UnityEngine.Pool;
 public class Monster : MonoBehaviour
 {
     [SerializeField] protected GameObject freezeEffect;
+    [SerializeField] protected Rigidbody rigid;
     [HideInInspector] protected SpriteRenderer rend;
     [HideInInspector] protected Animator anim;
     [HideInInspector] protected Collider coll;
@@ -72,6 +73,8 @@ public class Monster : MonoBehaviour
     void Update()
     {
         freezeEffect.SetActive(isFreeze);
+
+        rigid.velocity = Vector3.zero;
 
         if (isDead == false)
         {

@@ -34,7 +34,7 @@ public class Fire : Bullet
             DestroyBullet();
         }
 
-        transform.position += new Vector3(dir.x, 0, dir.z) * speed * Time.deltaTime;
+        transform.position += dir * speed * Time.deltaTime;
 
         // ÃÑ¾Ë °¢µµ
         angle = Mathf.Atan2(dir.z, dir.x) * Mathf.Rad2Deg;
@@ -62,8 +62,8 @@ public class Fire : Bullet
 
     void Explosion()
     {
-        int rand = Random.Range(0, 100);
-        if (rand <= 10 + Mathf.Clamp(gameManager.luck, 0, 100) * 0.3f)
+        float rand = Random.Range(0f, 100f);
+        if (rand <= 10f + Mathf.Clamp(gameManager.luck, 0f, 100f) * 0.3f)
         {
             Explosion ex = exPool.Get();
             ex.grade = grade;

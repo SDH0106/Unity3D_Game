@@ -166,6 +166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   freezeEffect: {fileID: 9000185838234157632}
+  rigid: {fileID: 0}
   isWalk: 0
   isDead: 0
   isAttacked: 0

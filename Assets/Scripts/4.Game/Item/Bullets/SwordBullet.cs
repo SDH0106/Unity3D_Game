@@ -19,7 +19,7 @@ public class SwordBullet : Bullet
             DestroyBullet();
         }
 
-        transform.position += new Vector3(dir.x, 0, dir.z) * speed * Time.deltaTime;
+        transform.position += dir * speed * Time.deltaTime;
 
         // ÃÑ¾Ë °¢µµ
         angle = Mathf.Atan2(dir.z, dir.x) * Mathf.Rad2Deg;

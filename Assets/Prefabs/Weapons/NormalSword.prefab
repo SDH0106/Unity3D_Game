@@ -60,7 +60,7 @@ MonoBehaviour:
   firePos: {fileID: 2108970804477156405}
   doubleFirePos1: {fileID: 8125442358768616442}
   doubleFirePos2: {fileID: 7675320459507948328}
-  poolCount: 10
+  poolCount: 20
 --- !u!95 &2791904199997901973
 Animator:
   serializedVersion: 4

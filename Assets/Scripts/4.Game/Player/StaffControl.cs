@@ -43,6 +43,10 @@ public class StaffControl : Weapon
 
     Color initBulletColor;
 
+    Vector3 bulletPos;
+    Vector3 bulletPos1;
+    Vector3 bulletPos2;
+
     private void Awake()
     {
         pool = new ObjectPool<Bullet>(CreateBullet, OnGetBullet, OnReleaseBullet, OnDestroyBullet, maxSize: poolCount);
@@ -118,27 +122,30 @@ public class StaffControl : Weapon
                     if (!gameManager.doubleShot)
                     {
                         Bullet bullet = pool.Get();
-                        bullet.transform.position = normalFirePos.position;
+                        bulletPos = new Vector3(normalFirePos.position.x, 0, normalFirePos.position.z);
+                        bullet.transform.position = bulletPos;
                         bullet.bulletDamage = weaponDamage;
                         bullet.damageUI = damageUI;
                         bullet.speed = weaponInfo.BulletSpeed;
-                        bullet.Shoot(dir.normalized,normalFirePos.position, weaponInfo.WeaponRange);
+                        bullet.Shoot(dir.normalized, bulletPos, weaponInfo.WeaponRange);
                     }
 
                     else if (gameManager.doubleShot)
                     {
                         Bullet bullet1 = pool.Get();
                         Bullet bullet2 = pool.Get();
-                        bullet1.transform.position = doubleFirePos1.position;
-                        bullet2.transform.position = doubleFirePos2.position;
+                        bulletPos1 = new Vector3(doubleFirePos1.position.x, 0, doubleFirePos1.position.z);
+                        bulletPos2 = new Vector3(doubleFirePos2.position.x, 0, doubleFirePos2.position.z);
+                        bullet1.transform.position = bulletPos1;
+                        bullet2.transform.position = bulletPos2;
                         bullet1.bulletDamage = weaponDamage;
                         bullet2.bulletDamage = weaponDamage;
                         bullet1.damageUI = damageUI;
                         bullet2.damageUI = damageUI;
                         bullet1.speed = weaponInfo.BulletSpeed;
                         bullet2.speed = weaponInfo.BulletSpeed;
-                        bullet1.Shoot(dir.normalized,doubleFirePos1.position, weaponInfo.WeaponRange);
-                        bullet2.Shoot(dir.normalized,doubleFirePos2.position, weaponInfo.WeaponRange);
+                        bullet1.Shoot(dir.normalized, bulletPos1, weaponInfo.WeaponRange);
+                        bullet2.Shoot(dir.normalized, bulletPos2, weaponInfo.WeaponRange);
                     }
 
                     SoundManager.Instance.PlayES(weaponInfo.WeaponSound);
@@ -150,19 +157,19 @@ public class StaffControl : Weapon
             {
                 delay += Time.deltaTime;
 
-                if (gameManager.attackSpeed >= 0)
+                if (gameManager.attackSpeed >= 0f)
                 {
-                    if (delay >= (bulletDelay / (1 + gameManager.attackSpeed * 0.1)))
+                    if (delay >= (bulletDelay / (1f + gameManager.attackSpeed * 0.1f)))
                     {
                         canAttack = true;
-                        delay = 0;
+                        delay = 0f;
                     }
                 }
 
                 else if (gameManager.attackSpeed < 0)
                 {
                     // 공속이 음수인 경우이므로 음수를 빼 (+로 만들어) 딜레이를 늘린다.
-                    if (delay >= (bulletDelay - (gameManager.attackSpeed * 0.1)))
+                    if (delay >= (bulletDelay - (gameManager.attackSpeed * 0.1f)))
                     {
                         canAttack = true;
                         delay = 0;
@@ -181,11 +188,12 @@ public class StaffControl : Weapon
                     if (!gameManager.doubleShot)
                     {
                         Bullet bullet = pool.Get();
-                        bullet.transform.position = normalFirePos.position;
+                        bulletPos = new Vector3(normalFirePos.position.x, 0, normalFirePos.position.z);
+                        bullet.transform.position = bulletPos;
                         bullet.bulletDamage = weaponDamage;
                         bullet.damageUI = damageUI;
                         bullet.speed = weaponInfo.BulletSpeed;
-                        bullet.Shoot(dir.normalized,normalFirePos.position, weaponInfo.WeaponRange);
+                        bullet.Shoot(dir.normalized, bulletPos, weaponInfo.WeaponRange);
                         bullet.GetComponent<Fire>().grade = grade;
                     }
 
@@ -193,8 +201,10 @@ public class StaffControl : Weapon
                     {
                         Bullet bullet1 = pool.Get();
                         Bullet bullet2 = pool.Get();
-                        bullet1.transform.position = doubleFirePos1.position;
-                        bullet2.transform.position = doubleFirePos2.position;
+                        bulletPos1 = new Vector3(doubleFirePos1.position.x, 0, doubleFirePos1.position.z);
+                        bulletPos2 = new Vector3(doubleFirePos2.position.x, 0, doubleFirePos2.position.z);
+                        bullet1.transform.position = bulletPos1;
+                        bullet2.transform.position = bulletPos2;
                         bullet1.bulletDamage = weaponDamage;
                         bullet2.bulletDamage = weaponDamage;
                         bullet1.damageUI = damageUI;
@@ -203,8 +213,8 @@ public class StaffControl : Weapon
                         bullet2.speed = weaponInfo.BulletSpeed;
                         bullet1.GetComponent<Fire>().grade = grade;
                         bullet2.GetComponent<Fire>().grade = grade;
-                        bullet1.Shoot(dir.normalized,doubleFirePos1.position, weaponInfo.WeaponRange);
-                        bullet2.Shoot(dir.normalized,doubleFirePos2.position, weaponInfo.WeaponRange);
+                        bullet1.Shoot(dir.normalized, bulletPos1, weaponInfo.WeaponRange);
+                        bullet2.Shoot(dir.normalized, bulletPos2, weaponInfo.WeaponRange);
                     }
 
                     SoundManager.Instance.PlayES(weaponInfo.WeaponSound);
@@ -216,21 +226,21 @@ public class StaffControl : Weapon
             {
                 delay += Time.deltaTime;
 
-                if (gameManager.attackSpeed >= 0)
+                if (gameManager.attackSpeed >= 0f)
                 {
-                    if (delay >= (bulletDelay / (1 + gameManager.attackSpeed * 0.1)))
+                    if (delay >= (bulletDelay / (1f + gameManager.attackSpeed * 0.1f)))
                     {
                         canAttack = true;
-                        delay = 0;
+                        delay = 0f;
                     }
                 }
 
-                else if (gameManager.attackSpeed < 0)
+                else if (gameManager.attackSpeed < 0f)
                 {
-                    if (delay >= (bulletDelay - (gameManager.attackSpeed * 0.1)))
+                    if (delay >= (bulletDelay - (gameManager.attackSpeed * 0.1f)))
                     {
                         canAttack = true;
-                        delay = 0;
+                        delay = 0f;
                     }
                 }
             }
@@ -276,21 +286,21 @@ public class StaffControl : Weapon
             else if (canAttack == false)
             {
                 delay += Time.deltaTime;
-                if (gameManager.attackSpeed >= 0)
+                if (gameManager.attackSpeed >= 0f)
                 {
-                    if (delay >= (bulletDelay / (1 + (gameManager.attackSpeed * 0.05f))))
+                    if (delay >= (bulletDelay / (1 + (gameManager.attackSpeed * 0.1f))))
                     {
                         canAttack = true;
-                        delay = 0;
+                        delay = 0f;
                     }
                 }
 
-                else if (gameManager.attackSpeed < 0)
+                else if (gameManager.attackSpeed < 0f)
                 {
-                    if (delay >= (bulletDelay - gameManager.attackSpeed * 0.2f))
+                    if (delay >= (bulletDelay - gameManager.attackSpeed * 0.1f))
                     {
                         canAttack = true;
-                        delay = 0;
+                        delay = 0f;
                     }
                 }
             }
@@ -319,13 +329,13 @@ public class StaffControl : Weapon
                 WeaponSetting();
                 isLuck = false;
 
-                int rand = Random.Range(0, 100);
+                float rand = Random.Range(0f, 100f);
 
                 foreach (var target in find)
                 {
                     Monster monster = target.GetComponent<Monster>();
 
-                    if (rand <= 5 + Mathf.Clamp(gameManager.luck, 0, 100) * 0.1)
+                    if (rand <= 5f + Mathf.Clamp(gameManager.luck, 0f, 100f) * 0.1f)
                     {
                         luckThunderDmg = monster.maxHp * 0.05f;
                         isLuck = true;

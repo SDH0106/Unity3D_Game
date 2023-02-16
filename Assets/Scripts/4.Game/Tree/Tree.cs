@@ -26,14 +26,16 @@ public class Tree : MonoBehaviour
         {
             if (!isAttaked)
             {
+                gameManager = GameManager.Instance;
+
                 isAttaked = true;
                 GameObject potion = Instantiate(potionPrefab[potionsNum]);
                 potion.transform.position = transform.position;
                 gameManager.woodCount++;
 
-                int num = Random.Range(0, 100);
+                float num = Random.Range(0f, 100f);
 
-                if (num < 3 + Mathf.Clamp(gameManager.luck, 0, 100) * 0.4)
+                if (num < 3 + Mathf.Clamp(gameManager.luck, 0f, 100f) * 0.4f && gameManager.currentGameTime > 0)
                 {
                     SoundManager.Instance.PlayES("ItemGet");
                     GameSceneUI.Instance.chestCount++;

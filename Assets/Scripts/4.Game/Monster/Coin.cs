@@ -57,7 +57,8 @@ public class Coin : Singleton<Coin>
 
         if (transform.position == endPos)
         {
-            SoundManager.Instance.PlayES("Coin");
+            if (transform.parent.GetSiblingIndex() % 5 == 0 || transform.parent.GetSiblingIndex() == transform.parent.childCount - 1)
+                SoundManager.Instance.PlayES("Coin");
             gameManager.money += 1;
             DestroyPool();
         }

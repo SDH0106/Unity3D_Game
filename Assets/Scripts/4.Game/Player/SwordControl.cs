@@ -39,6 +39,10 @@ public class SwordControl : Weapon
 
     bool isAttack;
 
+    Vector3 bulletPos;
+    Vector3 bulletPos1;
+    Vector3 bulletPos2;
+
     private void Awake()
     {
         pool = new ObjectPool<Bullet>(CreateBullet, OnGetBullet, OnReleaseBullet, OnDestroyBullet, maxSize: poolCount);
@@ -147,14 +151,15 @@ public class SwordControl : Weapon
                             int bulletCri = criRand;
                             WeaponSetting();
                             Bullet bullet = pool.Get();
-                            bullet.transform.position = new Vector3(firePos.position.x, 0f, firePos.position.z);
+                            bulletPos = new Vector3(firePos.position.x, 0f, firePos.position.z);
+                            bullet.transform.position = bulletPos;
                             bulletDir = mouse - bullet.transform.position;
                             bulletDir.y = 0;
                             bullet.bulletDamage = swordBulletDamage;
                             bullet.GetComponent<SwordBullet>().criRand = bulletCri;
                             bullet.damageUI = damageUI;
-                            bullet.speed = 6f;
-                            bullet.Shoot(bulletDir.normalized, firePos.position, 5f);
+                            bullet.speed = 9f;
+                            bullet.Shoot(bulletDir.normalized, bulletPos, 5f);
                         }
 
                         else if(gameManager.doubleShot)
@@ -163,27 +168,29 @@ public class SwordControl : Weapon
                             int bulletCri = criRand;
                             WeaponSetting();
                             Bullet bullet = pool.Get();
-                            bullet.transform.position = new Vector3(doubleFirePos1.position.x, 0f, doubleFirePos1.position.z);
+                            bulletPos1 = new Vector3(doubleFirePos1.position.x, 0f, doubleFirePos1.position.z);
+                            bullet.transform.position = bulletPos1;
                             bulletDir = mouse - bullet.transform.position;
                             bulletDir.y = 0;
                             bullet.bulletDamage = swordBulletDamage;
                             bullet.GetComponent<SwordBullet>().criRand = bulletCri;
                             bullet.damageUI = damageUI;
-                            bullet.speed = 6f;
-                            bullet.Shoot(bulletDir.normalized, doubleFirePos1.position, 5f);
+                            bullet.speed = 9f;
+                            bullet.Shoot(bulletDir.normalized, bulletPos1, 5f);
 
                             criRand = UnityEngine.Random.Range(1, 101);
                             bulletCri = criRand;
                             WeaponSetting();
                             Bullet bullet2 = pool.Get();
-                            bullet2.transform.position = new Vector3(doubleFirePos2.position.x, 0f, doubleFirePos2.position.z);
+                            bulletPos2 = new Vector3(doubleFirePos2.position.x, 0f, doubleFirePos2.position.z);
+                            bullet2.transform.position = bulletPos2;
                             bulletDir = mouse - bullet2.transform.position;
                             bulletDir.y = 0;
                             bullet2.bulletDamage = swordBulletDamage;
                             bullet2.GetComponent<SwordBullet>().criRand = bulletCri;
                             bullet2.damageUI = damageUI;
-                            bullet2.speed = 6f;
-                            bullet2.Shoot(bulletDir.normalized, doubleFirePos2.position, 5f);
+                            bullet2.speed = 9f;
+                            bullet2.Shoot(bulletDir.normalized, bulletPos2, 5f);
                         }
                     }
                 }
@@ -196,21 +203,21 @@ public class SwordControl : Weapon
         {
             delay += Time.deltaTime;
 
-            if (gameManager.attackSpeed >= 0)
+            if (gameManager.attackSpeed >= 0f)
             {
-                if (delay >= (swordDelay / (1 + gameManager.attackSpeed * 0.1)))
+                if (delay >= (swordDelay / (1f + gameManager.attackSpeed * 0.1f)))
                 {
                     canAttack = true;
-                    delay = 0;
+                    delay = 0f;
                 }
             }
 
-            else if (gameManager.attackSpeed < 0)
+            else if (gameManager.attackSpeed < 0f)
             {
-                if (delay >= (swordDelay - gameManager.attackSpeed * 0.1))
+                if (delay >= (swordDelay - gameManager.attackSpeed * 0.1f))
                 {
                     canAttack = true;
-                    delay = 0;
+                    delay = 0f;
                 }
             }
         }

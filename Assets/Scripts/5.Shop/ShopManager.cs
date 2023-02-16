@@ -295,7 +295,7 @@ public class ShopManager : Singleton<ShopManager>
     void StartCardSlot()
     {
         if (gameManager.round < 10)
-            passivePercent = 60;
+            passivePercent = 50;
 
         else
             passivePercent = 80;
@@ -445,10 +445,10 @@ public class ShopManager : Singleton<ShopManager>
     {
         float totalWeight = 0;
 
-        weightWeaponValue[0] = 150 - (gameManager.round - 1) * 5;
-        weightWeaponValue[1] = 10 + (gameManager.round - 1) * (gameManager.round);
-        weightWeaponValue[2] = (gameManager.round - 1) * (1 + Mathf.Clamp(gameManager.luck, 0, 100) * 0.01f);
-        weightWeaponValue[3] = (gameManager.round - 1) * 0.5f * (1 + Mathf.Clamp(gameManager.luck, 0, 100) * 0.01f);
+        weightWeaponValue[0] = 150f - (gameManager.round - 1f) * 5f;
+        weightWeaponValue[1] = 10f + (gameManager.round - 1f) * (gameManager.round);
+        weightWeaponValue[2] = (gameManager.round - 1f) * (1f + Mathf.Clamp(gameManager.luck, 0f, 100f) * 0.01f);
+        weightWeaponValue[3] = (gameManager.round - 1f) * 0.5f * (1 + Mathf.Clamp(gameManager.luck, 0f, 100f) * 0.01f);
 
         for (int i = 0; i < weightWeaponValue.Length; i++)
         {
@@ -498,10 +498,10 @@ public class ShopManager : Singleton<ShopManager>
     {
         float totalWeight = 0;
 
-        weightPassiveValue[0] = 200 - (gameManager.round - 1) * 6;
-        weightPassiveValue[1] = 10 * gameManager.round;
-        weightPassiveValue[2] = (gameManager.round - 1) * (gameManager.round) * 0.1f * (1 + Mathf.Clamp(gameManager.luck, 0, 100) * 0.01f);
-        weightPassiveValue[3] = (gameManager.round - 1) * (gameManager.round) * 0.02f * (1 + Mathf.Clamp(gameManager.luck, 0, 100) * 0.01f) * 10f;
+        weightPassiveValue[0] = 200f - (gameManager.round - 1f) * 6f;
+        weightPassiveValue[1] = 10f * gameManager.round;
+        weightPassiveValue[2] = (gameManager.round - 1f) * (gameManager.round) * 0.1f * (1f + Mathf.Clamp(gameManager.luck, 0f, 100f) * 0.01f);
+        weightPassiveValue[3] = (gameManager.round - 1f) * (gameManager.round) * 0.02f * (1f + Mathf.Clamp(gameManager.luck, 0f, 100f) * 0.01f);
 
         PassiveCardUI passiveCard = passiveCardUI.GetComponent<PassiveCardUI>();
 
@@ -511,8 +511,8 @@ public class ShopManager : Singleton<ShopManager>
             totalWeight += passiveCard.passiveInfo[i].weight;
         }
 
-        float rand = UnityEngine.Random.Range(0, totalWeight);
-        float total = 0;
+        float rand = UnityEngine.Random.Range(0f, totalWeight);
+        float total = 0f;
 
         for (int i = 0; i < passiveCardUI.GetComponent<PassiveCardUI>().passiveInfo.Length; i++)
         {
@@ -528,8 +528,8 @@ public class ShopManager : Singleton<ShopManager>
 
                 else
                 {
-                    rand = UnityEngine.Random.Range(0, totalWeight);
-                    total = 0;
+                    rand = UnityEngine.Random.Range(0f, totalWeight);
+                    total = 0f;
                     i = 0;
                 }
             }
