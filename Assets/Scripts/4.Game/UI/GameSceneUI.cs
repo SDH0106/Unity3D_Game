@@ -255,6 +255,7 @@ public class GameSceneUI : Singleton<GameSceneUI>
                         bgmChange = true;
                     }
                     roundClearText.SetActive(true);
+                    CancelInvoke("SpawnOneTree");
                 }
 
                 if (roundClearText.GetComponent<TypingText>().isOver == true)
@@ -285,6 +286,8 @@ public class GameSceneUI : Singleton<GameSceneUI>
             {
                 if (gameManager.isBossDead)
                 {
+                    CancelInvoke("SpawnOneTree");
+
                     gameManager.isClear = true;
                     if (!gameClearUI.activeSelf)
                         gameManager.gameEndTime = Time.realtimeSinceStartup;
@@ -336,6 +339,8 @@ public class GameSceneUI : Singleton<GameSceneUI>
 
         else if (character.isDead)
         {
+            CancelInvoke("SpawnOneTree");
+
             if (!gameOverUI.activeSelf || !gameOverIsedolText)
                 gameManager.gameEndTime = Time.realtimeSinceStartup;
 
@@ -423,7 +428,7 @@ public class GameSceneUI : Singleton<GameSceneUI>
         sAtk.text = gameManager.shortDamage.ToString("0.#");
         lAtk.text = gameManager.longDamage.ToString("0.#");
         aSpd.text = gameManager.attackSpeed.ToString("0.#");
-        spd.text = gameManager.speed.ToString("0.#");
+        spd.text = gameManager.speed.ToString("0.##");
         ran.text = gameManager.range.ToString("0.#");
         luk.text = gameManager.luck.ToString("0.#");
         cri.text = gameManager.critical.ToString("0.#");

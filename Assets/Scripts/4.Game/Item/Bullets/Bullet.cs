@@ -30,7 +30,7 @@ public class Bullet : MonoBehaviour
 
     protected virtual void Awake()
     {
-        pool = new ObjectPool<DamageUI>(CreateDamageUI, OnGetDamageUI, OnReleaseDamageUI, OnDestroyDamageUI, maxSize: 10);
+        pool = new ObjectPool<DamageUI>(CreateDamageUI, OnGetDamageUI, OnReleaseDamageUI, OnDestroyDamageUI, maxSize: 20);
     }
 
     private void Start()
@@ -72,11 +72,14 @@ public class Bullet : MonoBehaviour
 
     protected virtual void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.CompareTag("Monster") && collision.collider.GetComponent<Monster>() != null)
+     if(collision.collider.CompareTag("Monster") && collision.collider.GetComponent<Monster>() !=null)
         {
             Monster monster = collision.collider.GetComponent<Monster>();
-            
+
             DamageUI damage = pool.Get();
+
+            damage.transform.position = transform.position;
+            damage.transform.SetParent(gameManager.damageStorage);
 
             damage.weaponDamage = bulletDamage;
 
@@ -91,17 +94,14 @@ public class Bullet : MonoBehaviour
 
             if (damage.weaponDamage > 0)
                 damage.isMiss = false;
-
-            else if(damage.weaponDamage <= 0)
+            else if (damage.weaponDamage <= 0)
                 damage.isMiss = true;
 
             float mDef = monster.defence;
-            damage.realDamage = Mathf.Clamp(damage.weaponDamage * (1 - (mDef / (20 + mDef))), 0, damage.weaponDamage * (1 - (mDef / (20 + mDef))));
+            damage.realDamage = Mathf.Clamp(damage.weaponDamage * (1 - (mDef / (20 + mDef))), 0, damage.weaponDamage);
             damage.UISetting();
-            damage.transform.position = transform.position;
-            damage.gameObject.transform.SetParent(gameManager.damageStorage);
-            
-            if (gameManager.absorbHp > 0 && !damage.isMiss && !isAbsorb)
+
+            if(gameManager.absorbHp >0 && !damage.isMiss && !isAbsorb)
             {
                 Character.Instance.currentHp += Mathf.Clamp(gameManager.absorbHp, 0f, gameManager.maxAbs);
                 isAbsorb = true;
@@ -109,9 +109,9 @@ public class Bullet : MonoBehaviour
 
             monster.OnDamaged(damage.realDamage);
 
-            if (!gameManager.isReflect && !gameManager.lowPenetrate && !gameManager.onePenetrate && !gameManager.penetrate)
+            if(!gameManager.isReflect && !gameManager.lowPenetrate && !gameManager.onePenetrate && !gameManager.penetrate)
             {
-                if (!isDestroyed)
+                if(!isDestroyed)
                 {
                     Instantiate(effectPrefab, transform.position, transform.rotation);
                     DestroyBullet();

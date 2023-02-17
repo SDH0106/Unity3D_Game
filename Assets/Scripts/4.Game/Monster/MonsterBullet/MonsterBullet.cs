@@ -72,4 +72,9 @@ public class MonsterBullet : MonoBehaviour
             managedPool.Release(this);
         }
     }
+
+    private void OnDestroy()
+    {
+        CancelInvoke("DestroyBullet");
+    }
 }

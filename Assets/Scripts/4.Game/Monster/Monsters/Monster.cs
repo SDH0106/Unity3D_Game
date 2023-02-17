@@ -156,7 +156,7 @@ public class Monster : MonoBehaviour
 
     protected virtual void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Character"))
+        if (other.CompareTag("Character") && !isDead)
         {
             character.OnDamaged(damage);
         }
@@ -188,7 +188,6 @@ public class Monster : MonoBehaviour
 
             runningCoroutine = MonsterColorBlink();
             StartCoroutine(runningCoroutine);
-
         }
     }
 

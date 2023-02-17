@@ -100,8 +100,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.15, y: 0.25, z: 0}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.15, y: 0.23, z: 0}
+  m_Center: {x: 0, y: -0.015, z: 0}
 --- !u!95 &8864195796923052525
 Animator:
   serializedVersion: 4
@@ -135,6 +135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   freezeEffect: {fileID: 6142686302541850931}
+  rigid: {fileID: 0}
   isWalk: 0
   isDead: 0
   isAttacked: 0

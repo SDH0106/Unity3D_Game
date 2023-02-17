@@ -60,8 +60,9 @@ MonoBehaviour:
   onePenetrate: 0
   lowPenetrate: 0
   penetrate: 0
+  vamAbsorb: 0
   description: "\uAF2C\uAF2C\uB97C \uC18C\uD658\uD569\uB2C8\uB2E4. \n\uAF2C\uAF2C\uB294
-    <color=cyan>\uBCD1\uC544\uB9AC</color>\uBD80\uD130 \uC2DC\uC791\uD574 <color=cyan>15\uB77C\uC6B4\uB4DC</color>
+    <color=cyan>\uBCD1\uC544\uB9AC</color>\uBD80\uD130 \uC2DC\uC791\uD574 <color=cyan>10\uB77C\uC6B4\uB4DC</color>
     \uC774\uD6C4 <color=cyan>\uAF2C\uAF2C</color>\uB85C \uC9C4\uD654\uD569\uB2C8\uB2E4.\n(\uBCD1\uC544\uB9AC
     \uACF5\uACA9\uB825\uC740 \uB77C\uC6B4\uB4DC <color=lime>2\uBC30</color>,\n\uAF2C\uAF2C
     \uACF5\uACA9\uB825\uC740 \uB77C\uC6B4\uB4DC <color=lime>5\uBC30</color>,\n\uBAAC\uC2A4\uD130

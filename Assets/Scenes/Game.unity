@@ -62777,7 +62777,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 896421748}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 43.75, y: 25.75, z: 0}
@@ -63982,7 +63982,7 @@ MonoBehaviour:
   bosssParent: {fileID: 1492117603}
   spawnImage: {fileID: 995458817036204544, guid: 46c63591fdc1b544a9187fc96944aebc, type: 3}
   bossSpawnImage: {fileID: 2892993388896840969, guid: 2fb3d3cdedbebd24080663a334260a98, type: 3}
-  poolCount: 30
+  poolCount: 50
   spawnRange: 10
   spawnDelay: 1
   spawnPos: {x: 0, y: 0, z: 0}

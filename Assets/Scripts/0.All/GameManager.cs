@@ -38,7 +38,7 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector] public int[] passiveIntVariables;
     [HideInInspector] public float[] passiveFloatVariables;
     [HideInInspector] public bool[] passiveBoolVariables;
-    [HideInInspector] public int dashCount;
+    /*[HideInInspector]*/ public int dashCount;
     [HideInInspector] public int buffNum;
     [HideInInspector] public int exDmg;
     [HideInInspector] public int isedolCount;
@@ -94,6 +94,8 @@ public class GameManager : Singleton<GameManager>
 
     [HideInInspector] public float maxAbs;
 
+    public bool isTuto = false;
+
     protected override void Awake()
     {
         base.Awake();
@@ -108,7 +110,8 @@ public class GameManager : Singleton<GameManager>
 
         Vector2 cursorHotSpot = new Vector3(useCursorNormal.width * 0.5f, useCursorNormal.height * 0.5f);
         Cursor.SetCursor(useCursorNormal, cursorHotSpot, CursorMode.ForceSoftware);
-/*        PlayerPrefs.SetInt("GameTuto", 1);
+        Cursor.lockState = CursorLockMode.None;
+        /*PlayerPrefs.SetInt("GameTuto", 1);
         PlayerPrefs.SetInt("ShopTuto", 1);
         PlayerPrefs.SetInt("BossTuto", 1);*/
         //PlayerPrefs.SetInt("BagicClear", 1);
@@ -305,7 +308,7 @@ public class GameManager : Singleton<GameManager>
         scene = SceneManager.GetActiveScene();
         currentScene = scene.name;
 
-        if (currentGameTime == 0)
+        if (currentGameTime <= 0)
         {
             isClear = true;
         }

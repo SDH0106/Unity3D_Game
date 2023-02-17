@@ -63,11 +63,14 @@ public class OptionUI : MonoBehaviour
         bUnMark.SetActive(muteBgmVolume);
         sUnMark.SetActive(muteSfxVolume);
 
-        if (Input.GetKeyDown(KeyCode.Escape)&& !gameManager.isPause)
-            PauseGame();
+        if (!gameManager.isTuto)
+        {
+            if (Input.GetKeyDown(KeyCode.Escape) && !gameManager.isPause)
+                PauseGame();
 
-        else if (Input.GetKeyDown(KeyCode.Escape) && gameManager.isPause)
-            ReturnToGame();
+            else if (Input.GetKeyDown(KeyCode.Escape) && gameManager.isPause)
+                ReturnToGame();
+        }
     }
 
     public void CursorSizeSetting(int num)
@@ -183,7 +186,9 @@ public class OptionUI : MonoBehaviour
     {
         if (!gameManager.isPause)
         {
-            if(gameManager.currentScene == "Game")
+            Cursor.lockState = CursorLockMode.None;
+
+            if (gameManager.currentScene == "Game")
             {
                 Vector2 cursorHotSpot = new Vector3(cursorNormal.width * 0.5f, cursorNormal.height * 0.5f);
                 Cursor.SetCursor(cursorNormal, cursorHotSpot, CursorMode.ForceSoftware);
@@ -202,6 +207,8 @@ public class OptionUI : MonoBehaviour
     {
         if (gameManager.isPause)
         {
+            Cursor.lockState = CursorLockMode.Confined;
+
             if (gameManager.currentScene == "Game")
             {
                 if (gameManager.isBossDead && gameManager.isClear)

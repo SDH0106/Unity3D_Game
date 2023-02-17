@@ -13,6 +13,7 @@ public class CharacterSelect : MonoBehaviour
 
     private void Start()
     {
+        Cursor.lockState = CursorLockMode.Confined;
         characterClear = new bool[(int)CHARACTER_NUM.Count];
         characterClear[(int)CHARACTER_NUM.Bagic] = Convert.ToBoolean(PlayerPrefs.GetInt("BagicClear", 0));
         LockImage.SetActive(!characterClear[(int)CHARACTER_NUM.Bagic]);
