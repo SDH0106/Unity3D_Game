@@ -235,4 +235,4 @@ MonoBehaviour:
   normalFirePos: {fileID: 95083074413199260}
   doubleFirePos1: {fileID: 1185596853712436993}
   doubleFirePos2: {fileID: 1403637071586184003}
-  poolCount: 10
+  poolCount: 20
