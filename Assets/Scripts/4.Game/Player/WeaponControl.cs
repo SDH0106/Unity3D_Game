@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -119,7 +116,7 @@ public class WeaponControl : Weapon
 
             if (gameManager.attackSpeed >= 0f)
             {
-                if (delay >= (bulletDelay / (1f + gameManager.attackSpeed * 0.1f)))
+                if (delay >= ((bulletDelay - (grade * 0.1f)) / (1f + gameManager.attackSpeed * 0.1f)))
                 {
                     canAttack = true;
                     delay = 0f;
@@ -128,7 +125,7 @@ public class WeaponControl : Weapon
 
             else if (gameManager.attackSpeed < 0f)
             {
-                if (delay >= (bulletDelay - gameManager.attackSpeed * 0.1f))
+                if (delay >= ((bulletDelay - (grade * 0.1f)) - gameManager.attackSpeed * 0.1f))
                 {
                     canAttack = true;
                     delay = 0f;

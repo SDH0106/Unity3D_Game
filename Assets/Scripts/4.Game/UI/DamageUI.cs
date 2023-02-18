@@ -1,12 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 using UnityEngine.Pool;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
 
 public class DamageUI : MonoBehaviour
 {
@@ -14,7 +8,6 @@ public class DamageUI : MonoBehaviour
 
     float printTime, initPrintTime;
 
-    public float weaponDamage;
     public float realDamage;
     public float swordBulletDamage;
 

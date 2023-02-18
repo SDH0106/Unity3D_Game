@@ -1,10 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.Purchasing;
-using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
 using static WeaponInfo;
 
@@ -113,13 +107,15 @@ public class WeaponCardUI : MonoBehaviour
             selectGrade = itemManager.selectedGrades[num];
         }
 
-        price = Mathf.CeilToInt(selectedWeapon.WeaponPrice * ((int)selectGrade * 2f + 1) * (1 - gameManager.salePercent));
+        int grade = (int)selectGrade;
+
+        price = Mathf.CeilToInt(selectedWeapon.WeaponPrice * (grade * 2f + 1) * (1 - gameManager.salePercent));
         itemSprite.sprite = selectedWeapon.ItemSprite;
         weaponName.text = selectedWeapon.WeaponName.ToString();
         type.text = selectedWeapon.Type.ToString();
-        weaponDamage.text = (selectedWeapon.WeaponDamage * (int)(selectGrade + 1)).ToString();
-        magicDamage.text = (selectedWeapon.MagicDamage * (int)(selectGrade + 1)).ToString();
-        attackDelay.text = selectedWeapon.AttackDelay.ToString();
+        weaponDamage.text = (selectedWeapon.WeaponDamage * (grade + 1)).ToString();
+        magicDamage.text = (selectedWeapon.MagicDamage * (grade + 1)).ToString();
+        attackDelay.text = (selectedWeapon.AttackDelay - (grade * 0.1f)).ToString("0.##");
         bulletSpeed.text = selectedWeapon.BulletSpeed.ToString();
         weaponRange.text = selectedWeapon.WeaponRange.ToString();
         weaponPrice.text = price.ToString();

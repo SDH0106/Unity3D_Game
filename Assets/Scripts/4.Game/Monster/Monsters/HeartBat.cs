@@ -1,7 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics.Tracing;
-using Unity.Services.Analytics.Platform;
 using UnityEngine;
 using UnityEngine.Pool;
 

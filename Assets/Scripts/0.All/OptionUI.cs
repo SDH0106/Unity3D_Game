@@ -1,11 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
-using Unity.VisualScripting;
-using UnityEngine.Events;
 
 public class OptionUI : MonoBehaviour
 {

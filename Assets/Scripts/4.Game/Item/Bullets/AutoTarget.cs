@@ -1,11 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.Pool;
-using UnityEngine.Rendering.UI;
-using UnityEngine.TextCore.Text;
+
 
 public class AutoTarget : Bullet
 {
@@ -114,9 +110,9 @@ public class AutoTarget : Bullet
         isFind = false;
     }
 
-    public override void LowPenetrate(DamageUI damage)
+    public override void LowPenetrate()
     {
-        base.LowPenetrate(damage);
+        base.LowPenetrate();
         targetMonster = null;
         isFind = false;
     }

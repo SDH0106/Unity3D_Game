@@ -1,9 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using static WeaponInfo;
 
@@ -91,13 +86,15 @@ public class CardClick : MonoBehaviour
         selectedNum = num;
         selectedWeapon = itemManager.storedWeapon[selectedNum];
 
-        price = Mathf.CeilToInt(selectedWeapon.WeaponPrice * ((int)(itemManager.weaponGrade[selectedNum]) * 2f + 1) * (1 - GameManager.Instance.salePercent));
+        int grade = (int)(itemManager.weaponGrade[selectedNum]);
+
+        price = Mathf.CeilToInt(selectedWeapon.WeaponPrice * (grade * 2f + 1) * (1 - GameManager.Instance.salePercent));
         itemSprite.sprite = selectedWeapon.ItemSprite;
         weaponName.text = selectedWeapon.WeaponName.ToString();
         type.text = selectedWeapon.Type.ToString();
-        weaponDamage.text = (selectedWeapon.WeaponDamage * (int)(itemManager.weaponGrade[num] + 1)).ToString();
-        magicDamage.text = (selectedWeapon.MagicDamage * (int)(itemManager.weaponGrade[num] + 1)).ToString();
-        attackDelay.text = selectedWeapon.AttackDelay.ToString();
+        weaponDamage.text = (selectedWeapon.WeaponDamage * (grade + 1)).ToString();
+        magicDamage.text = (selectedWeapon.MagicDamage * (grade + 1)).ToString();
+        attackDelay.text = (selectedWeapon.AttackDelay - (grade * 0.1f)).ToString();
         bulletSpeed.text = selectedWeapon.BulletSpeed.ToString();
         weaponRange.text = selectedWeapon.WeaponRange.ToString();
         sellPrice.text = Mathf.CeilToInt(price * 0.7f).ToString();

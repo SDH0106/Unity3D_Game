@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Pool;
@@ -159,7 +157,7 @@ public class StaffControl : Weapon
 
                 if (gameManager.attackSpeed >= 0f)
                 {
-                    if (delay >= (bulletDelay / (1f + gameManager.attackSpeed * 0.1f)))
+                    if (delay >= ((bulletDelay - (grade * 0.1f)) / (1f + gameManager.attackSpeed * 0.1f)))
                     {
                         canAttack = true;
                         delay = 0f;
@@ -169,7 +167,7 @@ public class StaffControl : Weapon
                 else if (gameManager.attackSpeed < 0)
                 {
                     // 공속이 음수인 경우이므로 음수를 빼 (+로 만들어) 딜레이를 늘린다.
-                    if (delay >= (bulletDelay - (gameManager.attackSpeed * 0.1f)))
+                    if (delay >= ((bulletDelay - (grade * 0.1f)) - (gameManager.attackSpeed * 0.1f)))
                     {
                         canAttack = true;
                         delay = 0;
@@ -228,7 +226,7 @@ public class StaffControl : Weapon
 
                 if (gameManager.attackSpeed >= 0f)
                 {
-                    if (delay >= (bulletDelay / (1f + gameManager.attackSpeed * 0.1f)))
+                    if (delay >= ((bulletDelay - (grade * 0.1f)) / (1f + gameManager.attackSpeed * 0.1f)))
                     {
                         canAttack = true;
                         delay = 0f;
@@ -237,7 +235,7 @@ public class StaffControl : Weapon
 
                 else if (gameManager.attackSpeed < 0f)
                 {
-                    if (delay >= (bulletDelay - (gameManager.attackSpeed * 0.1f)))
+                    if (delay >= ((bulletDelay - (grade * 0.1f)) - (gameManager.attackSpeed * 0.1f)))
                     {
                         canAttack = true;
                         delay = 0f;
@@ -288,7 +286,7 @@ public class StaffControl : Weapon
                 delay += Time.deltaTime;
                 if (gameManager.attackSpeed >= 0f)
                 {
-                    if (delay >= (bulletDelay / (1 + (gameManager.attackSpeed * 0.1f))))
+                    if (delay >= ((bulletDelay - (grade * 0.1f)) / (1 + (gameManager.attackSpeed * 0.1f))))
                     {
                         canAttack = true;
                         delay = 0f;
@@ -297,7 +295,7 @@ public class StaffControl : Weapon
 
                 else if (gameManager.attackSpeed < 0f)
                 {
-                    if (delay >= (bulletDelay - gameManager.attackSpeed * 0.1f))
+                    if (delay >= ((bulletDelay - (grade * 0.1f)) - gameManager.attackSpeed * 0.1f))
                     {
                         canAttack = true;
                         delay = 0f;
@@ -349,15 +347,15 @@ public class StaffControl : Weapon
                         targets[monsterCount] = target.transform;
 
                         DamageUI damage = damagePool.Get();
-                        damage.weaponDamage = weaponDamage;
-                        if (damage.weaponDamage > 0)
+
+                        if (weaponDamage > 0)
                             damage.isMiss = false;
 
-                        else if (damage.weaponDamage <= 0)
+                        else if (weaponDamage <= 0)
                             damage.isMiss = true;
 
                         float mDef = monster.defence;
-                        damage.realDamage = Mathf.Clamp(damage.weaponDamage * (1 - (mDef / (20 + mDef))), 0, damage.weaponDamage * (1 - (mDef / (20 + mDef))));
+                        damage.realDamage = Mathf.Clamp(weaponDamage * (1 - (mDef / (20 + mDef))), 0, weaponDamage);
                         damage.UISetting();
                         damage.transform.position = target.transform.position;
                         damage.gameObject.transform.SetParent(gameManager.damageStorage);
@@ -385,16 +383,15 @@ public class StaffControl : Weapon
                                 targets[monsterCount] = target.transform;
 
                                 DamageUI damage = damagePool.Get();
-                                damage.weaponDamage = weaponDamage;
 
-                                if (damage.weaponDamage > 0)
+                                if (weaponDamage > 0)
                                     damage.isMiss = false;
 
-                                else if (damage.weaponDamage <= 0)
+                                else if (weaponDamage <= 0)
                                     damage.isMiss = true;
 
                                 float mDef = monster.defence;
-                                damage.realDamage = Mathf.Clamp(damage.weaponDamage * (1 - (mDef / (20 + mDef))), 0, damage.weaponDamage * (1 - (mDef / (20 + mDef))));
+                                damage.realDamage = Mathf.Clamp(weaponDamage * (1 - (mDef / (20 + mDef))), 0, weaponDamage);
                                 damage.UISetting();
                                 damage.transform.position = target.transform.position;
                                 damage.gameObject.transform.SetParent(gameManager.damageStorage);
@@ -423,16 +420,15 @@ public class StaffControl : Weapon
                                 targets[monsterCount] = target.transform;
 
                                 DamageUI damage = damagePool.Get();
-                                damage.weaponDamage = weaponDamage;
 
-                                if (damage.weaponDamage > 0)
+                                if (weaponDamage > 0)
                                     damage.isMiss = false;
 
-                                else if (damage.weaponDamage <= 0)
+                                else if (weaponDamage <= 0)
                                     damage.isMiss = true;
 
                                 float mDef = monster.defence;
-                                damage.realDamage = Mathf.Clamp(damage.weaponDamage * (1 - (mDef / (20 + mDef))), 0, damage.weaponDamage * (1 - (mDef / (20 + mDef))));
+                                damage.realDamage = Mathf.Clamp(weaponDamage * (1 - (mDef / (20 + mDef))), 0, weaponDamage * (1 - (mDef / (20 + mDef))));
                                 damage.UISetting();
                                 damage.transform.position = target.transform.position;
                                 damage.gameObject.transform.SetParent(gameManager.damageStorage);

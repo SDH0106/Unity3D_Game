@@ -205,7 +205,7 @@ public class SwordControl : Weapon
 
             if (gameManager.attackSpeed >= 0f)
             {
-                if (delay >= (swordDelay / (1f + gameManager.attackSpeed * 0.1f)))
+                if (delay >= ((swordDelay - (grade * 0.1f)) / (1f + gameManager.attackSpeed * 0.1f)))
                 {
                     canAttack = true;
                     delay = 0f;
@@ -214,7 +214,7 @@ public class SwordControl : Weapon
 
             else if (gameManager.attackSpeed < 0f)
             {
-                if (delay >= (swordDelay - gameManager.attackSpeed * 0.1f))
+                if (delay >= ((swordDelay - (grade * 0.1f)) - gameManager.attackSpeed * 0.1f))
                 {
                     canAttack = true;
                     delay = 0f;
@@ -243,16 +243,15 @@ public class SwordControl : Weapon
             WeaponSetting();
 
             DamageUI damage = damagePool.Get();
-            damage.weaponDamage = weaponDamage;
 
-            if (damage.weaponDamage > 0)
+            if (weaponDamage > 0)
                 damage.isMiss = false;
 
-            else if (damage.weaponDamage <= 0)
+            else if (weaponDamage <= 0)
                 damage.isMiss = true;
 
             float mDef = monster.defence;
-            damage.realDamage = Mathf.Clamp(damage.weaponDamage * (1 - (mDef / (20 + mDef))), 0, damage.weaponDamage * (1 - (mDef / (20 + mDef))));
+            damage.realDamage = Mathf.Clamp(weaponDamage * (1 - (mDef / (20 + mDef))), 0, weaponDamage);
 
             if (criRand <= gameManager.critical || gameManager.critical >= 100)
             {

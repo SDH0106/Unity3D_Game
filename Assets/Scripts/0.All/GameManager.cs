@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
 public class GameManager : Singleton<GameManager>       
 {
     [SerializeField] public Texture2D[] cursorNormal;
@@ -20,10 +19,10 @@ public class GameManager : Singleton<GameManager>
     [Header("StatData")]
     [SerializeField] public float maxHp;
     [HideInInspector] public float percentDamage;
-    /*[HideInInspector]*/ public float physicDamage;
-    /*[HideInInspector]*/ public float magicDamage;
-    /*[HideInInspector]*/ public float shortDamage;
-    /*[HideInInspector]*/ public float longDamage;
+    [HideInInspector] public float physicDamage;
+    [HideInInspector] public float magicDamage;
+    [HideInInspector] public float shortDamage;
+    [HideInInspector] public float longDamage;
     [SerializeField] public float recoverHp;
     [SerializeField] public float absorbHp;
     [SerializeField] public float defence;
@@ -38,7 +37,7 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector] public int[] passiveIntVariables;
     [HideInInspector] public float[] passiveFloatVariables;
     [HideInInspector] public bool[] passiveBoolVariables;
-    /*[HideInInspector]*/ public int dashCount;
+    [HideInInspector] public int dashCount;
     [HideInInspector] public int buffNum;
     [HideInInspector] public int exDmg;
     [HideInInspector] public int isedolCount;
@@ -62,9 +61,9 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector] public bool subscriptionFee;
     [HideInInspector] public bool spawnTree;
     [HideInInspector] public bool dotgu;
-    /*[HideInInspector]*/ public bool isReflect;
-    /*[HideInInspector]*/ public bool onePenetrate;
-    /*[HideInInspector]*/ public bool lowPenetrate;
+    [HideInInspector] public bool isReflect;
+    [HideInInspector] public bool onePenetrate;
+    [HideInInspector] public bool lowPenetrate;
     [HideInInspector] public bool penetrate;
     [HideInInspector] public bool vamAbsorb;
     #endregion
@@ -73,7 +72,7 @@ public class GameManager : Singleton<GameManager>
 
     [HideInInspector] public string currentScene;
 
-    UnityEngine.SceneManagement.Scene scene;
+    Scene scene;
 
     [HideInInspector] public float[] stats;
 
@@ -94,7 +93,7 @@ public class GameManager : Singleton<GameManager>
 
     [HideInInspector] public float maxAbs;
 
-    public bool isTuto = false;
+    [HideInInspector] public bool isTuto = false;
 
     protected override void Awake()
     {
@@ -111,15 +110,10 @@ public class GameManager : Singleton<GameManager>
         Vector2 cursorHotSpot = new Vector3(useCursorNormal.width * 0.5f, useCursorNormal.height * 0.5f);
         Cursor.SetCursor(useCursorNormal, cursorHotSpot, CursorMode.ForceSoftware);
         Cursor.lockState = CursorLockMode.None;
-        /*PlayerPrefs.SetInt("GameTuto", 1);
-        PlayerPrefs.SetInt("ShopTuto", 1);
-        PlayerPrefs.SetInt("BossTuto", 1);*/
-        //PlayerPrefs.SetInt("BagicClear", 1);
 
         gameTime = Mathf.Clamp(initGameTime + (round - 1) * 3f, initGameTime, 60f);
-        //gameTime = Mathf.Clamp(initGameTime + (round - 1) * 3f, 0, 10000f);
-        //gameTime = 0;
-        InitSetting();
+        gameTime = 0;
+        //InitSetting();
         InitArray();
         currentGameTime = gameTime;
         isPause = false;
@@ -357,8 +351,6 @@ public class GameManager : Singleton<GameManager>
         SceneManager.LoadScene(currentScene);
 
         gameTime = Mathf.Clamp(initGameTime + (round - 1) * 3f, initGameTime, 60f);
-        //gameTime = Mathf.Clamp(initGameTime + (round - 1) * 3f, 0, 10000f);
-        //gameTime = 0;
 
         currentGameTime = gameTime;
 

@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,10 +7,26 @@ public class ShowCard : MonoBehaviour
 
     int[] numArray;
 
+    GameManager gameManager;
+    SoundManager soundManager;
+    Character character;
+
     private void Start()
     {
+        gameManager = GameManager.Instance;
+        soundManager = SoundManager.Instance;
+        character = Character.Instance;
+
         numArray = new int[cards[0].weaponInfos.Length];
         GetRandomNum(cards.Length ,cards[0].weaponInfos.Length);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            TitleScene();
+        }
     }
 
     void GetRandomNum(int count, int length)
@@ -34,7 +47,6 @@ public class ShowCard : MonoBehaviour
 
         for (int i = 0; i < cards.Length; i++)
         {
-            //cards[i].selectedWeapon = cards[i].weaponInfos[numArray[i]];
             cards[i].selectedWeapon = cards[i].weaponInfos[i];
             cards[i].selectedWeapon.weaponGrade = Grade.ÀÏ¹Ý;
         }
@@ -45,5 +57,20 @@ public class ShowCard : MonoBehaviour
         SoundManager.Instance.PlayES("SelectButton");
         Destroy(Character.Instance.gameObject);
         SceneManager.LoadScene("CharacterSelect");
+    }
+
+    public void TitleScene()
+    {
+
+        if (character.gameObject != null)
+            Destroy(character.gameObject);
+
+        if (soundManager.gameObject != null)
+            Destroy(soundManager.gameObject);
+
+        if (gameManager.gameObject != null)
+            Destroy(gameManager.gameObject);
+
+        SceneManager.LoadScene("StartTitle");
     }
 }

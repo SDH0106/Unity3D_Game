@@ -22,8 +22,8 @@ MonoBehaviour:
   absorbHp: 0
   defence: 0
   physicDamage: 0
-  magicDamage: -3
-  shortDamage: 0
+  magicDamage: 0
+  shortDamage: 2.3
   longDamage: 2.3
   attackSpeed: 8
   speed: 2
@@ -60,5 +60,6 @@ MonoBehaviour:
   onePenetrate: 0
   lowPenetrate: 0
   penetrate: 0
+  vamAbsorb: 0
   description: 
-  weight: 0
+  weight: 30.24

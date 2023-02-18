@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SwordBullet : Bullet
@@ -34,9 +32,7 @@ public class SwordBullet : Bullet
 
             Instantiate(effectPrefab, transform.position, transform.rotation);
 
-            DamageUI damage = pool.Get();
-
-            damage.weaponDamage = bulletDamage;
+            DamageUI damage = damagePool.Get();
 
             if (gameManager.isReflect)
                 Reflect(collision);
@@ -45,16 +41,16 @@ public class SwordBullet : Bullet
                 OnePenetrate();
 
             else if (gameManager.lowPenetrate)
-                LowPenetrate(damage);
+                LowPenetrate();
 
-            if (damage.weaponDamage > 0)
+            if (bulletDamage > 0)
                 damage.isMiss = false;
 
-            else if (damage.weaponDamage <= 0)
+            else if (bulletDamage <= 0)
                 damage.isMiss = true;
 
             float mDef = monster.defence;
-            damage.realDamage = Mathf.Clamp(damage.weaponDamage * (1 - (mDef / (20 + mDef))), 0, damage.weaponDamage * (1 - (mDef / (20 + mDef))));
+            damage.realDamage = Mathf.Clamp(bulletDamage * (1 - (mDef / (20 + mDef))), 0, bulletDamage);
 
             if (criRand <= gameManager.critical || gameManager.critical >= 100)
             {

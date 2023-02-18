@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Lazor : Bullet
@@ -43,18 +41,16 @@ public class Lazor : Bullet
 
             Instantiate(effectPrefab, collision.contacts[0].point, transform.rotation);
                         
-            DamageUI damage = pool.Get();
+            DamageUI damage = damagePool.Get();
 
-            damage.weaponDamage = bulletDamage;
-
-            if (damage.weaponDamage > 0)
+            if (bulletDamage > 0)
                 damage.isMiss = false;
 
-            else if (damage.weaponDamage <= 0)
+            else if (bulletDamage <= 0)
                 damage.isMiss = true;
 
             float mDef = monster.defence;
-            damage.realDamage = Mathf.Clamp(damage.weaponDamage * (1 - (mDef / (20 + mDef))), 0, damage.weaponDamage * (1 - (mDef / (20 + mDef))));
+            damage.realDamage = Mathf.Clamp(bulletDamage * (1 - (mDef / (20 + mDef))), 0, bulletDamage * (1 - (mDef / (20 + mDef))));
             damage.UISetting();
             damage.transform.position = collision.contacts[0].point;
             damage.gameObject.transform.SetParent(gameManager.damageStorage);

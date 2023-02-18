@@ -1,9 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
-using UnityEngine.Experimental.XR.Interaction;
-using static WeaponInfo;
 
 [CreateAssetMenu(fileName = "new Item", menuName = "GameData/Item/Passive")]
 public class PassiveInfo : ScriptableObject

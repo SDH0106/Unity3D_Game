@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -45,7 +43,7 @@ public class DescriptionUI : MonoBehaviour
                 break;
 
             case 2:
-                descriptionText.text = "캐릭터가 몬스터를 공격했을 경우 회복하는 체력 수치와 관련된 능력치.\n0이하인 경우 적용되지 않고 최대 적용치는 1입니다.\n폭발 공격에는 적용되지 않습니다.\n검은 휘두르기에만 적용됩니다.";
+                descriptionText.text = "캐릭터가 몬스터를 공격했을 경우 회복하는 체력 수치와 관련된 능력치.\n0이하인 경우 적용되지 않고, 최대 적용치는 1입니다.\n폭발 공격에는 적용되지 않습니다.\n검은 휘두르기에만 적용됩니다.";
                 break;
 
             case 3:
@@ -61,19 +59,19 @@ public class DescriptionUI : MonoBehaviour
                 break;
 
             case 6:
-                descriptionText.text = "검/총류 무기의 공격력와 관련된 능력치.\n공격력 합의 수치가 0이하가 되면 공격이 불가능합니다.";
+                descriptionText.text = "검/총류 무기의 공격력와 관련된 능력치.\n무기에 적용되는 공격력 합의 수치가 0이하가 되면 공격이 불가능합니다.";
                 break;
 
             case 7:
-                descriptionText.text = "스태프류 무기의 공격력, 검신 뇨파의 검기와 관련된 능력치.\n공격력 합의 수치가 0이하가 되면 공격이 불가능합니다.";
+                descriptionText.text = "스태프류 무기의 공격력, 검신 뇨파의 검기와 관련된 능력치.\n무기에 적용되는 공격력 합의 수치가 0이하가 되면 공격이 불가능합니다.";
                 break;
 
             case 8:
-                descriptionText.text = "검류 무기의 공격력과 관련된 능력치.\n공격력 합의 수치가 0이하가 되면 공격이 불가능합니다.";
+                descriptionText.text = "검류 무기의 공격력과 관련된 능력치.\n무기에 적용되는 공격력 합의 수치가 0이하가 되면 공격이 불가능합니다.";
                 break;
 
             case 9:
-                descriptionText.text = "총/스태프류 무기의 공격력, 검신 뇨파의 검기와 관련된 능력치.\n공격력 합의 수치가 0이하가 되면 공격이 불가능합니다.";
+                descriptionText.text = "총/스태프류 무기의 공격력, 검신 뇨파의 검기와 관련된 능력치.\n무기에 적용되는 공격력 합의 수치가 0이하가 되면 공격이 불가능합니다.";
                 break;
 
             case 10:

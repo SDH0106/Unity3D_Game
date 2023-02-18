@@ -1,4 +1,4 @@
-Ôªøusing UnityEngine;
+using UnityEngine;
 using UnityEngine.Pool;
 
 public class Bullet : MonoBehaviour
@@ -7,7 +7,7 @@ public class Bullet : MonoBehaviour
     public GameObject effectPrefab;
 
     protected IObjectPool<Bullet> managedPool;
-    protected IObjectPool<DamageUI> pool;
+    protected IObjectPool<DamageUI> damagePool;
 
     protected float angle;
     public Vector3 dir;
@@ -30,7 +30,7 @@ public class Bullet : MonoBehaviour
 
     protected virtual void Awake()
     {
-        pool = new ObjectPool<DamageUI>(CreateDamageUI, OnGetDamageUI, OnReleaseDamageUI, OnDestroyDamageUI, maxSize: 20);
+        damagePool = new ObjectPool<DamageUI>(CreateDamageUI, OnGetDamageUI, OnReleaseDamageUI, OnDestroyDamageUI, maxSize: 20);
     }
 
     private void Start()
@@ -41,19 +41,19 @@ public class Bullet : MonoBehaviour
 
     private void Update()
     {
-        if(Vector3.Distance(transform.position, initPos) > range)
+        if (Vector3.Distance(transform.position, initPos) > range)
         {
             DestroyBullet();
         }
 
         transform.position += dir * speed * Time.deltaTime;
 
-        // Ï¥ùÏïå Í∞ÅÎèÑ
+        // √—æÀ ∞¢µµ
         angle = Mathf.Atan2(dir.z, dir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(90, -angle, 0);
     }
 
-    public virtual void Shoot(Vector3 dir,Vector3 initPos, float range)
+    public virtual void Shoot(Vector3 dir, Vector3 initPos, float range)
     {
         gameManager = GameManager.Instance;
 
@@ -74,11 +74,9 @@ public class Bullet : MonoBehaviour
     {
         if (collision.collider.CompareTag("Monster") && collision.collider.GetComponent<Monster>() != null)
         {
+            DamageUI damage = damagePool.Get();
+
             Monster monster = collision.collider.GetComponent<Monster>();
-
-            DamageUI damage = pool.Get();
-
-            damage.weaponDamage = bulletDamage;
 
             if (gameManager.isReflect)
                 Reflect(collision);
@@ -87,15 +85,16 @@ public class Bullet : MonoBehaviour
                 OnePenetrate();
 
             else if (gameManager.lowPenetrate)
-                LowPenetrate(damage);
+                LowPenetrate();
 
-            if (damage.weaponDamage > 0)
+            if (bulletDamage > 0)
                 damage.isMiss = false;
-            else if (damage.weaponDamage <= 0)
+
+            else if (bulletDamage <= 0)
                 damage.isMiss = true;
 
             float mDef = monster.defence;
-            damage.realDamage = Mathf.Clamp(damage.weaponDamage * (1 - (mDef / (20 + mDef))), 0, damage.weaponDamage);
+            damage.realDamage = Mathf.Clamp(bulletDamage * (1 - (mDef / (20 + mDef))), 0, bulletDamage);
             damage.UISetting();
 
             damage.transform.position = transform.position;
@@ -143,11 +142,11 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    public virtual void LowPenetrate(DamageUI damage)
+    public virtual void LowPenetrate()
     {
         if (penetrateNum > 0)
         {
-            damage.weaponDamage = damage.weaponDamage * Mathf.Clamp(0.5f - ((penetrateNum - 1) / 10f), 0.1f, 0.5f);
+            bulletDamage = bulletDamage * Mathf.Clamp(0.5f - ((penetrateNum - 1) / 10f), 0.1f, 0.5f);
         }
 
         penetrateNum++;
@@ -173,7 +172,7 @@ public class Bullet : MonoBehaviour
     private DamageUI CreateDamageUI()
     {
         DamageUI damageUIPool = Instantiate(damageUI, transform.position, Quaternion.Euler(90, 0, 0)).GetComponent<DamageUI>();
-        damageUIPool.SetManagedPool(pool);
+        damageUIPool.SetManagedPool(damagePool);
         damageUIPool.transform.SetParent(gameManager.bulletStorage);
         return damageUIPool;
     }
@@ -195,7 +194,7 @@ public class Bullet : MonoBehaviour
 
     protected virtual void OnDestroy()
     {
-        if (pool != null)
-            pool.Clear();
+        if (damagePool != null)
+            damagePool.Clear();
     }
 }

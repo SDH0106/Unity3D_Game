@@ -484,7 +484,7 @@ public class GameSceneUI : Singleton<GameSceneUI>
                 SheildText.gameObject.SetActive(false);
 
             hpBar.value = 1 - (character.currentHp / character.maxHp);
-            sheildBar.value = (character.shield / 10f);
+            sheildBar.value = (character.shield / character.maxHp);
         }
     }
 

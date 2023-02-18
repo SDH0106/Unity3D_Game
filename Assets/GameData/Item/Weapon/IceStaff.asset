@@ -17,7 +17,7 @@ MonoBehaviour:
   weaponName: "\uC5BC\uC74C \uC2A4\uD0DC\uD504"
   type: 1
   weaponDamage: 0
-  magicDamage: 6
+  magicDamage: 5
   attackDelay: 1.5
   bulletSpeed: 12
   weaponRange: 6

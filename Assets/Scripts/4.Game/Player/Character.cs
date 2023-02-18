@@ -1,10 +1,5 @@
-using Newtonsoft.Json;
 using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
 
 public enum CHARACTER_NUM
@@ -587,10 +582,10 @@ public class Character : Singleton<Character>
         yield return new WaitForSeconds(2.5f);
         gameManager.passiveBoolVariables[4] = false;    // gameManager.revive = false
         currentHp = Mathf.Ceil(maxHp * 0.5f);
+        gardianAngel.SetActive(false);
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(2f);
         rend.color = Color.white;
         isAttacked = false;
-        gardianAngel.SetActive(false);
     }
 }
