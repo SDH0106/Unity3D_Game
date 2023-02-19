@@ -1427,7 +1427,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a7e88bf1966034444ac1b821061e8a2f, type: 2}
   - {fileID: 11400000, guid: 6f446d46d65248142aa5b7d0c0311df9, type: 2}
   - {fileID: 11400000, guid: d6fbaf900a5af254298b75de8dcecd6d, type: 2}
-  - {fileID: 11400000, guid: 0b82d2f972fedde4583b397ab8b47eaf, type: 2}
   - {fileID: 11400000, guid: 519753e1b91c22646a192fbed597512e, type: 2}
   cardBack: {fileID: 2903748721345065678}
   cardBackLine: {fileID: 1096670128247984123}

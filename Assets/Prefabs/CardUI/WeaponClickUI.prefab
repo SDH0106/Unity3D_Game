@@ -4262,6 +4262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 993e6016b929aa64bacab704c8eb368a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rect: {fileID: 7416537652616297275}
   cardBack: {fileID: 6131952449362948251}
   cardBackLine: {fileID: 7523785923457319689}
   itemSprite: {fileID: 8297941429168631760}

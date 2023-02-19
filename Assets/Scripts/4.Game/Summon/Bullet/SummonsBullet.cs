@@ -23,7 +23,7 @@ public class SummonsBullet : MonoBehaviour
     private void Start()
     {
         gameManager = GameManager.Instance;
-        Invoke("DestroyBullet", 3);
+        Invoke("BulletDestroy", 3);
         damage = Mathf.Round(gameManager.round * 2 * (1 + gameManager.summonPDmg) * 10) * 0.1f;
     }
 
@@ -34,6 +34,11 @@ public class SummonsBullet : MonoBehaviour
         // ÃÑ¾Ë °¢µµ
         angle = Mathf.Atan2(dir.z, dir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(90, -angle, 0);
+
+        if(gameManager.isClear && gameManager.isBossDead)
+        {
+            CancelInvoke("BulletDestroy");
+        }
     }
 
     public void Fire(Vector3 dir)
@@ -46,7 +51,7 @@ public class SummonsBullet : MonoBehaviour
         if(other.CompareTag("Monster"))
         {
             damage = Mathf.Round(gameManager.round * 2 * (1 + gameManager.summonPDmg) * 10) * 0.1f;
-            CancelInvoke("DestroyBullet");
+            CancelInvoke("BulletDestroy");
             DamageUI damageUI = pool.Get();
             damageUI.realDamage = damage;
             damageUI.isMiss = false;

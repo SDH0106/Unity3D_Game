@@ -4,6 +4,7 @@ using static WeaponInfo;
 
 public class CardClick : MonoBehaviour
 {
+    [SerializeField] RectTransform rect;
     [Header("Info")]
     [SerializeField] Image cardBack;
     [SerializeField] Image cardBackLine;
@@ -45,8 +46,6 @@ public class CardClick : MonoBehaviour
 
     public Vector3 showPos;
 
-    RectTransform rect;
-
     private void Start()
     {
         itemManager = ItemManager.Instance;
@@ -75,7 +74,6 @@ public class CardClick : MonoBehaviour
 
     public void ShowPos()
     {
-        rect = GetComponent<RectTransform>();
         RectTransformUtility.ScreenPointToWorldPointInRectangle(rect, Input.mousePosition, Camera.main, out showPos);
         rect.transform.position = showPos;
     }

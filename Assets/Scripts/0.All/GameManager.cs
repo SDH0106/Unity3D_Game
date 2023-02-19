@@ -53,7 +53,7 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector] public bool luckCritical;
     [HideInInspector] public bool doubleShot;
     [HideInInspector] public bool revive;
-    [HideInInspector] public bool ggoGgoSummon;
+    /*[HideInInspector]*/ public bool ggoGgoSummon;
     [HideInInspector] public bool ilsoonSummon;
     [HideInInspector] public bool wakgoodSummon;
     [HideInInspector] public bool ddilpa;
@@ -112,8 +112,8 @@ public class GameManager : Singleton<GameManager>
         Cursor.lockState = CursorLockMode.None;
 
         gameTime = Mathf.Clamp(initGameTime + (round - 1) * 3f, initGameTime, 60f);
-        gameTime = 0;
-        //InitSetting();
+        //gameTime = 0;
+        InitSetting();
         InitArray();
         currentGameTime = gameTime;
         isPause = false;

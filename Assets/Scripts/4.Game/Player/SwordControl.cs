@@ -329,6 +329,7 @@ public class SwordControl : Weapon
     {
         if (pool != null)
             pool.Clear();
+
         if (damagePool != null)
             damagePool.Clear();
     }

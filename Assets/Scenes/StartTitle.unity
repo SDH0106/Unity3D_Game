@@ -5273,7 +5273,7 @@ MonoBehaviour:
   initGameTime: 20
   gameTime: 0
   money: 1000000
-  round: 28
+  round: 8
   woodCount: 0
   woodMaxCount: 70
   maxHp: 0
@@ -5310,7 +5310,7 @@ MonoBehaviour:
   luckCritical: 0
   doubleShot: 0
   revive: 0
-  ggoGgoSummon: 0
+  ggoGgoSummon: 1
   ilsoonSummon: 0
   wakgoodSummon: 0
   ddilpa: 0
