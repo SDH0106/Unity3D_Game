@@ -27,7 +27,7 @@ TagManager:
   - Ground
   - MonsterOverlap
   - CamBound
-  - 
+  - Panel
   - 
   - 
   - 
@@ -49,4 +49,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: panel
+    uniqueID: 537945903
     locked: 0

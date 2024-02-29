@@ -108,6 +108,8 @@ public class GameSceneUI : Singleton<GameSceneUI>
 
         gameManager = GameManager.Instance;
 
+        //monsterSpawn.SetActive(false);
+
         if (gameManager.round == 1)
         {
             if (Convert.ToBoolean(PlayerPrefs.GetInt("GameTuto", 1)))
@@ -254,6 +256,7 @@ public class GameSceneUI : Singleton<GameSceneUI>
                         soundManager.PlayBGM(5, false);
                         bgmChange = true;
                     }
+
                     roundClearText.SetActive(true);
                     CancelInvoke("SpawnOneTree");
                 }

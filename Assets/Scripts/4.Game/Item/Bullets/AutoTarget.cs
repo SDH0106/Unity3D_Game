@@ -2,7 +2,6 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-
 public class AutoTarget : Bullet
 {
     [SerializeField] LayerMask monsterLayer;

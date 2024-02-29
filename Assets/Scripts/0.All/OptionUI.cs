@@ -18,6 +18,7 @@ public class OptionUI : MonoBehaviour
     [SerializeField] GameObject statPanel;
     [SerializeField] GameObject normalToggle;
     [SerializeField] GameObject doubleToggle;
+    [SerializeField] GameObject shopPanel;
 
     GameManager gameManager;
     SoundManager soundManager;
@@ -95,15 +96,11 @@ public class OptionUI : MonoBehaviour
                 muteSfxVolume = muteAllVolume;
             }
 
-            else if (AllSound.value != 1 && !muteAllVolume)
+            else
             {
                 muteAllVolume = false;
-
-                if (!muteBgmVolume)
-                    muteBgmVolume = muteAllVolume;
-
-                if (!muteSfxVolume)
-                    muteSfxVolume = muteAllVolume;
+                muteBgmVolume = muteAllVolume;
+                muteSfxVolume = muteAllVolume;
             }
 
             soundManager.WholeVolume((1 - AllSound.value), muteBgmVolume, muteSfxVolume);
@@ -129,15 +126,10 @@ public class OptionUI : MonoBehaviour
         if (panel.activeSelf)
         {
             if (bgmSound.value == 1)
-            {
                 muteBgmVolume = true;
-            }
 
-            else if (bgmSound.value != 1 && !muteBgmVolume)
-            {
-                if (!muteAllVolume)
-                    muteBgmVolume = false;
-            }
+            else
+                muteBgmVolume = false;
 
             soundManager.BgmVolume((1 - bgmSound.value), muteBgmVolume);
         }
@@ -159,11 +151,8 @@ public class OptionUI : MonoBehaviour
             if (sfxSound.value == 1)
                 muteSfxVolume = true;
 
-            else if (sfxSound.value != 1 && !muteSfxVolume)
-            {
-                if (!muteAllVolume)
-                    muteSfxVolume = false;
-            }
+            else
+                muteSfxVolume = false;
 
             soundManager.EsVolume((1 - sfxSound.value), muteSfxVolume);
         }
@@ -190,7 +179,10 @@ public class OptionUI : MonoBehaviour
                 Cursor.SetCursor(cursorNormal, cursorHotSpot, CursorMode.ForceSoftware);
             }
 
-            if(statPanel != null)
+            else if (gameManager.currentScene == "Shop")
+                shopPanel.SetActive(true);
+
+                if (statPanel != null)
                 statPanel.SetActive(true);
 
             panel.SetActive(true);
@@ -219,6 +211,9 @@ public class OptionUI : MonoBehaviour
                     Cursor.SetCursor(cursorAttack, cursorHotSpot, CursorMode.ForceSoftware);
                 }
             }
+
+            else if (gameManager.currentScene == "Shop")
+                shopPanel.SetActive(false);
 
             if (statPanel != null)
                 statPanel.SetActive(false);

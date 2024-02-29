@@ -105,12 +105,15 @@ public class TitleOption : MonoBehaviour
         Cursor.SetCursor(useCursorNormal, cursorHotSpot, CursorMode.ForceSoftware);
     }
 
+    // GUI, 키 입력등의 이벤트가 발생할 때 호출되는 함수.
     private void OnGUI()
     {
         Event keyEvent = Event.current;     // 지금 진행되고 있는 이벤트 확인
+
         if (keyEvent.isKey)                 // 키보드 입력이 있다면 
         {
             KeySetting.keys[(KeyAction)key] = keyEvent.keyCode;     // 지금 입력된 키를 받아와 KeySetting 클래스의 Dictionary형 변수 keys의 key번째에 등록.
+
             switch((KeyAction)key)
             {
                 case KeyAction.UP:
@@ -200,15 +203,11 @@ public class TitleOption : MonoBehaviour
                 muteSfxVolume = muteAllVolume;
             }
 
-            else if (AllSound.value != 1 && !muteAllVolume)
+            else
             {
                 muteAllVolume = false;
-
-                if (!muteBgmVolume)
-                    muteBgmVolume = muteAllVolume;
-
-                if (!muteSfxVolume)
-                    muteSfxVolume = muteAllVolume;
+                muteBgmVolume = muteAllVolume;
+                muteSfxVolume = muteAllVolume;
             }
 
             soundManager.WholeVolume((1 - AllSound.value), muteBgmVolume, muteSfxVolume);
@@ -234,15 +233,10 @@ public class TitleOption : MonoBehaviour
         if (panel.activeSelf)
         {
             if (bgmSound.value == 1)
-            {
                 muteBgmVolume = true;
-            }
 
-            else if (bgmSound.value != 1 && !muteBgmVolume)
-            {
-                if (!muteAllVolume)
-                    muteBgmVolume = false;
-            }
+            else 
+                muteBgmVolume = false;
 
             soundManager.BgmVolume((1 - bgmSound.value), muteBgmVolume);
         }
@@ -264,11 +258,8 @@ public class TitleOption : MonoBehaviour
             if (sfxSound.value == 1)
                 muteSfxVolume = true;
 
-            else if (sfxSound.value != 1 && !muteSfxVolume)
-            {
-                if (!muteAllVolume)
-                    muteSfxVolume = false;
-            }
+            else
+                muteSfxVolume = false;
 
             soundManager.EsVolume((1 - sfxSound.value), muteSfxVolume);
         }

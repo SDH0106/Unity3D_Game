@@ -60,6 +60,7 @@ MonoBehaviour:
   onePenetrate: 0
   lowPenetrate: 0
   penetrate: 0
-  description: "<color=silver>\uC774\uC138\uB3CC \uBD80\uCE90</color>\uB97C \uBAA8\uB450
-    \uBAA8\uC740\uB2E4\uBA74\n\uD2B9\uBCC4\uD55C \uC77C\uC774 \uC77C\uC5B4\uB0A0\uC9C0\uB3C4...?"
-  weight: 290
+  vamAbsorb: 0
+  description: "<color=silver>\uC774\uC138\uB3CC \uBD80\uCE90</color> 5\uBA85\uC744
+    \uBAA8\uB450 \uBAA8\uC740\uB2E4\uBA74\n\uD2B9\uBCC4\uD55C \uC77C\uC774 \uC77C\uC5B4\uB0A0\uC9C0\uB3C4...?"
+  weight: 80

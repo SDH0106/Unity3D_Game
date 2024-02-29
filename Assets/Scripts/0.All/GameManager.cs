@@ -19,7 +19,7 @@ public class GameManager : Singleton<GameManager>
     [Header("StatData")]
     [SerializeField] public float maxHp;
     [HideInInspector] public float percentDamage;
-    [HideInInspector] public float physicDamage;
+    /*[HideInInspector]*/ public float physicDamage;
     [HideInInspector] public float magicDamage;
     [HideInInspector] public float shortDamage;
     [HideInInspector] public float longDamage;
@@ -53,7 +53,7 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector] public bool luckCritical;
     [HideInInspector] public bool doubleShot;
     [HideInInspector] public bool revive;
-    /*[HideInInspector]*/ public bool ggoGgoSummon;
+    [HideInInspector] public bool ggoGgoSummon;
     [HideInInspector] public bool ilsoonSummon;
     [HideInInspector] public bool wakgoodSummon;
     [HideInInspector] public bool ddilpa;
@@ -113,7 +113,12 @@ public class GameManager : Singleton<GameManager>
 
         gameTime = Mathf.Clamp(initGameTime + (round - 1) * 3f, initGameTime, 60f);
         //gameTime = 0;
-        InitSetting();
+        //PlayerPrefs.SetInt("GameTuto", 1);
+        /*PlayerPrefs.SetInt("ShopTuto", 1);
+        PlayerPrefs.SetInt("BossTuto", 1);
+        PlayerPrefs.SetInt("BagicClear", 0);
+*/
+        //InitSetting();
         InitArray();
         currentGameTime = gameTime;
         isPause = false;
@@ -126,7 +131,7 @@ public class GameManager : Singleton<GameManager>
     void InitSetting()
     {
         initGameTime = 20;
-        gameTime = initGameTime;
+        //gameTime = initGameTime;
         money = 0;
         woodCount = 0;
         woodMaxCount = 70;

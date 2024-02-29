@@ -208,7 +208,7 @@ public class ChestPassiveCard : MonoBehaviour
     {
         SoundManager.Instance.PlayES("ChestSelect");
 
-        if (gameManager.money >= selectedPassive.ItemPrice && itemManager.passiveCounts[arrayCount] > 0)
+        if (itemManager.passiveCounts[arrayCount] > 0)
         {
             itemManager.GetPassiveInfo(selectedPassive);
             itemManager.passiveCounts[arrayCount]--;
