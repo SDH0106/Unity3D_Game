@@ -17,6 +17,7 @@ public class Fishing : Singleton<Fishing>
     [SerializeField] Text currentCount;
     [SerializeField] RectTransform yellow;
     [SerializeField] RectTransform red;
+    [SerializeField] Text timeText;
 
     [Header("Stat")]
     [SerializeField] GameObject statUI;
@@ -44,6 +45,11 @@ public class Fishing : Singleton<Fishing>
     int money;
     int maxFishCount;
     int currentFishCount;
+    float fishingTime;
+    float currentTime;
+
+    int yRand;
+    int rRand;
 
     GameManager gameManager;
     FishingAnim fishingAnim;
@@ -53,9 +59,11 @@ public class Fishing : Singleton<Fishing>
         gameManager = GameManager.Instance;
         fishingAnim = FishingAnim.Instance;
 
-        maxFishCount = 5;
+        maxFishCount = 100;
         currentFishCount = maxFishCount;
         money = 2;
+        fishingTime = 5;
+        currentTime = fishingTime;
 
         roundText.text = gameManager.round.ToString();
         keyText.text = ((KeyCode)PlayerPrefs.GetInt("Key_Dash")).ToString();
@@ -70,6 +78,7 @@ public class Fishing : Singleton<Fishing>
         statUI.SetActive(false);
         nextRoundUI.SetActive(false);
         keyButton.SetActive(false);
+        timeText.gameObject.SetActive(false);
 
         RandomBar();
     }
@@ -80,14 +89,19 @@ public class Fishing : Singleton<Fishing>
         {
             if (!isCatch && isCatchingStart)
             {
+                timeText.gameObject.SetActive(true);
+                timeText.text = currentTime.ToString("F2");
+                currentTime -= Time.deltaTime;
+
                 catchBar.gameObject.SetActive(true);
                 keyButton.SetActive(true);
                 MoveBar(isCatch);
 
                 if (currentFishCount > 0)
                 {
-                    if (Input.GetKeyDown((KeyCode)PlayerPrefs.GetInt("Key_Dash")))
+                    if (Input.GetKeyDown((KeyCode)PlayerPrefs.GetInt("Key_Dash")) || currentTime <= 0)
                     {
+                        timeText.gameObject.SetActive(false);
                         keyButton.SetActive(false);
                         isCatch = true;
                         isGet = true;
@@ -118,10 +132,10 @@ public class Fishing : Singleton<Fishing>
                 isMin = false;
 
             if (isMin)
-                catchBar.value += 0.5f;
+                catchBar.value += Time.deltaTime * 400;
 
             else if (!isMin)
-                catchBar.value -= 0.5f;
+                catchBar.value -= Time.deltaTime * 400;
         }
     }
 
@@ -133,12 +147,12 @@ public class Fishing : Singleton<Fishing>
         // yello = 합이 140
         // red = 합이 185
 
-        int yRand = Random.Range(30, 130);
+        yRand = Random.Range(30, 130);
 
         yellow.offsetMin = new Vector2(yRand, 0);
         yellow.offsetMax = new Vector2(yRand - 140, 0);
 
-        int rRand = Random.Range(yRand + 15, yRand + 30);
+        rRand = Random.Range(yRand + 15, yRand + 30);
         red.offsetMin = new Vector2(rRand, 0);
         red.offsetMax = new Vector2(rRand - 185, 0);
     }
@@ -147,11 +161,18 @@ public class Fishing : Singleton<Fishing>
     {
         if(isCatch)
         {
-            if (catchBar.value >= 135 && catchBar.value <= 150)
-                catchMult = 2;
+            Debug.Log(currentTime);
+            if (currentTime > 0)
+            {
+                if (catchBar.value >= rRand && catchBar.value <= 25 + rRand)    // 200 - (185 - rRand)
+                    catchMult = 2;
 
-            else if (catchBar.value >= 100 && catchBar.value <= 160)
-                catchMult = 1;
+                else if (catchBar.value >= yRand && catchBar.value <= 60 + yRand)       // 200 - (140 - yRand)
+                    catchMult = 1;
+
+                else
+                    catchMult = 0;
+            }
 
             else
                 catchMult = 0;
@@ -200,6 +221,7 @@ public class Fishing : Singleton<Fishing>
         keyButton.SetActive(false);
         isCatch = false;
         isCatchingStart = false;
+        currentTime = fishingTime;
 
         if (currentFishCount > 0)
         {
