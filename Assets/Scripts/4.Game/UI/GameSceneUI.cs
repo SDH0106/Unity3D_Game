@@ -12,6 +12,7 @@ public class GameSceneUI : Singleton<GameSceneUI>
     [SerializeField] GameObject treePrefab;
     [SerializeField] public GameObject monsterSpawn;
     [SerializeField] GameObject tutoPanel;
+    [SerializeField] GameObject selectPanel;
 
     [Header("HP")]
     [SerializeField] Image chararcterImage;
@@ -105,6 +106,7 @@ public class GameSceneUI : Singleton<GameSceneUI>
         clickText.gameObject.SetActive(false);
         clearImage.gameObject.SetActive(false);
         tutoPanel.SetActive(false);
+        selectPanel.SetActive(false);
 
         gameManager = GameManager.Instance;
 
@@ -267,7 +269,11 @@ public class GameSceneUI : Singleton<GameSceneUI>
 
                     if (character.levelUpCount <= 0 && chestCount <= 0)
                     {
-                        gameManager.ToShopScene();
+                        if (gameManager.woodCount < 5)
+                            gameManager.ToNextScene("Shop");
+
+                        else if (gameManager.woodCount >= 5)
+                            selectPanel.SetActive(true);
                     }
 
                     if (character.levelUpCount > 0)
@@ -530,5 +536,13 @@ public class GameSceneUI : Singleton<GameSceneUI>
     public void OnOffStatWindow()
     {
         statWindow.gameObject.SetActive(!statWindow.gameObject.activeSelf);
+    }
+
+    public void SelectScene(string sceneName)
+    {
+        if (sceneName == "Fishing")
+            gameManager.woodCount -= 5;
+
+        gameManager.ToNextScene(sceneName);
     }
 }

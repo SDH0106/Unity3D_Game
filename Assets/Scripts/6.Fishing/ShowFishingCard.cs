@@ -1,6 +1,8 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class ShowPassive : Singleton<ShowPassive>
+public class ShowFishingCard : MonoBehaviour
 {
     [SerializeField] GameObject passiveCardUI;
 
@@ -9,19 +11,21 @@ public class ShowPassive : Singleton<ShowPassive>
     GameManager gameManager;
     ItemManager itemManager;
 
-    private void Start()
+    void Awake()
     {
         gameManager = GameManager.Instance;
         itemManager = ItemManager.Instance;
 
         weightPassiveValue = new float[4];
-
-        ShowRandomPassiveCard();
     }
 
-    public void ShowRandomPassiveCard()
+    private void OnEnable()
     {
-        Debug.Log("1");
+        ShowRandomCard();
+    }
+
+    public void ShowRandomCard()
+    {
         float totalWeight = 0;
 
         weightPassiveValue[0] = 200f - (gameManager.round - 1f) * 6f;
@@ -30,7 +34,7 @@ public class ShowPassive : Singleton<ShowPassive>
         weightPassiveValue[3] = (gameManager.round - 1f) * (gameManager.round) * 0.04f * (1f + Mathf.Clamp(gameManager.luck, 0f, 100f) * 0.01f);
 
 
-        ChestPassiveCard passiveCard = passiveCardUI.GetComponent<ChestPassiveCard>();
+        FishingCard passiveCard = passiveCardUI.GetComponent<FishingCard>();
 
         for (int i = 0; i < passiveCard.passiveInfo.Length; i++)
         {

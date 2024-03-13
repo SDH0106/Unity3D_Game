@@ -111,8 +111,8 @@ public class GameManager : Singleton<GameManager>
         Cursor.SetCursor(useCursorNormal, cursorHotSpot, CursorMode.ForceSoftware);
         Cursor.lockState = CursorLockMode.None;
 
-        gameTime = Mathf.Clamp(initGameTime + (round - 1) * 3f, initGameTime, 60f);
-        //gameTime = 0;
+        //gameTime = Mathf.Clamp(initGameTime + (round - 1) * 3f, initGameTime, 60f);
+        gameTime = 0;
         //PlayerPrefs.SetInt("GameTuto", 1);
         /*PlayerPrefs.SetInt("ShopTuto", 1);
         PlayerPrefs.SetInt("BossTuto", 1);
@@ -348,14 +348,14 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    public void ToShopScene()
+    public void ToNextScene(string sceneName)
     {
         Character.Instance.gameObject.SetActive(true);
         Character.Instance.transform.position = new Vector3(0f, 0f, -40f);
-        currentScene = "Shop";
+        currentScene = sceneName;
         SceneManager.LoadScene(currentScene);
 
-        gameTime = Mathf.Clamp(initGameTime + (round - 1) * 3f, initGameTime, 60f);
+        gameTime = Mathf.Clamp(initGameTime + round * 3f, initGameTime, 60f);
 
         currentGameTime = gameTime;
 

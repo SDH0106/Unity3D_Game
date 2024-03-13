@@ -5528,6 +5528,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7040922339243266447, guid: 0d4c13e78a7917b499c9d320e83136c3, type: 3}
+      propertyPath: backPanel
+      value: 
+      objectReference: {fileID: 1968751935}
+    - target: {fileID: 7040922339243266447, guid: 0d4c13e78a7917b499c9d320e83136c3, type: 3}
       propertyPath: shopPanel
       value: 
       objectReference: {fileID: 1968751935}

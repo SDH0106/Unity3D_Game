@@ -18,7 +18,7 @@ public class OptionUI : MonoBehaviour
     [SerializeField] GameObject statPanel;
     [SerializeField] GameObject normalToggle;
     [SerializeField] GameObject doubleToggle;
-    [SerializeField] GameObject shopPanel;
+    [SerializeField] GameObject backPanel;
 
     GameManager gameManager;
     SoundManager soundManager;
@@ -179,10 +179,10 @@ public class OptionUI : MonoBehaviour
                 Cursor.SetCursor(cursorNormal, cursorHotSpot, CursorMode.ForceSoftware);
             }
 
-            else if (gameManager.currentScene == "Shop")
-                shopPanel.SetActive(true);
+            if (backPanel != null)
+                backPanel.SetActive(true);
 
-                if (statPanel != null)
+            if (statPanel != null)
                 statPanel.SetActive(true);
 
             panel.SetActive(true);
@@ -212,8 +212,8 @@ public class OptionUI : MonoBehaviour
                 }
             }
 
-            else if (gameManager.currentScene == "Shop")
-                shopPanel.SetActive(false);
+            if (backPanel != null)
+                backPanel.SetActive(false);
 
             if (statPanel != null)
                 statPanel.SetActive(false);
