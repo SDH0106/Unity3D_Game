@@ -161,7 +161,6 @@ public class Fishing : Singleton<Fishing>
     {
         if(isCatch)
         {
-            Debug.Log(currentTime);
             if (currentTime > 0)
             {
                 if (catchBar.value >= rRand && catchBar.value <= 25 + rRand)    // 200 - (185 - rRand)

@@ -114,8 +114,6 @@ public class Character : Singleton<Character>
 
     void Update()
     {
-        HpSetting();
-
         if (exp >= maxExp)
         {
             SoundManager.Instance.PlayES("LevelUp");
@@ -136,6 +134,8 @@ public class Character : Singleton<Character>
 
         if (gameManager.currentScene == "Game" && !gameManager.isPause)
         {
+            HpSetting();
+
             isRun = false;
 
             if (currentHp > 0 && (!gameManager.isClear || !gameManager.isBossDead))
