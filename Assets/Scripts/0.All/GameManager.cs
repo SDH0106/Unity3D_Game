@@ -304,8 +304,8 @@ public class GameManager : Singleton<GameManager>
 
     private void Update()
     {
-        scene = SceneManager.GetActiveScene();
-        currentScene = scene.name;
+        /*scene = SceneManager.GetActiveScene();
+        currentScene = scene.name;*/
 
         if (currentGameTime <= 0)
         {
@@ -355,7 +355,7 @@ public class GameManager : Singleton<GameManager>
         currentScene = sceneName;
         SceneManager.LoadScene(currentScene);
 
-        gameTime = Mathf.Clamp(initGameTime + round * 3f, initGameTime, 60f);
+        gameTime = Mathf.Clamp(initGameTime + (round - 1) * 3f, initGameTime, 60f);
 
         currentGameTime = gameTime;
 

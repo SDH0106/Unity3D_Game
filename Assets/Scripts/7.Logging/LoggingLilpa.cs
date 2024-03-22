@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LoggingLilpa : MonoBehaviour
+public class LoggingLilpa : Singleton<LoggingLilpa>
 {
     [SerializeField] float speed;
+    [SerializeField] Collider ground;
     bool isRun;
 
     float x;
@@ -12,6 +13,7 @@ public class LoggingLilpa : MonoBehaviour
 
     bool isDownUp = false;
     bool isLeftRight = false;
+    [HideInInspector] public bool isLoggingAnimStart;
 
     Vector3 dir;
 
@@ -19,24 +21,37 @@ public class LoggingLilpa : MonoBehaviour
     SpriteRenderer rend;
     GameManager gameManager;
     Logging logging;
+    LoggingSceneManager sceneManager;
+
 
     void Start()
     {
+        speed = 5;
+        isLoggingAnimStart = false;
         anim = GetComponent<Animator>();
         rend = GetComponent<SpriteRenderer>();
         gameManager = GameManager.Instance;
         logging = Logging.Instance;
+        sceneManager = LoggingSceneManager.Instance;
     }
 
     void Update()
     {
-        //if (!gameManager.isPause)
-        if(!logging.isLogging)
+        if (!gameManager.isPause)
         {
-            Move();
+            if (!logging.isLogging)
+            {
+                if (!sceneManager.isEnd)
+                    Move();
 
-            anim.SetFloat("moveSpeed", 1 + (speed * 0.1f));
-            anim.SetBool("isRun", isRun);
+                else
+                    isRun = false;
+
+                anim.SetFloat("moveSpeed", 1 + (speed * 0.1f));
+                anim.SetBool("isRun", isRun);
+            }
+
+            anim.SetBool("isLogging", isLoggingAnimStart);
         }
     }
 
@@ -96,15 +111,11 @@ public class LoggingLilpa : MonoBehaviour
                 isLeftRight = false;
         }
 
-
-        /*if (ground == null)
-            ground = GameSceneUI.Instance.ground;*/
-
         dir = (Vector3.right * x + Vector3.forward * z).normalized;
 
         transform.position += dir * speed * Time.deltaTime;
 
-        //transform.position = ground.bounds.ClosestPoint(transform.position);
+        transform.position = ground.bounds.ClosestPoint(transform.position);
 
         if (dir != Vector3.zero)
             isRun = true;

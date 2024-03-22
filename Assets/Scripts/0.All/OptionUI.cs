@@ -22,6 +22,7 @@ public class OptionUI : MonoBehaviour
 
     GameManager gameManager;
     SoundManager soundManager;
+    Logging logging;
 
     bool muteAllVolume;
     bool muteBgmVolume;
@@ -34,6 +35,9 @@ public class OptionUI : MonoBehaviour
 
         gameManager = GameManager.Instance;
         soundManager = SoundManager.Instance;
+
+        if (Logging.Instance != null)
+            logging = Logging.Instance;
 
         cursorNormal = gameManager.useCursorNormal;
         cursorAttack = gameManager.useCursorAttack;
@@ -60,13 +64,28 @@ public class OptionUI : MonoBehaviour
         bUnMark.SetActive(muteBgmVolume);
         sUnMark.SetActive(muteSfxVolume);
 
-        if (!gameManager.isTuto)
+        if (logging != null)
         {
-            if (Input.GetKeyDown(KeyCode.Escape) && !gameManager.isPause)
-                PauseGame();
+            if (!logging.isLogging)
+            {
+                if (Input.GetKeyDown(KeyCode.Escape) && !gameManager.isPause)
+                    PauseGame();
 
-            else if (Input.GetKeyDown(KeyCode.Escape) && gameManager.isPause)
-                ReturnToGame();
+                else if (Input.GetKeyDown(KeyCode.Escape) && gameManager.isPause)
+                    ReturnToGame();
+            }
+        }
+
+        else
+        {
+            if (!gameManager.isTuto)
+            {
+                if (Input.GetKeyDown(KeyCode.Escape) && !gameManager.isPause)
+                    PauseGame();
+
+                else if (Input.GetKeyDown(KeyCode.Escape) && gameManager.isPause)
+                    ReturnToGame();
+            }
         }
     }
 

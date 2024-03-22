@@ -25,6 +25,7 @@ public class SelectSceneCard : MonoBehaviour
 
     ItemManager itemManager;
     Character character;
+    GameManager gameManager;
 
     private void Start()
     {
@@ -78,17 +79,17 @@ public class SelectSceneCard : MonoBehaviour
 
     public void MoveScene(string sceneName)
     {
-        character = Character.Instance;
         itemManager = ItemManager.Instance;
+        gameManager = GameManager.Instance;
 
         if (selectedWeapon.Type == WeaponInfo.WEAPON_TYPE.°Ë)
         {
             itemManager.GetWeaponInfo(selectedWeapon);
             itemManager.weaponGrade[itemManager.weaponCount] = selectedWeapon.weaponGrade;
             count++;
-            SceneManager.LoadScene(sceneName);
             character.Equip();
             SoundManager.Instance.PlayES("WeaponSelect");
+            gameManager.ToNextScene("Game");
         }
 
         else
@@ -109,7 +110,7 @@ public class SelectSceneCard : MonoBehaviour
                     character.thunderCount++;
                 }
                 SoundManager.Instance.PlayES("WeaponSelect");
-                SceneManager.LoadScene(sceneName);
+                gameManager.ToNextScene("Game");
             }
         }
     }

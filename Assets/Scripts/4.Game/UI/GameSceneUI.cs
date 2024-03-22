@@ -540,7 +540,7 @@ public class GameSceneUI : Singleton<GameSceneUI>
 
     public void SelectScene(string sceneName)
     {
-        if (sceneName == "Fishing")
+        if (sceneName == "Fishing" || sceneName == "Logging")
             gameManager.woodCount -= 5;
 
         gameManager.ToNextScene(sceneName);
