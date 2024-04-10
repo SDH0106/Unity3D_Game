@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,7 +14,6 @@ public class LoggingSceneManager : Singleton<LoggingSceneManager>
     [SerializeField] Collider ground;
 
     GameManager gameManager;
-    Logging logging;
 
     float time;
     float currentTime;
@@ -24,7 +22,6 @@ public class LoggingSceneManager : Singleton<LoggingSceneManager>
     private void Start()
     {
         gameManager = GameManager.Instance;
-        logging = Logging.Instance;
 
         time = 60f;
         currentTime = time;
@@ -48,7 +45,7 @@ public class LoggingSceneManager : Singleton<LoggingSceneManager>
                 timeText.text = currentTime.ToString("F2");
             }
 
-            else if (currentTime == 0f && !isEnd)
+            else if ((currentTime == 0f) && !isEnd)
             {
                 isEnd = true;
                 treeParent.SetActive(false);
@@ -70,18 +67,21 @@ public class LoggingSceneManager : Singleton<LoggingSceneManager>
         coinText.text = gameManager.money.ToString();
     }
 
-    List<int> posX, posZ;
+    /*List<int> posX, posZ;
 
     void TreeInstance()
     {
-        posX = new List<int>();
-        posZ = new List<int>();
+        if (posX == null && posZ == null)
+        {
+            posX = new List<int>();
+            posZ = new List<int>();
 
-        for (int i = -19; i <= 19; i += 2)
-            posX.Add(i);
+            for (int i = -19; i <= 21; i += 2)
+                posX.Add(i);
 
-        for (int i = -12; i <= 12; i += 2)
-            posZ.Add(i);
+            for (int i = -11; i <= 11; i += 2)
+                posZ.Add(i);
+        }
 
         for (int i = 0; i < 30; i++)
         {
@@ -96,10 +96,58 @@ public class LoggingSceneManager : Singleton<LoggingSceneManager>
 
             tree.transform.SetParent(treeParent.transform);
 
+            Debug.Log(posX.Count);
+            Debug.Log(posZ.Count);
+
             int randX = Random.Range(0, posX.Count - 1);
             int randZ = Random.Range(0, posZ.Count - 1);
 
             tree.transform.position = ground.bounds.ClosestPoint(new Vector3(posX[randX], 0, posZ[randZ]));
+
+            if (i % 3 != 0)
+                posX.RemoveAt(randX);
+
+            else
+                posZ.RemoveAt(randZ);
+        }
+    }*/
+
+    List<Vector3> posList;
+
+    void TreeInstance()
+    {
+        if (posList == null)
+        {
+            posList = new List<Vector3>();
+
+            for (int i = -19; i <= 21; i += 2)
+            {
+                for (int j = -11; j <= 11; j += 2)
+                {
+                    posList.Add(new Vector3(i, 0, j));
+                }
+            }
+        }
+
+        for (int i = 0; i < 30; i++)
+        {
+            int rand = Random.Range(0, 100);
+            GameObject tree;
+
+            if (rand < 95)
+                tree = Instantiate(treePrefabs[0]);
+
+            else
+                tree = Instantiate(treePrefabs[1]);
+
+            tree.transform.SetParent(treeParent.transform);
+
+
+            int randPos = Random.Range(0, posList.Count - 1);
+
+            tree.transform.position = ground.bounds.ClosestPoint(posList[randPos]);
+
+            posList.RemoveAt(randPos);
         }
     }
 

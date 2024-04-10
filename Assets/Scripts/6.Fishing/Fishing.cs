@@ -59,7 +59,7 @@ public class Fishing : Singleton<Fishing>
         gameManager = GameManager.Instance;
         fishingAnim = FishingAnim.Instance;
 
-        maxFishCount = 100;
+        maxFishCount = 5;
         currentFishCount = maxFishCount;
         money = 2;
         fishingTime = 5;

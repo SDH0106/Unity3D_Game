@@ -290,6 +290,7 @@ GameObject:
   - component: {fileID: 6412345365923146293}
   - component: {fileID: 3093632571883653313}
   - component: {fileID: 6567062546898947347}
+  - component: {fileID: 5103846679609278052}
   m_Layer: 0
   m_Name: LoggingTree
   m_TagString: Tree
@@ -393,3 +394,24 @@ MonoBehaviour:
   buttonUI: {fileID: 386649826767636824}
   keyText: {fileID: 1677217060682122515}
   treeNum: 0
+  brokenAnim: {fileID: 7400000, guid: 640d3cdb60ae74e4fb3a69be8ed1794d, type: 2}
+--- !u!95 &5103846679609278052
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3708054114444134878}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 46fde1f7f23575148a946e53302bec70, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

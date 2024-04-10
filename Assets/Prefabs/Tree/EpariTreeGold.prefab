@@ -401,6 +401,7 @@ MonoBehaviour:
   buttonUI: {fileID: 1304218999752475371}
   keyText: {fileID: 8180732659832883065}
   treeNum: 1
+  brokenAnim: {fileID: 7400000, guid: 3fff5a95b44a74f468803c9beb61e3dd, type: 2}
 --- !u!65 &4943966535365872181
 BoxCollider:
   m_ObjectHideFlags: 0

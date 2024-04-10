@@ -131,7 +131,7 @@ public class GameManager : Singleton<GameManager>
     void InitSetting()
     {
         initGameTime = 20;
-        //gameTime = initGameTime;
+        gameTime = initGameTime;
         money = 0;
         woodCount = 0;
         woodMaxCount = 70;
@@ -304,8 +304,8 @@ public class GameManager : Singleton<GameManager>
 
     private void Update()
     {
-        /*scene = SceneManager.GetActiveScene();
-        currentScene = scene.name;*/
+        scene = SceneManager.GetActiveScene();
+        //currentScene = scene.name;
 
         if (currentGameTime <= 0)
         {
@@ -314,11 +314,7 @@ public class GameManager : Singleton<GameManager>
 
         if (scene.buildIndex > 1)
         {
-            StatArray();
-            IntVariableArray();
-            FloatVariableArray();
-            BoolVariableArray();
-            
+            StatSetting();
             OnGameScene();
         }
 
@@ -329,11 +325,19 @@ public class GameManager : Singleton<GameManager>
             maxAbs = 1f;
     }
 
+    public void StatSetting()
+    {
+        StatArray();
+        IntVariableArray();
+        FloatVariableArray();
+        BoolVariableArray();
+    }
+
     void OnGameScene()
     {
         if (currentScene == "Game")
         {
-            Character.Instance.gameObject.SetActive(true);
+            //Character.Instance.gameObject.SetActive(true);
 
             if (Character.Instance.currentHp > 0)
                 currentGameTime -= Time.deltaTime;
@@ -355,8 +359,8 @@ public class GameManager : Singleton<GameManager>
         currentScene = sceneName;
         SceneManager.LoadScene(currentScene);
 
-        gameTime = Mathf.Clamp(initGameTime + (round - 1) * 3f, initGameTime, 60f);
-
+        //gameTime = Mathf.Clamp(initGameTime + (round - 1) * 3f, initGameTime, 60f);
+        gameTime = 0;
         currentGameTime = gameTime;
 
         isClear = false;

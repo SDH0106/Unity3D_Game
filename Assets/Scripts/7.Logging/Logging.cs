@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,9 +15,10 @@ public class Logging : Singleton<Logging>
     [HideInInspector] public float loggingTime;
     [HideInInspector] public float currentTime;
 
-    [HideInInspector] public bool isFail;
     bool isStart;
     bool isArrowClear;
+    [HideInInspector] public bool isSuccess;
+    [HideInInspector] public bool isTreeDead;
 
     string arrStr;
     KeyCode arrKey;
@@ -35,8 +35,9 @@ public class Logging : Singleton<Logging>
         lilpa = LoggingLilpa.Instance;
 
         isLogging = false;
-        isFail = false;
         isArrowClear = false;
+        isTreeDead = false;
+        isSuccess = false;
         count = 0;
 
         timeText.gameObject.SetActive(false);
@@ -102,11 +103,11 @@ public class Logging : Singleton<Logging>
                     {
                         if (checkKey != KeyCode.None && checkKey != (KeyCode)PlayerPrefs.GetInt("Key_Dash"))
                         {
-                            isFail = true;
                             isStart = false;
                             isArrowClear = true;
                             checkKey = KeyCode.None;
                             arrowParent.GetChild(count).GetComponent<Image>().color = Color.red;
+                            isLogging = false;
                             StartCoroutine(ActiveText("실패...", Color.red));
                         }
                     }
@@ -114,6 +115,9 @@ public class Logging : Singleton<Logging>
                     if (count >= arrowParent.childCount)
                     {
                         isArrowClear = true;
+                        lilpa.isAutoMove = true;
+                        isSuccess = true;
+
                         StartCoroutine(ActiveText("성공!", Color.cyan));
                     }
                 }
@@ -122,9 +126,9 @@ public class Logging : Singleton<Logging>
                 {
                     if (currentTime <= 0)
                     {
-                        isFail = true;
                         isStart = false;
                         checkKey = KeyCode.None;
+                        isLogging = false;
                         StartCoroutine(ActiveText("시간 초과...", Color.red));
                     }
                 }
@@ -135,8 +139,8 @@ public class Logging : Singleton<Logging>
         {
             if (!coroutineEnd)
             {
-                isFail = true;
                 arrowParent.gameObject.SetActive(false);
+                isLogging = false;
                 StartCoroutine(ActiveText("벌목 종료!", Color.yellow));
                 coroutineEnd = true;
             }
@@ -156,7 +160,7 @@ public class Logging : Singleton<Logging>
 
     public void KeyHit()
     {
-        lilpa.isLoggingAnimStart = true;
+        lilpa.isLoggingAnimating = true;
 
         for (int i = 0; i < arrowParent.transform.childCount; i++)
         {
@@ -175,8 +179,9 @@ public class Logging : Singleton<Logging>
 
     void Initialize()
     {
-        isLogging = false;
+        //isLogging = false;
         isArrowClear = false;
+        //isTreeDead = false;
         count = 0;
         currentTime = loggingTime;
         arrowParent.gameObject.SetActive(false);
@@ -185,7 +190,9 @@ public class Logging : Singleton<Logging>
 
     IEnumerator ActiveText(string str, Color color)
     {
-        lilpa.isLoggingAnimStart = false;
+        isTreeDead = true;
+        //isLogging = false;
+        lilpa.isLoggingAnimating = false;
         timeText.gameObject.SetActive(false);
         failText.text = str;
         failText.color = color;
@@ -193,6 +200,7 @@ public class Logging : Singleton<Logging>
 
         yield return new WaitForSeconds(1f);
         failText.gameObject.SetActive(false);
+        lilpa.isCanControl = true;
         Initialize();
     }
 }

@@ -22,7 +22,7 @@ public class OptionUI : MonoBehaviour
 
     GameManager gameManager;
     SoundManager soundManager;
-    Logging logging;
+    LoggingLilpa lilpa;
 
     bool muteAllVolume;
     bool muteBgmVolume;
@@ -36,8 +36,8 @@ public class OptionUI : MonoBehaviour
         gameManager = GameManager.Instance;
         soundManager = SoundManager.Instance;
 
-        if (Logging.Instance != null)
-            logging = Logging.Instance;
+        if (LoggingLilpa.Instance != null)
+            lilpa = LoggingLilpa.Instance;
 
         cursorNormal = gameManager.useCursorNormal;
         cursorAttack = gameManager.useCursorAttack;
@@ -64,9 +64,9 @@ public class OptionUI : MonoBehaviour
         bUnMark.SetActive(muteBgmVolume);
         sUnMark.SetActive(muteSfxVolume);
 
-        if (logging != null)
+        if (lilpa != null)
         {
-            if (!logging.isLogging)
+            if (lilpa.isCanControl)
             {
                 if (Input.GetKeyDown(KeyCode.Escape) && !gameManager.isPause)
                     PauseGame();

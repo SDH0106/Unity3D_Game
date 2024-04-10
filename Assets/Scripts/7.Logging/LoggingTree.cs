@@ -14,18 +14,25 @@ public class LoggingTree : MonoBehaviour
     bool isContact;
     bool isKeyPush;
 
+    bool isBroekn;
 
     GameManager gameManager;
+    LoggingLilpa lilpa;
+    Animator anim;
 
     private void Start()
     {
+        anim = GetComponent<Animator>();
+
         gameManager = GameManager.Instance;
         logging = Logging.Instance;
+        lilpa = LoggingLilpa.Instance;
 
         buttonUI.SetActive(false);
 
         isContact = false;
         isKeyPush = false;
+        isBroekn = false;
 
         keyText.text = ((KeyCode)PlayerPrefs.GetInt("Key_Dash")).ToString();
     }
@@ -39,7 +46,11 @@ public class LoggingTree : MonoBehaviour
                 if (Input.GetKeyDown((KeyCode)PlayerPrefs.GetInt("Key_Dash")))
                 {
                     buttonUI.SetActive(false);
-                    logging.isLogging = true;
+                    lilpa.treePos = transform.position;
+                    lilpa.treeIndex = treeNum;
+                    lilpa.isCanControl = false;
+                    lilpa.isAutoMove = true;
+                    //logging.isLogging = true;
                     if (treeNum == 0)
                         logging.loggingTime = 5f;
 
@@ -49,31 +60,29 @@ public class LoggingTree : MonoBehaviour
                     logging.currentTime = logging.loggingTime;
                     isKeyPush = true;
 
-                    logging.KeyHit();
+                    //logging.KeyHit();
                 }
             }
 
             else
             {
-                if (!logging.isLogging)
+                if (logging.isTreeDead && !logging.isLogging)
                 {
-                    isContact = false;
-
-                    if(!logging.isFail)
+                    if (logging.isSuccess)
                     {
-                        if (treeNum == 0)
-                            gameManager.woodCount += 5;
-
-                        else
-                            gameManager.money += 200;
+                        isBroekn = true;
+                        anim.SetBool("isBroken", isBroekn);
                     }
-                    
-                    logging.isLogging = false;
-                    logging.isFail = false;
 
-                    Destroy(gameObject);
+                    else
+                    {
+                        isContact = false;
+                        logging.isTreeDead = false;
+                        Destroy(gameObject);
+                    }
                 }
             }
+
         }
     }
 
@@ -91,7 +100,23 @@ public class LoggingTree : MonoBehaviour
         if (other.CompareTag("Character"))
         {
             buttonUI.SetActive(false);
-            isContact = false;
+
+            if (!isKeyPush)
+                isContact = false;
         }
+    }
+
+    public void TreeBroken()
+    {
+        if (treeNum == 0)
+            gameManager.woodCount += 5;
+
+        else
+            gameManager.money += 200;
+
+        logging.isSuccess = false;
+        logging.isTreeDead = false;
+        isContact = false;
+        Destroy(gameObject);
     }
 }

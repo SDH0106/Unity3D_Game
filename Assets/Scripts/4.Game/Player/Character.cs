@@ -414,14 +414,15 @@ public class Character : Singleton<Character>
             }
         }
 
-        if (ground == null)
-            ground = GameSceneUI.Instance.ground;
-
         dir = (Vector3.right * x + Vector3.forward * z).normalized;
 
         transform.position += dir * speed * Time.deltaTime;
 
-        transform.position = ground.bounds.ClosestPoint(transform.position);
+        if (ground == null)
+            ground = GameSceneUI.Instance.ground;
+
+        else
+            transform.position = ground.bounds.ClosestPoint(transform.position);
 
         if (dir != Vector3.zero)
             isRun = true;

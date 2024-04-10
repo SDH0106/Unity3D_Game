@@ -13,6 +13,7 @@ public class GameSceneUI : Singleton<GameSceneUI>
     [SerializeField] public GameObject monsterSpawn;
     [SerializeField] GameObject tutoPanel;
     [SerializeField] GameObject selectPanel;
+    [SerializeField] GameObject treeShopPanel;
 
     [Header("HP")]
     [SerializeField] Image chararcterImage;
@@ -85,8 +86,10 @@ public class GameSceneUI : Singleton<GameSceneUI>
     GameManager gameManager;
     Character character;
     SoundManager soundManager;
+    TreeShop treeShop;
 
     [HideInInspector] public int chestCount;
+    [HideInInspector] public int treeShopCount;
 
     bool bgmChange;
 
@@ -107,8 +110,10 @@ public class GameSceneUI : Singleton<GameSceneUI>
         clearImage.gameObject.SetActive(false);
         tutoPanel.SetActive(false);
         selectPanel.SetActive(false);
+        treeShopPanel.SetActive(false);
 
         gameManager = GameManager.Instance;
+        treeShop = TreeShop.Instance;
 
         //monsterSpawn.SetActive(false);
 
@@ -165,6 +170,7 @@ public class GameSceneUI : Singleton<GameSceneUI>
             InvokeRepeating("SpawnOneTree", 10f, 10f);
 
         chestCount = 0;
+        treeShopCount = 1;
     }
 
     IEnumerator BlinkBossSceneText()
@@ -269,20 +275,32 @@ public class GameSceneUI : Singleton<GameSceneUI>
 
                     if (character.levelUpCount <= 0 && chestCount <= 0)
                     {
-                        if (gameManager.woodCount < 5)
-                            gameManager.ToNextScene("Shop");
+                        if (gameManager.round % 5 == 0 && gameManager.woodCount >= 5 && treeShopCount > 0)
+                        {
+                            statCardParent.gameObject.SetActive(false);
+                            chestPassive.gameObject.SetActive(false);
+                            treeShopPanel.SetActive(true);
+                        }
 
-                        else if (gameManager.woodCount >= 5)
-                            selectPanel.SetActive(true);
+                        else 
+                        {
+                            treeShopPanel.SetActive(false);
+
+                            if (gameManager.woodCount < 5)
+                                gameManager.ToNextScene("Shop");
+
+                            else if (gameManager.woodCount >= 5)
+                                selectPanel.SetActive(true);
+                        }
                     }
 
-                    if (character.levelUpCount > 0)
+                    else if (character.levelUpCount > 0)
                     {
                         statCardParent.gameObject.SetActive(true);
                         statWindow.SetActive(true);
                     }
 
-                    if (character.levelUpCount <= 0 && chestCount > 0)
+                    else if (character.levelUpCount <= 0 && chestCount > 0)
                     {
                         statCardParent.gameObject.SetActive(false);
                         chestPassive.gameObject.SetActive(true);
