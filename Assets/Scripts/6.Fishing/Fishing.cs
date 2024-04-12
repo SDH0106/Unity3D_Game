@@ -255,6 +255,7 @@ public class Fishing : Singleton<Fishing>
 
     public void NextRound()
     {
-        gameManager.ToNextScene("Shop");
+        gameManager.round++;
+        gameManager.ToNextScene("Game");
     }
 }

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.TextCore.Text;
 
 public class GameManager : Singleton<GameManager>       
 {
@@ -111,8 +112,6 @@ public class GameManager : Singleton<GameManager>
         Cursor.SetCursor(useCursorNormal, cursorHotSpot, CursorMode.ForceSoftware);
         Cursor.lockState = CursorLockMode.None;
 
-        //gameTime = Mathf.Clamp(initGameTime + (round - 1) * 3f, initGameTime, 60f);
-        gameTime = 0;
         //PlayerPrefs.SetInt("GameTuto", 1);
         /*PlayerPrefs.SetInt("ShopTuto", 1);
         PlayerPrefs.SetInt("BossTuto", 1);
@@ -131,7 +130,7 @@ public class GameManager : Singleton<GameManager>
     void InitSetting()
     {
         initGameTime = 20;
-        //gameTime = initGameTime;
+        gameTime = initGameTime;
         money = 0;
         woodCount = 30;
         woodMaxCount = 70;
@@ -350,8 +349,22 @@ public class GameManager : Singleton<GameManager>
 
     public void ToNextScene(string sceneName)
     {
-        Character.Instance.transform.position = new Vector3(0f, 0f, -40f);
+        Character character = Character.Instance;
+
+        character.transform.position = new Vector3(0f, 0f, -40f);
         currentScene = sceneName;
+        character.thunderMark.transform.localScale = new Vector3(Mathf.Clamp(4f + range * 0.5f, 1, 12), Mathf.Clamp(4f + range * 0.5f, 1, 12), 0);
+
+        if (maxHp < 1)
+            character.maxHp = 1;
+
+        else if (maxHp >= 1)
+            character.maxHp = maxHp;
+
+        character.currentHp = character.maxHp;
+        character.dashCount = dashCount;
+        character.dashCoolTime = character.initDashCoolTime;
+
         SceneManager.LoadScene(currentScene);
 
         //gameTime = Mathf.Clamp(initGameTime + (round - 1) * 3f, initGameTime, 60f);

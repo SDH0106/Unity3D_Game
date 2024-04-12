@@ -160,22 +160,8 @@ public class ShopManager : Singleton<ShopManager>
 
     public void ToGameScene()
     {
-        gameManager.currentScene = "Game";
-        character.transform.position = new Vector3(0f, 0f, -40f);
         gameManager.round++;
-        rerollMoney = -gameManager.round;
-        character.thunderMark.transform.localScale = new Vector3(Mathf.Clamp(4f + gameManager.range * 0.5f, 1, 12), Mathf.Clamp(4f + gameManager.range * 0.5f, 1, 12), 0);
-
-        if (gameManager.maxHp < 1)
-            character.maxHp = 1;
-
-        else if(gameManager.maxHp >= 1)
-            character.maxHp = gameManager.maxHp;
-
-        character.currentHp = character.maxHp;
-        character.dashCount = gameManager.dashCount;
-        character.dashCoolTime = character.initDashCoolTime;
-        SceneManager.LoadScene("Game");
+        gameManager.ToNextScene("Game");
     }
 
     void ImageAlphaChange(int i, int a, Image image)

@@ -108,6 +108,7 @@ public class LoggingSceneManager : Singleton<LoggingSceneManager>
 
     public void ToGameScene()
     {
-        gameManager.ToNextScene("Shop");
+        gameManager.round++;
+        gameManager.ToNextScene("Game");
     }
 }

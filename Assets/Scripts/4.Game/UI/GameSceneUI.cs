@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Analytics;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -169,7 +170,7 @@ public class GameSceneUI : Singleton<GameSceneUI>
         if (gameManager.spawnTree)
             InvokeRepeating("SpawnOneTree", 10f, 10f);
 
-        chestCount = 2;
+        chestCount = 0;
         treeShopCount = 1;
     }
 
@@ -279,6 +280,8 @@ public class GameSceneUI : Singleton<GameSceneUI>
 
                         else 
                         {
+                            statCardParent.gameObject.SetActive(false);
+                            chestPassive.gameObject.SetActive(false);
                             treeShopPanel.SetActive(false);
 
                             if (gameManager.woodCount < 5)
@@ -554,9 +557,22 @@ public class GameSceneUI : Singleton<GameSceneUI>
 
     public void SelectScene(string sceneName)
     {
-        if (sceneName == "Fishing" || sceneName == "Logging")
-            gameManager.woodCount -= 5;
-
         gameManager.ToNextScene(sceneName);
+    }
+
+    public void GetRandomSecne()
+    {
+        gameManager.woodCount -= 5;
+
+        int rand = UnityEngine.Random.Range(0, 10);
+        string nextScene;
+
+        if (rand % 2 == 0)
+            nextScene = "Fishing";
+
+        else
+            nextScene = "Logging";
+
+        SelectScene(nextScene);
     }
 }
