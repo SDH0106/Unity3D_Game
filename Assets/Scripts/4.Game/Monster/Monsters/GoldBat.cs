@@ -22,8 +22,10 @@ public class GoldBat : Monster
     void Start()
     {
         StartSetting();
+
         if (gameManager.round == 10)
             hp = 1000;
+
         else if (gameManager.round == 30)
             hp = 55000;
 

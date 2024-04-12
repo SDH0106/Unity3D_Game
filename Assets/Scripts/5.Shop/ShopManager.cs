@@ -104,9 +104,7 @@ public class ShopManager : Singleton<ShopManager>
         if (gameManager.round == 1)
         {
             if (Convert.ToBoolean(PlayerPrefs.GetInt("ShopTuto", 1)))
-            {
                 tutoPanel.SetActive(Convert.ToBoolean(PlayerPrefs.GetInt("ShopTuto", 1)));
-            }
         }
     }
 
@@ -201,15 +199,11 @@ public class ShopManager : Singleton<ShopManager>
         for (int i = 0; i < 4; i++)
         {
             if (cardsParent.GetChild(i).childCount == 0)
-            {
                 refillNum++;
-            }
         }
 
         if (refillNum == 4)
-        {
             CardSlot();
-        }
     }
 
     public void Reroll()
@@ -250,11 +244,8 @@ public class ShopManager : Singleton<ShopManager>
         }
 
         else
-        {
             SoundManager.Instance.PlayES("CantBuy");
-        }
     }
-
     void CardSlot()
     {
         for (int i = 0; i < 4; i++)
@@ -357,11 +348,8 @@ public class ShopManager : Singleton<ShopManager>
                 image.sprite = itemManager.storedWeapon[i].ItemSprite;
             }
 
-
             else if (itemManager.storedWeapon[i] == null)
-            {
                 ImageAlphaChange(i, 0, image);
-            }
         }
     }
 
@@ -381,24 +369,16 @@ public class ShopManager : Singleton<ShopManager>
                 countText.text = itemManager.storedPassiveCount[i].ToString();
 
                 if (itemManager.storedPassive[i].ItemGrade == Grade.ÀÏ¹Ý)
-                {
                     back.color = new Color(0.53f, 0.53f, 0.53f, 0.8235f);
-                }
 
                 else if (itemManager.storedPassive[i].ItemGrade == Grade.Èñ±Í)
-                {
                     back.color = new Color(0, 0.77f, 1, 0.8235f);
-                }
 
                 else if (itemManager.storedPassive[i].ItemGrade == Grade.Àü¼³)
-                {
                     back.color = new Color(0.5f, 0.2f, 0.4f, 0.8235f);
-                }
 
                 else if (itemManager.storedPassive[i].ItemGrade == Grade.½ÅÈ­)
-                {
                     back.color = new Color(1, 0.31f, 0.31f, 0.8235f);
-                }
 
                 if (itemManager.storedPassiveCount[i] > 1)
                 {
@@ -445,9 +425,7 @@ public class ShopManager : Singleton<ShopManager>
         weightWeaponValue[3] = (gameManager.round - 1f) * 0.5f * (1 + Mathf.Clamp(gameManager.luck, 0f, 100f) * 0.01f);
 
         for (int i = 0; i < weightWeaponValue.Length; i++)
-        {
             totalWeight += weightWeaponValue[i];
-        }
 
         float rand = UnityEngine.Random.Range(0, totalWeight);
         float gradeNum = 0;

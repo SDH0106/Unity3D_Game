@@ -32,9 +32,7 @@ public class ShowStatCard : Singleton<ShowStatCard>
         statInfo = new Stat[gameManager.gameObject.GetComponent<StatCardInfo>().statInfos.Length];
 
         for (int i = 0; i < statInfo.Length; i++)
-        {
             statInfo[i] = gameManager.gameObject.GetComponent<StatCardInfo>().statInfos[i];
-        }
 
         numArray = new int[statInfo.Length];
 
@@ -64,6 +62,7 @@ public class ShowStatCard : Singleton<ShowStatCard>
                     Destroy(gameObject.transform.GetChild(i).GetChild(0).gameObject);
             }
         }
+
         isSelected = false;
     }
 
@@ -74,9 +73,7 @@ public class ShowStatCard : Singleton<ShowStatCard>
         if (gameManager.money >= -rerollMoney)
         {
             for (int i = 1; i < this.transform.childCount - 1; i++)
-            {
                 Destroy(this.transform.GetChild(i).GetChild(0).gameObject);
-            }
 
             gameManager.money += rerollMoney;
             rerollMoney--;
@@ -123,9 +120,7 @@ public class ShowStatCard : Singleton<ShowStatCard>
         weightValue[3] = (gameManager.round - 14);
 
         for (int i = 0; i < weightValue.Length; i++)
-        {
             totalWeight += weightValue[i];
-        }
 
         float rand = Random.Range(0, totalWeight);
         float gradeNum = 0;

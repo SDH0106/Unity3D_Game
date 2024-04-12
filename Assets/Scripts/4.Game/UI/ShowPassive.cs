@@ -21,7 +21,6 @@ public class ShowPassive : Singleton<ShowPassive>
 
     public void ShowRandomPassiveCard()
     {
-        Debug.Log("1");
         float totalWeight = 0;
 
         weightPassiveValue[0] = 200f - (gameManager.round - 1f) * 6f;

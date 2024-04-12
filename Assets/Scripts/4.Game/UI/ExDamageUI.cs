@@ -39,9 +39,7 @@ public class ExDamageUI : MonoBehaviour
         printTime -= Time.deltaTime;
 
         if (printTime <= 0)
-        {
             DestroyUI();
-        }
 
         ChangeAlpha(printTime / initPrintTime);
     }
@@ -54,8 +52,6 @@ public class ExDamageUI : MonoBehaviour
     public virtual void DestroyUI()
     {
         if (gameObject.activeSelf)
-        {
             managedPool.Release(this);
-        }
     }
 }

@@ -51,9 +51,7 @@ public class DamageUI : MonoBehaviour
         ChangeAlpha(printTime / initPrintTime);
 
         if (printTime <= 0)
-        {
             DestroyUI();
-        }
     }
 
     public void SetManagedPool(IObjectPool<DamageUI> pool)
@@ -66,8 +64,6 @@ public class DamageUI : MonoBehaviour
         damageText.fontSize = 50;
 
         if (gameObject.activeSelf)
-        {
             managedPool.Release(this);
-        }
     }
 }

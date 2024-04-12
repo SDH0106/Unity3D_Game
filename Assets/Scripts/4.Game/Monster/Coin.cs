@@ -30,18 +30,14 @@ public class Coin : Singleton<Coin>
         if (gameManager.currentScene == "Game")
         {
             if (gameManager.isClear && gameManager.isBossDead)
-            {
                 EndGameCoinMove();
-            }
 
             else
                 MoveCoin();
         }
 
         else if(gameManager.currentScene == "Shop")
-        {
             DestroyPool();
-        }
     }
 
     public void EndGameCoinMove()

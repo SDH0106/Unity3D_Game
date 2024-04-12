@@ -24,16 +24,14 @@ public class ShowCard : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
-        {
             TitleScene();
-        }
     }
 
     void GetRandomNum(int count, int length)
     {
         for (int i = 0; i < count; i++)
         {
-            numArray[i] = UnityEngine.Random.Range(0, length);
+            numArray[i] = Random.Range(0, length);
 
             for (int j = 0; j < i; j++)
             {

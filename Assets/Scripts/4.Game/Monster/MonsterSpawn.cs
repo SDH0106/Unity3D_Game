@@ -63,9 +63,7 @@ public class MonsterSpawn : MonoBehaviour
     private void Update()
     {
         if (gameManager.currentGameTime <= 0 || character.isDead)
-        {
             CancelInvoke("RendSpawnImage");
-        }
 
         if (bosssParent.transform.childCount == 0)
             gameManager.isBossDead = true;
@@ -82,9 +80,7 @@ public class MonsterSpawn : MonoBehaviour
         float distance = Vector3.Magnitude(playerPos - spawnPos);
 
         if(distance < 2)
-        {
             SpawnPosition();
-        }
 
         return spawnPos;
     }

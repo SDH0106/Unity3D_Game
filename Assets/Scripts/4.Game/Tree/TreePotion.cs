@@ -16,9 +16,7 @@ public class TreePotion : MonoBehaviour
     private void Update()
     {
         if(character.currentHp != character.maxHp)
-        {
             MovePotion();
-        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -26,9 +24,11 @@ public class TreePotion : MonoBehaviour
         if(other.CompareTag("Character"))
         {
             character = Character.Instance;
+
             if (character.currentHp != character.maxHp)
             {
                 SoundManager.Instance.PlayES("EatSound");
+
                 if (!character.isDead)
                     character.currentHp += 10f;
 

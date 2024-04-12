@@ -26,9 +26,7 @@ public class CharacterSelect : MonoBehaviour
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.Escape))
-        {
             TitleScene();
-        }
     }
 
     public void SelectCharacter(int num)

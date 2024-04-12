@@ -30,8 +30,6 @@ public class PassiveSlot : MonoBehaviour
     public void OffInfoUI()
     {
         if (itemManager.storedPassive[slotNum] != null)
-        {
             infoUIPrefab.gameObject.SetActive(false);
-        }
     }
 }

@@ -29,7 +29,7 @@ public class Weapon : MonoBehaviour
                 if (weaponInfo.WeaponName == "번개 스태프")
                     weaponDamage = weaponInfo.MagicDamage * grade + gameManager.magicDamage + gameManager.longDamage;
 
-                if (weaponInfo.WeaponName != "번개 스태프")
+                else
                     weaponDamage = (weaponInfo.MagicDamage * grade + gameManager.magicDamage + gameManager.longDamage) * 0.7f;
             }
 

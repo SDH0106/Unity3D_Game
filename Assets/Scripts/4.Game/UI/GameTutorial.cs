@@ -28,9 +28,7 @@ public class GameTutorial : MonoBehaviour
             count = 7;
 
         for (int i = 0; i < tutoUis.Length; i++)
-        {
             tutoUis[i].gameObject.SetActive(false);
-        }
 
         TextChange();
 
@@ -44,9 +42,7 @@ public class GameTutorial : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             if (gameManager.round == 1)
-            {
                 tutoUis[count].SetActive(false);
-            }
 
             count++;
 
@@ -72,9 +68,7 @@ public class GameTutorial : MonoBehaviour
             if(gameManager.round == 10)
             {
                 if (count < 12)
-                {
                     descripText.text = texts[count];
-                }
 
                 else if(count >= 12)
                 {

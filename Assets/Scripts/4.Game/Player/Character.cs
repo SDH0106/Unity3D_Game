@@ -161,9 +161,7 @@ public class Character : Singleton<Character>
     void HpSetting()
     {
         if (currentHp > maxHp)
-        {
             currentHp = maxHp;
-        }
 
         playerHpBar.value = 1 - (currentHp / maxHp);
         shielBar.value = (shield / 10f);
@@ -265,14 +263,10 @@ public class Character : Singleton<Character>
             if (dashCount > 0)
             {
                 if (rend.flipX == true)
-                {
                     particle.transform.localScale = new Vector3(-1, 1, 1);
-                }
 
                 else if (rend.flipX == false)
-                {
                     particle.transform.localScale = new Vector3(1, 1, 1);
-                }
 
                 if (Input.GetKeyDown((KeyCode)PlayerPrefs.GetInt("Key_Dash")))
                 {
@@ -281,9 +275,8 @@ public class Character : Singleton<Character>
                     beforePos = transform.position;
 
                     if (x == 0 && z == 0)
-                    {
                         afterPos = new Vector3(transform.position.x + 2, 0, transform.position.z);
-                    }
+
                     else
                         afterPos = transform.position + new Vector3(x, 0, z) * 4;
 
@@ -323,9 +316,7 @@ public class Character : Singleton<Character>
         for (int i = 0; i < weapons.Length; i++)
         {
             if (weapons[i].GetComponent<Weapon>().weaponInfo.WeaponName == ItemManager.Instance.storedWeapon[count].WeaponName)
-            {
                Instantiate(weapons[i], weaponPoses[count]);
-            }
         }
     }
 
@@ -467,9 +458,7 @@ public class Character : Singleton<Character>
             }
 
             if (currentHp <= 0)
-            {
                 OnDead();
-            }
         }
     }
 
@@ -486,9 +475,7 @@ public class Character : Singleton<Character>
             if (anim.GetCurrentAnimatorStateInfo(0).IsName("PlayerDie"))
             {
                 if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
-                {
                     gameObject.SetActive(false);
-                }
             }
         }
 

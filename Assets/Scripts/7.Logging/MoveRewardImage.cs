@@ -57,7 +57,6 @@ public class MoveRewardImage : Singleton<MoveRewardImage>
         {
             if (siblings[i].position != targetPoint)
                 siblings[i].position = Vector3.MoveTowards(siblings[i].position, targetPoint, Time.deltaTime * 800);
-                //siblings[i].position = Vector3.Lerp(siblings[i].position,transform.position, Time.time);
         }
     }
 

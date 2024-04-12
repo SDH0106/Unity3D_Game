@@ -209,14 +209,9 @@ public class GameSceneUI : Singleton<GameSceneUI>
     {
         for (int i = 0; i < 5; i++)
         {
-            SpawnOneTree();
+            GameObject tree = Instantiate(treePrefab);
+            tree.transform.position = TreePos();
         }
-    }
-
-    void SpawnOneTree()
-    {
-        GameObject tree = Instantiate(treePrefab);
-        tree.transform.position = TreePos();
     }
 
     Vector3 TreePos()
@@ -316,6 +311,7 @@ public class GameSceneUI : Singleton<GameSceneUI>
                     CancelInvoke("SpawnOneTree");
 
                     gameManager.isClear = true;
+
                     if (!gameClearUI.activeSelf)
                         gameManager.gameEndTime = Time.realtimeSinceStartup;
 
@@ -413,9 +409,7 @@ public class GameSceneUI : Singleton<GameSceneUI>
             }
 
             if (gameClearText.isOver == true && !soundManager.isPlaying)
-            {
                 SceneManager.LoadScene("End");
-            }
         }
     }
 
@@ -502,11 +496,13 @@ public class GameSceneUI : Singleton<GameSceneUI>
         {
             maxHpText.text = character.maxHp.ToString();
             hpText.text = character.currentHp.ToString("0.#");
+
             if (character.shield > 0)
             {
                 SheildText.gameObject.SetActive(true);
                 SheildText.text = $"+ {character.shield.ToString("0.#")}";
             }
+
             else
                 SheildText.gameObject.SetActive(false);
 

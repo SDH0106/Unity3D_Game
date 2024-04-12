@@ -25,7 +25,6 @@ public class Chick : Summons
     {
         if (gameManager.round - summonRound == 10)
         {
-
             GameObject summon = Instantiate(chickenPrefab);
             summon.transform.position = character.summonPos[summonPosNum].position;
             summon.transform.SetParent(gameManager.transform);

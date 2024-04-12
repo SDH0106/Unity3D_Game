@@ -51,8 +51,10 @@ public class Wakgood : Summons
             if (other.CompareTag("Monster"))
             {
                 SoundManager.Instance.PlayES("Wakgood");
+
                 if (other.GetComponent<Monster>() != null)
                     monster = other.GetComponent<Monster>();
+
                 isAttack = true;
                 Vector3 dir = other.gameObject.transform.position - transform.position;
 
@@ -81,12 +83,14 @@ public class Wakgood : Summons
             damage = 0;
 
         DamageUI damageUI = pool.Get();
-
         damageUI.realDamage = damage;
+
         if (damage > 0)
             damageUI.isMiss = false;
+
         else if (damage <= 0)
             damageUI.isMiss = true;
+
         damageUI.UISetting();
         damageUI.transform.position = transform.position;
         damageUI.gameObject.transform.SetParent(gameManager.damageStorage);

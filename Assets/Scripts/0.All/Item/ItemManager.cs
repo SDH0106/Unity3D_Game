@@ -6,17 +6,14 @@ public class ItemManager : Singleton<ItemManager>
     [SerializeField] public Transform coinStorage;
     [SerializeField] PassiveCardUI passiveCard;
 
-    [HideInInspector] public PassiveInfo passiveCardItem;
-
     [HideInInspector] public WeaponInfo[] storedWeapon;
     [HideInInspector] public PassiveInfo[] storedPassive;
     [HideInInspector] public int[] storedPassiveCount;
 
     [HideInInspector] public int weaponCount;
-    int passiveItemCount;
+    int getPassiveCount;
 
-    [HideInInspector] public bool isFull;
-    [HideInInspector] public int fullCount;
+    [HideInInspector] public int equipFullCount;
 
     [HideInInspector] public Grade[] weaponGrade;
 
@@ -40,13 +37,11 @@ public class ItemManager : Singleton<ItemManager>
         passiveCounts = new int[passiveCard.passiveInfo.Length];
 
         for (int i = 0; i < passiveCounts.Length; i++)
-        {
             passiveCounts[i] = passiveCard.passiveInfo[i].MaxCount;
-        }
-        isFull = false;
-        fullCount = 0;
+
+        equipFullCount = 0;
         weaponCount = 0;
-        passiveItemCount = 0;
+        getPassiveCount = 0;
         storedWeapon = new WeaponInfo[6];
         storedPassive = new PassiveInfo[90];
         storedPassiveCount = new int[storedPassive.Length];
@@ -59,15 +54,7 @@ public class ItemManager : Singleton<ItemManager>
 
     public void GetWeaponInfo(WeaponInfo weaponInfo)
     {
-        if (fullCount > 5)
-        {
-            isFull = true;
-        }
-
-        else if (fullCount <= 5)
-            isFull = false;
-
-        if (isFull == false)
+        if (equipFullCount <= 5)
         {
             for (int i = 0; i < storedWeapon.Length; i++)
             {
@@ -84,38 +71,33 @@ public class ItemManager : Singleton<ItemManager>
 
     public void GetPassiveInfo(PassiveInfo passiveInfo)
     {
-        passiveCardItem = passiveInfo;
-        storedPassive[passiveItemCount] = passiveInfo;
+        storedPassive[getPassiveCount] = passiveInfo;
 
-        if (passiveItemCount == 0)
-        {
-            storedPassiveCount[passiveItemCount]++;
-        }
+        if (getPassiveCount == 0)
+            storedPassiveCount[getPassiveCount]++;
 
-        else if (passiveItemCount > 0)
-        {
+        else if (getPassiveCount > 0)
             CheckItemEquel();
-        }
 
-        passiveItemCount++;
+        getPassiveCount++;
     }
 
     void CheckItemEquel()
     {
-        for (int i = 0; i < passiveItemCount; i++)
+        for (int i = 0; i < getPassiveCount; i++)
         {
-            if (storedPassive[passiveItemCount] == storedPassive[i])
+            if (storedPassive[getPassiveCount] == storedPassive[i])
             {
-                storedPassive[passiveItemCount] = null;
+                storedPassive[getPassiveCount] = null;
                 storedPassiveCount[i]++;
-                passiveItemCount--;
+                getPassiveCount--;
                 break;
             }
 
             else
             {
-                if (i == passiveItemCount - 1)
-                    storedPassiveCount[passiveItemCount]++;
+                if (i == getPassiveCount - 1)
+                    storedPassiveCount[getPassiveCount]++;
             }
         }
     }

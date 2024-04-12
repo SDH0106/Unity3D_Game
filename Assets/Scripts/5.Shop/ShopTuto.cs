@@ -15,9 +15,7 @@ public class ShopTuto : MonoBehaviour
     void Start()
     {
         for (int i = 0; i < tutoUis.Length; i++)
-        {
             tutoUis[i].gameObject.SetActive(false);
-        }
 
         TextChange();
 
@@ -31,7 +29,6 @@ public class ShopTuto : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             tutoUis[count].SetActive(false);
-
             count++;
         }
 

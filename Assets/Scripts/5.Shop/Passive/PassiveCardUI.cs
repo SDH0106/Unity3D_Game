@@ -227,6 +227,7 @@ public class PassiveCardUI : MonoBehaviour
                 {
                     descriptPrefabs[count].transform.GetChild(2).GetComponent<Text>().text = ($"+{stats[i]}");
                 }
+
                 descriptPrefabs[count].transform.GetChild(3).gameObject.SetActive(false);
                 count++;
             }
@@ -273,20 +274,14 @@ public class PassiveCardUI : MonoBehaviour
             for (int i = 0; i < passiveIntVariables.Length; i++)
             {
                 if (i == 1 && passiveIntVariables[i] != 0) // 버프 포션
-                {
                     gameManager.passiveIntVariables[i] = passiveIntVariables[i];
-                }
 
                 else
-                {
                     gameManager.passiveIntVariables[i] += passiveIntVariables[i];
-                }
             }
 
             for (int i = 0; i < passiveFloatVariables.Length; i++)
-            {
                 gameManager.passiveFloatVariables[i] = Mathf.Round((gameManager.passiveFloatVariables[i] + passiveFloatVariables[i]) * 10) * 0.1f;
-            }
 
             for (int i = 0; i < passiveBoolVariables.Length; i++)
             {
@@ -295,9 +290,7 @@ public class PassiveCardUI : MonoBehaviour
                     if (i == 14 || i == 15 || i == 16)
                     {
                         if (gameManager.isReflect)
-                        {
                             passiveBoolVariables[i] = false;
-                        }
                     }
 
                     gameManager.passiveBoolVariables[i] = passiveBoolVariables[i];

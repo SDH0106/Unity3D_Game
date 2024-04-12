@@ -165,7 +165,6 @@ public class Logging : Singleton<Logging>
         for (int i = 0; i < arrowParent.transform.childCount; i++)
         {
             int rand = Random.Range(0, 3);
-            //arrowParent.GetChild(i).rotation = Quaternion.Euler(arrowParent.rotation.eulerAngles.x, arrowParent.rotation.eulerAngles.y, rand * 90);
             arrowParent.GetChild(i).localRotation = Quaternion.Euler(0, 0, rand * 90);
             arrowParent.GetChild(i).GetComponent<Image>().color = Color.white;
 
@@ -179,9 +178,7 @@ public class Logging : Singleton<Logging>
 
     void Initialize()
     {
-        //isLogging = false;
         isArrowClear = false;
-        //isTreeDead = false;
         count = 0;
         currentTime = loggingTime;
         arrowParent.gameObject.SetActive(false);
@@ -191,7 +188,6 @@ public class Logging : Singleton<Logging>
     IEnumerator ActiveText(string str, Color color)
     {
         isTreeDead = true;
-        //isLogging = false;
         lilpa.isLoggingAnimating = false;
         timeText.gameObject.SetActive(false);
         failText.text = str;

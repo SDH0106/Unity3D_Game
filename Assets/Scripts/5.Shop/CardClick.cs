@@ -172,27 +172,27 @@ public class CardClick : MonoBehaviour
         itemManager = ItemManager.Instance;
         character = Character.Instance;
 
-        if (itemManager.fullCount > 0)
+        if (itemManager.equipFullCount > 0)
         {
             selectedWeapon = itemManager.storedWeapon[selectedNum];
             GameManager.Instance.money += Mathf.CeilToInt(price * 0.7f);
             itemManager.storedWeapon[selectedNum] = null;
             itemManager.weaponGrade[selectedNum] = Grade.일반;
-            itemManager.fullCount--;
+            itemManager.equipFullCount--;
+
             if (selectedWeapon.WeaponName == "번개 스태프")
             {
                 StaffControl thunderStaff = character.weaponPoses[selectedNum].GetChild(0).gameObject.GetComponent<StaffControl>();
                 itemManager.thunderCount = thunderStaff.thunderCount;
                 character.thunderCount--;
+
                 for (int j = 0; j < 6; j++)
-                {
                     itemManager.isThunderCountChange[j] = true;
-                }
+
                 if (character.thunderCount == 0)
-                {
                     character.thunderMark.SetActive(false);
-                }
             }
+
             character.ReleaseEquip(selectedNum);
             ShopManager.Instance.backgroundImage.SetActive(true);
             gameObject.SetActive(false);
@@ -227,33 +227,32 @@ public class CardClick : MonoBehaviour
                             itemManager.weaponGrade[selectedNum]++;
                             itemManager.storedWeapon[i] = null;
                             itemManager.weaponGrade[i] = Grade.일반;
-                            itemManager.fullCount--;
+                            itemManager.equipFullCount--;
 
                             if (selectedWeapon.WeaponName == "번개 스태프")
                             {
 
                                 StaffControl selectedThunderStaff = character.weaponPoses[selectedNum].GetChild(0).gameObject.GetComponent<StaffControl>();
                                 StaffControl combindedThunderStaff = character.weaponPoses[i].GetChild(0).gameObject.GetComponent<StaffControl>();
+
                                 if(selectedThunderStaff.thunderCount > combindedThunderStaff.thunderCount)
                                 {
                                     selectedThunderStaff.thunderCount = combindedThunderStaff.thunderCount;
                                     itemManager.thunderCount = selectedThunderStaff.thunderCount;
                                 }
+
                                 else
                                 {
                                     itemManager.thunderCount = combindedThunderStaff.thunderCount;
                                 }
+
                                 character.thunderCount--;
 
                                 for (int j = 0; j < 6; j++)
-                                {
                                     itemManager.isThunderCountChange[j] = true;
-                                }
 
                                 if (character.thunderCount == 0)
-                                {
                                     character.thunderMark.SetActive(false);
-                                }
                             }
 
                             character.ReleaseEquip(i);
@@ -273,16 +272,19 @@ public class CardClick : MonoBehaviour
         else if (!canCombine)
         {
             SoundManager.Instance.PlayES("CantBuy");
+
             if (itemManager.weaponGrade[selectedNum] == Grade.신화)
             {
                 cantMoneyText.SetActive(false);
                 cantGradeText.SetActive(true);
             }
+
             else
             {
                 cantMoneyText.SetActive(true);
                 cantGradeText.SetActive(false);
             }
+
             cantCombinePanel.SetActive(true);
         }
     }

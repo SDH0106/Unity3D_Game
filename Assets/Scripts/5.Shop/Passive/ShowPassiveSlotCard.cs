@@ -153,9 +153,7 @@ public class ShowPassiveSlotCard : MonoBehaviour
             }
 
             else
-            {
                 descriptPrefabs[i].gameObject.SetActive(false);
-            }
         }
 
         infoChange = false;

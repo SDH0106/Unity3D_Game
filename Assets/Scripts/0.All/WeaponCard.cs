@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using static WeaponInfo;
 
-public class WeaponCardUI : MonoBehaviour
+public class WeaponCard : MonoBehaviour
 {
     [SerializeField] public WeaponInfo[] weaponInfo;
 
@@ -55,51 +55,7 @@ public class WeaponCardUI : MonoBehaviour
 
     public Grade selectGrade;
 
-    private void Start()
-    {
-        gameManager = GameManager.Instance;
-        itemManager = ItemManager.Instance;
-        character = Character.Instance;
-
-        isOver = false;
-
-        combineCheckPanel.SetActive(false);
-        cantCombinePanel.SetActive(false);
-
-        initPriceColor = weaponPrice.color;
-        LockImageColor = new Color(0.17f, 0.17f, 0.17f);
-        LockTextColor = Color.white;
-
-        num = transform.parent.GetSiblingIndex();
-
-        isLock = itemManager.cardLocks[num];
-
-        Setting();
-        CardColor();
-        StartLockColor();
-    }
-
-    private void Update()
-    {
-        if (!isOver)
-        {
-            if (Input.GetMouseButton(0))
-            {
-                combineCheckPanel.SetActive(false);
-                cantCombinePanel.SetActive(false);
-            }
-        }
-
-        lockImage.gameObject.SetActive(isLock);
-
-        if (gameManager.money < price)
-            weaponPrice.color = Color.red;
-
-        else if (gameManager.money >= price)
-            weaponPrice.color = initPriceColor;
-    }
-
-    void Setting()
+    protected void Setting()
     {
         if (isLock)
         {
@@ -133,7 +89,7 @@ public class WeaponCardUI : MonoBehaviour
             attackTypes.text = "(¸¶¹ý/¿ø°Å¸®)";
     }
 
-    void CardColor()
+    protected void CardColor()
     {
         if (selectGrade == Grade.ÀÏ¹Ý)
         {
@@ -143,7 +99,7 @@ public class WeaponCardUI : MonoBehaviour
             weaponGrade.color = Color.white;
         }
 
-        else if(selectGrade == Grade.Èñ±Í)
+        else if (selectGrade == Grade.Èñ±Í)
         {
             cardBack.color = new Color(0f, 0.6f, 0.8f, 0.8235f);
             cardBackLine.color = Color.blue;
@@ -206,7 +162,7 @@ public class WeaponCardUI : MonoBehaviour
                 }
             }
 
-            if(!canSwordBuy)
+            if (!canSwordBuy)
                 SoundManager.Instance.PlayES("CantBuy");
         }
 
@@ -226,7 +182,7 @@ public class WeaponCardUI : MonoBehaviour
                     itemManager.weaponGrade[itemManager.weaponCount] = selectGrade;
                     if (selectedWeapon.WeaponName == "¹ø°³ ½ºÅÂÇÁ")
                     {
-                        if(character.thunderCount == 0)
+                        if (character.thunderCount == 0)
                         {
                             character.thunderMark.SetActive(true);
                         }
@@ -309,7 +265,7 @@ public class WeaponCardUI : MonoBehaviour
         itemManager.cardLocks[num] = isLock;
     }
 
-    void StartLockColor()
+    protected void StartLockColor()
     {
         if (isLock)
         {
@@ -334,3 +290,5 @@ public class WeaponCardUI : MonoBehaviour
         isOver = false;
     }
 }
+
+

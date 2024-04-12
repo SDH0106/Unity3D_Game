@@ -50,7 +50,7 @@ public class LoggingTree : MonoBehaviour
                     lilpa.treeIndex = treeNum;
                     lilpa.isCanControl = false;
                     lilpa.isAutoMove = true;
-                    //logging.isLogging = true;
+
                     if (treeNum == 0)
                         logging.loggingTime = 5f;
 
@@ -59,8 +59,6 @@ public class LoggingTree : MonoBehaviour
 
                     logging.currentTime = logging.loggingTime;
                     isKeyPush = true;
-
-                    //logging.KeyHit();
                 }
             }
 

@@ -10,6 +10,7 @@ public class StatDescription : MonoBehaviour
     {
         descripPanel.SetActive(false);
     }
+
     public void ShowStatDescription(int num)
     {
         descripPanel.SetActive(true);

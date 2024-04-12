@@ -113,7 +113,5 @@ public class SelectSceneCard : MonoBehaviour
                 gameManager.ToNextScene("Game");
             }
         }
-
-        //gameManager.StatSetting();
     }
 }
