@@ -166,7 +166,6 @@ public class CardClick : MonoBehaviour
         isOver = false;
     }
 
-
     public void SellWeapon()
     {
         itemManager = ItemManager.Instance;
@@ -242,9 +241,7 @@ public class CardClick : MonoBehaviour
                                 }
 
                                 else
-                                {
                                     itemManager.thunderCount = combindedThunderStaff.thunderCount;
-                                }
 
                                 character.thunderCount--;
 

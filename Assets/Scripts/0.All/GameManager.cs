@@ -19,7 +19,7 @@ public class GameManager : Singleton<GameManager>
     [Header("StatData")]
     [SerializeField] public float maxHp;
     [HideInInspector] public float percentDamage;
-    /*[HideInInspector]*/ public float physicDamage;
+    [HideInInspector] public float physicDamage;
     [HideInInspector] public float magicDamage;
     [HideInInspector] public float shortDamage;
     [HideInInspector] public float longDamage;
@@ -118,7 +118,7 @@ public class GameManager : Singleton<GameManager>
         PlayerPrefs.SetInt("BossTuto", 1);
         PlayerPrefs.SetInt("BagicClear", 0);
 */
-        //InitSetting();
+        InitSetting();
         InitArray();
         currentGameTime = gameTime;
         isPause = false;
@@ -131,9 +131,9 @@ public class GameManager : Singleton<GameManager>
     void InitSetting()
     {
         initGameTime = 20;
-        gameTime = initGameTime;
+        //gameTime = initGameTime;
         money = 0;
-        woodCount = 0;
+        woodCount = 30;
         woodMaxCount = 70;
         round = 1;
         maxHp = 0;
@@ -337,15 +337,11 @@ public class GameManager : Singleton<GameManager>
     {
         if (currentScene == "Game")
         {
-            //Character.Instance.gameObject.SetActive(true);
-
             if (Character.Instance.currentHp > 0)
                 currentGameTime -= Time.deltaTime;
 
             if (currentGameTime <= 0)
-            {
                 currentGameTime = 0;
-            }
 
             if (money <= 0)
                 money = 0;
@@ -354,7 +350,6 @@ public class GameManager : Singleton<GameManager>
 
     public void ToNextScene(string sceneName)
     {
-        Character.Instance.gameObject.SetActive(true);
         Character.Instance.transform.position = new Vector3(0f, 0f, -40f);
         currentScene = sceneName;
         SceneManager.LoadScene(currentScene);

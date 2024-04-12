@@ -461,9 +461,9 @@ public class ShopManager : Singleton<ShopManager>
     void GetRandomWeaponCard()
     {
         WeaponCardUI weaponCard = weaponCardUI.GetComponent<WeaponCardUI>();
-        int rand = UnityEngine.Random.Range(0, weaponCardUI.GetComponent<WeaponCardUI>().weaponInfo.Length);
+        int rand = UnityEngine.Random.Range(0, weaponCardUI.GetComponent<WeaponCardUI>().weaponInfos.Length);
         weaponCard.selectGrade = RandomWeaponGrade();
-        weaponCard.selectedWeapon = weaponCard.weaponInfo[rand];
+        weaponCard.selectedWeapon = weaponCard.weaponInfos[rand];
     }
 
     void GetRandomPassiveCard()

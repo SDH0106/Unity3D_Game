@@ -2,30 +2,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using static WeaponInfo;
 
-public class WeaponCardUI : MonoBehaviour
+public class WeaponCardUI : WeaponCard
 {
-    [SerializeField] public WeaponInfo[] weaponInfo;
-
     [Header("Lock")]
     [SerializeField] Image lockBackImage;
     [SerializeField] Image lockImage;
     [SerializeField] Text lockText;
 
     [Header("Card")]
-    [SerializeField] Image cardBack;
-    [SerializeField] Image cardBackLine;
-    [SerializeField] Image itemSprite;
-    [SerializeField] Text weaponName;
-    [SerializeField] Text type;
-    [SerializeField] Text attackTypes;
-    [SerializeField] Text weaponDamage;
-    [SerializeField] Text magicDamage;
-    [SerializeField] Text attackDelay;
-    [SerializeField] Text bulletSpeed;
-    [SerializeField] Text weaponRange;
     [SerializeField] Text weaponPrice;
-    [SerializeField] Text weaponGrade;
-    [SerializeField] Text description;
     [SerializeField] GameObject combineCheckPanel;
     [SerializeField] Text combineMoney;
     [SerializeField] GameObject cantCombinePanel;
@@ -33,27 +18,15 @@ public class WeaponCardUI : MonoBehaviour
     Color LockImageColor;
     Color LockTextColor;
 
-    [HideInInspector] public WeaponInfo selectedWeapon;
-
     [HideInInspector] public bool isLock;
 
     Color initPriceColor;
-
-    GameManager gameManager;
-    ItemManager itemManager;
-    Character character;
-
-    int price;
-
-    public int cardNum;
 
     int combineNum;
 
     int num;
 
     bool isOver = false;
-
-    public Grade selectGrade;
 
     private void Start()
     {
@@ -99,7 +72,7 @@ public class WeaponCardUI : MonoBehaviour
             weaponPrice.color = initPriceColor;
     }
 
-    void Setting()
+    protected override void Setting()
     {
         if (isLock)
         {
@@ -107,162 +80,39 @@ public class WeaponCardUI : MonoBehaviour
             selectGrade = itemManager.selectedGrades[num];
         }
 
-        int grade = (int)selectGrade;
+        base.Setting();
 
-        price = Mathf.CeilToInt(selectedWeapon.WeaponPrice * (grade * 2f + 1) * (1 - gameManager.salePercent));
-        itemSprite.sprite = selectedWeapon.ItemSprite;
-        weaponName.text = selectedWeapon.WeaponName.ToString();
-        type.text = selectedWeapon.Type.ToString();
-        weaponDamage.text = (selectedWeapon.WeaponDamage * (grade + 1)).ToString();
-        magicDamage.text = (selectedWeapon.MagicDamage * (grade + 1)).ToString();
-        attackDelay.text = (selectedWeapon.AttackDelay - (grade * 0.1f)).ToString("0.##");
-        bulletSpeed.text = selectedWeapon.BulletSpeed.ToString();
-        weaponRange.text = selectedWeapon.WeaponRange.ToString();
+        price = Mathf.CeilToInt(selectedWeapon.WeaponPrice * ((int)selectGrade * 2f + 1) * (1 - gameManager.salePercent));
         weaponPrice.text = price.ToString();
-        weaponGrade.text = selectGrade.ToString();
-        description.text = selectedWeapon.Description.ToString();
         combineMoney.text = Mathf.CeilToInt(price * 0.5f).ToString();
-
-        if (selectedWeapon.Type == WEAPON_TYPE.검)
-            attackTypes.text = "(물리/근거리)";
-
-        else if (selectedWeapon.Type == WEAPON_TYPE.총)
-            attackTypes.text = "(물리/원거리)";
-
-        else if (selectedWeapon.Type == WEAPON_TYPE.스태프)
-            attackTypes.text = "(마법/원거리)";
     }
 
-    void CardColor()
+    public override void Select()
     {
-        if (selectGrade == Grade.일반)
-        {
-            cardBack.color = new Color(0.142f, 0.142f, 0.142f, 0.8235f);
-            cardBackLine.color = Color.black;
-            weaponName.color = Color.white;
-            weaponGrade.color = Color.white;
-        }
-
-        else if(selectGrade == Grade.희귀)
-        {
-            cardBack.color = new Color(0f, 0.6f, 0.8f, 0.8235f);
-            cardBackLine.color = Color.blue;
-            weaponName.color = new Color(0.5f, 0.8f, 1f, 1f);
-            weaponGrade.color = new Color(0.5f, 0.8f, 1f, 1f);
-        }
-
-        else if (selectGrade == Grade.전설)
-        {
-            cardBack.color = new Color(0.5f, 0.2f, 0.4f, 0.8235f);
-            cardBackLine.color = new Color(0.5f, 0f, 0.5f, 1f);
-            weaponName.color = new Color(0.8f, 0.4f, 1f, 1f);
-            weaponGrade.color = new Color(0.8f, 0.4f, 1f, 1f);
-        }
-
-        else if (selectGrade == Grade.신화)
-        {
-            cardBack.color = new Color(0.7f, 0.1f, 0.1f, 0.8235f);
-            cardBackLine.color = Color.red;
-            weaponName.color = new Color(1f, 0.45f, 0.45f, 1f);
-            weaponGrade.color = new Color(1f, 0.45f, 0.45f, 1f);
-        }
+        base.Select();
     }
 
-    public void Click()
+    protected override void EquipWeapon()
     {
-        bool canSwordBuy = false;
+        isLock = false;
+        itemManager.cardLocks[num] = isLock;
+        itemManager.lockedWeaCards[num] = null;
+        base.EquipWeapon();
+    }
 
-        if (selectedWeapon.Type == WEAPON_TYPE.검)
+    protected override void FullWeaponCheckCombine()
+    {
+        for (int i = 0; i < itemManager.storedWeapon.Length; i++)
         {
-            if (itemManager.equipFullCount < 5 && gameManager.money >= price)
+            if (itemManager.storedWeapon[i] != null && selectGrade != Grade.신화)
             {
-                canSwordBuy = true;
-                SoundManager.Instance.PlayES("WeaponSelect");
-                gameManager.money -= price;
-                itemManager.equipFullCount++;
-                itemManager.GetWeaponInfo(selectedWeapon);
-                itemManager.weaponGrade[itemManager.weaponCount] = selectGrade;
-                isLock = false;
-                itemManager.cardLocks[num] = isLock;
-                itemManager.lockedWeaCards[num] = null;
-                character.Equip();
-                Destroy(gameObject);
-            }
-
-            else if (itemManager.equipFullCount >= 5 && gameManager.money >= price)
-            {
-                for (int i = 0; i < itemManager.storedWeapon.Length; i++)
+                if ((selectedWeapon.WeaponName == itemManager.storedWeapon[i].WeaponName) && (selectGrade == itemManager.weaponGrade[i]))
                 {
-                    if (itemManager.storedWeapon[i] != null && selectGrade != Grade.신화)
-                    {
-                        if ((selectedWeapon.WeaponName == itemManager.storedWeapon[i].WeaponName) && (selectGrade == itemManager.weaponGrade[i]))
-                        {
-                            canSwordBuy = true;
-                            combineNum = i;
-                            combineCheckPanel.SetActive(true);
-                            break;
-                        }
-                    }
+                    combineNum = i;
+                    combineCheckPanel.SetActive(true);
+                    break;
                 }
             }
-
-            if(!canSwordBuy)
-                SoundManager.Instance.PlayES("CantBuy");
-        }
-
-        // 검신캐릭터는 검외엔 끼지 못하게
-        else if (selectedWeapon.Type != WEAPON_TYPE.검)
-        {
-            bool canBuy = false;
-            if (character.characterNum != (int)CHARACTER_NUM.Legendary)
-            {
-                if (itemManager.equipFullCount < 5 && gameManager.money >= price)
-                {
-                    canBuy = true;
-                    SoundManager.Instance.PlayES("WeaponSelect");
-                    gameManager.money -= price;
-                    itemManager.equipFullCount++;
-                    itemManager.GetWeaponInfo(selectedWeapon);
-                    itemManager.weaponGrade[itemManager.weaponCount] = selectGrade;
-                    if (selectedWeapon.WeaponName == "번개 스태프")
-                    {
-                        if(character.thunderCount == 0)
-                        {
-                            character.thunderMark.SetActive(true);
-                        }
-
-                        character.thunderCount++;
-                    }
-                    isLock = false;
-                    itemManager.cardLocks[num] = isLock;
-                    itemManager.lockedWeaCards[num] = null;
-                    character.Equip();
-                    Destroy(gameObject);
-                }
-
-                else if (itemManager.equipFullCount >= 5 && gameManager.money >= price)
-                {
-                    for (int i = 0; i < itemManager.storedWeapon.Length; i++)
-                    {
-                        if (itemManager.storedWeapon[i] != null && selectGrade != Grade.신화)
-                        {
-                            if ((selectedWeapon.WeaponName == itemManager.storedWeapon[i].WeaponName) && (selectGrade == itemManager.weaponGrade[i]))
-                            {
-                                canBuy = true;
-                                combineNum = i;
-                                combineCheckPanel.SetActive(true);
-                                break;
-                            }
-                        }
-                    }
-                }
-
-                if (!canBuy)
-                    SoundManager.Instance.PlayES("CantBuy");
-            }
-
-            else if (character.characterNum == (int)CHARACTER_NUM.Legendary)
-                SoundManager.Instance.PlayES("CantBuy");
         }
     }
 

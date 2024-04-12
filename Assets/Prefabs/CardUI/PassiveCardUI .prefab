@@ -122,8 +122,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2156325227211688543}
-        m_TargetAssemblyTypeName: PassiveCardUI, Assembly-CSharp
-        m_MethodName: Click
+        m_TargetAssemblyTypeName: PassiveCard, Assembly-CSharp
+        m_MethodName: Select
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -875,9 +875,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3e58450ffcec20e4d83c608fa63eb5dd, type: 2}
   - {fileID: 11400000, guid: 02956729cbd22174a83ed3a617dfeee6, type: 2}
   - {fileID: 11400000, guid: c96e8d01f733d4741b544d051013aa6d, type: 2}
-  lockBackImage: {fileID: 4778071493522451700}
-  lockImage: {fileID: 8296031119694492482}
-  lockText: {fileID: 4972568240297667687}
   descriptPrefabs:
   - {fileID: 520282873035567209}
   - {fileID: 6505978013957604809}
@@ -890,10 +887,13 @@ MonoBehaviour:
   cardBackLine: {fileID: 659522053600396763}
   itemSprite: {fileID: 1009497355040056144}
   itemName: {fileID: 3667563659590199475}
-  itemPrice: {fileID: 2162777225447614391}
   itemGrade: {fileID: 2034016708954755514}
   maxCount: {fileID: 448334731084532112}
   selectedPassive: {fileID: 11400000, guid: 7c1a3d2e55a7c834d9f976bcd475792d, type: 2}
+  lockBackImage: {fileID: 4778071493522451700}
+  lockImage: {fileID: 8296031119694492482}
+  lockText: {fileID: 4972568240297667687}
+  itemPrice: {fileID: 2162777225447614391}
   isLock: 0
 --- !u!1 &3950642370217644491
 GameObject:

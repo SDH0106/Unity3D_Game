@@ -54,7 +54,7 @@ public class ItemManager : Singleton<ItemManager>
 
     public void GetWeaponInfo(WeaponInfo weaponInfo)
     {
-        if (equipFullCount <= 5)
+        if (equipFullCount <= 6)
         {
             for (int i = 0; i < storedWeapon.Length; i++)
             {

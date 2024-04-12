@@ -169,7 +169,7 @@ public class GameSceneUI : Singleton<GameSceneUI>
         if (gameManager.spawnTree)
             InvokeRepeating("SpawnOneTree", 10f, 10f);
 
-        chestCount = 0;
+        chestCount = 2;
         treeShopCount = 1;
     }
 

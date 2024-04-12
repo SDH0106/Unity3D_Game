@@ -899,9 +899,9 @@ MonoBehaviour:
   itemSprite: {fileID: 1009497355040056144}
   itemName: {fileID: 3667563659590199475}
   itemGrade: {fileID: 2034016708954755514}
-  itemCount: {fileID: 5818705863974470788}
-  sellPriceText: {fileID: 8816517834597159728}
+  maxCount: {fileID: 5818705863974470788}
   selectedPassive: {fileID: 11400000, guid: 27fccdcb983a51f4c9d52012843c3023, type: 2}
+  sellPriceText: {fileID: 8816517834597159728}
 --- !u!1 &3950642370217644491
 GameObject:
   m_ObjectHideFlags: 0
