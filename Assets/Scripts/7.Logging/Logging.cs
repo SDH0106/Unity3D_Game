@@ -29,6 +29,8 @@ public class Logging : Singleton<Logging>
 
     bool coroutineEnd = false;
 
+    bool isKeyPush;
+
     void Start()
     {
         sceneManager = LoggingSceneManager.Instance;
@@ -38,6 +40,7 @@ public class Logging : Singleton<Logging>
         isArrowClear = false;
         isTreeDead = false;
         isSuccess = false;
+        isKeyPush = false;
         count = 0;
 
         timeText.gameObject.SetActive(false);
@@ -89,27 +92,32 @@ public class Logging : Singleton<Logging>
                             break;
                     }
 
-                    isStart = true;
-
-                    if (checkKey == arrKey || checkKey == (KeyCode)PlayerPrefs.GetInt(arrStr))
+                    if (isKeyPush)
                     {
-                        arrowParent.GetChild(count).gameObject.SetActive(false);
-                        count++;
-                        isStart = false;
-                        checkKey = KeyCode.None;
+                        if (checkKey == arrKey || checkKey == (KeyCode)PlayerPrefs.GetInt(arrStr))
+                        {
+                            checkKey = KeyCode.None;
+                            arrowParent.GetChild(count).gameObject.SetActive(false);
+                            isKeyPush = false;
+                        }
+
+                        else
+                        {
+                            if (checkKey != KeyCode.None && checkKey != (KeyCode)PlayerPrefs.GetInt("Key_Dash"))
+                            {
+                                isArrowClear = true;
+                                arrowParent.GetChild(count).GetComponent<Image>().color = Color.red;
+                                isLogging = false;
+                                StartCoroutine(ActiveText("실패...", Color.red));
+                                isKeyPush = false;
+                            }
+                        }
                     }
 
-                    else
+                    if (Input.GetKeyUp(arrKey) || Input.GetKeyUp((KeyCode)PlayerPrefs.GetInt(arrStr)))
                     {
-                        if (checkKey != KeyCode.None && checkKey != (KeyCode)PlayerPrefs.GetInt("Key_Dash"))
-                        {
-                            isStart = false;
-                            isArrowClear = true;
-                            checkKey = KeyCode.None;
-                            arrowParent.GetChild(count).GetComponent<Image>().color = Color.red;
-                            isLogging = false;
-                            StartCoroutine(ActiveText("실패...", Color.red));
-                        }
+                        isStart = true;
+                        count++;
                     }
 
                     if (count >= arrowParent.childCount)
@@ -117,6 +125,7 @@ public class Logging : Singleton<Logging>
                         isArrowClear = true;
                         lilpa.isAutoMove = true;
                         isSuccess = true;
+                        isStart = false;
 
                         StartCoroutine(ActiveText("성공!", Color.cyan));
                     }
@@ -153,8 +162,29 @@ public class Logging : Singleton<Logging>
         {
             Event keyEvent = Event.current;
 
-            if (keyEvent.isKey)
+            if (!isKeyPush && keyEvent.isKey)
+            {
+                if (keyEvent.keyCode != (KeyCode)PlayerPrefs.GetInt("Key_Dash"))
+                {
+                    checkKey = keyEvent.keyCode;
+                    isKeyPush = true;
+                    isStart = false;
+                }
+
+                /*if (keyEvent.keyCode != KeyCode.None && keyEvent.keyCode != (KeyCode)PlayerPrefs.GetInt("Key_Dash"))
+                {
+                    Debug.Log(keyEvent.keyCode);
+                    checkKey = keyEvent.keyCode;
+                    isKeyPush = true;
+                }*/
+            }
+
+            /*if (keyEvent.isKey)
+            {
+                Debug.Log(keyEvent.keyCode);
                 checkKey = keyEvent.keyCode;
+                isKeyPush = true;
+            }*/
         }
     }
 
@@ -174,6 +204,7 @@ public class Logging : Singleton<Logging>
 
         arrowParent.gameObject.SetActive(true);
         timeText.gameObject.SetActive(true);
+        isStart = true;
     }
 
     void Initialize()

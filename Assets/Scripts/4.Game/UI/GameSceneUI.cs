@@ -567,10 +567,10 @@ public class GameSceneUI : Singleton<GameSceneUI>
         int rand = UnityEngine.Random.Range(0, 10);
         string nextScene;
 
-        if (rand % 2 == 0)
+        /*if (rand % 2 == 0)
             nextScene = "Fishing";
 
-        else
+        else*/
             nextScene = "Logging";
 
         SelectScene(nextScene);
