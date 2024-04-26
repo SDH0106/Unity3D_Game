@@ -132,7 +132,7 @@ public class GameManager : Singleton<GameManager>
         initGameTime = 20;
         gameTime = initGameTime;
         money = 0;
-        woodCount = 30;
+        woodCount = 5;
         woodMaxCount = 70;
         round = 1;
         maxHp = 0;
@@ -367,8 +367,8 @@ public class GameManager : Singleton<GameManager>
 
         SceneManager.LoadScene(currentScene);
 
-        //gameTime = Mathf.Clamp(initGameTime + (round - 1) * 3f, initGameTime, 60f);
-        gameTime = 0;
+        gameTime = Mathf.Clamp(initGameTime + (round - 1) * 3f, initGameTime, 60f);
+        //gameTime = 0;
         currentGameTime = gameTime;
 
         isClear = false;
