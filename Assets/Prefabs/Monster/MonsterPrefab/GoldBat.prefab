@@ -662,11 +662,11 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 4112701204563769253}
   m_HandleRect: {fileID: 0}
-  m_Direction: 1
+  m_Direction: 0
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.122
+  m_Value: 0.802
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []

@@ -104,7 +104,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SwrodLilpa_Idle_0
+      name: SwordLilpa_Idle_0
       rect:
         serializedVersion: 2
         x: 0
@@ -112,7 +112,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -125,7 +125,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SwrodLilpa_Idle_1
+      name: SwordLilpa_Idle_1
       rect:
         serializedVersion: 2
         x: 64
@@ -133,7 +133,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -146,7 +146,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SwrodLilpa_Idle_2
+      name: SwordLilpa_Idle_2
       rect:
         serializedVersion: 2
         x: 128
@@ -154,7 +154,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -167,7 +167,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SwrodLilpa_Idle_3
+      name: SwordLilpa_Idle_3
       rect:
         serializedVersion: 2
         x: 192
@@ -175,7 +175,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -188,7 +188,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SwrodLilpa_Idle_4
+      name: SwordLilpa_Idle_4
       rect:
         serializedVersion: 2
         x: 256
@@ -196,7 +196,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -219,11 +219,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      SwrodLilpa_Idle_2: 1513339962
-      SwrodLilpa_Idle_1: -2084665331
-      SwrodLilpa_Idle_3: 151248634
-      SwrodLilpa_Idle_4: -1260845103
-      SwrodLilpa_Idle_0: 2028307459
+      SwordLilpa_Idle_4: -1260845103
+      SwordLilpa_Idle_2: 1513339962
+      SwordLilpa_Idle_1: -2084665331
+      SwordLilpa_Idle_0: 2028307459
+      SwordLilpa_Idle_3: 151248634
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

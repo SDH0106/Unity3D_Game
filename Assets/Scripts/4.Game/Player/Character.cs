@@ -20,20 +20,17 @@ public class Character : Singleton<Character>
     [SerializeField] Slider shielBar;
 
     [Header("Stat")]
-    [SerializeField] public float characterNum;
+    [SerializeField] public int characterNum;
     public int level;
-    [SerializeField] float characterHp;
     [SerializeField] public float maxExp;
-    [SerializeField] public float damageRatio;
-    [SerializeField] float characterSpeed;
-    [SerializeField] float avoid;
-    [SerializeField] float invincibleTime;
+    [SerializeField] public CharacterInfo[] characterInfos;
 
     [HideInInspector] public float dashCoolTime;
     [HideInInspector] public float initDashCoolTime;
     [HideInInspector] public int dashCount;
 
     [Header("Weapon")]
+    [SerializeField] GameObject WeaponParent;
     [SerializeField] public GameObject[] weapons;
     [SerializeField] public Transform[] weaponPoses;
     [SerializeField] public GameObject thunderMark;
@@ -96,13 +93,7 @@ public class Character : Singleton<Character>
         gardianAngel.SetActive(false);
         gardianEffect.SetActive(false);
 
-        gameManager.stats[0] = characterHp;
-        maxHp = gameManager.stats[0];
-        currentHp = maxHp;
-        gameManager.stats[9] = characterSpeed;
-        gameManager.stats[13] = damageRatio;
-        avoid = 0;
-        gameManager.stats[14] = avoid;
+        CharacterSetting(0);
         maxExp = 10;
         level = 1;
         levelUpCount = 0;
@@ -110,6 +101,18 @@ public class Character : Singleton<Character>
         dashCoolTime = 4;
         dashCount = gameManager.dashCount;
         initDashCoolTime = dashCoolTime;
+    }
+
+    public void CharacterSetting(int num)
+    {
+        characterNum = num;
+        anim.runtimeAnimatorController = characterInfos[characterNum].CharacterAnim;
+        gameManager.stats[0] = Mathf.Round(gameManager.stats[0]*characterInfos[characterNum].HpRate);
+        maxHp = gameManager.stats[0];
+        currentHp = maxHp;
+        gameManager.stats[9] = characterInfos[characterNum].CharacterSpeed;
+        gameManager.stats[13] = characterInfos[characterNum].DamageRatio;
+        gameManager.stats[14] = characterInfos[characterNum].Avoid;
     }
 
     void Update()
@@ -145,7 +148,7 @@ public class Character : Singleton<Character>
                 AutoRecoverHp();
             }
 
-            else if ((gameManager.isClear && gameManager.isBossDead))
+            else if (gameManager.isClear && gameManager.isBossDead)
             {
                 isBuff = false;
                 buffTime = 5;
@@ -325,6 +328,17 @@ public class Character : Singleton<Character>
         Destroy(weaponPoses[num].GetChild(0).gameObject);
     }
 
+    public bool CheckEquipWeapon(int num)
+    {
+        for(int i = 0; i< weaponPoses.Length;i++)
+        {
+            if (weaponPoses[i].childCount != 0 && (int)ItemManager.Instance.storedWeapon[i].Type == num)
+                return true;
+        }
+
+        return false;
+    }
+
     bool isDownUp = false;
     bool isLeftRight = false;
 
@@ -466,6 +480,7 @@ public class Character : Singleton<Character>
     {
         if (!gameManager.revive)
         {
+            WeaponParent.SetActive(false);
             currentHp = 0;
             isDead = true;
             isAttacked = true;
@@ -514,7 +529,7 @@ public class Character : Singleton<Character>
             currentCoroutine = StartCoroutine(PlayerColorInvincible());
         }
 
-        yield return new WaitForSeconds(invincibleTime);
+        yield return new WaitForSeconds(characterInfos[characterNum].InvincibleTime);
         rend.color = Color.white;
         isAttacked = false;
     }
@@ -527,7 +542,7 @@ public class Character : Singleton<Character>
         color.a = 0.5f;
         rend.color = color;
 
-        yield return new WaitForSeconds(invincibleTime);
+        yield return new WaitForSeconds(characterInfos[characterNum].InvincibleTime);
         color.a = 1f;
         rend.color = color;
         rend.color = Color.white;
@@ -540,7 +555,7 @@ public class Character : Singleton<Character>
 
         rend.color = white;
 
-        yield return new WaitForSeconds(invincibleTime - 0.3f);
+        yield return new WaitForSeconds(characterInfos[characterNum].InvincibleTime - 0.3f);
     }
 
     private IEnumerator PlayerColorBlink()
@@ -558,7 +573,7 @@ public class Character : Singleton<Character>
         yield return new WaitForSeconds(0.1f);
 
         rend.color = white;
-        yield return new WaitForSeconds(invincibleTime - 0.3f);
+        yield return new WaitForSeconds(characterInfos[characterNum].InvincibleTime - 0.3f);
     }
 
     IEnumerator OnRevive()

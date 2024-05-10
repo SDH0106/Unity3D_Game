@@ -70,6 +70,8 @@ public class EndUI : Singleton<EndUI>
         WeaponSlotSetting();
         PassiveSlotSetting();
         TimeSetting();
+
+        character.gameObject.SetActive(false);
     }
 
     void TimeSetting()

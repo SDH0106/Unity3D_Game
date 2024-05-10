@@ -5273,10 +5273,10 @@ MonoBehaviour:
   initGameTime: 0
   gameTime: 0
   money: 5000
-  round: 4
-  woodCount: 70
+  round: 5
+  woodCount: 10
   woodMaxCount: 70
-  maxHp: 1000
+  maxHp: 1
   percentDamage: 0
   physicDamage: 100000
   magicDamage: 0

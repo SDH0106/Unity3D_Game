@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class CharacterSelect : MonoBehaviour
 {
-    [SerializeField] GameObject[] characters;
+    [SerializeField] GameObject characterPrefab;
     [SerializeField] GameObject LockImage;
 
     bool[] characterClear;
@@ -32,7 +32,7 @@ public class CharacterSelect : MonoBehaviour
     public void SelectCharacter(int num)
     {
         SoundManager.Instance.PlayES("SelectButton");
-        GameObject character = Instantiate(characters[num], Vector3.zero, characters[num].transform.rotation);
+        GameObject character = Instantiate(characterPrefab, Vector3.zero, characterPrefab.transform.rotation);
         character.SetActive(false);
         character.GetComponent<Character>().characterNum = num;
         SceneManager.LoadScene("WeaponSelect");

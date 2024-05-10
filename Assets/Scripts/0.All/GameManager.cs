@@ -117,7 +117,7 @@ public class GameManager : Singleton<GameManager>
         PlayerPrefs.SetInt("BossTuto", 1);
         PlayerPrefs.SetInt("BagicClear", 0);
 */
-        InitSetting();
+        //InitSetting();
         InitArray();
         currentGameTime = gameTime;
         isPause = false;
@@ -132,10 +132,10 @@ public class GameManager : Singleton<GameManager>
         initGameTime = 20;
         gameTime = initGameTime;
         money = 0;
-        woodCount = 5;
+        woodCount = 0;
         woodMaxCount = 70;
         round = 1;
-        maxHp = 0;
+        maxHp = 30;
         recoverHp = 0;
         absorbHp = 0;
         defence = 0;

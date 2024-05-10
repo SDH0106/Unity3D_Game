@@ -18,7 +18,7 @@ public class TreeShopWeaponInfo : MonoBehaviour
     TreeShop treeShop;
     GameSceneUI gameSceneUI;
 
-    public int siblingNum;
+    [HideInInspector] public int siblingNum;
 
     Grade selectGrade;
 

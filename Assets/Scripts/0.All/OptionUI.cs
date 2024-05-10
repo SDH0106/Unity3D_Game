@@ -5,9 +5,9 @@ using System;
 
 public class OptionUI : MonoBehaviour
 {
-    Texture2D cursorNormal;
-    Texture2D cursorAttack;
-    [SerializeField] GameObject panel;
+    protected Texture2D cursorNormal;
+    protected Texture2D cursorAttack;
+    [SerializeField] protected GameObject panel;
     [SerializeField] Slider AllSound;
     [SerializeField] Slider bgmSound;
     [SerializeField] Slider sfxSound;
@@ -18,9 +18,9 @@ public class OptionUI : MonoBehaviour
     [SerializeField] GameObject statPanel;
     [SerializeField] GameObject normalToggle;
     [SerializeField] GameObject doubleToggle;
-    [SerializeField] GameObject backPanel;
+    [SerializeField] protected GameObject backPanel;
 
-    GameManager gameManager;
+    protected GameManager gameManager;
     SoundManager soundManager;
     LoggingLilpa lilpa;
 
@@ -186,7 +186,7 @@ public class OptionUI : MonoBehaviour
             muteAllVolume = false;
     }
 
-    public void PauseGame()
+    virtual public void PauseGame()
     {
         if (!gameManager.isPause)
         {
@@ -210,7 +210,7 @@ public class OptionUI : MonoBehaviour
         }
     }
 
-    public void ReturnToGame()
+    virtual public void ReturnToGame()
     {
         if (gameManager.isPause)
         {

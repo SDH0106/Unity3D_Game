@@ -262,7 +262,9 @@ public class GameSceneUI : Singleton<GameSceneUI>
                     }
 
                     roundClearText.SetActive(true);
-                    CancelInvoke("SpawnOneTree");
+
+                    if (gameManager.spawnTree)
+                        CancelInvoke("SpawnOneTree");
                 }
 
                 if (roundClearText.GetComponent<TypingText>().isOver == true)
@@ -271,7 +273,7 @@ public class GameSceneUI : Singleton<GameSceneUI>
 
                     if (character.levelUpCount <= 0 && chestCount <= 0)
                     {
-                        if (gameManager.round % 5 == 0 && gameManager.woodCount >= 5 && treeShopCount > 0)
+                        if (gameManager.round % 5 == 0 && treeShopCount > 0)
                         {
                             statCardParent.gameObject.SetActive(false);
                             chestPassive.gameObject.SetActive(false);
@@ -311,7 +313,8 @@ public class GameSceneUI : Singleton<GameSceneUI>
             {
                 if (gameManager.isBossDead)
                 {
-                    CancelInvoke("SpawnOneTree");
+                    if (gameManager.spawnTree)
+                        CancelInvoke("SpawnOneTree");
 
                     gameManager.isClear = true;
 
@@ -365,7 +368,8 @@ public class GameSceneUI : Singleton<GameSceneUI>
 
         else if (character.isDead)
         {
-            CancelInvoke("SpawnOneTree");
+            if (gameManager.spawnTree)
+                CancelInvoke("SpawnOneTree");
 
             if (!gameOverUI.activeSelf || !gameOverIsedolText)
                 gameManager.gameEndTime = Time.realtimeSinceStartup;
@@ -381,6 +385,8 @@ public class GameSceneUI : Singleton<GameSceneUI>
 
             else if (gameManager.isedolCount == 5)
             {
+                gameManager.isClear = true;
+
                 if (!clickText.gameObject.activeSelf)
                     gameOverIsedolUI.SetActive(true);
 

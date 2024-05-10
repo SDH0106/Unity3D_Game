@@ -5107,15 +5107,15 @@ MonoBehaviour:
   shielBar: {fileID: 6462630388083919554}
   characterNum: 0
   level: 0
-  characterHp: 15
   maxExp: 0
-  damageRatio: 1
-  characterSpeed: 3
-  avoid: 0
-  invincibleTime: 0.7
+  characterInfos:
+  - {fileID: 11400000, guid: 1378ac29a4fab014088a64f7cf18031b, type: 2}
+  - {fileID: 11400000, guid: 86c228ecf84dce54abcbd77bb43b2936, type: 2}
+  - {fileID: 11400000, guid: 440ed7bc70a7f9148ad6568dbd53b530, type: 2}
   dashCoolTime: 2
   initDashCoolTime: 0
   dashCount: 2
+  WeaponParent: {fileID: 289213144614210456}
   weapons:
   - {fileID: 4942268788761087581, guid: 941e5330dd1395442b47913c209b6bed, type: 3}
   - {fileID: 8135749844320535992, guid: cedc7bc35d28ac5418d3797670a41177, type: 3}

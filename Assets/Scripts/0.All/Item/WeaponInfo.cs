@@ -14,8 +14,8 @@ public class WeaponInfo : ScriptableObject
     public enum WEAPON_TYPE
     {
         총,
-        스태프,
         검,
+        스태프,
     }
 
     [HideInInspector] public Grade weaponGrade;

@@ -249,7 +249,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.122
+  m_Value: 0.145
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -787,6 +787,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   freezeEffect: {fileID: 2440319470828730858}
+  rigid: {fileID: 0}
   isWalk: 0
   isDead: 0
   isAttacked: 0
