@@ -5272,16 +5272,16 @@ MonoBehaviour:
   damageStorage: {fileID: 1692643827}
   initGameTime: 0
   gameTime: 0
-  money: 5000
-  round: 5
-  woodCount: 10
+  money: 5000000
+  round: 1
+  woodCount: 70
   woodMaxCount: 70
-  maxHp: 1
+  maxHp: 50
   percentDamage: 0
-  physicDamage: 100000
+  physicDamage: 0
   magicDamage: 0
   shortDamage: 0
-  longDamage: 0
+  longDamage: 50
   recoverHp: 0
   absorbHp: 0
   defence: 0
@@ -5297,7 +5297,7 @@ MonoBehaviour:
   dashCount: 0
   buffNum: 0
   exDmg: 0
-  isedolCount: 0
+  isedolCount: 5
   salePercent: 0
   increaseExp: 0
   coinRange: 0

@@ -20,10 +20,10 @@ public class GameManager : Singleton<GameManager>
     [Header("StatData")]
     [SerializeField] public float maxHp;
     [HideInInspector] public float percentDamage;
-    [HideInInspector] public float physicDamage;
+    /*[HideInInspector]*/ public float physicDamage;
     [HideInInspector] public float magicDamage;
     [HideInInspector] public float shortDamage;
-    [HideInInspector] public float longDamage;
+    /*[HideInInspector]*/ public float longDamage;
     [SerializeField] public float recoverHp;
     [SerializeField] public float absorbHp;
     [SerializeField] public float defence;
@@ -41,7 +41,7 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector] public int dashCount;
     [HideInInspector] public int buffNum;
     [HideInInspector] public int exDmg;
-    [HideInInspector] public int isedolCount;
+    /*[HideInInspector]*/ public int isedolCount;
     [HideInInspector] public float salePercent;
     [HideInInspector] public float increaseExp;
     [HideInInspector] public float coinRange;
@@ -367,8 +367,14 @@ public class GameManager : Singleton<GameManager>
 
         SceneManager.LoadScene(currentScene);
 
-        gameTime = Mathf.Clamp(initGameTime + (round - 1) * 3f, initGameTime, 60f);
-        //gameTime = 0;
+        //gameTime = Mathf.Clamp(initGameTime + (round - 1) * 3f, initGameTime, 60f);
+
+        if (round != 2)
+            gameTime = 0;
+
+        else
+            gameTime = 30;
+        
         currentGameTime = gameTime;
 
         isClear = false;

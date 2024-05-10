@@ -209,10 +209,13 @@ public class GameSceneUI : Singleton<GameSceneUI>
     void SpawnTree()
     {
         for (int i = 0; i < 5; i++)
-        {
-            GameObject tree = Instantiate(treePrefab);
-            tree.transform.position = TreePos();
-        }
+            SpawnOneTree();
+    }
+
+    void SpawnOneTree()
+    {
+        GameObject tree = Instantiate(treePrefab);
+        tree.transform.position = TreePos();
     }
 
     Vector3 TreePos()
@@ -352,6 +355,53 @@ public class GameSceneUI : Singleton<GameSceneUI>
 
                         if (gameOverWoodText.isOver)
                             SceneManager.LoadScene("End");
+
+                        /*if (gameManager.isedolCount != 5)
+                        {
+                            gameOverWoodUI.SetActive(true);
+
+                            if (gameOverWoodText.isOver)
+                                SceneManager.LoadScene("End");
+                        }
+
+                        else
+                        {
+                            gameOverWoodUI.SetActive(true);
+
+                            gameManager.isClear = true;
+
+                            if (gameOverWoodText.isOver)
+                            {
+                                gameOverWoodUI.SetActive(false);
+                                gameOverIsedolUI.SetActive(true);
+                            }
+
+                            if (gameOverIsedolText.isOver == true)
+                            {
+                                clearImage.sprite = clearIllusts[1];
+                                StartCoroutine(FadeIn());
+                                gameOverIsedolText.isOver = false;
+                            }
+
+                            if (clickText.gameObject.activeSelf)
+                            {
+                                if (Input.GetMouseButtonDown(0))
+                                {
+                                    if (!bgmChange)
+                                    {
+                                        soundManager.PlayBGM(6, false);
+                                        bgmChange = true;
+                                    }
+
+                                    clearImage.gameObject.SetActive(false);
+                                    gameOverIsedolUI.SetActive(false);
+                                    gameClearUI.SetActive(true);
+                                }
+                            }
+
+                            if (gameClearText.isOver == true && !soundManager.isPlaying)
+                                SceneManager.LoadScene("End");
+                        }*/
                     }
                 }
 
