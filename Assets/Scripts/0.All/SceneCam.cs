@@ -18,7 +18,19 @@ public class SceneCam : MonoBehaviour
             loggingLilpa = LoggingLilpa.Instance;
     }
 
-    private void Update()
+    private void LateUpdate()
+    {
+        if (lilpa != null && !lilpa.isDead)
+        {
+            transform.position = new Vector3(Mathf.Clamp(lilpa.transform.position.x, -14f, 17f), transform.position.y, Mathf.Clamp(lilpa.transform.position.z, -49f, -31f));
+            //transform.position = Vector3.Lerp(transform.position, new Vector3(character.transform.position.x, transform.position.y, character.transform.position.z), 5*Time.deltaTime);
+        }
+
+        else if (loggingLilpa != null)
+            transform.position = new Vector3(Mathf.Clamp(loggingLilpa.transform.position.x, -14f, 17f), transform.position.y, Mathf.Clamp(loggingLilpa.transform.position.z, -9f, 9f));
+    }
+
+    /*private void Update()
     {
         if (lilpa != null && !lilpa.isDead)
         {
@@ -28,5 +40,5 @@ public class SceneCam : MonoBehaviour
 
         else if(loggingLilpa != null)
             transform.position = new Vector3(Mathf.Clamp(loggingLilpa.transform.position.x, -14f, 17f), transform.position.y, Mathf.Clamp(loggingLilpa.transform.position.z, -9f, 9f));
-    }
+    }*/
 }

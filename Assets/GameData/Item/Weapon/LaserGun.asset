@@ -27,3 +27,5 @@ MonoBehaviour:
     \uB808\uC774\uC800\uB97C \uC3D8\uB294 \uCD1D.\n(\uB808\uC774\uC800\uB294 <color=cyan>\uC0AC\uAC70\uB9AC</color>\uC5D0
     \uB530\uB77C \uAE38\uC774\uAC00 \uBC14\uB01D\uB2C8\uB2E4.)"
   weaponSound: {fileID: 8300000, guid: 9f3ac5863e7ef074d8093917707c537e, type: 3}
+  useCharacter:
+  - {fileID: 11400000, guid: 1378ac29a4fab014088a64f7cf18031b, type: 2}

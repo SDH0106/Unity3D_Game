@@ -344,9 +344,6 @@ public class GameSceneUI : Singleton<GameSceneUI>
                             StartCoroutine(FadeIn());
                             gameClearText.isOver = false;
                         }
-
-                        if (character.characterNum == (int)CHARACTER_NUM.Bagic)
-                            PlayerPrefs.SetInt("BagicClear", 1);
                     }
 
                     else if (gameManager.woodCount < gameManager.woodMaxCount)
@@ -432,7 +429,6 @@ public class GameSceneUI : Singleton<GameSceneUI>
                     SceneManager.LoadScene("End");
             }
 
-
             else if (gameManager.isedolCount == 5)
             {
                 gameManager.isClear = true;
@@ -446,9 +442,6 @@ public class GameSceneUI : Singleton<GameSceneUI>
                     StartCoroutine(FadeIn());
                     gameOverIsedolText.isOver = false;
                 }
-
-                if (character.characterNum == (int)CHARACTER_NUM.Bagic)
-                    PlayerPrefs.SetInt("BagicClear", 1);
             }
 
             if (clickText.gameObject.activeSelf)
@@ -470,6 +463,17 @@ public class GameSceneUI : Singleton<GameSceneUI>
             if (gameClearText.isOver == true && !soundManager.isPlaying)
                 SceneManager.LoadScene("End");
         }
+    }
+
+    bool CursorChange(int playNum)
+    {
+        Vector2 cursorHotSpot = new Vector3(cursorNormal.width * 0.5f, cursorNormal.height * 0.5f);
+        Cursor.SetCursor(cursorNormal, cursorHotSpot, CursorMode.ForceSoftware);
+
+        soundManager.PlayBGM(playNum, false);
+        bgmChange = true;
+
+        return false;
     }
 
     IEnumerator FadeIn()

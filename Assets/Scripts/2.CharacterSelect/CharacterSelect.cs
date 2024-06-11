@@ -33,8 +33,8 @@ public class CharacterSelect : MonoBehaviour
     {
         SoundManager.Instance.PlayES("SelectButton");
         GameObject character = Instantiate(characterPrefab, Vector3.zero, characterPrefab.transform.rotation);
-        character.SetActive(false);
         character.GetComponent<Character>().characterNum = num;
+        //character.SetActive(false);
         SceneManager.LoadScene("WeaponSelect");
     }
 

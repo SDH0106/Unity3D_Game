@@ -38,7 +38,7 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector] public int[] passiveIntVariables;
     [HideInInspector] public float[] passiveFloatVariables;
     [HideInInspector] public bool[] passiveBoolVariables;
-    [HideInInspector] public int dashCount;
+    /*[HideInInspector]*/ public int dashCount;
     [HideInInspector] public int buffNum;
     [HideInInspector] public int exDmg;
     /*[HideInInspector]*/ public int isedolCount;
@@ -95,6 +95,8 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector] public float maxAbs;
 
     [HideInInspector] public bool isTuto = false;
+
+    public Vector3 characterSpawnPos = new Vector3(0, 0, -40);
 
     protected override void Awake()
     {
@@ -351,7 +353,7 @@ public class GameManager : Singleton<GameManager>
     {
         Character character = Character.Instance;
 
-        character.transform.position = new Vector3(0f, 0f, -40f);
+        character.transform.position = characterSpawnPos;
         currentScene = sceneName;
         character.thunderMark.transform.localScale = new Vector3(Mathf.Clamp(4f + range * 0.5f, 1, 12), Mathf.Clamp(4f + range * 0.5f, 1, 12), 0);
 
@@ -361,20 +363,21 @@ public class GameManager : Singleton<GameManager>
         else if (maxHp >= 1)
             character.maxHp = maxHp;
 
+        character.shield = 0f;
         character.currentHp = character.maxHp;
         character.dashCount = dashCount;
         character.dashCoolTime = character.initDashCoolTime;
 
         SceneManager.LoadScene(currentScene);
 
-        //gameTime = Mathf.Clamp(initGameTime + (round - 1) * 3f, initGameTime, 60f);
+        gameTime = Mathf.Clamp(initGameTime + (round - 1) * 3f, initGameTime, 60f);
 
-        if (round != 2)
+        /*if (round != 8)
             gameTime = 0;
 
         else
-            gameTime = 30;
-        
+            gameTime = 30;*/
+
         currentGameTime = gameTime;
 
         isClear = false;

@@ -4,8 +4,6 @@ using UnityEngine.SceneManagement;
 
 public class SelectSceneCard : WeaponCard
 {
-    [SerializeField] GameObject lockPanel;
-
     private void Start()
     {
         itemManager = ItemManager.Instance;
@@ -14,18 +12,6 @@ public class SelectSceneCard : WeaponCard
 
         Setting();
         CardColor();
-
-        if (character.characterNum == 0)
-            lockPanel.SetActive(false);
-
-        else if (character.characterNum == 1)
-        {
-            if (selectedWeapon.Type == WeaponInfo.WEAPON_TYPE.°Ë)
-                lockPanel.SetActive(false);
-
-            else
-                lockPanel.SetActive(true);
-        }
     }
 
     protected override void Setting()

@@ -922,7 +922,7 @@ GameObject:
   - component: {fileID: 318291964420829077}
   - component: {fileID: 5481015473613211904}
   m_Layer: 5
-  m_Name: Lock
+  m_Name: CantBuyPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1319,7 +1319,7 @@ GameObject:
   - component: {fileID: 7719271856648617477}
   - component: {fileID: 1077021359343993128}
   m_Layer: 5
-  m_Name: 'SelectSceneCardUI '
+  m_Name: SelectSceneCardUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1440,9 +1440,9 @@ MonoBehaviour:
   weaponRange: {fileID: 6358410489333772704}
   weaponGrade: {fileID: 2604329551075999922}
   description: {fileID: 1310879713634554718}
+  canBuyImage: {fileID: 5481015473613211904}
   selectedWeapon: {fileID: 0}
   selectGrade: 0
-  lockPanel: {fileID: 2505651834964606215}
 --- !u!1 &4463944616484215258
 GameObject:
   m_ObjectHideFlags: 0
@@ -1700,14 +1700,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2bb4e96f5d0b02c468932d665a015c54, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9aa4348290784b2468144a97eb15d8d7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

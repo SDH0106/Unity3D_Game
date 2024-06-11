@@ -60,7 +60,8 @@ MonoBehaviour:
   onePenetrate: 1
   lowPenetrate: 0
   penetrate: 0
+  vamAbsorb: 0
   description: "\uD22C\uC0AC\uCCB4\uAC00 \uBAAC\uC2A4\uD130 <color=lime>\uD55C \uB9C8\uB9AC\uB97C
     \uAD00\uD1B5</color>\uD569\uB2C8\uB2E4. \n(\uC0AC\uC6A9\uD558\uB358 \uAD00\uD1B5
-    \uD6A8\uACFC\uB294 \uC0AC\uB77C\uC9D1\uB2C8\uB2E4 .)"
+    \uD6A8\uACFC\uB294 \uC0AC\uB77C\uC9D1\uB2C8\uB2E4.)"
   weight: 32

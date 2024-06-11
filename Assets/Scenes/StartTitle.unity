@@ -5273,7 +5273,7 @@ MonoBehaviour:
   initGameTime: 0
   gameTime: 0
   money: 5000000
-  round: 1
+  round: 10
   woodCount: 70
   woodMaxCount: 70
   maxHp: 50
@@ -5283,7 +5283,7 @@ MonoBehaviour:
   shortDamage: 0
   longDamage: 50
   recoverHp: 0
-  absorbHp: 0
+  absorbHp: 2
   defence: 0
   attackSpeed: 0
   speed: 0
@@ -5294,7 +5294,7 @@ MonoBehaviour:
   passiveIntVariables: 
   passiveFloatVariables: []
   passiveBoolVariables: 
-  dashCount: 0
+  dashCount: 2
   buffNum: 0
   exDmg: 0
   isedolCount: 5
@@ -5338,6 +5338,7 @@ MonoBehaviour:
   cursorSize: 0
   maxAbs: 0
   isTuto: 0
+  characterSpawnPos: {x: 0, y: 0, z: -40}
 --- !u!4 &936130855
 Transform:
   m_ObjectHideFlags: 0

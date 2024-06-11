@@ -145,9 +145,7 @@ public class Bullet : MonoBehaviour
     public virtual void LowPenetrate()
     {
         if (penetrateNum > 0)
-        {
             bulletDamage = bulletDamage * Mathf.Clamp(0.5f - ((penetrateNum - 1) / 10f), 0.1f, 0.5f);
-        }
 
         penetrateNum++;
     }

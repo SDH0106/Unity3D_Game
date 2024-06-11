@@ -26,3 +26,6 @@ MonoBehaviour:
     \uC801\uC744 <color=cyan>\uC5BC\uB9AC\uB294</color> \uD22C\uC0AC\uCCB4\uB97C
     \uBC1C\uC0AC\uD558\uB294 \uC2A4\uD0DC\uD504."
   weaponSound: {fileID: 8300000, guid: 0241bfc3127aac144b93a08bf787b64c, type: 3}
+  useCharacter:
+  - {fileID: 11400000, guid: 1378ac29a4fab014088a64f7cf18031b, type: 2}
+  - {fileID: 11400000, guid: 440ed7bc70a7f9148ad6568dbd53b530, type: 2}

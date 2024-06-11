@@ -24,6 +24,7 @@ public class Character : Singleton<Character>
     public int level;
     [SerializeField] public float maxExp;
     [SerializeField] public CharacterInfo[] characterInfos;
+    //[SerializeField] public CharacterInfo[] characterInfos2;
 
     [HideInInspector] public float dashCoolTime;
     [HideInInspector] public float initDashCoolTime;
@@ -75,6 +76,10 @@ public class Character : Singleton<Character>
 
     public float shield = 0;
 
+    Rigidbody rigid;
+
+    public CharacterInfo currentCharacterInfo;
+
     protected override void Awake()
     {
         base.Awake();
@@ -83,8 +88,10 @@ public class Character : Singleton<Character>
 
     void Start()
     {
+        rigid = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         particle.GetComponentInChildren<Renderer>().enabled = false;
+        gameObject.GetComponent<SpecialAttack>().enabled = false;
 
         gameManager = GameManager.Instance;
         transform.position = new Vector3(0f, 0f, -40f);
@@ -93,7 +100,7 @@ public class Character : Singleton<Character>
         gardianAngel.SetActive(false);
         gardianEffect.SetActive(false);
 
-        CharacterSetting(0);
+        CharacterSetting(characterNum);
         maxExp = 10;
         level = 1;
         levelUpCount = 0;
@@ -101,18 +108,36 @@ public class Character : Singleton<Character>
         dashCoolTime = 4;
         dashCount = gameManager.dashCount;
         initDashCoolTime = dashCoolTime;
+
+        gameObject.SetActive(false);
     }
 
     public void CharacterSetting(int num)
     {
-        characterNum = num;
+        StatChangeCheck(num);
+
         anim.runtimeAnimatorController = characterInfos[characterNum].CharacterAnim;
-        gameManager.stats[0] = Mathf.Round(gameManager.stats[0]*characterInfos[characterNum].HpRate);
+        gameManager.stats[0] = Mathf.Round(gameManager.stats[0] * characterInfos[characterNum].HpRate);
         maxHp = gameManager.stats[0];
         currentHp = maxHp;
-        gameManager.stats[9] = characterInfos[characterNum].CharacterSpeed;
-        gameManager.stats[13] = characterInfos[characterNum].DamageRatio;
-        gameManager.stats[14] = characterInfos[characterNum].Avoid;
+        gameManager.stats[9] += characterInfos[characterNum].CharacterSpeed;
+        gameManager.stats[13] += characterInfos[characterNum].DamageRatio;
+        gameManager.stats[14] += characterInfos[characterNum].Avoid;
+    }
+
+    void StatChangeCheck(int num)
+    {
+        int beforeNum = characterNum;
+        characterNum = num;
+        currentCharacterInfo = characterInfos[characterNum];
+
+        if (beforeNum == characterNum)
+            return;
+
+        gameManager.stats[0] = Mathf.Round(gameManager.stats[0] / characterInfos[beforeNum].HpRate);
+        gameManager.stats[9] -= characterInfos[beforeNum].CharacterSpeed;
+        gameManager.stats[13] -= characterInfos[beforeNum].DamageRatio;
+        gameManager.stats[14] -= characterInfos[beforeNum].Avoid;
     }
 
     void Update()
@@ -139,11 +164,11 @@ public class Character : Singleton<Character>
         {
             HpSetting();
 
-            isRun = false;
+            //isRun = false;
 
             if (currentHp > 0 && (!gameManager.isClear || !gameManager.isBossDead))
             {
-                Move();
+                //Move();
                 Dash();
                 AutoRecoverHp();
             }
@@ -154,11 +179,25 @@ public class Character : Singleton<Character>
                 buffTime = 5;
             }
 
-            anim.SetFloat("moveSpeed", 1 + (speed * 0.1f));
-            anim.SetBool("isRun", isRun);
+            /*anim.SetFloat("moveSpeed", 1 + (speed * 0.1f));
+            anim.SetBool("isRun", isRun);*/
         }
 
         SummonPet();
+    }
+
+    private void FixedUpdate()
+    {
+        if (gameManager.currentScene == "Game" && !gameManager.isPause)
+        {
+            isRun = false;
+
+            if (currentHp > 0 && (!gameManager.isClear || !gameManager.isBossDead))
+                Move();
+
+            anim.SetFloat("moveSpeed", 1 + (speed * 0.1f));
+            anim.SetBool("isRun", isRun);
+        }
     }
 
     void HpSetting()
@@ -283,7 +322,14 @@ public class Character : Singleton<Character>
                     else
                         afterPos = transform.position + new Vector3(x, 0, z) * 4;
 
+                    if (ground == null)
+                        ground = GameSceneUI.Instance.ground;
+
+                    else
+                        afterPos = ground.bounds.ClosestPoint(afterPos);
+
                     transform.position = Vector3.Lerp(beforePos, afterPos, 1);
+
                     dashCount--;
                     Invoke("ParticleOff", 0.4f);
 
@@ -422,6 +468,7 @@ public class Character : Singleton<Character>
         dir = (Vector3.right * x + Vector3.forward * z).normalized;
 
         transform.position += dir * speed * Time.deltaTime;
+        //rigid.MovePosition(transform.position + dir * speed * Time.deltaTime);
 
         if (ground == null)
             ground = GameSceneUI.Instance.ground;

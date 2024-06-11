@@ -20,6 +20,7 @@ public class WeaponCard : MonoBehaviour
     [SerializeField] protected Text weaponRange;
     [SerializeField] protected Text weaponGrade;
     [SerializeField] protected Text description;
+    [SerializeField] protected Image canBuyImage;
 
     [HideInInspector] public WeaponInfo selectedWeapon;
 
@@ -33,6 +34,8 @@ public class WeaponCard : MonoBehaviour
 
     protected virtual void Setting()
     {
+        OnOffCanBuyPanel();
+
         itemSprite.sprite = selectedWeapon.ItemSprite;
         weaponName.text = selectedWeapon.WeaponName.ToString();
         type.text = selectedWeapon.Type.ToString();
@@ -89,7 +92,58 @@ public class WeaponCard : MonoBehaviour
         }
     }
 
+    void OnOffCanBuyPanel()
+    {
+        canBuyImage.gameObject.SetActive(!CheckCanUseCharacter());
+    }
+
+    bool CheckCanUseCharacter()
+    {
+        for (int i = 0; i < selectedWeapon.UseCharacter.Length; i++)
+        {
+            if (character.currentCharacterInfo == selectedWeapon.UseCharacter[i])
+                return true;
+        }
+
+        return false;
+    }
+
     public virtual void Select()
+    {
+        bool canBuy = false;
+
+        if (CheckCanUseCharacter())
+        {
+            if (itemManager.equipFullCount < 6 && gameManager.money >= price)
+            {
+                canBuy = true;
+
+                if (selectedWeapon.WeaponName == "번개 스태프")
+                {
+                    if (character.thunderCount == 0)
+                        character.thunderMark.SetActive(true);
+
+                    character.thunderCount++;
+                }
+
+                EquipWeapon();
+            }
+
+            else if (itemManager.equipFullCount >= 6 && gameManager.money >= price)
+            {
+                for (int i = 0; i < itemManager.storedWeapon.Length; i++)
+                {
+                    canBuy = true;
+                    FullWeaponCheckCombine();
+                }
+            }
+        }
+
+        if (!canBuy)
+            SoundManager.Instance.PlayES("CantBuy");
+    }
+
+    /*public virtual void Select()
     {
         bool canBuy = false;
 
@@ -144,7 +198,7 @@ public class WeaponCard : MonoBehaviour
 
         if (!canBuy)
             SoundManager.Instance.PlayES("CantBuy");
-    }
+    }*/
 
     protected virtual void EquipWeapon()
     {

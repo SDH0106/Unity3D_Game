@@ -21,7 +21,7 @@ public class ClassChangeUI : OptionUI
 
         panel.SetActive(false);
 
-        if (gameManager.round == 15)
+        if (gameManager.round == 7)
         {
             for (int i = 1; i < 3; i++)
             {
@@ -36,6 +36,17 @@ public class ClassChangeUI : OptionUI
             classImage.sprite = character.characterInfos[characterNum].CharacterImage;
             className.text = character.characterInfos[characterNum].CharacterName.ToString();
         }
+
+        else if(gameManager.round == 8)
+        {
+            if(character.characterNum == 2 && gameManager.absorbHp >= 2)
+            {
+                PauseGame();
+                characterNum = 3;
+                classImage.sprite = character.characterInfos[characterNum].CharacterImage;
+                className.text = character.characterInfos[characterNum].CharacterName.ToString();
+            }
+        }
     }
 
     private void Update()
@@ -46,12 +57,16 @@ public class ClassChangeUI : OptionUI
     public void SelectChangeYes()
     {
         character.CharacterSetting(characterNum);
+
+        if(characterNum == 3)
+            character.gameObject.GetComponent<SpecialAttack>().enabled = true;
+
         ReturnToGame();
     }
 
     public void SelectChangeNo()
     {
-        gameManager.percentDamage *= 1.5f;
+        //gameManager.percentDamage *= 1.5f;
         ReturnToGame();
     }
 }

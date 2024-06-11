@@ -32,6 +32,7 @@ public class WeaponInfo : ScriptableObject
     [TextArea]
     [SerializeField] string description;
     [SerializeField] AudioClip weaponSound;
+    [SerializeField] protected CharacterInfo[] useCharacter;
 
     public Sprite ItemSprite => itemSprite;
     public string WeaponName => weaponName;
@@ -44,4 +45,6 @@ public class WeaponInfo : ScriptableObject
     public int WeaponPrice => weaponPrice;
     public string Description => description;
     public AudioClip WeaponSound => weaponSound;
+
+    public CharacterInfo[] UseCharacter => useCharacter;
 }
