@@ -12,8 +12,6 @@ public class ProjectileObjectPool : MonoBehaviour
     protected IObjectPool<ProjectileObjectPool> pool;
     protected IObjectPool<DamageUI> damagePool;
 
-    bool isDestroyed = false;
-
     GameManager gameManager;
 
     private void Awake()
@@ -78,16 +76,10 @@ public class ProjectileObjectPool : MonoBehaviour
     }
 
     public void DestroyProjectile()
-    {
-        if (!isDestroyed)
+    { 
+        if (gameObject.activeSelf)
         {
-            isDestroyed = true;
-
-            if (gameObject.activeSelf)
-            {
-                isDestroyed = false;
-                pool.Release(this);
-            }
+            pool.Release(this);
         }
     }
 }

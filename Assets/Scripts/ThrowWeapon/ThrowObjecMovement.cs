@@ -40,7 +40,7 @@ public class ThrowObjecMovement : ParabolaLineRenderer
             beforeDelta = Mathf.Clamp(beforeDelta - Time.deltaTime * 5, 1.5f, 3);
 
         else
-            beforeDelta = Mathf.Clamp(beforeDelta + Time.deltaTime * 5, 1.5f, 3);
+            beforeDelta = Mathf.Clamp(beforeDelta + Time.deltaTime * 1, 1.5f, 3);
 
         currentThrowLength += (Time.deltaTime * beforeDelta);
 
@@ -62,7 +62,7 @@ public class ThrowObjecMovement : ParabolaLineRenderer
 
     public void Fire(Vector3 startPos)
     {
-        SetPosition(startPos);
+        GetClickPos(startPos);
         currentThrowLength = 0;
         isArrive = false;
         GetComponent<SphereCollider>().enabled = false;

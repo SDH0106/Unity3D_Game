@@ -34,7 +34,7 @@ public class FireProjectile : MonoBehaviour
 
     protected virtual void Fire()
     {
-        if (Input.GetMouseButtonUp(0) && (!gameManager.isClear || !gameManager.isBossDead || !gameManager.isPause))
+        if (Input.GetMouseButtonUp(0) && !(gameManager.isClear || gameManager.isPause))
         {
             SetFire();
         }

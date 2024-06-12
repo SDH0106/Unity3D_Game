@@ -24,19 +24,25 @@ public class ParabolaLineRenderer : MonoBehaviour
 
     void Update()
     {
-        SetPosition(character.transform.position);
+        GetClickPos(character.transform.position);
 
         for (int i = 0; i < lineRenderer.positionCount; i++)
             lineRenderer.SetPosition(i, ParabolicPos(startPos, endPos, i, lineRenderer.positionCount - 1));
     }
 
-    protected void SetPosition(Vector3 _startPos)
+    protected void GetClickPos(Vector3 _startPos)
     {
         Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mouse.y = 0;
 
         startPos = _startPos;
-        endPos = mouse;
+
+        Vector3 distance = startPos - mouse;
+
+        if(distance.magnitude > 5)
+            distance = distance.normalized * 5;
+
+        endPos = startPos - distance;
     }
 
     protected Vector3 ParabolicPos(Vector3 start, Vector3 end, float index, float total)
