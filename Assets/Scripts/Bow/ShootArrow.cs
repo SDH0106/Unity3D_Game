@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ShootArrow : FireProjectile
 {
-    [SerializeField] GameObject enhancedProjectilePrefab;
+    [SerializeField] GameObject enhancedProjectile;
 
     void Update()
     {
@@ -17,7 +17,8 @@ public class ShootArrow : FireProjectile
     protected override void SettingProjectile()
     {
         base.SettingProjectile();
-        projectile.GetComponent<ArrowMovement>().Shoot(dir.normalized, normalFirePos.position); projectile.GetComponent<ArrowMovement>().Shoot(dir.normalized, normalFirePos.position);
+        projectile.GetComponent<ArrowTypeChange>().ChangeArrowType(GetComponent<BowCatchBar>().IsCatch());
+        projectile.GetComponent<ArrowMovement>().Shoot(dir.normalized, normalFirePos.position, 5f);
     }
 
     public bool checkCanFire()

@@ -30,7 +30,7 @@ public class BowCatchBar : MonoBehaviour
         {
             catchBar.gameObject.SetActive(false);
             catchBar.value = 0;
-            isCatch = true;
+            Catch();
         }
     }
 
@@ -45,12 +45,17 @@ public class BowCatchBar : MonoBehaviour
         if (isMin)
             catchBar.value += Time.deltaTime * 400;
 
-        else if (!isMin)
+        else
             catchBar.value -= Time.deltaTime * 400;
     }
 
-    void CatchEnhanceBar()
+    void Catch()
     {
+        isCatch = catchBar.value >= 80 && catchBar.value <= 120 ? true : false;
+    }
 
+    public bool IsCatch()
+    {
+        return isCatch;
     }
 }
