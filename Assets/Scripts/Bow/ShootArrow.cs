@@ -1,8 +1,9 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ShootArrow : FireProjectile
 {
-    [SerializeField] GameObject enhancedProjectile;
+    [SerializeField] GameObject catchBar;
 
     void Update()
     {
@@ -18,7 +19,7 @@ public class ShootArrow : FireProjectile
     {
         base.SettingProjectile();
         projectile.GetComponent<ArrowTypeChange>().ChangeArrowType(GetComponent<BowCatchBar>().IsCatch());
-        projectile.GetComponent<ArrowMovement>().Shoot(dir.normalized, normalFirePos.position, 5f);
+        projectile.GetComponent<ArrowMovement>().Shoot(dir.normalized, normalFirePos.position, 10f);
     }
 
     public bool checkCanFire()

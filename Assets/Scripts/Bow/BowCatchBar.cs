@@ -9,8 +9,11 @@ public class BowCatchBar : MonoBehaviour
 
     bool isCatch = false;
 
+    GameManager gameManager;
+
     private void Start()
     {
+        gameManager = GameManager.Instance;
         catchBar.gameObject.SetActive(false);
         catchBar.value = 0;
     }
@@ -28,9 +31,9 @@ public class BowCatchBar : MonoBehaviour
 
         else if (Input.GetMouseButtonUp(0))
         {
+            Catch();
             catchBar.gameObject.SetActive(false);
             catchBar.value = 0;
-            Catch();
         }
     }
 

@@ -57,8 +57,8 @@ public class Character : Singleton<Character>
 
     GameManager gameManager;
 
-    public Vector3 dir;
-    public Vector3 charDir => dir;
+    [HideInInspector] public Vector3 dir;
+    [HideInInspector] public Vector3 charDir => dir;
     [HideInInspector] public float x;
     [HideInInspector] public float z;
 
@@ -70,15 +70,15 @@ public class Character : Singleton<Character>
     [HideInInspector] public float charBuffDmg = 0;
     [HideInInspector] public float buffTime = 5;
 
-    public int thunderCount;
+    [HideInInspector] public int thunderCount;
 
     Coroutine currentCoroutine;
 
-    public float shield = 0;
+    [HideInInspector] public float shield = 0;
 
-    Rigidbody rigid;
+    [HideInInspector] public CharacterInfo currentCharacterInfo;
 
-    public CharacterInfo currentCharacterInfo;
+    public Transform weaponParent;
 
     protected override void Awake()
     {
@@ -88,7 +88,6 @@ public class Character : Singleton<Character>
 
     void Start()
     {
-        rigid = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         particle.GetComponentInChildren<Renderer>().enabled = false;
         gameObject.GetComponent<SpecialAttack>().enabled = false;

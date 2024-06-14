@@ -324,9 +324,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10501bbe9e60cce48bb53adc4268c68c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 8154831264171076226, guid: 9e1223c364f2bbe48836ca3d76a16b12, type: 3}
+  projectilePrefab: {fileID: 7236512193234804584, guid: 0e764926f6d20b8439c7072ac2fac63a, type: 3}
   normalFirePos: {fileID: 9127276467427897190}
   poolCount: 10
+  enhancedProjectile: {fileID: 0}
 --- !u!114 &5844579215938408588
 MonoBehaviour:
   m_ObjectHideFlags: 0

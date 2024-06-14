@@ -5276,7 +5276,7 @@ MonoBehaviour:
   round: 1
   woodCount: 70
   woodMaxCount: 70
-  maxHp: 50
+  maxHp: 20
   percentDamage: 0
   physicDamage: 10000
   magicDamage: 0
