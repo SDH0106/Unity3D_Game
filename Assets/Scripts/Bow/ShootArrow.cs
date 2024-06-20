@@ -1,3 +1,4 @@
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -18,8 +19,17 @@ public class ShootArrow : FireProjectile
     protected override void SettingProjectile()
     {
         base.SettingProjectile();
-        projectile.GetComponent<ArrowTypeChange>().ChangeArrowType(GetComponent<BowCatchBar>().IsCatch());
-        projectile.GetComponent<ArrowMovement>().Shoot(dir.normalized, normalFirePos.position, 10f);
+
+        bool isCatch = GetComponent<BowCatchBar>().IsCatch();
+        projectile.GetComponent<ArrowTypeChange>().ChangeArrowType(isCatch);
+
+        Transform activeArrow = projectile.transform.GetChild(Convert.ToInt32(isCatch));
+
+        float damage = activeArrow.GetComponent<ArrowStatus>().Damage;
+        projectile.GetComponent<ProjectileObjectPool>().SetDamage(damage);
+
+        float speed = activeArrow.GetComponent<ArrowStatus>().Speed;
+        projectile.GetComponent<ArrowMovement>().Shoot(dir.normalized, normalFirePos.position, speed);
     }
 
     public bool checkCanFire()

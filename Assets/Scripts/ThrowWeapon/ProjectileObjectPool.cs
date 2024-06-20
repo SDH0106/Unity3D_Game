@@ -6,15 +6,13 @@ using UnityEngine.Pool;
 public class ProjectileObjectPool : MonoBehaviour
 {
     [SerializeField] protected DamageUI damageUI;
-    [SerializeField] float defaultDamage;
+    [SerializeField] float projectileDamage;
     //public GameObject effectPrefab;
 
     protected IObjectPool<ProjectileObjectPool> pool;
     protected IObjectPool<DamageUI> damagePool;
 
     GameManager gameManager;
-
-    protected float projectileDamage;
 
     private void Awake()
     {
@@ -24,7 +22,6 @@ public class ProjectileObjectPool : MonoBehaviour
     private void Start()
     {
         gameManager = GameManager.Instance;
-        projectileDamage = defaultDamage;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -86,13 +83,8 @@ public class ProjectileObjectPool : MonoBehaviour
         }
     }
 
-    public void ChangeDamage()
+    public void SetDamage(float damage)
     {
-        projectileDamage *= 1.3f;
-    }
-
-    public void BackToDefaultDamage()
-    {
-        projectileDamage = defaultDamage;
+        projectileDamage = damage;
     }
 }

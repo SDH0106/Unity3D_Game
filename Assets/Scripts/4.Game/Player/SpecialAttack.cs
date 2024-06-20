@@ -44,10 +44,5 @@ public class SpecialAttack : MonoBehaviour
         float detectRange = Mathf.Clamp(4 + gameManager.range * 0.5f, 1f, 12f);
 
         Collider[] colliders = Physics.OverlapSphere(gameObject.transform.position, detectRange, monsterLayer);
-
-        if(colliders.Length > 0 ) 
-        {
-            Debug.Log("monster");
-        }
     }
 }
