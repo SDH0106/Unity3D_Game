@@ -33,11 +33,11 @@ public class Explosion : MonoBehaviour
         if (collision.collider.tag == "Monster")
         {
             ExDamageUI damagePool = pool.Get();
-            exDamage = exDamage + gameManager.exDmg;
-            damagePool.damage = exDamage * grade;
+            float realExDamage = exDamage + gameManager.exDmg;
+            damagePool.damage = realExDamage * grade;
             damagePool.damageSetting();
             damagePool.transform.SetParent(GameManager.Instance.damageStorage);
-            collision.collider.GetComponent<Monster>().PureOnDamaged(exDamage * grade);
+            collision.collider.GetComponent<Monster>().PureOnDamaged(realExDamage * grade);
         }
     }
 
