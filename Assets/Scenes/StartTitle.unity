@@ -5294,10 +5294,10 @@ MonoBehaviour:
   passiveIntVariables: 
   passiveFloatVariables: []
   passiveBoolVariables: 
-  dashCount: 0
+  dashCount: 2
   buffNum: 0
   exDmg: 0
-  isedolCount: 5
+  isedolCount: 0
   salePercent: 0
   increaseExp: 0
   coinRange: 0

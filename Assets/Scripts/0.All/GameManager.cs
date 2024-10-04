@@ -38,10 +38,10 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector] public int[] passiveIntVariables;
     [HideInInspector] public float[] passiveFloatVariables;
     [HideInInspector] public bool[] passiveBoolVariables;
-    [HideInInspector] public int dashCount;
+    /*[HideInInspector]*/ public int dashCount;
     [HideInInspector] public int buffNum;
     [HideInInspector] public int exDmg;
-    /*[HideInInspector]*/ public int isedolCount;
+    [HideInInspector] public int isedolCount;
     [HideInInspector] public float salePercent;
     [HideInInspector] public float increaseExp;
     [HideInInspector] public float coinRange;
@@ -367,14 +367,14 @@ public class GameManager : Singleton<GameManager>
 
         SceneManager.LoadScene(currentScene);
 
-        //gameTime = Mathf.Clamp(initGameTime + (round - 1) * 3f, initGameTime, 60f);
+        gameTime = Mathf.Clamp(initGameTime + (round - 1) * 3f, initGameTime, 60f);
 
         if (round != 2)
             gameTime = 0;
 
         else
             gameTime = 30;
-        
+
         currentGameTime = gameTime;
 
         isClear = false;
